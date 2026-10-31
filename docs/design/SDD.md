@@ -1,236 +1,217 @@
-# Software design document: the template's example product
+# Software design document: SoftQP Studio
 
-This is the SDD of the example the template ships (ADR-0075): an SIR epidemic model, replayed and re-run live.
-It exists so the structure, the contracts, the lanes and the gates are exercised by something real on the first
-day. A product writes its own SDD here, after its research and its plan and before it instantiates, and the
-guard `scripts/check_sdd.py` holds every requirement to a gate that exists.
+Design version 0.01.000. The solver contribution is a hypothesis subject to proof and comparative evaluation.
 
 ## Problem and non-goals
 
-Problem: show, end to end, how a CAOS product turns cases into committed artifacts, replays them, re-runs them
-live, and proves each step: a pipeline that bakes and checks cases, a web workbench that reads and recomputes
-them, documentation transcribed from sources, and gates that fail when any of it breaks.
+Control, robotics, building-energy, and optimization engineers encounter quadratic programs whose selected operational constraints may yield. Solver APIs often make the mathematical meaning of “soft” difficult to inspect: a quadratic violation cost, an exact linear penalty, a weighted two-sided penalty, a group penalty, and an infeasibility-repair objective can return different decisions even when attached to the same interval. Practitioners need to see what is softened, what remains hard, how lower and upper violations are priced, whether the returned point solves that declared objective, and how numerical behavior changes across methods.
 
-Non-goals, each something a reader could reasonably assume:
+SoftQP Studio is a research workbench that lets a reader select a fully specified case, edit supported cost and scenario parameters, solve and compare declared formulations, inspect side-specific violations and residuals, and export a provenance-bearing result. Its offline scientific pipeline is authoritative. The website replays checksummed results; any browser solver is a separately gated lane.
 
-- Epidemiology. The SIR model is a placeholder with textbook assumptions (closed, homogeneous, deterministic);
-  it is not a forecasting tool and carries no real data.
-- A choice of integrator. Forward Euler at a quarter-day step is enough to show parity and convergence; a
-  product picks its scheme from its own error budget.
-- A backend. `app/` is a dormant read-only API; the example is a static site.
-- A learned model of record. The surrogate exists to show where a trained model sits in the pipeline and how its
-  held-out error is reported.
+Non-goals:
+
+- A certified controller, safety case, engineering approval, or production control loop.
+- A claim that feasibility restoration, fixed elastic penalties, exact penalties, and infeasibility certificates have interchangeable semantics.
+- A universal ranking of solvers or transfer of paper timing claims to this product's machine.
+- A hosted solver API or collection of user scenarios on a server.
+- Client-specific models, proprietary datasets, or unlicensed data redistribution.
+- A claim that asymmetric costs, always-feasible optimization, or L1 exactness are new.
+- Social-media publication. Required diffusion materials are private repository drafts only.
 
 ## Executive brief
 
-The executive view of the Introduction is data, kept apart from this document: one file frames the problem space for a
-decision maker (a landing block, five sub-tabs, three illustrations and a linked source for every figure), in English
-and Spanish. It is written from the research before any development, is valid against the shell's `executive.schema.json`
-2.0.0, and is rendered by the shell as the first view of the Introduction, where the product lands (the header order stays App, Introduction,
-Methodology, Implementation, Experiments, Benchmark: the landing never moves the tabs). The standard is
-[`docs/guides/06_executive-brief.md`](../guides/06_executive-brief.md). The example's file frames the example's own
-problem space and is replaced by every product.
-
 Data file: content/executive.json
+
+The sourced bilingual brief and three authored illustrations frame the engineering policy, affected roles, existing methods and acceptance actions.
 
 ## Research basis
 
-Done before the plan, and kept here so a reader can re-check it (ADR-0075; rule 11 section 12). The example is a
-placeholder model, so the research is short; a product's is the persisted dossier summarised claim by claim, each
-with its source. The list shows what was decided and from what; every DOI below was resolved against the Crossref
-record on 2026-10-11 (HTTP 200 each; the two of Dormand and Prince and of Virtanen et al. on 2026-10-26, HTTP 200 each).
+Research is documented in [the source review](../research.md). It reviews classical explicit lifting, OSQP, the 2025 quadratic-slack ADMM result, the 2026 generalized slack projection paper and its OSQPSlack implementation, DAQP, ElastiQP, PIQP, MPC soft constraints, benchmark protocols, and ICLR 2026 FlexQP/Deep FlexQP.
 
-| decision | what the research found | source |
+| Design decision | Research finding | Consequence |
 |---|---|---|
-| The model is the closed SIR system, dS/dt = -beta S I / N, dI/dt = beta S I / N - gamma I, dR/dt = gamma I | The threshold and the whole course follow from R0 = beta / gamma | Kermack and McKendrick 1927, https://doi.org/10.1098/rspa.1927.0118 |
-| The model family and its textbook assumptions (closed, homogeneous, deterministic) | The survey states the assumptions the non-goals list | Hethcote 2000, https://doi.org/10.1137/S0036144500371907 |
-| R0 as the threshold, and the herd threshold 1 - 1/R0 | The definition of the basic reproduction ratio and its computation | Diekmann, Heesterbeek and Metz 1990, https://doi.org/10.1007/BF00178324 |
-| The same threshold for compartmental models | R0 < 1 is the stability condition of the disease-free state | van den Driessche and Watmough 2002, https://doi.org/10.1016/S0025-5564(02)00108-6 |
-| The final-size relation z = 1 - exp(-R0 z) is the oracle independent of the time course | A closed derivation of the final size | Miller 2012, https://doi.org/10.1007/s11538-012-9749-6 |
-| Forward Euler at a quarter-day step, converging at first order | The scheme's global error is first order in the step | Hairer, Norsett and Wanner 1993, https://doi.org/10.1007/978-3-540-78862-1 |
-| A higher-order reference for the engine's integrator: the embedded pair RK45 | A fifth-order formula with a fourth-order error estimate that chooses the step, six evaluations per step | Dormand and Prince 1980, https://doi.org/10.1016/0771-050X(80)90013-3 |
-| The implementation of that pair that the level 3 notebook runs as the reference | `scipy.integrate.solve_ivp` offers RK45 and the eighth-order DOP853 | Virtanen et al. 2020, https://doi.org/10.1038/s41592-019-0686-2 |
-| Requirements are written in EARS form, each with its gate | The five EARS patterns used in the requirements files | Mavin et al. 2009, https://doi.org/10.1109/RE.2009.9 |
+| Keep explicit lifting as the classical baseline | It directly represents the declared penalty with variables and constraints and is an independent oracle path. | Run an actual QP implementation and recover/verify physical slacks. |
+| Include generalized slack projection | The 2026 paper provides multiple convex penalty families without increasing the principal QP dimension under its assumptions. | Pin the authors' source revision and reproduce compatible penalties. |
+| Compare side-specific penalties | DAQP already supports different lower/upper linear and quadratic weights. | Asymmetry alone cannot be presented as the proposed contribution. |
+| Include exact restoration semantics | FlexQP is an always-feasible exact L1 elastic method; learned Deep FlexQP reports acceleration. | Treat it as a distinct restoration objective. The official ICLR paper entry inspected on 2026-10-31 exposed no code link; do not claim its results are reproduced. |
+| Candidate contribution | Unconditional penalty assumptions in the generalized projection paper exclude non-even penalties. | Test an asymmetric separable convex penalty update in OSQP-style ADMM; novelty remains unproven until the primary-source search and method review are complete. |
+| Static-first product | The primary outputs are finite, versioned, reproducible result documents. | GitHub Pages is a candidate only after payload, route, and browser measurements. |
 
-Choices with no source because the example does not need one: the surrogate's four-term basis (a placeholder that
-shows where a trained model sits) and the 1500 ms run budget (the template's lane gate, measured in the Lanes
-section below).
 
-UNVERIFIED: what each work says beyond its title, scope and DOI record (kept in `frontend/src/content/citations.ts`):
-the page text of the works was not re-read for this release, only their Crossref records, so the "what the research
-found" cells restate the reason the example cites each work, not a quotation.
+Sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
+
+UNVERIFIED: novelty, superiority, complete method coverage, field safety and deployment.
 
 ## Sizing and contracts
 
-The design rests on two artifacts of contract-first parallel delivery (ADR-0080): the sizing, kept with the
-coordination records outside the product (for this release: the repositories, components, modules with their owner
-units, the seven boundaries, the technology versions verified on primary sources, the machine limits and three
-parallel units with disjoint write scopes), and the contract catalog, kept here,
-[`docs/contracts/catalog.md`](../contracts/catalog.md). Every boundary below is a catalog row with one schema file,
-an example, a test on each side, its missing-data behavior, a provider and a swap test; the units of a feature are
-the sizing's parallel units, built at once against the fixed rows.
+The current size estimate is a research-grade software package, not a small front-end. The product template provides the app, contract system, pipeline structure, guards, notebook and deployment scaffolding; it does not provide the scientific methods, adapters, fixtures, proofs, data, result matrix, bilingual lessons, manuscript, or UI interaction. Expected workload is XL across method engines and matrix, L across product/app/docs, and L for release evidence. A release is gated by the exact acceptance matrix, not an elapsed-time estimate.
 
-- Ingestion (params-record, contract 1, `data-pipeline/pipeline/io/contract.py`): each case's parameters are
-  validated before a run. A missing, non-numeric, NaN or out-of-range value is rejected with its reason, never
-  coerced; an unusual value (R0 above 20) is accepted and flagged into the manifest.
-- Artifacts (case-index, case-manifest, trace, contract 2): `data/derived/manifests/index.json`
-  (`example.index/v2`: cases with bilingual titles and categories, the default case), one manifest per case
-  (`example.manifest/v4`: parameters, seed, engine and version, artifact, lane verdict, metrics and the model behind them, expected ranges,
-  bilingual expected band) and one trace per case (`example.trace/v1`: at most 200 points, summary). The web's
-  types are generated from the schema files (`frontend/src/lib/contract.gen.ts`), and
-  `frontend/src/lib/contract.test.ts` reads every committed document and the provider tree against them in both
-  directions.
-- The model slot (surrogate-model): r0 to the peak infected fraction; the analytic baseline answers while no
-  trained bundle is released, behind the same contract.
-- Readiness: `data/derived/readiness.json`, what is real in this build, row by row, in one of six declared states;
-  the site labels what a provider, a stale bake or the baseline serves, and shows not available yet for what is
-  missing.
-- The dormant API (api, `docs/contracts/api.openapi.json`): GET only; 503 with the declared state when a document
-  is absent.
+Proposed units with disjoint write ownership after contract freeze:
+
+| Unit | Boundary | Owns |
+|---|---|---|
+| U1: contracts and case pipeline | schemas and manifests | `data-pipeline/pipeline/io`, schemas and catalog rows, deterministic case registry, splits/seeds, run orchestration, output validation and replay index |
+| U2: solver engines and adapters | method API/result | engine build and pinned source provenance, explicit lift, generalized projection, DAQP/FlexQP adapters, AAGSP only after proof gate |
+| U3: web and content | static artifacts | six shell pages, app case interaction, comparison/inspection/export, English/Spanish content, accessibility and measured browser gate |
+| U4: evidence and curriculum | experiment artifact/notebooks | held-out runner, stats and raw measurements, bilingual notebooks and docs, executive brief, manuscript/report and private post drafts |
+
+The units define module ownership and stable contract seams.
+
+Engine decision: AAGSP extends solver behavior below the UI and should be reusable/testable independently. The current CAOS template forbids an internal product package and requires reusable libraries in separate public package repositories. Therefore the design selects a **separate public solver-engine repository and pinned published Python distribution** if direct extension of OSQPSlack is confirmed as the required route. Working names are `CAOS_SoftQP_Engine` and `softqp`; the public OSQPSlack repo is MIT and its two reviewed pinned submodules include Apache-2.0 license text. PyPI lookups found no JSON records for three candidate names on 2026-10-31; this is not a reservation. Complete nested notice audit, upstream diff review, wheel buildability, ABI support, and exact dependency pins remain pre-creation checks. If no safe, reproducible package route exists, stop and bring a revised SDD; do not bury an unpublished package inside the app. The public app repo remains `CAOS_SoftQP`.
 
 ## Technology and versions
 
-Every pinned dependency of `requirements-precompute.txt` (through `data-pipeline/requirements.txt`),
-`requirements-dev.txt` and `frontend/package.json`, with the version actually installed; `scripts/check_tech_matrix.py`
-fails when a pin and this table disagree. A package.json range is recorded at the version `frontend/package-lock.json`
-resolves it to. The runtimes are Python 3.12 (CI; the device's venv may be newer) and Node 22 (CI).
-
-| component | package | version | use | alternative considered |
-|---|---|---|---|---|
-| engine | numpy | 2.4.6 | the SIR engine and the surrogate's least squares (numpy only, so the template installs with no native build); the same pin in `notebooks/requirements.txt` | scipy.integrate, rejected: a second heavy dependency for a one-line integrator |
-| notebooks | matplotlib | 3.11.2 | the figures of the notebooks (`notebooks/requirements.txt`); https://pypi.org/pypi/matplotlib/json read on 2026-10-19, released 2026-09-11 | none: the figures of the notebooks need a plotting library, and the web's uplot runs in the browser only |
-| notebooks | scipy | 1.18.1 | the pinned reference implementation of the level 3 example notebook (`scipy.integrate.solve_ivp`, RK45 and DOP853; `notebooks/requirements.txt`); https://pypi.org/pypi/scipy/json read on 2026-10-26, released 2026-08-21 | none: it is the state-of-the-art solver the level 3 notebook compares the engine with; the engine itself stays numpy only |
-| notebooks | nbclient | 0.11.0 | executes a notebook top to bottom in a fresh kernel (`scripts/run_notebooks.py`); https://pypi.org/pypi/nbclient/json read on 2026-10-19, released 2026-06-05 | nbconvert --execute, rejected: a heavier install for the same execution |
-| notebooks | nbformat | 5.11.1 | reads and writes the notebook format (`scripts/run_notebooks.py`); https://pypi.org/pypi/nbformat/json read on 2026-10-19, released 2026-08-17 | none: the format's own library |
-| notebooks | ipykernel | 7.4.0 | the Python kernel the notebooks run in; https://pypi.org/pypi/ipykernel/json read on 2026-10-19, released 2026-09-29 | none: nbclient needs a kernel |
-| tests | pytest | 9.1.1 | the pipeline, contract, guard and adversarial tests | unittest, rejected: no parametrisation or fixtures |
-| lint | ruff | 0.15.18 | lint of data-pipeline, tests, scripts and app | flake8 plus isort, rejected: two tools for one |
-| contracts | jsonschema | 4.26.0 | validates every document against its schema file | fastjsonschema, rejected: no support for the draft the schemas declare |
-| contracts | openapi-spec-validator | 0.9.0 | validates `docs/contracts/api.openapi.json` | none: the only maintained validator for the OpenAPI 3.1 document |
-| API | fastapi | 0.143.0 | the dormant `app/`, run by the API contract tests | flask, rejected: no response models to compare with the OpenAPI document |
-| API | httpx | 0.28.1 | the test client of the dormant `app/` | requests, rejected: FastAPI's test client needs httpx |
-| shell | @fasl-work/caos-app-shell | 0.19.1 | the shared app shell (pinned exactly, ADR-0078) | a hand-rolled shell, forbidden by ADR-0078 |
-| web | react | 19.3.0 | the UI | none: the shell requires it |
-| web | react-dom | 19.3.0 | the UI renderer | none: the shell requires it |
-| web | react-router | 8.4.0 | the routes | none: the shell requires it |
-| web | zustand | 5.0.15 | the workbench selection store | redux, rejected: one store of a few keys |
-| web | katex | 0.19.1 | typeset equations on the pages | MathJax, rejected: heavier and slower to render |
-| web | lucide-react | 1.52.0 | icons | the shell's own set where it has one |
-| web | uplot | 1.6.32 | the interactive curves (`UPlotChart`) | a static SVG, rejected: no hover or zoom |
-| build | vite | 8.3.5 | bundler and dev server | webpack, rejected: slower and needs more configuration |
-| build | @vitejs/plugin-react | 6.1.1 | the React transform for vite | none |
-| build | typescript | 5.9.3 | type check of the web and the generated contract types | none |
-| build | openapi-typescript | 7.13.0 | generates `contract.gen.ts` from the OpenAPI document | hand-written types, rejected: they drift (the build checks them) |
-| build | @types/node | 24.19.1 | types of the build scripts | none |
-| build | @types/react | 19.3.0 | types of React | none |
-| build | @types/react-dom | 19.3.0 | types of React DOM | none |
-| tests | vitest | 5.0.3 | the web unit tests | jest, rejected: needs a transform for the vite config |
-| gate | playwright | 1.63.0 | the measured UI gate (`npm run gate`), local only | cypress, rejected: heavier install |
+The app base is template release `0.14.001` observed in the template review checkout and shell `0.19.1` observed in that template. Both must be rechecked at instantiation and then frozen exactly. Python, Node, solver distributions, benchmark solvers, operating system, compiler, BLAS, notebook runtime, UI dependencies and CI actions are intentionally **not pinned in this pre-approval document**: current primary registry releases and compatible wheels must be measured/verified during the approved instantiate/sizing gate and recorded in the product SDD. Candidate runtime is CPU-only. No GPU requirement is justified. Dependency licensing must be reviewed before inclusion.
 
 ## Resources
 
-What each stage needs on the development workstation (Windows 11, 2026-10-11; peak is the largest working set of the
-stage's processes, polled every 20 ms; the commands and outputs of the bake, the live engine and the site are in
-[`measured-resources.md`](measured-resources.md)). No stage uses a GPU or a
-network after the install. Bounds are stated where a figure depends on the product: a product measures its own and
-replaces this table.
+Design budgets, to be measured and enforced before release; no stage has yet been shown to meet the full-product budget. CPU-only.
 
 | stage | memory | disk | time | where it runs |
 |---|---|---|---|---|
-| bake (`data-pipeline/run.py`, five cases, the released surrogate) | 33 MB peak | 35 KB of artifacts in `data/derived/` (35,145 bytes) | 0.1 s | workstation, never CI |
-| training (the surrogate, folded into a bake with no released bundle, five cases) | 33 MB peak | 1 KB (`models/surrogate.json`) | 0.3 s | workstation, never CI |
-| tests (pytest, the whole suite, 599 tests of which 3 skip without node: 117 s in one run on 2026-10-12, behind the workstation's shared heavy-job lock) | 107 MB peak per process, 3.1 GB summed over the 253 processes the first suite started (not re-measured for the larger suite) | temporary copies of the few files each guard reads, under a MB each | 117 s | workstation (the plants alone, `tests/adversarial`, also run in CI; the first CI time is recorded in the release notes) |
-| install (`npm ci`) | 240 MB peak | 181 MB in `node_modules` | 123 s with a cold cache | workstation and CI web job |
-| build (`npm run build`) | 340 MB peak | 1.9 MB in `frontend/dist` (1,917,973 bytes; 2.2 MB allocated on disk) | 5 s | workstation and CI web job |
-| web unit tests (`npm test`, 55 tests) | 110 MB peak | none | 1 s | workstation and CI web job |
-| deploy payload (GitHub Pages) | none | 1.9 MB uploaded | one Pages deploy, under 2 min | CI after main |
+| bake | 4 GiB | 2 GiB raw samples | 2 hours | bounded workstation job; reduce batches without discarding required cells |
+| training | not applicable until a learned comparator is reproducibly available | no model currently produced | no training currently scheduled | baseline and candidate are deterministic solvers |
+| tests | 4 GiB | 2 GiB temporary build | 15 minutes | build system time limit; analytic/lifted suite is a separate narrow measurement |
+| build | 2 GiB | 1 GiB dependencies and outputs | 5 minutes | static-site build budget |
+| deploy | browser budget 256 MiB | 20 MiB compressed artifacts | initial route 3 seconds under declared QA network | replay-first design acceptance budget |
 
 ## Lanes
 
-- Offline: `data-pipeline/run.py` bakes every case (about a millisecond each) and checks it against its expected
-  ranges; it runs on a workstation, never in CI and never in the browser.
-- Replay: the committed artifacts, copied into the site by `frontend/scripts/copy-data.mjs` (exactly the declared
-  files) and fetched with the version in the address.
-- Live: `frontend/src/engine/sir.ts`, a step-for-step port of the Python engine. The basis for putting it in the
-  browser is measured, not assumed: the lane gate (`data-pipeline/pipeline/core/gate.py`) gives each case a run
-  budget of 1500 ms and a trace budget of 256 KiB, and the Benchmark page measures the live engine against that
-  budget in the reader's browser (a median of 0.006 to 0.010 ms per case under Node 24 on the development workstation, 2026-10-12,
-  [`measured-resources.md`](measured-resources.md)).
+Offline: native solver and independent lifting with full matrix, validation and checksummed export. Replay: committed artifact documents read by the browser. Live: disabled until native browser packaging, matched-result parity, resource and latency measurements pass; replay parameter selections must never be labeled as a newly solved scenario. No server lane is planned.
 
 ## Method ladder
 
-Every method of the product is a row, with the tier it belongs to: `classical` (the established methods of the problem),
-`sota` (the current solutions, replicated or implemented) or `beyond` (the product's own proposals beyond the state of the
-art). A product has at least one method in each tier ([`docs/guides/09_method-tiers.md`](../guides/09_method-tiers.md));
-this teaching example has two tiers and says so under "Beyond the state of the art". Each row has one acceptance criterion and
-its gate, per ADR-0069.
+Each promised method is a real executable vertical, not a citation. The final set and compatible cells are fixed in the machine-readable matrix before implementation.
 
 | id | tier | method | acceptance criterion | gate |
 |---|---|---|---|---|
-| M-1 | classical | The SIR system of Kermack and McKendrick integrated by Forward Euler, the example engine | The live engine reproduces every baked trace to the trace rounding (0.005 people), and both converge to the final-size relation at first order in the step | `frontend/src/engine/sir.parity.test.ts` |
-| M-2 | sota | A higher-order Runge-Kutta solver, SciPy's RK45 and DOP853, run on the same five cases | The level 3 notebook runs RK45 and DOP853 on the engine's cases and reports the engine's Forward Euler error against them in the peak and the attack rate | `notebooks/en/01-getting-started/03-a-higher-order-solver.ipynb` (`scripts/check_notebooks.py` fails when no level 3 notebook names M-2) |
+| M-1 | classical | Explicitly lifted soft QP solved with pinned OSQP | Same canonical objective, recovered slack and objective agree with an independent high-accuracy oracle within the per-case tolerance; hard rows remain within tolerance. | Contract, oracle, and per-case tests |
+| M-2 | sota | Authors' generalized slack projection OSQP implementation | Reproduce supported quadratic, L1, elastic-net and selected grouped cases at the exact source pin; objective, slack, and residual reports validated against lifting. | Provenance/source-pin and method-case matrix gate |
+| M-3 | sota | DAQP side-specific weights | Lower/upper linear/quadratic semantics map exactly; only compatible convex cases are compared, and unsupported cases are marked incompatible with reason. | Adapter parity and case compatibility gate |
+| M-4 | sota | FlexQP exact L1 feasibility restoration | Reconstruct from the paper only if its algorithm, assumptions and test oracle are independently reviewed; report as restoration, not a substitute for arbitrary fixed penalty objectives. | Mathematical implementation review and oracle gate |
+| M-5 | sota | Deep FlexQP | Record paper scope and claims; execute only if official code/weights/data are found and licensing, pinned dependencies and matched cases pass review. No repository link was exposed by the ICLR record at design time. | Source availability/provenance gate; otherwise a documented unavailable comparator, never a fabricated result |
+| BS-1 | beyond | AAGSP side-specific generalized projection | Mathematical review passes; independent lifted oracle agrees on all supported cases; preregistered practitioner outcome improves on compatible matched cases without hard-constraint or accuracy regression. | Proof, novelty, adversarial tests, and held-out benchmark gates |
+
+Internal tier words and IDs remain in design/control records only. Product pages, README, notebooks, posts, and manuscripts use method names and the shared terminology rules.
 
 ## Cases
 
-Five cases in two categories. Outbreak regimes: sub-critical (R0 0.72, no outbreak), epidemic (R0 2.75), fast burn
-(R0 6), slow spread (R0 1.2, still running when the horizon ends). Controls: no initial infection (R0 2, nothing
-happens). Each exists to test a different part of the engine and the views: the threshold, a full epidemic, a
-sharp early peak, a horizon that cuts the run, and the degenerate start. Every case states numeric expected
-ranges, enforced by `data-pipeline/pipeline/core/expect.py`. Variants: immunisation of 0%, 30% and 60% at the
-start, computed live.
+Minimum catalog: 12 deterministic, meaningfully distinct cases. All compatible method-by-case cells run and every incompatible cell records a reason. Initial matrix:
+
+| ID | Case | Category | Main evidence |
+|---|---|---|---|
+| C01 | Single lower-bound undershoot | semantic oracle | lower-side penalty, signed slack, objective |
+| C02 | Single upper-bound overshoot | semantic oracle | upper-side penalty, signed slack, objective |
+| C03 | Competing lower and upper rows | semantic oracle | side asymmetry and active-set change |
+| C04 | Mixed hard and soft rows | hard-row integrity | hard violations, soft trade-off |
+| C05 | Grouped penalty case | penalty compatibility | group slack norm versus separable methods |
+| C06 | Sparse scaling family, held-out seeds | numerical structure | n, m, nnz, setup/factorization/solve |
+| C07 | Semidefinite Hessian with regularized and unregularized variants | numerical structure | assumptions, status, residuals |
+| C08 | Ill-conditioned Hessian and row scales | numerical structure | accuracy, iterations, factorization stability |
+| C09 | Feasible double-integrator MPC | repeated control | baseline equivalence and warm-start behavior |
+| C10 | Disturbance-induced state conflict with hard dynamics/actuator bounds | repeated control | selected state violation, invariant hard constraints |
+| C11 | Conflicting safety boundaries | control conflict | restoration versus declared user penalty semantics |
+| C12 | Warm-started parameter stream | repeated control | update/factorization reuse, continuity, status |
+| C13 | Reproduced two-zone/battery/grid energy case from OSQPSlack source | energy | source-faithful reproduction before variants |
+| C14 | Energy comfort/import with distinct side costs | energy | product-specific asymmetric application |
+| C15 | Mixed linear/quadratic side-specific penalty | energy/control | exact penalty semantics and solver coverage |
+
+C13 includes the upstream model/data terms under compatible license and preserves attribution; otherwise a documented non-redistributable input reference and checksum is used, with a separately authored model only if the research question remains comparable. No synthetic case may be represented as field data.
 
 ## Oracles
 
-- The final-size relation z = 1 - exp(-R0 z) (Kermack and McKendrick 1927; Miller 2012), independent of the time
-  course: a run that ends inside its horizon must reach it, to first order in the step.
-- The threshold R0 = 1 and the herd threshold 1 - 1/R0 (Diekmann, Heesterbeek and Metz 1990): a sub-critical case
-  must not grow, and an immunisation above the threshold must prevent the outbreak.
-- Parity: the Python engine is the reference for the live engine, to the trace rounding.
-None of these is a model judging a model.
+Correctness is checked two ways: (1) independent explicit lifting solved to tighter tolerances, with recovered slacks and objective recomputed in original coordinates; (2) KKT/primal/dual residual checks and high-accuracy cross-checks on compatible cases. Hard/equality rows have separate tolerances and can never be counted as soft slack. Penalty decomposition is recomputed outside each solver. Infeasible restoration outputs are not compared by a fixed-penalty objective unless formulations match exactly.
 
-## Beyond the state of the art
+Recorded metrics: objective components, objective gap, primal/dual/KKT residuals, side-specific and aggregate violation, hard-row violations, violated row IDs, status, setup/factorization/update/solve/end-to-end time, iterations, matrix dimensions/nonzeros, peak memory where measurable, warm/cold mode, timeouts/failures, machine/runtime/BLAS thread settings, package/source hashes, seed and tolerance configuration.
 
-None claimed. The example is a teaching model: its engine is the textbook SIR system integrated by Forward Euler, and
-the state of the art it is compared with (a higher-order Runge-Kutta solver, SciPy's RK45) is in the level 3 notebook
-of `notebooks/`. This is valid only for the template: `scripts/check_sdd.py` fails a product whose SDD says it, because
-every CAOS product proposes at least one method beyond the state of the art. A product lists each proposal here under an
-identifier of the form BS-<n> with its hypothesis, its method and the evaluation that would confirm or refute it, gives it
-a row of tier `beyond` in the method ladder, and covers it with a level 4 notebook in each language
-([`docs/guides/08_notebooks.md`](../guides/08_notebooks.md)). A validation protocol, a calibration or a benchmark design
-is not a method beyond the state of the art by itself: a proposal answers the problem differently, and a proposal that does
-not improve on the state of the art is reported as the negative result it is
-([`docs/guides/09_method-tiers.md`](../guides/09_method-tiers.md)).
+Protocol: paired generated problems and held-out seeds declared before final bake; repeated timing samples; pinned machine and dependency environment; thread limits; equivalent termination accuracy; medians and dispersion/uncertainty; preserve raw samples. Report incompatible or failed runs explicitly. No cross-paper timing is used as a product comparison. DAQP, FlexQP and Deep FlexQP are reported only for semantics/availability that can be supported fairly.
 
 ## Deploy driver
 
-GitHub Pages: a static site with every artifact committed, no secret and no server. The measurement behind it is
-the lane gate above (every case is live-eligible) and the site size (1.88 MB of site files, most of it KaTeX
-fonts, and 35 KB of artifacts, 1.9 MB in all, measured on the 2026-10-12 build, [`measured-resources.md`](measured-resources.md)). The target is written in `deploy/TARGET` and checked by `scripts/check_deploy_place.py`.
+GitHub Pages is the leading static candidate because the reader replays committed case results and no user scenario needs a server. Selection is conditional on measured build size, route/deep-link behavior, browser memory and payload budgets. If client-side solving fails those budgets, ship replay only. Domain inventory/availability is not yet established; no custom domain is selected. CI runs inexpensive guards/builds; offline scientific matrix is a separately invoked reproducible gate, not run on every push. Deployment acceptance requires live URL checks for version, case/experiment routes, checksums and language/theme behavior.
 
 ## Risks and kill criteria
 
-- Risk: an instantiated product keeps pieces of the example. Kill: `scripts/check_template_residue.py` fails.
-- Risk: the two engines drift. Kill: the parity test fails.
-- Risk: a test rewrites the committed artifacts. Kill: the session guard in `tests/conftest.py` fails the run.
-- Risk: the site looks right and is not (a blank drawing, a dead control, a broken deep link). Kill: the measured
-  gate (`npm run gate`) fails before a deploy.
-- Risk: a contract changes on one side only. Kill: the generated types fail the web build when they are not
-  current, and the contract tests of both sides read the same schema files.
-- Risk: a provider ships as if it were the product. Kill: the readiness document labels it on every view, and
-  `scripts/check_skeleton.py` lists every row still on a provider.
+- AAGSP identity/prox/convergence proof fails or duplicates known published work: stop that method and revise the contribution before product creation.
+- The required method does not beat relevant baselines: report negative evidence; do not claim beyond-current-method results or release a product claiming the contribution.
+- OSQPSlack extension cannot be legally and technically isolated into a reproducible public engine package: stop before repo creation and redesign the ownership route.
+- FlexQP reconstruction cannot be validated: mark method-cell unavailable with the exact reason; do not imply reproduced results. Deep FlexQP has the same rule plus model/data provenance.
+- Third-party energy case cannot be licensed or reproduced: record exclusion and ensure the authored alternative tests the same declared question.
+- App payload or browser computation exceeds measurements: retain offline methods and static replay, disable live execution.
+- Solver defaults diverge in tolerance/status: exclude ranking unless matched accuracy is shown.
+- Template residue, shallow bilingual material, missing matrix cells, or missing manuscript gates: release blocked.
 
 ## ADR fit
 
-How the example meets the ADRs it is bound by, and where the base carries the rule (ADR-0078):
+Adopt ADR-0057 (scientific app), ADR-0056 (wiki), ADR-0058 (architecture modal), ADR-0069 (full scientific repository), ADR-0070 (Focus workbench), ADR-0071 (viewport and UI), ADR-0074 (cheap CI), ADR-0075 (reviewed pre-code SDD), ADR-0078 (rules in shared template), ADR-0080 (contracts/readiness), ADR-0054 (replay discipline), ADR-0068 (versioning), ADR-0061 only for the separate engine package if confirmed, and applicable content, notebook, method-tier, manuscript, deploy, community and privacy rules. No exception is requested.
 
-| ADR | Rule | Carried by |
+## Proposed method and exact mathematical boundary
+
+Let the hard QP be
+
+`min_x 1/2 x^T Q x + q^T x` subject to `l <= A x <= u`,
+
+where `Q` is symmetric positive semidefinite. A soft row introduces signed slack `xi` and penalty `Phi(xi)` under `l <= Ax + xi <= u`. For the proposed family, `Phi(xi) = sum_i phi_i(xi_i)`, where each `phi_i` is proper, closed, convex, has its minimum value zero at zero, and may have different positive- and negative-side slopes and curvature. The minimum-at-zero property implies each convex scalar penalty is nondecreasing moving away from zero on either ray.
+
+For one interval `C=[l,u]` and residual `z=Ax`, minimize `phi(xi)` subject to `z+xi in C`. If `z` lies in `C`, `xi=0` is optimal. If `z>u`, feasible `xi` is negative and the optimum is the feasible value closest to zero, `xi=u-z`. If `z<l`, the optimum is `xi=l-z`. Therefore the eliminated cost is `g(z)=phi(Pi_C(z)-z)`, equivalently `phi(-R_C(z))` where `R_C(z)=z-Pi_C(z)`. This uses no evenness assumption; it is specific to coordinate-separable penalties and interval rows. The product must prove the vector value function is closed convex under the catalogued assumptions and check degenerate/infinite interval endpoints.
+
+The generalized projection update candidate is `G(v)=Pi_C(v)+prox_{(phi composed with negation)/rho}(v-Pi_C(v))`, coordinatewise for separable penalties. For asymmetric piecewise elastic-net penalties, define
+
+`phi(xi)=a_plus max(xi,0)+a_minus max(-xi,0)+0.5 b_plus max(xi,0)^2+0.5 b_minus max(-xi,0)^2`,
+
+with all coefficients nonnegative. For `r=v-Pi_C(v)>0`, the returned offset is `max((rho*r-a_minus)/(rho+b_minus),0)`; this is the upper-bound violation branch because the original slack is negative. For `r<0`, it is `-max((rho*abs(r)-a_plus)/(rho+b_plus),0)`. Coefficients and sign conventions are fixed in one mathematical contract and independently tested against scalar minimization and explicit lifting before any engine code is accepted.
+
+This is a derivation candidate, not a novelty result. A derivation sketch and source-level novelty search are recorded in the research dossier; a formal review must still establish the slack-elimination identity, convexity and closedness of the reduced term for all declared endpoints, proximal formula, ADMM assumptions and convergence, handling of hard/equality/fixed/free rows, numerical edge behavior, and prior-art boundary. If those fail, stop implementation of AAGSP and revise the proposed method before any product repository is created. Product release cannot list a protocol or benchmark as the beyond-current-method contribution. A method that fails to beat a relevant baseline remains reported as a negative result; a different method proposal would then be required before a qualified product release.
+
+## Contracts and pipeline boundaries
+
+The product's catalog will have one schema, example, producer check, consumer check, missing-data state, provider, and swap test per boundary. Candidate rows, versions initially `1.0.0`:
+
+| Contract | Payload | Owner / validation |
 |---|---|---|
-| ADR-0057 | two contracts, named stages, lanes | `data-pipeline/`, `docs/contracts/catalog.md` (the two contracts are its rows) |
-| ADR-0058 | architecture modal, five themed bilingual tabs | `frontend/src/architecture/`, validated by the shell on mount |
-| ADR-0069 | method vertical with its acceptance criterion | this SDD, the parity and convergence tests |
-| ADR-0070 | Focus mode for the App: a workbench opens the open group of a case in the full viewport, a surface opens each view with a stage; `?focus=1`, Escape or the exit button returns to the same case or view, group and sub-view | `frontend/src/workbench/Workbench.tsx` (`focus`), `npm run gate` with `--require-focus` (G18); the App's kind is `product.json` `app` (this example is a workbench), and only a surface App without simulation waives Focus, with its reason here as "not applicable: <reason>" |
-| ADR-0071 | the page is the viewport; one tab row; drawing at least half the viewport | the shell's `CaseWorkbench`; the gate (G5, G6) |
-| ADR-0074 | CI runs cheap checks only | `.github/workflows/ci.yml`, `scripts/check_ci_budget.py` |
-| ADR-0075 | every requirement names its gate | `docs/design/features/`, `scripts/check_sdd.py` |
-| ADR-0078 | rules live in the base | shell 0.19.1 (pinned exactly) and this template; no product re-implements them |
-| ADR-0080 | contract-first parallel delivery: catalog, one schema per boundary, providers, declared states, readiness | `docs/contracts/`, `tests/contracts/`, `frontend/src/readiness/`, `scripts/check_contracts.py`, `scripts/check_readiness.py` |
+| `case-spec` | Q, q, A, finite/infinite bounds, row kind, units, penalty family and coefficients, case metadata, provenance | case registry validates dimensions, convexity assumptions, finiteness and IDs; engine adapter independently validates accepted input |
+| `run-request` | case ID plus typed parameter override, method ID and numerical settings | pipeline producer and method adapter validate against shared schema; reject unknown/NaN/out-of-range, never coerce |
+| `run-manifest` | software/source pins, environment, seed/split, solver status, metrics, tolerances, compatibility, timing protocol, artifact hashes | bake validates all fields and artifact existence; reader verifies document and checksums |
+| `solution-artifact` | primal/dual solution, signed and side-specific slacks, objective components, residuals, iteration/convergence trace summary | engine emits; independent checker recomputes original-space constraints/objective and validates same schema |
+| `experiment-index` | named matrix rows, methods, case refs, status and excluded-cell reasons | experiment aggregator validates exact matrix coverage; web consumer rejects duplicate/missing required cells |
+| `readiness` | row-wise state, provenance, missing/stale reasons | pipeline computes; frontend reads; absence never becomes zero or success |
+| `export` | portable case, method result, provenance and checksum | export builder validates, schema test loads exported file from clean path |
+
+States use the template vocabulary and explicitly distinguish `missing`, `partial`, `stale`, `provider`, `training` only if applicable, and `available`. A failed solver is a recorded result with failure status, not a missing row. An unsupported method-case pair has `incompatible` plus reason in the matrix, not an omitted cell. A stale artifact never silently renders as current. Schema changes require a version/history row and both producer/consumer tests.
+
+Offline stages: ingest source/registry -> validate -> generate/pin seeds and splits -> solve each compatible method/case/settings -> independent oracle and residual checks -> aggregate held-out statistics -> export immutable artifacts -> validate inventory/checksums -> replay. Browser replay loads committed artifacts only. A browser live lane is optional and only admitted if complete solver code is bundleable, result parity is demonstrated, memory/payload limits pass, and per-case latency is within the measured product budget. No server lane is planned.
+
+## Application, UI and deliverables
+
+Instantiate current `CAOS_PRODUCT_TEMPLATE` exactly, use `@fasl-work/caos-app-shell` pinned to the version current at scaffold time, and follow the current template six-route contract: App, Introduction, Methodology, Implementation, Experiments, Benchmark. English and Spanish plus light and dark themes are release requirements. App opens on one selected case, provides real supported parameter edits, solve/compare, visible hard/soft row policy, side-specific violation chart, convergence/residual inspection and portable export. Cross-case selection and result matrices belong in Experiments/Benchmark. The page viewport is the app; keyboard access, focus behavior, empty/error/stale/incompatible states and responsive layouts are part of the measured gate.
+
+Architecture modal: five bilingual, theme-aware tabs with complete product architecture and data-flow content. The `docs/` wiki is maintained in the same implementation units and contains method derivations, assumptions, API/contracts, reproducibility, licensing, data provenance, limitations, operations, and contribution guidance. Bilingual notebooks run from simple penalty semantics to published-method comparison and AAGSP falsification; numerical output is executed and checked, never placeholders. Final technical report is required. A separate proposed-method manuscript is prepared only if the method is correct, reproducible and scientifically interesting; otherwise the technical report records negative/inconclusive evidence. Manuscript authorship is reviewed explicitly before publication.
+
+Six diffusion drafts are required by product coverage: executive problem context, two distinct notebook lessons, method/research story, and two further product areas. They remain unsubmitted files in the repository under the user's no-publication instruction.
+
+## Requirements and release gates
+
+Detailed EARS requirements and validation rows are created in the product repo from this accepted SDD before any feature code. Every requirement must point to an executable test/check or a named reproducible review artifact. Minimum feature groups and gates:
+
+| Requirement group | Required proof |
+|---|---|
+| Problem context | executive schema, source/claim checks, EN/ES content and illustration audit |
+| Case/penalty contract | adversarial schema and scalar/vector penalty oracle tests |
+| Methods | each method acceptance gate and exact method-case coverage |
+| Scientific pipeline | full offline ingest-to-export replay, checksums and fresh-environment run |
+| Numerical correctness | independent objective/slack recomputation, KKT/hard-row checks, failure cases |
+| Statistical evidence | preregistered held-out paired matrix, repeated runs and report completeness |
+| Web app | shell gate, keyboard/focus/responsive/EN-ES/light-dark matrix and real interactions |
+| Documentation/curriculum | notebook content audit and fresh-kernel execution in both languages, deep sourced wiki |
+| Provenance/community | dependency/license notices, citations, data/license audit, template residue and content guards |
+| Delivery | release manifest, artifact version/hash, deployment/live smoke and Zenodo report relation |
+
+No requirement is accepted solely because it renders, builds, or returns HTTP 200. No full release is claimed until all method and case gates pass; no superiority claim until the held-out acceptance criterion passes.
+
+## Beyond the state of the art
+
+BS-1: AAGSP tests the hypothesis that a side-specific separable elastic penalty update can preserve OSQP's original KKT dimensions while improving setup/solve work against matched explicit lifting in a practitioner-relevant regime. This is a proposed method awaiting the complete held-out comparison. The native implementation must include projection, objective, dual conjugate, scaling and recession behavior. An independent explicit-lift oracle, hard-row residual checks and paired measurements refute or support it. It cannot be described as novel or superior before the evidence and prior-art review justify that claim.
+
+Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
+
+UNVERIFIED: novelty, superiority, full case coverage, deployment and operational value; all require the declared gates.
