@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
+import { LANG_STORAGE_KEY, THEME_STORAGE_KEY } from '@fasl-work/caos-app-shell/keys';
+import { installLib } from '../node_modules/@fasl-work/caos-app-shell/gate/inpage.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const at = process.argv.indexOf('--out');
@@ -105,6 +107,40 @@ try {
   if (out) await page.screenshot({ path: join(out, 'benchmark-phone.png'), fullPage: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
   if (out) await page.screenshot({ path: join(out, 'benchmark-desktop.png'), fullPage: true });
+  // Reproduce the locale, contrast and wide-font failures with the same measurements as the full gate.
+  const methods = JSON.parse(readFileSync(join(root, '..', 'content', 'methods.json'), 'utf8'));
+  for (const [width,height,theme,wide] of [[1280,800,'dark',false],[390,844,'light',true]]) {
+    const context = await browser.newContext({ viewport:{width,height} });
+    await context.addInitScript(([lk,tk,t])=>{localStorage.setItem(lk,'es');localStorage.setItem(tk,t);},[LANG_STORAGE_KEY,THEME_STORAGE_KEY,theme]);
+    await context.addInitScript(installLib);
+    const localized = await context.newPage();
+    async function inspect() {
+      const problems = await localized.evaluate(()=>[
+        ...window.__caosGate.decimals(),...window.__caosGate.scrolls(),...window.__caosGate.brokenValues(),
+        ...window.__caosGate.contrast(),
+      ]);
+      if(problems.length) throw new Error(`${localized.url()} ${width}/${theme}: ${problems.join('\n')}`);
+    }
+    await localized.goto(new URL('benchmark',server.url).href,{waitUntil:'networkidle'});
+    if(wide) await localized.addStyleTag({content:':root { --font-sans: Verdana, "DejaVu Sans", sans-serif !important; }'});
+    await localized.getByLabel('Magnitud física',{exact:true}).selectOption('velocity');
+    await inspect();
+    if (!wide) {
+      await localized.goto(new URL('methodology',server.url).href,{waitUntil:'networkidle'});
+      await localized.getByRole('tab',{name:'Referencias L1',exact:true}).click();await inspect();
+      await localized.getByRole('tab',{name:methods.find(m=>m.id==='elasti').title.es,exact:true}).click();await inspect();
+      await localized.goto(new URL('implementation',server.url).href,{waitUntil:'networkidle'});
+      await localized.getByRole('tab',{name:'Evidencia y entrega',exact:true}).click();await inspect();
+      await localized.goto(new URL('app',server.url).href,{waitUntil:'networkidle'});await inspect();
+      await localized.getByRole('button',{name:'Editar costos y resolver localmente',exact:true}).click();await inspect();
+      await localized.goto(new URL('introduction',server.url).href,{waitUntil:'networkidle'});await inspect();
+      for(const label of ['La situación actual','La propuesta']) {
+        await localized.getByRole('tab',{name:label,exact:true}).click();await inspect();
+      }
+    }
+    if(out) await localized.screenshot({path:join(out,`locale-${width}-${theme}.png`),fullPage:true});
+    await context.close();
+  }
   console.log('SoftQP probe: native solve/import, tamper rejection, C12 cold/warm and incompatibility, campaign filters/plots, exact raw CSV download, Focus return and phone widths passed');
   if (errors.length) throw new Error(errors.join('\n'));
 } finally {

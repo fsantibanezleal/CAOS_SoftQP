@@ -49,3 +49,5 @@ Licensed under the MIT License (see [LICENSE](LICENSE)). The configured Pages de
 ## Measured finding
 
 The frozen 456-instance experiment retained 11592 accepted measured observations and 7560 explicit incompatibilities, without numerical failures or accuracy rejection. The primary timing hypothesis did not pass: median relative reduction 0.50%, 95% seed-cluster interval -3.29% to 3.94%, below the registered 10% criterion. This negative result is preserved in the raw evidence and curriculum; it establishes no timing superiority or global algorithmic novelty.
+
+The [technical report](https://doi.org/10.5281/zenodo.23851659) documents the formulation, methods, complete experiment and limits under CC BY 4.0.

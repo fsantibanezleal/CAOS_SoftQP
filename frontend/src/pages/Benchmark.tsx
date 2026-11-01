@@ -1,4 +1,4 @@
-import { BarChart, Callout, DocPage, DocSection, PlotCard } from '@fasl-work/caos-app-shell';
+import { BarChart, Callout, DocPage, DocSection, PlotCard, useFormat } from '@fasl-work/caos-app-shell';
 import { useState } from 'react';
 import { methodNames as names } from '../lib/methodNames';
 import { MeasuredExperiments } from './MeasuredExperiments';
@@ -6,9 +6,9 @@ import { P, useT } from '../content/bi';
 import { useScientificRecords } from '../lib/useScientificRecords';
 const local={en:'Computed from verified committed scientific records.',es:'Calculado desde registros científicos versionados y verificados.'};
 export function Benchmark(){
-  const t=useT();const {records,error}=useScientificRecords();const [method,setMethod]=useState('asymmetric');
+  const t=useT();const format=useFormat();const {records,error}=useScientificRecords();const [method,setMethod]=useState('asymmetric');
   const cells=records?.flatMap(doc=>doc.runs.map(run=>({doc,run})))??[];
-  const fmt=(value:number|null|undefined)=>value==null?'-':Number(value.toPrecision(5)).toString();
+  const fmt=(value:number|null|undefined)=>format(value,{digits:5});
   const good=cells.filter(c=>c.run.state==='available');
   return <DocPage title={{en:'Benchmark',es:'Comparación'}} lede={t('This page reads the committed development matrix and exposes agreement, formulation size and compatibility. It separates those correctness observations from the repeated held-out timing experiment required for a performance claim. Every cell retains its method state, so an unsupported formulation or failed solve cannot disappear from the comparison.', 'Esta página lee la matriz de desarrollo versionada y muestra concordancia, dimensiones y compatibilidad. Separa esas observaciones de corrección del experimento repetido y reservado necesario para afirmar desempeño. Cada celda conserva su estado, evitando que una formulación incompatible o una solución fallida desaparezcan de la comparación.')} floorWaivers={[{floor:'live',reason:{en:'The actual solver is a native C extension. The browser verifies recorded and locally imported results. A compiled browser solver has not passed its parity and resource gates.',es:'El solver real es una extensión nativa C. El navegador verifica registros y resultados locales. Un solver compilado para navegador no ha superado paridad y recursos.'}}]}>
     {error&&<p role="alert">{error}</p>}

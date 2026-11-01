@@ -254,11 +254,11 @@ No requirement is accepted solely because it renders, builds, or returns HTTP 20
 
 ## Beyond the state of the art
 
-BS-1: AAGSP tests the hypothesis that a side-specific separable elastic penalty update can preserve OSQP's original KKT dimensions while improving setup/solve work against matched explicit lifting in a practitioner-relevant regime. This is a proposed method awaiting the complete held-out comparison. The native implementation must include projection, objective, dual conjugate, scaling and recession behavior. An independent explicit-lift oracle, hard-row residual checks and paired measurements refute or support it. It cannot be described as novel or superior before the evidence and prior-art review justify that claim.
+BS-1: AAGSP tests the hypothesis that a side-specific separable elastic penalty update can preserve OSQP's original KKT dimensions while improving setup/solve work against matched explicit lifting in a practitioner-relevant regime. The completed held-out comparison did not establish the registered timing improvement; BS-1 remains an unaccepted research hypothesis. The native implementation must include projection, objective, dual conjugate, scaling and recession behavior. An independent explicit-lift oracle, hard-row residual checks and paired measurements refute or support it. It cannot be described as novel or superior before the evidence and prior-art review justify that claim.
 
 Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
 
-UNVERIFIED: novelty, superiority, full case coverage, deployment and operational value; all require the declared gates.
+UNVERIFIED: novelty, superiority, qualified product release, deployment and operational value; all require the declared gates. The complete catalog and registered experimental grid are executed and retained.
 
 The Methodology page uses the documented `method-learned` floor waiver: the implemented method set is deterministic convex optimization and has no trained parameter policy. This does not waive any method implementation, comparison, mathematical-depth or executive-brief requirement. Deep FlexQP remains an availability-gated related method with distinct restoration semantics.
 

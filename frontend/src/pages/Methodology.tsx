@@ -11,7 +11,7 @@ export function Methodology() {
       {method.paragraphs.map((p, i) => <P key={i} en={p.en} es={p.es} />)}
       {method.equations.map((eq, i) => <Equation key={i} tex={eq.tex} caption={t(eq.caption.en, eq.caption.es)} />)}
       <Figure caption={t("The computation and independent evidence path for this method.", "La secuencia de cómputo y evidencia independiente de este método.")}><FlowFigure stages={method.stages.map(s => t(s.en, s.es))} label={t(method.title.en, method.title.es)} /></Figure>
-      <Callout variant="honest" title={t("Scope and limits", "Alcance y límites")}>{t(method.scope.en, method.scope.es)}</Callout>
+      <Callout variant="honest" title={t("Scope and limits", "Alcance y límites")}>{t(method.scope.en, method.scope.es).split(/(Apache-2\.0)/).map((part,i)=>part==='Apache-2.0'?<code key={i}>{part}</code>:part)}</Callout>
     </DocSection>,
   }));
   return <DocPage title={{ en: 'Methodology', es: 'Metodología' }} lede={t(
