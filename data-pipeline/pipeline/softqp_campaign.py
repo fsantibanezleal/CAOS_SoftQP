@@ -267,7 +267,7 @@ def run_campaign(output, splits=("development", "heldout", "robustness")):
     records, datasets = [], []
     plan = [spec for split in splits for spec in instances(protocol, split)]
     try:
-        with (output / "trials.jsonl").open("w", encoding="utf-8") as raw:
+        with (output / "trials.jsonl").open("w", encoding="utf-8", newline="\n") as raw:
             for number, spec in enumerate(plan):
                 start = time.perf_counter()
                 problem = generated_problem(spec)
@@ -299,11 +299,11 @@ def run_campaign(output, splits=("development", "heldout", "robustness")):
                       f"condition={spec['condition']} elapsed={time.monotonic() - started:.1f}s", flush=True)
     finally:
         runner.close()
-    (output / "datasets.json").write_text(json.dumps(datasets, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (output / "datasets.json").write_text(json.dumps(datasets, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
     with (output / "trials.csv").open("w", newline="", encoding="utf-8") as handle:
         columns = ["id", "split", "seed", "n", "density", "condition", "family", "method", "repetition",
                    "warmup", "state", "reason", "elapsed_seconds", "normalized_gap", "iterations"]
-        writer = csv.DictWriter(handle, columns, extrasaction="ignore")
+        writer = csv.DictWriter(handle, columns, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(records)
     document = dict(schema_version="softqp.campaign/v1", protocol=protocol, environment=provenance,
@@ -316,7 +316,7 @@ def run_campaign(output, splits=("development", "heldout", "robustness")):
                     artifacts=[dict(path=name, bytes=(output / name).stat().st_size,
                                     sha256=hashlib.sha256((output / name).read_bytes()).hexdigest())
                                for name in ("trials.jsonl", "trials.csv", "datasets.json")])
-    (output / "campaign.json").write_text(json.dumps(document, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    (output / "campaign.json").write_text(json.dumps(document, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
     return document
 
 

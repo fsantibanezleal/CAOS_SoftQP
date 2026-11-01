@@ -75,5 +75,5 @@ def publish_experiments(campaign_folder, output):
                                  sha256=hashlib.sha256((output / name).read_bytes()).hexdigest())
                             for name, schema in names])
     validate_document(index, "softqp-experiment-index")
-    (output / "index.json").write_text(json.dumps(index, indent=2) + "\n", encoding="utf-8")
+    (output / "index.json").write_text(json.dumps(index, indent=2) + "\n", encoding="utf-8", newline="\n")
     return index

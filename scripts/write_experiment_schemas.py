@@ -41,7 +41,7 @@ def literal(value):
 def write(name, body):
     doc = {"$schema": "https://json-schema.org/draft/2020-12/schema",
            "$id": f"https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/{name}.schema.json", **body}
-    (FOLDER / f"{name}.schema.json").write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8")
+    (FOLDER / f"{name}.schema.json").write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def main():

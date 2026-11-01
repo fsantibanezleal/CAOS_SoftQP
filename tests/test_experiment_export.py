@@ -19,6 +19,7 @@ def test_experimental_exports_and_provider():
         validate_document(index, "softqp-experiment-index")
         for entry in index["artifacts"]:
             raw = (base / entry["path"]).read_bytes()
+            assert b"\r\n" not in raw, "Artifact digests must survive Git LF normalization"
             assert hashlib.sha256(raw).hexdigest() == entry["sha256"]
             assert len(raw) == entry["bytes"]
             if entry["path"].endswith(".json"):

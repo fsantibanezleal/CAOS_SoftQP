@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 import time
 import numpy as np
-from pipeline.softqp_campaign import generated_problem, instances, primary_endpoint, BoundedWorker
+from pipeline.softqp_campaign import generated_problem, instances, primary_endpoint, BoundedWorker, run_campaign
 from pipeline.experiment_common import oracle
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,3 +67,17 @@ def test_adversarial_bounded_worker_keeps_invalid_input_as_failure(monkeypatch):
         assert bad["state"] == "failed" and "NaN" in bad["reason"]
     finally:
         runner.close()
+
+
+def test_export_bytes_are_lf_on_every_platform(monkeypatch, tmp_path):
+    import pipeline.softqp_campaign as campaign
+
+    for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+        monkeypatch.setenv(name, "1")
+    spec = dict(id="development-0000", split="development", n=4, density=0.2,
+                seed=1000, family="asymmetric-elastic", condition=1)
+    monkeypatch.setattr(campaign, "instances", lambda protocol, split: [spec])
+    result = run_campaign(tmp_path, ("development",))
+    assert result["completed_instances"] == 1
+    for file in tmp_path.iterdir():
+        assert b"\r\n" not in file.read_bytes(), file.name

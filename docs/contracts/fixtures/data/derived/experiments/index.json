@@ -6,32 +6,32 @@
     {
       "path": "campaign.json",
       "schema": "softqp-campaign",
-      "bytes": 136214,
-      "sha256": "e95081872d63d64dfb7da813c60760bb3d618bb1eeb14c4296991b89ef1fafee"
+      "bytes": 131378,
+      "sha256": "ce99ae5796a19825b87ecf818f19554c49aaae8b020603aa4b86f658e0030294"
     },
     {
       "path": "datasets.json",
       "schema": "softqp-datasets",
-      "bytes": 61832,
-      "sha256": "5b3a3bc41985304837f3e57fe46032ed5d968f43fd409064ed7b8cda634466d3"
+      "bytes": 59814,
+      "sha256": "1c59bc83c0a688a08a8dda5b999c49ad7cb1525fa07aca8f2ec39efc66c9c9d7"
     },
     {
       "path": "trials.jsonl",
       "schema": "softqp-trial",
-      "bytes": 5212116,
-      "sha256": "3673bd636292eb48d2cc818e44ec3aaf73d842f63c359dc6f7ada662b163f168"
+      "bytes": 5205204,
+      "sha256": "6cbcc51ce7c23c3bd84c1d436cc10288862b06020a677bcb49d1dbb779d2636f"
     },
     {
       "path": "trials.csv",
       "schema": "csv",
-      "bytes": 1102993,
-      "sha256": "1689b8ee2f948293c287107406702e391a761378a2a2a10f882c8ca863367a2e"
+      "bytes": 1096080,
+      "sha256": "89d441555dcb02520da5749e09bd3333d01ff7ad3c4c56f8a3ca6ae8c248fd03"
     },
     {
       "path": "stream.json",
       "schema": "softqp-stream",
-      "bytes": 2199571,
-      "sha256": "6748cf8fe8ccc9548d068f5b7064fe17012d5dfd19d89348378fe963950a37e7"
+      "bytes": 2199588,
+      "sha256": "b829a1604f3b61fa4b84e7a49537b76006a451d71fdb57fd2f3e6e74f551e267"
     }
   ]
 }
