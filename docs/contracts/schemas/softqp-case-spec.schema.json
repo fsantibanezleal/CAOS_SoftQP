@@ -1,0 +1,201 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "P": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shape": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20000
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20000
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2000000
+        },
+        "indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxItems": 2000000
+        },
+        "indptr": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxItems": 20001
+        }
+      },
+      "required": [
+        "shape",
+        "data",
+        "indices",
+        "indptr"
+      ]
+    },
+    "q": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 20000
+    },
+    "A": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shape": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20000
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20000
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2000000
+        },
+        "indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxItems": 2000000
+        },
+        "indptr": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxItems": 20001
+        }
+      },
+      "required": [
+        "shape",
+        "data",
+        "indices",
+        "indptr"
+      ]
+    },
+    "lower": {
+      "type": "array",
+      "items": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "maxItems": 20000
+    },
+    "upper": {
+      "type": "array",
+      "items": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "maxItems": 20000
+    },
+    "penalty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lower_linear": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "maxItems": 20000
+        },
+        "upper_linear": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "maxItems": 20000
+        },
+        "lower_quadratic": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "maxItems": 20000
+        },
+        "upper_quadratic": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "maxItems": 20000
+        },
+        "soft": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          },
+          "maxItems": 20000
+        }
+      },
+      "required": [
+        "lower_linear",
+        "upper_linear",
+        "lower_quadratic",
+        "upper_quadratic",
+        "soft"
+      ]
+    }
+  },
+  "required": [
+    "P",
+    "q",
+    "A",
+    "lower",
+    "upper",
+    "penalty"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-case-spec.schema.json"
+}

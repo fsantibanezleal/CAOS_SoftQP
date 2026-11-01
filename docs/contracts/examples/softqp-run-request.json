@@ -1,0 +1,8 @@
+{
+  "schema_version": "softqp.run-request/v1",
+  "case_id": "C01",
+  "base_sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
+  "lower_multiplier": 2.0,
+  "upper_multiplier": 3.0,
+  "quadratic_multiplier": 1.5
+}

@@ -8,7 +8,7 @@
       },
       "failed": false,
       "path": "C01.json",
-      "sha256": "2173a6ecb3956a91ea6b2980bbecf3638e0b48107009430552150ac995ce509f",
+      "sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
       "title": {
         "en": "Lower-bound undershoot",
         "es": "Incumplimiento inferior"
@@ -22,7 +22,7 @@
       },
       "failed": false,
       "path": "C02.json",
-      "sha256": "8dd9fcf867b65b2d5835d55849e7fb103f9fc246efd7d9795a2dd74fcd4e4916",
+      "sha256": "d1319c87e0ddeb007528d5ee309e06284f1a4875095943448fee0c5fd763fcd6",
       "title": {
         "en": "Upper-bound overshoot",
         "es": "Incumplimiento superior"
@@ -36,7 +36,7 @@
       },
       "failed": false,
       "path": "C03.json",
-      "sha256": "5ccca64db669f57ecac13596b74a901425a3da1590b06c399010430d15685246",
+      "sha256": "82c7ed303e2d47cc9fd417ca3347851a0a83cc96803f919515fe4a3dfeb83970",
       "title": {
         "en": "Competing side costs",
         "es": "Costos por lado en conflicto"
@@ -50,7 +50,7 @@
       },
       "failed": false,
       "path": "C04.json",
-      "sha256": "97cec4aa6bcc9faa3ea4a1365b841621698c83df26b5e0850bda5ddd933a513b",
+      "sha256": "08ae34a8252057249e93709954eac425abc7e86bf2724fc369acdedbef66ff7d",
       "title": {
         "en": "Mixed hard and soft rows",
         "es": "Filas duras y blandas"
@@ -64,7 +64,7 @@
       },
       "failed": false,
       "path": "C05.json",
-      "sha256": "98615f8e580d2ccca5a458fc0040de2451e8b77b2d069bac40481f90e7b8b65b",
+      "sha256": "c449a5d2950602d83505cfa0121aa1bbdac98c61131aeede1b846ccf100c2657",
       "title": {
         "en": "Grouped peak violation",
         "es": "Incumplimiento máximo agrupado"
@@ -78,7 +78,7 @@
       },
       "failed": false,
       "path": "C06.json",
-      "sha256": "591a87bcee4ac44cfe4538025e8320d6353ca127ab07489e0c14e0f1f97e91ef",
+      "sha256": "992f8a1f20c3c04198db8ee803736dc5c83a364c2f730ccbca841ff1e4a83c2a",
       "title": {
         "en": "Sparse scaling instance",
         "es": "Instancia dispersa"
@@ -92,7 +92,7 @@
       },
       "failed": false,
       "path": "C07.json",
-      "sha256": "922044ed2fa4be8de94e7aa5a79fed4a71b29d0bd0300644b0b1e4b8d3a20bf6",
+      "sha256": "d9fdfdf1b4912245fcbb641914565587ce4842ba3305d3eb58661623fe21d664",
       "title": {
         "en": "Semidefinite Hessian",
         "es": "Hessiana semidefinida"
@@ -106,7 +106,7 @@
       },
       "failed": false,
       "path": "C08.json",
-      "sha256": "d217fdfaaf80ad982c413c945ab13c40c62dc309425553a2c50d5425b7cec534",
+      "sha256": "d85bea4482d0b3d05ca389fd58b52d3cb12d39805a618dfb6eec7d35b56663e3",
       "title": {
         "en": "Ill-conditioned Hessian",
         "es": "Hessiana mal condicionada"
@@ -120,7 +120,7 @@
       },
       "failed": false,
       "path": "C09.json",
-      "sha256": "22402744b1ab654773e27cd6500e02b3286a063d3e2cc10b999d80e9db48e60f",
+      "sha256": "d1442faa4e4626ec2264d56b852bfbb0a375d53105b2970915f5a95e93d699fc",
       "title": {
         "en": "Feasible double-integrator MPC",
         "es": "MPC factible de doble integrador"
@@ -134,7 +134,7 @@
       },
       "failed": false,
       "path": "C10.json",
-      "sha256": "3783536dd76fb7562899a60df214efe7b31511acedddd7e87e4874247a049714",
+      "sha256": "30d96a746701607cdeddd3bd54fbb7a99e814411347b42d9653e2ed24963454a",
       "title": {
         "en": "Disturbed state constraints",
         "es": "Restricciones de estado perturbadas"
@@ -148,7 +148,7 @@
       },
       "failed": false,
       "path": "C11.json",
-      "sha256": "a6c0fba5abb0e8a135de7b6238240b188dda9dda3ec8a4aedaf324eb961bed95",
+      "sha256": "89515d04f414574f63c20404d801399f72042f0fe90ab08809bd567924222332",
       "title": {
         "en": "Conflicting safety boundaries",
         "es": "Fronteras de seguridad en conflicto"
@@ -162,7 +162,7 @@
       },
       "failed": false,
       "path": "C12.json",
-      "sha256": "010183317edac99397fe3fb2e9784c05b66667d6270ca73b0d6cdf52587b8dc5",
+      "sha256": "a7130366ee0be3039799f07e394190c4dd8c0528a972c9eaf2d9b8635c7e47e7",
       "title": {
         "en": "Parameter-stream initial state",
         "es": "Estado inicial de flujo paramétrico"
@@ -176,7 +176,7 @@
       },
       "failed": false,
       "path": "C13.json",
-      "sha256": "2e88246d8746e738f72730e4b74b8792dc4b1948bf1deeb712ebb053107b0691",
+      "sha256": "3ebb9d5b093ecc91d8abfde09046ae95c7055de198656104c95f6a2e159c27e9",
       "title": {
         "en": "Published building-energy model",
         "es": "Modelo energético publicado"
@@ -190,7 +190,7 @@
       },
       "failed": false,
       "path": "C14.json",
-      "sha256": "367983e5f14a4cb4b6ded129e22c93fa9630c49272651fec5e722a93dce35177",
+      "sha256": "ee5fbbe986171566c5c7f7761839ed4d68178bf8f4436400710e683da0aa45bd",
       "title": {
         "en": "Side-specific energy trade-offs",
         "es": "Compromisos energéticos por lado"
@@ -204,7 +204,7 @@
       },
       "failed": false,
       "path": "C15.json",
-      "sha256": "cb559ea40ad54f21070d9fd6975764c3a292a087e7dd7c1c44978c24c29bb1b6",
+      "sha256": "b55500a5723383a0f45739b13939e523671ac480c9b2bb41e878c03c587d75d9",
       "title": {
         "en": "Mixed elastic side costs",
         "es": "Costos elásticos mixtos por lado"
@@ -214,6 +214,7 @@
   "default_case": "C01",
   "environment": {
     "packages": {
+      "daqp": "0.10.3",
       "numpy": "2.5.4",
       "osqp": "1.1.3",
       "scipy": "1.18.1",
@@ -224,7 +225,7 @@
   },
   "limitations": [
     "Development bake, not the complete release experiment matrix.",
-    "DAQP and FlexQP comparison cells are not implemented in this bake.",
+    "DAQP uses original-scale side weights on compatible positive definite cases; FlexQP is not implemented in this bake.",
     "C12 includes the initial state only; stream and warm-start measurements remain pending.",
     "No timing superiority or novelty is established."
   ],

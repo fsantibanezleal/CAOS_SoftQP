@@ -1,11 +1,13 @@
 import { BarChart, CaseWorkbench, PlotCard, Readout, useShellLang, useWorkbenchState } from '@fasl-work/caos-app-shell';
-import { useEffect, useState } from 'react';
-import { loadSoftQPCase, loadSoftQPIndex, type SoftQPIndex, type SoftQPResult, type SoftQPRun } from '../lib/softqp';
+import { useEffect, useRef, useState } from 'react';
+import { loadSoftQPCase, loadSoftQPIndex, softQPSource, type SoftQPIndex, type SoftQPResult, type SoftQPRun } from '../lib/softqp';
+import { makeLocalRequest, verifyLocalResult } from '../lib/softqp.local';
 
 const names: Record<string, { en: string; es: string }> = {
   lifted: { en: 'Explicit lifting', es: 'Holguras explícitas' },
   generalized: { en: 'Generalized projection', es: 'Proyección generalizada' },
   asymmetric: { en: 'Asymmetric projection', es: 'Proyección asimétrica' },
+  daqp: { en: 'DAQP', es: 'DAQP' },
 };
 const fmt = (n: number | null | undefined, lang: string) => n == null ? '—' : new Intl.NumberFormat(lang, { maximumSignificantDigits: 6 }).format(n);
 
@@ -45,29 +47,65 @@ export function Workbench() {
   const lang = useShellLang();
   const [index, setIndex] = useState<SoftQPIndex | null>(null); const [doc, setDoc] = useState<SoftQPResult | null>(null);
   const [selected, setSelected] = useState('C01'); const [method, setMethod] = useState('lifted'); const [unit, setUnit] = useState('1'); const [error, setError] = useState<string | null>(null);
+  const [localResult, setLocalResult] = useState<SoftQPResult | null>(null);
+  const [edits, setEdits] = useState({ lower: '1', upper: '1', quadratic: '1' });
+  const importKey = `${selected}|${edits.lower}|${edits.upper}|${edits.quadratic}`;
+  const activeImportKey = useRef(importKey); activeImportKey.current = importKey;
   useEffect(() => { loadSoftQPIndex().then(setIndex).catch(e => setError(String(e))); }, []);
   useEffect(() => {
     const entry = index?.cases.find(c => c.case_id === selected); if (!entry) return;
-    const abort = new AbortController(); setDoc(null); setError(null);
+    const abort = new AbortController(); setDoc(null); setError(null); setLocalResult(null); setEdits({ lower: '1', upper: '1', quadratic: '1' });
     loadSoftQPCase(entry, abort.signal).then(result => { if (!abort.signal.aborted) { setDoc(result); setUnit(result.rows.find(r => r.soft)?.unit ?? result.rows[0]?.unit ?? '1'); } }).catch(e => { if (!abort.signal.aborted) setError(String(e)); });
     return () => abort.abort();
   }, [selected, index]);
-  const current = doc?.case_id === selected ? doc : null; const run = current?.runs.find(r => r.method === method); const units = [...new Set(current?.rows.map(r => r.unit) ?? ['1'])];
+  const baseline = doc?.case_id === selected ? doc : null;
+  const current = localResult?.case_id === selected ? localResult : baseline; const run = current?.runs.find(r => r.method === method); const units = [...new Set(current?.rows.map(r => r.unit) ?? ['1'])];
+  function download(value: unknown, filename: string) {
+    const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: 'application/json' }));
+    const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function request() {
+    const entry = index?.cases.find(c => c.case_id === selected);
+    if (!entry || !baseline?.problem) throw new Error(lang === 'es' ? 'El caso no admite edición separable.' : 'This case does not support separable cost edits.');
+    return makeLocalRequest(selected, entry.sha256, Number(edits.lower), Number(edits.upper), Number(edits.quadratic));
+  }
+  function exportRequest() {
+    try { download(request(), `${selected}-request.json`); setError(null); } catch(e) { setError(String(e)); }
+  }
+  async function importResult(file?: File) {
+    if (!file || !baseline) return;
+    try {
+      if (file.size > 32 * 1024 * 1024) throw new Error('Local result exceeds 32 MiB');
+      const expected = request(); const original = baseline; const started = importKey;
+      const result = verifyLocalResult(JSON.parse(await file.text()), expected, original);
+      if (activeImportKey.current !== started) return;
+      setLocalResult(result); setError(null);
+    } catch(e) { setError(String(e)); }
+  }
   function exportResult() {
     if (!current) return;
-    const blob = new Blob([JSON.stringify({ lane: 'replay', selected_method: method, result: current }, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `${selected}-${method}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    download({ lane: 'replay', origin: localResult ? 'local-native-import' : softQPSource, selected_method: method, result: current }, `${selected}-${method}.json`);
   }
   const rail = <><p>{lang === 'es' ? 'Resultados de desarrollo reproducibles. Seleccione caso, método y unidad.' : 'Reproducible development results. Select a case, method and unit.'}</p>
+    {softQPSource === 'fixture' && <p data-state="provider">{lang === 'es' ? 'Proveedor de prueba: solo C01. No es la matriz científica completa.' : 'Fixture provider: C01 only. This is not the full scientific matrix.'}</p>}
     <label htmlFor="softqp-unit">{lang === 'es' ? 'Unidad de las filas' : 'Row unit'}</label><select id="softqp-unit" value={unit} onChange={e => setUnit(e.target.value)}>{units.map(u => <option key={u}>{u}</option>)}</select>
     <Readout title={{ en: 'Recorded result', es: 'Resultado registrado' }} lane="replay" provenance="synthetic" items={[
       { label: { en: 'Objective', es: 'Objetivo' }, value: run?.result?.metrics?.objective ?? null, unitless: true },
       { label: { en: 'Hard-row error', es: 'Error de filas duras' }, value: run?.result?.metrics?.hard_violation ?? null, unitless: true },
       { label: { en: 'Iterations', es: 'Iteraciones' }, value: run?.result?.iterations ?? null, unitless: true },
     ]} /><button type="button" disabled={!current} onClick={exportResult}>{lang === 'es' ? 'Exportar registro' : 'Export record'}</button>
-    {error && <p role="alert">{error}</p>}{run?.state === 'incompatible' && <p data-state="unavailable">{lang === 'es' ? 'La penalización queda fuera de la familia admitida por este método.' : 'The penalty is outside this method’s supported family.'}</p>}</>;
+    <details><summary>{lang === 'es' ? 'Editar costos y resolver localmente' : 'Edit costs and solve locally'}</summary>
+      <p>{lang === 'es' ? 'Los factores modifican costos blandos; las filas duras se conservan. Descargue la solicitud, ejecútela con el paquete científico e importe el resultado. El navegador verifica entradas, objetivo e incumplimientos.' : 'Factors change soft costs; hard rows are preserved. Download the request, execute it with the scientific package, then import the result. The browser verifies inputs, objective and violations.'}</p>
+      {(['lower', 'upper', 'quadratic'] as const).map(key => <div key={key}><label htmlFor={`cost-${key}`}>{key === 'lower' ? (lang === 'es' ? 'Factor inferior' : 'Lower cost factor') : key === 'upper' ? (lang === 'es' ? 'Factor superior' : 'Upper cost factor') : (lang === 'es' ? 'Factor cuadrático' : 'Quadratic cost factor')}</label><input id={`cost-${key}`} type="number" min="0.01" max="100" step="0.1" value={edits[key]} disabled={!baseline?.problem} onChange={e => { setEdits({ ...edits, [key]: e.target.value }); setLocalResult(null); }} /></div>)}
+      {!baseline?.problem && <p>{lang === 'es' ? 'Las penalizaciones acopladas de este caso no admiten esta edición.' : 'This case’s coupled penalties do not support these edits.'}</p>}
+      <button type="button" onClick={exportRequest} disabled={!baseline?.problem}>{lang === 'es' ? 'Descargar solicitud' : 'Download solve request'}</button>
+      <pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}><code>{`python data-pipeline/run_request.py ${selected}-request.json --output local-result.json`}</code></pre>
+      <label htmlFor="local-result">{lang === 'es' ? 'Importar resultado nativo' : 'Import native result'}</label><input id="local-result" type="file" accept="application/json,.json" disabled={!baseline?.problem} onChange={e => { void importResult(e.target.files?.[0]); e.target.value = ''; }} />
+      {localResult && <><p role="status">{lang === 'es' ? 'Resultado nativo importado y verificado.' : 'Imported native result verified.'}</p><button type="button" onClick={() => setLocalResult(null)}>{lang === 'es' ? 'Volver al registro original' : 'Restore recorded result'}</button></>}
+    </details>
+    {error && <p role="alert">{error}</p>}{run?.state === 'incompatible' && <p data-state="unavailable">{lang === 'es' ? 'El caso no cumple los supuestos que admite este método.' : 'The case is outside this method’s supported assumptions.'}</p>}</>;
   return <CaseWorkbench caseId={selected} source="synthetic" cases={{ cases: index?.cases.map(c => ({ id: c.case_id, name: c.title[lang], category: c.category[lang] })) ?? [], selectedId: selected, onSelect: setSelected, layout: 'select', deepLink: true }} controls={{ method, unit }} rail={rail} focus
-    variants={{ variants: ['lifted', 'generalized', 'asymmetric'].map(id => ({ id, label: names[id], note: { en: 'Recorded offline solve.', es: 'Solución registrada fuera del navegador.' }, lane: 'replay' as const })), activeId: method, onSelect: setMethod, title: { en: 'Method', es: 'Método' } }}
+    variants={{ variants: ['lifted', 'generalized', 'asymmetric', 'daqp'].map(id => ({ id, label: names[id], note: { en: 'Recorded offline solve.', es: 'Solución registrada fuera del navegador.' }, lane: 'replay' as const })), activeId: method, onSelect: setMethod, title: { en: 'Method', es: 'Método' } }}
     groups={[{ id: 'violations', label: { en: 'Violations', es: 'Incumplimientos' }, lane: 'replay', provenance: 'synthetic', content: <Violations doc={current} run={run} unit={unit} /> }, { id: 'comparison', label: { en: 'Comparison', es: 'Comparación' }, lane: 'replay', provenance: 'synthetic', content: <Comparison doc={current} /> }]}
-    context={{ content: <div><h2>{current?.title[lang]}</h2><p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Faltan las comparaciones DAQP/FlexQP, los experimentos repetidos y de inicio cálido y la aceptación de publicación. No se establece superioridad ni novedad.' : 'DAQP/FlexQP comparisons, repeated and warm-start experiments, and release acceptance remain pending. No superiority or novelty is established.'}</p></div> }} />;
+    context={{ content: <div><h2>{current?.title[lang]}</h2><p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Faltan las comparaciones FlexQP, los experimentos repetidos y de inicio cálido y la aceptación de publicación. No se establece superioridad ni novedad.' : 'FlexQP comparisons, repeated and warm-start experiments, and release acceptance remain pending. No superiority or novelty is established.'}</p></div> }} />;
 }

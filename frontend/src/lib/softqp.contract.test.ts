@@ -27,4 +27,12 @@ describe('SoftQP producer and consumer contract', () => {
     const controller = new AbortController(); controller.abort();
     await expect(loadSoftQPCase(entry, controller.signal)).rejects.toThrow();
   });
+  it('swaps the actual loader to the isolated provider inventory', async () => {
+    const fixture = await loadSoftQPIndex(undefined, 'fixture');
+    expect(fixture.cases.map(c => c.case_id)).toEqual(['C01']);
+    expect((await loadSoftQPCase(fixture.cases[0], undefined, 'fixture')).case_id).toBe('C01');
+    const canonical = await loadSoftQPIndex(undefined, 'canonical');
+    expect(canonical.cases).toHaveLength(15);
+    await expect(loadSoftQPCase(canonical.cases[1], undefined, 'fixture')).rejects.toThrow('unavailable');
+  });
 });

@@ -1,0 +1,405 @@
+[
+  {
+    "id": "lifting",
+    "title": {
+      "en": "Explicit slack lifting",
+      "es": "Holguras explícitas"
+    },
+    "paragraphs": [
+      {
+        "en": "Explicit lifting represents the violation cost using additional decision variables and linear constraints. A lower slack relaxes a lower endpoint and an upper slack relaxes an upper endpoint, with both slacks constrained to be nonnegative. Independent side costs therefore remain ordinary linear and quadratic objective terms, so an established QP solver can solve the enlarged problem without a custom proximal operator.",
+        "es": "Las holguras explícitas representan el costo de incumplir mediante variables adicionales y restricciones lineales. Una holgura inferior relaja el extremo inferior y otra superior relaja el extremo superior; ambas son no negativas. Los costos independientes por lado siguen siendo términos lineales y cuadráticos ordinarios, por lo que un solver QP establecido puede resolver el problema ampliado sin un operador proximal nuevo."
+      },
+      {
+        "en": "The lifting must be chosen for the declared penalty rather than enlarged unnecessarily. A symmetric quadratic cost can use one signed slack per row, and a symmetric elastic cost can use a shared nonnegative relaxation with an absolute-value construction. The implementation uses the authors' compact reference lifting for symmetric cases and separate lower and upper variables when the costs genuinely differ.",
+        "es": "La formulación debe adaptarse a la penalización declarada y evitar ampliaciones innecesarias. Un costo cuadrático simétrico puede usar una holgura firmada por fila, mientras un costo elástico simétrico puede usar una relajación no negativa compartida mediante una construcción de valor absoluto. La implementación utiliza la formulación compacta de referencia para casos simétricos y variables separadas cuando los costos difieren entre lados."
+      },
+      {
+        "en": "The stock OSQP distribution solves the lifted matrices, independently of the modified native penalty implementation. The reported decision is recovered from the first n coordinates, while lower and upper row multipliers are combined back into original row coordinates. Costs and violations are then recomputed from the original matrices, avoiding reliance on a solver objective that may omit constants or describe auxiliary variables.",
+        "es": "La distribución estándar de OSQP resuelve las matrices ampliadas de forma independiente de la implementación nativa modificada. La decisión se recupera de las primeras n coordenadas y los multiplicadores inferiores y superiores se combinan en las filas originales. Después se recalculan costos e incumplimientos con las matrices originales, sin depender de un objetivo que pueda omitir constantes o describir variables auxiliares."
+      },
+      {
+        "en": "Lifting provides a useful correctness oracle but it is not an exact arithmetic certificate. It has its own stopping tolerances, conditioning and possible failures, and a semidefinite objective may have multiple equally good decisions. Comparisons therefore require matched objective semantics, an independently recomputed objective gap, original-space residual checks and explicit recording of inaccurate, infeasible or unbounded outcomes.",
+        "es": "Esta formulación aporta un oráculo de corrección útil, pero no un certificado de aritmética exacta. Tiene tolerancias, condicionamiento y posibles fallos propios; un objetivo semidefinido puede admitir varias decisiones igualmente buenas. La comparación exige semántica equivalente, brecha del objetivo recalculada de manera independiente, residuos originales y registro explícito de resultados imprecisos, infactibles o no acotados."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "l-s_l\\le Ax\\le u+s_u,\\qquad s_l,s_u\\ge0",
+        "caption": {
+          "en": "Independent nonnegative side slacks represent the same interval relaxation.",
+          "es": "Las holguras no negativas por lado representan la misma relajación del intervalo."
+        }
+      },
+      {
+        "tex": "f(x)+a_l^\\top s_l+a_u^\\top s_u+\\tfrac12 s_l^\\top B_l s_l+\\tfrac12 s_u^\\top B_u s_u",
+        "caption": {
+          "en": "Diagonal nonnegative matrices B_l and B_u encode the quadratic side costs.",
+          "es": "Las matrices diagonales no negativas B_l y B_u codifican los costos cuadráticos por lado."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Original QP",
+        "es": "QP original"
+      },
+      {
+        "en": "Compact lift",
+        "es": "Ampliación compacta"
+      },
+      {
+        "en": "Stock OSQP",
+        "es": "OSQP estándar"
+      },
+      {
+        "en": "Original-space check",
+        "es": "Verificación original"
+      }
+    ],
+    "scope": {
+      "en": "The oracle is a numerical solve. Hard rows stay hard, unsupported penalties need a different representation, and failures are retained instead of being replaced with a plausible point.",
+      "es": "El oráculo es una solución numérica. Las filas duras permanecen duras, otras penalizaciones requieren una representación distinta y los fallos se conservan en el registro."
+    },
+    "refs": [
+      "gsp",
+      "osqp"
+    ]
+  },
+  {
+    "id": "separable",
+    "title": {
+      "en": "Separable generalized projection",
+      "es": "Proyección generalizada separable"
+    },
+    "paragraphs": [
+      {
+        "en": "The published generalized projection method eliminates explicit slack variables for supported unconditional convex penalties. For separable penalties, unconditionality means that changing the sign of a violation does not change its cost. The relaxed interval indicator can then be expressed directly through the distance outside the box, leaving the original decision vector and the principal linear-system dimensions unchanged.",
+        "es": "El método publicado elimina las holguras explícitas para penalizaciones convexas incondicionales compatibles. En el caso separable, esa propiedad implica que cambiar el signo del incumplimiento no altera su costo. El indicador relajado del intervalo se expresa directamente mediante el residuo exterior de la caja, conservando el vector de decisiones y las dimensiones del sistema lineal principal."
+      },
+      {
+        "en": "The ADMM step projects its temporary constraint value onto the interval and applies a scalar proximal map to the remaining residual. For an elastic penalty, the map combines soft thresholding with quadratic shrinkage. A pure linear penalty can set a small residual exactly to zero, whereas a finite pure quadratic penalty continuously reduces it and generally permits a nonzero trade-off with the base objective.",
+        "es": "El paso de ADMM proyecta el valor temporal de la restricción sobre el intervalo y aplica un operador proximal escalar al residuo restante. Una penalización elástica combina umbralización suave y contracción cuadrática. La penalización lineal puede anular exactamente un residuo pequeño; una cuadrática finita lo reduce de forma continua y suele permitir un compromiso no nulo con el objetivo base."
+      },
+      {
+        "en": "The native C core receives row types and original-scale penalty coefficients after ordinary OSQP setup. Hard rows retain the box projection, while soft rows use the generalized update. Consistent row scaling transforms the linear and quadratic coefficients together with the constraints; the numerical ADMM parameter rho remains separate from the physical price of violating an operating limit.",
+        "es": "El núcleo C recibe los tipos de fila y los coeficientes en la escala original después de configurar OSQP. Las filas duras conservan la proyección sobre la caja y las blandas usan la actualización generalizada. El escalado transforma los coeficientes junto con las restricciones; el parámetro numérico rho de ADMM permanece separado del costo físico de incumplir un límite."
+      },
+      {
+        "en": "The implementation is the pinned authors' OSQP fork rather than a short browser reimplementation. The same cases are solved with explicit lifting, and the result record preserves objective components, physical violations, hard-row error and numerical work. Equal matrix dimensions do not guarantee equal iteration counts, and no timing improvement is inferred merely from the absence of extra slack variables.",
+        "es": "La implementación corresponde al fork fijado de los autores, no a una versión abreviada para el navegador. Los mismos casos se resuelven con holguras explícitas y se conservan componentes del objetivo, incumplimientos físicos, error de filas duras y trabajo numérico. Conservar dimensiones no garantiza igual número de iteraciones ni demuestra por sí solo una mejora de rapidez."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "R(v)=v-\\Pi_{[l,u]}(v),\\qquad G(v)=\\Pi_{[l,u]}(v)+\\operatorname{prox}_{\\phi/\\rho}(R(v))",
+        "caption": {
+          "en": "The original projection is augmented by a proximal residual correction.",
+          "es": "La proyección original se amplía con una corrección proximal del residuo."
+        }
+      },
+      {
+        "tex": "\\operatorname{prox}_{\\phi/\\rho}(r)=\\frac{\\rho}{\\rho+b}\\operatorname{sign}(r)\\max\\{|r|-a/\\rho,0\\},\\quad\\phi(r)=a|r|+\\tfrac b2r^2",
+        "caption": {
+          "en": "Nonnegative a and b select linear, quadratic or elastic costs.",
+          "es": "Los valores no negativos a y b eligen costos lineales, cuadráticos o mixtos."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Temporary row value",
+        "es": "Valor temporal"
+      },
+      {
+        "en": "Box projection",
+        "es": "Proyección"
+      },
+      {
+        "en": "Residual prox",
+        "es": "Proximal del residuo"
+      },
+      {
+        "en": "ADMM update",
+        "es": "Actualización ADMM"
+      }
+    ],
+    "scope": {
+      "en": "This published reference uses symmetric side costs. It must not silently average unequal lower and upper weights; those cases are marked incompatible with this method.",
+      "es": "Esta referencia usa costos simétricos por lado. Los pesos desiguales no se promedian de forma silenciosa; esos casos se registran como incompatibles con el método."
+    },
+    "refs": [
+      "gsp",
+      "quadratic",
+      "osqp"
+    ]
+  },
+  {
+    "id": "grouped",
+    "title": {
+      "en": "Grouped maximum violation",
+      "es": "Incumplimiento máximo agrupado"
+    },
+    "paragraphs": [
+      {
+        "en": "A grouped maximum penalty charges the largest violation within a declared set of rows, instead of adding independent row costs. In the building model, the grid contract prices a daily peak overage across the horizon. That policy differs from charging every time step separately, even when the same numerical coefficient appears in both formulations, because the marginal consequence depends on the entire group.",
+        "es": "La penalización máxima agrupada cobra el mayor incumplimiento dentro de un conjunto de filas, en vez de sumar costos independientes. En el modelo del edificio, el contrato de red valora el máximo exceso diario durante el horizonte. Esta política difiere de cobrar cada instante por separado, aunque se use el mismo coeficiente, porque la consecuencia marginal depende de todo el grupo."
+      },
+      {
+        "en": "The proximal update follows Moreau decomposition: subtract the projection of the residual vector onto an L1 ball. Computing that projection requires a common threshold determined from the group magnitudes, so a collection of independent scalar threshold operations would implement a different objective. The native backend sorts the relevant magnitudes and applies the shared correction to the declared group.",
+        "es": "La actualización proximal utiliza la descomposición de Moreau y resta la proyección del vector residual sobre una bola L1. Esa proyección requiere un umbral común determinado por las magnitudes del grupo; aplicar umbrales escalares independientes resolvería otro objetivo. El núcleo nativo ordena las magnitudes pertinentes y aplica la corrección compartida al grupo declarado."
+      },
+      {
+        "en": "The compact lifted oracle introduces an epigraph variable for the group maximum and constrains each relevant violation beneath it. A common unit is required across the grouped rows, because a maximum over unrelated physical units has no coherent operating interpretation. The source implementation equalizes row scaling within a group so that its norm continues to represent the declared original-space penalty.",
+        "es": "El oráculo compacto introduce una variable de epígrafo para el máximo del grupo y limita cada incumplimiento relevante por ella. Todas las filas del grupo deben compartir unidad, pues el máximo entre magnitudes físicas distintas carece de una interpretación operativa coherente. La implementación de referencia iguala el escalado de las filas agrupadas para conservar la penalización original."
+      },
+      {
+        "en": "The grouped catalog case and the paper building model exercise this implementation against the independently lifted QP. The test suite also plants inconsistent group weights and requires the native setup to reject them. The current grouped QP comparison concerns the maximum norm; a Euclidean group norm would require an appropriate conic oracle rather than being described as an ordinary lifted QP.",
+        "es": "El caso agrupado y el modelo del edificio comparan esta implementación con el QP ampliado independiente. Las pruebas también introducen pesos inconsistentes dentro de un grupo y exigen que la configuración nativa los rechace. La comparación agrupada actual usa la norma máxima; una norma euclidiana requeriría un oráculo cónico adecuado, no una formulación presentada como QP ordinario."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "\\Phi(r_G)=w\\|r_G\\|_\\infty,\\qquad t\\ge |r_i|\\quad(i\\in G)",
+        "caption": {
+          "en": "The epigraph variable t is the group peak and w is its cost.",
+          "es": "La variable t representa el máximo del grupo y w su costo."
+        }
+      },
+      {
+        "tex": "\\operatorname{prox}_{(w/\\rho)\\|\\cdot\\|_\\infty}(r_G)=r_G-\\Pi_{\\|\\cdot\\|_1\\le w/\\rho}(r_G)",
+        "caption": {
+          "en": "The L1-ball projection couples every row in the group.",
+          "es": "La proyección sobre la bola L1 acopla todas las filas del grupo."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Grouped residuals",
+        "es": "Residuos agrupados"
+      },
+      {
+        "en": "Shared threshold",
+        "es": "Umbral compartido"
+      },
+      {
+        "en": "Maximum cost",
+        "es": "Costo del máximo"
+      },
+      {
+        "en": "Lifted oracle",
+        "es": "Oráculo ampliado"
+      }
+    ],
+    "scope": {
+      "en": "A group is not a set of independent asymmetric penalties. The candidate asymmetric update is marked incompatible with grouped costs, and unsupported comparisons remain explicit.",
+      "es": "Un grupo no equivale a penalizaciones asimétricas independientes. La propuesta asimétrica se registra como incompatible con los costos agrupados."
+    },
+    "refs": [
+      "gsp"
+    ]
+  },
+  {
+    "id": "huber",
+    "title": {
+      "en": "Huber ramp penalty",
+      "es": "Penalización Huber de rampa"
+    },
+    "paragraphs": [
+      {
+        "en": "The Huber penalty is quadratic near zero and linear beyond a transition magnitude delta. It preserves a smooth derivative while limiting the growth of the marginal cost of a large violation. In the paper building model it applies to HVAC ramp-rate violations, where the unit of the residual is power per hour rather than temperature, energy or grid-import power.",
+        "es": "La penalización Huber es cuadrática cerca de cero y lineal después de una magnitud de transición delta. Mantiene una derivada continua y limita el crecimiento del costo marginal de incumplimientos grandes. En el modelo publicado se aplica a la rampa del sistema HVAC, cuyo residuo se mide en potencia por hora, no en temperatura, energía o potencia importada."
+      },
+      {
+        "en": "The proximal problem has two analytic branches. The quadratic candidate shrinks the residual by rho divided by rho plus the weight, and is valid when the resulting magnitude remains inside delta. Beyond that interval the linear tail subtracts a constant signed correction. Testing the shrunk candidate directly also avoids unnecessarily large intermediate expressions when the penalty weight is large.",
+        "es": "El problema proximal tiene dos ramas analíticas. La candidata cuadrática contrae el residuo con el cociente entre rho y la suma de rho más el peso, y vale mientras la magnitud resultante permanezca dentro de delta. Fuera de ese intervalo, la cola lineal resta una corrección firmada constante. Probar directamente la candidata contraída evita expresiones intermedias innecesariamente grandes."
+      },
+      {
+        "en": "The independent QP lifting decomposes the permitted relaxation into a quadratically priced component and a nonnegative linearly priced tail. Both the native projection and the lifted construction use the same transition value and original-scale coefficient. The physical violation is recovered from Ax and the interval endpoints, so a low auxiliary-variable cost cannot conceal a different ramp trajectory.",
+        "es": "La formulación QP independiente descompone la relajación en una componente cuadrática y una cola lineal no negativa. La proyección nativa y la ampliación usan el mismo umbral y coeficiente en la escala original. El incumplimiento físico se recupera de Ax y de los extremos del intervalo, de modo que un costo auxiliar pequeño no oculte otra trayectoria de rampa."
+      },
+      {
+        "en": "Delta is a penalty transition, not a replacement operating limit and not a safety threshold. Raising or lowering it changes the optimization policy even if the underlying interval remains fixed. The complete building case preserves the original Huber ramp model, while the separately labeled asymmetric energy variants deliberately replace the mixed penalties and therefore answer a changed, explicitly stated question.",
+        "es": "Delta es una transición de penalización, no un límite operativo nuevo ni un umbral de seguridad. Modificarlo cambia la política de optimización aunque el intervalo permanezca fijo. El caso completo del edificio conserva el modelo Huber original; las variantes energéticas asimétricas, identificadas aparte, reemplazan deliberadamente las penalizaciones mixtas y responden una pregunta modificada y explícita."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "h_\\delta(s)=\\begin{cases}\\tfrac12s^2,&|s|\\le\\delta,\\\\\\delta|s|-\\tfrac12\\delta^2,&|s|>\\delta,\\end{cases}\\qquad\\phi(s)=w h_\\delta(s)",
+        "caption": {
+          "en": "The weight w and transition delta retain the row's physical units.",
+          "es": "El peso w y la transición delta conservan las unidades físicas de la fila."
+        }
+      },
+      {
+        "tex": "\\operatorname{prox}_{\\phi/\\rho}(r)=\\begin{cases}\\frac{\\rho r}{\\rho+w},&\\left|\\frac{\\rho r}{\\rho+w}\\right|\\le\\delta,\\\\r-\\frac{w\\delta}{\\rho}\\operatorname{sign}(r),&\\left|\\frac{\\rho r}{\\rho+w}\\right|>\\delta.\\end{cases}",
+        "caption": {
+          "en": "The branch condition is checked on the quadratic candidate.",
+          "es": "La condición se verifica sobre la candidata cuadrática."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Ramp violation",
+        "es": "Incumplimiento de rampa"
+      },
+      {
+        "en": "Quadratic candidate",
+        "es": "Candidata cuadrática"
+      },
+      {
+        "en": "Linear tail",
+        "es": "Cola lineal"
+      },
+      {
+        "en": "Physical check",
+        "es": "Verificación física"
+      }
+    ],
+    "scope": {
+      "en": "This is the symmetric Huber reference from the published implementation. The current asymmetric elastic candidate does not implement a side-dependent Huber transition.",
+      "es": "Esta es la referencia Huber simétrica publicada. La propuesta elástica asimétrica actual no implementa una transición Huber distinta por lado."
+    },
+    "refs": [
+      "gsp"
+    ]
+  },
+  {
+    "id": "asymmetric",
+    "title": {
+      "en": "Asymmetric interval projection",
+      "es": "Proyección asimétrica del intervalo"
+    },
+    "paragraphs": [
+      {
+        "en": "The candidate keeps independent linear and quadratic costs for undershooting a lower bound and exceeding an upper bound. These operating preferences are already known, including in DAQP. The proposed implementation concerns a separable reflected-prox update inside OSQP-style ADMM, preserving the original constraint rows and primal variable count rather than claiming that asymmetric costs themselves are a new formulation.",
+        "es": "La propuesta conserva costos lineales y cuadráticos independientes para el déficit inferior y el exceso superior. Estas preferencias operativas ya existen, incluso en DAQP. La implementación propuesta estudia una actualización proximal reflejada y separable dentro de ADMM, manteniendo las filas y variables originales, sin afirmar que los costos asimétricos sean una formulación nueva."
+      },
+      {
+        "en": "Eliminating signed slack requires its minimum-cost feasible value. A convex scalar penalty minimized at zero cannot decrease while moving away from zero on either ray. The best feasible slack is consequently the interval correction, with a sign opposite to the projection residual. Separability allows this argument row by row, but does not justify an arbitrary coupled asymmetric penalty.",
+        "es": "Eliminar la holgura firmada exige elegir su valor factible de costo mínimo. Una penalización convexa escalar minimizada en cero no puede disminuir al alejarse de cero por ninguna de las dos semirrectas. Por ello, la mejor holgura es la corrección al intervalo, de signo opuesto al residuo de proyección. La separabilidad permite repetir el argumento por fila, sin justificar una penalización asimétrica acoplada arbitraria."
+      },
+      {
+        "en": "The C extension changes more than the projection formula. It evaluates the asymmetric primal cost, chooses the correct side of the dual conjugate, scales both coefficient vectors consistently and charges the correct recession slope for linear tails. Hard rows keep their original projection and recession cone. Tests distinguish bounded and unbounded linear cases with unequal side slopes, as well as conflicting hard constraints.",
+        "es": "La extensión C modifica más que la fórmula de proyección. Evalúa el costo primal asimétrico, elige el lado correcto del conjugado dual, escala los coeficientes de forma coherente y usa la pendiente de recesión correspondiente en las colas lineales. Las filas duras conservan su proyección y su cono de recesión. Las pruebas distinguen casos lineales acotados y no acotados con pendientes desiguales, además de restricciones duras en conflicto."
+      },
+      {
+        "en": "For fixed ADMM parameters and the usual solution-existence assumptions, the reduced separable cost remains closed and convex. The native implementation can also inherit OSQP parameter adaptation, whose practical behavior must be measured rather than converted into a new unrestricted convergence theorem. Novelty and performance remain hypotheses: agreement with lifting establishes correctness evidence, while a held-out comparison with current compatible solvers must support any improvement claim.",
+        "es": "Con parámetros de ADMM fijos y los supuestos habituales de existencia de solución, el costo separable reducido sigue siendo cerrado y convexo. La implementación también puede usar la adaptación de parámetros de OSQP, cuyo comportamiento práctico debe medirse sin convertirlo en un teorema irrestricto nuevo. La novedad y el desempeño siguen siendo hipótesis: coincidir con la ampliación aporta corrección, pero las mejoras requieren comparación reservada con métodos compatibles."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "g(z)=\\min_{\\xi:\\;z+\\xi\\in[l,u]}\\phi(\\xi)=\\phi\\!\\left(-R(z)\\right),\\qquad R(z)=z-\\Pi_{[l,u]}(z)",
+        "caption": {
+          "en": "The reflected argument preserves the distinction between original signed slack and violation residual.",
+          "es": "El argumento reflejado distingue la holgura firmada original del residuo de incumplimiento."
+        }
+      },
+      {
+        "tex": "\\Delta(r)=\\begin{cases}\\frac{(\\rho r-a_u)_+}{\\rho+b_u},&r>0,\\\\-\\frac{(\\rho|r|-a_l)_+}{\\rho+b_l},&r<0,\\\\0,&r=0,\\end{cases}\\quad G(v)=\\Pi(v)+\\Delta(R(v))",
+        "caption": {
+          "en": "The sign of the residual selects the physical bound side and its coefficients.",
+          "es": "El signo del residuo selecciona el lado físico del límite y sus coeficientes."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Declared side costs",
+        "es": "Costos por lado"
+      },
+      {
+        "en": "Reflected residual",
+        "es": "Residuo reflejado"
+      },
+      {
+        "en": "Native ADMM",
+        "es": "ADMM nativo"
+      },
+      {
+        "en": "Independent oracle",
+        "es": "Oráculo independiente"
+      }
+    ],
+    "scope": {
+      "en": "The candidate supports separable elastic costs in the CPU builtin backend. It has no established novelty or timing advantage, and does not provide asymmetric grouped or Huber penalties.",
+      "es": "La propuesta admite costos elásticos separables en CPU. No tiene novedad ni ventaja temporal establecida y no ofrece penalizaciones agrupadas o Huber asimétricas."
+    },
+    "refs": [
+      "gsp",
+      "osqp",
+      "daqp"
+    ]
+  },
+  {
+    "id": "daqp",
+    "title": {
+      "en": "DAQP side-specific reference",
+      "es": "Referencia DAQP por lado"
+    },
+    "paragraphs": [
+      {
+        "en": "DAQP uses a dual active-set algorithm rather than OSQP's operator splitting. Its soft-constraint interface accepts independent lower and upper linear weights and reciprocal quadratic weights in the original problem scale. This makes it a necessary comparator for side-specific elastic costs, because matching an asymmetric objective against a symmetric solver default would compare different engineering decisions instead of numerical algorithms.",
+        "es": "DAQP utiliza un algoritmo de conjunto activo dual en lugar de la separación de operadores de OSQP. Su interfaz admite pesos lineales y pesos cuadráticos recíprocos independientes por lado en la escala original. Por ello es un comparador necesario: contrastar un objetivo asimétrico con valores simétricos por defecto compararía decisiones de ingeniería distintas y no algoritmos numéricos."
+      },
+      {
+        "en": "The adapter maps a positive quadratic coefficient b to the reciprocal weight one over b, and maps each linear coefficient directly to its bound side. DAQP interprets an individual zero weight as a fallback to a global setting, so the implementation explicitly sets the global linear default to zero. Otherwise a nominally zero original-scale coefficient could acquire an unintended penalty.",
+        "es": "El adaptador transforma un coeficiente cuadrático positivo b en el peso recíproco uno sobre b y asigna cada coeficiente lineal al lado correspondiente. DAQP interpreta un peso individual cero como una selección del valor global, por lo que la implementación fija explícitamente el valor lineal global en cero. Así se evita agregar una penalización no declarada."
+      },
+      {
+        "en": "The present reference adapter requires a positive definite Hessian and positive quadratic cost on each finite soft side. It does not insert a regularizer into a semidefinite problem or substitute a small quadratic term for a pure linear penalty. Hard equalities remain active immutable constraints, and dense conversion is bounded by a declared variable and row budget before allocating large reference matrices.",
+        "es": "El adaptador actual exige una hessiana definida positiva y costo cuadrático positivo en cada lado blando finito. No inserta regularización en problemas semidefinidos ni sustituye una penalización lineal por una cuadrática pequeña. Las igualdades duras permanecen activas e inmutables y la conversión densa se limita mediante un presupuesto declarado de variables y filas antes de asignar matrices grandes."
+      },
+      {
+        "en": "Native DAQP status two means soft optimal and is a successful solve, unlike OSQP status two, which denotes an inaccurate optimum. The pipeline preserves the original status and backend settings and applies the method-specific interpretation. It recomputes the same original-space objective and residuals as the other methods, while recognizing that active-set iterations and ADMM iterations do not represent equal computational work.",
+        "es": "El estado nativo dos de DAQP significa óptimo blando y es exitoso; el estado dos de OSQP indica un óptimo impreciso. El pipeline conserva el estado y los parámetros nativos y aplica la interpretación correspondiente al método. Recalcula el mismo objetivo y los mismos residuos originales, reconociendo que las iteraciones de conjunto activo y de ADMM no representan igual trabajo computacional."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "\\rho_{l,i}=1/b_{l,i},\\qquad\\rho_{u,i}=1/b_{u,i},\\qquad w_{l,i}=a_{l,i},\\quad w_{u,i}=a_{u,i}",
+        "caption": {
+          "en": "The reciprocal DAQP convention must not be confused with OSQP's numerical ADMM rho.",
+          "es": "La convención recíproca de DAQP no debe confundirse con el rho numérico de ADMM."
+        }
+      },
+      {
+        "tex": "\\nabla f(x)+A^\\top y=0,\\qquad f_{\\mathrm{elastic}}(x)=f(x)+\\Phi(v_l,v_u)",
+        "caption": {
+          "en": "Stationarity and the declared elastic objective are recomputed outside the reference solver.",
+          "es": "La estacionariedad y el objetivo elástico declarado se recalculan fuera del solver de referencia."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Original-scale weights",
+        "es": "Pesos originales"
+      },
+      {
+        "en": "Dense active set",
+        "es": "Conjunto activo denso"
+      },
+      {
+        "en": "Native status",
+        "es": "Estado nativo"
+      },
+      {
+        "en": "Matched metrics",
+        "es": "Métricas equivalentes"
+      }
+    ],
+    "scope": {
+      "en": "Unsupported positive-definiteness or penalty conditions are recorded as incompatibilities. The adapter does not claim to reproduce FlexQP or its learned variant, which use a distinct restoration and training protocol.",
+      "es": "Las condiciones no admitidas se registran como incompatibilidades. El adaptador no reproduce FlexQP ni su variante aprendida, que usan otro protocolo de restauración y entrenamiento."
+    },
+    "refs": [
+      "daqp",
+      "osqp",
+      "flex"
+    ]
+  }
+]

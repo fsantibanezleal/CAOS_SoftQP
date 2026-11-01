@@ -142,7 +142,7 @@ describe('CONTRACT 2: the checker', () => {
   it('the model slots are the catalog rows with a model io cell', () => {
     expect(modelSlots()).toEqual(['surrogate-model']);
   });
-  it('the catalog table is parsed: nine rows, readiness among them', () => {
-    expect(catalogIds()).toEqual(['params-record', 'case-index', 'case-manifest', 'trace', 'surrogate-model', 'readiness', 'api', 'softqp-index', 'softqp-case-result']);
+  it('the catalog table is parsed: twelve rows, readiness among them', () => {
+    expect(catalogIds()).toEqual(['params-record', 'case-index', 'case-manifest', 'trace', 'surrogate-model', 'readiness', 'api', 'softqp-index', 'softqp-case-result', 'softqp-case-spec', 'softqp-run-request', 'softqp-local-export']);
   });
 });

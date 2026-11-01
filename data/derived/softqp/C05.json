@@ -34,7 +34,7 @@
           "rows": 5,
           "variables": 3
         },
-        "elapsed_seconds": 0.0036837999941781163,
+        "elapsed_seconds": 0.002448200000799261,
         "iterations": 50,
         "method": "lifted",
         "metrics": {
@@ -56,8 +56,8 @@
             0.0
           ]
         },
-        "setup_seconds": 1.97e-05,
-        "solve_seconds": 1.16e-05,
+        "setup_seconds": 1.77e-05,
+        "solve_seconds": 1.09e-05,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -76,7 +76,7 @@
           "rows": 2,
           "variables": 2
         },
-        "elapsed_seconds": 0.0008996000105980784,
+        "elapsed_seconds": 0.0007583000115118921,
         "iterations": 50,
         "method": "generalized",
         "metrics": {
@@ -98,8 +98,8 @@
             0.0
           ]
         },
-        "setup_seconds": 1.5e-05,
-        "solve_seconds": 2.14e-05,
+        "setup_seconds": 2.56e-05,
+        "solve_seconds": 2.2e-05,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -112,6 +112,12 @@
     {
       "method": "asymmetric",
       "reason": "The separable asymmetric candidate does not support grouped or Huber penalties.",
+      "result": null,
+      "state": "incompatible"
+    },
+    {
+      "method": "daqp",
+      "reason": "The DAQP reference adapter supports separable elastic side costs, not grouped or Huber penalties.",
       "result": null,
       "state": "incompatible"
     }

@@ -340,7 +340,7 @@ export interface components {
             };
             runs: ({
                 /** @enum {unknown} */
-                method: "lifted" | "generalized" | "asymmetric";
+                method: "lifted" | "generalized" | "asymmetric" | "daqp";
                 /** @enum {unknown} */
                 state: "available" | "failed" | "incompatible";
                 reason: string | null;
@@ -370,6 +370,9 @@ export interface components {
                     setup_seconds: number;
                     solve_seconds: number;
                     elapsed_seconds: number;
+                    backend_settings?: {
+                        [key: string]: number;
+                    };
                 } | null;
             } & (unknown & unknown))[];
             rows: {
@@ -381,6 +384,52 @@ export interface components {
                 unit: string;
                 soft: boolean;
             }[];
+            problem?: components["schemas"]["SoftQPProblemPayload"];
+        };
+        SoftQPCaseSpec: {
+            P: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            q: number[];
+            A: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            lower: (number | null)[];
+            upper: (number | null)[];
+            penalty: {
+                lower_linear: number[];
+                upper_linear: number[];
+                lower_quadratic: number[];
+                upper_quadratic: number[];
+                soft: boolean[];
+            };
+        };
+        SoftQPRunRequest: {
+            /** @constant */
+            schema_version: "softqp.run-request/v1";
+            case_id: string;
+            base_sha256: string;
+            lower_multiplier: number;
+            upper_multiplier: number;
+            quadratic_multiplier: number;
+        };
+        SoftQPLocalExport: {
+            /** @constant */
+            schema_version: "softqp.local-export/v1";
+            request: components["schemas"]["SoftQPRequestPayload"];
+            result: components["schemas"]["SoftQPResultPayload"];
         };
         /** @description Every reader-facing string is bilingual at the source. */
         text: {
@@ -416,6 +465,113 @@ export interface components {
          * @enum {unknown}
          */
         state: "available" | "partial" | "stale" | "provider" | "training" | "missing";
+        SoftQPProblemPayload: {
+            P: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            q: number[];
+            A: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            lower: (number | null)[];
+            upper: (number | null)[];
+            penalty: {
+                lower_linear: number[];
+                upper_linear: number[];
+                lower_quadratic: number[];
+                upper_quadratic: number[];
+                soft: boolean[];
+            };
+        };
+        SoftQPRequestPayload: {
+            /** @constant */
+            schema_version: "softqp.run-request/v1";
+            case_id: string;
+            base_sha256: string;
+            lower_multiplier: number;
+            upper_multiplier: number;
+            quadratic_multiplier: number;
+        };
+        SoftQPResultPayload: {
+            /** @constant */
+            schema_version: "softqp.case-result/v2";
+            case_id: string;
+            title: {
+                en: string;
+                es: string;
+            };
+            category: {
+                en: string;
+                es: string;
+            };
+            seed: number;
+            source: string;
+            settings: {
+                eps_abs: number;
+                eps_rel: number;
+                max_iter: number;
+                adaptive_rho_interval: number;
+            };
+            runs: ({
+                /** @enum {unknown} */
+                method: "lifted" | "generalized" | "asymmetric" | "daqp";
+                /** @enum {unknown} */
+                state: "available" | "failed" | "incompatible";
+                reason: string | null;
+                result: {
+                    method: string;
+                    status: string;
+                    status_code: number;
+                    x: number[] | null;
+                    y?: number[] | null;
+                    metrics: {
+                        base_objective: number;
+                        penalty_objective: number;
+                        objective: number;
+                        hard_violation: number;
+                        lower_violation: number[];
+                        upper_violation: number[];
+                        slack: number[];
+                        stationarity_residual?: number;
+                        objective_gap_against_lifted: number | null;
+                    } | null;
+                    dimensions: {
+                        variables: number;
+                        rows: number;
+                        nnz: number;
+                    };
+                    iterations: number;
+                    setup_seconds: number;
+                    solve_seconds: number;
+                    elapsed_seconds: number;
+                    backend_settings?: {
+                        [key: string]: number;
+                    };
+                } | null;
+            } & (unknown & unknown))[];
+            rows: {
+                id: string;
+                label: {
+                    en: string;
+                    es: string;
+                };
+                unit: string;
+                soft: boolean;
+            }[];
+            problem?: components["schemas"]["SoftQPProblemPayload"];
+        };
     };
     responses: {
         /** @description No such case or artifact. */

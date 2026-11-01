@@ -219,3 +219,5 @@ BS-1: AAGSP tests the hypothesis that a side-specific separable elastic penalty 
 Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
 
 UNVERIFIED: novelty, superiority, full case coverage, deployment and operational value; all require the declared gates.
+
+The Methodology page uses the documented `method-learned` floor waiver: the implemented method set is deterministic convex optimization and has no trained parameter policy. This does not waive any method implementation, comparison, mathematical-depth or executive-brief requirement. Deep FlexQP remains an availability-gated related method with distinct restoration semantics.

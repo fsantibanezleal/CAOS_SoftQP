@@ -1,0 +1,820 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "softqp.local-export/v1"
+    },
+    "request": {
+      "$ref": "#/$defs/SoftQPRequestPayload"
+    },
+    "result": {
+      "$ref": "#/$defs/SoftQPResultPayload"
+    }
+  },
+  "required": [
+    "schema_version",
+    "request",
+    "result"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-local-export.schema.json",
+  "$defs": {
+    "SoftQPProblemPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "P": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shape": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 20000
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 20000
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 2000000
+            },
+            "indices": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxItems": 2000000
+            },
+            "indptr": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxItems": 20001
+            }
+          },
+          "required": [
+            "shape",
+            "data",
+            "indices",
+            "indptr"
+          ]
+        },
+        "q": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 20000
+        },
+        "A": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shape": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 20000
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 20000
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 2000000
+            },
+            "indices": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxItems": 2000000
+            },
+            "indptr": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "maxItems": 20001
+            }
+          },
+          "required": [
+            "shape",
+            "data",
+            "indices",
+            "indptr"
+          ]
+        },
+        "lower": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "maxItems": 20000
+        },
+        "upper": {
+          "type": "array",
+          "items": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "maxItems": 20000
+        },
+        "penalty": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "lower_linear": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0
+              },
+              "maxItems": 20000
+            },
+            "upper_linear": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0
+              },
+              "maxItems": 20000
+            },
+            "lower_quadratic": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0
+              },
+              "maxItems": 20000
+            },
+            "upper_quadratic": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": 0
+              },
+              "maxItems": 20000
+            },
+            "soft": {
+              "type": "array",
+              "items": {
+                "type": "boolean"
+              },
+              "maxItems": 20000
+            }
+          },
+          "required": [
+            "lower_linear",
+            "upper_linear",
+            "lower_quadratic",
+            "upper_quadratic",
+            "soft"
+          ]
+        }
+      },
+      "required": [
+        "P",
+        "q",
+        "A",
+        "lower",
+        "upper",
+        "penalty"
+      ]
+    },
+    "SoftQPRequestPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "softqp.run-request/v1"
+        },
+        "case_id": {
+          "type": "string",
+          "pattern": "^C[0-9]{2}$"
+        },
+        "base_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "lower_multiplier": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100
+        },
+        "upper_multiplier": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100
+        },
+        "quadratic_multiplier": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "schema_version",
+        "case_id",
+        "base_sha256",
+        "lower_multiplier",
+        "upper_multiplier",
+        "quadratic_multiplier"
+      ]
+    },
+    "SoftQPResultPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "case_id",
+        "title",
+        "category",
+        "seed",
+        "source",
+        "settings",
+        "runs",
+        "rows"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "softqp.case-result/v2"
+        },
+        "case_id": {
+          "type": "string",
+          "pattern": "^C[0-9]{2}$"
+        },
+        "title": {
+          "type": "object",
+          "required": [
+            "en",
+            "es"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1
+            },
+            "es": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "category": {
+          "type": "object",
+          "required": [
+            "en",
+            "es"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1
+            },
+            "es": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eps_abs",
+            "eps_rel",
+            "max_iter",
+            "adaptive_rho_interval"
+          ],
+          "properties": {
+            "eps_abs": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "eps_rel": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "max_iter": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "adaptive_rho_interval": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "runs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "method",
+              "state",
+              "reason",
+              "result"
+            ],
+            "properties": {
+              "method": {
+                "enum": [
+                  "lifted",
+                  "generalized",
+                  "asymmetric",
+                  "daqp"
+                ]
+              },
+              "state": {
+                "enum": [
+                  "available",
+                  "failed",
+                  "incompatible"
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "result": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "method",
+                      "status",
+                      "status_code",
+                      "x",
+                      "metrics",
+                      "dimensions",
+                      "iterations",
+                      "setup_seconds",
+                      "solve_seconds",
+                      "elapsed_seconds"
+                    ],
+                    "properties": {
+                      "method": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "status_code": {
+                        "type": "integer"
+                      },
+                      "x": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "y": {
+                        "anyOf": [
+                          {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "metrics": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                              "base_objective",
+                              "penalty_objective",
+                              "objective",
+                              "hard_violation",
+                              "lower_violation",
+                              "upper_violation",
+                              "slack",
+                              "objective_gap_against_lifted"
+                            ],
+                            "properties": {
+                              "base_objective": {
+                                "type": "number"
+                              },
+                              "penalty_objective": {
+                                "type": "number"
+                              },
+                              "objective": {
+                                "type": "number"
+                              },
+                              "hard_violation": {
+                                "type": "number"
+                              },
+                              "lower_violation": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "upper_violation": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "slack": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "stationarity_residual": {
+                                "type": "number"
+                              },
+                              "objective_gap_against_lifted": {
+                                "anyOf": [
+                                  {
+                                    "type": "number"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "dimensions": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "variables",
+                          "rows",
+                          "nnz"
+                        ],
+                        "properties": {
+                          "variables": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "rows": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "nnz": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      },
+                      "iterations": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "setup_seconds": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "solve_seconds": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "elapsed_seconds": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "backend_settings": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "state": {
+                      "const": "available"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "reason": {
+                      "type": "null"
+                    },
+                    "result": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "method",
+                        "status",
+                        "status_code",
+                        "x",
+                        "metrics",
+                        "dimensions",
+                        "iterations",
+                        "setup_seconds",
+                        "solve_seconds",
+                        "elapsed_seconds"
+                      ],
+                      "properties": {
+                        "method": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "status_code": {
+                          "type": "integer"
+                        },
+                        "x": {
+                          "anyOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "y": {
+                          "anyOf": [
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "metrics": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "required": [
+                                "base_objective",
+                                "penalty_objective",
+                                "objective",
+                                "hard_violation",
+                                "lower_violation",
+                                "upper_violation",
+                                "slack",
+                                "objective_gap_against_lifted"
+                              ],
+                              "properties": {
+                                "base_objective": {
+                                  "type": "number"
+                                },
+                                "penalty_objective": {
+                                  "type": "number"
+                                },
+                                "objective": {
+                                  "type": "number"
+                                },
+                                "hard_violation": {
+                                  "type": "number"
+                                },
+                                "lower_violation": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  }
+                                },
+                                "upper_violation": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  }
+                                },
+                                "slack": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "number"
+                                  }
+                                },
+                                "stationarity_residual": {
+                                  "type": "number"
+                                },
+                                "objective_gap_against_lifted": {
+                                  "anyOf": [
+                                    {
+                                      "type": "number"
+                                    },
+                                    {
+                                      "type": "null"
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        },
+                        "dimensions": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "variables",
+                            "rows",
+                            "nnz"
+                          ],
+                          "properties": {
+                            "variables": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "rows": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "nnz": {
+                              "type": "integer",
+                              "minimum": 0
+                            }
+                          }
+                        },
+                        "iterations": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "setup_seconds": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "solve_seconds": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "elapsed_seconds": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "backend_settings": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "state": {
+                      "const": "incompatible"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "result": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label",
+              "unit",
+              "soft"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^r[0-9]{4}$"
+              },
+              "label": {
+                "type": "object",
+                "required": [
+                  "en",
+                  "es"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "es": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1
+              },
+              "soft": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "problem": {
+          "$ref": "#/$defs/SoftQPProblemPayload"
+        }
+      }
+    }
+  }
+}

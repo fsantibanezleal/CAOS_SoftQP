@@ -4,6 +4,75 @@
     "en": "Control conflict",
     "es": "Conflicto de control"
   },
+  "problem": {
+    "A": {
+      "data": [
+        1.0,
+        1.0
+      ],
+      "indices": [
+        0,
+        1
+      ],
+      "indptr": [
+        0,
+        2
+      ],
+      "shape": [
+        2,
+        1
+      ]
+    },
+    "P": {
+      "data": [
+        1.0
+      ],
+      "indices": [
+        0
+      ],
+      "indptr": [
+        0,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    "lower": [
+      1.0,
+      null
+    ],
+    "penalty": {
+      "lower_linear": [
+        0.3,
+        0.3
+      ],
+      "lower_quadratic": [
+        2.0,
+        2.0
+      ],
+      "soft": [
+        true,
+        true
+      ],
+      "upper_linear": [
+        1.2,
+        1.2
+      ],
+      "upper_quadratic": [
+        4.0,
+        4.0
+      ]
+    },
+    "q": [
+      0.0
+    ],
+    "upper": [
+      null,
+      -1.0
+    ]
+  },
   "rows": [
     {
       "id": "r0000",
@@ -34,7 +103,7 @@
           "rows": 4,
           "variables": 3
         },
-        "elapsed_seconds": 0.0019674999930430204,
+        "elapsed_seconds": 0.0020798000041395426,
         "iterations": 75,
         "method": "lifted",
         "metrics": {
@@ -57,8 +126,8 @@
             0.5857142857142371
           ]
         },
-        "setup_seconds": 1.84e-05,
-        "solve_seconds": 1.49e-05,
+        "setup_seconds": 1.8e-05,
+        "solve_seconds": 1.51e-05,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -86,7 +155,7 @@
           "rows": 2,
           "variables": 1
         },
-        "elapsed_seconds": 0.0016246000013779849,
+        "elapsed_seconds": 0.0008113000076264143,
         "iterations": 75,
         "method": "asymmetric",
         "metrics": {
@@ -109,8 +178,8 @@
             0.5857142857138515
           ]
         },
-        "setup_seconds": 2.05e-05,
-        "solve_seconds": 2.68e-05,
+        "setup_seconds": 2.54e-05,
+        "solve_seconds": 2.07e-05,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -119,6 +188,72 @@
         "y": [
           -3.1285714285714286,
           3.542857142857143
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "daqp",
+      "reason": null,
+      "result": {
+        "backend_settings": {
+          "abs_subopt": 0.0,
+          "cycle_tol": 10,
+          "dual_tol": 1e-07,
+          "eps_prox": 0.0,
+          "eq_reduction": 0,
+          "eta_prox": -1.0,
+          "fval_bound": 1e+30,
+          "iter_limit": 200000,
+          "pivot_tol": 1e-08,
+          "primal_tol": 1e-07,
+          "progress_tol": 1e-14,
+          "refactor_tol": 1e-09,
+          "rel_subopt": 0.0,
+          "rho_soft": 1e-06,
+          "sing_tol": 3.7e-11,
+          "time_limit": 0.0,
+          "w_soft": 0.0,
+          "zero_tol": 1e-11
+        },
+        "dimensions": {
+          "nnz": 3,
+          "rows": 2,
+          "variables": 1
+        },
+        "elapsed_seconds": 0.00017270000535063446,
+        "iterations": 3,
+        "method": "daqp",
+        "metrics": {
+          "base_objective": 0.08581632653061219,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            1.4142857142857141,
+            0.0
+          ],
+          "objective": 3.8992857142857145,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 3.8134693877551022,
+          "slack": [
+            1.4142857142857141,
+            -0.5857142857142859
+          ],
+          "stationarity_residual": 0.0,
+          "upper_violation": [
+            0.0,
+            0.5857142857142859
+          ]
+        },
+        "setup_seconds": 3.8e-06,
+        "solve_seconds": 3.5e-06,
+        "status": "soft optimal",
+        "status_code": 2,
+        "x": [
+          -0.41428571428571415
+        ],
+        "y": [
+          -3.128571428571428,
+          3.5428571428571423
         ]
       },
       "state": "available"
