@@ -62,7 +62,7 @@ Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distri
 
 ## Technology and versions
 
-The approved implementation instantiates template 0.14.001 and shared shell 0.19.1. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. The engine uses an exact reviewed Git source pin during development; public distribution publication remains a release gate. These direct dependencies match the actual requirements and committed npm lock.
+The approved implementation instantiates template 0.14.001 and shared shell 0.19.1. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. These direct dependencies match the actual requirements and committed npm lock.
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|

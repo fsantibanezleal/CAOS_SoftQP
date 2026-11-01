@@ -1,4 +1,4 @@
-# Development scientific environment; engine remains pinned to its reviewed source commit.
+# Development scientific environment; exact published engine distribution.
 softqp==0.1.0
 numpy==2.5.4
 scipy==1.18.1

@@ -1,6 +1,6 @@
 # Scientific development and local execution
 
-SoftQP Studio executes optimization with the separately versioned [SoftQP engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine). Python 3.12, a C/C++ compiler and CMake are required to install the exact source pin in `requirements-softqp.txt`.
+SoftQP Studio executes optimization with the separately versioned [SoftQP engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine). The ordinary development and notebook requirements install published `softqp==0.1.0` from PyPI. CPython 3.12 wheels are available for Windows x86-64 and Linux x86-64, so those installations do not need a C/C++ compiler or CMake. Building the source archive on another supported target requires the native build tools and its own validation.
 
 ```bash
 python -m pip install -r requirements-softqp.txt
@@ -36,7 +36,7 @@ C12 has a complete 32-frame paired stream. Cold/warm timings use identical indep
 
 ## Registered experiment workflow
 
-The frozen runner requires the exact clean source revision in `docs/design/experiments-v1.json`. Reproduce that historical environment explicitly; a package version or later packaging-only commit cannot substitute for its exact revision.
+The frozen runner requires the exact clean source revision in `docs/design/experiments-v1.json`. Reproduce that historical environment explicitly in a separate checkout/environment with engine revision `d0c69ed974d577ba02adbd4806332270d9425651`; a public package version or later packaging-only commit cannot substitute for its exact revision. The ordinary current requirements install the published wheel and do not reconstruct this historical source environment. The source build requires a C/C++ compiler and CMake.
 
 ```bash
 python data-pipeline/run_experiments.py campaign --output FRESH_OUTPUT
