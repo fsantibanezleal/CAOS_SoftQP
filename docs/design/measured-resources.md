@@ -36,3 +36,18 @@ The earlier focused shared-shell gate passed 171 states at 1280x800 and 390x844 
 ## Reproduction
 
 Install the exact historical engine source in the protocol for the frozen experiment. Package version alone is insufficient to identify its numerical binary. Run the experiment CLI into a fresh explicit output directory; preserve all raw states and use `publish --campaign-input SOURCE --output DESTINATION` to validate and export. New packaging metadata or a different machine must not be presented as the original timing environment.
+
+## Static reader resource observations
+
+Build `55a7e77415f2f73334ffbce286d3559f8a81152a` contains 153 static files totaling 34336119 bytes. The [raw resource observations](static-reader-resources.json) retain the browser version, exact build identity, resource body sizes, sampled V8 heap and DOM counts. The local static server did not apply production compression. Resource body totals are not a measurement of wire traffic, and sampled heap is not a peak-memory bound.
+
+| Viewport | Route / case | Encoded resource body bytes | Sampled used heap bytes | DOM elements |
+|---|---|---|---|---|
+| 1280x800 | app/C01 | 1069419 | 15293152 | 243 |
+| 1280x800 | app/C13 | 1496600 | 24543988 | 661 |
+| 1280x800 | benchmark | 5832389 | 15342108 | 1565 |
+| 390x844 | app/C01 | 1069419 | 15296376 | 243 |
+| 390x844 | app/C13 | 1496600 | 24575640 | 652 |
+| 390x844 | benchmark | 5832389 | 15281992 | 1565 |
+
+Both sizes use desktop Chromium with emulated viewports. These are local observations of verified static replay, not physical-phone performance, a deployed origin, or browser-native solver execution. The configured static-hosting candidate still requires exact-commit deployment and served-artifact checks. The failed scientific improvement criterion remains a separate, binding release condition.
