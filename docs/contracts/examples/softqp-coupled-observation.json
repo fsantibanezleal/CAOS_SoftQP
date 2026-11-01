@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "directional-coupled-observation",
+  "role": "method",
+  "id": "development-0000",
+  "split": "development",
+  "seed": 20261104,
+  "family": "sparse",
+  "n": 4,
+  "group_size": 2,
+  "condition": 1000,
+  "curvature": "semidefinite",
+  "quadratic": 1.0,
+  "method": "native",
+  "repetition": 0,
+  "warmup": false,
+  "state": "failed",
+  "reason": "Schema example only; no solver run or scientific observation.",
+  "elapsed_seconds": null
+}

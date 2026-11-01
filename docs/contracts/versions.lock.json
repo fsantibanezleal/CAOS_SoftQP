@@ -68,5 +68,20 @@
     "version": "1.0.0",
     "schema": "docs/contracts/schemas/softqp-experiment-index.schema.json",
     "sha256": "6b49695e50e5177586347b0596553d0e4e960f376b7b9aa3d6130e63ba7cf42f"
+  },
+  "softqp-coupled-batch": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-batch.schema.json",
+    "sha256": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54"
+  },
+  "softqp-coupled-observation": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-observation.schema.json",
+    "sha256": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710"
+  },
+  "softqp-coupled-campaign": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-campaign.schema.json",
+    "sha256": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372"
   }
 }
