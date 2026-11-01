@@ -65,7 +65,9 @@ def test_state_partial_results(repo):
 def test_adversarial_state_stale(repo):
     path = repo / "data/derived/manifests/index.json"
     doc = json.loads(path.read_text(encoding="utf-8"))
-    doc["engine_version"] = "0.00.001"
+    version = (repo / "VERSION").read_text(encoding="utf-8").strip().split(".")
+    version[-1] = str(int(version[-1]) + 1).zfill(3)
+    doc["engine_version"] = ".".join(version)
     write_json(path, doc)
     assert row(compute(repo), "softqp-case-result")["state"] == "stale"
 
