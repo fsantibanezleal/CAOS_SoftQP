@@ -2,7 +2,7 @@
   "protocol_id": "softqp-experiments-v1",
   "phase": "registered before held-out generation",
   "created": "2026-10-31",
-  "engine_source": "d0c69ed",
+  "engine_source": "d0c69ed974d577ba02adbd4806332270d9425651",
   "operating_limits": {
     "blas_threads": 1,
     "wall_seconds": 7200,
