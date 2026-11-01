@@ -289,6 +289,99 @@ export interface components {
                 };
             };
         };
+        SoftQPIndex: {
+            /** @constant */
+            schema_version: "softqp.index/v1";
+            /** @constant */
+            state: "development";
+            default_case: string | null;
+            cases: {
+                case_id: string;
+                title: {
+                    en: string;
+                    es: string;
+                };
+                category: {
+                    en: string;
+                    es: string;
+                };
+                path: string;
+                sha256: string;
+                failed: boolean;
+            }[];
+            environment: {
+                python: string;
+                platform: string;
+                packages: {
+                    [key: string]: string;
+                };
+            };
+            limitations: string[];
+        };
+        SoftQPCaseResult: {
+            /** @constant */
+            schema_version: "softqp.case-result/v2";
+            case_id: string;
+            title: {
+                en: string;
+                es: string;
+            };
+            category: {
+                en: string;
+                es: string;
+            };
+            seed: number;
+            source: string;
+            settings: {
+                eps_abs: number;
+                eps_rel: number;
+                max_iter: number;
+                adaptive_rho_interval: number;
+            };
+            runs: ({
+                /** @enum {unknown} */
+                method: "lifted" | "generalized" | "asymmetric";
+                /** @enum {unknown} */
+                state: "available" | "failed" | "incompatible";
+                reason: string | null;
+                result: {
+                    method: string;
+                    status: string;
+                    status_code: number;
+                    x: number[] | null;
+                    y?: number[] | null;
+                    metrics: {
+                        base_objective: number;
+                        penalty_objective: number;
+                        objective: number;
+                        hard_violation: number;
+                        lower_violation: number[];
+                        upper_violation: number[];
+                        slack: number[];
+                        stationarity_residual?: number;
+                        objective_gap_against_lifted: number | null;
+                    } | null;
+                    dimensions: {
+                        variables: number;
+                        rows: number;
+                        nnz: number;
+                    };
+                    iterations: number;
+                    setup_seconds: number;
+                    solve_seconds: number;
+                    elapsed_seconds: number;
+                } | null;
+            } & (unknown & unknown))[];
+            rows: {
+                id: string;
+                label: {
+                    en: string;
+                    es: string;
+                };
+                unit: string;
+                soft: boolean;
+            }[];
+        };
         /** @description Every reader-facing string is bilingual at the source. */
         text: {
             en: string;

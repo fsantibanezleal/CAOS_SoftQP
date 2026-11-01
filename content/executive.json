@@ -125,6 +125,20 @@
           "en": "Versioned result and acceptance record",
           "es": "Resultado versionado y registro de aceptación"
         }
+      },
+      {
+        "who": {
+          "en": "Commissioning engineer",
+          "es": "Ingeniero de puesta en marcha"
+        },
+        "cost": {
+          "en": "Accepted assumptions become unclear during handoff",
+          "es": "Los supuestos aceptados pierden claridad al transferirse"
+        },
+        "measure": {
+          "en": "Approved settings reproduced before commissioning",
+          "es": "Parámetros aprobados reproducidos antes de operar"
+        }
       }
     ],
     "figures": [
@@ -249,6 +263,13 @@
           "es": "DAQP documenta ponderaciones lineales y cuadráticas distintas para cada lado."
         },
         "source": "daqp"
+      },
+      {
+        "statement": {
+          "en": "The earlier quadratic-slack ADMM result retained the original problem dimension for quadratic violation penalties.",
+          "es": "El resultado previo con holguras cuadráticas mantuvo la dimensión original para esas penalizaciones."
+        },
+        "source": "quadratic"
       }
     ]
   },
@@ -319,7 +340,7 @@
           "en": "Adds variables and constraints",
           "es": "Agrega variables y restricciones"
         },
-        "source": "gsp"
+        "source": "mpc"
       },
       {
         "approach": {
@@ -365,6 +386,21 @@
           "es": "La restauración difiere de costos arbitrarios del usuario"
         },
         "source": "flex"
+      },
+      {
+        "approach": {
+          "en": "ElastiQP robot control",
+          "es": "Control robótico con ElastiQP"
+        },
+        "achieves": {
+          "en": "Exact linear elastic penalties in control QPs",
+          "es": "Penalizaciones elásticas lineales exactas en QP de control"
+        },
+        "falls_short": {
+          "en": "The supported formulation differs from grouped convex penalties",
+          "es": "La formulación admitida difiere de penalizaciones convexas agrupadas"
+        },
+        "source": "elasti"
       }
     ],
     "status": {
@@ -659,6 +695,30 @@
         "es": "IEA, Edificios más eficientes y flexibles para la transición energética (2024)"
       },
       "url": "https://www.iea.org/commentaries/more-efficient-and-flexible-buildings-are-key-to-clean-energy-transitions"
+    },
+    {
+      "id": "quadratic",
+      "title": {
+        "en": "Lew et al., quadratic slack ADMM (2025)",
+        "es": "Lew y colaboradores, ADMM con holguras cuadráticas (2025)"
+      },
+      "url": "https://arxiv.org/abs/2511.08451"
+    },
+    {
+      "id": "mpc",
+      "title": {
+        "en": "MathWorks, QP optimization problem for linear MPC",
+        "es": "MathWorks, problema QP para control predictivo lineal"
+      },
+      "url": "https://www.mathworks.com/help/mpc/ug/optimization-problem.html"
+    },
+    {
+      "id": "elasti",
+      "title": {
+        "en": "Morton et al., ElastiQP (2026)",
+        "es": "Morton y colaboradores, ElastiQP (2026)"
+      },
+      "url": "https://arxiv.org/abs/2609.19080"
     }
   ]
 }

@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "case_id": "C01",
+      "category": {
+        "en": "Semantics",
+        "es": "Sem\u00e1ntica"
+      },
+      "failed": false,
+      "path": "C01.json",
+      "sha256": "2173a6ecb3956a91ea6b2980bbecf3638e0b48107009430552150ac995ce509f",
+      "title": {
+        "en": "Lower-bound undershoot",
+        "es": "Incumplimiento inferior"
+      }
+    }
+  ],
+  "default_case": "C01",
+  "environment": {
+    "packages": {
+      "numpy": "2.5.4",
+      "osqp": "1.1.3",
+      "scipy": "1.18.1",
+      "softqp": "0.1.0"
+    },
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.10"
+  },
+  "limitations": [
+    "Development bake, not the complete release experiment matrix.",
+    "DAQP and FlexQP comparison cells are not implemented in this bake.",
+    "C12 includes the initial state only; stream and warm-start measurements remain pending.",
+    "No timing superiority or novelty is established."
+  ],
+  "schema_version": "softqp.index/v1",
+  "state": "development"
+}

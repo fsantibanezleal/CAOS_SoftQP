@@ -30,8 +30,18 @@
     "sha256": "de86ae161c0f333c11b95884ef07fd3e7f59b54f74d513cb823a093889f76d5a"
   },
   "api": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "schema": "docs/contracts/api.openapi.json",
-    "sha256": "46a68a0faf5256d3e39e51316f645ce1593c6f2da77c76b2188d05cdb21b14e5"
+    "sha256": "d27f1920fd8a86be8b08976ca8b62f96d41031e2b95da58b60361f74792c527f"
+  },
+  "softqp-index": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-index.schema.json",
+    "sha256": "86cbd7b1464b08b30744d25e6e5d36e9b4f15a7e2e7cddbec30bb856182a833e"
+  },
+  "softqp-case-result": {
+    "version": "2.0.0",
+    "schema": "docs/contracts/schemas/softqp-case-result.schema.json",
+    "sha256": "607487dadfe51e868b08599c8d69950e5a6f3343a5c854808c831c7ec28a535f"
   }
 }

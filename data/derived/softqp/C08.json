@@ -1,0 +1,816 @@
+{
+  "case_id": "C08",
+  "category": {
+    "en": "Numerical structure",
+    "es": "Estructura numérica"
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Normalized row 0",
+        "es": "Fila normalizada 0"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0001",
+      "label": {
+        "en": "Normalized row 1",
+        "es": "Fila normalizada 1"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0002",
+      "label": {
+        "en": "Normalized row 2",
+        "es": "Fila normalizada 2"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0003",
+      "label": {
+        "en": "Normalized row 3",
+        "es": "Fila normalizada 3"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0004",
+      "label": {
+        "en": "Normalized row 4",
+        "es": "Fila normalizada 4"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0005",
+      "label": {
+        "en": "Normalized row 5",
+        "es": "Fila normalizada 5"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0006",
+      "label": {
+        "en": "Normalized row 6",
+        "es": "Fila normalizada 6"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0007",
+      "label": {
+        "en": "Normalized row 7",
+        "es": "Fila normalizada 7"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0008",
+      "label": {
+        "en": "Normalized row 8",
+        "es": "Fila normalizada 8"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0009",
+      "label": {
+        "en": "Normalized row 9",
+        "es": "Fila normalizada 9"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0010",
+      "label": {
+        "en": "Normalized row 10",
+        "es": "Fila normalizada 10"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0011",
+      "label": {
+        "en": "Normalized row 11",
+        "es": "Fila normalizada 11"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0012",
+      "label": {
+        "en": "Normalized row 12",
+        "es": "Fila normalizada 12"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0013",
+      "label": {
+        "en": "Normalized row 13",
+        "es": "Fila normalizada 13"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0014",
+      "label": {
+        "en": "Normalized row 14",
+        "es": "Fila normalizada 14"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0015",
+      "label": {
+        "en": "Normalized row 15",
+        "es": "Fila normalizada 15"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0016",
+      "label": {
+        "en": "Normalized row 16",
+        "es": "Fila normalizada 16"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0017",
+      "label": {
+        "en": "Normalized row 17",
+        "es": "Fila normalizada 17"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0018",
+      "label": {
+        "en": "Normalized row 18",
+        "es": "Fila normalizada 18"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0019",
+      "label": {
+        "en": "Normalized row 19",
+        "es": "Fila normalizada 19"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0020",
+      "label": {
+        "en": "Normalized row 20",
+        "es": "Fila normalizada 20"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0021",
+      "label": {
+        "en": "Normalized row 21",
+        "es": "Fila normalizada 21"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0022",
+      "label": {
+        "en": "Normalized row 22",
+        "es": "Fila normalizada 22"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0023",
+      "label": {
+        "en": "Normalized row 23",
+        "es": "Fila normalizada 23"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0024",
+      "label": {
+        "en": "Normalized row 24",
+        "es": "Fila normalizada 24"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0025",
+      "label": {
+        "en": "Normalized row 25",
+        "es": "Fila normalizada 25"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0026",
+      "label": {
+        "en": "Normalized row 26",
+        "es": "Fila normalizada 26"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0027",
+      "label": {
+        "en": "Normalized row 27",
+        "es": "Fila normalizada 27"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0028",
+      "label": {
+        "en": "Normalized row 28",
+        "es": "Fila normalizada 28"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0029",
+      "label": {
+        "en": "Normalized row 29",
+        "es": "Fila normalizada 29"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0030",
+      "label": {
+        "en": "Normalized row 30",
+        "es": "Fila normalizada 30"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0031",
+      "label": {
+        "en": "Normalized row 31",
+        "es": "Fila normalizada 31"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0032",
+      "label": {
+        "en": "Normalized row 32",
+        "es": "Fila normalizada 32"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0033",
+      "label": {
+        "en": "Normalized row 33",
+        "es": "Fila normalizada 33"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0034",
+      "label": {
+        "en": "Normalized row 34",
+        "es": "Fila normalizada 34"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0035",
+      "label": {
+        "en": "Normalized row 35",
+        "es": "Fila normalizada 35"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0036",
+      "label": {
+        "en": "Normalized row 36",
+        "es": "Fila normalizada 36"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0037",
+      "label": {
+        "en": "Normalized row 37",
+        "es": "Fila normalizada 37"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0038",
+      "label": {
+        "en": "Normalized row 38",
+        "es": "Fila normalizada 38"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0039",
+      "label": {
+        "en": "Normalized row 39",
+        "es": "Fila normalizada 39"
+      },
+      "soft": true,
+      "unit": "1"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 512,
+          "rows": 160,
+          "variables": 96
+        },
+        "elapsed_seconds": 0.00991269999940414,
+        "iterations": 75,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -2.955692322093391,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.34036851683698277,
+            0.10119892856102641,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.12926815602866681,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": -2.6416394351066295,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 0.3140528869867617,
+          "slack": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.34036851683698277,
+            0.10119892856102641,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.12926815602866681,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stationarity_residual": 2.2261410159707395e-08,
+          "upper_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 0.0001521,
+        "solve_seconds": 0.0001513,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          0.6582265390616273,
+          -0.8900821099384721,
+          -0.14912543431746814,
+          0.10886659069773308,
+          0.07935054727431222,
+          0.028746491507281955,
+          -0.003221626926421876,
+          0.007658736440472016,
+          -0.00043199350567758475,
+          -0.00013867331766830623,
+          -0.0006001604849305988,
+          -4.448348750662452e-05,
+          -2.626987140300815e-06,
+          -1.236267469682759e-05,
+          -9.19408228085873e-06,
+          -7.032651155184114e-06
+        ],
+        "y": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          5.1004626393204954e-18,
+          -0.9807370239125018,
+          -0.5023978505149732,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          4.080370111456397e-18,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.19652886102479053,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.5585363385741013,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": "The published unconditional penalty reference requires symmetric side costs.",
+      "result": null,
+      "state": "incompatible"
+    },
+    {
+      "method": "asymmetric",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 144,
+          "rows": 40,
+          "variables": 16
+        },
+        "elapsed_seconds": 0.0014940999972168356,
+        "iterations": 50,
+        "method": "asymmetric",
+        "metrics": {
+          "base_objective": -2.955692334306674,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.3403685223761277,
+            0.1011989323102197,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.1292681407506434,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": -2.64163944752103,
+          "objective_gap_against_lifted": 1.2414400618609989e-08,
+          "penalty_objective": 0.31405288678564364,
+          "slack": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.3403685223761277,
+            0.1011989323102197,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -8.468177270515298e-10,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.1292681407506434,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stationarity_residual": 5.005983128025804e-10,
+          "upper_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            8.468177270515298e-10,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 0.0001251,
+        "solve_seconds": 5.19e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          0.6582266139965057,
+          -0.8900821165977307,
+          -0.14912543438635192,
+          0.10886659126936984,
+          0.07935054741733924,
+          0.028746491502584286,
+          -0.003221626919983604,
+          0.0076587363698738115,
+          -0.0004319935015167404,
+          -0.00013867331663793055,
+          -0.0006001604807625154,
+          -4.448348743878813e-05,
+          -2.6269871055606114e-06,
+          -1.2362674689647126e-05,
+          -9.194082182069572e-06,
+          -7.0326511547647006e-06
+        ],
+        "y": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -3.878048289831426e-18,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -1.5822503307266075e-17,
+          -0.9807370446391938,
+          -0.5023978645838914,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.19652878658476575,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.5585362817304494,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "state": "available"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Ill-conditioned Hessian",
+    "es": "Hessiana mal condicionada"
+  }
+}

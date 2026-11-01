@@ -1,0 +1,1455 @@
+{
+  "case_id": "C09",
+  "category": {
+    "en": "Repeated control",
+    "es": "Control repetido"
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Acceleration, step 0",
+        "es": "Aceleración, paso 0"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0001",
+      "label": {
+        "en": "Acceleration, step 1",
+        "es": "Aceleración, paso 1"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0002",
+      "label": {
+        "en": "Acceleration, step 2",
+        "es": "Aceleración, paso 2"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0003",
+      "label": {
+        "en": "Acceleration, step 3",
+        "es": "Aceleración, paso 3"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0004",
+      "label": {
+        "en": "Acceleration, step 4",
+        "es": "Aceleración, paso 4"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0005",
+      "label": {
+        "en": "Acceleration, step 5",
+        "es": "Aceleración, paso 5"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0006",
+      "label": {
+        "en": "Acceleration, step 6",
+        "es": "Aceleración, paso 6"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0007",
+      "label": {
+        "en": "Acceleration, step 7",
+        "es": "Aceleración, paso 7"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0008",
+      "label": {
+        "en": "Acceleration, step 8",
+        "es": "Aceleración, paso 8"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0009",
+      "label": {
+        "en": "Acceleration, step 9",
+        "es": "Aceleración, paso 9"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0010",
+      "label": {
+        "en": "Acceleration, step 10",
+        "es": "Aceleración, paso 10"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0011",
+      "label": {
+        "en": "Acceleration, step 11",
+        "es": "Aceleración, paso 11"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0012",
+      "label": {
+        "en": "Acceleration, step 12",
+        "es": "Aceleración, paso 12"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0013",
+      "label": {
+        "en": "Acceleration, step 13",
+        "es": "Aceleración, paso 13"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0014",
+      "label": {
+        "en": "Acceleration, step 14",
+        "es": "Aceleración, paso 14"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0015",
+      "label": {
+        "en": "Acceleration, step 15",
+        "es": "Aceleración, paso 15"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0016",
+      "label": {
+        "en": "Acceleration, step 16",
+        "es": "Aceleración, paso 16"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0017",
+      "label": {
+        "en": "Acceleration, step 17",
+        "es": "Aceleración, paso 17"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0018",
+      "label": {
+        "en": "Acceleration, step 18",
+        "es": "Aceleración, paso 18"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0019",
+      "label": {
+        "en": "Acceleration, step 19",
+        "es": "Aceleración, paso 19"
+      },
+      "soft": false,
+      "unit": "m/s²"
+    },
+    {
+      "id": "r0020",
+      "label": {
+        "en": "Position, step 1",
+        "es": "Posición, paso 1"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0021",
+      "label": {
+        "en": "Velocity, step 1",
+        "es": "Velocidad, paso 1"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0022",
+      "label": {
+        "en": "Position, step 2",
+        "es": "Posición, paso 2"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0023",
+      "label": {
+        "en": "Velocity, step 2",
+        "es": "Velocidad, paso 2"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0024",
+      "label": {
+        "en": "Position, step 3",
+        "es": "Posición, paso 3"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0025",
+      "label": {
+        "en": "Velocity, step 3",
+        "es": "Velocidad, paso 3"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0026",
+      "label": {
+        "en": "Position, step 4",
+        "es": "Posición, paso 4"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0027",
+      "label": {
+        "en": "Velocity, step 4",
+        "es": "Velocidad, paso 4"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0028",
+      "label": {
+        "en": "Position, step 5",
+        "es": "Posición, paso 5"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0029",
+      "label": {
+        "en": "Velocity, step 5",
+        "es": "Velocidad, paso 5"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0030",
+      "label": {
+        "en": "Position, step 6",
+        "es": "Posición, paso 6"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0031",
+      "label": {
+        "en": "Velocity, step 6",
+        "es": "Velocidad, paso 6"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0032",
+      "label": {
+        "en": "Position, step 7",
+        "es": "Posición, paso 7"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0033",
+      "label": {
+        "en": "Velocity, step 7",
+        "es": "Velocidad, paso 7"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0034",
+      "label": {
+        "en": "Position, step 8",
+        "es": "Posición, paso 8"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0035",
+      "label": {
+        "en": "Velocity, step 8",
+        "es": "Velocidad, paso 8"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0036",
+      "label": {
+        "en": "Position, step 9",
+        "es": "Posición, paso 9"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0037",
+      "label": {
+        "en": "Velocity, step 9",
+        "es": "Velocidad, paso 9"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0038",
+      "label": {
+        "en": "Position, step 10",
+        "es": "Posición, paso 10"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0039",
+      "label": {
+        "en": "Velocity, step 10",
+        "es": "Velocidad, paso 10"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0040",
+      "label": {
+        "en": "Position, step 11",
+        "es": "Posición, paso 11"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0041",
+      "label": {
+        "en": "Velocity, step 11",
+        "es": "Velocidad, paso 11"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0042",
+      "label": {
+        "en": "Position, step 12",
+        "es": "Posición, paso 12"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0043",
+      "label": {
+        "en": "Velocity, step 12",
+        "es": "Velocidad, paso 12"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0044",
+      "label": {
+        "en": "Position, step 13",
+        "es": "Posición, paso 13"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0045",
+      "label": {
+        "en": "Velocity, step 13",
+        "es": "Velocidad, paso 13"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0046",
+      "label": {
+        "en": "Position, step 14",
+        "es": "Posición, paso 14"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0047",
+      "label": {
+        "en": "Velocity, step 14",
+        "es": "Velocidad, paso 14"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0048",
+      "label": {
+        "en": "Position, step 15",
+        "es": "Posición, paso 15"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0049",
+      "label": {
+        "en": "Velocity, step 15",
+        "es": "Velocidad, paso 15"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0050",
+      "label": {
+        "en": "Position, step 16",
+        "es": "Posición, paso 16"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0051",
+      "label": {
+        "en": "Velocity, step 16",
+        "es": "Velocidad, paso 16"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0052",
+      "label": {
+        "en": "Position, step 17",
+        "es": "Posición, paso 17"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0053",
+      "label": {
+        "en": "Velocity, step 17",
+        "es": "Velocidad, paso 17"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0054",
+      "label": {
+        "en": "Position, step 18",
+        "es": "Posición, paso 18"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0055",
+      "label": {
+        "en": "Velocity, step 18",
+        "es": "Velocidad, paso 18"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0056",
+      "label": {
+        "en": "Position, step 19",
+        "es": "Posición, paso 19"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0057",
+      "label": {
+        "en": "Velocity, step 19",
+        "es": "Velocidad, paso 19"
+      },
+      "soft": true,
+      "unit": "m/s"
+    },
+    {
+      "id": "r0058",
+      "label": {
+        "en": "Position, step 20",
+        "es": "Posición, paso 20"
+      },
+      "soft": true,
+      "unit": "m"
+    },
+    {
+      "id": "r0059",
+      "label": {
+        "en": "Velocity, step 20",
+        "es": "Velocidad, paso 20"
+      },
+      "soft": true,
+      "unit": "m/s"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 1500,
+          "rows": 180,
+          "variables": 100
+        },
+        "elapsed_seconds": 0.011264400003710762,
+        "iterations": 275,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -34.07019629899588,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": -34.07019629899588,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 0.0,
+          "slack": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stationarity_residual": 1.2449082618104512e-06,
+          "upper_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 0.0002056,
+        "solve_seconds": 0.0010185,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          -0.9999999979244909,
+          -0.9999999982361921,
+          -0.9999999985801147,
+          -0.9999999989528908,
+          -0.9273877625151419,
+          0.303315291455589,
+          0.8433234042027511,
+          0.9728760899922959,
+          0.887440524224598,
+          0.7125714461479815,
+          0.5215652642568037,
+          0.3517706056099222,
+          0.21779155149649854,
+          0.12121543342204855,
+          0.05721521802096096,
+          0.018663756939128237,
+          -0.0015639637024079274,
+          -0.009509855471883256,
+          -0.009814323795265156,
+          -0.005836027673804648
+        ],
+        "y": [
+          -1.7178934196473457,
+          -1.0724050230789064,
+          -0.5769166265056155,
+          -0.22182822994755982,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 840,
+          "rows": 60,
+          "variables": 20
+        },
+        "elapsed_seconds": 0.00244320000638254,
+        "iterations": 250,
+        "method": "generalized",
+        "metrics": {
+          "base_objective": -34.070196582168336,
+          "hard_violation": 9.427169378461997e-08,
+          "lower_violation": [
+            9.427169378461997e-08,
+            7.24289339615325e-08,
+            5.207743214441507e-08,
+            3.1487584317702044e-08,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": -34.070196582168336,
+          "objective_gap_against_lifted": 2.831724543739256e-07,
+          "penalty_objective": 0.0,
+          "slack": [
+            9.427169378461997e-08,
+            7.24289339615325e-08,
+            5.207743214441507e-08,
+            3.1487584317702044e-08,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stationarity_residual": 1.3284012112535493e-07,
+          "upper_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 0.0002422,
+        "solve_seconds": 0.0006067,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          -1.0000000942716938,
+          -1.000000072428934,
+          -1.0000000520774321,
+          -1.0000000314875843,
+          -0.9273969532671356,
+          0.30332712485133173,
+          0.8433256914136683,
+          0.9728738995480859,
+          0.8874386669750549,
+          0.7125707663922812,
+          0.5215651914601614,
+          0.35177067221639546,
+          0.21779160426567848,
+          0.12121545978896066,
+          0.057215229424148834,
+          0.018663759947778785,
+          -0.0015639666331255984,
+          -0.009509861746035145,
+          -0.00981433083887465,
+          -0.005836033072568271
+        ],
+        "y": [
+          -1.7178927757849551,
+          -1.0724045045039414,
+          -0.5769162324889117,
+          -0.2218279597392376,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "asymmetric",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 840,
+          "rows": 60,
+          "variables": 20
+        },
+        "elapsed_seconds": 0.0015045999898575246,
+        "iterations": 250,
+        "method": "asymmetric",
+        "metrics": {
+          "base_objective": -34.070196582168336,
+          "hard_violation": 9.427169378461997e-08,
+          "lower_violation": [
+            9.427169378461997e-08,
+            7.24289339615325e-08,
+            5.207743214441507e-08,
+            3.1487584317702044e-08,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "objective": -34.070196582168336,
+          "objective_gap_against_lifted": 2.831724543739256e-07,
+          "penalty_objective": 0.0,
+          "slack": [
+            9.427169378461997e-08,
+            7.24289339615325e-08,
+            5.207743214441507e-08,
+            3.1487584317702044e-08,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stationarity_residual": 1.3284012112535493e-07,
+          "upper_violation": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 0.0001012,
+        "solve_seconds": 0.0004182,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          -1.0000000942716938,
+          -1.000000072428934,
+          -1.0000000520774321,
+          -1.0000000314875843,
+          -0.9273969532671356,
+          0.30332712485133173,
+          0.8433256914136683,
+          0.9728738995480859,
+          0.8874386669750549,
+          0.7125707663922812,
+          0.5215651914601614,
+          0.35177067221639546,
+          0.21779160426567848,
+          0.12121545978896066,
+          0.057215229424148834,
+          0.018663759947778785,
+          -0.0015639666331255984,
+          -0.009509861746035145,
+          -0.00981433083887465,
+          -0.005836033072568271
+        ],
+        "y": [
+          -1.7178927757849551,
+          -1.0724045045039414,
+          -0.5769162324889117,
+          -0.2218279597392376,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "state": "available"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Feasible double-integrator MPC",
+    "es": "MPC factible de doble integrador"
+  }
+}

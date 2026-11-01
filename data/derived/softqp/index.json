@@ -1,0 +1,233 @@
+{
+  "cases": [
+    {
+      "case_id": "C01",
+      "category": {
+        "en": "Semantics",
+        "es": "Semántica"
+      },
+      "failed": false,
+      "path": "C01.json",
+      "sha256": "2173a6ecb3956a91ea6b2980bbecf3638e0b48107009430552150ac995ce509f",
+      "title": {
+        "en": "Lower-bound undershoot",
+        "es": "Incumplimiento inferior"
+      }
+    },
+    {
+      "case_id": "C02",
+      "category": {
+        "en": "Semantics",
+        "es": "Semántica"
+      },
+      "failed": false,
+      "path": "C02.json",
+      "sha256": "8dd9fcf867b65b2d5835d55849e7fb103f9fc246efd7d9795a2dd74fcd4e4916",
+      "title": {
+        "en": "Upper-bound overshoot",
+        "es": "Incumplimiento superior"
+      }
+    },
+    {
+      "case_id": "C03",
+      "category": {
+        "en": "Semantics",
+        "es": "Semántica"
+      },
+      "failed": false,
+      "path": "C03.json",
+      "sha256": "5ccca64db669f57ecac13596b74a901425a3da1590b06c399010430d15685246",
+      "title": {
+        "en": "Competing side costs",
+        "es": "Costos por lado en conflicto"
+      }
+    },
+    {
+      "case_id": "C04",
+      "category": {
+        "en": "Integrity",
+        "es": "Integridad"
+      },
+      "failed": false,
+      "path": "C04.json",
+      "sha256": "97cec4aa6bcc9faa3ea4a1365b841621698c83df26b5e0850bda5ddd933a513b",
+      "title": {
+        "en": "Mixed hard and soft rows",
+        "es": "Filas duras y blandas"
+      }
+    },
+    {
+      "case_id": "C05",
+      "category": {
+        "en": "Semantics",
+        "es": "Semántica"
+      },
+      "failed": false,
+      "path": "C05.json",
+      "sha256": "98615f8e580d2ccca5a458fc0040de2451e8b77b2d069bac40481f90e7b8b65b",
+      "title": {
+        "en": "Grouped peak violation",
+        "es": "Incumplimiento máximo agrupado"
+      }
+    },
+    {
+      "case_id": "C06",
+      "category": {
+        "en": "Numerical structure",
+        "es": "Estructura numérica"
+      },
+      "failed": false,
+      "path": "C06.json",
+      "sha256": "591a87bcee4ac44cfe4538025e8320d6353ca127ab07489e0c14e0f1f97e91ef",
+      "title": {
+        "en": "Sparse scaling instance",
+        "es": "Instancia dispersa"
+      }
+    },
+    {
+      "case_id": "C07",
+      "category": {
+        "en": "Numerical structure",
+        "es": "Estructura numérica"
+      },
+      "failed": false,
+      "path": "C07.json",
+      "sha256": "922044ed2fa4be8de94e7aa5a79fed4a71b29d0bd0300644b0b1e4b8d3a20bf6",
+      "title": {
+        "en": "Semidefinite Hessian",
+        "es": "Hessiana semidefinida"
+      }
+    },
+    {
+      "case_id": "C08",
+      "category": {
+        "en": "Numerical structure",
+        "es": "Estructura numérica"
+      },
+      "failed": false,
+      "path": "C08.json",
+      "sha256": "d217fdfaaf80ad982c413c945ab13c40c62dc309425553a2c50d5425b7cec534",
+      "title": {
+        "en": "Ill-conditioned Hessian",
+        "es": "Hessiana mal condicionada"
+      }
+    },
+    {
+      "case_id": "C09",
+      "category": {
+        "en": "Repeated control",
+        "es": "Control repetido"
+      },
+      "failed": false,
+      "path": "C09.json",
+      "sha256": "22402744b1ab654773e27cd6500e02b3286a063d3e2cc10b999d80e9db48e60f",
+      "title": {
+        "en": "Feasible double-integrator MPC",
+        "es": "MPC factible de doble integrador"
+      }
+    },
+    {
+      "case_id": "C10",
+      "category": {
+        "en": "Repeated control",
+        "es": "Control repetido"
+      },
+      "failed": false,
+      "path": "C10.json",
+      "sha256": "3783536dd76fb7562899a60df214efe7b31511acedddd7e87e4874247a049714",
+      "title": {
+        "en": "Disturbed state constraints",
+        "es": "Restricciones de estado perturbadas"
+      }
+    },
+    {
+      "case_id": "C11",
+      "category": {
+        "en": "Control conflict",
+        "es": "Conflicto de control"
+      },
+      "failed": false,
+      "path": "C11.json",
+      "sha256": "a6c0fba5abb0e8a135de7b6238240b188dda9dda3ec8a4aedaf324eb961bed95",
+      "title": {
+        "en": "Conflicting safety boundaries",
+        "es": "Fronteras de seguridad en conflicto"
+      }
+    },
+    {
+      "case_id": "C12",
+      "category": {
+        "en": "Repeated control",
+        "es": "Control repetido"
+      },
+      "failed": false,
+      "path": "C12.json",
+      "sha256": "010183317edac99397fe3fb2e9784c05b66667d6270ca73b0d6cdf52587b8dc5",
+      "title": {
+        "en": "Parameter-stream initial state",
+        "es": "Estado inicial de flujo paramétrico"
+      }
+    },
+    {
+      "case_id": "C13",
+      "category": {
+        "en": "Energy",
+        "es": "Energía"
+      },
+      "failed": false,
+      "path": "C13.json",
+      "sha256": "2e88246d8746e738f72730e4b74b8792dc4b1948bf1deeb712ebb053107b0691",
+      "title": {
+        "en": "Published building-energy model",
+        "es": "Modelo energético publicado"
+      }
+    },
+    {
+      "case_id": "C14",
+      "category": {
+        "en": "Energy",
+        "es": "Energía"
+      },
+      "failed": false,
+      "path": "C14.json",
+      "sha256": "367983e5f14a4cb4b6ded129e22c93fa9630c49272651fec5e722a93dce35177",
+      "title": {
+        "en": "Side-specific energy trade-offs",
+        "es": "Compromisos energéticos por lado"
+      }
+    },
+    {
+      "case_id": "C15",
+      "category": {
+        "en": "Energy",
+        "es": "Energía"
+      },
+      "failed": false,
+      "path": "C15.json",
+      "sha256": "cb559ea40ad54f21070d9fd6975764c3a292a087e7dd7c1c44978c24c29bb1b6",
+      "title": {
+        "en": "Mixed elastic side costs",
+        "es": "Costos elásticos mixtos por lado"
+      }
+    }
+  ],
+  "default_case": "C01",
+  "environment": {
+    "packages": {
+      "numpy": "2.5.4",
+      "osqp": "1.1.3",
+      "scipy": "1.18.1",
+      "softqp": "0.1.0"
+    },
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.10"
+  },
+  "limitations": [
+    "Development bake, not the complete release experiment matrix.",
+    "DAQP and FlexQP comparison cells are not implemented in this bake.",
+    "C12 includes the initial state only; stream and warm-start measurements remain pending.",
+    "No timing superiority or novelty is established."
+  ],
+  "schema_version": "softqp.index/v1",
+  "state": "development"
+}

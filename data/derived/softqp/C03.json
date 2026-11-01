@@ -1,0 +1,123 @@
+{
+  "case_id": "C03",
+  "category": {
+    "en": "Semantics",
+    "es": "Semántica"
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Normalized row 0",
+        "es": "Fila normalizada 0"
+      },
+      "soft": true,
+      "unit": "1"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 9,
+          "rows": 4,
+          "variables": 3
+        },
+        "elapsed_seconds": 0.0043701000104192644,
+        "iterations": 50,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -2.8072000008854676,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.5639999999999996,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 0.24320000088546787,
+          "slack": [
+            -0.16000000048123253
+          ],
+          "stationarity_residual": 5.559213089867399e-10,
+          "upper_violation": [
+            0.16000000048123253
+          ]
+        },
+        "setup_seconds": 2.85e-05,
+        "solve_seconds": 1.8e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.1600000004812325
+        ],
+        "y": [
+          1.8399999989628462
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": "The published unconditional penalty reference requires symmetric side costs.",
+      "result": null,
+      "state": "incompatible"
+    },
+    {
+      "method": "asymmetric",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 2,
+          "rows": 1,
+          "variables": 1
+        },
+        "elapsed_seconds": 0.002130400011083111,
+        "iterations": 50,
+        "method": "asymmetric",
+        "metrics": {
+          "base_objective": -2.8071999999655266,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.564,
+          "objective_gap_against_lifted": 4.440892098500626e-16,
+          "penalty_objective": 0.2431999999655266,
+          "slack": [
+            -0.15999999998126446
+          ],
+          "stationarity_residual": 1.994004961147766e-11,
+          "upper_violation": [
+            0.15999999998126446
+          ]
+        },
+        "setup_seconds": 2.23e-05,
+        "solve_seconds": 1.83e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.1599999999812645
+        ],
+        "y": [
+          1.8399999999987955
+        ]
+      },
+      "state": "available"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Competing side costs",
+    "es": "Costos por lado en conflicto"
+  }
+}

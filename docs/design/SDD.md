@@ -145,6 +145,10 @@ GitHub Pages is the leading static candidate because the reader replays committe
 
 Adopt ADR-0057 (scientific app), ADR-0056 (wiki), ADR-0058 (architecture modal), ADR-0069 (full scientific repository), ADR-0070 (Focus workbench), ADR-0071 (viewport and UI), ADR-0074 (cheap CI), ADR-0075 (reviewed pre-code SDD), ADR-0078 (rules in shared template), ADR-0080 (contracts/readiness), ADR-0054 (replay discipline), ADR-0068 (versioning), ADR-0061 only for the separate engine package if confirmed, and applicable content, notebook, method-tier, manuscript, deploy, community and privacy rules. No exception is requested.
 
+| ADR | Rule | Carried by |
+|---|---|---|
+| ADR-0070 | The App is a case workbench with Focus mode that retains case, method and unit selection. | `frontend/src/workbench/Workbench.tsx`, `npm run gate` |
+
 ## Proposed method and exact mathematical boundary
 
 Let the hard QP be

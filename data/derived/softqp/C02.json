@@ -1,0 +1,159 @@
+{
+  "case_id": "C02",
+  "category": {
+    "en": "Semantics",
+    "es": "Semántica"
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Normalized row 0",
+        "es": "Fila normalizada 0"
+      },
+      "soft": true,
+      "unit": "1"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 9,
+          "rows": 4,
+          "variables": 3
+        },
+        "elapsed_seconds": 0.0021634000004269183,
+        "iterations": 50,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -3.472777777918284,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.981666666666667,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 0.491111111251617,
+          "slack": [
+            -0.566666666764694
+          ],
+          "stationarity_residual": 4.1358494407006674e-10,
+          "upper_violation": [
+            0.566666666764694
+          ]
+        },
+        "setup_seconds": 1.67e-05,
+        "solve_seconds": 1.07e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.566666666764694
+        ],
+        "y": [
+          1.433333332821721
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 2,
+          "rows": 1,
+          "variables": 1
+        },
+        "elapsed_seconds": 0.0015288000140571967,
+        "iterations": 50,
+        "method": "generalized",
+        "metrics": {
+          "base_objective": -3.4727777777492506,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.9816666666666665,
+          "objective_gap_against_lifted": 4.440892098500626e-16,
+          "penalty_objective": 0.4911111110825841,
+          "slack": [
+            -0.5666666666467641
+          ],
+          "stationarity_residual": 1.9909407455998007e-11,
+          "upper_violation": [
+            0.5666666666467641
+          ]
+        },
+        "setup_seconds": 2.72e-05,
+        "solve_seconds": 1.85e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.5666666666467641
+        ],
+        "y": [
+          1.4333333333333265
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "asymmetric",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 2,
+          "rows": 1,
+          "variables": 1
+        },
+        "elapsed_seconds": 0.0012089999945601448,
+        "iterations": 50,
+        "method": "asymmetric",
+        "metrics": {
+          "base_objective": -3.4727777777492506,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.9816666666666665,
+          "objective_gap_against_lifted": 4.440892098500626e-16,
+          "penalty_objective": 0.4911111110825841,
+          "slack": [
+            -0.5666666666467641
+          ],
+          "stationarity_residual": 1.9909851545207857e-11,
+          "upper_violation": [
+            0.5666666666467641
+          ]
+        },
+        "setup_seconds": 1.62e-05,
+        "solve_seconds": 1.4e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.5666666666467641
+        ],
+        "y": [
+          1.433333333333326
+        ]
+      },
+      "state": "available"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Upper-bound overshoot",
+    "es": "Incumplimiento superior"
+  }
+}

@@ -1,1 +1,127 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img"><title>Constraint policy and evidence</title><style>:root{color-scheme:light dark} .bg{fill:light-dark(#eef4f8,#142633)} .edge{stroke:light-dark(#456278,#a3bbcb);stroke-width:3;fill:none}.node{fill:light-dark(#d5e8ee,#234859);stroke:#38a5a4;stroke-width:3}.accent{fill:#dd9a43}.pulse{animation:move 5s ease-in-out infinite}@keyframes move{0%,100%{transform:translateX(0)}50%{transform:translateX(24px)}}@media(prefers-reduced-motion:reduce){.pulse{animation:none}}</style><rect class="bg" width="900" height="300" rx="24"/><path class="edge" d="M140 150H760"/><rect class="node" x="70" y="75" width="150" height="150" rx="22"/><path class="edge" d="M105 180l35-85 35 85m-55-30h40"/><rect class="node" x="375" y="75" width="150" height="150" rx="22"/><path class="edge" d="M410 190l25-80 30 80 30-80"/><rect class="node" x="680" y="75" width="150" height="150" rx="22"/><path class="edge" d="M710 150l25 25 60-65"/><circle class="accent pulse" cx="290" cy="150" r="12"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img"><title>Building energy policy / Política energética del edificio</title>
+<style>
+.stress { animation: stress 6s ease-in-out infinite; }
+@keyframes stress { 0%, 15% { opacity: .25; } 65%, 100% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .stress { animation: none; opacity: 1; transform: none; }
+}
+</style>
+<rect x="1" y="1" width="998" height="558" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<rect x="30" y="110" width="560" height="350" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="45" y="135" width="530" height="310" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<rect x="58" y="150" width="155" height="185" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="66" y="345" width="139" height="82" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="68" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="68" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="112" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="112" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="156" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="156" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="143" y="260" width="48" height="20" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M150 285h34m-30 10h26m-22 10h18" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<rect x="80" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="80" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M83 383v22m23-22v22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="145" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="145" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M148 383v22m23-22v22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="98" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="88" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M90 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M88 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="164" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="154" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M156 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M154 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="230" y="150" width="155" height="185" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="238" y="345" width="139" height="82" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="240" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="240" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="284" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="284" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="328" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="328" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="315" y="260" width="48" height="20" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M322 285h34m-30 10h26m-22 10h18" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<rect x="252" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="252" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M255 383v22m23-22v22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="317" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="317" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M320 383v22m23-22v22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="270" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="260" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M262 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M260 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="336" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="326" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M328 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M326 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="402" y="150" width="155" height="185" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="410" y="345" width="139" height="82" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="412" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="412" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="456" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="456" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="500" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="500" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="487" y="260" width="48" height="20" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M494 285h34m-30 10h26m-22 10h18" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<rect x="424" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="424" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M427 383v22m23-22v22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="489" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="489" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M492 383v22m23-22v22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="442" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="432" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M434 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M432 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="508" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="498" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M500 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M498 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="630" y="145" width="145" height="180" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="650" y="167" width="105" height="65" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<circle cx="660" cy="262" r="7" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<circle cx="687" cy="262" r="7" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<circle cx="714" cy="262" r="7" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<circle cx="741" cy="262" r="7" fill="var(--color-bad)" stroke="var(--color-border)"/>
+<rect x="654" y="290" width="20" height="14" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="684" y="290" width="20" height="14" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="714" y="290" width="20" height="14" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="820" y="150" width="125" height="130" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="857" y="132" width="48" height="18" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="833" y="164" width="99" height="100" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<rect x="842" y="177" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="842" y="197" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="842" y="217" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="842" y="237" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M590 225h40m145 0h45" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<path d="M700 325v110H450" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<path d="M880 280v155H700" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<circle cx="930" cy="65" r="23" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<path d="M930.0 35.0L930 25" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M951.0 44.0L958 37" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M960.0 65.0L970 65" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M951.0 86.0L958 93" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M930.0 95.0L930 105" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M909.0 86.0L902 93" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M900.0 65.0L890 65" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M909.0 44.0L902 37" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<rect x="650" y="455" width="64" height="50" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<circle cx="682" cy="440" r="11" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M665 505v25m34-25v25" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="735" y="455" width="64" height="50" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<circle cx="767" cy="440" r="11" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M750 505v25m34-25v25" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<rect x="820" y="455" width="64" height="50" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<circle cx="852" cy="440" r="11" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M835 505v25m34-25v25" fill="none" stroke="var(--color-text-muted)" stroke-width="3" />
+<text data-lang="en" x="42" y="55" fill="var(--color-text)" font-size="17">Policy reaches several teams</text><text data-lang="es" x="42" y="55" fill="var(--color-text)" font-size="17">La política involucra varios equipos</text>
+<text data-lang="en" x="58" y="125" fill="var(--color-text)" font-size="17">Occupied rooms</text><text data-lang="es" x="58" y="125" fill="var(--color-text)" font-size="17">Salas ocupadas</text>
+<text data-lang="en" x="630" y="125" fill="var(--color-text)" font-size="17">Supervisory control</text><text data-lang="es" x="630" y="125" fill="var(--color-text)" font-size="17">Control supervisor</text>
+<text data-lang="en" x="820" y="310" fill="var(--color-text)" font-size="17">Battery reserve</text><text data-lang="es" x="820" y="310" fill="var(--color-text)" font-size="17">Reserva de batería</text>
+<text data-lang="en" x="48" y="490" fill="var(--color-text)" font-size="17">Comfort and power limits</text><text data-lang="es" x="48" y="490" fill="var(--color-text)" font-size="17">Límites de confort y potencia</text>
+<text data-lang="en" x="630" y="550" fill="var(--color-text)" font-size="17">Owner · model author · reviewer</text><text data-lang="es" x="630" y="550" fill="var(--color-text)" font-size="17">Responsable · autor · revisor</text>
+</svg>

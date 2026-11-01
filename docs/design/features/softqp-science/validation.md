@@ -2,7 +2,7 @@
 
 | requirement | adversarial check | gate |
 |---|---|---|
-| SQ-001 | Compare the exact set and order, so missing, repeated or renamed cases fail. | `tests/test_softqp_matrix.py::test_case_catalog_covers_fifteen_declared_ids` |
-| SQ-002 | Solve independently lifted and native formulations, then compare recomputed original-space objectives rather than trusting solver-reported cost. | `tests/test_softqp_matrix.py::test_scalar_methods_share_objective_and_hard_policy` |
-| SQ-003 | Compare the grouped native proximal result with the independently lifted QP epigraph. | `tests/test_softqp_matrix.py::test_grouped_reference_matches_explicit_lift` |
-| SQ-004 | Recompute hashes from actual bytes in a test-only directory; any inventory drift fails. | `tests/test_softqp_matrix.py::test_bake_writes_hashed_inventory_outside_committed_data` |
+| SQ-001 | A duplicate ID is planted in the catalog and the bake must stop before any result is accepted. | `tests/adversarial/test_softqp_boundary.py::test_adversarial_duplicate_case_id_blocks_bake` |
+| SQ-002 | An asymmetric case must be explicitly incompatible with the symmetric reference, never silently solved with different costs. | `tests/adversarial/test_softqp_boundary.py::test_adversarial_semantics_mismatch_is_incompatible` |
+| SQ-003 | Unequal weights are planted inside a shared penalty group and the native solver must reject it. | `tests/adversarial/test_softqp_boundary.py::test_adversarial_inconsistent_group_weights_fail_native` |
+| SQ-004 | An exported byte is changed without updating the digest; inventory verification must reject the changed file. | `tests/adversarial/test_softqp_boundary.py::test_adversarial_changed_artifact_byte_breaks_inventory` |
