@@ -1,5 +1,5 @@
 # Exact scientific method and fresh-kernel notebook dependencies.
-softqp @ git+https://github.com/fsantibanezleal/CAOS_SoftQP_Engine.git@65a93eb44a723d3de554d305890e8b0078096b1c
+softqp @ git+https://github.com/fsantibanezleal/CAOS_SoftQP_Engine.git@d0c69ed974d577ba02adbd4806332270d9425651
 numpy==2.5.4
 scipy==1.18.1
 osqp==1.1.3

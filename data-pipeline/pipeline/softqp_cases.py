@@ -54,13 +54,13 @@ def generated(n=32, m=80, semidefinite=False, ill_conditioned=False, seed=1729):
     )
 
 
-def mpc(conflict=False, asymmetric=False, initial_position=1.2):
+def mpc(conflict=False, asymmetric=False, initial_position=1.2, initial_velocity=0.0):
     # Condensed double integrator: state dynamics hold identically, controls stay hard.
     horizon = 20
     dt = 0.2
     F = np.array([[1.0, dt], [0.0, 1.0]])
     B = np.array([0.5 * dt**2, dt])
-    x0 = np.array([initial_position, 0.0])
+    x0 = np.array([initial_position, initial_velocity])
     G = np.zeros((2 * horizon, horizon))
     offset = np.zeros(2 * horizon)
     for k in range(horizon):

@@ -94,7 +94,7 @@ The approved implementation instantiates template 0.14.001 and shared shell 0.19
 | tooling | react-router | 8.4.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | lint | ruff | 0.15.18 | Static Python source validation | Unpinned formatting |
 | sparse matrices | scipy | 1.18.1 | CSC assembly and convexity checks | Dense-only storage |
-| native engine | softqp | 65a93eb44a723d3de554d305890e8b0078096b1c | Pinned native generalized and asymmetric solver | Separate package over internal distribution |
+| native engine | softqp | d0c69ed974d577ba02adbd4806332270d9425651 | Pinned native generalized and asymmetric solver | Separate package over internal distribution |
 | tooling | typescript | 5.9.3 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | uplot | 1.6.32 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | vite | 8.3.5 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
