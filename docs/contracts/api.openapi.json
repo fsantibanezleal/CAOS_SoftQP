@@ -248,6 +248,15 @@
       },
       "SoftQPLocalExport": {
         "$ref": "schemas/softqp-local-export.schema.json"
+      },
+      "SoftQPStream": {
+        "$ref": "schemas/softqp-stream.schema.json"
+      },
+      "SoftQPCampaign": {
+        "$ref": "schemas/softqp-campaign.schema.json"
+      },
+      "SoftQPExperimentIndex": {
+        "$ref": "schemas/softqp-experiment-index.schema.json"
       }
     },
     "responses": {

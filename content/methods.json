@@ -401,5 +401,140 @@
       "osqp",
       "flex"
     ]
+  },
+  {
+    "id": "flex",
+    "title": {
+      "en": "FlexQP fixed-parameter reference",
+      "es": "Referencia FlexQP de parámetros fijos"
+    },
+    "paragraphs": [
+      {
+        "en": "FlexQP rewrites a weighted L1 elastic objective as an equality-coupled problem with a nonnegative slack and a signed restoration residual. Each finite upper interval side contributes G=A and h=u; each finite lower side contributes G=-A and h=-l. Separate side weights are retained. This conversion represents the same hinge objective as explicit lifting, but it does not imply that every returned optimum satisfies the original unsoftened inequalities.",
+        "es": "FlexQP reescribe el objetivo elástico L1 ponderado como un problema acoplado por igualdades con una holgura no negativa y un residuo de restauración con signo. Cada lado superior finito aporta G=A y h=u; cada lado inferior finito aporta G=-A y h=-l. Se conservan pesos distintos por lado. La conversión representa el mismo objetivo de bisagra que las holguras explícitas, sin implicar que todo óptimo satisfaga las desigualdades originales sin flexibilizar."
+      },
+      {
+        "en": "The implemented reference follows equations 23 to 26 and Algorithm 1 of the paper. A dense Schur complement factors P plus a positive proximal diagonal and a scaled Gram matrix of the finite-side rows. The algorithm alternates this linear solve, nonnegative projection and weighted shrinkage, then applies relaxed primal and dual updates. The previous slack and restoration states must enter the relaxation in the order specified by the algorithm; exchanging them changes the iteration.",
+        "es": "La referencia implementada sigue las ecuaciones 23 a 26 y el Algoritmo 1 del artículo. Un complemento de Schur denso factoriza P más una diagonal proximal positiva y una matriz de Gram escalada de los lados finitos. El algoritmo alterna solución lineal, proyección no negativa y umbral ponderado, y aplica actualizaciones relajadas primales y duales. Los estados previos de holgura y restauración deben entrar en la relajación en el orden indicado; intercambiarlos cambia la iteración."
+      },
+      {
+        "en": "The numerical policy is fixed at sigma_x=1e-6, sigma_s=1, rho=1 and alpha=1.6. These proximal terms stabilize the ADMM subproblems and do not add a quadratic regularizer to the declared original objective. Termination checks original stationarity and the projected dual-box condition. An iteration limit keeps its failed state and supplies no invented optimum. The Python and SciPy implementation is an independently authored reconstruction, rather than the authors' code or a reproduction of their published timing.",
+        "es": "La política numérica se fija en sigma_x=1e-6, sigma_s=1, rho=1 y alpha=1.6. Los términos proximales estabilizan los subproblemas de ADMM y no agregan regularización cuadrática al objetivo original. La terminación verifica estacionariedad original y la condición proyectada de la caja dual. Un límite de iteraciones conserva el estado fallido sin inventar un óptimo. La implementación en Python y SciPy es una reconstrucción propia, no el código de los autores ni una reproducción de sus tiempos publicados."
+      },
+      {
+        "en": "Exact recovery of an optimum of a feasible hard QP requires L1 weights large enough relative to optimal multipliers. Smaller weights can rationally purchase a violation, which is a policy outcome rather than solver infeasibility. This adapter accepts positive finite-side L1 costs and refuses finite hard rows and quadratic soft penalties. The Deep FlexQP learned parameter policy is not implemented because its trained reproducibility assets were unavailable; its acceleration claims are not transferred to this fixed-parameter reference.",
+        "es": "Recuperar exactamente el óptimo de un QP duro factible exige pesos L1 suficientemente grandes respecto de los multiplicadores óptimos. Pesos menores pueden comprar un incumplimiento de forma racional: es una decisión de política, no infactibilidad del solver. El adaptador acepta costos L1 positivos por lado finito y rechaza filas duras finitas y costos blandos cuadráticos. La política aprendida de Deep FlexQP no está implementada porque no se dispuso de sus activos entrenados reproducibles; sus ventajas no se atribuyen a esta referencia fija."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "\\min_x\\;\\tfrac12x^\\top Px+q^\\top x+\\sum_j\\mu_j(G_jx-h_j)_+",
+        "caption": {
+          "en": "Finite sides become weighted elastic inequalities without changing their original scale.",
+          "es": "Los lados finitos pasan a desigualdades elásticas ponderadas conservando su escala."
+        }
+      },
+      {
+        "tex": "K=P+\\sigma_x I+cG^\\top G,\\qquad c=(\\sigma_s^{-1}+\\rho^{-1})^{-1}",
+        "caption": {
+          "en": "The positive Schur system is a numerical subproblem, not a changed scientific objective.",
+          "es": "El sistema positivo de Schur es un subproblema numérico, no otro objetivo científico."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Finite-side expansion",
+        "es": "Expansión por lado"
+      },
+      {
+        "en": "Schur solve",
+        "es": "Solución de Schur"
+      },
+      {
+        "en": "Projection and shrinkage",
+        "es": "Proyección y umbral"
+      },
+      {
+        "en": "Original KKT check",
+        "es": "Verificación KKT original"
+      }
+    ],
+    "scope": {
+      "en": "Pure L1 soft inequalities only; dense reference budget 2048 variables and 8192 finite sides. Timings include the maturity and language of this reconstruction. No learned policy, universal hard-feasibility guarantee or infeasibility certificate is claimed.",
+      "es": "Solo desigualdades blandas L1; presupuesto denso de 2048 variables y 8192 lados finitos. Los tiempos incluyen la madurez y el lenguaje de la reconstrucción. No se afirma política aprendida, factibilidad dura universal ni certificado de infactibilidad."
+    },
+    "refs": [
+      "flex",
+      "osqp"
+    ]
+  },
+  {
+    "id": "elasti",
+    "title": {
+      "en": "ElastiQP dual active set",
+      "es": "Conjunto activo dual ElastiQP"
+    },
+    "paragraphs": [
+      {
+        "en": "ElastiQP provides a published dual active-set solver for L1 elastic inequalities. The adapter consumes version 0.2.0 and constructs one inequality for each finite soft side. Its penalty vector contains the original lower or upper linear coefficient, so a scaled engineering row retains its declared price. Hard equalities are supplied through the separate equality interface. A hard inequality is refused by this adapter instead of being silently converted into a highly priced soft row.",
+        "es": "ElastiQP ofrece un solver publicado de conjunto activo dual para desigualdades elásticas L1. El adaptador utiliza la versión 0.2.0 y construye una desigualdad por cada lado blando finito. El vector de penalización contiene el coeficiente lineal inferior o superior original, por lo que una fila física escalada conserva su precio declarado. Las igualdades duras se entregan por la interfaz separada. Se rechazan las desigualdades duras en lugar de convertirlas silenciosamente en filas blandas de alto precio."
+      },
+      {
+        "en": "For a positive definite P, eliminating the primal quadratic gives a bounded dual over inequality multipliers between zero and their side weights, together with unrestricted equality multipliers. The active-set method identifies the relevant dual bounds rather than repeatedly applying the same ADMM splitting. Its iteration count therefore cannot be compared one for one with an OSQP or FlexQP iteration. The product compares independently evaluated objectives and wall-clock scopes, while retaining the original backend status and iteration diagnostic.",
+        "es": "Con P definida positiva, eliminar la cuadrática primal produce un dual acotado cuyos multiplicadores de desigualdad están entre cero y sus pesos por lado, junto con multiplicadores libres de igualdad. El conjunto activo identifica límites duales pertinentes en vez de repetir la separación de ADMM. Su número de iteraciones no equivale al de OSQP o FlexQP. El producto compara objetivos evaluados independientemente y alcances temporales declarados, conservando el estado nativo y las iteraciones como diagnóstico."
+      },
+      {
+        "en": "The reference uses the DAS backend with matched absolute and relative tolerances, cold initialization and a zero proximal objective regularizer. Positive definiteness is checked before this configuration is used. A semidefinite Hessian, a quadratic soft cost or an unsupported hard inequality produces an explicit incompatible cell. Dense conversion is budgeted before the reference matrices are assembled, and the actual numerical settings accompany the exported result. No small quadratic term is inserted to make an unsupported objective fit the solver.",
+        "es": "La referencia utiliza el backend DAS con tolerancias absolutas y relativas equivalentes, inicio frío y regularización proximal del objetivo igual a cero. Se verifica definición positiva antes de usar esta configuración. Una hessiana semidefinida, un costo blando cuadrático o una desigualdad dura no admitida producen una celda incompatible explícita. Se limita la conversión densa antes de ensamblar matrices y se exportan los parámetros numéricos reales. No se agrega un término cuadrático pequeño para adaptar un objetivo no compatible."
+      },
+      {
+        "en": "Returned upper-side multipliers enter the original row dual with a positive sign and lower-side multipliers with a negative sign. Equality multipliers retain their original row positions. Recomputing stationarity after this recovery catches a sign or row-order mistake that an objective-only comparison could miss. Tests cover differently scaled rows, unequal side prices and a hard equality against independent stock-OSQP lifting. The licensing and version are recorded separately from the source-faithful generalized projection and the paper-equation FlexQP reconstruction.",
+        "es": "Los multiplicadores superiores entran al dual original con signo positivo y los inferiores con signo negativo. Los de igualdad mantienen la posición de sus filas. Recalcular estacionariedad después de recuperar el dual detecta errores de signo u orden que una comparación de objetivo podría omitir. Las pruebas cubren filas con distinta escala, precios desiguales y una igualdad dura frente a holguras explícitas con OSQP independiente. Se registran licencia y versión por separado de la proyección generalizada y de la reconstrucción FlexQP."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "0\\le z_j\\le\\mu_j,\\qquad Px+q+G^\\top z+E^\\top y=0",
+        "caption": {
+          "en": "Weighted hinges bound the inequality dual; equality multipliers remain free.",
+          "es": "Las bisagras ponderadas acotan el dual de desigualdad; los multiplicadores de igualdad son libres."
+        }
+      },
+      {
+        "tex": "y_i^{\\mathrm{original}}=z_i^{u}-z_i^{l},\\qquad F(x)=\\tfrac12x^\\top Px+q^\\top x+\\mu^\\top(Gx-h)_+",
+        "caption": {
+          "en": "Dual recovery and original objective evaluation are independent of the native status.",
+          "es": "La recuperación dual y el objetivo original se verifican independientemente del estado nativo."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Original side costs",
+        "es": "Costos originales"
+      },
+      {
+        "en": "Bounded dual",
+        "es": "Dual acotado"
+      },
+      {
+        "en": "Active-set solve",
+        "es": "Solución por conjunto activo"
+      },
+      {
+        "en": "Recover signed dual",
+        "es": "Recuperación dual con signo"
+      }
+    ],
+    "scope": {
+      "en": "Published ElastiQP 0.2.0, Apache-2.0, positive definite pure L1 cases and hard equalities. The current adapter refuses hard inequalities and quadratic side costs. It does not infer operational safety from elastic feasibility.",
+      "es": "ElastiQP 0.2.0 publicado, Apache-2.0, casos L1 definidos positivos e igualdades duras. El adaptador rechaza desigualdades duras y costos cuadráticos por lado. No deduce seguridad operativa a partir de factibilidad elástica."
+    },
+    "refs": [
+      "elasti",
+      "flex",
+      "daqp"
+    ]
   }
 ]

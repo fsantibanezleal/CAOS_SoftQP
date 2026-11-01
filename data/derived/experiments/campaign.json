@@ -1,0 +1,4836 @@
+{
+  "schema_version": "softqp.campaign/v1",
+  "protocol": {
+    "protocol_id": "softqp-experiments-v1",
+    "phase": "registered before held-out generation",
+    "created": "2026-10-31",
+    "engine_source": "d0c69ed974d577ba02adbd4806332270d9425651",
+    "operating_limits": {
+      "blas_threads": 1,
+      "wall_seconds": 7200,
+      "process_memory_limit_bytes": 4294967296,
+      "parallel_workers": 1,
+      "trial_timeout_seconds": 10
+    },
+    "accuracy": {
+      "eps_abs": 1e-07,
+      "eps_rel": 1e-07,
+      "max_iter": 200000,
+      "adaptive_rho_interval": 25,
+      "normalized_objective_gap_limit": 1e-06,
+      "hard_row_error_limit": 1e-06
+    },
+    "methods": [
+      "lifted",
+      "generalized",
+      "asymmetric",
+      "daqp",
+      "flex",
+      "elastiqp"
+    ],
+    "backends": {
+      "lifted_timed": "pinned native fork",
+      "lifted_oracle": "independent stock OSQP with eps_abs=eps_rel=1e-9",
+      "flex": "fixed-parameter paper-equation reconstruction",
+      "elastiqp": "published 0.2.0 dual active set"
+    },
+    "generator": {
+      "n": [
+        32,
+        64,
+        128,
+        256
+      ],
+      "m_per_n": 2,
+      "density": [
+        0.05,
+        0.2
+      ],
+      "hessian_condition": [
+        1,
+        1000
+      ],
+      "families": [
+        "symmetric-elastic",
+        "asymmetric-elastic",
+        "asymmetric-l1"
+      ],
+      "hard_row_fraction_elastic": 0.2,
+      "hard_row_fraction_l1": 0,
+      "row_norm": 1,
+      "q_standard_deviation": 3,
+      "linear_cost_range": [
+        0.1,
+        1.0
+      ],
+      "quadratic_cost_range": [
+        0.5,
+        4.0
+      ],
+      "asymmetric_upper_factor_range": [
+        1.5,
+        3.0
+      ],
+      "lower": -0.4,
+      "upper": 0.6
+    },
+    "seeds": {
+      "development": [
+        1000,
+        1001,
+        1002
+      ],
+      "heldout": [
+        9000,
+        9001,
+        9002,
+        9003,
+        9004,
+        9005
+      ],
+      "robustness": [
+        8500,
+        8501,
+        8502,
+        8503,
+        8504,
+        8505
+      ],
+      "order": 271828,
+      "bootstrap": 314159
+    },
+    "repetitions": {
+      "warmup_per_backend": 1,
+      "measured": 7,
+      "paired_order": "seeded random method order within each instance and repetition",
+      "bootstrap_seed_clusters": 2000
+    },
+    "primary_endpoint": {
+      "family": "asymmetric-elastic",
+      "n_minimum": 128,
+      "density": 0.05,
+      "quantity": "median paired relative reduction in cold end-to-end time against the faster of native compact lifting and DAQP",
+      "minimum_reduction": 0.1,
+      "confidence": "two-sided 95 percent seed-cluster bootstrap interval has a lower endpoint above zero",
+      "success_condition": "all compared cells satisfy external original-space acceptance; failures are retained"
+    },
+    "secondary_endpoints": [
+      "native solve/setup and update time",
+      "iterations",
+      "formulation dimensions and nonzeros",
+      "accuracy versus conditioning",
+      "within-method warm/cold stream measurements"
+    ],
+    "robustness": {
+      "n": 32,
+      "m": 64,
+      "density": 0.1,
+      "hessian_condition": [
+        1,
+        100,
+        10000,
+        1000000
+      ],
+      "same_A_q_and_costs_within_seed": true
+    },
+    "stream": {
+      "case_id": "C12",
+      "frames": 32,
+      "horizon": 20,
+      "dt_seconds": 0.2,
+      "initial_state": [
+        1.6,
+        0.0
+      ],
+      "velocity_impulses": {
+        "8": 0.8,
+        "20": -0.6
+      },
+      "policy": "Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts.",
+      "methods": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "daqp"
+      ],
+      "modes": [
+        "cold",
+        "warm"
+      ],
+      "timing": "one documented stream observation per frame; no statistical superiority claim from it"
+    },
+    "measurement_scope": {
+      "cold_end_to_end": "validated original QP input to independently evaluated returned result; includes validation, formulation construction, setup and solve; excludes generator, module import and export",
+      "generation": "measured separately",
+      "warm_end_to_end": "vector validation, update, solve and original-space evaluation; one initial workspace setup is recorded separately",
+      "factorization": "backend setup currently includes linear-system preparation; isolated numeric factor time is not instrumented and cannot be inferred",
+      "memory": "process RSS and campaign high-water mark are resource observations, not per-method native allocation peaks"
+    },
+    "failure_policy": "Preserve incompatible, maximum-iteration, timeout, numerical and accuracy-rejected cells with reasons. Never replace an objective or drop a failed evaluation seed.",
+    "claims": "A successful implementation benchmark does not establish global algorithmic novelty, safety or universal solver superiority. Deep FlexQP trained weights are not available in this reconstruction."
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "osqp": "1.1.3",
+      "softqp": "0.1.0",
+      "daqp": "0.10.3",
+      "elastiqp": "0.2.0"
+    },
+    "engine_revision": "d0c69ed974d577ba02adbd4806332270d9425651",
+    "engine_source_dirty": false,
+    "native_binary_sha256": "c595808656e4d9a45d1adf723c6644a0a3215bae93c0a2daa54da3cb83b1ca0b"
+  },
+  "protocol_sha256": "d6c20c060e37a3bb342589a4ee44975411d14b9c9aa4535a2004bc637f6ab1fe",
+  "source_sha256": {
+    "data-pipeline/pipeline/softqp_campaign.py": "18b6a41f79d1af9bc7ff64c2104b1b19f057eb4a483d22eb8440eb327569d496",
+    "data-pipeline/pipeline/experiment_common.py": "cec3197df4b52462e09c037c0f021ceca7d04e3dc3c320f46d155e7a3110e98c"
+  },
+  "observed_wall_seconds": 397.1560000000027,
+  "worker_peak_rss_bytes": 89665536,
+  "worker_restarts": 0,
+  "planned_instances": 144,
+  "completed_instances": 144,
+  "cells": [
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0013601999962702394,
+      "quantile_25_seconds": 0.0012066000053891912,
+      "quantile_75_seconds": 0.00144680000084918,
+      "max_normalized_gap": 1.9718032193200938e-08,
+      "max_hard_violation": 9.934120109855726e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0031004999909782782,
+      "quantile_25_seconds": 0.002749300008872524,
+      "quantile_75_seconds": 0.003354800006491132,
+      "max_normalized_gap": 3.2001786701050214e-09,
+      "max_hard_violation": 6.683125380879673e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0006175000016810372,
+      "quantile_25_seconds": 0.0005291999987093732,
+      "quantile_75_seconds": 0.0006767000013496727,
+      "max_normalized_gap": 1.0740384324160172e-11,
+      "max_hard_violation": 9.43689570931383e-16
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0012924999900860712,
+      "quantile_25_seconds": 0.0011673999979393557,
+      "quantile_75_seconds": 0.001399499989929609,
+      "max_normalized_gap": 1.9718032193200938e-08,
+      "max_hard_violation": 9.934120093202381e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0011110999912489206,
+      "quantile_25_seconds": 0.0010121999948751181,
+      "quantile_75_seconds": 0.0023351000127149746,
+      "max_normalized_gap": 3.758100397754028e-09,
+      "max_hard_violation": 7.28284769158094e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0004972999886376783,
+      "quantile_25_seconds": 0.00043420000292826444,
+      "quantile_75_seconds": 0.0010013999999500811,
+      "max_normalized_gap": 4.1203039318203444e-11,
+      "max_hard_violation": 1.5543122344752192e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005827300003147684,
+      "quantile_25_seconds": 0.005515999990166165,
+      "quantile_75_seconds": 0.014513200003420934,
+      "max_normalized_gap": 3.0589337605205817e-09,
+      "max_hard_violation": 6.432787191812395e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0024582000041846186,
+      "quantile_25_seconds": 0.002292299992404878,
+      "quantile_75_seconds": 0.002531899997848086,
+      "max_normalized_gap": 3.3220184426473177e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0016508999979123473,
+      "quantile_25_seconds": 0.0015752000035718083,
+      "quantile_75_seconds": 0.0016922999930102378,
+      "max_normalized_gap": 5.4031874429521684e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0266700999927707,
+      "quantile_25_seconds": 0.023041499996907078,
+      "quantile_75_seconds": 0.02921750000678003,
+      "max_normalized_gap": 1.2035022943554342e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.017152100001112558,
+      "quantile_25_seconds": 0.016590499988524243,
+      "quantile_75_seconds": 0.018054900006973185,
+      "max_normalized_gap": 8.840439053033784e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0009531999967293814,
+      "quantile_25_seconds": 0.0008677000005263835,
+      "quantile_75_seconds": 0.00106380000943318,
+      "max_normalized_gap": 7.17694839200961e-11,
+      "max_hard_violation": 2.220446049250313e-16
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0023382999934256077,
+      "quantile_25_seconds": 0.0022282999998424202,
+      "quantile_75_seconds": 0.002650299997185357,
+      "max_normalized_gap": 5.143175136837522e-10,
+      "max_hard_violation": 8.4710785608344e-09
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002376200005528517,
+      "quantile_25_seconds": 0.002319200008059852,
+      "quantile_75_seconds": 0.0025329000054625794,
+      "max_normalized_gap": 5.143177777289395e-10,
+      "max_hard_violation": 8.471078949412458e-09
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0059637000085785985,
+      "quantile_25_seconds": 0.00566929999331478,
+      "quantile_75_seconds": 0.006220299997949041,
+      "max_normalized_gap": 9.367187720870118e-09,
+      "max_hard_violation": 3.5112219798349997e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.014929800003301352,
+      "quantile_25_seconds": 0.01403829999617301,
+      "quantile_75_seconds": 0.015386900005978532,
+      "max_normalized_gap": 2.729705809416423e-09,
+      "max_hard_violation": 1.6712655814821176e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0008967000030679628,
+      "quantile_25_seconds": 0.0008384999964619055,
+      "quantile_75_seconds": 0.0009833000076469034,
+      "max_normalized_gap": 4.989387888346791e-11,
+      "max_hard_violation": 1.1102230246251565e-16
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0023476999922422692,
+      "quantile_25_seconds": 0.0022745000023860484,
+      "quantile_75_seconds": 0.0026197999977739528,
+      "max_normalized_gap": 1.9694837730567783e-09,
+      "max_hard_violation": 3.5126217656777925e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.015220000001136214,
+      "quantile_25_seconds": 0.01477819999854546,
+      "quantile_75_seconds": 0.015548399998806417,
+      "max_normalized_gap": 4.277205704890689e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.001364399999147281,
+      "quantile_25_seconds": 0.0012934999977005646,
+      "quantile_75_seconds": 0.0014605000033043325,
+      "max_normalized_gap": 1.47103495329789e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.02407540001149755,
+      "quantile_25_seconds": 0.01844830000482034,
+      "quantile_75_seconds": 0.02706690000195522,
+      "max_normalized_gap": 3.205744250978392e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002190100000007078,
+      "quantile_25_seconds": 0.002034799996181391,
+      "quantile_75_seconds": 0.0023132000060286373,
+      "max_normalized_gap": 2.157864434073965e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0019822999893222004,
+      "quantile_25_seconds": 0.0019029999966733158,
+      "quantile_75_seconds": 0.0021253000013530254,
+      "max_normalized_gap": 1.019754205638353e-08,
+      "max_hard_violation": 1.0905022201912473e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.004893200006335974,
+      "quantile_25_seconds": 0.004829400000744499,
+      "quantile_75_seconds": 0.005170699994778261,
+      "max_normalized_gap": 1.458493521575235e-09,
+      "max_hard_violation": 8.008268748138647e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002033799988566898,
+      "quantile_25_seconds": 0.001957800006493926,
+      "quantile_75_seconds": 0.002132499997969717,
+      "max_normalized_gap": 1.0197542439384108e-08,
+      "max_hard_violation": 1.0905022196361358e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0008398000063607469,
+      "quantile_25_seconds": 0.0008154999959515408,
+      "quantile_75_seconds": 0.0008809999999357387,
+      "max_normalized_gap": 2.6670974585033906e-11,
+      "max_hard_violation": 2.4424906541753444e-15
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0008381000079680234,
+      "quantile_25_seconds": 0.0008155999967129901,
+      "quantile_75_seconds": 0.0010369999945396557,
+      "max_normalized_gap": 3.189846525443507e-11,
+      "max_hard_violation": 1.2212453270876722e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.013495199993485585,
+      "quantile_25_seconds": 0.013235400008852594,
+      "quantile_75_seconds": 0.013944700011052191,
+      "max_normalized_gap": 4.208592663062509e-09,
+      "max_hard_violation": 1.2616012590171977e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002161799988243729,
+      "quantile_25_seconds": 0.0020695999992312863,
+      "quantile_75_seconds": 0.0022902000055182725,
+      "max_normalized_gap": 1.6939202202388327e-08,
+      "max_hard_violation": 1.1903075358699056e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.014876699991873465,
+      "quantile_25_seconds": 0.014315399996121414,
+      "quantile_75_seconds": 0.015965799990226515,
+      "max_normalized_gap": 1.9421705258194174e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.001389600001857616,
+      "quantile_25_seconds": 0.0012657000042963773,
+      "quantile_75_seconds": 0.001461299994844012,
+      "max_normalized_gap": 9.992673659737173e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0021923000022070482,
+      "quantile_25_seconds": 0.0020385000098031014,
+      "quantile_75_seconds": 0.002332599993678741,
+      "max_normalized_gap": 5.056426994668075e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.014379200001712888,
+      "quantile_25_seconds": 0.01394939998863265,
+      "quantile_75_seconds": 0.015234499995131046,
+      "max_normalized_gap": 2.3816401357165744e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0025221999967470765,
+      "quantile_25_seconds": 0.0024440999986836687,
+      "quantile_75_seconds": 0.002710899992962368,
+      "max_normalized_gap": 2.3262037703450105e-08,
+      "max_hard_violation": 1.7414361741519002e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0025693000061437488,
+      "quantile_25_seconds": 0.0021980000019539148,
+      "quantile_75_seconds": 0.0026578999968478456,
+      "max_normalized_gap": 2.3262037838961327e-08,
+      "max_hard_violation": 1.7414361724865657e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005499399994732812,
+      "quantile_25_seconds": 0.005268500011879951,
+      "quantile_75_seconds": 0.005892799992579967,
+      "max_normalized_gap": 2.489185988226438e-09,
+      "max_hard_violation": 3.0565775466229184e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0008090000046649948,
+      "quantile_25_seconds": 0.0007686999888392165,
+      "quantile_75_seconds": 0.0008540999988326803,
+      "max_normalized_gap": 6.255547472927073e-11,
+      "max_hard_violation": 1.1102230246251565e-16
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0007603999983984977,
+      "quantile_25_seconds": 0.0007255000091390684,
+      "quantile_75_seconds": 0.0008177999989129603,
+      "max_normalized_gap": 2.200390601105934e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.013593800002126954,
+      "quantile_25_seconds": 0.013357000003452413,
+      "quantile_75_seconds": 0.01419519999762997,
+      "max_normalized_gap": 2.138701130112852e-08,
+      "max_hard_violation": 1.2301727969621368e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002417099996819161,
+      "quantile_25_seconds": 0.002106999992975034,
+      "quantile_75_seconds": 0.0025273000064771622,
+      "max_normalized_gap": 2.2454846078131396e-08,
+      "max_hard_violation": 8.553003155720162e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002258699998492375,
+      "quantile_25_seconds": 0.002191299994592555,
+      "quantile_75_seconds": 0.0025464000063948333,
+      "max_normalized_gap": 1.634473822708908e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0012793999921996146,
+      "quantile_25_seconds": 0.0012318999943090603,
+      "quantile_75_seconds": 0.001313300002948381,
+      "max_normalized_gap": 2.1270421186296205e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.04478770001151133,
+      "quantile_25_seconds": 0.023472999993828125,
+      "quantile_75_seconds": 0.06634809999377467,
+      "max_normalized_gap": 1.6879079624552392e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 32,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.016099099986604415,
+      "quantile_25_seconds": 0.014921699999831617,
+      "quantile_75_seconds": 0.016821699988213368,
+      "max_normalized_gap": 3.272187855784048e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.006228800004464574,
+      "quantile_25_seconds": 0.006082899999455549,
+      "quantile_75_seconds": 0.006632400007219985,
+      "max_normalized_gap": 2.4009125294796695e-09,
+      "max_hard_violation": 1.6423154902689419e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002785999997286126,
+      "quantile_25_seconds": 0.002696199997444637,
+      "quantile_75_seconds": 0.0029161999991629273,
+      "max_normalized_gap": 7.148426796763677e-10,
+      "max_hard_violation": 2.9511657007041947e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002790600003208965,
+      "quantile_25_seconds": 0.0026529000024311244,
+      "quantile_75_seconds": 0.0030155999993439764,
+      "max_normalized_gap": 7.148426796763677e-10,
+      "max_hard_violation": 2.9511656784997342e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0017697000002954155,
+      "quantile_25_seconds": 0.0017073000053642318,
+      "quantile_75_seconds": 0.001840399985667318,
+      "max_normalized_gap": 5.932593695620448e-12,
+      "max_hard_violation": 2.3869795029440866e-15
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0016724000015528873,
+      "quantile_25_seconds": 0.0015700999938417226,
+      "quantile_75_seconds": 0.0017656999989412725,
+      "max_normalized_gap": 2.5478962415055296e-11,
+      "max_hard_violation": 2.6645352591003757e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.02493299999332521,
+      "quantile_25_seconds": 0.0240470999997342,
+      "quantile_75_seconds": 0.02620940000633709,
+      "max_normalized_gap": 8.391586219820133e-10,
+      "max_hard_violation": 1.8690230163542765e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002869099989766255,
+      "quantile_25_seconds": 0.0026308000087738037,
+      "quantile_75_seconds": 0.003395699997781776,
+      "max_normalized_gap": 2.415359921190038e-09,
+      "max_hard_violation": 1.3726768632871256e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0028326000028755516,
+      "quantile_25_seconds": 0.002658900004462339,
+      "quantile_75_seconds": 0.0029118999955244362,
+      "max_normalized_gap": 1.8553928903611623e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.026677500005462207,
+      "quantile_25_seconds": 0.02597570000216365,
+      "quantile_75_seconds": 0.028228300012415275,
+      "max_normalized_gap": 7.636278553082752e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.022206600013305433,
+      "quantile_25_seconds": 0.020390899997437373,
+      "quantile_75_seconds": 0.02458360001037363,
+      "max_normalized_gap": 1.6323670920766426e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002450900006806478,
+      "quantile_25_seconds": 0.002280200002132915,
+      "quantile_75_seconds": 0.0025928999966708943,
+      "max_normalized_gap": 7.315048662008045e-12,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.006950299997697584,
+      "quantile_25_seconds": 0.006546399992657825,
+      "quantile_75_seconds": 0.007220400002552196,
+      "max_normalized_gap": 3.284782517015578e-09,
+      "max_hard_violation": 5.209980225018285e-10
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0027353000041330233,
+      "quantile_25_seconds": 0.0025482999917585403,
+      "quantile_75_seconds": 0.0030128000071272254,
+      "max_normalized_gap": 2.1051451935957572e-08,
+      "max_hard_violation": 2.0363012348534326e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0010494000016478822,
+      "quantile_25_seconds": 0.0009882000013021752,
+      "quantile_75_seconds": 0.0010811999964062124,
+      "max_normalized_gap": 6.376605259568671e-11,
+      "max_hard_violation": 6.661338147750939e-16
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002825300005497411,
+      "quantile_25_seconds": 0.002552700010710396,
+      "quantile_75_seconds": 0.0030913999944459647,
+      "max_normalized_gap": 2.105145176032827e-08,
+      "max_hard_violation": 2.0363012426249938e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.003100999994785525,
+      "quantile_25_seconds": 0.002877300008549355,
+      "quantile_75_seconds": 0.0033838999952422455,
+      "max_normalized_gap": 7.788199092433432e-09,
+      "max_hard_violation": 7.005292795847495e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.025009099990711547,
+      "quantile_25_seconds": 0.024011999994399957,
+      "quantile_75_seconds": 0.02584680001018569,
+      "max_normalized_gap": 6.6163307986063255e-09,
+      "max_hard_violation": 1.5179489332162177e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.001086899996153079,
+      "quantile_25_seconds": 0.0010098000057041645,
+      "quantile_75_seconds": 0.001203499996336177,
+      "max_normalized_gap": 1.842325045304057e-11,
+      "max_hard_violation": 6.106226635438361e-16
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002644700012751855,
+      "quantile_25_seconds": 0.0025880999892251566,
+      "quantile_75_seconds": 0.0027513999957591295,
+      "max_normalized_gap": 2.0038287570912688e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0020847999985562637,
+      "quantile_25_seconds": 0.0020176999969407916,
+      "quantile_75_seconds": 0.002161800002795644,
+      "max_normalized_gap": 2.668904948629012e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.024796899990178645,
+      "quantile_25_seconds": 0.01733379998768214,
+      "quantile_75_seconds": 0.09132079999835696,
+      "max_normalized_gap": 1.8400138596298677e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.027963200001977384,
+      "quantile_25_seconds": 0.026739399996586144,
+      "quantile_75_seconds": 0.02902229999017436,
+      "max_normalized_gap": 6.617833207843483e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.001713299992843531,
+      "quantile_25_seconds": 0.0015796000079717487,
+      "quantile_75_seconds": 0.0018501000013202429,
+      "max_normalized_gap": 2.2268870071947028e-10,
+      "max_hard_violation": 1.9984014443252818e-15
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0028904999926453456,
+      "quantile_25_seconds": 0.0027904000016860664,
+      "quantile_75_seconds": 0.0030830000032437965,
+      "max_normalized_gap": 3.5957584237664023e-09,
+      "max_hard_violation": 1.3413519961424925e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0068146000121487305,
+      "quantile_25_seconds": 0.006632000004174188,
+      "quantile_75_seconds": 0.00718349999806378,
+      "max_normalized_gap": 3.1156872133332775e-09,
+      "max_hard_violation": 3.146039651014121e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0029042999958619475,
+      "quantile_25_seconds": 0.0027494999958435073,
+      "quantile_75_seconds": 0.0031403000029968098,
+      "max_normalized_gap": 3.5957588371812458e-09,
+      "max_hard_violation": 1.341351973938032e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.003442700006416999,
+      "quantile_25_seconds": 0.0031734999938635156,
+      "quantile_75_seconds": 0.0036697999894386157,
+      "max_normalized_gap": 6.662210484218237e-09,
+      "max_hard_violation": 6.90157156424398e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0017269000090891495,
+      "quantile_25_seconds": 0.0015528999938396737,
+      "quantile_75_seconds": 0.0018203999934485182,
+      "max_normalized_gap": 7.379212823848029e-11,
+      "max_hard_violation": 3.774758283725532e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.027427300010458566,
+      "quantile_25_seconds": 0.026017300013336353,
+      "quantile_75_seconds": 0.02851129999908153,
+      "max_normalized_gap": 3.0686889827733725e-09,
+      "max_hard_violation": 5.05700554764843e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0023560999979963526,
+      "quantile_25_seconds": 0.0022501999919768423,
+      "quantile_75_seconds": 0.002432199995382689,
+      "max_normalized_gap": 6.965504303462066e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.028616499999770895,
+      "quantile_25_seconds": 0.027486699997098185,
+      "quantile_75_seconds": 0.029602600014186464,
+      "max_normalized_gap": 3.881249952211753e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.016792499998700805,
+      "quantile_25_seconds": 0.01617410000471864,
+      "quantile_75_seconds": 0.017414100002497435,
+      "max_normalized_gap": 1.606767639049226e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0033647999953245744,
+      "quantile_25_seconds": 0.0032219999993685633,
+      "quantile_75_seconds": 0.003548599997884594,
+      "max_normalized_gap": 1.0927342806086058e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0010365000052843243,
+      "quantile_25_seconds": 0.0010148000001208857,
+      "quantile_75_seconds": 0.0010729999921750277,
+      "max_normalized_gap": 1.3922839928450198e-10,
+      "max_hard_violation": 3.3306690738754696e-16
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007609199994476512,
+      "quantile_25_seconds": 0.007312699992326088,
+      "quantile_75_seconds": 0.01015709999774117,
+      "max_normalized_gap": 1.5228040419167345e-08,
+      "max_hard_violation": 5.657041501905269e-10
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0030973999964771792,
+      "quantile_25_seconds": 0.002947200002381578,
+      "quantile_75_seconds": 0.0031927999953040853,
+      "max_normalized_gap": 3.0201462084612944e-10,
+      "max_hard_violation": 1.300353158484313e-09
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.003077599991229363,
+      "quantile_25_seconds": 0.002905300003476441,
+      "quantile_75_seconds": 0.0031393000099342316,
+      "max_normalized_gap": 3.0201462084612944e-10,
+      "max_hard_violation": 1.3003533250177668e-09
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0031667000002926216,
+      "quantile_25_seconds": 0.0030974999972386286,
+      "quantile_75_seconds": 0.0033681999921100214,
+      "max_normalized_gap": 1.587564738138519e-09,
+      "max_hard_violation": 3.541617610292036e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.028242800006410107,
+      "quantile_25_seconds": 0.02565540000796318,
+      "quantile_75_seconds": 0.03258780000032857,
+      "max_normalized_gap": 1.11597881983332e-08,
+      "max_hard_violation": 3.2222830514960776e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.001030300001730211,
+      "quantile_25_seconds": 0.0010122000094270334,
+      "quantile_75_seconds": 0.0011036999931093305,
+      "max_normalized_gap": 1.2381828713534527e-10,
+      "max_hard_violation": 5.551115123125783e-17
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.028907100000651553,
+      "quantile_25_seconds": 0.02786289999494329,
+      "quantile_75_seconds": 0.029238300005090423,
+      "max_normalized_gap": 7.94563590135208e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0030467000033240765,
+      "quantile_25_seconds": 0.0028821000014431775,
+      "quantile_75_seconds": 0.0031389999930979684,
+      "max_normalized_gap": 9.753663891224718e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.001951999991433695,
+      "quantile_25_seconds": 0.0019284000009065494,
+      "quantile_75_seconds": 0.002070100003038533,
+      "max_normalized_gap": 2.282256019612191e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0472412999952212,
+      "quantile_25_seconds": 0.026145700001507066,
+      "quantile_75_seconds": 0.08937600000353996,
+      "max_normalized_gap": 1.1585579375663002e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 64,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005379199996241368,
+      "quantile_25_seconds": 0.0052066000062040985,
+      "quantile_75_seconds": 0.005486100009875372,
+      "max_normalized_gap": 3.873673163428509e-09,
+      "max_hard_violation": 1.6164400590268357e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.009727100012241863,
+      "quantile_25_seconds": 0.009262599996873178,
+      "quantile_75_seconds": 0.01139050000347197,
+      "max_normalized_gap": 1.6639326929651615e-09,
+      "max_hard_violation": 8.633681936043303e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005369100006646477,
+      "quantile_25_seconds": 0.005128799995873123,
+      "quantile_75_seconds": 0.005457499995827675,
+      "max_normalized_gap": 3.873673163428509e-09,
+      "max_hard_violation": 1.6164400645779509e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0076972999959252775,
+      "quantile_25_seconds": 0.0059819000016432256,
+      "quantile_75_seconds": 0.008173099995474331,
+      "max_normalized_gap": 3.661543480266798e-11,
+      "max_hard_violation": 8.770761894538737e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005999600005452521,
+      "quantile_25_seconds": 0.005618399998638779,
+      "quantile_75_seconds": 0.006439599994337186,
+      "max_normalized_gap": 3.1368844277173357e-09,
+      "max_hard_violation": 1.6990037693398463e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.006635100013227202,
+      "quantile_25_seconds": 0.0063704000058351085,
+      "quantile_75_seconds": 0.00799620000179857,
+      "max_normalized_gap": 1.823569599448679e-11,
+      "max_hard_violation": 6.217248937900877e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.04945199999201577,
+      "quantile_25_seconds": 0.04848630000196863,
+      "quantile_75_seconds": 0.05037850000371691,
+      "max_normalized_gap": 1.194811233564086e-09,
+      "max_hard_violation": 1.0767647812270909e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.03281639999477193,
+      "quantile_25_seconds": 0.0323560999968322,
+      "quantile_75_seconds": 0.04469999999855645,
+      "max_normalized_gap": 8.965413309830174e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.004874899997957982,
+      "quantile_25_seconds": 0.00461820000782609,
+      "quantile_75_seconds": 0.005192600001464598,
+      "max_normalized_gap": 7.008461360623884e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.006845299998531118,
+      "quantile_25_seconds": 0.0065747000044211745,
+      "quantile_75_seconds": 0.007240000006277114,
+      "max_normalized_gap": 7.018232013581131e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.050270799998543225,
+      "quantile_25_seconds": 0.04986600000120234,
+      "quantile_75_seconds": 0.05204039999807719,
+      "max_normalized_gap": 2.0586724033428373e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.00413890001073014,
+      "quantile_25_seconds": 0.004009800002677366,
+      "quantile_75_seconds": 0.004288199997972697,
+      "max_normalized_gap": 1.9024484129899034e-09,
+      "max_hard_violation": 1.3216801320048432e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002094399998895824,
+      "quantile_25_seconds": 0.0019336999976076186,
+      "quantile_75_seconds": 0.00222679998842068,
+      "max_normalized_gap": 1.6654689182021793e-11,
+      "max_hard_violation": 5.551115123125783e-16
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.004129399996600114,
+      "quantile_25_seconds": 0.003930099992430769,
+      "quantile_75_seconds": 0.004203799995593727,
+      "max_normalized_gap": 1.9024485332492288e-09,
+      "max_hard_violation": 1.3216802374760306e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.009912900000927038,
+      "quantile_25_seconds": 0.009245300010661595,
+      "quantile_75_seconds": 0.010724899999331683,
+      "max_normalized_gap": 6.407296016722023e-09,
+      "max_hard_violation": 2.3121293379890773e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005619099989417009,
+      "quantile_25_seconds": 0.005316700000548735,
+      "quantile_75_seconds": 0.006001200003083795,
+      "max_normalized_gap": 1.4655039042457452e-09,
+      "max_hard_violation": 1.0707854058988886e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0021825000003445894,
+      "quantile_25_seconds": 0.0021129999950062484,
+      "quantile_75_seconds": 0.0022847999935038388,
+      "max_normalized_gap": 1.1978076092997509e-11,
+      "max_hard_violation": 8.326672684688674e-16
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.05042820000380743,
+      "quantile_25_seconds": 0.04935739999928046,
+      "quantile_75_seconds": 0.05159139999886975,
+      "max_normalized_gap": 7.871445532264682e-10,
+      "max_hard_violation": 9.286045266065912e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.005568900000071153,
+      "quantile_25_seconds": 0.005391000013332814,
+      "quantile_75_seconds": 0.005912799999350682,
+      "max_normalized_gap": 2.4321561207323236e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.06059589999495074,
+      "quantile_25_seconds": 0.0578516999958083,
+      "quantile_75_seconds": 0.06297100000665523,
+      "max_normalized_gap": 1.4881910753408584e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.24823230000038166,
+      "quantile_25_seconds": 0.1530063000100199,
+      "quantile_75_seconds": 0.25565250001091044,
+      "max_normalized_gap": 8.907092539986708e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.00552340000285767,
+      "quantile_25_seconds": 0.005243699997663498,
+      "quantile_75_seconds": 0.006079900005715899,
+      "max_normalized_gap": 5.692305859684509e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.013563500004238449,
+      "quantile_25_seconds": 0.012988200003746897,
+      "quantile_75_seconds": 0.013722200004849583,
+      "max_normalized_gap": 2.7633035090880457e-09,
+      "max_hard_violation": 2.189446024480901e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007416699998429976,
+      "quantile_25_seconds": 0.007070699997711927,
+      "quantile_75_seconds": 0.007613699999637902,
+      "max_normalized_gap": 1.4209721936071988e-10,
+      "max_hard_violation": 2.9066494766638584e-09
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007812399999238551,
+      "quantile_25_seconds": 0.007354500005021691,
+      "quantile_75_seconds": 0.008073299992247485,
+      "max_normalized_gap": 5.0096373292207794e-11,
+      "max_hard_violation": 1.2323475573339238e-14
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007295100003830157,
+      "quantile_25_seconds": 0.006954700002097525,
+      "quantile_75_seconds": 0.007958500005770475,
+      "max_normalized_gap": 1.4209761187170503e-10,
+      "max_hard_violation": 2.906649143596951e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0068300000129966065,
+      "quantile_25_seconds": 0.006669199996395037,
+      "quantile_75_seconds": 0.007267600012710318,
+      "max_normalized_gap": 1.1409358280742332e-09,
+      "max_hard_violation": 1.4732593645039316e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0076621000043815,
+      "quantile_25_seconds": 0.006976500008022413,
+      "quantile_75_seconds": 0.008307500000228174,
+      "max_normalized_gap": 4.186358143792729e-11,
+      "max_hard_violation": 5.551115123125783e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.05947310000192374,
+      "quantile_25_seconds": 0.058471400014241226,
+      "quantile_75_seconds": 0.06110089999856427,
+      "max_normalized_gap": 1.0273823864158353e-08,
+      "max_hard_violation": 5.167716865539518e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.02785060000314843,
+      "quantile_25_seconds": 0.026505499990889803,
+      "quantile_75_seconds": 0.03621220000786707,
+      "max_normalized_gap": 1.747006613868322e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007704599993303418,
+      "quantile_25_seconds": 0.007446199990226887,
+      "quantile_75_seconds": 0.008390700008021668,
+      "max_normalized_gap": 9.272588875067937e-11,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.009068700004718266,
+      "quantile_25_seconds": 0.008500399999320507,
+      "quantile_75_seconds": 0.009618900003260933,
+      "max_normalized_gap": 9.353800927702476e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.06736559999990277,
+      "quantile_25_seconds": 0.06552049999299925,
+      "quantile_75_seconds": 0.068905200008885,
+      "max_normalized_gap": 6.01933027045149e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.019599599996581674,
+      "quantile_25_seconds": 0.01485020000836812,
+      "quantile_75_seconds": 0.01999489999434445,
+      "max_normalized_gap": 1.14098657392178e-08,
+      "max_hard_violation": 1.9519216687413632e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007282699996721931,
+      "quantile_25_seconds": 0.007167599993408658,
+      "quantile_75_seconds": 0.007376399997156113,
+      "max_normalized_gap": 4.3525642626965126e-10,
+      "max_hard_violation": 8.252685590459663e-09
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002412200003163889,
+      "quantile_25_seconds": 0.002264499999000691,
+      "quantile_75_seconds": 0.002815799991367385,
+      "max_normalized_gap": 7.469918500069585e-11,
+      "max_hard_violation": 3.885780586188048e-16
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007196699996711686,
+      "quantile_25_seconds": 0.007095599998137914,
+      "quantile_75_seconds": 0.007320800010347739,
+      "max_normalized_gap": 4.352559859190288e-10,
+      "max_hard_violation": 8.252686423126931e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.06642640000791289,
+      "quantile_25_seconds": 0.0629112000024179,
+      "quantile_75_seconds": 0.071114900012617,
+      "max_normalized_gap": 5.397590445147313e-09,
+      "max_hard_violation": 1.663551796315943e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.007191799988504499,
+      "quantile_25_seconds": 0.006808400008594617,
+      "quantile_75_seconds": 0.007360499992500991,
+      "max_normalized_gap": 3.4744456752081943e-10,
+      "max_hard_violation": 5.587165174958386e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.002420800010440871,
+      "quantile_25_seconds": 0.002000299995415844,
+      "quantile_75_seconds": 0.0026135000080103055,
+      "max_normalized_gap": 1.6675802908203354e-10,
+      "max_hard_violation": 1.1102230246251565e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.06481310000526719,
+      "quantile_25_seconds": 0.06363459999556653,
+      "quantile_75_seconds": 0.06864129999303259,
+      "max_normalized_gap": 2.5027202668381997e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.008529800004907884,
+      "quantile_25_seconds": 0.0073195000004488975,
+      "quantile_75_seconds": 0.009136900000157766,
+      "max_normalized_gap": 4.416584825126995e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.08833329999470152,
+      "quantile_25_seconds": 0.07922500000859145,
+      "quantile_75_seconds": 0.1084736999910092,
+      "max_normalized_gap": 9.982051385095874e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0055272000026889145,
+      "quantile_25_seconds": 0.005283799997414462,
+      "quantile_75_seconds": 0.005601599987130612,
+      "max_normalized_gap": 1.1060047635652957e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 128,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.01138100000389386,
+      "quantile_25_seconds": 0.010919300009845756,
+      "quantile_75_seconds": 0.011704899996402673,
+      "max_normalized_gap": 3.534862925906463e-10,
+      "max_hard_violation": 2.7095818255773452e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.019418299998505972,
+      "quantile_25_seconds": 0.019006699993042275,
+      "quantile_75_seconds": 0.020228800000040792,
+      "max_normalized_gap": 5.232731850209423e-09,
+      "max_hard_violation": 9.663949240845682e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.051802200003294274,
+      "quantile_25_seconds": 0.04797369999869261,
+      "quantile_75_seconds": 0.053451200001291,
+      "max_normalized_gap": 3.689344605357458e-11,
+      "max_hard_violation": 6.772360450213455e-15
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.01119420000759419,
+      "quantile_25_seconds": 0.01097279999521561,
+      "quantile_75_seconds": 0.011685499994200654,
+      "max_normalized_gap": 3.5348603877807383e-10,
+      "max_hard_violation": 2.7095818755373813e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.013588900008471683,
+      "quantile_25_seconds": 0.01286769998841919,
+      "quantile_75_seconds": 0.014740500002517365,
+      "max_normalized_gap": 1.117003643657915e-09,
+      "max_hard_violation": 8.573651211207789e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.05186390000744723,
+      "quantile_25_seconds": 0.04591159999836236,
+      "quantile_75_seconds": 0.05470900000364054,
+      "max_normalized_gap": 5.5612091872124936e-11,
+      "max_hard_violation": 6.5503158452884236e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.10706930000742432,
+      "quantile_25_seconds": 0.10463000000163447,
+      "quantile_75_seconds": 0.1105944000009913,
+      "max_normalized_gap": 6.6410842978062675e-09,
+      "max_hard_violation": 1.3488501660052776e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.037918500005616806,
+      "quantile_25_seconds": 0.03741319999971893,
+      "quantile_75_seconds": 0.03950849999091588,
+      "max_normalized_gap": 1.25514752158655e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.06681180000305176,
+      "quantile_25_seconds": 0.06324629999289755,
+      "quantile_75_seconds": 0.09871800000837538,
+      "max_normalized_gap": 2.045290683756775e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.1192913000122644,
+      "quantile_25_seconds": 0.11544129998947028,
+      "quantile_75_seconds": 0.1229559000057634,
+      "max_normalized_gap": 1.2174589352264247e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.016520899996976368,
+      "quantile_25_seconds": 0.01619760000903625,
+      "quantile_75_seconds": 0.018372699996689335,
+      "max_normalized_gap": 1.1464980210732164e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2594135999970604,
+      "quantile_25_seconds": 0.2550827999948524,
+      "quantile_75_seconds": 0.26341069999034517,
+      "max_normalized_gap": 2.2524289943598003e-09,
+      "max_hard_violation": 2.0582646254041492e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.22912089999590535,
+      "quantile_25_seconds": 0.22599210000771564,
+      "quantile_75_seconds": 0.2346141999878455,
+      "max_normalized_gap": 1.529766658764284e-09,
+      "max_hard_violation": 8.303215298655076e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.23156870000821073,
+      "quantile_25_seconds": 0.221377100009704,
+      "quantile_75_seconds": 0.23579200000676792,
+      "max_normalized_gap": 1.529766362239118e-09,
+      "max_hard_violation": 8.303215309757306e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2266483999992488,
+      "quantile_25_seconds": 0.2216954000032274,
+      "quantile_75_seconds": 0.23118560000148136,
+      "max_normalized_gap": 2.488098187808009e-11,
+      "max_hard_violation": 4.440892098500626e-16
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.3436733000125969,
+      "quantile_25_seconds": 0.3301103999983752,
+      "quantile_75_seconds": 0.36032589999376796,
+      "max_normalized_gap": 3.399735399180269e-09,
+      "max_hard_violation": 7.784620059680947e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2274154000042472,
+      "quantile_25_seconds": 0.22278229999938048,
+      "quantile_75_seconds": 0.23434170000837184,
+      "max_normalized_gap": 2.5153107805338245e-11,
+      "max_hard_violation": 1.2212453270876722e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.23266140000487212,
+      "quantile_25_seconds": 0.22988420000183396,
+      "quantile_75_seconds": 0.24220139998942614,
+      "max_normalized_gap": 6.126933402512905e-10,
+      "max_hard_violation": 7.277342173317436e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.5506613000034122,
+      "quantile_25_seconds": 0.49352359998738393,
+      "quantile_75_seconds": 0.9094962999952259,
+      "max_normalized_gap": 7.938299599287684e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.3012056000006851,
+      "quantile_25_seconds": 0.27019680000375956,
+      "quantile_75_seconds": 0.3867954000015743,
+      "max_normalized_gap": 2.3412333150711278e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.29959239999880083,
+      "quantile_25_seconds": 0.28857020000577904,
+      "quantile_75_seconds": 0.341283800007659,
+      "max_normalized_gap": 1.0036489740111086e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.05,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.4487816000037128,
+      "quantile_25_seconds": 0.4199249000084819,
+      "quantile_75_seconds": 0.5037026000063634,
+      "max_normalized_gap": 6.192604491513492e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.04365669999970123,
+      "quantile_25_seconds": 0.04287159998784773,
+      "quantile_75_seconds": 0.046939599997131154,
+      "max_normalized_gap": 1.5006913169486294e-09,
+      "max_hard_violation": 3.0897566283272226e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.0568935000046622,
+      "quantile_25_seconds": 0.0537517999910051,
+      "quantile_75_seconds": 0.060828700006823055,
+      "max_normalized_gap": 3.688577190707741e-11,
+      "max_hard_violation": 8.93729534823251e-15
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.030549599992809817,
+      "quantile_25_seconds": 0.029201199999079108,
+      "quantile_75_seconds": 0.031983400011085905,
+      "max_normalized_gap": 3.2712024571921414e-09,
+      "max_hard_violation": 2.0200686817739566e-07
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.02961189999768976,
+      "quantile_25_seconds": 0.029041800007689744,
+      "quantile_75_seconds": 0.030912499991245568,
+      "max_normalized_gap": 3.27120272331114e-09,
+      "max_hard_violation": 2.0200686967619674e-07
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.1735165000136476,
+      "quantile_25_seconds": 0.16824639998958446,
+      "quantile_75_seconds": 0.1797428999998374,
+      "max_normalized_gap": 5.841126847530446e-09,
+      "max_hard_violation": 1.684594863604616e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.05420730001060292,
+      "quantile_25_seconds": 0.051037000012001954,
+      "quantile_75_seconds": 0.05575749999843538,
+      "max_normalized_gap": 8.340964278713997e-11,
+      "max_hard_violation": 1.3988810110276972e-14
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.02662350000173319,
+      "quantile_25_seconds": 0.02445889999216888,
+      "quantile_75_seconds": 0.028175400002510287,
+      "max_normalized_gap": 2.452183134848605e-10,
+      "max_hard_violation": 8.899903813919252e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.029090399999404326,
+      "quantile_25_seconds": 0.027930199998081662,
+      "quantile_75_seconds": 0.031213300011586398,
+      "max_normalized_gap": 2.749173142183224e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.09972049998759758,
+      "quantile_25_seconds": 0.06563889999233652,
+      "quantile_75_seconds": 0.10244399998919107,
+      "max_normalized_gap": 1.5030707342126947e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.20146129999193363,
+      "quantile_25_seconds": 0.1984738000028301,
+      "quantile_75_seconds": 0.20238800000515766,
+      "max_normalized_gap": 3.573955240421525e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.042395399999804795,
+      "quantile_25_seconds": 0.04059029999189079,
+      "quantile_75_seconds": 0.04412620000948664,
+      "max_normalized_gap": 3.5829890430958933e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.262930700002471,
+      "quantile_25_seconds": 0.2573952999955509,
+      "quantile_75_seconds": 0.27514179999707267,
+      "max_normalized_gap": 1.327512531698453e-09,
+      "max_hard_violation": 3.212118371287431e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2614447999949334,
+      "quantile_25_seconds": 0.2580744000006234,
+      "quantile_75_seconds": 0.272962799994275,
+      "max_normalized_gap": 1.3275123869799807e-09,
+      "max_hard_violation": 3.212118449003043e-08
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.24088739999569952,
+      "quantile_25_seconds": 0.2302456000033999,
+      "quantile_75_seconds": 0.24421850001090206,
+      "max_normalized_gap": 4.57856652839246e-11,
+      "max_hard_violation": 1.1657341758564144e-15
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "symmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.301044699997874,
+      "quantile_25_seconds": 0.2931334000022616,
+      "quantile_75_seconds": 0.3216347000125097,
+      "max_normalized_gap": 4.399706610227869e-09,
+      "max_hard_violation": 1.2921807512888961e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "flex",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.4235333999968134,
+      "quantile_25_seconds": 0.41687969998747576,
+      "quantile_75_seconds": 0.43994860000384506,
+      "max_normalized_gap": 3.4604834136700715e-09,
+      "max_hard_violation": 5.116029488938523e-09
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2365264000109164,
+      "quantile_25_seconds": 0.23265099999844097,
+      "quantile_75_seconds": 0.2386352000030456,
+      "max_normalized_gap": 3.150866996041856e-11,
+      "max_hard_violation": 1.0547118733938987e-15
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-elastic",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2595916999998735,
+      "quantile_25_seconds": 0.25156749998859596,
+      "quantile_75_seconds": 0.26232779999554623,
+      "max_normalized_gap": 4.174821277420368e-10,
+      "max_hard_violation": 1.777711117201264e-08
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "lifted",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.4293963999953121,
+      "quantile_25_seconds": 0.41027380000741687,
+      "quantile_75_seconds": 0.4401314000133425,
+      "max_normalized_gap": 1.5084258489617384e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "asymmetric",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.2610569999960717,
+      "quantile_25_seconds": 0.2521134999988135,
+      "quantile_75_seconds": 0.27311519999057055,
+      "max_normalized_gap": 2.2018018700259605e-09,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "elastiqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.25205880000430625,
+      "quantile_25_seconds": 0.2397002999932738,
+      "quantile_75_seconds": 0.26386390000698157,
+      "max_normalized_gap": 1.5018806971322942e-10,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "flex",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "accepted": 21
+      },
+      "median_seconds": 0.5245844000019133,
+      "quantile_25_seconds": 0.49921949999406934,
+      "quantile_75_seconds": 0.5391028000012739,
+      "max_normalized_gap": 1.5581104619116137e-08,
+      "max_hard_violation": 0.0
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "generalized",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    },
+    {
+      "split": "development",
+      "family": "asymmetric-l1",
+      "method": "daqp",
+      "n": 256,
+      "density": 0.2,
+      "condition": 1000,
+      "counts": {
+        "incompatible": 21
+      },
+      "median_seconds": null,
+      "quantile_25_seconds": null,
+      "quantile_75_seconds": null,
+      "max_normalized_gap": null,
+      "max_hard_violation": null
+    }
+  ],
+  "primary_endpoint": {
+    "state": "not-established",
+    "median_relative_reduction": null,
+    "confidence_interval_95": null,
+    "paired_samples": 0,
+    "rejected_pairs": 0,
+    "seed_clusters": 0
+  },
+  "counts": {
+    "accepted": 3696,
+    "incompatible": 2352
+  },
+  "artifacts": [
+    {
+      "path": "trials.jsonl",
+      "bytes": 5212116,
+      "sha256": "3673bd636292eb48d2cc818e44ec3aaf73d842f63c359dc6f7ada662b163f168"
+    },
+    {
+      "path": "trials.csv",
+      "bytes": 1102993,
+      "sha256": "1689b8ee2f948293c287107406702e391a761378a2a2a10f882c8ca863367a2e"
+    },
+    {
+      "path": "datasets.json",
+      "bytes": 61832,
+      "sha256": "5b3a3bc41985304837f3e57fe46032ed5d968f43fd409064ed7b8cda634466d3"
+    }
+  ]
+}

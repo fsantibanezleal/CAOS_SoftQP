@@ -1,0 +1,453 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-trial.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(development|heldout|robustness)-[0-9]{4}$"
+    },
+    "split": {
+      "enum": [
+        "development",
+        "heldout",
+        "robustness"
+      ]
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "density": {
+      "type": "number",
+      "minimum": 0
+    },
+    "condition": {
+      "type": "number",
+      "minimum": 0
+    },
+    "family": {
+      "enum": [
+        "symmetric-elastic",
+        "asymmetric-elastic",
+        "asymmetric-l1"
+      ]
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "method": {
+      "enum": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "daqp",
+        "flex",
+        "elastiqp"
+      ]
+    },
+    "repetition": {
+      "type": "integer",
+      "minimum": -1
+    },
+    "warmup": {
+      "type": "boolean"
+    },
+    "state": {
+      "enum": [
+        "accepted",
+        "incompatible",
+        "failed",
+        "accuracy-rejected",
+        "timeout",
+        "resource-limit",
+        "oracle-failed"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "metrics": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objective": {
+              "type": "number"
+            },
+            "base_objective": {
+              "type": "number"
+            },
+            "penalty_objective": {
+              "type": "number"
+            },
+            "hard_violation": {
+              "type": "number"
+            },
+            "stationarity_residual": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "total_lower_violation": {
+              "type": "number"
+            },
+            "total_upper_violation": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "objective",
+            "base_objective",
+            "penalty_objective",
+            "hard_violation",
+            "stationarity_residual",
+            "total_lower_violation",
+            "total_upper_violation"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "normalized_gap": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "elapsed_seconds": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "update_seconds": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "workspace_setup_seconds": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "method",
+            "status",
+            "status_code",
+            "x",
+            "metrics",
+            "dimensions",
+            "iterations",
+            "setup_seconds",
+            "solve_seconds",
+            "elapsed_seconds"
+          ],
+          "properties": {
+            "method": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "status_code": {
+              "type": "integer"
+            },
+            "x": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "y": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "metrics": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "base_objective",
+                    "penalty_objective",
+                    "objective",
+                    "hard_violation",
+                    "lower_violation",
+                    "upper_violation",
+                    "slack"
+                  ],
+                  "properties": {
+                    "base_objective": {
+                      "type": "number"
+                    },
+                    "penalty_objective": {
+                      "type": "number"
+                    },
+                    "objective": {
+                      "type": "number"
+                    },
+                    "hard_violation": {
+                      "type": "number"
+                    },
+                    "lower_violation": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "upper_violation": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "slack": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "stationarity_residual": {
+                      "anyOf": [
+                        {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "objective_gap_against_lifted": {
+                      "anyOf": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "dimensions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "variables",
+                "rows",
+                "nnz"
+              ],
+              "properties": {
+                "variables": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "rows": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "nnz": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "iterations": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "setup_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "solve_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "elapsed_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "backend_settings": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "iterations": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dimensions": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "variables",
+            "rows",
+            "nnz"
+          ],
+          "properties": {
+            "variables": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rows": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "nnz": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "native_setup_seconds": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "native_solve_seconds": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "split",
+    "n",
+    "density",
+    "condition",
+    "family",
+    "seed",
+    "method",
+    "repetition",
+    "warmup",
+    "state",
+    "reason",
+    "elapsed_seconds",
+    "metrics",
+    "normalized_gap"
+  ]
+}

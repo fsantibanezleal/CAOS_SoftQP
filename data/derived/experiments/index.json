@@ -1,0 +1,37 @@
+{
+  "schema_version": "softqp.experiments/v1",
+  "protocol_id": "softqp-experiments-v1",
+  "state": "development",
+  "artifacts": [
+    {
+      "path": "campaign.json",
+      "schema": "softqp-campaign",
+      "bytes": 136214,
+      "sha256": "e95081872d63d64dfb7da813c60760bb3d618bb1eeb14c4296991b89ef1fafee"
+    },
+    {
+      "path": "datasets.json",
+      "schema": "softqp-datasets",
+      "bytes": 61832,
+      "sha256": "5b3a3bc41985304837f3e57fe46032ed5d968f43fd409064ed7b8cda634466d3"
+    },
+    {
+      "path": "trials.jsonl",
+      "schema": "softqp-trial",
+      "bytes": 5212116,
+      "sha256": "3673bd636292eb48d2cc818e44ec3aaf73d842f63c359dc6f7ada662b163f168"
+    },
+    {
+      "path": "trials.csv",
+      "schema": "csv",
+      "bytes": 1102993,
+      "sha256": "1689b8ee2f948293c287107406702e391a761378a2a2a10f882c8ca863367a2e"
+    },
+    {
+      "path": "stream.json",
+      "schema": "softqp-stream",
+      "bytes": 2199448,
+      "sha256": "aa7ee305863824154e5f9c34c25ecf0ef78ece5357b45ba6bfc3a75167695037"
+    }
+  ]
+}

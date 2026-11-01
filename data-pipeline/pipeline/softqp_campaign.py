@@ -194,9 +194,16 @@ def primary_endpoint(records, protocol):
     groups = {}
     for row in subset:
         groups.setdefault((row["id"], row["repetition"]), {})[row["method"]] = row
+    expected = {
+        (spec["id"], repetition) for spec in instances(protocol, "heldout")
+        if spec["family"] == endpoint["family"] and spec["n"] >= endpoint["n_minimum"]
+        and spec["density"] == endpoint["density"]
+        for repetition in range(protocol["repetitions"]["measured"])
+    } if subset else set()
     values = {}
     rejected = 0
-    for group in groups.values():
+    for key in sorted(expected | groups.keys()):
+        group = groups.get(key, {})
         if len(group) != 3 or any(r["state"] != "accepted" for r in group.values()):
             rejected += 1
             continue

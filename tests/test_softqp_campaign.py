@@ -32,16 +32,20 @@ def test_conditioning_changes_only_hessian():
 
 def test_endpoint_retains_a_rejected_pair():
     rows = []
-    for seed in range(3):
-        for method, elapsed in [("asymmetric", 1), ("lifted", 2), ("daqp", 3)]:
-            rows.append(dict(id=str(seed), seed=seed, split="heldout", family="asymmetric-elastic",
-                             n=128, density=0.05, method=method, repetition=0, warmup=False,
-                             state="accepted", elapsed_seconds=elapsed))
+    for spec in instances(protocol(), "heldout"):
+        if spec["family"] != "asymmetric-elastic" or spec["n"] < 128 or spec["density"] != 0.05:
+            continue
+        for repetition in range(7):
+            for method, elapsed in [("asymmetric", 1), ("lifted", 2), ("daqp", 3)]:
+                rows.append(dict(**spec, method=method, repetition=repetition, warmup=False,
+                                 state="accepted", elapsed_seconds=elapsed))
     result = primary_endpoint(rows, protocol())
     assert result["state"] == "met" and result["median_relative_reduction"] == 0.5
     rows[-1]["state"] = "accuracy-rejected"
     result = primary_endpoint(rows, protocol())
     assert result["state"] == "not-established" and result["rejected_pairs"] == 1
+    rows.pop()
+    assert primary_endpoint(rows, protocol())["rejected_pairs"] == 1
 
 
 def test_planned_matrix_has_exact_split_sizes():

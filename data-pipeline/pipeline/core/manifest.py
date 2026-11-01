@@ -55,5 +55,11 @@ def export_manifests(derived):
         cases=entries,
         files=["softqp/index.json"],
     )
+    experimental = derived / "experiments/index.json"
+    if experimental.is_file():
+        evidence = json.loads(experimental.read_text(encoding="utf-8"))
+        result["files"] += ["experiments/index.json"] + [
+            "experiments/" + artifact["path"] for artifact in evidence["artifacts"]
+        ]
     write_json(derived / "manifests/index.json", result)
     return result

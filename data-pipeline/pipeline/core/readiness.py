@@ -75,6 +75,16 @@ def compute(*, repo_root, derived_root, models_dir=None, catalog_path=None, vers
                 "La API está inactiva; el navegador lee artefactos estáticos.",
                 provenance=None,
             )
+        elif rid.startswith("softqp-") and rid in (
+            "softqp-stream", "softqp-campaign", "softqp-datasets", "softqp-experiment-index"
+        ):
+            relative = {
+                "softqp-stream": "experiments/stream.json", "softqp-campaign": "experiments/campaign.json",
+                "softqp-datasets": "experiments/datasets.json", "softqp-experiment-index": "experiments/index.json",
+            }[rid]
+            if not (derived / relative).is_file():
+                state("missing", "Experimental evidence has not been exported.",
+                      "La evidencia experimental no ha sido exportada.", [relative], provenance=None)
         elif rid in ("case-index", "case-manifest", "softqp-index", "softqp-case-result"):
             inventory = science if rid.startswith("softqp-") else deployment
             if not inventory:
