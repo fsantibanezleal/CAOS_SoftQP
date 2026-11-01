@@ -25,7 +25,7 @@
     },
     "quadratic_multiplier": {
       "type": "number",
-      "minimum": 0.01,
+      "minimum": 0,
       "maximum": 100
     }
   },

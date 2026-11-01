@@ -1,16 +1,15 @@
 """Offline solver execution and explicit checksummed export; no browser computation."""
 
 import hashlib
-import importlib.metadata
 import json
 import math
-import platform
 from pathlib import Path
 import time
 import numpy as np
 from softqp.solvers import solve, UnsupportedProblemError
 from .softqp_cases import cases
 from .softqp_rows import rows_for
+from .environment import environment
 
 SETTINGS = dict(eps_abs=1e-7, eps_rel=1e-7, max_iter=200000, adaptive_rho_interval=25)
 
@@ -103,14 +102,16 @@ def run_reference(case, method):
     )
 
 
-def run_case(case):
+def run_case(case, methods=None):
     rows = []
-    for method in ["lifted", "generalized", "asymmetric", "daqp"]:
+    for method in methods or ["lifted", "generalized", "asymmetric", "daqp"]:
         reason = None
         if method == "asymmetric" and case.reference is not None:
             reason = "The separable asymmetric candidate does not support grouped or Huber penalties."
         if method == "daqp" and case.reference is not None:
             reason = "The DAQP reference adapter supports separable elastic side costs, not grouped or Huber penalties."
+        if method in ("flex", "elastiqp") and case.reference is not None:
+            reason = "The L1 reference adapter does not replace coupled or quadratic penalties."
         if method == "generalized" and case.problem is not None:
             p = case.problem.penalty
             if not (
@@ -122,11 +123,18 @@ def run_case(case):
             rows.append(dict(method=method, state="incompatible", reason=reason, result=None))
             continue
         try:
-            result = (
-                run_reference(case, method)
-                if case.reference is not None
-                else solve(case.problem, method, **SETTINGS)
-            )
+            if method in ("flex", "elastiqp"):
+                if method == "flex":
+                    from softqp.flex import solve_flex as execute
+                else:
+                    from softqp.elasti import solve_elastiqp as execute
+                result = execute(case.problem, **{k: SETTINGS[k] for k in ("eps_abs", "eps_rel", "max_iter")})
+            else:
+                result = (
+                    run_reference(case, method)
+                    if case.reference is not None
+                    else solve(case.problem, method, **SETTINGS)
+                )
             good = result["status_code"] == 1 or (method == "daqp" and result["status_code"] == 2)
             rows.append(
                 dict(
@@ -163,8 +171,10 @@ def run_case(case):
     )
     if case.problem is not None:
         from .softqp_requests import encode_problem
+
         document["problem"] = encode_problem(case.problem)
     from .core.expect import check_document
+
     return check_document(document)
 
 
@@ -204,11 +214,7 @@ def bake(output: Path, selected=None):
         state="development",
         default_case=inventory[0]["case_id"] if inventory else None,
         cases=inventory,
-        environment=dict(
-            python=platform.python_version(),
-            platform=platform.platform(),
-            packages={p: importlib.metadata.version(p) for p in ["numpy", "scipy", "osqp", "softqp", "daqp"]},
-        ),
+        environment=environment(),
         limitations=[
             "Development bake, not the complete release experiment matrix.",
             "DAQP uses original-scale side weights on compatible positive definite cases; FlexQP is not implemented in this bake.",

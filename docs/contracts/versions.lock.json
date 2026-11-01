@@ -15,19 +15,19 @@
     "sha256": "98af12b6d5620bcd07fb684e580a5715712d280ed6f3ab97edf16b215a5914f3"
   },
   "api": {
-    "version": "2.0.0",
+    "version": "2.0.1",
     "schema": "docs/contracts/api.openapi.json",
-    "sha256": "5d0dfdb1907cfa36016826f1641ccb36c6ba67ffd60d5e498575b35fc9e6b9af"
+    "sha256": "df62b3c81f095bf603ba6a995409e0aa46c7daaa2aff17784bfd30d06ad26c02"
   },
   "softqp-index": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "schema": "docs/contracts/schemas/softqp-index.schema.json",
-    "sha256": "86cbd7b1464b08b30744d25e6e5d36e9b4f15a7e2e7cddbec30bb856182a833e"
+    "sha256": "de57805f3de3201523c930c846fffc2c19a2008b49f18986325139b307581209"
   },
   "softqp-case-result": {
-    "version": "2.2.0",
+    "version": "2.3.0",
     "schema": "docs/contracts/schemas/softqp-case-result.schema.json",
-    "sha256": "a4cf32f1f85eb9a9c32af19396fc3cb4c6138417d38911774bf0743f0ce4c8ee"
+    "sha256": "2b2b3555fa39e779e7485b5c9f673610f2255eb79fdb2e307e52cbaa0c69691f"
   },
   "softqp-case-spec": {
     "version": "1.0.0",
@@ -35,13 +35,13 @@
     "sha256": "dff9f1f23f5867aea4f8b7e5be14b06d4c4aa84372b2e468663771cdc2861a9a"
   },
   "softqp-run-request": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "schema": "docs/contracts/schemas/softqp-run-request.schema.json",
-    "sha256": "69f0f4f2bd42c15e86691eb3a263a8a0e43d9342473abbf0d2c171a87fa0de29"
+    "sha256": "3010be005e625af758f2faefb13b5949ef911cef46a89ca53bd2b7dcab440ba3"
   },
   "softqp-local-export": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "schema": "docs/contracts/schemas/softqp-local-export.schema.json",
-    "sha256": "7ec3c7dbfffb3a19dfef9a7b9289597d70f6b7cd3e701697703c3ab37c62fa84"
+    "sha256": "02aa2b23e683fb5ceec97466457d95820aa9d214e58818d92567fdc5ca8a2036"
   }
 }

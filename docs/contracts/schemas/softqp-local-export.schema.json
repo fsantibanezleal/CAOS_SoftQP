@@ -10,6 +10,46 @@
     },
     "result": {
       "$ref": "#/$defs/SoftQPResultPayload"
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python",
+        "platform",
+        "packages"
+      ],
+      "properties": {
+        "python": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "engine_revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "engine_source_dirty": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "native_binary_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
     }
   },
   "required": [
@@ -246,7 +286,7 @@
         },
         "quadratic_multiplier": {
           "type": "number",
-          "minimum": 0.01,
+          "minimum": 0,
           "maximum": 100
         }
       },
@@ -370,7 +410,9 @@
                   "lifted",
                   "generalized",
                   "asymmetric",
-                  "daqp"
+                  "daqp",
+                  "flex",
+                  "elastiqp"
                 ]
               },
               "state": {

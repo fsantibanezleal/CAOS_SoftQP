@@ -19,3 +19,15 @@ describe('local scientific workflow',()=>{
     expect(()=>validateSoftQPRequest({...request,upper_multiplier:true})).toThrow();
   });
 });
+
+it('accepts the pure L1 native comparison and verifies both additional reference costs',()=>{
+  const value=read('softqp-local-l1-export');
+  const request=validateSoftQPRequest(value.request);
+  const result=verifyLocalResult(value,request,baseline);
+  expect(result.runs).toHaveLength(6);
+  for(const method of ['flex','elastiqp']){
+    const run=result.runs.find(r=>r.method===method);
+    expect(run?.state).toBe('available');
+    expect(run?.result?.metrics?.objective).toBeCloseTo(-3.48,6);
+  }
+});

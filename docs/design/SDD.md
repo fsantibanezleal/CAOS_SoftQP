@@ -57,11 +57,49 @@ Proposed units with disjoint write ownership after contract freeze:
 
 The units define module ownership and stable contract seams.
 
-Engine decision: AAGSP extends solver behavior below the UI and should be reusable/testable independently. The current CAOS template forbids an internal product package and requires reusable libraries in separate public package repositories. Therefore the design selects a **separate public solver-engine repository and pinned published Python distribution** if direct extension of OSQPSlack is confirmed as the required route. Working names are `CAOS_SoftQP_Engine` and `softqp`; the public OSQPSlack repo is MIT and its two reviewed pinned submodules include Apache-2.0 license text. PyPI lookups found no JSON records for three candidate names on 2026-10-31; this is not a reservation. Complete nested notice audit, upstream diff review, wheel buildability, ABI support, and exact dependency pins remain pre-creation checks. If no safe, reproducible package route exists, stop and bring a revised SDD; do not bury an unpublished package inside the app. The public app repo remains `CAOS_SoftQP`.
+Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distribution/import `softqp`. It vendors the reviewed C core and Python binding with Apache-2.0, MIT and BSD notices, pinned QDLDL and marked source changes. Linux and Windows tests and wheel builds passed on promoted source. The app consumes an exact source revision while public package publication remains pending. CPU builtin backend is supported. The approved ownership decision is implemented.
+
 
 ## Technology and versions
 
-The app base is template release `0.14.001` observed in the template review checkout and shell `0.19.1` observed in that template. Both must be rechecked at instantiation and then frozen exactly. Python, Node, solver distributions, benchmark solvers, operating system, compiler, BLAS, notebook runtime, UI dependencies and CI actions are intentionally **not pinned in this pre-approval document**: current primary registry releases and compatible wheels must be measured/verified during the approved instantiate/sizing gate and recorded in the product SDD. Candidate runtime is CPU-only. No GPU requirement is justified. Dependency licensing must be reviewed before inclusion.
+The approved implementation instantiates template 0.14.001 and shared shell 0.19.1. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. The engine uses an exact reviewed Git source pin during development; public distribution publication remains a release gate. These direct dependencies match the actual requirements and committed npm lock.
+
+| component | package | version | use | alternative considered |
+|---|---|---|---|---|
+| shell | @fasl-work/caos-app-shell | 0.19.1 | Shared workbench and measured gate | Custom shell duplication |
+| tooling | @types/node | 24.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | @types/react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | @types/react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | @vitejs/plugin-react | 6.1.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| browser validation | ajv | 8.20.0 | Scientific runtime schemas | Type assertions alone |
+| active-set reference | daqp | 0.10.3 | Original-scale side costs | Hidden regularization |
+| L1 active-set reference | elastiqp | 0.2.0 | Pure L1 soft inequalities and hard equalities | Unmatched softened hard inequalities |
+| tooling | fastapi | 0.143.0 | Locked direct dependency declared in requirements-dev.txt | Separate custom implementation |
+| tooling | httpx | 0.28.1 | Locked direct dependency declared in requirements-dev.txt | Separate custom implementation |
+| notebook kernel | ipykernel | 7.4.0 | Pinned Python execution | Ambient kernel |
+| schema validation | jsonschema | 4.26.0 | Standalone scientific boundaries | Duplicated assumptions |
+| tooling | katex | 0.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | lucide-react | 1.52.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| scientific figures | matplotlib | 3.11.2 | Executed notebook plots | Baked screenshots |
+| notebook runner | nbclient | 0.11.0 | Fresh-kernel execution | Unexecuted notebooks |
+| notebook format | nbformat | 5.11.1 | Structured notebook files | Hand-edited output JSON |
+| arrays | numpy | 2.5.4 | Original-space vector arithmetic | Scalar loops |
+| tooling | openapi-spec-validator | 0.9.0 | Locked direct dependency declared in requirements-dev.txt | Separate custom implementation |
+| tooling | openapi-typescript | 7.13.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| independent oracle | osqp | 1.1.3 | Stock explicit-lift reference | Same native fork as the only oracle |
+| tooling | playwright | 1.63.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tests | pytest | 9.2.0 | Native, contract and adversarial checks | Manual-only checks |
+| tooling | react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | react-router | 8.4.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| lint | ruff | 0.15.18 | Static Python source validation | Unpinned formatting |
+| sparse matrices | scipy | 1.18.1 | CSC assembly and convexity checks | Dense-only storage |
+| native engine | softqp | 65a93eb44a723d3de554d305890e8b0078096b1c | Pinned native generalized and asymmetric solver | Separate package over internal distribution |
+| tooling | typescript | 5.9.3 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | uplot | 1.6.32 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | vite | 8.3.5 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | vitest | 5.0.3 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
+| tooling | zustand | 5.0.15 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 
 ## Resources
 

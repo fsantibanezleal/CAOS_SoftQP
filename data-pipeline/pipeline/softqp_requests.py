@@ -57,14 +57,21 @@ def execute_request(request, *, derived=ROOT / "data/derived/softqp"):
         request[k] for k in ("lower_multiplier", "upper_multiplier", "quadratic_multiplier")
     )
     penalty = Penalty(
-        p.lower_linear * lower,
-        p.upper_linear * upper,
-        p.lower_quadratic * lower * quadratic,
-        p.upper_quadratic * upper * quadratic,
+        np.where(p.soft, p.lower_linear * lower, p.lower_linear),
+        np.where(p.soft, p.upper_linear * upper, p.upper_linear),
+        np.where(p.soft, p.lower_quadratic * lower * quadratic, p.lower_quadratic),
+        np.where(p.soft, p.upper_quadratic * upper * quadratic, p.upper_quadratic),
         p.soft.copy(),
     )
     case = replace(case, problem=replace(case.problem, penalty=penalty))
-    result = run_case(case)
-    result["source"] = "local native execution of declared cost edits; authored synthetic case"
-    envelope = dict(schema_version="softqp.local-export/v1", request=request, result=result)
+    methods = ["lifted", "generalized", "asymmetric", "daqp"]
+    if quadratic == 0:
+        methods += ["flex", "elastiqp"]
+    result = run_case(case, methods)
+    result["source"] = "local execution of declared soft-cost edits; " + baseline["source"]
+    from .environment import environment
+
+    envelope = dict(
+        schema_version="softqp.local-export/v1", request=request, result=result, environment=environment()
+    )
     return validate_document(envelope, "softqp-local-export")

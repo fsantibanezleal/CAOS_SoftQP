@@ -31,13 +31,14 @@ export function verifyLocalResult(value: unknown, request: SoftQPRequest, baseli
   if (!equal(envelope.request,request)) throw new Error('The local result does not match the current request');
   if (!baseline.problem) throw new Error('Cost editing is unavailable for coupled penalties');
   const expected=structuredClone(baseline.problem);
-  expected.penalty.lower_linear=expected.penalty.lower_linear.map(x=>x*request.lower_multiplier);
-  expected.penalty.upper_linear=expected.penalty.upper_linear.map(x=>x*request.upper_multiplier);
-  expected.penalty.lower_quadratic=expected.penalty.lower_quadratic.map(x=>x*request.lower_multiplier*request.quadratic_multiplier);
-  expected.penalty.upper_quadratic=expected.penalty.upper_quadratic.map(x=>x*request.upper_multiplier*request.quadratic_multiplier);
+  expected.penalty.lower_linear=expected.penalty.lower_linear.map((x,i)=>expected.penalty.soft[i]?x*request.lower_multiplier:x);
+  expected.penalty.upper_linear=expected.penalty.upper_linear.map((x,i)=>expected.penalty.soft[i]?x*request.upper_multiplier:x);
+  expected.penalty.lower_quadratic=expected.penalty.lower_quadratic.map((x,i)=>expected.penalty.soft[i]?x*request.lower_multiplier*request.quadratic_multiplier:x);
+  expected.penalty.upper_quadratic=expected.penalty.upper_quadratic.map((x,i)=>expected.penalty.soft[i]?x*request.upper_multiplier*request.quadratic_multiplier:x);
   const doc=envelope.result;
   if(doc.case_id!==baseline.case_id || !equal(doc.problem,expected) || !equal(doc.rows,baseline.rows) || !equal(doc.settings,baseline.settings)) throw new Error('Local result changed undeclared inputs or row policy');
-  if(doc.runs.length!==4 || new Set(doc.runs.map(r=>r.method)).size!==4) throw new Error('Incomplete or duplicated comparison');
+  const expectedMethods=request.quadratic_multiplier===0?['lifted','generalized','asymmetric','daqp','flex','elastiqp']:['lifted','generalized','asymmetric','daqp'];
+  if(doc.runs.length!==expectedMethods.length || new Set(doc.runs.map(r=>r.method)).size!==expectedMethods.length || expectedMethods.some(method=>!doc.runs.some(r=>r.method===method))) throw new Error('Incomplete or duplicated comparison');
   for(const run of doc.runs) {
     if(run.state!=='available') continue;
     const result=run.result, p=expected;

@@ -1,5 +1,6 @@
 import copy
 import hashlib
+import json
 from pathlib import Path
 import pytest
 from pipeline.softqp_requests import execute_request
@@ -55,3 +56,34 @@ def test_local_export_rejects_corrupted_result():
     doc["result"]["runs"][0]["result"]["x"][0] = True
     with pytest.raises(Exception):
         validate_document(doc, "softqp-local-export")
+
+
+def test_pure_l1_edits_execute_compatible_published_references():
+    doc = request()
+    doc["quadratic_multiplier"] = 0
+    result = execute_request(doc)["result"]
+    assert len(result["runs"]) == 6
+    for method in ["lifted", "asymmetric", "flex", "elastiqp"]:
+        row = next(r for r in result["runs"] if r["method"] == method)
+        assert row["state"] == "available"
+        assert row["result"]["x"] == pytest.approx([-2.4], abs=3e-6)
+        assert row["result"]["metrics"]["objective"] == pytest.approx(-3.48, abs=1e-6)
+    assert next(r for r in result["runs"] if r["method"] == "daqp")["state"] == "incompatible"
+
+
+def test_cost_edits_leave_hard_row_coefficients_and_policy_unchanged():
+    doc = request("C04")
+    result = execute_request(doc)["result"]
+    baseline = json.loads((ROOT / "data/derived/softqp/C04.json").read_text(encoding="utf-8"))
+    for key in ["lower_linear", "upper_linear", "lower_quadratic", "upper_quadratic"]:
+        assert result["problem"]["penalty"][key][-1] == baseline["problem"]["penalty"][key][-1]
+    assert result["rows"] == baseline["rows"]
+
+
+def test_export_provenance_identifies_native_binary_without_local_paths():
+    result = execute_request(request())
+    environment = result["environment"]
+    assert environment["packages"]["softqp"] == "0.1.0"
+    assert len(environment["native_binary_sha256"]) == 64
+    assert str(ROOT) not in json.dumps(environment)
+    assert "file://" not in json.dumps(environment)

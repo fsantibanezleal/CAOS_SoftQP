@@ -1,77 +1,23 @@
 {
+  "schema_version": "softqp.local-export/v1",
   "request": {
-    "base_sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
-    "case_id": "C01",
-    "lower_multiplier": 2.0,
-    "quadratic_multiplier": 1.5,
     "schema_version": "softqp.run-request/v1",
-    "upper_multiplier": 3.0
+    "case_id": "C01",
+    "base_sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
+    "lower_multiplier": 2.0,
+    "upper_multiplier": 3.0,
+    "quadratic_multiplier": 1.5
   },
   "result": {
+    "schema_version": "softqp.case-result/v2",
     "case_id": "C01",
+    "title": {
+      "en": "Lower-bound undershoot",
+      "es": "Incumplimiento inferior"
+    },
     "category": {
       "en": "Semantics",
       "es": "Semántica"
-    },
-    "problem": {
-      "A": {
-        "data": [
-          1.0
-        ],
-        "indices": [
-          0
-        ],
-        "indptr": [
-          0,
-          1
-        ],
-        "shape": [
-          1,
-          1
-        ]
-      },
-      "P": {
-        "data": [
-          1.0
-        ],
-        "indices": [
-          0
-        ],
-        "indptr": [
-          0,
-          1
-        ],
-        "shape": [
-          1,
-          1
-        ]
-      },
-      "lower": [
-        -1.0
-      ],
-      "penalty": {
-        "lower_linear": [
-          0.6
-        ],
-        "lower_quadratic": [
-          6.0
-        ],
-        "soft": [
-          true
-        ],
-        "upper_linear": [
-          0.8999999999999999
-        ],
-        "upper_quadratic": [
-          9.0
-        ]
-      },
-      "q": [
-        3.0
-      ],
-      "upper": [
-        1.0
-      ]
     },
     "rows": [
       {
@@ -80,42 +26,25 @@
           "en": "Normalized row 0",
           "es": "Fila normalizada 0"
         },
-        "soft": true,
-        "unit": "1"
+        "unit": "1",
+        "soft": true
       }
     ],
+    "seed": 1729,
+    "source": "local execution of declared soft-cost edits; authored synthetic case",
+    "settings": {
+      "eps_abs": 1e-07,
+      "eps_rel": 1e-07,
+      "max_iter": 200000,
+      "adaptive_rho_interval": 25
+    },
     "runs": [
       {
         "method": "lifted",
+        "state": "available",
         "reason": null,
         "result": {
-          "dimensions": {
-            "nnz": 9,
-            "rows": 4,
-            "variables": 3
-          },
-          "elapsed_seconds": 0.008793600005446933,
-          "iterations": 50,
           "method": "lifted",
-          "metrics": {
-            "base_objective": -2.8799999510215564,
-            "hard_violation": 0.0,
-            "lower_violation": [
-              0.19999997278975368
-            ],
-            "objective": -2.6399999999999975,
-            "objective_gap_against_lifted": 0.0,
-            "penalty_objective": 0.23999995102155883,
-            "slack": [
-              0.19999997278975368
-            ],
-            "stationarity_residual": 1.0177734166560981e-07,
-            "upper_violation": [
-              0.0
-            ]
-          },
-          "setup_seconds": 3.74e-05,
-          "solve_seconds": 1.23e-05,
           "status": "solved",
           "status_code": 1,
           "x": [
@@ -123,47 +52,47 @@
           ],
           "y": [
             -1.7999999254329047
-          ]
-        },
-        "state": "available"
+          ],
+          "metrics": {
+            "base_objective": -2.8799999510215564,
+            "penalty_objective": 0.23999995102155883,
+            "objective": -2.6399999999999975,
+            "lower_violation": [
+              0.19999997278975368
+            ],
+            "upper_violation": [
+              0.0
+            ],
+            "slack": [
+              0.19999997278975368
+            ],
+            "hard_violation": 0.0,
+            "stationarity_residual": 1.0177734166560981e-07,
+            "objective_gap_against_lifted": 0.0
+          },
+          "dimensions": {
+            "variables": 3,
+            "rows": 4,
+            "nnz": 9
+          },
+          "iterations": 50,
+          "setup_seconds": 3.67e-05,
+          "solve_seconds": 1.27e-05,
+          "elapsed_seconds": 0.007835299998987466
+        }
       },
       {
         "method": "generalized",
+        "state": "incompatible",
         "reason": "The published unconditional penalty reference requires symmetric side costs.",
-        "result": null,
-        "state": "incompatible"
+        "result": null
       },
       {
         "method": "asymmetric",
+        "state": "available",
         "reason": null,
         "result": {
-          "dimensions": {
-            "nnz": 2,
-            "rows": 1,
-            "variables": 1
-          },
-          "elapsed_seconds": 0.0009196999890264124,
-          "iterations": 50,
           "method": "asymmetric",
-          "metrics": {
-            "base_objective": -2.8799999999737227,
-            "hard_violation": 0.0,
-            "lower_violation": [
-              0.1999999999854014
-            ],
-            "objective": -2.64,
-            "objective_gap_against_lifted": 2.6645352591003757e-15,
-            "penalty_objective": 0.23999999997372254,
-            "slack": [
-              0.1999999999854014
-            ],
-            "stationarity_residual": 2.03990158098577e-11,
-            "upper_violation": [
-              0.0
-            ]
-          },
-          "setup_seconds": 3.96e-05,
-          "solve_seconds": 1.69e-05,
           "status": "solved",
           "status_code": 1,
           "x": [
@@ -171,61 +100,41 @@
           ],
           "y": [
             -1.7999999999941996
-          ]
-        },
-        "state": "available"
+          ],
+          "metrics": {
+            "base_objective": -2.8799999999737227,
+            "penalty_objective": 0.23999999997372254,
+            "objective": -2.64,
+            "lower_violation": [
+              0.1999999999854014
+            ],
+            "upper_violation": [
+              0.0
+            ],
+            "slack": [
+              0.1999999999854014
+            ],
+            "hard_violation": 0.0,
+            "stationarity_residual": 2.03990158098577e-11,
+            "objective_gap_against_lifted": 2.6645352591003757e-15
+          },
+          "dimensions": {
+            "variables": 1,
+            "rows": 1,
+            "nnz": 2
+          },
+          "iterations": 50,
+          "setup_seconds": 3.38e-05,
+          "solve_seconds": 1.42e-05,
+          "elapsed_seconds": 0.0009329000022262335
+        }
       },
       {
         "method": "daqp",
+        "state": "available",
         "reason": null,
         "result": {
-          "backend_settings": {
-            "abs_subopt": 0.0,
-            "cycle_tol": 10,
-            "dual_tol": 1e-07,
-            "eps_prox": 0.0,
-            "eq_reduction": 0,
-            "eta_prox": -1.0,
-            "fval_bound": 1e+30,
-            "iter_limit": 200000,
-            "pivot_tol": 1e-08,
-            "primal_tol": 1e-07,
-            "progress_tol": 1e-14,
-            "refactor_tol": 1e-09,
-            "rel_subopt": 0.0,
-            "rho_soft": 1e-06,
-            "sing_tol": 3.7e-11,
-            "time_limit": 0.0,
-            "w_soft": 0.0,
-            "zero_tol": 1e-11
-          },
-          "dimensions": {
-            "nnz": 2,
-            "rows": 1,
-            "variables": 1
-          },
-          "elapsed_seconds": 0.0016213999915635213,
-          "iterations": 2,
           "method": "daqp",
-          "metrics": {
-            "base_objective": -2.88,
-            "hard_violation": 0.0,
-            "lower_violation": [
-              0.19999999999999996
-            ],
-            "objective": -2.64,
-            "objective_gap_against_lifted": 2.6645352591003757e-15,
-            "penalty_objective": 0.2399999999999999,
-            "slack": [
-              0.19999999999999996
-            ],
-            "stationarity_residual": 0.0,
-            "upper_violation": [
-              0.0
-            ]
-          },
-          "setup_seconds": 1.14e-05,
-          "solve_seconds": 1.38e-05,
           "status": "soft optimal",
           "status_code": 2,
           "x": [
@@ -233,24 +142,130 @@
           ],
           "y": [
             -1.8
-          ]
-        },
-        "state": "available"
+          ],
+          "metrics": {
+            "base_objective": -2.88,
+            "penalty_objective": 0.2399999999999999,
+            "objective": -2.64,
+            "lower_violation": [
+              0.19999999999999996
+            ],
+            "upper_violation": [
+              0.0
+            ],
+            "slack": [
+              0.19999999999999996
+            ],
+            "hard_violation": 0.0,
+            "stationarity_residual": 0.0,
+            "objective_gap_against_lifted": 2.6645352591003757e-15
+          },
+          "dimensions": {
+            "variables": 1,
+            "rows": 1,
+            "nnz": 2
+          },
+          "iterations": 2,
+          "setup_seconds": 1.42e-05,
+          "solve_seconds": 1.11e-05,
+          "elapsed_seconds": 0.001571400003740564,
+          "backend_settings": {
+            "primal_tol": 1e-07,
+            "dual_tol": 1e-07,
+            "zero_tol": 1e-11,
+            "pivot_tol": 1e-08,
+            "progress_tol": 1e-14,
+            "cycle_tol": 10,
+            "iter_limit": 200000,
+            "fval_bound": 1e+30,
+            "eps_prox": 0.0,
+            "eta_prox": -1.0,
+            "rho_soft": 1e-06,
+            "w_soft": 0.0,
+            "rel_subopt": 0.0,
+            "abs_subopt": 0.0,
+            "sing_tol": 3.7e-11,
+            "refactor_tol": 1e-09,
+            "time_limit": 0.0,
+            "eq_reduction": 0
+          }
+        }
       }
     ],
-    "schema_version": "softqp.case-result/v2",
-    "seed": 1729,
-    "settings": {
-      "adaptive_rho_interval": 25,
-      "eps_abs": 1e-07,
-      "eps_rel": 1e-07,
-      "max_iter": 200000
-    },
-    "source": "local native execution of declared cost edits; authored synthetic case",
-    "title": {
-      "en": "Lower-bound undershoot",
-      "es": "Incumplimiento inferior"
+    "problem": {
+      "P": {
+        "shape": [
+          1,
+          1
+        ],
+        "data": [
+          1.0
+        ],
+        "indices": [
+          0
+        ],
+        "indptr": [
+          0,
+          1
+        ]
+      },
+      "q": [
+        3.0
+      ],
+      "A": {
+        "shape": [
+          1,
+          1
+        ],
+        "data": [
+          1.0
+        ],
+        "indices": [
+          0
+        ],
+        "indptr": [
+          0,
+          1
+        ]
+      },
+      "lower": [
+        -1.0
+      ],
+      "upper": [
+        1.0
+      ],
+      "penalty": {
+        "lower_linear": [
+          0.6
+        ],
+        "upper_linear": [
+          0.8999999999999999
+        ],
+        "lower_quadratic": [
+          6.0
+        ],
+        "upper_quadratic": [
+          9.0
+        ],
+        "soft": [
+          true
+        ]
+      }
     }
   },
-  "schema_version": "softqp.local-export/v1"
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "osqp": "1.1.3",
+      "softqp": "0.1.0",
+      "daqp": "0.10.3",
+      "elastiqp": "0.2.0"
+    },
+    "engine_revision": "65a93eb44a723d3de554d305890e8b0078096b1c",
+    "engine_source_dirty": false,
+    "native_binary_sha256": "c595808656e4d9a45d1adf723c6644a0a3215bae93c0a2daa54da3cb83b1ca0b"
+  }
 }

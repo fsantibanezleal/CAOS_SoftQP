@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "Product dormant API",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "summary": "Catalog row api 1.1.0: the read-only API of app/ (ADR-0057), dormant until the API lane is activated.",
     "description": "Serves the committed documents of data/derived unchanged, GET only. A document that does not exist yet is a declared state, never an empty body that looks like data: the API answers 503 with the state missing and its reason. The schemas are the catalog's schema files; this document and docs/contracts/schemas/ are the single source the TypeScript types are generated from (frontend/src/lib/contract.gen.ts)."
   },
@@ -104,7 +104,7 @@
       "get": {
         "operationId": "getArtifact",
         "summary": "An artifact a manifest names (catalog row trace), by its path under data/derived.",
-        "description": "rel_path may contain slashes (for example EX02_epidemic/trace.json); only a path an indexed manifest names is served; anything else is not found, and an artifact that cannot be read is unavailable.",
+        "description": "rel_path may contain slashes (for example C02/trace.json); only a path an indexed manifest names is served; anything else is not found, and an artifact that cannot be read is unavailable.",
         "parameters": [
           {
             "name": "rel_path",

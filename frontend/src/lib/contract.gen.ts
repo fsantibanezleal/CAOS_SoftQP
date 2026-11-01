@@ -77,7 +77,7 @@ export interface paths {
         };
         /**
          * An artifact a manifest names (catalog row trace), by its path under data/derived.
-         * @description rel_path may contain slashes (for example EX02_epidemic/trace.json); only a path an indexed manifest names is served; anything else is not found, and an artifact that cannot be read is unavailable.
+         * @description rel_path may contain slashes (for example C02/trace.json); only a path an indexed manifest names is served; anything else is not found, and an artifact that cannot be read is unavailable.
          */
         get: operations["getArtifact"];
         put?: never;
@@ -225,6 +225,9 @@ export interface components {
                 packages: {
                     [key: string]: string;
                 };
+                engine_revision?: string | null;
+                engine_source_dirty?: boolean | null;
+                native_binary_sha256?: string;
             };
             limitations: string[];
         };
@@ -250,7 +253,7 @@ export interface components {
             };
             runs: ({
                 /** @enum {unknown} */
-                method: "lifted" | "generalized" | "asymmetric" | "daqp";
+                method: "lifted" | "generalized" | "asymmetric" | "daqp" | "flex" | "elastiqp";
                 /** @enum {unknown} */
                 state: "available" | "failed" | "incompatible";
                 reason: string | null;
@@ -340,6 +343,16 @@ export interface components {
             schema_version: "softqp.local-export/v1";
             request: components["schemas"]["SoftQPRequestPayload"];
             result: components["schemas"]["SoftQPResultPayload"];
+            environment?: {
+                python: string;
+                platform: string;
+                packages: {
+                    [key: string]: string;
+                };
+                engine_revision?: string | null;
+                engine_source_dirty?: boolean | null;
+                native_binary_sha256?: string;
+            };
         };
         entry: {
             /** @description The catalog row id. */
@@ -435,7 +448,7 @@ export interface components {
             };
             runs: ({
                 /** @enum {unknown} */
-                method: "lifted" | "generalized" | "asymmetric" | "daqp";
+                method: "lifted" | "generalized" | "asymmetric" | "daqp" | "flex" | "elastiqp";
                 /** @enum {unknown} */
                 state: "available" | "failed" | "incompatible";
                 reason: string | null;

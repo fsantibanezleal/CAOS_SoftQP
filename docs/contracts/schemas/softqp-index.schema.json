@@ -117,6 +117,23 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "engine_revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "engine_source_dirty": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "native_binary_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       }
     },
