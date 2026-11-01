@@ -14,7 +14,7 @@ Construct `softqp.problem.Problem` and call `softqp.solvers.solve(problem, metho
 
 ## Applying it here
 
-The app consumes an exact declared distribution version; its historical experiment separately records source d0c69ed974d577ba02adbd4806332270d9425651. Current source validation is not public PyPI publication.
+The app consumes an exact declared distribution version; its historical experiment separately records source d0c69ed974d577ba02adbd4806332270d9425651. [Version 0.1.0 is published on PyPI](https://pypi.org/project/softqp/0.1.0/). Its public source archive and both portable wheels match the tagged publishing workflow; a fresh public-index Windows install passes all 94 native tests and license checks.
 
 ## Caveats and license
 

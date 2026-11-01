@@ -29,7 +29,7 @@ C12 has 32 common-oracle state inputs with impulses at frames 8 and 20. Three co
 
 ## Distribution and UI boundaries
 
-A clean Windows source install initially failed because MSBuild compiler-test paths exceeded 260 characters. Retrying with a short temporary root succeeded and produced a normal installed wheel. The engine release branch repairs the default build path and adds portable wheels built from the source archive, clean-wheel tests and license checks. Public index publication remains pending.
+A clean Windows source install initially failed because MSBuild compiler-test paths exceeded 260 characters. Retrying with a short temporary root succeeded and produced a normal installed wheel. The engine release branch repairs the default build path and adds portable wheels built from the source archive, clean-wheel tests and license checks. Version 0.1.0 is now published on PyPI. All public files match tagged workflow 41323753954; a fresh public-index Windows install passes 94 native tests and license checks. The original timing environment remains unchanged.
 
 The earlier focused shared-shell gate passed 171 states at 1280x800 and 390x844 in light/English before the campaign/stream view additions. It is historical focused evidence, not the current full five-size/two-theme/two-language release gate. Static replay remains the declared lane; no browser-native solver budget or parity pass is claimed.
 

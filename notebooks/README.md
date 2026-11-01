@@ -4,7 +4,7 @@ The [English](en/README.md) and [Spanish](es/README.md) trees contain four mirro
 
 ## Environment and execution
 
-Use Python 3.12 and the exact requirements in `requirements.txt`. The separate native distribution is `softqp==0.1.0`; public package publication remains a release gate while source validation is in progress. The recorded experiment uses the exact historical source revision in its protocol, independently of later packaging metadata.
+Use Python 3.12 and the exact requirements in `requirements.txt`. The separate native distribution [softqp 0.1.0 is published on PyPI](https://pypi.org/project/softqp/0.1.0/). All eight lessons pass the copied-repository unchanged-output check using its public Windows wheel. The recorded experiment uses the exact historical source revision in its protocol, independently of later packaging metadata.
 
 ```bash
 python -m pip install -r notebooks/requirements.txt
@@ -20,3 +20,5 @@ The final lesson requires the complete canonical experimental export and recompu
 ## Review boundary
 
 The [notebook guide](../docs/guides/08_notebooks.md) sets the worked-lesson bar and requires review by someone other than the author before release. Static floors and fresh execution are necessary evidence, not independent editorial or scientific review. The source report, package publication and product release have their own acceptance gates.
+
+All eight lessons passed [independent curriculum review](../docs/notebook-review.md) after correcting control-interval timing in two figures and Spanish method display names. That review does not establish the rejected timing hypothesis or qualified product-release acceptance.

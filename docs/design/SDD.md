@@ -57,7 +57,7 @@ Proposed units with disjoint write ownership after contract freeze:
 
 The units define module ownership and stable contract seams.
 
-Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distribution/import `softqp`. It vendors the reviewed C core and Python binding with Apache-2.0, MIT and BSD notices, pinned QDLDL and marked source changes. Linux and Windows tests and wheel builds passed on promoted source. The app consumes an exact source revision while public package publication remains pending. CPU builtin backend is supported. The approved ownership decision is implemented.
+Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distribution/import `softqp`. It vendors the reviewed C core and Python binding with Apache-2.0, MIT and BSD notices, pinned QDLDL and marked source changes. Linux and Windows tests and wheel builds passed on promoted source. The app consumes published distribution `softqp==0.1.0`; a fresh public-index Windows install passes all 94 native tests and license checks. The historical experiment remains tied to its exact source revision. CPU builtin backend is supported. The approved ownership decision is implemented.
 
 
 ## Technology and versions
@@ -268,4 +268,4 @@ The complete experiment at app source `1a0c664` / engine `d0c69ed974d577ba02adbd
 
 This is a negative comparative result. Preserve the exact protocol and complete raw observations under `data/derived/experiments/`. It does not establish timing superiority or global novelty. The approved strict stop/revise rule prevents promoting BS-1 as an accepted improved contribution or qualifying the product release on that hypothesis. Documentation, reproducible curriculum, package validation and the negative-result technical report continue; any different method proposal requires its own derivation, prior-art review and preregistered evaluation, rather than rewriting this endpoint.
 
-The prepared release requirements name distribution `softqp==0.1.0`. The current validation environment installs the reviewed source revision with that same distribution version; clean-index installation and public publication remain mandatory release gates. The historical experiment remains pinned to its exact source revision.
+The release requirements name published distribution `softqp==0.1.0`. The source archive and both wheels match tagged publishing workflow 41323753954. A fresh public-index Windows install passes all 94 native tests and license checks; all eight notebooks reproduce unchanged outputs using the public wheel and pass independent content review. The pipeline environment retains the historical engine source pin for the frozen experiment. These engineering gates do not change the rejected scientific endpoint.

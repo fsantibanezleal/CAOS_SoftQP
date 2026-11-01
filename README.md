@@ -18,7 +18,7 @@ The repository by area: its folder, whether the area is active or dormant, and w
 | Web | [`frontend/`](frontend/) | active | The workbench and the documentation routes on the shared shell. Build and test: `cd frontend && npm ci && npm run build && npm test`. |
 | API | [`app/`](app/) | dormant: this solution does not require it at the moment | Ships dormant; activation is [guide 04](docs/guides/04_run-the-api.md). |
 | Core pipelines | [`data-pipeline/`](data-pipeline/) | active | The named pipeline stages and the bake: `./scripts/precompute.sh all --output OUTPUT`. See [data-pipeline/README.md](data-pipeline/README.md). |
-| Packages | (PyPI) [numpy](https://pypi.org/project/numpy/) | active: consumes pinned SoftQP engine and numerical dependencies | The separate [native engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine), numerical dependencies and exact distribution requirements; public package publication remains pending. |
+| Packages | (PyPI) [softqp](https://pypi.org/project/softqp/0.1.0/) | active: consumes pinned SoftQP engine and numerical dependencies | The separate [native engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine), numerical dependencies and exact distribution requirements; softqp 0.1.0 is published and its public-index installation is verified. |
 | Notebooks | [`notebooks/`](notebooks/) | active | The didactic notebooks in English and Spanish, by topic and level. Run: `./scripts/setup.sh --notebooks`, then `python scripts/run_notebooks.py`. Guide: [guide 08](docs/guides/08_notebooks.md). |
 | Data | [`data/`](data/) | active | The committed derived artifacts and the sources with their licence classes. |
 | Contracts | [`docs/contracts/`](docs/contracts/) | active | The contract catalog and the schemas. |
