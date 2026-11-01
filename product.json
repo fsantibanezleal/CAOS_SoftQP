@@ -10,6 +10,26 @@
   "license": "MIT",
   "holder": "Felipe Santibáñez-Leal",
   "year": 2026,
-  "method_entrypoints": [],
-  "manuscripts": []
+  "method_entrypoints": [
+    "softqp.solvers.solve",
+    "softqp.flex.solve_flex",
+    "softqp.elasti.solve_elastiqp",
+    "softqp.sessions.PreparedSolver",
+    "softqp.sessions.DaqpWorkspace",
+    "pipeline.optimality.kkt",
+    "pipeline.control.predict_states",
+    "pipeline.softqp_campaign.primary_endpoint"
+  ],
+  "manuscripts": [
+    {
+      "kind": "technical-report",
+      "concept_doi": "10.5281/zenodo.23851659",
+      "title": "Side-Specific Soft Constraints in Quadratic Programming",
+      "version": "0.01.000",
+      "covers": []
+    }
+  ],
+  "method_packages": [
+    "softqp"
+  ]
 }

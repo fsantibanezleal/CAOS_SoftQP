@@ -30,4 +30,20 @@ The CLI verifies the base artifact digest and its serialized matrices against th
 
 The browser replays committed or locally imported native records. A browser solver has not been enabled. The fixture source is isolated: build with `VITE_SOFTQP_SOURCE=fixture` for its C01-only inventory; the interface labels that provider explicitly. The actual loader and checksum checks are tested for both sources.
 
-Timings are individual development observations, not a repeated benchmark or speedup claim. C12 is currently a stream's initial state; its complete stream evidence is being implemented. The scientific pipeline and deployment inventories replace the inherited domain core. Remaining old documentation and notebooks are still being migrated. Source checks, full UI gates, notebooks, report, deployment proof and research acceptance remain distinct unfinished release requirements.
+The committed catalog timings are individual observations. The separate complete campaign has 456 controlled instances and preserves all repeated observations. Its registered timing hypothesis is negative: median reduction 0.50%, 95% interval -3.29% to 3.94%, against the faster matched baseline. The source, raw evidence and resource scope are in [measured resources](design/measured-resources.md).
+
+C12 has a complete 32-frame paired stream. Cold/warm timings use identical independently driven state inputs; initial workspace setup is separate. Its record contains 192 accepted observations and 64 explicit incompatibilities.
+
+## Registered experiment workflow
+
+The frozen runner requires the exact clean source revision in `docs/design/experiments-v1.json`. Reproduce that historical environment explicitly; a package version or later packaging-only commit cannot substitute for its exact revision.
+
+```bash
+python data-pipeline/run_experiments.py campaign --output FRESH_OUTPUT
+python data-pipeline/run_experiments.py publish --campaign-input FRESH_OUTPUT --output data/derived/experiments
+python scripts/check_documents.py
+```
+
+Publication checks raw sizes/digests, schemas, the complete instance/method/repetition matrix and summaries recomputed from the raw JSONL. Missing or duplicate observations fail even with a changed digest. CSV retains readable scalar fields; JSONL is the complete per-trial record. LF serialization preserves digests across Windows and Git.
+
+The six documentation routes and one-case workbench consume those records. A complete experiment does not establish global novelty or accepted release. The approved plan's strict stop/revise gate applies to the failed candidate hypothesis; notebook/report/package preparation and full product QA remain separate work.

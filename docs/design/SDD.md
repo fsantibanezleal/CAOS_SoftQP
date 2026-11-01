@@ -38,7 +38,7 @@ Research is documented in [the source review](../research.md). It reviews classi
 | Static-first product | The primary outputs are finite, versioned, reproducible result documents. | GitHub Pages is a candidate only after payload, route, and browser measurements. |
 
 
-Sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
+Sources: https://arxiv.org/html/2512.01565v2 ; https://github.com/StanfordASL/elastiqp ; https://www.mathworks.com/help/mpc/ug/optimization-problem.html ; https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
 
 UNVERIFIED: novelty, superiority, complete method coverage, field safety and deployment.
 
@@ -94,7 +94,7 @@ The approved implementation instantiates template 0.14.001 and shared shell 0.19
 | tooling | react-router | 8.4.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | lint | ruff | 0.15.18 | Static Python source validation | Unpinned formatting |
 | sparse matrices | scipy | 1.18.1 | CSC assembly and convexity checks | Dense-only storage |
-| native engine | softqp | d0c69ed974d577ba02adbd4806332270d9425651 | Pinned native generalized and asymmetric solver | Separate package over internal distribution |
+| native engine | softqp | 0.1.0 | Pinned native generalized and asymmetric solver | Separate package over internal distribution |
 | tooling | typescript | 5.9.3 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | uplot | 1.6.32 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | vite | 8.3.5 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -127,8 +127,10 @@ Each promised method is a real executable vertical, not a citation. The final se
 | M-2 | sota | Authors' generalized slack projection OSQP implementation | Reproduce supported quadratic, L1, elastic-net and selected grouped cases at the exact source pin; objective, slack, and residual reports validated against lifting. | Provenance/source-pin and method-case matrix gate |
 | M-3 | sota | DAQP side-specific weights | Lower/upper linear/quadratic semantics map exactly; only compatible convex cases are compared, and unsupported cases are marked incompatible with reason. | Adapter parity and case compatibility gate |
 | M-4 | sota | FlexQP exact L1 feasibility restoration | Reconstruct from the paper only if its algorithm, assumptions and test oracle are independently reviewed; report as restoration, not a substitute for arbitrary fixed penalty objectives. | Mathematical implementation review and oracle gate |
-| M-5 | sota | Deep FlexQP | Record paper scope and claims; execute only if official code/weights/data are found and licensing, pinned dependencies and matched cases pass review. No repository link was exposed by the ICLR record at design time. | Source availability/provenance gate; otherwise a documented unavailable comparator, never a fabricated result |
+| M-6 | sota | ElastiQP 0.2.0 dual active set | Pure L1 positive-definite side costs and hard equalities match independent lifting; hard inequalities and quadratic costs are refused. | Published adapter parity and original dual recovery tests |
 | BS-1 | beyond | AAGSP side-specific generalized projection | Mathematical review passes; independent lifted oracle agrees on all supported cases; preregistered practitioner outcome improves on compatible matched cases without hard-constraint or accuracy regression. | Proof, novelty, adversarial tests, and held-out benchmark gates |
+
+Deep FlexQP remains a conditional unavailable comparator because trained code/weights/data were unavailable. Its former M-5 row is excluded from the executable ladder, rather than fabricating a learned-policy result. The fixed FlexQP reconstruction does not claim trained-policy reproduction.
 
 Internal tier words and IDs remain in design/control records only. Product pages, README, notebooks, posts, and manuscripts use method names and the shared terminology rules.
 
@@ -259,3 +261,11 @@ Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver
 UNVERIFIED: novelty, superiority, full case coverage, deployment and operational value; all require the declared gates.
 
 The Methodology page uses the documented `method-learned` floor waiver: the implemented method set is deterministic convex optimization and has no trained parameter policy. This does not waive any method implementation, comparison, mathematical-depth or executive-brief requirement. Deep FlexQP remains an availability-gated related method with distinct restoration semantics.
+
+## Preregistered outcome and release stop
+
+The complete experiment at app source `1a0c664` / engine `d0c69ed974d577ba02adbd4806332270d9425651` completed 456 instances with 11592 accepted measured observations, 7560 incompatible cells and no failed or accuracy-rejected observations. The primary endpoint had 168 accepted pairs over six evaluation seeds and no rejected pair. Median relative end-to-end reduction was 0.499839%, with 95% seed-cluster interval [-3.291967%, 3.944835%]. It did not meet the preregistered 10%/positive-interval criterion.
+
+This is a negative comparative result. Preserve the exact protocol and complete raw observations under `data/derived/experiments/`. It does not establish timing superiority or global novelty. The approved strict stop/revise rule prevents promoting BS-1 as an accepted improved contribution or qualifying the product release on that hypothesis. Documentation, reproducible curriculum, package validation and the negative-result technical report continue; any different method proposal requires its own derivation, prior-art review and preregistered evaluation, rather than rewriting this endpoint.
+
+The prepared release requirements name distribution `softqp==0.1.0`. The current validation environment installs the reviewed source revision with that same distribution version; clean-index installation and public publication remain mandatory release gates. The historical experiment remains pinned to its exact source revision.

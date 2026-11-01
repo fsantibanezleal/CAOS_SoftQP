@@ -58,3 +58,7 @@ Thumbs.db
 *.log
 # the training marker (models/training/<contract-id>): runtime state of a long training job, never committed
 models/training/
+
+# Local artifact builds and rendered review intermediates. The frozen report lives under manuscripts/.
+/output/
+/tmp/

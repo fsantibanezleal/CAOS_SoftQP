@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { loadSoftQPCase, loadSoftQPIndex, type SoftQPResult } from './softqp';
+import { loadSoftQPCase, loadSoftQPIndex, softQPSource, type SoftQPResult } from './softqp';
 /** One cancellable load path for numerical documentation: no example-domain model. */
 export function useScientificRecords() {
   const [records,setRecords]=useState<SoftQPResult[]|null>(null);
@@ -11,5 +11,5 @@ export function useScientificRecords() {
       .catch(e=>{if(!abort.signal.aborted)setError(String(e));});
     return()=>abort.abort();
   },[]);
-  return {records,error};
+  return {records,error,source:softQPSource};
 }

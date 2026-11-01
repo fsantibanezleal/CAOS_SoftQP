@@ -50,3 +50,11 @@ def test_protocol_frozen_before_campaign():
     protocol = json.loads((root / "docs/design/experiments-v1.json").read_text(encoding="utf-8"))
     assert protocol["engine_source"] == "d0c69ed974d577ba02adbd4806332270d9425651"
     assert set(protocol["seeds"]["development"]).isdisjoint(protocol["seeds"]["heldout"])
+
+
+def test_adversarial_stream_refuses_an_unpinned_engine(monkeypatch):
+    import pipeline.softqp_stream as stream_module
+
+    monkeypatch.setattr(stream_module, "environment", lambda: dict(engine_revision=None, engine_source_dirty=None))
+    with pytest.raises(RuntimeError, match="exact clean native source"):
+        stream_module.run_stream()

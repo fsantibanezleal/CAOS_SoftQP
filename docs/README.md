@@ -11,4 +11,4 @@ SoftQP Studio studies declared hard and soft policies in convex quadratic progra
 - [Frameworks](frameworks/): the pinned native and numerical engines, installation, use and licensing.
 - [Guides](guides/): product operation, validation and contribution procedures.
 
-The current branch is development source. The focused browser probe, source tests and a build are bounded checks. Full held-out/streaming evidence, executable EN/ES curriculum, report/package publication, full UI gates and deployed commit verification remain separate release requirements. No speed or novelty claim follows from this documentation.
+The current branch is development source. The focused browser probe, source tests and a build are bounded checks. The complete paired experiment is exported and its registered timing hypothesis is negative. Curriculum execution/review, report/package publication, full UI gates and deployed commit verification remain separate release requirements. No speed or novelty claim follows from this documentation.

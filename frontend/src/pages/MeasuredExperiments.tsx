@@ -1,4 +1,4 @@
-import { Callout, DocSection, PlotCard } from '@fasl-work/caos-app-shell';
+import { Callout, DocSection, PlotCard, useFormat } from '@fasl-work/caos-app-shell';
 import { UPlotChart } from '@fasl-work/caos-app-shell/chart';
 import { useState } from 'react';
 import { useT, P } from '../content/bi';
@@ -7,7 +7,7 @@ import { useExperiments } from '../lib/experiments';
 const own={en:'Measured from the preregistered paired experiment and retained raw trials.',es:'Medido en el experimento pareado prerregistrado y sus registros conservados.'};
 const names:Record<string,string>={lifted:'OSQP lift',generalized:'Generalized',asymmetric:'Asymmetric',daqp:'DAQP',flex:'FlexQP',elastiqp:'ElastiQP'};
 export function MeasuredExperiments(){
-  const t=useT();const {evidence,error,source}=useExperiments();
+  const t=useT();const format=useFormat();const {evidence,error,source}=useExperiments();
   const [family,setFamily]=useState('asymmetric-elastic');const [density,setDensity]=useState(0.05);
   const [condition,setCondition]=useState(1);const [streamMethod,setStreamMethod]=useState('asymmetric');
   const [variable,setVariable]=useState<'position'|'velocity'|'control'>('position');
@@ -19,7 +19,7 @@ export function MeasuredExperiments(){
   const robustness=campaign.cells.filter(c=>c.split==='robustness');
   const ns=[32,64,128,256];const conditions=[1,100,10000,1000000];
   const methods=Object.keys(names).filter(method=>timing.some(c=>c.method===method&&c.median_seconds!==null));
-  const percent=(v:number|null|undefined)=>v==null?'-':`${(v*100).toFixed(1)}%`;
+  const percent=(v:number|null|undefined)=>format(v,{percent:true,decimals:1});
   const failures=Object.entries(campaign.counts).filter(([key])=>!['accepted','incompatible'].includes(key));
   return <>
     <DocSection area="results" title={{en:'Preregistered computational experiment',es:'Experimento computacional prerregistrado'}} noRefsReason={own}>
@@ -34,7 +34,7 @@ export function MeasuredExperiments(){
       </tbody></table>
       <P en="The primary comparison uses asymmetric elastic problems with at least 128 variables and density 0.05, against the faster paired observation from native lifting and DAQP. The registered target is at least 10% median reduction with a seed-cluster confidence interval above zero and no rejected compared pair. A negative reduction means the candidate took longer. This implementation outcome cannot establish algorithmic novelty or universal superiority."
         es="La comparación principal utiliza problemas elásticos asimétricos con al menos 128 variables y densidad 0.05 frente a la observación pareada más rápida entre holguras nativas y DAQP. El objetivo registrado es una reducción mediana mínima del 10%, intervalo por semilla sobre cero y ningún par comparado rechazado. Una reducción negativa indica mayor tiempo del candidato. Este resultado de implementación no establece novedad algorítmica ni superioridad universal."/>
-      <p>{t(`Observed campaign time ${(campaign.observed_wall_seconds/60).toFixed(1)} min; maximum worker RSS ${(campaign.worker_peak_rss_bytes/1024**2).toFixed(1)} MiB; ${campaign.worker_restarts} worker restarts. These are process resource observations, not isolated per-method allocation peaks.`,`Tiempo observado ${(campaign.observed_wall_seconds/60).toFixed(1)} min; RSS máximo del proceso ${(campaign.worker_peak_rss_bytes/1024**2).toFixed(1)} MiB; ${campaign.worker_restarts} reinicios. Son observaciones del proceso, no máximos de asignación aislados por método.`)}</p>
+      <p>{t(`Observed campaign time ${format(campaign.observed_wall_seconds/60,{decimals:1})} min; maximum worker RSS ${format(campaign.worker_peak_rss_bytes/1024**2,{decimals:1})} MiB; ${campaign.worker_restarts} worker restarts. These are process resource observations, not isolated per-method allocation peaks.`,`Tiempo observado ${format(campaign.observed_wall_seconds/60,{decimals:1})} min; RSS máximo del proceso ${format(campaign.worker_peak_rss_bytes/1024**2,{decimals:1})} MiB; ${campaign.worker_restarts} reinicios. Son observaciones del proceso, no máximos de asignación aislados por método.`)}</p>
     </DocSection>
     <DocSection area="comparison" title={{en:'Cold end-to-end cost',es:'Costo total con inicio frío'}} noRefsReason={own}>
       <label htmlFor="timing-family">{t('Penalty family','Familia de penalización')}</label><select id="timing-family" value={family} onChange={e=>setFamily(e.target.value)}><option value="asymmetric-elastic">{t('Asymmetric elastic','Elástica asimétrica')}</option><option value="symmetric-elastic">{t('Symmetric elastic','Elástica simétrica')}</option><option value="asymmetric-l1">{t('Asymmetric L1','L1 asimétrica')}</option></select>
@@ -43,7 +43,7 @@ export function MeasuredExperiments(){
       <PlotCard title={{en:'Paired seeded cold observations',es:'Observaciones frías con semillas pareadas'}} lane="replay" provenance="synthetic"><UPlotChart height={350} title={{en:'Cold end-to-end time versus variables',es:'Tiempo total frío según variables'}} x={{values:ns,label:{en:'Original variables',es:'Variables originales'},time:false}} y={{label:{en:'Median elapsed time',es:'Tiempo transcurrido mediano'},unit:{en:'ms',es:'ms'},log:true}} solo series={methods.map(method=>({id:method,label:{en:names[method],es:names[method]},dots:true,values:ns.map(n=>{const c=timing.find(c=>c.n===n&&c.method===method);return c?.median_seconds==null?null:c.median_seconds*1000;})}))}/></PlotCard>
       <P en="Each point summarizes all seven measured repetitions and evaluation seeds in the selected cell; dispersion and every failure remain in the exported table. End-to-end includes input validation, formulation, setup, solve and original-space evaluation. Setup includes linear-system preparation, so a separate factorization time cannot be inferred. FlexQP is a Python/SciPy reconstruction and ElastiQP is its published backend; their language and implementation maturity remain part of this measurement."
         es="Cada punto resume las siete repeticiones y las semillas de evaluación de la celda; la dispersión y toda falla se conservan en la tabla exportada. El tiempo total incluye validación, formulación, preparación, solución y evaluación original. La preparación incluye el sistema lineal y no permite inferir tiempo de factorización separado. FlexQP es una reconstrucción en Python/SciPy y ElastiQP utiliza su backend publicado; lenguaje y madurez forman parte de la medición."/>
-      <div style={{overflowX:'auto'}}><table className="caos-table"><thead><tr>{[t('Method','Método'),'n',t('Median / IQR (ms)','Mediana / RIC (ms)'),t('Accepted','Aceptadas'),t('Other states','Otros estados')].map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{timing.map(c=><tr key={`${c.method}-${c.n}`}><th>{names[c.method]}</th><td>{c.n}</td><td>{c.median_seconds==null?'-':`${(c.median_seconds*1000).toFixed(3)} / ${(c.quantile_25_seconds!*1000).toFixed(3)}–${(c.quantile_75_seconds!*1000).toFixed(3)}`}</td><td>{c.counts.accepted??0}</td><td>{Object.entries(c.counts).filter(([s])=>s!=='accepted').map(([s,n])=>`${s}: ${n}`).join(', ')||'-'}</td></tr>)}</tbody></table></div>
+      <div style={{overflowX:'auto'}}><table className="caos-table"><thead><tr>{[t('Method','Método'),'n',t('Median / IQR (ms)','Mediana / RIC (ms)'),t('Accepted','Aceptadas'),t('Other states','Otros estados')].map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{timing.map(c=><tr key={`${c.method}-${c.n}`}><th>{names[c.method]}</th><td>{c.n}</td><td>{c.median_seconds==null?'-':`${format(c.median_seconds*1000,{decimals:3})} / ${format(c.quantile_25_seconds!*1000,{decimals:3})}–${format(c.quantile_75_seconds!*1000,{decimals:3})}`}</td><td>{c.counts.accepted??0}</td><td>{Object.entries(c.counts).filter(([s])=>s!=='accepted').map(([s,n])=>`${s}: ${n}`).join(', ')||'-'}</td></tr>)}</tbody></table></div>
     </DocSection>
     <DocSection area="robustness" title={{en:'Controlled conditioning sweep',es:'Barrido controlado de condicionamiento'}} noRefsReason={own}>
       <P en="Within each robustness seed, only the Hessian diagonal condition changes. Rows have unit Euclidean norm and A, q, bounds and side prices stay fixed. The chart shows maximum normalized objective discrepancy among accepted observations; rejected and failed cells are counted below instead of receiving a zero error. This authored 32-variable sweep measures numerical degradation, not field reliability."
@@ -63,7 +63,7 @@ export function MeasuredExperiments(){
     <DocSection area="provenance" title={{en:'Raw evidence and numerical identity',es:'Evidencia original e identidad numérica'}} noRefsReason={own}>
       <p>{t(`Python ${campaign.environment.python}; native engine ${campaign.environment.engine_revision}; BLAS/OMP/MKL threads: 1.`, `Python ${campaign.environment.python}; motor nativo ${campaign.environment.engine_revision}; hilos BLAS/OMP/MKL: 1.`)}</p>
       <p>{t('Protocol and source hashes, native binary hash, package versions, all raw states, seven repetitions and warm-ups accompany the exported files. The CSV is a readable projection of the full JSONL observations.','Los archivos incluyen hashes del protocolo, código y binario, versiones, estados originales, siete repeticiones y calentamientos. El CSV es una proyección legible de las observaciones completas JSONL.')}</p>
-      <ul>{index.artifacts.map(a=><li key={a.path}><a href={`${import.meta.env.BASE_URL}data/experiments/${a.path}`} download>{a.path}</a> ({(a.bytes/1024).toFixed(1)} KiB)</li>)}</ul>
+      <ul>{index.artifacts.map(a=><li key={a.path}><a href={`${import.meta.env.BASE_URL}data/experiments/${a.path}`} download>{a.path}</a> ({format(a.bytes/1024,{decimals:1})} KiB)</li>)}</ul>
     </DocSection>
   </>;
 }

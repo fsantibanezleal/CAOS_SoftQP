@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "upload_type": "publication",
+    "publication_type": "report",
+    "title": "Side-Specific Soft Constraints in Quadratic Programming",
+    "creators": [
+      {
+        "name": "Santibáñez-Leal, Felipe",
+        "orcid": "0000-0002-0150-3246"
+      }
+    ],
+    "description": "<p>Soft constraints in control and energy optimization represent priced departures from selected operating limits. Their interpretation depends on which rows remain hard, which interval side is violated and whether the price is linear, quadratic or coupled across rows. We implement separable side-specific linear-quadratic interval costs in a native OSQP-style projection path and compare equivalent formulations through independent lifting, the published generalized slack projection implementation, DAQP, a fixed-parameter FlexQP reconstruction and ElastiQP. Fifteen synthetic or source-faithful cases cover scalar semantics, mixed hard/soft rows, grouped penalties, semidefinite curvature, control conflict and a building-energy model. A preregistered computation comprises 456 seeded instances and seven measured repetitions, retaining 11592 accepted observations and 7560 incompatible cells without numerical or accuracy-rejected observations. The primary paired relative cold end-to-end reduction against the faster matched baseline is 0.50%, with a 95% seed-cluster interval of [-3.29%,3.94%], so the predicted 10% improvement is not established. A separate 32-frame common-trajectory control example distinguishes warm-state reuse from hard-constraint safety. The results support numerical equivalence within the tested families, while showing that unchanged principal dimensions alone do not establish an end-to-end advantage or algorithmic novelty.</p><p>Code and data: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP\">CAOS_SoftQP</a>. Native source: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>.</p>",
+    "keywords": [
+      "quadratic programming",
+      "soft constraints",
+      "model predictive control",
+      "elastic penalties",
+      "operator splitting",
+      "reproducible optimization"
+    ],
+    "license": "cc-by-4.0",
+    "language": "eng",
+    "version": "0.01.000",
+    "publication_date": "2026-11-01"
+  }
+}

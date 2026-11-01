@@ -26,7 +26,7 @@ Assess whether a public CAOS scientific app based on OSQP and soft-constrained q
 
 The hard QP is `min_x 1/2 x'Qx + q'x` subject to `l <= Ax <= u`, with symmetric positive-semidefinite Q. A common elastic formulation introduces a signed slack `xi` and minimizes `1/2 x'Qx + q'x + Phi(xi)` subject to `l <= Ax + xi <= u`.
 
-The 2026 paper proves, for proper, closed, convex, unconditional `Phi` with `Phi(0)=0`, that the relaxed indicator is `g(z)=Phi(R(z))`, where `R(z)=z-Proj_[l,u](z)`. Its generalized projection is `Proj_[l,u](v) + prox_(Phi/rho)(R(v))`. This replaces the hard box projection in the OSQP ADMM update while retaining the same KKT matrix and factorization. The unconditionality condition means invariance under coordinatewise sign changes. The paper includes quadratic, l1, elastic-net, Huber, l-infinity, and l2 penalties, including grouped norms. It does not claim that all possible convex penalties are supported.
+The 2026 paper proves, for proper, closed, convex, unconditional `Phi` with `Phi(0)=0`, that the relaxed indicator is `g(z)=Phi(R(z))`, where `R(z)=z-Proj_box(z)`. Its generalized projection is `Proj_box(v) + prox_(Phi/rho)(R(v))`. This replaces the hard box projection in the OSQP ADMM update while retaining the same KKT dimensions and, for fixed numerical parameters, the same factorization. The unconditionality condition means invariance under coordinatewise sign changes. The paper includes quadratic, l1, elastic-net, Huber, l-infinity, and l2 penalties, including grouped norms. It does not claim that all possible convex penalties are supported.
 
 ## Existing methods and product boundary
 
@@ -93,3 +93,13 @@ Submodule pins were confirmed at OSQP `2500405a1bc63387721feec64f0c050fa99223dd`
 - DAQP's documentation confirms side-specific soft weights, so asymmetry is not a novel problem formulation by itself.
 - FlexQP already supplies an exact `l1` elastic feasibility-restoration method and Deep FlexQP a learned acceleration for QPs; AAGSP's potential distinction is the family of user-selected convex penalty functions and asymmetric interval-side costs inside generalized OSQP projection, not always-feasible behavior or `l1` exactness. The non-equivalence and comparison boundary still need formal SDD treatment.
 - Search absence is not proof of novelty. The AAGSP candidate is not yet a proven theorem, implementation, validated speedup, or accepted beyond-SOTA method.
+
+## Completed comparative result
+
+The registered campaign completed all 456 instances. Its primary time reduction is 0.499839%, 95% seed-cluster interval [-3.291967%, 3.944835%], on 168 paired observations over six held-out seeds. The 10% improvement hypothesis is not established. Numerical agreement is separate: 11592 measured observations pass the original objective/hard-row thresholds, with 7560 explicit incompatibilities and no failed or rejected measured observations.
+
+No post-hoc subset replaces that primary result. Matrix-size preservation remains a true implementation property, not evidence of superiority. The source, raw repeats, resource observations and complete acceptance states are retained in the experimental inventory.
+
+### Candidate-revision prior-art check
+
+A possible follow-up involving cached active-region solutions would be genuinely different from the current projection update, but its ingredients are established. [qpOASES](https://coin-or.github.io/qpOASES/doc/3.0/manual.pdf) already exploits slowly changing active sets in parametric QPs. [OSQP polishing](https://osqp.org/docs/solver/) already guesses active constraints, solves a reduced linear system and retains the ADMM solution when the guess is unsuitable. Therefore an active-set guess plus KKT validation is not a defensible novelty claim by itself. No replacement method is declared accepted from that idea. Preserve this distinction while completing the negative-result report and release preparation.

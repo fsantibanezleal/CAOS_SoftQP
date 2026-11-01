@@ -1,5 +1,3 @@
-# Cases
+# Scientific cases
 
-The CATEGORY taxonomy + the coverage matrix + one page per documented case live in
-**[cases/README.md](cases/README.md)**. Each case carries a category, params, an expected band, and a
-real|synthetic flag; the App shows one case, Experiments/Benchmark summarize across categories.
+The [case taxonomy](cases/README.md) links every formalized case and its original-space validation anchor. [The experimental protocol](design/experiments-v1.json) defines the separate controlled generator grid; the catalog examples are not interchangeable with that grid.

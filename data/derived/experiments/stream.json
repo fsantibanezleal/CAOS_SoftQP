@@ -62,7 +62,7 @@
         1.580000000000614,
         -0.19999999999386048
       ],
-      "generation_seconds": 0.002208799996878952,
+      "generation_seconds": 0.006143200007500127,
       "runs": [
         {
           "method": "lifted",
@@ -263,7 +263,7 @@
             "stationarity_residual": 1.931681733987643e-06
           },
           "normalized_gap": 1.485593300322934e-09,
-          "elapsed_seconds": 0.006166600011056289,
+          "elapsed_seconds": 0.015931799993268214,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -551,9 +551,9 @@
               "nnz": 1500
             },
             "iterations": 200,
-            "setup_seconds": 0.0001733,
-            "solve_seconds": 0.0004437,
-            "elapsed_seconds": 0.005696000007446855
+            "setup_seconds": 0.0003489,
+            "solve_seconds": 0.0009386,
+            "elapsed_seconds": 0.014608099998440593
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -757,9 +757,9 @@
             "stationarity_residual": 1.931681733987643e-06
           },
           "normalized_gap": 1.485593300322934e-09,
-          "elapsed_seconds": 0.0008451000030618161,
+          "elapsed_seconds": 0.0016758999990997836,
           "update_seconds": 0.0,
-          "workspace_setup_seconds": 0.005632899992633611,
+          "workspace_setup_seconds": 0.014220900004147552,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -1047,9 +1047,9 @@
               "nnz": 1500
             },
             "iterations": 200,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0005423,
-            "elapsed_seconds": 0.000745099998312071
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.000902,
+            "elapsed_seconds": 0.0014611999940825626
           }
         },
         {
@@ -1275,7 +1275,7 @@
             "stationarity_residual": 9.253786847907008e-08
           },
           "normalized_gap": 2.6056564898645857e-09,
-          "elapsed_seconds": 0.0016925000090850517,
+          "elapsed_seconds": 0.003592599998228252,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -1563,9 +1563,9 @@
               "nnz": 840
             },
             "iterations": 200,
-            "setup_seconds": 9.51e-05,
-            "solve_seconds": 0.0002837,
-            "elapsed_seconds": 0.0012896999978693202
+            "setup_seconds": 0.0001466,
+            "solve_seconds": 0.0004665,
+            "elapsed_seconds": 0.002692199996090494
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -1769,9 +1769,9 @@
             "stationarity_residual": 9.253786847907008e-08
           },
           "normalized_gap": 2.6056564898645857e-09,
-          "elapsed_seconds": 0.0005332000000635162,
+          "elapsed_seconds": 0.000999199997750111,
           "update_seconds": 0.0,
-          "workspace_setup_seconds": 0.0011580999998841435,
+          "workspace_setup_seconds": 0.002339899991056882,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -2059,9 +2059,9 @@
               "nnz": 840
             },
             "iterations": 200,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.000294,
-            "elapsed_seconds": 0.00044680001155938953
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0004901,
+            "elapsed_seconds": 0.0008110999915516004
           }
         },
         {
@@ -2263,7 +2263,7 @@
             "stationarity_residual": 1.7319479184152442e-14
           },
           "normalized_gap": 1.154915341915469e-11,
-          "elapsed_seconds": 0.0018246999970870093,
+          "elapsed_seconds": 0.004588099996908568,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -2551,9 +2551,9 @@
               "nnz": 840
             },
             "iterations": 20,
-            "setup_seconds": 2.73e-05,
-            "solve_seconds": 2.6e-05,
-            "elapsed_seconds": 0.0013343000027816743,
+            "setup_seconds": 3.74e-05,
+            "solve_seconds": 3.26e-05,
+            "elapsed_seconds": 0.003472000011242926,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -2777,9 +2777,9 @@
             "stationarity_residual": 1.7319479184152442e-14
           },
           "normalized_gap": 1.154915341915469e-11,
-          "elapsed_seconds": 0.00017660000594332814,
+          "elapsed_seconds": 0.0004377000004751608,
           "update_seconds": 0.0,
-          "workspace_setup_seconds": 0.00036419999378267676,
+          "workspace_setup_seconds": 0.0008366999973077327,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -3067,9 +3067,9 @@
               "nnz": 840
             },
             "iterations": 20,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.68e-05,
-            "elapsed_seconds": 0.00010399999155197293,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.79e-05,
+            "elapsed_seconds": 0.0002597999991849065,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -3111,7 +3111,7 @@
         1.5200000000022258,
         -0.3999999999900209
       ],
-      "generation_seconds": 0.001811099995393306,
+      "generation_seconds": 0.00464260000444483,
       "runs": [
         {
           "method": "lifted",
@@ -3312,7 +3312,7 @@
             "stationarity_residual": 9.370733299245259e-07
           },
           "normalized_gap": 2.2526039450466653e-09,
-          "elapsed_seconds": 0.006222799987881444,
+          "elapsed_seconds": 0.01485540000430774,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -3600,9 +3600,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001569,
-            "solve_seconds": 0.000355,
-            "elapsed_seconds": 0.005840600002557039
+            "setup_seconds": 0.0002642,
+            "solve_seconds": 0.0006794,
+            "elapsed_seconds": 0.013974299989058636
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -3806,8 +3806,8 @@
             "stationarity_residual": 3.454077913849211e-08
           },
           "normalized_gap": 3.150901476675651e-10,
-          "elapsed_seconds": 0.005483899993123487,
-          "update_seconds": 0.00480849998712074,
+          "elapsed_seconds": 0.06387860000540968,
+          "update_seconds": 0.06222259999776725,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -4096,9 +4096,9 @@
               "nnz": 1500
             },
             "iterations": 175,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0004473,
-            "elapsed_seconds": 0.0005970999918645248
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0009483,
+            "elapsed_seconds": 0.001437900005839765
           }
         },
         {
@@ -4324,7 +4324,7 @@
             "stationarity_residual": 7.804285084844764e-08
           },
           "normalized_gap": 6.0848227684181046e-09,
-          "elapsed_seconds": 0.001525899991975166,
+          "elapsed_seconds": 0.0033822999976109713,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -4612,9 +4612,9 @@
               "nnz": 840
             },
             "iterations": 250,
-            "setup_seconds": 8.21e-05,
-            "solve_seconds": 0.000326,
-            "elapsed_seconds": 0.0011648000072455034
+            "setup_seconds": 0.0001673,
+            "solve_seconds": 0.0006551,
+            "elapsed_seconds": 0.0025640999956522137
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -4818,8 +4818,8 @@
             "stationarity_residual": 5.3759095952621294e-08
           },
           "normalized_gap": 1.1849583700748143e-08,
-          "elapsed_seconds": 0.0005633999971905723,
-          "update_seconds": 0.00020460000087041408,
+          "elapsed_seconds": 0.0011393999884603545,
+          "update_seconds": 0.00040800000715535134,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -5108,9 +5108,9 @@
               "nnz": 840
             },
             "iterations": 150,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001926,
-            "elapsed_seconds": 0.00028750000637955964
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003479,
+            "elapsed_seconds": 0.0005649000086123124
           }
         },
         {
@@ -5312,7 +5312,7 @@
             "stationarity_residual": 1.509903313490213e-14
           },
           "normalized_gap": 1.2530915513925663e-11,
-          "elapsed_seconds": 0.0004293999954825267,
+          "elapsed_seconds": 0.0008743999933358282,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -5600,9 +5600,9 @@
               "nnz": 840
             },
             "iterations": 18,
-            "setup_seconds": 1.9e-05,
-            "solve_seconds": 1.52e-05,
-            "elapsed_seconds": 0.0001505999971413985,
+            "setup_seconds": 2.44e-05,
+            "solve_seconds": 2.35e-05,
+            "elapsed_seconds": 0.00029159999394323677,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -5826,8 +5826,8 @@
             "stationarity_residual": 1.7763568394002505e-14
           },
           "normalized_gap": 1.2530915513925663e-11,
-          "elapsed_seconds": 0.0003265999985160306,
-          "update_seconds": 0.00017240000306628644,
+          "elapsed_seconds": 0.0006763999990653247,
+          "update_seconds": 0.00033200001053046435,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -6116,9 +6116,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 5.6e-06,
-            "elapsed_seconds": 8.100000559352338e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 9.7e-06,
+            "elapsed_seconds": 0.0001748999929986894,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -6160,7 +6160,7 @@
         1.420000000005531,
         -0.5999999999769277
       ],
-      "generation_seconds": 0.0016919999907258898,
+      "generation_seconds": 0.004507599995122291,
       "runs": [
         {
           "method": "lifted",
@@ -6361,7 +6361,7 @@
             "stationarity_residual": 1.5813401277515667e-07
           },
           "normalized_gap": 2.5317813623360053e-08,
-          "elapsed_seconds": 0.005658299996866845,
+          "elapsed_seconds": 0.01514060000772588,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -6649,9 +6649,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001434,
-            "solve_seconds": 0.0001847,
-            "elapsed_seconds": 0.005316499999025837
+            "setup_seconds": 0.0002819,
+            "solve_seconds": 0.0003431,
+            "elapsed_seconds": 0.013992000007419847
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -6855,8 +6855,8 @@
             "stationarity_residual": 9.24420318148733e-09
           },
           "normalized_gap": 2.0430466207699283e-09,
-          "elapsed_seconds": 0.004992600006517023,
-          "update_seconds": 0.004409799992572516,
+          "elapsed_seconds": 0.012681299995165318,
+          "update_seconds": 0.011413000000175089,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -7145,9 +7145,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0003663,
-            "elapsed_seconds": 0.0005067000020062551
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0006392,
+            "elapsed_seconds": 0.0010674000077415258
           }
         },
         {
@@ -7373,7 +7373,7 @@
             "stationarity_residual": 2.9637751614020047e-07
           },
           "normalized_gap": 9.06664032740423e-07,
-          "elapsed_seconds": 0.0013998000067658722,
+          "elapsed_seconds": 0.0031137999903876334,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -7661,9 +7661,9 @@
               "nnz": 840
             },
             "iterations": 225,
-            "setup_seconds": 7.45e-05,
-            "solve_seconds": 0.0002848,
-            "elapsed_seconds": 0.0010726000036811456
+            "setup_seconds": 0.0001164,
+            "solve_seconds": 0.000493,
+            "elapsed_seconds": 0.002285499998833984
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -7867,8 +7867,8 @@
             "stationarity_residual": 1.8457602353472158e-07
           },
           "normalized_gap": 5.749943188249063e-07,
-          "elapsed_seconds": 0.0005554000090342015,
-          "update_seconds": 0.00019049999536946416,
+          "elapsed_seconds": 0.0012701999949058518,
+          "update_seconds": 0.00047559999802615494,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -8157,9 +8157,9 @@
               "nnz": 840
             },
             "iterations": 150,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001986,
-            "elapsed_seconds": 0.00029549999453593045
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003565,
+            "elapsed_seconds": 0.0006062000029487535
           }
         },
         {
@@ -8361,7 +8361,7 @@
             "stationarity_residual": 1.942890293094024e-14
           },
           "normalized_gap": 3.624140987312785e-10,
-          "elapsed_seconds": 0.0004050999996252358,
+          "elapsed_seconds": 0.0010961999942082912,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -8649,9 +8649,9 @@
               "nnz": 840
             },
             "iterations": 16,
-            "setup_seconds": 1.2e-05,
-            "solve_seconds": 1.32e-05,
-            "elapsed_seconds": 0.00013410000246949494,
+            "setup_seconds": 5.05e-05,
+            "solve_seconds": 2.68e-05,
+            "elapsed_seconds": 0.00047539999650325626,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -8875,8 +8875,8 @@
             "stationarity_residual": 1.2323475573339238e-14
           },
           "normalized_gap": 3.624140987312785e-10,
-          "elapsed_seconds": 0.000301499996567145,
-          "update_seconds": 0.0001598999951966107,
+          "elapsed_seconds": 0.0006914999976288527,
+          "update_seconds": 0.00036890000046696514,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -9165,9 +9165,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 5.4e-06,
-            "elapsed_seconds": 7.46000005165115e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 9.9e-06,
+            "elapsed_seconds": 0.0001638999965507537,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -9209,7 +9209,7 @@
         1.2800000000102771,
         -0.7999999999756121
       ],
-      "generation_seconds": 0.0016902000061236322,
+      "generation_seconds": 0.00460410000232514,
       "runs": [
         {
           "method": "lifted",
@@ -9410,7 +9410,7 @@
             "stationarity_residual": 7.932784384934166e-08
           },
           "normalized_gap": 3.132302032370818e-10,
-          "elapsed_seconds": 0.005560800011153333,
+          "elapsed_seconds": 0.015622499995515682,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -9698,9 +9698,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.00015,
-            "solve_seconds": 0.0001925,
-            "elapsed_seconds": 0.005226499997661449
+            "setup_seconds": 0.0002395,
+            "solve_seconds": 0.0003334,
+            "elapsed_seconds": 0.014318700006697327
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -9904,8 +9904,8 @@
             "stationarity_residual": 2.5948810295793645e-07
           },
           "normalized_gap": 4.068167824393161e-08,
-          "elapsed_seconds": 0.00482640000700485,
-          "update_seconds": 0.004396799995447509,
+          "elapsed_seconds": 0.013900799996918067,
+          "update_seconds": 0.012774100003298372,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -10194,9 +10194,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002143,
-            "elapsed_seconds": 0.0003539000026648864
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003638,
+            "elapsed_seconds": 0.0009040000004461035
           }
         },
         {
@@ -10422,7 +10422,7 @@
             "stationarity_residual": 6.352697506928351e-07
           },
           "normalized_gap": 9.153855379902364e-08,
-          "elapsed_seconds": 0.0014221999881556258,
+          "elapsed_seconds": 0.003974000006564893,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -10710,9 +10710,9 @@
               "nnz": 840
             },
             "iterations": 225,
-            "setup_seconds": 0.0001026,
-            "solve_seconds": 0.0002884,
-            "elapsed_seconds": 0.0010987999994540587
+            "setup_seconds": 0.0001623,
+            "solve_seconds": 0.000498,
+            "elapsed_seconds": 0.003030899999430403
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -10916,8 +10916,8 @@
             "stationarity_residual": 2.4226683992267795e-08
           },
           "normalized_gap": 3.6950504749347084e-08,
-          "elapsed_seconds": 0.0005779000057373196,
-          "update_seconds": 0.0001894999877549708,
+          "elapsed_seconds": 0.0013465999945765361,
+          "update_seconds": 0.00040780000563245267,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -11206,9 +11206,9 @@
               "nnz": 840
             },
             "iterations": 175,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0002212,
-            "elapsed_seconds": 0.0003188999980920926
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003949,
+            "elapsed_seconds": 0.0006449000065913424
           }
         },
         {
@@ -11410,7 +11410,7 @@
             "stationarity_residual": 6.217248937900877e-15
           },
           "normalized_gap": 7.352761934268168e-12,
-          "elapsed_seconds": 0.0003913000109605491,
+          "elapsed_seconds": 0.0010329000069759786,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -11698,9 +11698,9 @@
               "nnz": 840
             },
             "iterations": 14,
-            "setup_seconds": 1.13e-05,
-            "solve_seconds": 1.17e-05,
-            "elapsed_seconds": 0.0001303000026382506,
+            "setup_seconds": 2.8e-05,
+            "solve_seconds": 2.03e-05,
+            "elapsed_seconds": 0.00034810000215657055,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -11924,8 +11924,8 @@
             "stationarity_residual": 7.105427357601002e-15
           },
           "normalized_gap": 7.351307741549401e-12,
-          "elapsed_seconds": 0.00028979999478906393,
-          "update_seconds": 0.00015230001008603722,
+          "elapsed_seconds": 0.0007102999952621758,
+          "update_seconds": 0.00035370000114198774,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -12214,9 +12214,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 4.9e-06,
-            "elapsed_seconds": 7.140000525396317e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 9.7e-06,
+            "elapsed_seconds": 0.00019330000213813037,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -12258,7 +12258,7 @@
         1.1000000000152754,
         -0.9999999999744033
       ],
-      "generation_seconds": 0.0016233000060310587,
+      "generation_seconds": 0.005083900003228337,
       "runs": [
         {
           "method": "lifted",
@@ -12459,7 +12459,7 @@
             "stationarity_residual": 1.1970584574501683e-06
           },
           "normalized_gap": 7.989003150478686e-11,
-          "elapsed_seconds": 0.0058508000074652955,
+          "elapsed_seconds": 0.015640199999324977,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -12747,9 +12747,9 @@
               "nnz": 1500
             },
             "iterations": 175,
-            "setup_seconds": 0.0001418,
-            "solve_seconds": 0.0004065,
-            "elapsed_seconds": 0.0055114999995566905
+            "setup_seconds": 0.0002443,
+            "solve_seconds": 0.0008333,
+            "elapsed_seconds": 0.014728200010722503
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -12953,8 +12953,8 @@
             "stationarity_residual": 1.2900710368076894e-07
           },
           "normalized_gap": 3.2858394632604404e-11,
-          "elapsed_seconds": 0.0052943000046070665,
-          "update_seconds": 0.004709500004537404,
+          "elapsed_seconds": 0.012529399988125078,
+          "update_seconds": 0.011434700005338527,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -13243,9 +13243,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0003537,
-            "elapsed_seconds": 0.0005029999883845448
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0005956,
+            "elapsed_seconds": 0.0009218999912263826
           }
         },
         {
@@ -13471,7 +13471,7 @@
             "stationarity_residual": 1.0651351974703073e-07
           },
           "normalized_gap": 9.87667103082149e-09,
-          "elapsed_seconds": 0.0013830000098096207,
+          "elapsed_seconds": 0.0029141999984858558,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -13759,9 +13759,9 @@
               "nnz": 840
             },
             "iterations": 225,
-            "setup_seconds": 7.23e-05,
-            "solve_seconds": 0.0002817,
-            "elapsed_seconds": 0.0010536000045249239
+            "setup_seconds": 0.0001257,
+            "solve_seconds": 0.0005427,
+            "elapsed_seconds": 0.002199300011852756
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -13965,8 +13965,8 @@
             "stationarity_residual": 1.8911642518659733e-07
           },
           "normalized_gap": 1.8856968714411584e-09,
-          "elapsed_seconds": 0.0005481999978655949,
-          "update_seconds": 0.00019710000196937472,
+          "elapsed_seconds": 0.00114900000335183,
+          "update_seconds": 0.0003988999960711226,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -14255,9 +14255,9 @@
               "nnz": 840
             },
             "iterations": 150,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001824,
-            "elapsed_seconds": 0.0002815000043483451
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.000337,
+            "elapsed_seconds": 0.0005610000080196187
           }
         },
         {
@@ -14459,7 +14459,7 @@
             "stationarity_residual": 9.159339953157541e-15
           },
           "normalized_gap": 2.8487120897058413e-13,
-          "elapsed_seconds": 0.0003699999942909926,
+          "elapsed_seconds": 0.001342500007012859,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -14747,9 +14747,9 @@
               "nnz": 840
             },
             "iterations": 12,
-            "setup_seconds": 1.21e-05,
-            "solve_seconds": 9.7e-06,
-            "elapsed_seconds": 0.00012070000229869038,
+            "setup_seconds": 4.68e-05,
+            "solve_seconds": 2.67e-05,
+            "elapsed_seconds": 0.0005506000015884638,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -14973,8 +14973,8 @@
             "stationarity_residual": 1.2462253451417382e-14
           },
           "normalized_gap": 2.8487120897058413e-13,
-          "elapsed_seconds": 0.0002761000068858266,
-          "update_seconds": 0.0001399000029778108,
+          "elapsed_seconds": 0.0008335999882547185,
+          "update_seconds": 0.00045429999590851367,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -15263,9 +15263,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 4.3e-06,
-            "elapsed_seconds": 6.750000466126949e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 1.08e-05,
+            "elapsed_seconds": 0.00019690000044647604,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -15307,7 +15307,7 @@
         0.880000000022284,
         -1.1999999999555113
       ],
-      "generation_seconds": 0.0015268999995896593,
+      "generation_seconds": 0.004908799994154833,
       "runs": [
         {
           "method": "lifted",
@@ -15508,7 +15508,7 @@
             "stationarity_residual": 8.337793246365877e-07
           },
           "normalized_gap": 5.2129811694921476e-11,
-          "elapsed_seconds": 0.0050106999988202006,
+          "elapsed_seconds": 0.013732699997490272,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -15796,9 +15796,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001464,
-            "solve_seconds": 0.0002253,
-            "elapsed_seconds": 0.0047070999862626195
+            "setup_seconds": 0.0002361,
+            "solve_seconds": 0.0004734,
+            "elapsed_seconds": 0.012878399997134693
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -16002,8 +16002,8 @@
             "stationarity_residual": 2.5330277249976026e-07
           },
           "normalized_gap": 1.1769620559931028e-11,
-          "elapsed_seconds": 0.004423499995027669,
-          "update_seconds": 0.003962900009355508,
+          "elapsed_seconds": 0.012741600003209896,
+          "update_seconds": 0.011597399992751889,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -16292,9 +16292,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002738,
-            "elapsed_seconds": 0.00039510001079179347
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.000579,
+            "elapsed_seconds": 0.0009494999976595864
           }
         },
         {
@@ -16520,7 +16520,7 @@
             "stationarity_residual": 1.787372683054178e-07
           },
           "normalized_gap": 8.76554805288577e-10,
-          "elapsed_seconds": 0.0011615000112215057,
+          "elapsed_seconds": 0.004294800004572608,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -16808,9 +16808,9 @@
               "nnz": 840
             },
             "iterations": 150,
-            "setup_seconds": 6.81e-05,
-            "solve_seconds": 0.0001836,
-            "elapsed_seconds": 0.000873099997988902
+            "setup_seconds": 0.0002116,
+            "solve_seconds": 0.0004356,
+            "elapsed_seconds": 0.003242199993110262
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -17014,8 +17014,8 @@
             "stationarity_residual": 7.217001749285296e-08
           },
           "normalized_gap": 2.3801490019609666e-10,
-          "elapsed_seconds": 0.0004383999912533909,
-          "update_seconds": 0.00016260000120382756,
+          "elapsed_seconds": 0.0018075999978464097,
+          "update_seconds": 0.0007261999999172986,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -17304,9 +17304,9 @@
               "nnz": 840
             },
             "iterations": 125,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001394,
-            "elapsed_seconds": 0.0002179000002797693
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003212,
+            "elapsed_seconds": 0.0008098999969661236
           }
         },
         {
@@ -17508,7 +17508,7 @@
             "stationarity_residual": 1.7763568394002505e-14
           },
           "normalized_gap": 5.667711298098306e-13,
-          "elapsed_seconds": 0.00034559999767225236,
+          "elapsed_seconds": 0.0013013999996474013,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -17796,9 +17796,9 @@
               "nnz": 840
             },
             "iterations": 10,
-            "setup_seconds": 1.05e-05,
-            "solve_seconds": 7.5e-06,
-            "elapsed_seconds": 0.00011139998969156295,
+            "setup_seconds": 3.72e-05,
+            "solve_seconds": 1.37e-05,
+            "elapsed_seconds": 0.00035870001011062413,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -18022,8 +18022,8 @@
             "stationarity_residual": 1.7763568394002505e-14
           },
           "normalized_gap": 5.665626814354982e-13,
-          "elapsed_seconds": 0.000294400000711903,
-          "update_seconds": 0.00016090000281110406,
+          "elapsed_seconds": 0.0008078999962890521,
+          "update_seconds": 0.0004394999996293336,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -18312,9 +18312,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 4.2e-06,
-            "elapsed_seconds": 7.239999831654131e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 8.1e-06,
+            "elapsed_seconds": 0.0001973000034922734,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -18356,7 +18356,7 @@
         0.6450187765533432,
         -1.149812234733896
       ],
-      "generation_seconds": 0.0014392999873962253,
+      "generation_seconds": 0.004827600001590326,
       "runs": [
         {
           "method": "lifted",
@@ -18557,7 +18557,7 @@
             "stationarity_residual": 1.877319632971851e-06
           },
           "normalized_gap": 9.857591603426749e-12,
-          "elapsed_seconds": 0.005011200002627447,
+          "elapsed_seconds": 0.02267279999796301,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -18845,9 +18845,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001263,
-            "solve_seconds": 0.0002799,
-            "elapsed_seconds": 0.0047217999963322654
+            "setup_seconds": 0.0002632,
+            "solve_seconds": 0.0006161,
+            "elapsed_seconds": 0.018897100002504885
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -19051,8 +19051,8 @@
             "stationarity_residual": 4.481445898852038e-06
           },
           "normalized_gap": 1.2084251405019266e-11,
-          "elapsed_seconds": 0.00486270000692457,
-          "update_seconds": 0.0041883000085363165,
+          "elapsed_seconds": 0.017494299987447448,
+          "update_seconds": 0.016224700011662208,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -19341,9 +19341,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0003092,
-            "elapsed_seconds": 0.0004633000062312931
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0005213,
+            "elapsed_seconds": 0.0008372000011149794
           }
         },
         {
@@ -19569,7 +19569,7 @@
             "stationarity_residual": 3.7846279108411096e-06
           },
           "normalized_gap": 1.6398891294960545e-10,
-          "elapsed_seconds": 0.0013315999967744574,
+          "elapsed_seconds": 0.0031881999893812463,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -19857,9 +19857,9 @@
               "nnz": 840
             },
             "iterations": 125,
-            "setup_seconds": 7.04e-05,
-            "solve_seconds": 0.0001517,
-            "elapsed_seconds": 0.0009480000007897615
+            "setup_seconds": 0.0001573,
+            "solve_seconds": 0.0003244,
+            "elapsed_seconds": 0.002281100008985959
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -20063,8 +20063,8 @@
             "stationarity_residual": 1.901303790935449e-06
           },
           "normalized_gap": 4.639721274175782e-10,
-          "elapsed_seconds": 0.000642999992123805,
-          "update_seconds": 0.0001779000012902543,
+          "elapsed_seconds": 0.0011609000066528097,
+          "update_seconds": 0.00044069999421481043,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -20353,9 +20353,9 @@
               "nnz": 840
             },
             "iterations": 125,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0002171,
-            "elapsed_seconds": 0.00037629999860655516
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003166,
+            "elapsed_seconds": 0.0005466000002343208
           }
         },
         {
@@ -20557,7 +20557,7 @@
             "stationarity_residual": 2.1316282072803006e-14
           },
           "normalized_gap": 2.6961558049144662e-14,
-          "elapsed_seconds": 0.0003909999941242859,
+          "elapsed_seconds": 0.0008987000037450343,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -20845,9 +20845,9 @@
               "nnz": 840
             },
             "iterations": 7,
-            "setup_seconds": 1.08e-05,
-            "solve_seconds": 6.1e-06,
-            "elapsed_seconds": 0.00011649999942164868,
+            "setup_seconds": 2.92e-05,
+            "solve_seconds": 1.08e-05,
+            "elapsed_seconds": 0.000305800000205636,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -21071,8 +21071,8 @@
             "stationarity_residual": 2.1316282072803006e-14
           },
           "normalized_gap": 2.6961558049144662e-14,
-          "elapsed_seconds": 0.00026699999580159783,
-          "update_seconds": 0.00014030000602360815,
+          "elapsed_seconds": 0.0006786000012652948,
+          "update_seconds": 0.0003406000032555312,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -21361,9 +21361,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 3.6e-06,
-            "elapsed_seconds": 6.590000702999532e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 6.1e-06,
+            "elapsed_seconds": 0.00016349999350495636,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -21405,7 +21405,7 @@
         0.4350563296054365,
         -0.9498122347451707
       ],
-      "generation_seconds": 0.0014750000118510798,
+      "generation_seconds": 0.004800299997441471,
       "runs": [
         {
           "method": "lifted",
@@ -21606,7 +21606,7 @@
             "stationarity_residual": 8.00292738631513e-07
           },
           "normalized_gap": 1.9382210858793877e-11,
-          "elapsed_seconds": 0.005275799994706176,
+          "elapsed_seconds": 0.017082200007280335,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -21894,9 +21894,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001503,
-            "solve_seconds": 0.0003299,
-            "elapsed_seconds": 0.00494260000414215
+            "setup_seconds": 0.0003253,
+            "solve_seconds": 0.0007455,
+            "elapsed_seconds": 0.015984400000888854
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -22100,8 +22100,8 @@
             "stationarity_residual": 1.982931273436756e-06
           },
           "normalized_gap": 1.2151346666230886e-11,
-          "elapsed_seconds": 0.0045919999975012615,
-          "update_seconds": 0.004088099987711757,
+          "elapsed_seconds": 0.014912700004060753,
+          "update_seconds": 0.013602600010926835,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -22390,9 +22390,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002983,
-            "elapsed_seconds": 0.00042379999649710953
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0006582,
+            "elapsed_seconds": 0.0011068999883718789
           }
         },
         {
@@ -22618,7 +22618,7 @@
             "stationarity_residual": 4.187356873228132e-06
           },
           "normalized_gap": 3.9304561764627694e-10,
-          "elapsed_seconds": 0.0013395999994827434,
+          "elapsed_seconds": 0.0034794999955920503,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -22906,9 +22906,9 @@
               "nnz": 840
             },
             "iterations": 250,
-            "setup_seconds": 6.84e-05,
-            "solve_seconds": 0.0003215,
-            "elapsed_seconds": 0.0010408999951323494
+            "setup_seconds": 0.0001451,
+            "solve_seconds": 0.0006301,
+            "elapsed_seconds": 0.00260540000454057
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -23112,8 +23112,8 @@
             "stationarity_residual": 1.1610212880830402e-07
           },
           "normalized_gap": 1.9186234875765599e-10,
-          "elapsed_seconds": 0.0005407999997260049,
-          "update_seconds": 0.00017129999469034374,
+          "elapsed_seconds": 0.0012495000119088218,
+          "update_seconds": 0.00042559999565128237,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -23402,9 +23402,9 @@
               "nnz": 840
             },
             "iterations": 175,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0002026,
-            "elapsed_seconds": 0.00030309999419841915
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0004302,
+            "elapsed_seconds": 0.0006575000006705523
           }
         },
         {
@@ -23606,7 +23606,7 @@
             "stationarity_residual": 2.1316282072803006e-14
           },
           "normalized_gap": 8.395171980858528e-14,
-          "elapsed_seconds": 0.0003770000039367005,
+          "elapsed_seconds": 0.000942300001042895,
           "result": {
             "method": "daqp",
             "status": "soft optimal",
@@ -23894,9 +23894,9 @@
               "nnz": 840
             },
             "iterations": 6,
-            "setup_seconds": 1.14e-05,
-            "solve_seconds": 5.3e-06,
-            "elapsed_seconds": 0.0001250000059371814,
+            "setup_seconds": 2.65e-05,
+            "solve_seconds": 1.09e-05,
+            "elapsed_seconds": 0.00030729999707546085,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -24120,8 +24120,8 @@
             "stationarity_residual": 2.842170943040401e-14
           },
           "normalized_gap": 8.37617837909188e-14,
-          "elapsed_seconds": 0.00028670000028796494,
-          "update_seconds": 0.00015379999240394682,
+          "elapsed_seconds": 0.0006973999988986179,
+          "update_seconds": 0.00035650000791065395,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -24410,9 +24410,9 @@
               "nnz": 840
             },
             "iterations": 5,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 3e-06,
-            "elapsed_seconds": 7.009999535512179e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 7.6e-06,
+            "elapsed_seconds": 0.0001750999945215881,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -24454,7 +24454,7 @@
         0.3850938826564023,
         -0.3498122347451707
       ],
-      "generation_seconds": 0.0014781000063521788,
+      "generation_seconds": 0.006221300005563535,
       "runs": [
         {
           "method": "lifted",
@@ -24655,7 +24655,7 @@
             "stationarity_residual": 3.674810611150221e-12
           },
           "normalized_gap": 3.3306690738754696e-15,
-          "elapsed_seconds": 0.005383099996834062,
+          "elapsed_seconds": 0.015967100000125356,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -24943,9 +24943,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001314,
-            "solve_seconds": 0.0002913,
-            "elapsed_seconds": 0.005058800001279451
+            "setup_seconds": 0.0002412,
+            "solve_seconds": 0.0006235,
+            "elapsed_seconds": 0.015011900002718903
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -25149,8 +25149,8 @@
             "stationarity_residual": 8.950574994444597e-10
           },
           "normalized_gap": 6.350475700855895e-14,
-          "elapsed_seconds": 0.004620000006980263,
-          "update_seconds": 0.0040643999964231625,
+          "elapsed_seconds": 0.013799000007566065,
+          "update_seconds": 0.012360699998680502,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -25439,9 +25439,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0003688,
-            "elapsed_seconds": 0.0004890000127488747
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0007845,
+            "elapsed_seconds": 0.0012436999968485907
           }
         },
         {
@@ -25667,7 +25667,7 @@
             "stationarity_residual": 7.384524589038044e-10
           },
           "normalized_gap": 1.350746181572049e-10,
-          "elapsed_seconds": 0.0011239000014029443,
+          "elapsed_seconds": 0.0033241000055568293,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -25955,9 +25955,9 @@
               "nnz": 840
             },
             "iterations": 125,
-            "setup_seconds": 7.04e-05,
-            "solve_seconds": 0.0001612,
-            "elapsed_seconds": 0.0008450000023003668
+            "setup_seconds": 0.0001429,
+            "solve_seconds": 0.0003464,
+            "elapsed_seconds": 0.0023482999968109652
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -26161,8 +26161,8 @@
             "stationarity_residual": 1.0362596732094165e-08
           },
           "normalized_gap": 1.2757802592133771e-09,
-          "elapsed_seconds": 0.0004368999943835661,
-          "update_seconds": 0.00016139999206643552,
+          "elapsed_seconds": 0.0013322000013431534,
+          "update_seconds": 0.000568500006920658,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -26451,9 +26451,9 @@
               "nnz": 840
             },
             "iterations": 100,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001252,
-            "elapsed_seconds": 0.00021430000197142363
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0002733,
+            "elapsed_seconds": 0.0005754000012530014
           }
         },
         {
@@ -26655,7 +26655,7 @@
             "stationarity_residual": 2.8449465006019636e-15
           },
           "normalized_gap": 5.88418203051333e-15,
-          "elapsed_seconds": 0.0003595999878598377,
+          "elapsed_seconds": 0.0011820999934570864,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -26943,9 +26943,9 @@
               "nnz": 840
             },
             "iterations": 2,
-            "setup_seconds": 1.05e-05,
-            "solve_seconds": 3.5e-06,
-            "elapsed_seconds": 0.00011079999967478216,
+            "setup_seconds": 3.12e-05,
+            "solve_seconds": 1.04e-05,
+            "elapsed_seconds": 0.0004504000098677352,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -27169,8 +27169,8 @@
             "stationarity_residual": 2.8449465006019636e-15
           },
           "normalized_gap": 5.88418203051333e-15,
-          "elapsed_seconds": 0.00026119999529328197,
-          "update_seconds": 0.00013830000534653664,
+          "elapsed_seconds": 0.0007513000018661842,
+          "update_seconds": 0.0003997999883722514,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -27459,9 +27459,9 @@
               "nnz": 840
             },
             "iterations": 8,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 2.7e-06,
-            "elapsed_seconds": 6.36000040685758e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 6.9e-06,
+            "elapsed_seconds": 0.00018180000188294798,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -27503,7 +27503,7 @@
         0.30699834516792573,
         -0.4311431401395952
       ],
-      "generation_seconds": 0.0014967000024626032,
+      "generation_seconds": 0.004757000002427958,
       "runs": [
         {
           "method": "lifted",
@@ -27704,7 +27704,7 @@
             "stationarity_residual": 1.3399990166560329e-06
           },
           "normalized_gap": 1.9822898262272516e-12,
-          "elapsed_seconds": 0.0052749999886145815,
+          "elapsed_seconds": 0.015036400000099093,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -27992,9 +27992,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001246,
-            "solve_seconds": 0.0003246,
-            "elapsed_seconds": 0.004977500007953495
+            "setup_seconds": 0.0002343,
+            "solve_seconds": 0.0007148,
+            "elapsed_seconds": 0.014140300001599826
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -28198,8 +28198,8 @@
             "stationarity_residual": 1.8420209358283352e-08
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0053619999962393194,
-          "update_seconds": 0.004764299999806099,
+          "elapsed_seconds": 0.013468999997712672,
+          "update_seconds": 0.012260400006198324,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -28488,9 +28488,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0003389,
-            "elapsed_seconds": 0.0005150999932084233
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0006477,
+            "elapsed_seconds": 0.001017999995383434
           }
         },
         {
@@ -28716,7 +28716,7 @@
             "stationarity_residual": 6.28670427947711e-11
           },
           "normalized_gap": 4.169730387520513e-16,
-          "elapsed_seconds": 0.001228399996762164,
+          "elapsed_seconds": 0.002658600002177991,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -29004,9 +29004,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.23e-05,
-            "solve_seconds": 6.94e-05,
-            "elapsed_seconds": 0.0008845000120345503
+            "setup_seconds": 0.0001312,
+            "solve_seconds": 0.0001391,
+            "elapsed_seconds": 0.001785500004189089
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -29210,8 +29210,8 @@
             "stationarity_residual": 8.525875119427016e-09
           },
           "normalized_gap": 4.169730387520513e-16,
-          "elapsed_seconds": 0.00040499999886378646,
-          "update_seconds": 0.0001931000006152317,
+          "elapsed_seconds": 0.0009592999995220453,
+          "update_seconds": 0.00041390000842511654,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -29500,9 +29500,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.24e-05,
-            "elapsed_seconds": 0.00014899999951012433
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.000135,
+            "elapsed_seconds": 0.0003721999964909628
           }
         },
         {
@@ -29704,7 +29704,7 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0003620000061346218,
+          "elapsed_seconds": 0.0010156000062124804,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -29992,9 +29992,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 2.1e-06,
-            "elapsed_seconds": 0.00011889998859260231,
+            "setup_seconds": 2.59e-05,
+            "solve_seconds": 4.5e-06,
+            "elapsed_seconds": 0.0003254000039305538,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -30218,8 +30218,8 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0002806999982567504,
-          "update_seconds": 0.00014829999417997897,
+          "elapsed_seconds": 0.0007872999995015562,
+          "update_seconds": 0.0004065999964950606,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -30508,9 +30508,9 @@
               "nnz": 840
             },
             "iterations": 2,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.2e-06,
-            "elapsed_seconds": 6.880000000819564e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 3.9e-06,
+            "elapsed_seconds": 0.00019629999587778002,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -30552,7 +30552,7 @@
         0.22341526857727115,
         -0.40468762576695066
       ],
-      "generation_seconds": 0.0015087000065250322,
+      "generation_seconds": 0.0054942999995546415,
       "runs": [
         {
           "method": "lifted",
@@ -30753,7 +30753,7 @@
             "stationarity_residual": 5.61101185081226e-07
           },
           "normalized_gap": 1.4805853184199292e-13,
-          "elapsed_seconds": 0.005396599997766316,
+          "elapsed_seconds": 0.017261799992411397,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -31041,9 +31041,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001421,
-            "solve_seconds": 0.0002637,
-            "elapsed_seconds": 0.0049989999970421195
+            "setup_seconds": 0.0002268,
+            "solve_seconds": 0.0005071,
+            "elapsed_seconds": 0.01578369998605922
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -31247,8 +31247,8 @@
             "stationarity_residual": 1.413177272975242e-07
           },
           "normalized_gap": 9.793755024567625e-15,
-          "elapsed_seconds": 0.0046070000098552555,
-          "update_seconds": 0.004170599990175106,
+          "elapsed_seconds": 0.01288840000052005,
+          "update_seconds": 0.011805599991930649,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -31537,9 +31537,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002286,
-            "elapsed_seconds": 0.00036890000046696514
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0004291,
+            "elapsed_seconds": 0.0008809999999357387
           }
         },
         {
@@ -31765,7 +31765,7 @@
             "stationarity_residual": 3.1612401936132724e-10
           },
           "normalized_gap": 1.9203441224642402e-16,
-          "elapsed_seconds": 0.001077399996574968,
+          "elapsed_seconds": 0.003734400001121685,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -32053,9 +32053,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 6.93e-05,
-            "solve_seconds": 6.84e-05,
-            "elapsed_seconds": 0.0007893000001786277
+            "setup_seconds": 0.0001593,
+            "solve_seconds": 0.0001391,
+            "elapsed_seconds": 0.002358600002480671
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -32259,8 +32259,8 @@
             "stationarity_residual": 6.920330973910159e-11
           },
           "normalized_gap": 5.761032367392721e-16,
-          "elapsed_seconds": 0.0003862000012304634,
-          "update_seconds": 0.00017169999773614109,
+          "elapsed_seconds": 0.001591400010511279,
+          "update_seconds": 0.0008240999886766076,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -32549,9 +32549,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.72e-05,
-            "elapsed_seconds": 0.0001548000000184402
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0002595,
+            "elapsed_seconds": 0.0005734000005759299
           }
         },
         {
@@ -32753,7 +32753,7 @@
             "stationarity_residual": 8.881784197001252e-15
           },
           "normalized_gap": 3.8406882449284804e-16,
-          "elapsed_seconds": 0.0003831999929388985,
+          "elapsed_seconds": 0.0011095000081695616,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -33041,9 +33041,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.21e-05,
-            "solve_seconds": 2.1e-06,
-            "elapsed_seconds": 0.0001303000026382506,
+            "setup_seconds": 2.97e-05,
+            "solve_seconds": 6.5e-06,
+            "elapsed_seconds": 0.00035030000435654074,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -33267,8 +33267,8 @@
             "stationarity_residual": 8.881784197001252e-15
           },
           "normalized_gap": 3.8406882449284804e-16,
-          "elapsed_seconds": 0.0002623999898787588,
-          "update_seconds": 0.00013939999917056412,
+          "elapsed_seconds": 0.0009776000079000369,
+          "update_seconds": 0.00039670000842306763,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -33557,9 +33557,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1e-06,
-            "elapsed_seconds": 6.289999873843044e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 5.7e-06,
+            "elapsed_seconds": 0.0003335999936098233,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -33601,7 +33601,7 @@
         0.14985446303392358,
         -0.3309204296665249
       ],
-      "generation_seconds": 0.0014451000024564564,
+      "generation_seconds": 0.0050405000074533746,
       "runs": [
         {
           "method": "lifted",
@@ -33802,7 +33802,7 @@
             "stationarity_residual": 2.767965128517711e-07
           },
           "normalized_gap": 3.461066551095419e-14,
-          "elapsed_seconds": 0.0051162000017939135,
+          "elapsed_seconds": 0.01890689998981543,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -34090,9 +34090,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001434,
-            "solve_seconds": 0.0002416,
-            "elapsed_seconds": 0.0047996000066632405
+            "setup_seconds": 0.0003433,
+            "solve_seconds": 0.0005245,
+            "elapsed_seconds": 0.0178678999945987
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -34296,8 +34296,8 @@
             "stationarity_residual": 2.476407559011074e-07
           },
           "normalized_gap": 2.966628472367502e-14,
-          "elapsed_seconds": 0.004402599995955825,
-          "update_seconds": 0.004067400004714727,
+          "elapsed_seconds": 0.015019399987068027,
+          "update_seconds": 0.013803699999698438,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -34586,9 +34586,9 @@
               "nnz": 1500
             },
             "iterations": 50,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001478,
-            "elapsed_seconds": 0.00026789998810272664
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.000298,
+            "elapsed_seconds": 0.0009511999960523099
           }
         },
         {
@@ -34814,7 +34814,7 @@
             "stationarity_residual": 9.980709692284204e-10
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0010846000077435747,
+          "elapsed_seconds": 0.003645599994342774,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -35102,9 +35102,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 6.85e-05,
-            "solve_seconds": 7.14e-05,
-            "elapsed_seconds": 0.0007921000069472939
+            "setup_seconds": 0.0001862,
+            "solve_seconds": 0.0001515,
+            "elapsed_seconds": 0.0026486999995540828
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -35308,8 +35308,8 @@
             "stationarity_residual": 5.854443045904997e-07
           },
           "normalized_gap": 1.1410109509105777e-14,
-          "elapsed_seconds": 0.0003513999981805682,
-          "update_seconds": 0.00016880000475794077,
+          "elapsed_seconds": 0.0010234999936074018,
+          "update_seconds": 0.0005078000103821978,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -35598,9 +35598,9 @@
               "nnz": 840
             },
             "iterations": 25,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 3.29e-05,
-            "elapsed_seconds": 0.00012319999223109335
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 8.38e-05,
+            "elapsed_seconds": 0.00034020000020973384
           }
         },
         {
@@ -35802,7 +35802,7 @@
             "stationarity_residual": 1.0658141036401503e-14
           },
           "normalized_gap": 1.9016849181842962e-16,
-          "elapsed_seconds": 0.00048180000158026814,
+          "elapsed_seconds": 0.0011545000015757978,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -36090,9 +36090,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.06e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.000229199999012053,
+            "setup_seconds": 3.63e-05,
+            "solve_seconds": 4.5e-06,
+            "elapsed_seconds": 0.0005122000002302229,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -36316,8 +36316,8 @@
             "stationarity_residual": 1.0658141036401503e-14
           },
           "normalized_gap": 1.9016849181842962e-16,
-          "elapsed_seconds": 0.00027069999487139285,
-          "update_seconds": 0.00014409999130293727,
+          "elapsed_seconds": 0.0007320000004256144,
+          "update_seconds": 0.0003792999923462048,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -36606,9 +36606,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.1e-06,
-            "elapsed_seconds": 6.479999865405262e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 4.5e-06,
+            "elapsed_seconds": 0.00017729999672155827,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -36650,7 +36650,7 @@
         0.09218424841268424,
         -0.2457817165458685
       ],
-      "generation_seconds": 0.001511100010247901,
+      "generation_seconds": 0.00550640000437852,
       "runs": [
         {
           "method": "lifted",
@@ -36851,7 +36851,7 @@
             "stationarity_residual": 5.7871883290249924e-08
           },
           "normalized_gap": 2.228335336764766e-15,
-          "elapsed_seconds": 0.00514189999375958,
+          "elapsed_seconds": 0.015679899996030144,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -37139,9 +37139,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001399,
-            "solve_seconds": 0.0002369,
-            "elapsed_seconds": 0.0048393000033684075
+            "setup_seconds": 0.0002401,
+            "solve_seconds": 0.0004942,
+            "elapsed_seconds": 0.014778400000068359
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -37345,8 +37345,8 @@
             "stationarity_residual": 1.7102728119815805e-09
           },
           "normalized_gap": 6.553927461072842e-16,
-          "elapsed_seconds": 0.0044024999951943755,
-          "update_seconds": 0.0040065000066533685,
+          "elapsed_seconds": 0.013251199998194352,
+          "update_seconds": 0.012090799995348789,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -37635,9 +37635,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002101,
-            "elapsed_seconds": 0.00033000000985339284
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003899,
+            "elapsed_seconds": 0.0009038999996846542
           }
         },
         {
@@ -37863,7 +37863,7 @@
             "stationarity_residual": 1.5427161774254278e-09
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0010925000096904114,
+          "elapsed_seconds": 0.0035198999976273626,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -38151,9 +38151,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.09e-05,
-            "solve_seconds": 7.61e-05,
-            "elapsed_seconds": 0.000800199995865114
+            "setup_seconds": 0.0001655,
+            "solve_seconds": 0.00014,
+            "elapsed_seconds": 0.0024665999953867868
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -38357,8 +38357,8 @@
             "stationarity_residual": 2.5561774908716232e-11
           },
           "normalized_gap": 1.3107854922145684e-16,
-          "elapsed_seconds": 0.0003834999952232465,
-          "update_seconds": 0.00016999999934341758,
+          "elapsed_seconds": 0.0012774999922839925,
+          "update_seconds": 0.0005993999948259443,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -38647,9 +38647,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.07e-05,
-            "elapsed_seconds": 0.00014930000179447234
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001544,
+            "elapsed_seconds": 0.00047980000090319663
           }
         },
         {
@@ -38851,7 +38851,7 @@
             "stationarity_residual": 7.105427357601002e-15
           },
           "normalized_gap": 2.621570984429137e-16,
-          "elapsed_seconds": 0.00037740000698249787,
+          "elapsed_seconds": 0.0012065000046277419,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -39139,9 +39139,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.21e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.0001326000055996701,
+            "setup_seconds": 3.59e-05,
+            "solve_seconds": 7.8e-06,
+            "elapsed_seconds": 0.0004924000095343217,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -39365,8 +39365,8 @@
             "stationarity_residual": 7.105427357601002e-15
           },
           "normalized_gap": 2.621570984429137e-16,
-          "elapsed_seconds": 0.00028140000358689576,
-          "update_seconds": 0.00015690000145696104,
+          "elapsed_seconds": 0.0007845000072848052,
+          "update_seconds": 0.0004000000044470653,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -39655,9 +39655,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 6.389999180100858e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 5.6e-06,
+            "elapsed_seconds": 0.0002060000115307048,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -39699,7 +39699,7 @@
         0.05079613546623325,
         -0.16809941291864133
       ],
-      "generation_seconds": 0.001481900006183423,
+      "generation_seconds": 0.005278299999190494,
       "runs": [
         {
           "method": "lifted",
@@ -39900,7 +39900,7 @@
             "stationarity_residual": 7.724659135389349e-07
           },
           "normalized_gap": 5.905020873484377e-13,
-          "elapsed_seconds": 0.0051528000039979815,
+          "elapsed_seconds": 0.01534939999692142,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -40188,9 +40188,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001522,
-            "solve_seconds": 0.0002192,
-            "elapsed_seconds": 0.004840399997192435
+            "setup_seconds": 0.0002812,
+            "solve_seconds": 0.0004716,
+            "elapsed_seconds": 0.014247300001443364
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -40394,8 +40394,8 @@
             "stationarity_residual": 3.492431233053657e-08
           },
           "normalized_gap": 7.815304616069322e-16,
-          "elapsed_seconds": 0.004876699997112155,
-          "update_seconds": 0.004426600004080683,
+          "elapsed_seconds": 0.01663420000113547,
+          "update_seconds": 0.01558120000117924,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -40684,9 +40684,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002107,
-            "elapsed_seconds": 0.00037009999505244195
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0004159,
+            "elapsed_seconds": 0.0008637999999336898
           }
         },
         {
@@ -40912,7 +40912,7 @@
             "stationarity_residual": 5.59225557203469e-10
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0011252000113017857,
+          "elapsed_seconds": 0.0035109000018564984,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -41200,9 +41200,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.03e-05,
-            "solve_seconds": 6.93e-05,
-            "elapsed_seconds": 0.0008218000002671033
+            "setup_seconds": 0.0001769,
+            "solve_seconds": 0.0001574,
+            "elapsed_seconds": 0.00253730000986252
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -41406,8 +41406,8 @@
             "stationarity_residual": 3.460520758662137e-11
           },
           "normalized_gap": 3.349416264029709e-16,
-          "elapsed_seconds": 0.0003718999942066148,
-          "update_seconds": 0.0001680999994277954,
+          "elapsed_seconds": 0.0011552000069059432,
+          "update_seconds": 0.0005163000023458153,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -41696,9 +41696,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.1e-05,
-            "elapsed_seconds": 0.000142400007462129
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001265,
+            "elapsed_seconds": 0.00043530001130420715
           }
         },
         {
@@ -41900,7 +41900,7 @@
             "stationarity_residual": 5.329070518200751e-15
           },
           "normalized_gap": 2.232944176019806e-16,
-          "elapsed_seconds": 0.00034470000537112355,
+          "elapsed_seconds": 0.0011287999950582162,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -42188,9 +42188,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.22e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.00011079999967478216,
+            "setup_seconds": 3.4e-05,
+            "solve_seconds": 7e-06,
+            "elapsed_seconds": 0.0004360000020824373,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -42414,8 +42414,8 @@
             "stationarity_residual": 5.329070518200751e-15
           },
           "normalized_gap": 2.232944176019806e-16,
-          "elapsed_seconds": 0.0002840000088326633,
-          "update_seconds": 0.0001551999885123223,
+          "elapsed_seconds": 0.000869399998919107,
+          "update_seconds": 0.00045149998913984746,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -42704,9 +42704,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1e-06,
-            "elapsed_seconds": 6.740000389982015e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 4.7e-06,
+            "elapsed_seconds": 0.00022820000594947487,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -42748,7 +42748,7 @@
         0.02341526789525651,
         -0.10570926279112605
       ],
-      "generation_seconds": 0.0014682999899378046,
+      "generation_seconds": 0.005028300001868047,
       "runs": [
         {
           "method": "lifted",
@@ -42949,7 +42949,7 @@
             "stationarity_residual": 2.2735775040416684e-07
           },
           "normalized_gap": 1.2761165387529817e-13,
-          "elapsed_seconds": 0.005193599994527176,
+          "elapsed_seconds": 0.015938800002913922,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -43237,9 +43237,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001457,
-            "solve_seconds": 0.0002193,
-            "elapsed_seconds": 0.004875800004811026
+            "setup_seconds": 0.0002649,
+            "solve_seconds": 0.0004587,
+            "elapsed_seconds": 0.014660799992270768
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -43443,8 +43443,8 @@
             "stationarity_residual": 2.5417712334337246e-10
           },
           "normalized_gap": 4.509245719975201e-16,
-          "elapsed_seconds": 0.004570099990814924,
-          "update_seconds": 0.00410780000675004,
+          "elapsed_seconds": 0.01619090000167489,
+          "update_seconds": 0.014655100007075816,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -43733,9 +43733,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002687,
-            "elapsed_seconds": 0.00039310001011472195
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0006373,
+            "elapsed_seconds": 0.0012393999932100996
           }
         },
         {
@@ -43961,7 +43961,7 @@
             "stationarity_residual": 1.1212151207473653e-09
           },
           "normalized_gap": 3.3819342899814005e-16,
-          "elapsed_seconds": 0.0010999000078300014,
+          "elapsed_seconds": 0.0037788000045111403,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -44249,9 +44249,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 6.76e-05,
-            "solve_seconds": 7.08e-05,
-            "elapsed_seconds": 0.0007982000097399577
+            "setup_seconds": 0.0001927,
+            "solve_seconds": 0.0001352,
+            "elapsed_seconds": 0.0027639000036288053
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -44455,8 +44455,8 @@
             "stationarity_residual": 3.367972567329384e-11
           },
           "normalized_gap": 2.2546228599876003e-16,
-          "elapsed_seconds": 0.0004202999989502132,
-          "update_seconds": 0.0001945000112755224,
+          "elapsed_seconds": 0.001293599998462014,
+          "update_seconds": 0.0007171999895945191,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -44745,9 +44745,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.29e-05,
-            "elapsed_seconds": 0.00016170000890269876
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001322,
+            "elapsed_seconds": 0.0003905000048689544
           }
         },
         {
@@ -44949,7 +44949,7 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 4.509245719975201e-16,
-          "elapsed_seconds": 0.0003797999961534515,
+          "elapsed_seconds": 0.0009817999962251633,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -45237,9 +45237,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.06e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.00011820001236628741,
+            "setup_seconds": 2.92e-05,
+            "solve_seconds": 7e-06,
+            "elapsed_seconds": 0.0003682999958982691,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -45463,8 +45463,8 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 4.509245719975201e-16,
-          "elapsed_seconds": 0.0002916999947046861,
-          "update_seconds": 0.00016320000577252358,
+          "elapsed_seconds": 0.0006358000100590289,
+          "update_seconds": 0.0003284999984316528,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -45753,9 +45753,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.1e-06,
-            "elapsed_seconds": 6.650001159869134e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 1.9e-06,
+            "elapsed_seconds": 0.00015800000983290374,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -45797,7 +45797,7 @@
         0.0068413617366530725,
         -0.06002979879490833
       ],
-      "generation_seconds": 0.0014841999945929274,
+      "generation_seconds": 0.004705199986346997,
       "runs": [
         {
           "method": "lifted",
@@ -45998,7 +45998,7 @@
             "stationarity_residual": 2.1528048677055267e-07
           },
           "normalized_gap": 2.343944976125887e-13,
-          "elapsed_seconds": 0.005206699992413633,
+          "elapsed_seconds": 0.016795100003946573,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -46286,9 +46286,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001334,
-            "solve_seconds": 0.00017,
-            "elapsed_seconds": 0.004881100001512095
+            "setup_seconds": 0.0003215,
+            "solve_seconds": 0.0003423,
+            "elapsed_seconds": 0.01560290000634268
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -46492,8 +46492,8 @@
             "stationarity_residual": 1.78172623321421e-07
           },
           "normalized_gap": 1.9566378874464238e-13,
-          "elapsed_seconds": 0.004651399998692796,
-          "update_seconds": 0.004293500009225681,
+          "elapsed_seconds": 0.014036100008524954,
+          "update_seconds": 0.013166499993531033,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -46782,9 +46782,9 @@
               "nnz": 1500
             },
             "iterations": 50,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001669,
-            "elapsed_seconds": 0.000291300006210804
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0002875,
+            "elapsed_seconds": 0.0006829000049037859
           }
         },
         {
@@ -47010,7 +47010,7 @@
             "stationarity_residual": 7.507144150764589e-08
           },
           "normalized_gap": 4.154505103482133e-15,
-          "elapsed_seconds": 0.0011187000054633245,
+          "elapsed_seconds": 0.003074299995205365,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -47298,9 +47298,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.09e-05,
-            "solve_seconds": 7.07e-05,
-            "elapsed_seconds": 0.0008027999865589663
+            "setup_seconds": 0.0001556,
+            "solve_seconds": 0.0001355,
+            "elapsed_seconds": 0.0021542000031331554
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -47504,8 +47504,8 @@
             "stationarity_residual": 2.8148150475401458e-11
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0003837000112980604,
-          "update_seconds": 0.0001748000067891553,
+          "elapsed_seconds": 0.0009861999860731885,
+          "update_seconds": 0.0004630999901564792,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -47794,9 +47794,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.28e-05,
-            "elapsed_seconds": 0.00014570000348612666
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001295,
+            "elapsed_seconds": 0.00035319999733474106
           }
         },
         {
@@ -47998,7 +47998,7 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.00035209998895879835,
+          "elapsed_seconds": 0.0015150999970501289,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -48286,9 +48286,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.14e-05,
-            "solve_seconds": 2.1e-06,
-            "elapsed_seconds": 0.00011399999493733048,
+            "setup_seconds": 2.96e-05,
+            "solve_seconds": 4.4e-06,
+            "elapsed_seconds": 0.0009254999895347282,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -48512,8 +48512,8 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.00027039999258704484,
-          "update_seconds": 0.00013970000145491213,
+          "elapsed_seconds": 0.0006529999955091625,
+          "update_seconds": 0.00034149999555666,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -48802,9 +48802,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 6.740000389982015e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.4e-06,
+            "elapsed_seconds": 0.00015859999984968454,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -48846,7 +48846,7 @@
         -0.0020826477082709688,
         -0.02921029565433209
       ],
-      "generation_seconds": 0.0015457999979844317,
+      "generation_seconds": 0.004316100006690249,
       "runs": [
         {
           "method": "lifted",
@@ -49047,7 +49047,7 @@
             "stationarity_residual": 2.2878202887710586e-08
           },
           "normalized_gap": 4.107825191113079e-15,
-          "elapsed_seconds": 0.0052641999936895445,
+          "elapsed_seconds": 0.012446699998690747,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -49335,9 +49335,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001413,
-            "solve_seconds": 0.0002428,
-            "elapsed_seconds": 0.004960099991876632
+            "setup_seconds": 0.0002181,
+            "solve_seconds": 0.0004728,
+            "elapsed_seconds": 0.01174620000529103
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -49541,8 +49541,8 @@
             "stationarity_residual": 1.444834918463184e-08
           },
           "normalized_gap": 2.4424906541753444e-15,
-          "elapsed_seconds": 0.004581999994115904,
-          "update_seconds": 0.0041409999976167455,
+          "elapsed_seconds": 0.014569399994798005,
+          "update_seconds": 0.013487699994584545,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -49831,9 +49831,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002524,
-            "elapsed_seconds": 0.00037290000182110816
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0004807,
+            "elapsed_seconds": 0.0008944000001065433
           }
         },
         {
@@ -50059,7 +50059,7 @@
             "stationarity_residual": 4.535541231476259e-08
           },
           "normalized_gap": 2.4424906541753444e-15,
-          "elapsed_seconds": 0.0010970000002998859,
+          "elapsed_seconds": 0.0027910000062547624,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -50347,9 +50347,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.29e-05,
-            "solve_seconds": 7.15e-05,
-            "elapsed_seconds": 0.0008049000025494024
+            "setup_seconds": 0.0001443,
+            "solve_seconds": 0.0001307,
+            "elapsed_seconds": 0.0020195999968564138
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -50553,8 +50553,8 @@
             "stationarity_residual": 2.125988274460759e-11
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.00039420000393874943,
-          "update_seconds": 0.00018139999883715063,
+          "elapsed_seconds": 0.0008728000102564692,
+          "update_seconds": 0.0003853000089293346,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -50843,9 +50843,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.33e-05,
-            "elapsed_seconds": 0.0001503000094089657
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001274,
+            "elapsed_seconds": 0.00032249999640043825
           }
         },
         {
@@ -51047,7 +51047,7 @@
             "stationarity_residual": 2.220446049250313e-15
           },
           "normalized_gap": 3.3306690738754696e-16,
-          "elapsed_seconds": 0.00036619999445974827,
+          "elapsed_seconds": 0.0010371000098530203,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -51335,9 +51335,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.23e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.00011419999646022916,
+            "setup_seconds": 3.85e-05,
+            "solve_seconds": 7.1e-06,
+            "elapsed_seconds": 0.0004383000050438568,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -51561,8 +51561,8 @@
             "stationarity_residual": 2.220446049250313e-15
           },
           "normalized_gap": 3.3306690738754696e-16,
-          "elapsed_seconds": 0.0002719000040087849,
-          "update_seconds": 0.00014460000966209918,
+          "elapsed_seconds": 0.0008154999959515408,
+          "update_seconds": 0.0003850999928545207,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -51851,9 +51851,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1e-06,
-            "elapsed_seconds": 6.520000169984996e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 3.9e-06,
+            "elapsed_seconds": 0.00025560001085978,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -51895,7 +51895,7 @@
         -0.0060160245098430775,
         -0.010123472361388983
       ],
-      "generation_seconds": 0.0014940000110073015,
+      "generation_seconds": 0.004667500004870817,
       "runs": [
         {
           "method": "lifted",
@@ -52096,7 +52096,7 @@
             "stationarity_residual": 1.873890953518753e-08
           },
           "normalized_gap": 2.3869795029440866e-15,
-          "elapsed_seconds": 0.0053004999936092645,
+          "elapsed_seconds": 0.013881500010029413,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -52384,9 +52384,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001357,
-            "solve_seconds": 0.0002477,
-            "elapsed_seconds": 0.004962900013197213
+            "setup_seconds": 0.0002326,
+            "solve_seconds": 0.00048,
+            "elapsed_seconds": 0.01298480000696145
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -52590,8 +52590,8 @@
             "stationarity_residual": 4.087625797727828e-10
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.004605299996910617,
-          "update_seconds": 0.004178299990599044,
+          "elapsed_seconds": 0.012645399998291396,
+          "update_seconds": 0.011053499998524785,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -52880,9 +52880,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002347,
-            "elapsed_seconds": 0.0003581000055419281
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0007479,
+            "elapsed_seconds": 0.0013797999999951571
           }
         },
         {
@@ -53108,7 +53108,7 @@
             "stationarity_residual": 2.666311393895171e-08
           },
           "normalized_gap": 9.992007221626409e-16,
-          "elapsed_seconds": 0.0010925999958999455,
+          "elapsed_seconds": 0.003050500003155321,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -53396,9 +53396,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.27e-05,
-            "solve_seconds": 7.11e-05,
-            "elapsed_seconds": 0.0008046000002650544
+            "setup_seconds": 0.0001461,
+            "solve_seconds": 0.00014,
+            "elapsed_seconds": 0.002068899993901141
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -53602,8 +53602,8 @@
             "stationarity_residual": 1.4767742584745743e-11
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0004388999950606376,
-          "update_seconds": 0.00018890001229010522,
+          "elapsed_seconds": 0.0011152000079164281,
+          "update_seconds": 0.0005154000100446865,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -53892,9 +53892,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.36e-05,
-            "elapsed_seconds": 0.000179000009666197
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.00013,
+            "elapsed_seconds": 0.0004120999947190285
           }
         },
         {
@@ -54096,7 +54096,7 @@
             "stationarity_residual": 1.1102230246251565e-15
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.00036099999852012843,
+          "elapsed_seconds": 0.0012455999967642128,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -54384,9 +54384,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.11e-05,
-            "solve_seconds": 1.9e-06,
-            "elapsed_seconds": 0.00011629999789875001,
+            "setup_seconds": 0.0001205,
+            "solve_seconds": 8.1e-06,
+            "elapsed_seconds": 0.0005439999949885532,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -54610,8 +54610,8 @@
             "stationarity_residual": 1.1102230246251565e-15
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.00026780000189319253,
-          "update_seconds": 0.00014200000441633165,
+          "elapsed_seconds": 0.0007445999945048243,
+          "update_seconds": 0.00039850000757724047,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -54900,9 +54900,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 6.350000330712646e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2e-06,
+            "elapsed_seconds": 0.000179000009666197,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -54944,7 +54944,7 @@
         -0.006979079934597346,
         0.0004929181138463024
       ],
-      "generation_seconds": 0.0015504999901168048,
+      "generation_seconds": 0.004820700007257983,
       "runs": [
         {
           "method": "lifted",
@@ -55145,7 +55145,7 @@
             "stationarity_residual": 1.5233770989109274e-07
           },
           "normalized_gap": 1.743778732521406e-13,
-          "elapsed_seconds": 0.0053982999961590394,
+          "elapsed_seconds": 0.013495499995769933,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -55433,9 +55433,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001352,
-            "solve_seconds": 0.0002558,
-            "elapsed_seconds": 0.0050971000018762425
+            "setup_seconds": 0.0002567,
+            "solve_seconds": 0.0005003,
+            "elapsed_seconds": 0.012748299996019341
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -55639,8 +55639,8 @@
             "stationarity_residual": 1.200212002010109e-07
           },
           "normalized_gap": 1.630015566966847e-13,
-          "elapsed_seconds": 0.0044430999987525865,
-          "update_seconds": 0.0040932999982032925,
+          "elapsed_seconds": 0.011764599999878556,
+          "update_seconds": 0.010970699993777089,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -55929,9 +55929,9 @@
               "nnz": 1500
             },
             "iterations": 50,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001589,
-            "elapsed_seconds": 0.0002815000043483451
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0002755,
+            "elapsed_seconds": 0.0006207000114955008
           }
         },
         {
@@ -56157,7 +56157,7 @@
             "stationarity_residual": 1.0577493769758917e-08
           },
           "normalized_gap": 1.5959455978986625e-16,
-          "elapsed_seconds": 0.0011186000047018752,
+          "elapsed_seconds": 0.0029932999896118417,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -56445,9 +56445,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.41e-05,
-            "solve_seconds": 7.45e-05,
-            "elapsed_seconds": 0.0008335000020451844
+            "setup_seconds": 0.0001324,
+            "solve_seconds": 0.0001374,
+            "elapsed_seconds": 0.0021161000040592626
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -56651,8 +56651,8 @@
             "stationarity_residual": 9.444889315216406e-12
           },
           "normalized_gap": 3.469446951953614e-18,
-          "elapsed_seconds": 0.0003859999997075647,
-          "update_seconds": 0.00017059998936019838,
+          "elapsed_seconds": 0.0009279999940190464,
+          "update_seconds": 0.0004199000104563311,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -56941,9 +56941,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.21e-05,
-            "elapsed_seconds": 0.0001512000017100945
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001234,
+            "elapsed_seconds": 0.000348299989127554
           }
         },
         {
@@ -57145,7 +57145,7 @@
             "stationarity_residual": 3.3306690738754696e-16
           },
           "normalized_gap": 1.3877787807814457e-17,
-          "elapsed_seconds": 0.0003566999948816374,
+          "elapsed_seconds": 0.0009221999935107306,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -57433,9 +57433,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.13e-05,
-            "solve_seconds": 1.9e-06,
-            "elapsed_seconds": 0.00011629999789875001,
+            "setup_seconds": 2.71e-05,
+            "solve_seconds": 8.7e-06,
+            "elapsed_seconds": 0.0003232000017305836,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -57659,8 +57659,8 @@
             "stationarity_residual": 3.3306690738754696e-16
           },
           "normalized_gap": 1.3877787807814457e-17,
-          "elapsed_seconds": 0.00026529999740887433,
-          "update_seconds": 0.0001402000052621588,
+          "elapsed_seconds": 0.0006858999986434355,
+          "update_seconds": 0.00036980000732000917,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -57949,9 +57949,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 6.259999645408243e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.2e-06,
+            "elapsed_seconds": 0.00016569999570492655,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -57993,7 +57993,7 @@
         -0.006382563437558662,
         0.00547224685654053
       ],
-      "generation_seconds": 0.0014831000007689,
+      "generation_seconds": 0.004725400009192526,
       "runs": [
         {
           "method": "lifted",
@@ -58194,7 +58194,7 @@
             "stationarity_residual": 6.355888459985692e-08
           },
           "normalized_gap": 3.1333551205048327e-14,
-          "elapsed_seconds": 0.005287599997245707,
+          "elapsed_seconds": 0.018164199995226227,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -58482,9 +58482,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001634,
-            "solve_seconds": 0.0003461,
-            "elapsed_seconds": 0.004975599993485957
+            "setup_seconds": 0.0002502,
+            "solve_seconds": 0.0009052,
+            "elapsed_seconds": 0.017174499997054227
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -58688,8 +58688,8 @@
             "stationarity_residual": 1.0504408859448107e-07
           },
           "normalized_gap": 1.0853210691275095e-13,
-          "elapsed_seconds": 0.00475229999574367,
-          "update_seconds": 0.004062699998030439,
+          "elapsed_seconds": 0.014718100006575696,
+          "update_seconds": 0.013258800012408756,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -58978,9 +58978,9 @@
               "nnz": 1500
             },
             "iterations": 225,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0004998,
-            "elapsed_seconds": 0.00061860001005698
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0009684,
+            "elapsed_seconds": 0.0012855999957537279
           }
         },
         {
@@ -59206,7 +59206,7 @@
             "stationarity_residual": 4.826068128460648e-09
           },
           "normalized_gap": 1.734723475976807e-18,
-          "elapsed_seconds": 0.0010784000041894615,
+          "elapsed_seconds": 0.0027336000057403,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -59494,9 +59494,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 6.81e-05,
-            "solve_seconds": 7e-05,
-            "elapsed_seconds": 0.0007879000040702522
+            "setup_seconds": 0.0001312,
+            "solve_seconds": 0.0001372,
+            "elapsed_seconds": 0.0019261999987065792
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -59700,8 +59700,8 @@
             "stationarity_residual": 5.482919673830912e-12
           },
           "normalized_gap": 3.5887091909270197e-17,
-          "elapsed_seconds": 0.0003664999967440963,
-          "update_seconds": 0.00016480000340379775,
+          "elapsed_seconds": 0.002716499991947785,
+          "update_seconds": 0.0014552000066032633,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -59990,9 +59990,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.07e-05,
-            "elapsed_seconds": 0.00014030000602360815
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0002123,
+            "elapsed_seconds": 0.0007384000055026263
           }
         },
         {
@@ -60194,7 +60194,7 @@
             "stationarity_residual": 1.249000902703301e-16
           },
           "normalized_gap": 3.393552799879629e-17,
-          "elapsed_seconds": 0.00034970001433975995,
+          "elapsed_seconds": 0.001508699991973117,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -60482,9 +60482,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.13e-05,
-            "solve_seconds": 1.8e-06,
-            "elapsed_seconds": 0.0001066999975591898,
+            "setup_seconds": 4.3e-05,
+            "solve_seconds": 5e-06,
+            "elapsed_seconds": 0.0003716999926837161,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -60708,8 +60708,8 @@
             "stationarity_residual": 1.249000902703301e-16
           },
           "normalized_gap": 3.393552799879629e-17,
-          "elapsed_seconds": 0.00031379998836200684,
-          "update_seconds": 0.00017300000763498247,
+          "elapsed_seconds": 0.0008047000010265037,
+          "update_seconds": 0.0004285000031813979,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -60998,9 +60998,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 7.560000813100487e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.9e-06,
+            "elapsed_seconds": 0.0001942999952007085,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -61042,7 +61042,7 @@
         -0.1052881140788387,
         -0.3945277532693411
       ],
-      "generation_seconds": 0.0015091999957803637,
+      "generation_seconds": 0.005000199991627596,
       "runs": [
         {
           "method": "lifted",
@@ -61243,7 +61243,7 @@
             "stationarity_residual": 1.0917673627800052e-06
           },
           "normalized_gap": 1.5717540977747567e-10,
-          "elapsed_seconds": 0.005357400004868396,
+          "elapsed_seconds": 0.014895000000251457,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -61531,9 +61531,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001414,
-            "solve_seconds": 0.0003405,
-            "elapsed_seconds": 0.0050436000019544736
+            "setup_seconds": 0.0002527,
+            "solve_seconds": 0.0007369,
+            "elapsed_seconds": 0.014059199995244853
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -61737,8 +61737,8 @@
             "stationarity_residual": 2.101101919845168e-06
           },
           "normalized_gap": 2.2571509646053428e-11,
-          "elapsed_seconds": 0.004970000009052455,
-          "update_seconds": 0.0042132999951718375,
+          "elapsed_seconds": 0.013331900001503527,
+          "update_seconds": 0.011700700008077547,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -62027,9 +62027,9 @@
               "nnz": 1500
             },
             "iterations": 225,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0005475,
-            "elapsed_seconds": 0.0006856999971205369
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0011118,
+            "elapsed_seconds": 0.001447700007702224
           }
         },
         {
@@ -62255,7 +62255,7 @@
             "stationarity_residual": 6.131720750590652e-07
           },
           "normalized_gap": 2.954539390215826e-11,
-          "elapsed_seconds": 0.0012193000002298504,
+          "elapsed_seconds": 0.0028295999945839867,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -62543,9 +62543,9 @@
               "nnz": 840
             },
             "iterations": 100,
-            "setup_seconds": 7.26e-05,
-            "solve_seconds": 0.0001461,
-            "elapsed_seconds": 0.0009118000016314909
+            "setup_seconds": 0.000124,
+            "solve_seconds": 0.0002786,
+            "elapsed_seconds": 0.002068599991616793
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -62749,8 +62749,8 @@
             "stationarity_residual": 5.384182443779473e-07
           },
           "normalized_gap": 1.5648881020052363e-09,
-          "elapsed_seconds": 0.0006147999956738204,
-          "update_seconds": 0.00018089999502990395,
+          "elapsed_seconds": 0.001414800004567951,
+          "update_seconds": 0.00042490000487305224,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -63039,9 +63039,9 @@
               "nnz": 840
             },
             "iterations": 225,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.000274,
-            "elapsed_seconds": 0.00036859999818261713
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0005583,
+            "elapsed_seconds": 0.0008170999935828149
           }
         },
         {
@@ -63243,7 +63243,7 @@
             "stationarity_residual": 1.7763568394002505e-14
           },
           "normalized_gap": 4.395452614445975e-12,
-          "elapsed_seconds": 0.0003536999865900725,
+          "elapsed_seconds": 0.0008872999896993861,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -63531,9 +63531,9 @@
               "nnz": 840
             },
             "iterations": 4,
-            "setup_seconds": 1.08e-05,
-            "solve_seconds": 4.3e-06,
-            "elapsed_seconds": 0.00011759999324567616,
+            "setup_seconds": 2.43e-05,
+            "solve_seconds": 7.5e-06,
+            "elapsed_seconds": 0.0002804000105243176,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -63757,8 +63757,8 @@
             "stationarity_residual": 1.7763568394002505e-14
           },
           "normalized_gap": 4.395452614445975e-12,
-          "elapsed_seconds": 0.00027689999842550606,
-          "update_seconds": 0.00014210000517778099,
+          "elapsed_seconds": 0.0006680000078631565,
+          "update_seconds": 0.0003395000094315037,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -64047,9 +64047,9 @@
               "nnz": 840
             },
             "iterations": 4,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 2.4e-06,
-            "elapsed_seconds": 7.049999840091914e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 5.4e-06,
+            "elapsed_seconds": 0.0001720000000204891,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -64091,7 +64091,7 @@
         -0.16419366473289873,
         -0.19452775327125907
       ],
-      "generation_seconds": 0.0015289000002667308,
+      "generation_seconds": 0.004702000005636364,
       "runs": [
         {
           "method": "lifted",
@@ -64292,7 +64292,7 @@
             "stationarity_residual": 2.453179281007335e-06
           },
           "normalized_gap": 4.144750588067232e-10,
-          "elapsed_seconds": 0.005371300008846447,
+          "elapsed_seconds": 0.017859899991890416,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -64580,9 +64580,9 @@
               "nnz": 1500
             },
             "iterations": 150,
-            "setup_seconds": 0.0001303,
-            "solve_seconds": 0.0003444,
-            "elapsed_seconds": 0.0050608000019565225
+            "setup_seconds": 0.0002322,
+            "solve_seconds": 0.0007102,
+            "elapsed_seconds": 0.016943299997365102
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -64786,8 +64786,8 @@
             "stationarity_residual": 1.2471475940535467e-07
           },
           "normalized_gap": 1.2490174262246602e-11,
-          "elapsed_seconds": 0.004734999994980171,
-          "update_seconds": 0.004238599998643622,
+          "elapsed_seconds": 0.01454340000054799,
+          "update_seconds": 0.013328699991689064,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -65076,9 +65076,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002964,
-            "elapsed_seconds": 0.00042490000487305224
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0005198,
+            "elapsed_seconds": 0.0010054000013042241
           }
         },
         {
@@ -65304,7 +65304,7 @@
             "stationarity_residual": 1.7386974391353505e-06
           },
           "normalized_gap": 5.2610532160068615e-11,
-          "elapsed_seconds": 0.0014106000016909093,
+          "elapsed_seconds": 0.003222200000891462,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -65592,9 +65592,9 @@
               "nnz": 840
             },
             "iterations": 225,
-            "setup_seconds": 9.82e-05,
-            "solve_seconds": 0.0002917,
-            "elapsed_seconds": 0.0010898000036831945
+            "setup_seconds": 0.0001709,
+            "solve_seconds": 0.0005449,
+            "elapsed_seconds": 0.0024107999925035983
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -65798,8 +65798,8 @@
             "stationarity_residual": 2.340752823709602e-06
           },
           "normalized_gap": 3.7472031605213686e-10,
-          "elapsed_seconds": 0.0006332000048132613,
-          "update_seconds": 0.0002886000002035871,
+          "elapsed_seconds": 0.0012378999963402748,
+          "update_seconds": 0.0004474000015761703,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -66088,9 +66088,9 @@
               "nnz": 840
             },
             "iterations": 150,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001852,
-            "elapsed_seconds": 0.00027859999681822956
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003944,
+            "elapsed_seconds": 0.0006282999966060743
           }
         },
         {
@@ -66292,7 +66292,7 @@
             "stationarity_residual": 1.1157741397482823e-14
           },
           "normalized_gap": 5.401132797799175e-14,
-          "elapsed_seconds": 0.00036559998989105225,
+          "elapsed_seconds": 0.0008872999896993861,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -66580,9 +66580,9 @@
               "nnz": 840
             },
             "iterations": 3,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 3.6e-06,
-            "elapsed_seconds": 0.00011590000940486789,
+            "setup_seconds": 2.61e-05,
+            "solve_seconds": 8.1e-06,
+            "elapsed_seconds": 0.00030470000638160855,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -66806,8 +66806,8 @@
             "stationarity_residual": 1.1157741397482823e-14
           },
           "normalized_gap": 5.401132797799175e-14,
-          "elapsed_seconds": 0.00027609999233391136,
-          "update_seconds": 0.00014810000720899552,
+          "elapsed_seconds": 0.0013572000025305897,
+          "update_seconds": 0.0003512999974191189,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -67096,9 +67096,9 @@
               "nnz": 840
             },
             "iterations": 2,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.4e-06,
-            "elapsed_seconds": 6.609999400097877e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 3.4e-06,
+            "elapsed_seconds": 0.00016900000628083944,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -67140,7 +67140,7 @@
         -0.18309921538715354,
         0.005472246728710883
       ],
-      "generation_seconds": 0.0015472000086447224,
+      "generation_seconds": 0.004717100004199892,
       "runs": [
         {
           "method": "lifted",
@@ -67341,7 +67341,7 @@
             "stationarity_residual": 2.859238184790705e-09
           },
           "normalized_gap": 4.1414458369114485e-13,
-          "elapsed_seconds": 0.005366599987610243,
+          "elapsed_seconds": 0.015562899992801249,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -67629,9 +67629,9 @@
               "nnz": 1500
             },
             "iterations": 175,
-            "setup_seconds": 0.0001399,
-            "solve_seconds": 0.0003946,
-            "elapsed_seconds": 0.005051800006185658
+            "setup_seconds": 0.0002196,
+            "solve_seconds": 0.0008556,
+            "elapsed_seconds": 0.01451529999030754
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -67835,8 +67835,8 @@
             "stationarity_residual": 1.0183645930406355e-08
           },
           "normalized_gap": 4.879462571137351e-13,
-          "elapsed_seconds": 0.004548800003249198,
-          "update_seconds": 0.004174599991529249,
+          "elapsed_seconds": 0.01283960000728257,
+          "update_seconds": 0.011958499992033467,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -68125,9 +68125,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001939,
-            "elapsed_seconds": 0.00030780000088270754
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003773,
+            "elapsed_seconds": 0.0006980000034673139
           }
         },
         {
@@ -68353,7 +68353,7 @@
             "stationarity_residual": 7.746269516384352e-07
           },
           "normalized_gap": 6.920496945172907e-10,
-          "elapsed_seconds": 0.0011921999976038933,
+          "elapsed_seconds": 0.0030316000047605485,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -68641,9 +68641,9 @@
               "nnz": 840
             },
             "iterations": 125,
-            "setup_seconds": 7.05e-05,
-            "solve_seconds": 0.0001618,
-            "elapsed_seconds": 0.0008881999965524301
+            "setup_seconds": 0.0001285,
+            "solve_seconds": 0.0003229,
+            "elapsed_seconds": 0.0022104999952716753
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -68847,8 +68847,8 @@
             "stationarity_residual": 1.6062804607253067e-08
           },
           "normalized_gap": 1.7639708556827308e-11,
-          "elapsed_seconds": 0.0004898000042885542,
-          "update_seconds": 0.0001779000012902543,
+          "elapsed_seconds": 0.0014647999923909083,
+          "update_seconds": 0.0004901999927824363,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -69137,9 +69137,9 @@
               "nnz": 840
             },
             "iterations": 125,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 0.0001613,
-            "elapsed_seconds": 0.00024839999969117343
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0003241,
+            "elapsed_seconds": 0.0007375999994110316
           }
         },
         {
@@ -69341,7 +69341,7 @@
             "stationarity_residual": 7.105427357601002e-15
           },
           "normalized_gap": 9.502361384882865e-16,
-          "elapsed_seconds": 0.000352299990481697,
+          "elapsed_seconds": 0.0014306999946711585,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -69629,9 +69629,9 @@
               "nnz": 840
             },
             "iterations": 2,
-            "setup_seconds": 1.56e-05,
-            "solve_seconds": 2.7e-06,
-            "elapsed_seconds": 0.0001171000039903447,
+            "setup_seconds": 5.86e-05,
+            "solve_seconds": 1.68e-05,
+            "elapsed_seconds": 0.0005729999975301325,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -69855,8 +69855,8 @@
             "stationarity_residual": 7.105427357601002e-15
           },
           "normalized_gap": 9.502361384882865e-16,
-          "elapsed_seconds": 0.00026449999131727964,
-          "update_seconds": 0.0001407999952789396,
+          "elapsed_seconds": 0.0008938000100897625,
+          "update_seconds": 0.0004571000026771799,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -70145,9 +70145,9 @@
               "nnz": 840
             },
             "iterations": 2,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.3e-06,
-            "elapsed_seconds": 6.350000330712646e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 5.8e-06,
+            "elapsed_seconds": 0.00023039999359752983,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -70189,7 +70189,7 @@
         -0.16849405025075725,
         0.14057940463525187
       ],
-      "generation_seconds": 0.001485000000684522,
+      "generation_seconds": 0.004803400006494485,
       "runs": [
         {
           "method": "lifted",
@@ -70390,7 +70390,7 @@
             "stationarity_residual": 6.807505670280989e-10
           },
           "normalized_gap": 1.4432899320127035e-15,
-          "elapsed_seconds": 0.005403100003604777,
+          "elapsed_seconds": 0.014881800001603551,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -70678,9 +70678,9 @@
               "nnz": 1500
             },
             "iterations": 125,
-            "setup_seconds": 0.0001511,
-            "solve_seconds": 0.0002996,
-            "elapsed_seconds": 0.005090599996037781
+            "setup_seconds": 0.0002397,
+            "solve_seconds": 0.0005723,
+            "elapsed_seconds": 0.014097799998125993
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -70884,8 +70884,8 @@
             "stationarity_residual": 1.9276971139764187e-08
           },
           "normalized_gap": 1.2212453270876722e-15,
-          "elapsed_seconds": 0.004571800003759563,
-          "update_seconds": 0.0041406999953323975,
+          "elapsed_seconds": 0.01194539999414701,
+          "update_seconds": 0.011099800001829863,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -71174,9 +71174,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002159,
-            "elapsed_seconds": 0.0003457000129856169
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003626,
+            "elapsed_seconds": 0.0006761000113328919
           }
         },
         {
@@ -71402,7 +71402,7 @@
             "stationarity_residual": 1.824536628447504e-07
           },
           "normalized_gap": 4.5630166312093934e-14,
-          "elapsed_seconds": 0.0011553999938769266,
+          "elapsed_seconds": 0.0026880999939749017,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -71690,9 +71690,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.32e-05,
-            "solve_seconds": 7.28e-05,
-            "elapsed_seconds": 0.0008430000016232952
+            "setup_seconds": 0.0001511,
+            "solve_seconds": 0.0001336,
+            "elapsed_seconds": 0.00191199999244418
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -71896,8 +71896,8 @@
             "stationarity_residual": 5.974776730826132e-12
           },
           "normalized_gap": 1.7763568394002505e-15,
-          "elapsed_seconds": 0.0004118999931961298,
-          "update_seconds": 0.00017590000061318278,
+          "elapsed_seconds": 0.0008788999984972179,
+          "update_seconds": 0.0003684999974211678,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -72186,9 +72186,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 7.03e-05,
-            "elapsed_seconds": 0.00016969999705906957
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001392,
+            "elapsed_seconds": 0.0003406000032555312
           }
         },
         {
@@ -72390,7 +72390,7 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 1.3322676295501878e-15,
-          "elapsed_seconds": 0.00035770000249613076,
+          "elapsed_seconds": 0.0008194000110961497,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -72678,9 +72678,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 2.1e-06,
-            "elapsed_seconds": 0.00011619999713730067,
+            "setup_seconds": 2.37e-05,
+            "solve_seconds": 3.9e-06,
+            "elapsed_seconds": 0.0002629999944474548,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -72904,8 +72904,8 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 1.3322676295501878e-15,
-          "elapsed_seconds": 0.00029350000841077417,
-          "update_seconds": 0.00015619999612681568,
+          "elapsed_seconds": 0.0006390999915311113,
+          "update_seconds": 0.00033229999826289713,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -73194,9 +73194,9 @@
               "nnz": 840
             },
             "iterations": 2,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.7e-06,
-            "elapsed_seconds": 7.210001058410853e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.7e-06,
+            "elapsed_seconds": 0.00015740000526420772,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -73238,7 +73238,7 @@
         -0.13607153902951513,
         0.18364570757716941
       ],
-      "generation_seconds": 0.001546500003314577,
+      "generation_seconds": 0.004407300002640113,
       "runs": [
         {
           "method": "lifted",
@@ -73439,7 +73439,7 @@
             "stationarity_residual": 1.9540721041266806e-08
           },
           "normalized_gap": 2.4838510469153335e-15,
-          "elapsed_seconds": 0.005385900003602728,
+          "elapsed_seconds": 0.017673399997875094,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -73727,9 +73727,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001294,
-            "solve_seconds": 0.0002203,
-            "elapsed_seconds": 0.005061699994257651
+            "setup_seconds": 0.0003559,
+            "solve_seconds": 0.0005639,
+            "elapsed_seconds": 0.016564000005018897
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -73933,8 +73933,8 @@
             "stationarity_residual": 6.22249096692827e-09
           },
           "normalized_gap": 3.5483586384504765e-16,
-          "elapsed_seconds": 0.004599199994117953,
-          "update_seconds": 0.004205300007015467,
+          "elapsed_seconds": 0.014299200003733858,
+          "update_seconds": 0.013295600001583807,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -74223,9 +74223,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002093,
-            "elapsed_seconds": 0.00032669999927747995
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003696,
+            "elapsed_seconds": 0.0007958000060170889
           }
         },
         {
@@ -74451,7 +74451,7 @@
             "stationarity_residual": 5.65109123940033e-08
           },
           "normalized_gap": 6.03220968536581e-15,
-          "elapsed_seconds": 0.0011623000027611852,
+          "elapsed_seconds": 0.0032089000014821067,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -74739,9 +74739,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 8.78e-05,
-            "solve_seconds": 7.04e-05,
-            "elapsed_seconds": 0.0008640000014565885
+            "setup_seconds": 0.0001387,
+            "solve_seconds": 0.000137,
+            "elapsed_seconds": 0.0023413000017171726
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -74945,8 +74945,8 @@
             "stationarity_residual": 2.086331107721914e-11
           },
           "normalized_gap": 1.7741793192252383e-16,
-          "elapsed_seconds": 0.00039239999023266137,
-          "update_seconds": 0.00018010000349022448,
+          "elapsed_seconds": 0.0009773000056156889,
+          "update_seconds": 0.0004262000002199784,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -75235,9 +75235,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.78e-05,
-            "elapsed_seconds": 0.00015010000788606703
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001475,
+            "elapsed_seconds": 0.00038519999361597
           }
         },
         {
@@ -75439,7 +75439,7 @@
             "stationarity_residual": 1.7763568394002505e-15
           },
           "normalized_gap": 1.7741793192252383e-16,
-          "elapsed_seconds": 0.00034130000858567655,
+          "elapsed_seconds": 0.0009258999925805256,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -75727,9 +75727,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.07e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.00011069999891333282,
+            "setup_seconds": 2.96e-05,
+            "solve_seconds": 4.4e-06,
+            "elapsed_seconds": 0.0003181000065524131,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -75953,8 +75953,8 @@
             "stationarity_residual": 1.7763568394002505e-15
           },
           "normalized_gap": 1.7741793192252383e-16,
-          "elapsed_seconds": 0.00025520000781398267,
-          "update_seconds": 0.00013349999790079892,
+          "elapsed_seconds": 0.0006579000037163496,
+          "update_seconds": 0.0003341000119689852,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -76243,9 +76243,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 6.19000056758523e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 3.5e-06,
+            "elapsed_seconds": 0.00016250000044237822,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -76287,7 +76287,7 @@
         -0.10006828656640587,
         0.17638681705392315
       ],
-      "generation_seconds": 0.001508999994257465,
+      "generation_seconds": 0.004847899996093474,
       "runs": [
         {
           "method": "lifted",
@@ -76488,7 +76488,7 @@
             "stationarity_residual": 4.807023401554034e-07
           },
           "normalized_gap": 5.967836734519216e-13,
-          "elapsed_seconds": 0.005310399996233173,
+          "elapsed_seconds": 0.015996000001905486,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -76776,9 +76776,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001506,
-            "solve_seconds": 0.0002153,
-            "elapsed_seconds": 0.004994000002625398
+            "setup_seconds": 0.0002948,
+            "solve_seconds": 0.0004685,
+            "elapsed_seconds": 0.014943100002710707
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -76982,8 +76982,8 @@
             "stationarity_residual": 4.408208909006824e-09
           },
           "normalized_gap": 1.356943322992091e-16,
-          "elapsed_seconds": 0.0045156999985920265,
-          "update_seconds": 0.004104200008441694,
+          "elapsed_seconds": 0.014119400002527982,
+          "update_seconds": 0.012954999998328276,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -77272,9 +77272,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002189,
-            "elapsed_seconds": 0.0003428000054555014
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0004138,
+            "elapsed_seconds": 0.0009352999913971871
           }
         },
         {
@@ -77500,7 +77500,7 @@
             "stationarity_residual": 3.175047957881816e-08
           },
           "normalized_gap": 9.498603260944636e-16,
-          "elapsed_seconds": 0.0010856000008061528,
+          "elapsed_seconds": 0.004856600004131906,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -77788,9 +77788,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.12e-05,
-            "solve_seconds": 7e-05,
-            "elapsed_seconds": 0.0007878000033088028
+            "setup_seconds": 0.0002158,
+            "solve_seconds": 0.0001477,
+            "elapsed_seconds": 0.0033989000075962394
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -77994,8 +77994,8 @@
             "stationarity_residual": 2.9052316106587843e-11
           },
           "normalized_gap": 1.356943322992091e-16,
-          "elapsed_seconds": 0.00037569999403785914,
-          "update_seconds": 0.00016989999858196825,
+          "elapsed_seconds": 0.0015329000016208738,
+          "update_seconds": 0.0008069000032264739,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -78284,9 +78284,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.29e-05,
-            "elapsed_seconds": 0.00014370000280905515
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001661,
+            "elapsed_seconds": 0.0005118999979458749
           }
         },
         {
@@ -78488,7 +78488,7 @@
             "stationarity_residual": 5.329070518200751e-15
           },
           "normalized_gap": 4.070829968976273e-16,
-          "elapsed_seconds": 0.00036780000664293766,
+          "elapsed_seconds": 0.0013215999933890998,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -78776,9 +78776,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.23e-05,
-            "solve_seconds": 1.9e-06,
-            "elapsed_seconds": 0.0001238999975612387,
+            "setup_seconds": 5.09e-05,
+            "solve_seconds": 1.23e-05,
+            "elapsed_seconds": 0.000614999997196719,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -79002,8 +79002,8 @@
             "stationarity_residual": 5.329070518200751e-15
           },
           "normalized_gap": 4.070829968976273e-16,
-          "elapsed_seconds": 0.00027380000392440706,
-          "update_seconds": 0.00014630000805482268,
+          "elapsed_seconds": 0.0007711000071140006,
+          "update_seconds": 0.0003956000000471249,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -79292,9 +79292,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1e-06,
-            "elapsed_seconds": 6.439999560825527e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 3.9e-06,
+            "elapsed_seconds": 0.00019970000721514225,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -79336,7 +79336,7 @@
         -0.06780276982034339,
         0.14626835040670164
       ],
-      "generation_seconds": 0.001537599993753247,
+      "generation_seconds": 0.005132699996465817,
       "runs": [
         {
           "method": "lifted",
@@ -79537,7 +79537,7 @@
             "stationarity_residual": 2.955509970092862e-07
           },
           "normalized_gap": 2.0682667697285713e-13,
-          "elapsed_seconds": 0.005323899997165427,
+          "elapsed_seconds": 0.016796500000054948,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -79825,9 +79825,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001439,
-            "solve_seconds": 0.0002596,
-            "elapsed_seconds": 0.005013300004065968
+            "setup_seconds": 0.0003189,
+            "solve_seconds": 0.0004858,
+            "elapsed_seconds": 0.015757599991047755
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -80031,8 +80031,8 @@
             "stationarity_residual": 2.615697347607636e-07
           },
           "normalized_gap": 1.8363471503288602e-13,
-          "elapsed_seconds": 0.004444600010174327,
-          "update_seconds": 0.004089499998372048,
+          "elapsed_seconds": 0.013192099999287166,
+          "update_seconds": 0.01214330000220798,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -80321,9 +80321,9 @@
               "nnz": 1500
             },
             "iterations": 50,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001552,
-            "elapsed_seconds": 0.0002835999912349507
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0002814,
+            "elapsed_seconds": 0.0008272000122815371
           }
         },
         {
@@ -80549,7 +80549,7 @@
             "stationarity_residual": 7.723120987179755e-08
           },
           "normalized_gap": 1.394052357047444e-15,
-          "elapsed_seconds": 0.0011633999965852126,
+          "elapsed_seconds": 0.0029082999972160906,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -80837,9 +80837,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.31e-05,
-            "solve_seconds": 7.21e-05,
-            "elapsed_seconds": 0.0008572999940952286
+            "setup_seconds": 0.0001828,
+            "solve_seconds": 0.0001417,
+            "elapsed_seconds": 0.002058100013528019
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -81043,8 +81043,8 @@
             "stationarity_residual": 1.0374519892053532e-06
           },
           "normalized_gap": 2.1037517388170516e-14,
-          "elapsed_seconds": 0.0003724000125657767,
-          "update_seconds": 0.00019239999528508633,
+          "elapsed_seconds": 0.0009504000045126304,
+          "update_seconds": 0.00044839999463874847,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -81333,9 +81333,9 @@
               "nnz": 840
             },
             "iterations": 25,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 3.38e-05,
-            "elapsed_seconds": 0.00011700000322889537
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 8.32e-05,
+            "elapsed_seconds": 0.0003201999934390187
           }
         },
         {
@@ -81537,7 +81537,7 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 1.2673203245885853e-16,
-          "elapsed_seconds": 0.0004899999912595376,
+          "elapsed_seconds": 0.0008742000063648447,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -81825,9 +81825,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 2.5e-06,
-            "elapsed_seconds": 0.00024510000366717577,
+            "setup_seconds": 2.87e-05,
+            "solve_seconds": 3.8e-06,
+            "elapsed_seconds": 0.0003232000017305836,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -82051,8 +82051,8 @@
             "stationarity_residual": 3.552713678800501e-15
           },
           "normalized_gap": 1.2673203245885853e-16,
-          "elapsed_seconds": 0.0002823000104399398,
-          "update_seconds": 0.00015409999468829483,
+          "elapsed_seconds": 0.0006151999987196177,
+          "update_seconds": 0.0003108999953838065,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -82341,9 +82341,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1e-06,
-            "elapsed_seconds": 6.669999856967479e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 1.5e-06,
+            "elapsed_seconds": 0.000152299995534122,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -82385,7 +82385,7 @@
         -0.04219387975421823,
         0.10982055025454986
       ],
-      "generation_seconds": 0.0015320999955292791,
+      "generation_seconds": 0.004517000008490868,
       "runs": [
         {
           "method": "lifted",
@@ -82586,7 +82586,7 @@
             "stationarity_residual": 3.5752130234101287e-07
           },
           "normalized_gap": 3.65290168343118e-13,
-          "elapsed_seconds": 0.005237899997155182,
+          "elapsed_seconds": 0.017035800003213808,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -82874,9 +82874,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001407,
-            "solve_seconds": 0.0001749,
-            "elapsed_seconds": 0.004919500002870336
+            "setup_seconds": 0.0002666,
+            "solve_seconds": 0.0003577,
+            "elapsed_seconds": 0.015999499999452382
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -83080,8 +83080,8 @@
             "stationarity_residual": 1.715083186576301e-09
           },
           "normalized_gap": 3.383882986040926e-16,
-          "elapsed_seconds": 0.004669299989473075,
-          "update_seconds": 0.004230499995173886,
+          "elapsed_seconds": 0.014360599991050549,
+          "update_seconds": 0.013425400000414811,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -83370,9 +83370,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002174,
-            "elapsed_seconds": 0.0003665999975055456
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003728,
+            "elapsed_seconds": 0.0007477000035578385
           }
         },
         {
@@ -83598,7 +83598,7 @@
             "stationarity_residual": 7.694870696184353e-08
           },
           "normalized_gap": 2.8763005381347874e-15,
-          "elapsed_seconds": 0.0011992000072496012,
+          "elapsed_seconds": 0.0030390000029001385,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -83886,9 +83886,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.19e-05,
-            "solve_seconds": 7.08e-05,
-            "elapsed_seconds": 0.0008883999980753288
+            "setup_seconds": 0.0002378,
+            "solve_seconds": 0.0001606,
+            "elapsed_seconds": 0.0022997000050963834
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -84092,8 +84092,8 @@
             "stationarity_residual": 1.0009770791823665e-11
           },
           "normalized_gap": 5.075824479061389e-16,
-          "elapsed_seconds": 0.00040639999497216195,
-          "update_seconds": 0.0001838999887695536,
+          "elapsed_seconds": 0.0010426999942865223,
+          "update_seconds": 0.000483600000734441,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -84382,9 +84382,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.27e-05,
-            "elapsed_seconds": 0.00015799999528098851
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001489,
+            "elapsed_seconds": 0.0003895999980159104
           }
         },
         {
@@ -84586,7 +84586,7 @@
             "stationarity_residual": 2.6645352591003757e-15
           },
           "normalized_gap": 5.075824479061389e-16,
-          "elapsed_seconds": 0.00037310000334400684,
+          "elapsed_seconds": 0.0011301000049570575,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -84874,9 +84874,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.09e-05,
-            "solve_seconds": 2.1e-06,
-            "elapsed_seconds": 0.00012379999679978937,
+            "setup_seconds": 4.69e-05,
+            "solve_seconds": 8.3e-06,
+            "elapsed_seconds": 0.0005193999968469143,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -85100,8 +85100,8 @@
             "stationarity_residual": 2.6645352591003757e-15
           },
           "normalized_gap": 5.075824479061389e-16,
-          "elapsed_seconds": 0.00028300000121816993,
-          "update_seconds": 0.00014769998961128294,
+          "elapsed_seconds": 0.0006545000069309026,
+          "update_seconds": 0.00033290000283159316,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -85390,9 +85390,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1.1e-06,
-            "elapsed_seconds": 6.539998867083341e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 4e-06,
+            "elapsed_seconds": 0.00016280000272672623,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -85434,7 +85434,7 @@
         -0.023624899697073314,
         0.07586925031689934
       ],
-      "generation_seconds": 0.00155570000060834,
+      "generation_seconds": 0.0052294000051915646,
       "runs": [
         {
           "method": "lifted",
@@ -85635,7 +85635,7 @@
             "stationarity_residual": 1.0317021992278796e-07
           },
           "normalized_gap": 5.153974820019184e-14,
-          "elapsed_seconds": 0.00522120000096038,
+          "elapsed_seconds": 0.016398499996284954,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -85923,9 +85923,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.000141,
-            "solve_seconds": 0.0001684,
-            "elapsed_seconds": 0.004907299997285008
+            "setup_seconds": 0.0002684,
+            "solve_seconds": 0.0003637,
+            "elapsed_seconds": 0.015217099993606098
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -86129,8 +86129,8 @@
             "stationarity_residual": 1.0191953941723971e-09
           },
           "normalized_gap": 5.632759366141185e-16,
-          "elapsed_seconds": 0.004586999988532625,
-          "update_seconds": 0.00419809999584686,
+          "elapsed_seconds": 0.014491499998257495,
+          "update_seconds": 0.013409699997282587,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -86419,9 +86419,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001942,
-            "elapsed_seconds": 0.00031909999961499125
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003908,
+            "elapsed_seconds": 0.000862000000779517
           }
         },
         {
@@ -86647,7 +86647,7 @@
             "stationarity_residual": 5.5593289083333275e-08
           },
           "normalized_gap": 1.6898278098423555e-15,
-          "elapsed_seconds": 0.001108499986003153,
+          "elapsed_seconds": 0.0031765000021550804,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -86935,9 +86935,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.21e-05,
-            "solve_seconds": 6.98e-05,
-            "elapsed_seconds": 0.0008098999969661236
+            "setup_seconds": 0.0001714,
+            "solve_seconds": 0.0001421,
+            "elapsed_seconds": 0.002257400003145449
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -87141,8 +87141,8 @@
             "stationarity_residual": 1.4635404001621917e-11
           },
           "normalized_gap": 2.8163796830705923e-16,
-          "elapsed_seconds": 0.00039570000080857426,
-          "update_seconds": 0.00018030000501312315,
+          "elapsed_seconds": 0.0010550000006332994,
+          "update_seconds": 0.0004961999948136508,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -87431,9 +87431,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.32e-05,
-            "elapsed_seconds": 0.00015100000018719584
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001381,
+            "elapsed_seconds": 0.00037680000241380185
           }
         },
         {
@@ -87635,7 +87635,7 @@
             "stationarity_residual": 4.440892098500626e-15
           },
           "normalized_gap": 5.632759366141185e-16,
-          "elapsed_seconds": 0.0003530999965732917,
+          "elapsed_seconds": 0.0009639999916544184,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -87923,9 +87923,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.26e-05,
-            "solve_seconds": 1.9e-06,
-            "elapsed_seconds": 0.00011219999578315765,
+            "setup_seconds": 3.13e-05,
+            "solve_seconds": 4.7e-06,
+            "elapsed_seconds": 0.0003482000029180199,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -88149,8 +88149,8 @@
             "stationarity_residual": 4.440892098500626e-15
           },
           "normalized_gap": 5.632759366141185e-16,
-          "elapsed_seconds": 0.0002792000013869256,
-          "update_seconds": 0.00014069999451749027,
+          "elapsed_seconds": 0.0008436000061919913,
+          "update_seconds": 0.00043400000140536577,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -88439,9 +88439,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 9e-07,
-            "elapsed_seconds": 7.259999983943999e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.6e-06,
+            "elapsed_seconds": 0.0002204000047640875,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -88483,7 +88483,7 @@
         -0.011214123914109256,
         0.048238507512741224
       ],
-      "generation_seconds": 0.0015540000022156164,
+      "generation_seconds": 0.004709100001491606,
       "runs": [
         {
           "method": "lifted",
@@ -88684,7 +88684,7 @@
             "stationarity_residual": 3.014542038215495e-08
           },
           "normalized_gap": 7.549516567451064e-15,
-          "elapsed_seconds": 0.005355999994208105,
+          "elapsed_seconds": 0.01576730000670068,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -88972,9 +88972,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.0001341,
-            "solve_seconds": 0.0002663,
-            "elapsed_seconds": 0.0050436000019544736
+            "setup_seconds": 0.000255,
+            "solve_seconds": 0.0004888,
+            "elapsed_seconds": 0.014733799995156005
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -89178,8 +89178,8 @@
             "stationarity_residual": 6.068283647603442e-10
           },
           "normalized_gap": 1.1102230246251565e-16,
-          "elapsed_seconds": 0.004472099986742251,
-          "update_seconds": 0.00406989999464713,
+          "elapsed_seconds": 0.012374900004942901,
+          "update_seconds": 0.011443299998063594,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -89468,9 +89468,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0002009,
-            "elapsed_seconds": 0.00033269998675677925
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003545,
+            "elapsed_seconds": 0.000748499995097518
           }
         },
         {
@@ -89696,7 +89696,7 @@
             "stationarity_residual": 3.99748847357273e-08
           },
           "normalized_gap": 1.887379141862766e-15,
-          "elapsed_seconds": 0.0011445999989518896,
+          "elapsed_seconds": 0.0028411999956006184,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -89984,9 +89984,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.45e-05,
-            "solve_seconds": 7.13e-05,
-            "elapsed_seconds": 0.0008397999918088317
+            "setup_seconds": 0.0001499,
+            "solve_seconds": 0.0001389,
+            "elapsed_seconds": 0.001994799997191876
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -90190,8 +90190,8 @@
             "stationarity_residual": 1.4628298574264316e-11
           },
           "normalized_gap": 2.220446049250313e-16,
-          "elapsed_seconds": 0.00040499999886378646,
-          "update_seconds": 0.00019379999139346182,
+          "elapsed_seconds": 0.0011783000081777573,
+          "update_seconds": 0.0005573000089498237,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -90480,9 +90480,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.31e-05,
-            "elapsed_seconds": 0.00014829999417997897
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001523,
+            "elapsed_seconds": 0.0004420000041136518
           }
         },
         {
@@ -90684,7 +90684,7 @@
             "stationarity_residual": 8.881784197001252e-16
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.00037149999116081744,
+          "elapsed_seconds": 0.0011378000053809956,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -90972,9 +90972,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.05e-05,
-            "solve_seconds": 2e-06,
-            "elapsed_seconds": 0.00011649999942164868,
+            "setup_seconds": 4.22e-05,
+            "solve_seconds": 1.06e-05,
+            "elapsed_seconds": 0.00043489999370649457,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -91198,8 +91198,8 @@
             "stationarity_residual": 8.881784197001252e-16
           },
           "normalized_gap": 0.0,
-          "elapsed_seconds": 0.0002668000088306144,
-          "update_seconds": 0.00014370000280905515,
+          "elapsed_seconds": 0.0007792999967932701,
+          "update_seconds": 0.0004385999927762896,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -91488,9 +91488,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 1e-06,
-            "elapsed_seconds": 6.27999979769811e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 4.6e-06,
+            "elapsed_seconds": 0.00018170000112149864,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -91532,7 +91532,7 @@
         -0.0036109404887400584,
         0.027793326740950752
       ],
-      "generation_seconds": 0.0015188999968813732,
+      "generation_seconds": 0.004785700002685189,
       "runs": [
         {
           "method": "lifted",
@@ -91733,7 +91733,7 @@
             "stationarity_residual": 3.549268479119405e-08
           },
           "normalized_gap": 1.099120794378905e-14,
-          "elapsed_seconds": 0.005369400008930825,
+          "elapsed_seconds": 0.016243300007772632,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -92021,9 +92021,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.000147,
-            "solve_seconds": 0.0002459,
-            "elapsed_seconds": 0.0050396000006003305
+            "setup_seconds": 0.0002201,
+            "solve_seconds": 0.0004741,
+            "elapsed_seconds": 0.015125899997656234
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -92227,8 +92227,8 @@
             "stationarity_residual": 3.187961002253272e-10
           },
           "normalized_gap": 1.1102230246251565e-16,
-          "elapsed_seconds": 0.004519299996900372,
-          "update_seconds": 0.004138699994655326,
+          "elapsed_seconds": 0.013127199999871664,
+          "update_seconds": 0.012036900006933138,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -92517,9 +92517,9 @@
               "nnz": 1500
             },
             "iterations": 75,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001884,
-            "elapsed_seconds": 0.00031280000985134393
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0003992,
+            "elapsed_seconds": 0.0008704999927431345
           }
         },
         {
@@ -92745,7 +92745,7 @@
             "stationarity_residual": 3.0500004744027365e-08
           },
           "normalized_gap": 1.1657341758564144e-15,
-          "elapsed_seconds": 0.0011577999975997955,
+          "elapsed_seconds": 0.002759800001513213,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -93033,9 +93033,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.91e-05,
-            "solve_seconds": 6.88e-05,
-            "elapsed_seconds": 0.0008566000033169985
+            "setup_seconds": 0.0001372,
+            "solve_seconds": 0.0001494,
+            "elapsed_seconds": 0.0019407999934628606
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -93239,8 +93239,8 @@
             "stationarity_residual": 1.2413181593401203e-11
           },
           "normalized_gap": 1.6653345369377348e-16,
-          "elapsed_seconds": 0.0003789000038523227,
-          "update_seconds": 0.0001748999929986894,
+          "elapsed_seconds": 0.0009800000116229057,
+          "update_seconds": 0.0004341000021668151,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -93529,9 +93529,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 6.05e-05,
-            "elapsed_seconds": 0.00014239999291021377
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001292,
+            "elapsed_seconds": 0.00036190000537317246
           }
         },
         {
@@ -93733,7 +93733,7 @@
             "stationarity_residual": 1.1102230246251565e-15
           },
           "normalized_gap": 5.551115123125783e-17,
-          "elapsed_seconds": 0.00034189999860245734,
+          "elapsed_seconds": 0.0018282000091858208,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -94021,9 +94021,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.1e-05,
-            "solve_seconds": 1.8e-06,
-            "elapsed_seconds": 0.00011140000424347818,
+            "setup_seconds": 2.72e-05,
+            "solve_seconds": 3.6e-06,
+            "elapsed_seconds": 0.0007799000013619661,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -94247,8 +94247,8 @@
             "stationarity_residual": 1.1102230246251565e-15
           },
           "normalized_gap": 5.551115123125783e-17,
-          "elapsed_seconds": 0.0002683000057004392,
-          "update_seconds": 0.00013939999917056412,
+          "elapsed_seconds": 0.0006488000071840361,
+          "update_seconds": 0.00033549999352544546,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -94537,9 +94537,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 8e-07,
-            "elapsed_seconds": 6.639999628532678e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.2e-06,
+            "elapsed_seconds": 0.0001584999990882352,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -94581,7 +94581,7 @@
         0.0005543218620838988,
         0.013859296767288814
       ],
-      "generation_seconds": 0.0015165999939199537,
+      "generation_seconds": 0.004350700008217245,
       "runs": [
         {
           "method": "lifted",
@@ -94782,7 +94782,7 @@
             "stationarity_residual": 5.8952197123929295e-08
           },
           "normalized_gap": 3.154421168716226e-14,
-          "elapsed_seconds": 0.00534269999479875,
+          "elapsed_seconds": 0.014072300007683225,
           "result": {
             "method": "lifted",
             "status": "solved",
@@ -95070,9 +95070,9 @@
               "nnz": 1500
             },
             "iterations": 100,
-            "setup_seconds": 0.000148,
-            "solve_seconds": 0.000249,
-            "elapsed_seconds": 0.005013899994082749
+            "setup_seconds": 0.0002545,
+            "solve_seconds": 0.0004922,
+            "elapsed_seconds": 0.01325229999201838
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -95276,8 +95276,8 @@
             "stationarity_residual": 1.4219120991822357e-07
           },
           "normalized_gap": 2.1173340858382517e-13,
-          "elapsed_seconds": 0.004479000010178424,
-          "update_seconds": 0.004097400000318885,
+          "elapsed_seconds": 0.013274600001750514,
+          "update_seconds": 0.01178030000301078,
           "workspace_setup_seconds": null,
           "result": {
             "method": "lifted",
@@ -95566,9 +95566,9 @@
               "nnz": 1500
             },
             "iterations": 50,
-            "setup_seconds": 0.0001937,
-            "solve_seconds": 0.0001534,
-            "elapsed_seconds": 0.00027659999614115804
+            "setup_seconds": 0.000283,
+            "solve_seconds": 0.0005393,
+            "elapsed_seconds": 0.0012245000107213855
           }
         },
         {
@@ -95794,7 +95794,7 @@
             "stationarity_residual": 1.8293137449276742e-08
           },
           "normalized_gap": 4.579669976578771e-16,
-          "elapsed_seconds": 0.0010949999996228144,
+          "elapsed_seconds": 0.003042900003492832,
           "result": {
             "method": "asymmetric",
             "status": "solved",
@@ -96082,9 +96082,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.37e-05,
-            "solve_seconds": 7.21e-05,
-            "elapsed_seconds": 0.00080750000779517
+            "setup_seconds": 0.0001934,
+            "solve_seconds": 0.0001376,
+            "elapsed_seconds": 0.002128299995092675
           },
           "update_seconds": null,
           "workspace_setup_seconds": null
@@ -96288,8 +96288,8 @@
             "stationarity_residual": 9.478862139316914e-12
           },
           "normalized_gap": 4.163336342344337e-17,
-          "elapsed_seconds": 0.000385499995900318,
-          "update_seconds": 0.00016670000331941992,
+          "elapsed_seconds": 0.0009797000093385577,
+          "update_seconds": 0.00043060000461991876,
           "workspace_setup_seconds": null,
           "result": {
             "method": "asymmetric",
@@ -96578,9 +96578,9 @@
               "nnz": 840
             },
             "iterations": 50,
-            "setup_seconds": 7.66e-05,
-            "solve_seconds": 7.01e-05,
-            "elapsed_seconds": 0.00015690000145696104
+            "setup_seconds": 0.0001458,
+            "solve_seconds": 0.0001292,
+            "elapsed_seconds": 0.0003850999928545207
           }
         },
         {
@@ -96782,7 +96782,7 @@
             "stationarity_residual": 8.881784197001252e-16
           },
           "normalized_gap": 4.163336342344337e-17,
-          "elapsed_seconds": 0.0003601000062189996,
+          "elapsed_seconds": 0.0012267000129213557,
           "result": {
             "method": "daqp",
             "status": "optimal",
@@ -97070,9 +97070,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.14e-05,
-            "solve_seconds": 1.8e-06,
-            "elapsed_seconds": 0.00011209999502170831,
+            "setup_seconds": 2.96e-05,
+            "solve_seconds": 5.9e-06,
+            "elapsed_seconds": 0.00040699999954085797,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,
@@ -97296,8 +97296,8 @@
             "stationarity_residual": 8.881784197001252e-16
           },
           "normalized_gap": 4.163336342344337e-17,
-          "elapsed_seconds": 0.0002707999956328422,
-          "update_seconds": 0.00014630000805482268,
+          "elapsed_seconds": 0.001003500001388602,
+          "update_seconds": 0.0005882999976165593,
           "workspace_setup_seconds": null,
           "result": {
             "method": "daqp",
@@ -97586,9 +97586,9 @@
               "nnz": 840
             },
             "iterations": 1,
-            "setup_seconds": 1.12e-05,
-            "solve_seconds": 8e-07,
-            "elapsed_seconds": 6.330000178422779e-05,
+            "setup_seconds": 2.53e-05,
+            "solve_seconds": 2.8e-06,
+            "elapsed_seconds": 0.00023890000011306256,
             "backend_settings": {
               "primal_tol": 1e-07,
               "dual_tol": 1e-07,

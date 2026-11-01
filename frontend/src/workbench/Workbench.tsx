@@ -1,17 +1,11 @@
 import { BarChart, CaseWorkbench, PlotCard, Readout, useShellLang, useWorkbenchState, useUrlView } from '@fasl-work/caos-app-shell';
 import { useEffect, useRef, useState } from 'react';
 import { loadSoftQPCase, loadSoftQPIndex, softQPSource, type SoftQPIndex, type SoftQPResult, type SoftQPRun } from '../lib/softqp';
+import { methodNames } from '../lib/methodNames';
 import { StreamStage } from './StreamStage';
 import { makeLocalRequest, verifyLocalResult } from '../lib/softqp.local';
 
-const names: Record<string, { en: string; es: string }> = {
-  lifted: { en: 'Explicit lifting', es: 'Holguras explícitas' },
-  generalized: { en: 'Generalized projection', es: 'Proyección generalizada' },
-  asymmetric: { en: 'Asymmetric projection', es: 'Proyección asimétrica' },
-  daqp: { en: 'DAQP', es: 'DAQP' },
-  flex: { en: 'FlexQP reconstruction', es: 'Reconstrucción FlexQP' },
-  elastiqp: { en: 'ElastiQP', es: 'ElastiQP' },
-};
+const names: Record<string, {en:string;es:string}> = methodNames;
 
 function Violations({ doc, run, unit }: { doc: SoftQPResult | null; run: SoftQPRun | undefined; unit: string }) {
   const lang = useShellLang(); const key = useWorkbenchState()?.stateKey;

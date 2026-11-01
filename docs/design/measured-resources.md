@@ -1,148 +1,38 @@
-# Measured resources and the numbers of the example
+# Measured resources and experimental outcome
 
-The committed evidence behind the numbers that [`SDD.md`](SDD.md) and the example's technical view state in the Lanes, the
-Resources and the Deploy driver. The example's executive view (`content/executive.json`) states none of them: it frames
-a problem space with sourced industry figures only. Measured on 2026-10-12 on the development workstation (Windows 11, Python 3.13, Node
-24.14.1) on a `git archive` copy of the release branch, so that nothing of the working tree was touched. A product
-measures its own and replaces this record. Sizes are bytes of file content unless a line says "on disk" (allocated
-blocks, which is what `du -sk` reports and is larger).
+The protocol was registered on 2026-10-31 before held-out generation. The completed run used app runner source `1a0c664` and engine `d0c69ed974d577ba02adbd4806332270d9425651`. The authoritative evidence is the [campaign manifest](../../data/derived/experiments/campaign.json), [artifact inventory](../../data/derived/experiments/index.json) and complete raw trial files. The experiment is a local computational study, not release acceptance.
 
-## Stored size of the committed artifacts
+## Observed campaign resources
 
-```
-$ find data/derived -type f | xargs du -cb | tail -1
-35145	total
-$ find data/derived -type f | wc -l
-14
-$ du -sk data/derived | cut -f1
-112
-```
+| Quantity | Observed value | Scope |
+|---|---|---|
+| Completed instances | 456 | 144 development, 288 held-out, 24 robustness |
+| Wall time | 1363.063 s | Entire generation/oracle/worker/export campaign |
+| Worker peak RSS | 92028928 bytes (87.766 MiB) | OS-observed worker high-water, not isolated method allocations |
+| Worker restarts | 0 | Timeout/resource recovery events |
+| Accepted measured observations | 11592 | Warm-ups excluded |
+| Incompatible measured cells | 7560 | Retained with reasons |
+| Experimental artifact bytes | 22356819 | JSON, JSONL, CSV, and the C12 stream; inventory itself excluded |
+| Current derived tree bytes | 24671035 | All 41 files, before a final release rebake |
 
-The artifacts hold 35,145 bytes in 14 files (34.3 KiB). The 112 is kilobytes allocated on disk, not content. The
-SDD says 35 KB.
+The worker budget was one process, one BLAS/OMP/MKL thread, a 10 s trial deadline, 7200 s campaign limit and 4 GiB RSS polling limit. These observed values do not establish a native allocation bound, a GPU requirement or a browser-live execution budget.
 
-## The bake: time and memory
+## Primary registered result
 
-A throwaway root, so the committed artifacts stay as they are. The script prints the wall time of `run_all` (five
-cases, the released surrogate) and the peak working set of the process (`GetProcessMemoryInfo`).
+The median paired relative cold end-to-end reduction was 0.499839%, 95% seed-cluster interval [-3.291967%, 3.944835%], over 168 accepted pairs and six held-out seeds. No compared pair was rejected. The registered target of at least 10% with a positive lower interval endpoint was **not established**. No subset replaces that result.
 
-```python
-"""Bake all five cases into a throwaway root and print the wall time, the peak working set and the bytes written."""
-import ctypes
-import ctypes.wintypes as wt
-import sys
-import time
-from pathlib import Path
+All 11592 accepted measured observations satisfy the registered original objective and hard-row limits. There were 7560 explicit incompatibilities and no numerical, timeout or accuracy-rejected measured observations. Compatibility is a property of the declared family and adapter, not a failed scientific evaluation silently removed from a denominator.
 
-sys.path.insert(0, "data-pipeline")
-from pipeline import pipeline  # noqa: E402
+## Control stream
 
+C12 has 32 common-oracle state inputs with impulses at frames 8 and 20. Three compatible methods each have cold/warm observations at every frame: 192 accepted observations. Generalized symmetric projection contributes 64 incompatible cells because side prices differ. One observation per frame is descriptive, not a statistical timing result. Initial workspace setup is recorded separately.
 
-class Counters(ctypes.Structure):
-    _fields_ = [("cb", wt.DWORD), ("PageFaultCount", wt.DWORD), ("PeakWorkingSetSize", ctypes.c_size_t),
-                ("WorkingSetSize", ctypes.c_size_t), ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
-                ("QuotaPagedPoolUsage", ctypes.c_size_t), ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
-                ("QuotaNonPagedPoolUsage", ctypes.c_size_t), ("PagefileUsage", ctypes.c_size_t),
-                ("PeakPagefileUsage", ctypes.c_size_t)]
+## Distribution and UI boundaries
 
+A clean Windows source install initially failed because MSBuild compiler-test paths exceeded 260 characters. Retrying with a short temporary root succeeded and produced a normal installed wheel. The engine release branch repairs the default build path and adds portable wheels built from the source archive, clean-wheel tests and license checks. Public index publication remains pending.
 
-out = Path(sys.argv[1])
-start = time.perf_counter()
-entries = pipeline.run_all(seed=42, output_root=out)
-elapsed = time.perf_counter() - start
-c = Counters()
-c.cb = ctypes.sizeof(c)
-kernel = ctypes.windll.kernel32
-psapi = ctypes.windll.psapi
-kernel.GetCurrentProcess.restype = wt.HANDLE
-psapi.GetProcessMemoryInfo.argtypes = [wt.HANDLE, ctypes.POINTER(Counters), wt.DWORD]
-psapi.GetProcessMemoryInfo(kernel.GetCurrentProcess(), ctypes.byref(c), c.cb)
-size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
-print(f"cases={len(entries)} seconds={elapsed:.3f} peak_working_set_mb={c.PeakWorkingSetSize / 1048576:.1f} bytes_written={size}")
-```
+The earlier focused shared-shell gate passed 171 states at 1280x800 and 390x844 in light/English before the campaign/stream view additions. It is historical focused evidence, not the current full five-size/two-theme/two-language release gate. Static replay remains the declared lane; no browser-native solver budget or parity pass is claimed.
 
-```
-$ python measure_bake.py <a throwaway directory>      (three runs, the directory emptied before each)
-cases=5 seconds=0.083 peak_working_set_mb=32.9 bytes_written=35293
-cases=5 seconds=0.138 peak_working_set_mb=33.0 bytes_written=35293
-cases=5 seconds=0.132 peak_working_set_mb=33.1 bytes_written=35293
-```
+## Reproduction
 
-So the bake of five cases takes 0.1 s (0.08 to 0.14 s) and peaks at 33 MB. The SDD says 0.1 s and 33 MB.
-
-## The live engine: median time of one run
-
-`frontend/src/engine/sir.ts` run by Node 24 on the parameters of each committed manifest, 2000 timed runs after 200
-warm-up runs (`node bench_live.mjs` from the repository root; Node strips the types itself).
-
-```js
-// Median wall time of one live run (frontend/src/engine/sir.ts) for each committed case, 2000 timed runs after 200 warm-up runs.
-import { readFileSync, readdirSync } from 'node:fs';
-import { simulate } from './frontend/src/engine/sir.ts';
-
-const dir = 'data/derived/manifests';
-for (const f of readdirSync(dir).filter((n) => n.endsWith('.json') && n !== 'index.json').sort()) {
-  const m = JSON.parse(readFileSync(`${dir}/${f}`, 'utf8'));
-  const p = m.params;
-  for (let i = 0; i < 200; i++) simulate(p);
-  const times = [];
-  for (let i = 0; i < 2000; i++) {
-    const t = performance.now();
-    simulate(p);
-    times.push(performance.now() - t);
-  }
-  times.sort((a, b) => a - b);
-  console.log(`${m.case_id} median_ms=${times[1000].toFixed(4)} p95_ms=${times[1900].toFixed(4)} budget_ms=${m.gate.run_ms_budget}`);
-}
-console.log(`node ${process.version}`);
-```
-
-```
-CTRL_degenerate median_ms=0.0055 p95_ms=0.0199 budget_ms=1500
-EX01_subcritical median_ms=0.0090 p95_ms=0.0224 budget_ms=1500
-EX02_epidemic median_ms=0.0096 p95_ms=0.0121 budget_ms=1500
-EX03_fast_burn median_ms=0.0090 p95_ms=0.0113 budget_ms=1500
-EX04_slow_spread median_ms=0.0090 p95_ms=0.0115 budget_ms=1500
-node v24.14.1
-```
-
-The medians are 0.006 to 0.010 ms per run, against the run budget of 1500 ms that every manifest carries
-(`gate.run_ms_budget`, set by `data-pipeline/pipeline/core/gate.py`). The SDD of 2026-10-04 said 0.02 to 0.08 ms; this
-measurement replaces it.
-
-## The site: build and deploy payload
-
-`npm ci` then `npm run build` in `frontend/` (87 packages added in 2 min with a cold cache; Vite reports the bundle
-built in 4.72 s).
-
-```
-$ find dist -type f | xargs du -cb | tail -1
-1917973	total
-$ find dist -type f | wc -l
-83
-$ find dist -path '*data*' -type f | xargs du -cb | tail -1      (the artifacts the site serves)
-35145	total
-$ find dist -type f -not -path '*data*' | xargs du -cb | tail -1  (the site itself)
-1882828	total
-$ find dist -name '*.woff*' -o -name '*.ttf' | xargs du -cb | tail -1   (the KaTeX fonts)
-1072948	total
-$ du -sk dist | cut -f1                                           (allocated on disk)
-2274
-```
-
-The deploy payload is the whole of `frontend/dist`: 1,917,973 bytes (1.9 MB) in 83 files, made of 1,882,828 bytes of
-site files (1.88 MB, 1.07 MB of them KaTeX fonts) and 35,145 bytes of artifacts (35 KB, the same bytes as
-`data/derived`). The 2.2 MB the SDD used to state is the allocation on disk (2274 KB), not the payload that is uploaded.
-
-## The numbers of the example's technical view that come from committed files
-
-- Epidemic case: `data/derived/manifests/EX02_epidemic.json` holds `beta 0.55`, `gamma 0.2`, `N 100000.0`, so the
-  reproduction number is 0.55 / 0.2 = 2.75 for 100000 people; `data/derived/EX02_epidemic/trace.json` holds
-  `peak_I 27345.24` and `t_peak 24.25` (27345 people on day 24.25).
-- Fast-burn case: `data/derived/manifests/EX03_fast_burn.json` holds `beta 1.2`, `gamma 0.2` (a reproduction number
-  of 6); `data/derived/EX03_fast_burn/trace.json` holds `t_peak 9.25`.
-- Herd threshold: computed as 1 - 1/2.75 = 0.636 from the relation of the cited work
-  (https://doi.org/10.1007/BF00178324 defines the basic reproduction ratio); the paper does not state 63.6 itself.
-- Held-out error of the fast approximation: `data/derived/manifests/EX02_epidemic.json` holds
-  `surrogate_peakfrac_rmse 0.00732` and `n_holdout 20`.
-- Run budget: `gate.run_ms_budget 1500.0` in each manifest.
+Install the exact historical engine source in the protocol for the frozen experiment. Package version alone is insufficient to identify its numerical binary. Run the experiment CLI into a fresh explicit output directory; preserve all raw states and use `publish --campaign-input SOURCE --output DESTINATION` to validate and export. New packaging metadata or a different machine must not be presented as the original timing environment.

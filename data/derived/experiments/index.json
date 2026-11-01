@@ -1,37 +1,37 @@
 {
   "schema_version": "softqp.experiments/v1",
   "protocol_id": "softqp-experiments-v1",
-  "state": "development",
+  "state": "measured",
   "artifacts": [
     {
       "path": "campaign.json",
       "schema": "softqp-campaign",
-      "bytes": 131378,
-      "sha256": "ce99ae5796a19825b87ecf818f19554c49aaae8b020603aa4b86f658e0030294"
+      "bytes": 265095,
+      "sha256": "3a79bc8abf63f70cac054c26bb5ec19bff0321e0047673d7bc3b239d380f00b5"
     },
     {
       "path": "datasets.json",
       "schema": "softqp-datasets",
-      "bytes": 59814,
-      "sha256": "1c59bc83c0a688a08a8dda5b999c49ad7cb1525fa07aca8f2ec39efc66c9c9d7"
+      "bytes": 187130,
+      "sha256": "e273321472a09400acadf7fcc26448578dc2e273f9a7fa86f57a44ac4f2839d4"
     },
     {
       "path": "trials.jsonl",
       "schema": "softqp-trial",
-      "bytes": 5205204,
-      "sha256": "6cbcc51ce7c23c3bd84c1d436cc10288862b06020a677bcb49d1dbb779d2636f"
+      "bytes": 16337030,
+      "sha256": "67c3d72a7b62d414d0a0f1b61fc18b5450b6a43c191ab6b7f78ac2c96fe39e39"
     },
     {
       "path": "trials.csv",
       "schema": "csv",
-      "bytes": 1096080,
-      "sha256": "89d441555dcb02520da5749e09bd3333d01ff7ad3c4c56f8a3ca6ae8c248fd03"
+      "bytes": 3368039,
+      "sha256": "99513a84a4f002cd57c49dab5bd28f2334371f39b9697dac6f3dbeb0ab29598a"
     },
     {
       "path": "stream.json",
       "schema": "softqp-stream",
-      "bytes": 2199612,
-      "sha256": "c376ee5d604a496021a44d141bee07f6a7edf38395847639ecc610fda8a05d87"
+      "bytes": 2199525,
+      "sha256": "faab5d6a0d5397748360906b0c5b73d0462cd045c164b67dd963b973f2719f3e"
     }
   ]
 }

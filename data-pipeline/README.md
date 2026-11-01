@@ -33,3 +33,7 @@ Separable cases retain lower and upper linear and quadratic coefficients per row
 ## Evidence limits
 
 Seeds reproduce authored inputs. Runtime and solver iteration histories can vary, so two native executions need not have identical bytes. A digest identifies one exported execution. The canonical matrix is development evidence, with a visible reason for every incompatible or failed method cell. C12 streaming, repeated held-out timing, current-method reproduction and research/release acceptance remain separate requirements. See [the local workflow guide](../docs/softqp-development.md).
+
+## Experimental evidence
+
+`run_experiments.py` executes the registered campaign and C12 stream. `publish --campaign-input SOURCE --output OUTPUT` validates and exports the complete evidence. The full campaign preserves a negative primary timing result; no favorable subset replaces it. Scientific boundary tests live under `tests/scientific/` and run in the full local numerical gate, separately from cheap standard-library CI guard plants.

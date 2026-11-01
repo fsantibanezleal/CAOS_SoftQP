@@ -59,6 +59,16 @@ try {
   const chartHeight = await page.locator('[data-plot="Matched formulations"]').evaluate(el => Math.max(0, ...Array.from(el.querySelectorAll('svg,canvas'), drawing => drawing.getBoundingClientRect().height)));
   if (chartHeight < 300) throw new Error('Comparison plot collapsed');
   if (out) await page.screenshot({ path: join(out, 'workbench-comparison.png'), fullPage: true });
+  await page.getByRole('combobox', { name: 'Case selector', exact: true }).selectOption('C12');
+  await page.getByRole('radio', { name: 'Asymmetric projection', exact: true }).click();
+  await page.getByRole('tab', { name: 'C12 stream', exact: true }).click();
+  const streamPlot = page.locator('[data-plot="C12 cold and warm stream"]');
+  await streamPlot.locator('canvas').first().waitFor();
+  if (await streamPlot.locator('canvas').first().evaluate(el => el.getBoundingClientRect().height) < 300) throw new Error('Stream plot collapsed');
+  if (out) await page.screenshot({ path: join(out, 'workbench-stream.png'), fullPage: true });
+  await page.getByRole('radio', { name: 'Generalized projection', exact: true }).click();
+  await streamPlot.getByText(/The recorded stream requires unedited C12/).waitFor();
+  if (await streamPlot.locator('canvas').count()) throw new Error('Incompatible stream retained a numeric plot');
   await page.getByRole('tab', { name: 'Violations', exact: true }).click();
   if (out) await page.screenshot({ path: join(out, 'workbench-desktop.png'), fullPage: true });
   await page.getByRole('combobox', { name: 'Case selector', exact: true }).selectOption('C03');
@@ -75,7 +85,27 @@ try {
   await page.waitForTimeout(250);
   if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)) throw new Error('Phone page overflows horizontally');
   if (out) await page.screenshot({ path: join(out, 'workbench-phone.png'), fullPage: true });
-  console.log('SoftQP probe: native edit/request/solve/import and tamper rejection, case selection, checksummed export, unit selection, Focus return and phone width passed');
+  await page.goto(new URL('benchmark', server.url).href, { waitUntil: 'networkidle' });
+  await page.getByText('The campaign completed 456 of 456 seeded instances.', { exact: false }).waitFor();
+  await page.getByRole('cell', { name: 'Not established', exact: true }).waitFor();
+  await page.getByLabel('Penalty family', { exact: true }).selectOption('asymmetric-l1');
+  await page.getByLabel('Row density', { exact: true }).selectOption('0.2');
+  await page.getByLabel('Hessian condition', { exact: true }).selectOption('1000');
+  await page.getByLabel('Physical quantity', { exact: true }).selectOption('control');
+  await page.getByLabel('Stream method', { exact: true }).selectOption('daqp');
+  for (const title of ['Paired seeded cold observations', 'Same-instance conditioning', 'Oracle-driven plant', 'Same-method cold and warm observations']) {
+    const plot = page.locator(`[data-plot="${title}"]`);
+    await plot.locator('canvas').first().waitFor();
+    if (await plot.locator('canvas').first().evaluate(el => el.getBoundingClientRect().height) < 250) throw new Error(`${title} collapsed`);
+  }
+  const [csv] = await Promise.all([page.waitForEvent('download'), page.getByRole('link', { name: 'trials.csv', exact: true }).click()]);
+  const csvPath = join(localDir, 'trials.csv'); await csv.saveAs(csvPath);
+  if (!readFileSync(csvPath).equals(readFileSync(join(root, '..', 'data', 'derived', 'experiments', 'trials.csv')))) throw new Error('Raw CSV download differs from checked evidence');
+  if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1)) throw new Error('Phone benchmark overflows horizontally');
+  if (out) await page.screenshot({ path: join(out, 'benchmark-phone.png'), fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  if (out) await page.screenshot({ path: join(out, 'benchmark-desktop.png'), fullPage: true });
+  console.log('SoftQP probe: native solve/import, tamper rejection, C12 cold/warm and incompatibility, campaign filters/plots, exact raw CSV download, Focus return and phone widths passed');
   if (errors.length) throw new Error(errors.join('\n'));
 } finally {
   if (browser) await browser.close();

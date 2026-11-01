@@ -64,32 +64,32 @@ def test_a_catalog_without_the_column_names_it_and_the_release(tmp_path):
 
 
 def test_a_dash_cell_is_accepted(tmp_path):
-    assert run(with_documents("trace", "-"), tmp_path).returncode == 0
+    assert run(with_documents("softqp-case-result", "-"), tmp_path).returncode == 0
 
 
 def test_an_empty_cell_fails(tmp_path):
-    p = run(with_documents("trace", ""), tmp_path)
-    assert p.returncode == 1 and "trace: empty documents" in p.stdout, p.stdout
+    p = run(with_documents("softqp-case-result", ""), tmp_path)
+    assert p.returncode == 1 and "softqp-case-result: empty documents" in p.stdout, p.stdout
 
 
 def test_adversarial_paths_outside_the_repository_fail(tmp_path):
     for bad in ("../outside/*.json", "data/../../x.json", "/etc/x.json", "C:/x/y.json", "data\\derived\\x.json", "!../x.json"):
-        p = run(with_documents("trace", f"data/derived/*/trace.json, {bad}"), tmp_path)
-        assert p.returncode == 1 and "trace: documents" in p.stdout and "outside the repository" in p.stdout, (bad, p.stdout)
+        p = run(with_documents("softqp-case-result", f"data/derived/softqp/C*.json, {bad}"), tmp_path)
+        assert p.returncode == 1 and "softqp-case-result: documents" in p.stdout and "outside the repository" in p.stdout, (bad, p.stdout)
 
 
 def test_a_dash_mixed_with_globs_fails(tmp_path):
-    p = run(with_documents("trace", "-, data/derived/*/trace.json"), tmp_path)
-    assert p.returncode == 1 and "trace: documents" in p.stdout, p.stdout
+    p = run(with_documents("softqp-case-result", "-, data/derived/softqp/C*.json"), tmp_path)
+    assert p.returncode == 1 and "softqp-case-result: documents" in p.stdout, p.stdout
 
 
 def test_a_row_of_exclusions_only_fails(tmp_path):
-    p = run(with_documents("trace", "!data/derived/*/trace.json"), tmp_path)
+    p = run(with_documents("softqp-case-result", "!data/derived/softqp/C*.json"), tmp_path)
     assert p.returncode == 1 and "no glob to include" in p.stdout, p.stdout
 
 
 def test_a_component_is_required_on_an_openapi_row_and_forbidden_elsewhere(tmp_path):
     p = run(with_documents("api", "docs/contracts/examples/api-unavailable.json"), tmp_path)
     assert p.returncode == 1 and "api: documents" in p.stdout and "component" in p.stdout, p.stdout
-    p = run(with_documents("trace", "data/derived/*/trace.json#Foo"), tmp_path)
-    assert p.returncode == 1 and "trace: documents" in p.stdout and "component" in p.stdout, p.stdout
+    p = run(with_documents("softqp-case-result", "data/derived/softqp/C*.json#Foo"), tmp_path)
+    assert p.returncode == 1 and "softqp-case-result: documents" in p.stdout and "component" in p.stdout, p.stdout

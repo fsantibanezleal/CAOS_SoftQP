@@ -16,6 +16,9 @@ ROOT = Path(__file__).resolve().parents[2]
 def run_stream(protocol=None):
     if protocol is None:
         protocol = json.loads((ROOT / "docs/design/experiments-v1.json").read_text(encoding="utf-8"))
+    provenance = environment()
+    if provenance["engine_revision"] != protocol["engine_source"] or provenance["engine_source_dirty"] is not False:
+        raise RuntimeError("Stream requires the exact clean native source revision recorded in the protocol")
     spec = protocol["stream"]
     state = np.array(spec["initial_state"], dtype=float)
     dt = spec["dt_seconds"]
@@ -77,7 +80,7 @@ def run_stream(protocol=None):
         state = next_state
     all_runs = [r for frame in frames for r in frame["runs"]]
     return dict(schema_version="softqp.stream/v1", case_id="C12", protocol_id=protocol["protocol_id"],
-                engine_source=protocol["engine_source"], environment=environment(), specification=spec,
+                engine_source=protocol["engine_source"], environment=provenance, specification=spec,
                 frames=frames, counts={s: sum(r["state"] == s for r in all_runs) for s in
                                       ("accepted", "incompatible", "failed", "accuracy-rejected")},
                 limitations=["One stream observation per frame is descriptive, not a statistical timing claim.",

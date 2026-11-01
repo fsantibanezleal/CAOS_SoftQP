@@ -71,7 +71,7 @@ def test_a_schema_change_without_regenerated_types_fails_the_build_check(repo: P
         script = repo / "frontend" / "scripts" / "gen-contract-types.mjs"
         clean = subprocess.run([NODE, str(script), "--check"], capture_output=True, encoding="utf-8", errors="replace", cwd=repo / "frontend")
         assert clean.returncode == 0 and "contract types: current" in clean.stdout, clean.stderr
-        schema = repo / "docs" / "contracts" / "schemas" / "trace.schema.json"
+        schema = repo / "docs" / "contracts" / "schemas" / "softqp-case-result.schema.json"
         doc = json.loads(schema.read_text(encoding="utf-8"))
         doc["properties"]["planted_field"] = {"type": "number"}
         schema.write_text(json.dumps(doc, indent=2), encoding="utf-8")

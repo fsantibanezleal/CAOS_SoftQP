@@ -13,12 +13,19 @@ if __name__ == "__main__":
     from pipeline.softqp_stream import export_stream
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("kind", choices=["campaign", "stream"])
+    parser.add_argument("kind", choices=["campaign", "stream", "publish"])
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--campaign-input", type=Path)
     parser.add_argument("--split", action="append", choices=["development", "heldout", "robustness"])
     args = parser.parse_args()
     if args.kind == "campaign":
         result = run_campaign(args.output, tuple(args.split or ["development", "heldout", "robustness"]))
         print(result["counts"], result["primary_endpoint"])
-    else:
+    elif args.kind == "stream":
         print(export_stream(args.output))
+    else:
+        if args.campaign_input is None:
+            parser.error("publish requires --campaign-input with the complete raw campaign")
+        from pipeline.experiment_export import publish_experiments
+
+        print(publish_experiments(args.campaign_input, args.output))

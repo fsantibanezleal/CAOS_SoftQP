@@ -1,10 +1,10 @@
 import { BarChart, Callout, DocPage, DocSection, PlotCard } from '@fasl-work/caos-app-shell';
 import { useState } from 'react';
+import { methodNames as names } from '../lib/methodNames';
 import { MeasuredExperiments } from './MeasuredExperiments';
 import { P, useT } from '../content/bi';
 import { useScientificRecords } from '../lib/useScientificRecords';
 const local={en:'Computed from verified committed scientific records.',es:'Calculado desde registros científicos versionados y verificados.'};
-const names:Record<string,{en:string;es:string}>={lifted:{en:'Explicit lifting',es:'Holguras explícitas'},generalized:{en:'Generalized projection',es:'Proyección generalizada'},asymmetric:{en:'Asymmetric projection',es:'Proyección asimétrica'},daqp:{en:'DAQP',es:'DAQP'}};
 export function Benchmark(){
   const t=useT();const {records,error}=useScientificRecords();const [method,setMethod]=useState('asymmetric');
   const cells=records?.flatMap(doc=>doc.runs.map(run=>({doc,run})))??[];

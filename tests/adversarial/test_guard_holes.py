@@ -105,8 +105,8 @@ def test_tech_t6_an_editable_unpinned_requirement(tech_repo: Path) -> None:
 
 
 def test_tech_t7_a_wildcard_pin(tech_repo: Path) -> None:
-    edit(tech_repo, "data-pipeline/requirements.txt", "numpy==2.4.6", "numpy==2.*")
-    edit(tech_repo, SDD, "| numpy | 2.4.6 |", "| numpy | 2.* |")
+    edit(tech_repo, "requirements-softqp.txt", "numpy==2.5.4", "numpy==2.*")
+    edit(tech_repo, SDD, "| numpy | 2.5.4 |", "| numpy | 2.* |")
     r = _tech(tech_repo)
     assert r.returncode == 1 and "numpy" in r.stdout, r.stdout
 
