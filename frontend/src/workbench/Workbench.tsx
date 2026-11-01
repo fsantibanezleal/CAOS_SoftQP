@@ -7,14 +7,21 @@ import { makeLocalRequest, verifyLocalResult } from '../lib/softqp.local';
 
 const names: Record<string, {en:string;es:string}> = methodNames;
 
-function Violations({ doc, run, unit }: { doc: SoftQPResult | null; run: SoftQPRun | undefined; unit: string }) {
+function CaseStatus({ error }: { error: string | null }) {
+  const lang = useShellLang();
+  return <p role={error ? 'alert' : 'status'} data-state={error ? 'unavailable' : 'loading'}>{error
+    ? (lang === 'es' ? `No se puede cargar el registro del caso: ${error}` : `The case record could not be loaded: ${error}`)
+    : (lang === 'es' ? 'Cargando…' : 'Loading…')}</p>;
+}
+
+function Violations({ doc, run, unit, error }: { doc: SoftQPResult | null; run: SoftQPRun | undefined; unit: string; error: string | null }) {
   const lang = useShellLang(); const key = useWorkbenchState()?.stateKey;
   const metrics = run?.result?.metrics;
   const all = doc?.rows.map((r, i) => ({ ...r, lower: metrics?.lower_violation[i] ?? 0, upper: metrics?.upper_violation[i] ?? 0 })).filter(r => r.unit === unit) ?? [];
   const nonzero = all.filter(r => r.lower > 1e-7 || r.upper > 1e-7);
   const rows = (nonzero.length ? nonzero : all).slice(0, 18);
   return <PlotCard fill title={{ en: 'Lower and upper violations', es: 'Incumplimientos por lado' }} note={{ en: 'Lower and upper bounds are separate series. Only rows with the same unit are compared. Values above 1e-7 are prioritized; up to 18 rows are shown. The export includes all values.', es: 'Los lados inferior y superior son series separadas. Solo se comparan filas con la misma unidad. Se priorizan valores mayores que 1e-7; se muestran hasta 18 filas. La exportación conserva todos los valores.' }} lane="replay" provenance="synthetic" dataKey={key}>
-    {!doc ? <p role="status">{lang === 'es' ? 'Cargando…' : 'Loading…'}</p> : !metrics ? <p data-state="unavailable">{lang === 'es' ? 'Sin resultado compatible para este método.' : 'No compatible result for this method.'}</p> : <>
+    {!doc ? <CaseStatus error={error} /> : !metrics ? <p data-state="unavailable">{lang === 'es' ? 'Sin resultado compatible para este método.' : 'No compatible result for this method.'}</p> : <>
       <BarChart height="fill" title={{ en: 'Violation by row and bound side', es: 'Incumplimiento por fila y lado' }}
         axis={{ label: { en: 'Violation', es: 'Incumplimiento' }, ...(unit === '1' ? {} : { unit: { en: unit, es: unit } }) }}
         data={rows.flatMap(r => [
@@ -26,13 +33,13 @@ function Violations({ doc, run, unit }: { doc: SoftQPResult | null; run: SoftQPR
   </PlotCard>;
 }
 
-function Comparison({ doc, active }: { doc: SoftQPResult | null; active: string }) {
+function Comparison({ doc, active, error }: { doc: SoftQPResult | null; active: string; error: string | null }) {
   const key = useWorkbenchState()?.stateKey;
   const good = doc?.runs.filter(r => r.result) ?? [];
   return <PlotCard fill title={{ en: 'Matched formulations', es: 'Formulaciones equivalentes' }} note={{ en: 'One development run per method; timing superiority remains unestablished.', es: 'Una medición de desarrollo por método; no se establece superioridad de tiempo.' }} lane="replay" provenance="synthetic" dataKey={key}>
-    <BarChart height="fill" title={{ en: 'Formulation dimensions', es: 'Dimensiones de formulación' }}
+    {!doc ? <CaseStatus error={error} /> : <BarChart height="fill" title={{ en: 'Formulation dimensions', es: 'Dimensiones de formulación' }}
       axis={{ label: { en: 'Primal variables', es: 'Variables primales' }, format: { decimals: 0 } }}
-      data={good.map(r => ({ id: r.method, label: names[r.method], value: r.result!.dimensions.variables, tone: r.method === active ? 'accent' as const : r.method === 'lifted' ? 'warn' as const : 'neutral' as const }))} />
+      data={good.map(r => ({ id: r.method, label: names[r.method], value: r.result!.dimensions.variables, tone: r.method === active ? 'accent' as const : r.method === 'lifted' ? 'warn' as const : 'neutral' as const }))} />}
   </PlotCard>;
 }
 
@@ -104,6 +111,6 @@ export function Workbench() {
     {error && <p role="alert">{error}</p>}{run?.state === 'incompatible' && <p data-state="unavailable">{lang === 'es' ? 'El caso no cumple los supuestos que admite este método.' : 'The case is outside this method’s supported assumptions.'}</p>}</>;
   return <CaseWorkbench group={group} onGroupChange={setGroup} caseId={selected} source="synthetic" cases={{ cases: index?.cases.map(c => ({ id: c.case_id, name: c.title[lang], category: c.category[lang] })) ?? [], selectedId: selected, onSelect: setSelected, layout: 'select', deepLink: true }} controls={{ method, unit, origin: localResult ? 'local-native' : softQPSource, ...(localResult ? edits : {}) }} replayOnly rail={rail} focus
     variants={{ variants: (current?.runs.map(r => r.method) ?? ['lifted', 'generalized', 'asymmetric', 'daqp']).map(id => ({ id, label: names[id], note: { en: 'Recorded offline solve.', es: 'Solución registrada fuera del navegador.' }, lane: 'replay' as const })), activeId: method, onSelect: setMethod, title: { en: 'Method', es: 'Método' } }}
-    groups={[{ id: 'violations', label: { en: 'Violations', es: 'Incumplimientos' }, lane: 'replay', provenance: 'synthetic', content: <Violations doc={current} run={run} unit={unit} /> }, { id: 'comparison', label: { en: 'Comparison', es: 'Comparación' }, lane: 'replay', provenance: 'synthetic', content: <Comparison doc={current} active={method} /> }, {id: 'stream',label:{en:'C12 stream',es:'Flujo C12'},lane:'replay',provenance:'synthetic',content:<StreamStage caseId={selected} method={method} edited={!!localResult}/>}]}
+    groups={[{ id: 'violations', label: { en: 'Violations', es: 'Incumplimientos' }, lane: 'replay', provenance: 'synthetic', content: <Violations doc={current} run={run} unit={unit} error={error} /> }, { id: 'comparison', label: { en: 'Comparison', es: 'Comparación' }, lane: 'replay', provenance: 'synthetic', content: <Comparison doc={current} active={method} error={error} /> }, {id: 'stream',label:{en:'C12 stream',es:'Flujo C12'},lane:'replay',provenance:'synthetic',content:<StreamStage caseId={selected} method={method} edited={!!localResult}/>}]}
     context={{ content: <div><h2>{current?.title[lang]}</h2>{editor}<p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Un factor cuadrático cero declara una variante puramente L1 e incorpora FlexQP y ElastiQP cuando sus supuestos coinciden. La reconstrucción FlexQP ejecuta ecuaciones del artículo y no una política aprendida. Comparación conserva la campaña temporal registrada, el barrido controlado y el flujo pareado C12. La aceptación científica y de publicación son verificaciones separadas.' : 'A zero quadratic factor declares a pure L1 variant and includes FlexQP and ElastiQP where their assumptions match. The FlexQP reconstruction executes paper equations, not a learned policy. The Benchmark page retains the registered timing campaign, controlled conditioning sweep and paired C12 stream. Release and scientific acceptance remain separate gates.'}</p><p>{lang === 'es' ? 'Iteraciones del método seleccionado: ' : 'Selected method iterations: '}{run?.result?.iterations ?? '-'}</p></div> }} />;
 }
