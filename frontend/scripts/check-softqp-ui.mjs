@@ -119,6 +119,8 @@ try {
         ...window.__caosGate.decimals(),...window.__caosGate.scrolls(),...window.__caosGate.brokenValues(),
         ...window.__caosGate.contrast(),
       ]);
+      const rail = await localized.evaluate(()=>window.__caosGate.facts().rail);
+      if(width>=1280 && rail && rail.scroll>rail.client+1) problems.push(`Rail scroll ${rail.scroll}/${rail.client}`);
       if(problems.length) throw new Error(`${localized.url()} ${width}/${theme}: ${problems.join('\n')}`);
     }
     await localized.goto(new URL('benchmark',server.url).href,{waitUntil:'networkidle'});
@@ -132,9 +134,9 @@ try {
       await localized.goto(new URL('implementation',server.url).href,{waitUntil:'networkidle'});
       await localized.getByRole('tab',{name:'Evidencia y entrega',exact:true}).click();await inspect();
       await localized.goto(new URL('app',server.url).href,{waitUntil:'networkidle'});await inspect();
-      await localized.getByRole('button',{name:'Editar costos y resolver localmente',exact:true}).click();await inspect();
+      await localized.getByRole('button',{name:'Editar costos y resolver',exact:true}).click();await inspect();
       await localized.goto(new URL('introduction',server.url).href,{waitUntil:'networkidle'});await inspect();
-      for(const label of ['La situación actual','La propuesta']) {
+      for(const label of ['La situación actual','La propuesta','Técnica']) {
         await localized.getByRole('tab',{name:label,exact:true}).click();await inspect();
       }
     }
