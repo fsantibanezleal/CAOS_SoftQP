@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "data-pipeline"))
 def main():
     from pipeline.core.readiness import compute, write
     from pipeline.softqp_run import validate_document, verify_inventory
+    from pipeline.core.manifest import export_manifests
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--fixture-root", type=Path, required=True)
@@ -31,6 +32,7 @@ def main():
     (target / "index.json").write_text(
         json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
+    export_manifests(fixture / "data/derived")
     lines = []
     inside = False
     for line in (ROOT / "docs/contracts/catalog.md").read_text(encoding="utf-8").splitlines():

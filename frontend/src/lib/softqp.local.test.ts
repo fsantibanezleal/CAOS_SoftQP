@@ -9,7 +9,7 @@ describe('local scientific workflow',()=>{
   it('accepts the actual native producer and independently verifies original costs',()=>{
     expect(verifyLocalResult(read('softqp-local-export'),request,baseline).runs.filter(r=>r.state==='available')).toHaveLength(3);
   });
-  it('rejects altered request, problem, row policy and computed costs',()=>{
+  it('adversarial: rejects altered request, problem, row policy and computed costs',()=>{
     const changes=[(d:any)=>d.request.lower_multiplier=4,(d:any)=>d.result.problem.q[0]=1,(d:any)=>d.result.rows[0].soft=false,(d:any)=>d.result.runs[0].result.metrics.objective+=1,(d:any)=>d.result.runs[0].result.metrics.lower_violation[0]+=1];
     for(const change of changes){const doc=read('softqp-local-export');change(doc);expect(()=>verifyLocalResult(doc,request,baseline)).toThrow();}
   });

@@ -38,7 +38,7 @@ const entry = (id: string, state: ContractState, over: Partial<ReadinessEntry> =
   missing: state === 'partial' ? ['x/y.json'] : [],
   ...over,
 });
-const doc = (...entries: ReadinessEntry[]): Readiness => ({ schema: 'example.readiness/v1', product_version: '9.9.9', catalog_sha256: '0', contracts: entries });
+const doc = (...entries: ReadinessEntry[]): Readiness => ({ schema: 'softqp.readiness/v2', product_version: '9.9.9', catalog_sha256: '0', contracts: entries });
 
 describe('the committed documents', () => {
   it.each([['committed bake', committed], ['provider tree', fixture]])('%s conforms to READINESS', (_n, d) => {

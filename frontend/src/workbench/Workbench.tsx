@@ -1,4 +1,4 @@
-import { BarChart, CaseWorkbench, PlotCard, Readout, useShellLang, useWorkbenchState } from '@fasl-work/caos-app-shell';
+import { BarChart, CaseWorkbench, PlotCard, Readout, useShellLang, useWorkbenchState, useUrlView } from '@fasl-work/caos-app-shell';
 import { useEffect, useRef, useState } from 'react';
 import { loadSoftQPCase, loadSoftQPIndex, softQPSource, type SoftQPIndex, type SoftQPResult, type SoftQPRun } from '../lib/softqp';
 import { makeLocalRequest, verifyLocalResult } from '../lib/softqp.local';
@@ -9,7 +9,6 @@ const names: Record<string, { en: string; es: string }> = {
   asymmetric: { en: 'Asymmetric projection', es: 'Proyección asimétrica' },
   daqp: { en: 'DAQP', es: 'DAQP' },
 };
-const fmt = (n: number | null | undefined, lang: string) => n == null ? '—' : new Intl.NumberFormat(lang, { maximumSignificantDigits: 6 }).format(n);
 
 function Violations({ doc, run, unit }: { doc: SoftQPResult | null; run: SoftQPRun | undefined; unit: string }) {
   const lang = useShellLang(); const key = useWorkbenchState()?.stateKey;
@@ -31,12 +30,9 @@ function Violations({ doc, run, unit }: { doc: SoftQPResult | null; run: SoftQPR
 }
 
 function Comparison({ doc }: { doc: SoftQPResult | null }) {
-  const lang = useShellLang(); const key = useWorkbenchState()?.stateKey;
+  const key = useWorkbenchState()?.stateKey;
   const good = doc?.runs.filter(r => r.result) ?? [];
   return <PlotCard fill title={{ en: 'Matched formulations', es: 'Formulaciones equivalentes' }} note={{ en: 'One development run per method; timing superiority remains unestablished.', es: 'Una medición de desarrollo por método; no se establece superioridad de tiempo.' }} lane="replay" provenance="synthetic" dataKey={key}>
-    <div style={{ overflowX: 'auto', maxWidth: '100%' }}><table style={{ width: '100%' }}><thead><tr>{(lang === 'es' ? ['Método', 'Estado', 'Objetivo', 'Brecha', 'Error duro', 'Iteraciones', 'Solución (ms)'] : ['Method', 'Status', 'Objective', 'Gap', 'Hard error', 'Iterations', 'Solve (ms)']).map(h => <th key={h}>{h}</th>)}</tr></thead>
-      <tbody>{doc?.runs.map(r => <tr key={r.method}><th>{names[r.method]?.[lang] ?? r.method}</th><td>{r.result?.status ?? (r.state === 'incompatible' ? 'Incompatible' : r.state)}</td><td>{fmt(r.result?.metrics?.objective, lang)}</td><td>{fmt(r.result?.metrics?.objective_gap_against_lifted, lang)}</td><td>{fmt(r.result?.metrics?.hard_violation, lang)}</td><td>{r.result?.iterations ?? '—'}</td><td>{fmt(r.result ? r.result.solve_seconds * 1000 : null, lang)}</td></tr>)}</tbody>
-    </table></div>
     <div style={{ flex: 1, minHeight: 0 }}><BarChart height="fill" title={{ en: 'Formulation dimensions', es: 'Dimensiones de formulación' }}
       axis={{ label: { en: 'Primal variables', es: 'Variables primales' }, format: { decimals: 0 } }}
       data={good.map(r => ({ id: r.method, label: names[r.method], value: r.result!.dimensions.variables, tone: r.method === 'lifted' ? 'warn' as const : 'accent' as const }))} /></div>
@@ -45,6 +41,7 @@ function Comparison({ doc }: { doc: SoftQPResult | null }) {
 
 export function Workbench() {
   const lang = useShellLang();
+  const [group, setGroup] = useUrlView(['violations', 'comparison', 'context'], 'view');
   const [index, setIndex] = useState<SoftQPIndex | null>(null); const [doc, setDoc] = useState<SoftQPResult | null>(null);
   const [selected, setSelected] = useState('C01'); const [method, setMethod] = useState('lifted'); const [unit, setUnit] = useState('1'); const [error, setError] = useState<string | null>(null);
   const [localResult, setLocalResult] = useState<SoftQPResult | null>(null);
@@ -86,15 +83,8 @@ export function Workbench() {
     if (!current) return;
     download({ lane: 'replay', origin: localResult ? 'local-native-import' : softQPSource, selected_method: method, result: current }, `${selected}-${method}.json`);
   }
-  const rail = <><p>{lang === 'es' ? 'Resultados de desarrollo reproducibles. Seleccione caso, método y unidad.' : 'Reproducible development results. Select a case, method and unit.'}</p>
-    {softQPSource === 'fixture' && <p data-state="provider">{lang === 'es' ? 'Proveedor de prueba: solo C01. No es la matriz científica completa.' : 'Fixture provider: C01 only. This is not the full scientific matrix.'}</p>}
-    <label htmlFor="softqp-unit">{lang === 'es' ? 'Unidad de las filas' : 'Row unit'}</label><select id="softqp-unit" value={unit} onChange={e => setUnit(e.target.value)}>{units.map(u => <option key={u}>{u}</option>)}</select>
-    <Readout title={{ en: 'Recorded result', es: 'Resultado registrado' }} lane="replay" provenance="synthetic" items={[
-      { label: { en: 'Objective', es: 'Objetivo' }, value: run?.result?.metrics?.objective ?? null, unitless: true },
-      { label: { en: 'Hard-row error', es: 'Error de filas duras' }, value: run?.result?.metrics?.hard_violation ?? null, unitless: true },
-      { label: { en: 'Iterations', es: 'Iteraciones' }, value: run?.result?.iterations ?? null, unitless: true },
-    ]} /><button type="button" disabled={!current} onClick={exportResult}>{lang === 'es' ? 'Exportar registro' : 'Export record'}</button>
-    <details><summary>{lang === 'es' ? 'Editar costos y resolver localmente' : 'Edit costs and solve locally'}</summary>
+  const editor = <>
+    <details open><summary>{lang === 'es' ? 'Configuración de ejecución local' : 'Local execution settings'}</summary>
       <p>{lang === 'es' ? 'Los factores modifican costos blandos; las filas duras se conservan. Descargue la solicitud, ejecútela con el paquete científico e importe el resultado. El navegador verifica entradas, objetivo e incumplimientos.' : 'Factors change soft costs; hard rows are preserved. Download the request, execute it with the scientific package, then import the result. The browser verifies inputs, objective and violations.'}</p>
       {(['lower', 'upper', 'quadratic'] as const).map(key => <div key={key}><label htmlFor={`cost-${key}`}>{key === 'lower' ? (lang === 'es' ? 'Factor inferior' : 'Lower cost factor') : key === 'upper' ? (lang === 'es' ? 'Factor superior' : 'Upper cost factor') : (lang === 'es' ? 'Factor cuadrático' : 'Quadratic cost factor')}</label><input id={`cost-${key}`} type="number" min="0.01" max="100" step="0.1" value={edits[key]} disabled={!baseline?.problem} onChange={e => { setEdits({ ...edits, [key]: e.target.value }); setLocalResult(null); }} /></div>)}
       {!baseline?.problem && <p>{lang === 'es' ? 'Las penalizaciones acopladas de este caso no admiten esta edición.' : 'This case’s coupled penalties do not support these edits.'}</p>}
@@ -103,9 +93,19 @@ export function Workbench() {
       <label htmlFor="local-result">{lang === 'es' ? 'Importar resultado nativo' : 'Import native result'}</label><input id="local-result" type="file" accept="application/json,.json" disabled={!baseline?.problem} onChange={e => { void importResult(e.target.files?.[0]); e.target.value = ''; }} />
       {localResult && <><p role="status">{lang === 'es' ? 'Resultado nativo importado y verificado.' : 'Imported native result verified.'}</p><button type="button" onClick={() => setLocalResult(null)}>{lang === 'es' ? 'Volver al registro original' : 'Restore recorded result'}</button></>}
     </details>
+  </>;
+  const rail = <>
+    {softQPSource === 'fixture' && <p data-state="provider">{lang === 'es' ? 'Proveedor de prueba: solo C01. No es la matriz científica completa.' : 'Fixture provider: C01 only. This is not the full scientific matrix.'}</p>}
+    <label htmlFor="softqp-unit">{lang === 'es' ? 'Unidad de las filas' : 'Row unit'}</label><select id="softqp-unit" value={unit} onChange={e => setUnit(e.target.value)}>{units.map(u => <option key={u}>{u}</option>)}</select>
+    <Readout title={{ en: localResult ? 'Verified local result' : 'Recorded result', es: localResult ? 'Resultado local verificado' : 'Resultado registrado' }} lane="replay" provenance="synthetic" items={[
+      { label: { en: 'Objective', es: 'Objetivo' }, value: run?.result?.metrics?.objective ?? null, unitless: true },
+      { label: { en: 'Hard-row error', es: 'Error de filas duras' }, value: run?.result?.metrics?.hard_violation ?? null, unitless: true },
+      { label: { en: 'Iterations', es: 'Iteraciones' }, value: run?.result?.iterations ?? null, unitless: true },
+    ]} /><button type="button" disabled={!current} onClick={exportResult}>{lang === 'es' ? 'Exportar registro' : 'Export record'}</button>
+    <button type="button" onClick={() => setGroup('context')}>{lang === 'es' ? 'Editar costos y resolver localmente' : 'Edit costs and solve locally'}</button>
     {error && <p role="alert">{error}</p>}{run?.state === 'incompatible' && <p data-state="unavailable">{lang === 'es' ? 'El caso no cumple los supuestos que admite este método.' : 'The case is outside this method’s supported assumptions.'}</p>}</>;
-  return <CaseWorkbench caseId={selected} source="synthetic" cases={{ cases: index?.cases.map(c => ({ id: c.case_id, name: c.title[lang], category: c.category[lang] })) ?? [], selectedId: selected, onSelect: setSelected, layout: 'select', deepLink: true }} controls={{ method, unit }} rail={rail} focus
+  return <CaseWorkbench group={group} onGroupChange={setGroup} caseId={selected} source="synthetic" cases={{ cases: index?.cases.map(c => ({ id: c.case_id, name: c.title[lang], category: c.category[lang] })) ?? [], selectedId: selected, onSelect: setSelected, layout: 'select', deepLink: true }} controls={{ method, unit, origin: localResult ? 'local-native' : softQPSource, ...(localResult ? edits : {}) }} replayOnly rail={rail} focus
     variants={{ variants: ['lifted', 'generalized', 'asymmetric', 'daqp'].map(id => ({ id, label: names[id], note: { en: 'Recorded offline solve.', es: 'Solución registrada fuera del navegador.' }, lane: 'replay' as const })), activeId: method, onSelect: setMethod, title: { en: 'Method', es: 'Método' } }}
     groups={[{ id: 'violations', label: { en: 'Violations', es: 'Incumplimientos' }, lane: 'replay', provenance: 'synthetic', content: <Violations doc={current} run={run} unit={unit} /> }, { id: 'comparison', label: { en: 'Comparison', es: 'Comparación' }, lane: 'replay', provenance: 'synthetic', content: <Comparison doc={current} /> }]}
-    context={{ content: <div><h2>{current?.title[lang]}</h2><p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Faltan las comparaciones FlexQP, los experimentos repetidos y de inicio cálido y la aceptación de publicación. No se establece superioridad ni novedad.' : 'FlexQP comparisons, repeated and warm-start experiments, and release acceptance remain pending. No superiority or novelty is established.'}</p></div> }} />;
+    context={{ content: <div><h2>{current?.title[lang]}</h2>{editor}<p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Faltan las comparaciones FlexQP, los experimentos repetidos y de inicio cálido y la aceptación de publicación. No se establece superioridad ni novedad.' : 'FlexQP comparisons, repeated and warm-start experiments, and release acceptance remain pending. No superiority or novelty is established.'}</p></div> }} />;
 }

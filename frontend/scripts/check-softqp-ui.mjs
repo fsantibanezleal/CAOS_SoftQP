@@ -26,7 +26,7 @@ try {
   console.log(JSON.stringify({ url: page.url(), alerts: await page.getByRole('alert').allTextContents(), errors }));
   const [file] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export record', exact: true }).click()]);
   if (!file.suggestedFilename().includes('C01-lifted')) throw new Error('Wrong case/method export');
-  await page.getByText('Edit costs and solve locally', { exact: true }).click();
+  await page.getByRole('button', { name: 'Edit costs and solve locally', exact: true }).click();
   await page.getByLabel('Lower cost factor', { exact: true }).fill('2');
   await page.getByLabel('Upper cost factor', { exact: true }).fill('3');
   await page.getByLabel('Quadratic cost factor', { exact: true }).fill('1.5');
@@ -42,7 +42,7 @@ try {
   await page.getByLabel('Import native result', { exact: true }).setInputFiles(badPath);
   await page.getByRole('alert').filter({ hasText: 'verification failed' }).waitFor();
   await page.getByRole('button', { name: 'Restore recorded result', exact: true }).click();
-  await page.getByText('Edit costs and solve locally', { exact: true }).click();
+  await page.getByRole('tab', { name: 'Violations', exact: true }).click();
   if (out) await page.screenshot({ path: join(out, 'workbench-desktop.png'), fullPage: true });
   await page.getByRole('combobox', { name: 'Case selector', exact: true }).selectOption('C03');
   await page.getByRole('radio', { name: 'Generalized projection', exact: true }).click();

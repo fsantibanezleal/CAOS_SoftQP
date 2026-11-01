@@ -1,6 +1,5 @@
 import copy
 import hashlib
-import json
 from pathlib import Path
 import pytest
 from pipeline.softqp_requests import execute_request
@@ -34,14 +33,14 @@ def test_local_request_recomputes_a_changed_optimum():
     "field,value",
     [("lower_multiplier", True), ("upper_multiplier", 0), ("quadratic_multiplier", 101), ("extra", 1)],
 )
-def test_request_rejects_unbounded_or_invalid_edits(field, value):
+def test_adversarial_request_rejects_unbounded_or_invalid_edits(field, value):
     doc = request()
     doc[field] = value
     with pytest.raises(Exception):
         execute_request(doc)
 
 
-def test_stale_and_grouped_requests_are_rejected():
+def test_adversarial_stale_and_grouped_requests_are_rejected():
     doc = request()
     doc["base_sha256"] = "0" * 64
     with pytest.raises(ValueError, match="checksum"):

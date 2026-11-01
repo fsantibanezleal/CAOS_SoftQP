@@ -1,4 +1,4 @@
-# Contract catalog: the template's example product
+# SoftQP scientific contract catalog
 
 Phase 2 of contract-first parallel delivery (ADR-0080; rule 11 sections 11 to 20 in CAOS_MANAGE). One row per
 boundary and per model slot. Each schema file is the single source of its contract: the Python producers and
@@ -54,76 +54,35 @@ checks.
 
 | id | version | owner | schema file | example | documents | producer test | consumer test | missing-data behavior | provider | model io | swap test | status |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| params-record | 1.0.0 | data-pipeline/pipeline/io/contract.py | docs/contracts/schemas/params-record.schema.json | docs/contracts/examples/params-record.json | - | tests/contracts/test_params_record.py::test_accepted_records_match_the_schema | tests/contracts/test_params_record.py::test_adversarial_schema_valid_records_are_accepted, tests/test_contract.py | partial: a rejected row is dropped with its reason and the bake goes on with the accepted rows; readiness lists the rejected case ids. missing: no source table; readiness says missing and the bake uses the registry's cases | fixture:docs/contracts/fixtures/data/examples/params.csv | - | tests/contracts/test_params_record.py::test_swap_fixture_and_example_sources | real |
-| case-index | 2.0.0 | data-pipeline/pipeline/core/manifest.py | docs/contracts/schemas/case-index.schema.json | docs/contracts/fixtures/data/derived/manifests/index.json | data/derived/manifests/index.json | tests/contracts/test_documents.py::test_index_validates | frontend/src/lib/contract.test.ts | missing: the site build stops at copy-data (no site without an inventory), the API answers 503 missing, readiness says missing. stale: engine_version older than VERSION; readiness says stale with both versions and the views show it | fixture:docs/contracts/fixtures/data/derived/manifests/index.json | - | frontend/src/lib/contract.test.ts, tests/contracts/test_documents.py::test_fixture_tree_validates | real |
-| case-manifest | 4.0.0 | data-pipeline/pipeline/core/manifest.py | docs/contracts/schemas/case-manifest.schema.json | docs/contracts/fixtures/data/derived/manifests/FX01_fixture.json | data/derived/manifests/*.json, !data/derived/manifests/index.json | tests/contracts/test_documents.py::test_manifests_validate | frontend/src/lib/contract.test.ts | partial: a manifest the index lists is absent; readiness lists its path, the case selector marks the case not available yet and the other cases work, the API answers 404 for it. stale: as case-index | fixture:docs/contracts/fixtures/data/derived/manifests/FX01_fixture.json | - | frontend/src/lib/contract.test.ts, tests/contracts/test_documents.py::test_fixture_tree_validates | real |
-| trace | 1.0.0 | data-pipeline/pipeline/core/trace.py | docs/contracts/schemas/trace.schema.json | docs/contracts/fixtures/data/derived/FX01_fixture/trace.json | data/derived/*/trace.json | tests/contracts/test_documents.py::test_traces_validate | frontend/src/lib/contract.test.ts | partial: an artifact a manifest names is absent; readiness lists its path and that case's views show not available yet with the reason, the API answers 404 for it. stale: as case-index | fixture:docs/contracts/fixtures/data/derived/FX01_fixture/trace.json | - | frontend/src/lib/contract.test.ts, tests/contracts/test_documents.py::test_fixture_tree_validates | real |
-| surrogate-model | 1.0.0 | data-pipeline/pipeline/stages/train.py | docs/contracts/schemas/surrogate-model.schema.json | docs/contracts/examples/surrogate-model.json | models/surrogate.json | tests/contracts/test_surrogate.py::test_trained_bundle_validates | tests/contracts/test_surrogate.py::test_evaluate_reads_any_valid_bundle | training: no valid released bundle, the baseline answers (provenance baseline); or the marker models/training/surrogate-model exists, the released bundle answers (provenance real) while a newer one trains. The Benchmark page labels the surrogate metrics with the model that answered | baseline:data-pipeline/pipeline/model/baseline.py | in: r0 = beta / gamma (number, dimensionless, > 0); out: peak_frac = peak_I / N (number in [0, 1]); trained on the cases' r0 (0.72 to 6) and held monotone to r0 = 10, beyond which the 4-term fit turns down (the baseline holds to 20) | tests/contracts/test_surrogate.py::test_adversarial_swap_baseline_and_trained | real |
-| readiness | 1.0.0 | data-pipeline/pipeline/core/readiness.py | docs/contracts/schemas/readiness.schema.json | docs/contracts/fixtures/data/derived/readiness.json | data/derived/readiness.json | tests/contracts/test_readiness.py::test_committed_readiness_is_current | frontend/src/readiness/readiness.test.ts | missing: the site build stops at copy-data; if the document cannot be loaded at run time the views keep working and each says readiness unknown; the API answers 503 missing | fixture:docs/contracts/fixtures/data/derived/readiness.json | - | frontend/src/readiness/readiness.test.ts | real |
-| api | 1.2.0 | app/ | docs/contracts/api.openapi.json | docs/contracts/examples/api-unavailable.json | docs/contracts/examples/api-unavailable.json#UnavailableBody | tests/contracts/test_api.py::test_responses_match_the_openapi_document | frontend/src/lib/api.contract.test.ts | missing: a document the route serves is absent, the API answers 503 with state missing and the reason (never an empty body); an unknown case or artifact is 404. The static readiness says missing for this row while the API lane is dormant; /api/readiness says available | fixture:docs/contracts/fixtures/data/derived | - | tests/contracts/test_api.py::test_swap_fixture_tree_and_bake | real |
+| case-index | 3.0.0 | data-pipeline/pipeline/core/manifest.py | docs/contracts/schemas/case-index.schema.json | docs/contracts/fixtures/data/derived/manifests/index.json | data/derived/manifests/index.json | tests/contracts/test_documents.py::test_index_validates | frontend/src/lib/contract.test.ts | missing: the site build stops at copy-data (no site without an inventory), the API answers 503 missing, readiness says missing. stale: engine_version older than VERSION; readiness says stale with both versions and the views show it | fixture:docs/contracts/fixtures/data/derived/manifests/index.json | - | frontend/src/lib/contract.test.ts, tests/contracts/test_documents.py::test_fixture_tree_validates | real |
+| case-manifest | 5.0.0 | data-pipeline/pipeline/core/manifest.py | docs/contracts/schemas/case-manifest.schema.json | docs/contracts/fixtures/data/derived/manifests/C01.json | data/derived/manifests/*.json, !data/derived/manifests/index.json | tests/contracts/test_documents.py::test_manifests_validate | frontend/src/lib/contract.test.ts | partial: a manifest the index lists is absent; readiness lists its path, the case selector marks the case not available yet and the other cases work, the API answers 404 for it. stale: as case-index | fixture:docs/contracts/fixtures/data/derived/manifests/C01.json | - | frontend/src/lib/contract.test.ts, tests/contracts/test_documents.py::test_fixture_tree_validates | real |
+| readiness | 2.0.1 | data-pipeline/pipeline/core/readiness.py | docs/contracts/schemas/readiness.schema.json | docs/contracts/fixtures/data/derived/readiness.json | data/derived/readiness.json | tests/contracts/test_readiness.py::test_committed_readiness_is_current | frontend/src/readiness/readiness.test.ts | missing: the site build stops at copy-data; if the document cannot be loaded at run time the views keep working and each says readiness unknown; the API answers 503 missing | fixture:docs/contracts/fixtures/data/derived/readiness.json | - | frontend/src/readiness/readiness.test.ts | real |
+| api | 2.0.0 | app/ | docs/contracts/api.openapi.json | docs/contracts/examples/api-unavailable.json | docs/contracts/examples/api-unavailable.json#UnavailableBody | tests/contracts/test_api.py::test_responses_match_the_openapi_document | frontend/src/lib/api.contract.test.ts | missing: a document the route serves is absent, the API answers 503 with state missing and the reason (never an empty body); an unknown case or artifact is 404. The static readiness says missing for this row while the API lane is dormant; /api/readiness says available | fixture:docs/contracts/fixtures/data/derived | - | tests/contracts/test_api.py::test_swap_fixture_tree_and_bake | real |
 | softqp-index | 1.0.0 | data-pipeline/pipeline/softqp_run.py | docs/contracts/schemas/softqp-index.schema.json | docs/contracts/fixtures/data/derived/softqp/index.json | data/derived/softqp/index.json | tests/test_softqp_contracts.py::test_producer_documents_and_provider_match_schema | frontend/src/lib/softqp.contract.test.ts | missing: no scientific inventory; the workbench shows unavailable and no result; development state is displayed until the release matrix is complete | fixture:docs/contracts/fixtures/data/derived/softqp | - | tests/test_softqp_contracts.py::test_producer_documents_and_provider_match_schema | real |
 | softqp-case-result | 2.2.0 | data-pipeline/pipeline/softqp_run.py | docs/contracts/schemas/softqp-case-result.schema.json | docs/contracts/fixtures/data/derived/softqp/C01.json | data/derived/softqp/C*.json | tests/test_softqp_contracts.py::test_producer_documents_and_provider_match_schema | frontend/src/lib/softqp.contract.test.ts | missing: a declared document is absent; the workbench says unavailable and reports the path; a failed run is recorded with its reason, and incompatible semantics never become an empty successful result | fixture:docs/contracts/fixtures/data/derived/softqp | - | tests/test_softqp_contracts.py::test_producer_documents_and_provider_match_schema | real |
-| softqp-case-spec | 1.0.0 | data-pipeline/pipeline/softqp_requests.py | docs/contracts/schemas/softqp-case-spec.schema.json | docs/contracts/examples/softqp-case-spec.json | - | tests/test_softqp_requests.py | frontend/src/lib/softqp.local.test.ts | missing: local execution is unavailable until a complete matching request and validated export exist; replay remains available | fixture:docs/contracts/examples/softqp-case-spec.json | - | tests/test_softqp_requests.py, frontend/src/lib/softqp.local.test.ts | real |
+| softqp-case-spec | 1.0.0 | data-pipeline/pipeline/io/contract.py | docs/contracts/schemas/softqp-case-spec.schema.json | docs/contracts/examples/softqp-case-spec.json | - | tests/test_softqp_requests.py | frontend/src/lib/softqp.local.test.ts | missing: local execution is unavailable until a complete matching request and validated export exist; replay remains available | fixture:docs/contracts/examples/softqp-case-spec.json | - | tests/test_softqp_requests.py, frontend/src/lib/softqp.local.test.ts | real |
 | softqp-run-request | 1.0.0 | data-pipeline/pipeline/softqp_requests.py | docs/contracts/schemas/softqp-run-request.schema.json | docs/contracts/examples/softqp-run-request.json | - | tests/test_softqp_requests.py | frontend/src/lib/softqp.local.test.ts | missing: local execution is unavailable until a complete matching request and validated export exist; replay remains available | fixture:docs/contracts/examples/softqp-run-request.json | - | tests/test_softqp_requests.py, frontend/src/lib/softqp.local.test.ts | real |
 | softqp-local-export | 1.0.0 | data-pipeline/pipeline/softqp_requests.py | docs/contracts/schemas/softqp-local-export.schema.json | docs/contracts/examples/softqp-local-export.json | - | tests/test_softqp_requests.py | frontend/src/lib/softqp.local.test.ts | missing: local execution is unavailable until a complete matching request and validated export exist; replay remains available | fixture:docs/contracts/examples/softqp-local-export.json | - | tests/test_softqp_requests.py, frontend/src/lib/softqp.local.test.ts | real |
 
 
 ## Missing-data states
 
-One vocabulary for every row (ADR-0080 decision 3). `data-pipeline/pipeline/core/readiness.py` computes each row's
-state from this catalog and the repository; the frontend and the API show it. Rules, applied in this order, first
-match wins:
+The native pipeline computes readiness from this catalog, product version and scientific deployment inventory. It uses the shared six-state vocabulary. There is no trained model in this product, so no training-state producer is declared. Runtime contracts can be available without a user having submitted a local request; this describes implemented capability, not execution of every possible input.
 
-| Row kind | Condition | state | provenance | reason en | reason es |
+| state | condition | provenance | surface behavior | reason en | reason es |
 |---|---|---|---|---|---|
-| any | the catalog `status` is `active` | `provider` | the provider kind | Served by its provider ({provider}); the real producer is not built yet. | Lo sirve su proveedor ({provider}); el productor real aún no está construido. |
-| case-index, case-manifest, trace | `data/derived/manifests/index.json` is absent | `missing` | null | The pipeline has not baked this build. | El pipeline no ha generado esta versión. |
-| case-manifest | a manifest the index lists is absent | `partial` | `real` | {n} of {total} manifests are absent. | Faltan {n} de {total} manifiestos. |
-| trace | an artifact a present manifest names is absent | `partial` | `real` | {n} of {total} artifacts are absent. | Faltan {n} de {total} artefactos. |
-| case-index, case-manifest, trace | the index `engine_version` differs from `VERSION` | `stale` | `real` | Baked by {engine_version}; the product is {version}. | Generado por {engine_version}; el producto es {version}. |
-| params-record | `data/examples/params.csv` is absent | `missing` | null | No source table; the bake uses the registry's cases. | No hay tabla de origen; la generación usa los casos del registro. |
-| params-record | contract 1 rejects some rows | `partial` | `real` | {n} of {total} rows rejected by contract 1. | {n} de {total} filas rechazadas por el contrato 1. |
-| surrogate-model | `models/surrogate.json` is absent or fails its schema | `training` | `baseline` | No released surrogate; the analytic baseline answers. | No hay un sustituto publicado; responde la línea base analítica. |
-| surrogate-model | a manifest records that the baseline produced its metrics (`models` of the manifest) | `training` | `baseline` | The bake's metrics come from the analytic baseline; bake again to use the released surrogate. | Las métricas de la generación vienen de la línea base analítica; genere de nuevo para usar el sustituto publicado. |
-| surrogate-model | the marker file `models/training/surrogate-model` exists | `training` | `real` | The released surrogate answers; a newer one is training. | Responde el sustituto publicado; uno más nuevo está en entrenamiento. |
-| api | always, in the static document | `missing` | null | The API lane is dormant; the site reads the committed documents. | La API está inactiva; el sitio lee los documentos versionados. |
-| any | otherwise | `available` | `real` | null | null |
+| provider | status active | declared provider kind | Show a visible provider label | Served by its declared provider; the producer is incomplete. | Servido por su proveedor declarado; el productor está incompleto. |
+| missing | dormant API | null | Static reader remains available | The API lane is dormant; the browser reads static artifacts. | La API está inactiva; el navegador lee artefactos estáticos. |
+| missing | inventory absent or unreadable | null | Show unavailable, with its reason | The scientific inventory has not been baked. | El inventario científico no ha sido generado. |
+| partial | declared manifests or results absent | real | Keep other cases and list missing paths | Declared scientific files are absent. | Faltan archivos científicos declarados. |
+| stale | deployment inventory version differs | real | Show a stale note | Baked by {engine_version}; the product is {version}. | Generado por {engine_version}; el producto es {version}. |
+| available | applicable checks above pass | real | Render verified records | none | ninguna |
 
-The `status` column holds `real` or `active` only, in lower case; any other value fails the readiness computation (and so
-`scripts/check_readiness.py`), because a status the rules do not know would be published as real. `{provider}` is
-the row's provider cell (`kind:path`); `{n}`, `{total}`, `{engine_version}` and `{version}` are
-filled from the repository. `missing` is a list of strings, non-empty exactly when the state is `partial`: the
-absent paths relative to `data/derived/` (manifests, artifacts) or the rejected case ids (params-record), sorted.
-`/api/readiness` returns the committed document with the `api` row set to status `real`, state `available`, provenance `real`, reason
-null. What each surface does:
+Schema and byte integrity are separate checks. Available readiness never substitutes for JSON Schema, native original-space acceptance, checksums, full UI review, scientific novelty review or release acceptance. A provider inventory is isolated to C01 and uses the actual loader and checksum path.
 
-| state | the frontend shows | the API answers |
-|---|---|---|
-| `available` | the result | 200 |
-| `partial` | the result for what exists; each absent case or artifact says not available yet | 200 for what exists, 404 for the absent paths |
-| `stale` | the result and a note with the version that baked it | 200 |
-| `provider` | the result and a note naming the provider kind | 200 |
-| `training` | the result and a note naming the model that answered, and that a newer one is training (or that none is released) | 200 |
-| `missing` | an explicit not available yet with the reason, never an empty chart | 503 with `{"detail": {"state": "missing", "reason": {...}}}` |
+## Provider inventory
 
-A `partial` bake builds: `frontend/scripts/copy-data.mjs` and `scripts/check_artifacts.py` accept an absent
-manifest or artifact only when the readiness document lists it in the `missing` of a `partial` row (and the
-readiness is current, `scripts/check_readiness.py`); any other absent file stops them.
-
-## Providers
-
-- `docs/contracts/fixtures/data/derived/`: a provider tree in the layout of `data/derived/` (one case,
-  `FX01_fixture`, its manifest and trace, the index and a readiness document that says `provider` for every row but `api`, which is
-dormant and so `missing`). The
-  frontend builds on it with `CAOS_DATA_ROOT=docs/contracts/fixtures/data/derived` (a walking skeleton before any
-  bake), the API serves it with `DATA_DIR=docs/contracts/fixtures/data/derived`, and the contract tests run against
-  it and against `data/derived/` with the same assertions (the swap tests).
-- `docs/contracts/fixtures/data/examples/params.csv`: a two-row source table for contract 1.
-- `data-pipeline/pipeline/model/baseline.py`: the surrogate slot's baseline, the SIR peak with S0 = 1,
-  `1 - (1 + ln r0) / r0` for `r0 > 1`, else 0. It needs no trained bundle.
-
-A provider is scaffolding: labelled on every surface by the readiness document, never counted as done for the unit
-that owes the real producer.
+`docs/contracts/fixtures/data/derived` carries a C01-only scientific result, inventory, deployment manifest and readiness document. `scripts/update_softqp_fixtures.py` builds it from the canonical checked record without rerunning a solver. `VITE_SOFTQP_SOURCE=fixture` selects the labelled scientific source in the browser; `CAOS_DATA_ROOT` selects deployment files at build time and `DATA_DIR` selects the dormant read-only API source.
 
 ## History
 
@@ -133,10 +92,10 @@ not reconstructed.
 
 | contract | version | date | change | kind |
 |---|---|---|---|---|
-| params-record | 1.0.0 | 2026-10-11 | the ingestion record: case id, SIR parameters with the bounds of contract 1 | initial |
-| case-index | 2.0.0 | 2026-10-11 | the index of cases with bilingual titles, categories and the default case (`example.index/v2`) | initial |
-| case-manifest | 4.0.0 | 2026-10-11 | the per-case manifest with lane verdict, metrics and the model behind them (`example.manifest/v4`) | initial |
-| trace | 1.0.0 | 2026-10-11 | the per-case trace, at most 200 points, with a summary (`example.trace/v1`) | initial |
+| params-record | 1.0.0 | 2026-10-11 | the ingestion record: case id, retired example parameters with the bounds of contract 1 | initial |
+| case-index | 2.0.0 | 2026-10-11 | the index of cases with bilingual titles, categories and the default case (retired inherited index) | initial |
+| case-manifest | 4.0.0 | 2026-10-11 | the per-case manifest with lane verdict, metrics and the model behind them (retired inherited manifest) | initial |
+| trace | 1.0.0 | 2026-10-11 | the per-case trace, at most 200 points, with a summary (retired inherited trace) | initial |
 | surrogate-model | 1.0.0 | 2026-10-11 | the slot r0 to peak infected fraction, with the analytic baseline behind it | initial |
 | readiness | 1.0.0 | 2026-10-11 | what is real in a build, row by row, in one of six declared states | initial |
 | api | 1.0.0 | 2026-10-11 | the dormant read-only API, GET only, 503 with the declared state when a document is absent | initial |
@@ -150,3 +109,11 @@ not reconstructed.
 | softqp-run-request | 1.0.0 | 2026-10-31 | Bounded cost edits tied to one checksummed committed case | initial |
 | softqp-local-export | 1.0.0 | 2026-10-31 | Local execution envelope retaining request and complete result | initial |
 | api | 1.2.0 | 2026-10-31 | Add specification, request and local export components | minor |
+| params-record | 2.0.0 | 2026-10-31 | Remove inherited domain parameters; sparse scientific specification replaces them | major |
+| trace | 2.0.0 | 2026-10-31 | Remove inherited trajectory; original-space scientific result replaces it | major |
+| surrogate-model | 2.0.0 | 2026-10-31 | Remove unrelated trained surrogate; all implemented solvers are deterministic | major |
+| case-index | 3.0.0 | 2026-10-31 | Replace inherited index with declared scientific deployment inventory | major |
+| case-manifest | 5.0.0 | 2026-10-31 | Replace inherited simulation fields with scientific result metadata and replay gate | major |
+| readiness | 2.0.0 | 2026-10-31 | Scientific inventory readiness without example model or training dependencies | major |
+| api | 2.0.0 | 2026-10-31 | Replace example response bodies with scientific inventory, manifest and result types | major |
+| readiness | 2.0.1 | 2026-10-31 | Explicit redundant array types in conditional branches for strict runtime validation | patch |

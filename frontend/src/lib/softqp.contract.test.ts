@@ -13,7 +13,7 @@ describe('SoftQP producer and consumer contract', () => {
       }
     });
   }
-  it('rejects an unknown key and a boolean objective', () => {
+  it('adversarial: rejects an unknown key and a boolean objective', () => {
     const doc = JSON.parse(readFileSync(new URL('C01.json', roots[0]), 'utf8'));
     expect(() => validateSoftQPResult({ ...doc, unexpected: true })).toThrow();
     doc.runs[0].result.metrics.objective = true;

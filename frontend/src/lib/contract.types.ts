@@ -1,111 +1,19 @@
-// CONTRACT 2 mirror (the web side of data-pipeline/pipeline/core/{trace.py, manifest.py}) and the readiness document. The
-// types are GENERATED: contract.gen.ts comes from docs/contracts/api.openapi.json, whose components are the schema
-// files of docs/contracts/schemas/ (ADR-0080 decision 2; `npm run contracts:types`, checked by `npm run build`). The
-// names below are aliases of the generated types, never hand-written interfaces. The descriptors below describe the
-// same keys at run time, and `satisfies` ties each descriptor to its generated type (a key added to or removed from a
-// schema and not here fails `tsc`). contract.test.ts reads the committed artifacts and the provider tree against the
-// descriptors in both directions, types included, so the pipeline cannot ship a shape the web does not read, and the
-// web cannot read a key the pipeline does not write (T11).
+// Generated schema aliases and the generic readiness descriptor.
 import type { components } from './contract.gen';
-
 type Schemas = components['schemas'];
-
-/** Every reader-facing string is bilingual at the source. */
 export type Text = Schemas['text'];
-
-export type Trace = Schemas['Trace'];
-export type TraceSummary = Trace['summary'];
-export type CaseManifest = Schemas['CaseManifest'];
-export type ArtifactRef = CaseManifest['artifact'];
-export type GateVerdict = CaseManifest['gate'];
-export type CaseParams = CaseManifest['params'];
 export type CaseIndex = Schemas['CaseIndex'];
-export type CaseIndexEntry = CaseIndex['cases'][number];
+export type CaseManifest = Schemas['CaseManifest'];
+export type Trace = Schemas['SoftQPCaseResult'];
 export type Readiness = Schemas['Readiness'];
 export type ReadinessEntry = Readiness['contracts'][number];
-
-/** The declared state of a catalog row (docs/contracts/catalog.md, Missing-data states). */
 export type ContractState = ReadinessEntry['state'];
-
-/** What served a catalog row in this build; null when nothing did. */
 export type Provenance = NonNullable<ReadinessEntry['provenance']>;
-
-/** The 503 body (state missing, with the reason) and the 404 body of the API (catalog row api). */
 export type UnavailableBody = Schemas['UnavailableBody'];
 export type NotFoundBody = Schemas['NotFoundBody'];
-
-export const SCHEMAS = {
-  trace: 'example.trace/v1',
-  manifest: 'example.manifest/v4',
-  index: 'example.index/v2',
-  readiness: 'example.readiness/v1',
-} as const satisfies { trace: Trace['schema']; manifest: CaseManifest['schema']; index: CaseIndex['schema']; readiness: Readiness['schema'] };
-
-/** A run-time description of a value: a primitive, a bilingual text, an array of a kind, an object, a map, or a
- * kind that may also be null (an optional bound, an absent reference). */
-export type Kind =
-  | 'string'
-  | 'number'
-  | 'integer'
-  | 'boolean'
-  | 'text'
-  | { array: Kind }
-  | { object: Record<string, Kind> }
-  | { map: Kind }
-  | { nullable: Kind };
-
-export const TRACE_SUMMARY = { peak_I: 'number', t_peak: 'number', attack_rate: 'number' } satisfies Record<keyof TraceSummary, Kind>;
-
-export const TRACE = {
-  schema: 'string',
-  case_id: 'string',
-  t: { array: 'number' },
-  S: { array: 'number' },
-  I: { array: 'number' },
-  R: { array: 'number' },
-  summary: { object: TRACE_SUMMARY },
-} satisfies Record<keyof Trace, Kind>;
-
-export const MANIFEST = {
-  schema: 'string',
-  case_id: 'string',
-  title: 'text',
-  category: 'text',
-  real_or_synthetic: 'string',
-  expected_band: 'text',
-  engine: { object: { package: 'string', version: 'string', model: 'string' } },
-  params: { object: { beta: 'number', gamma: 'number', N: 'number', I0: 'number', days: 'integer' } satisfies Record<keyof CaseParams, Kind> },
-  seed: 'integer',
-  artifact: { object: { path: 'string', format: 'string', trace_schema: 'string', bytes: 'integer' } satisfies Record<keyof ArtifactRef, Kind> },
-  lane: 'string',
-  gate: {
-    object: {
-      lane: 'string',
-      pure_python: 'boolean',
-      wheels: { array: 'string' },
-      trace_bytes: 'integer',
-      run_ms_budget: 'number',
-      trace_bytes_budget: 'integer',
-      reasons: { array: 'string' },
-    } satisfies Record<keyof GateVerdict, Kind>,
-  },
-  flags: { array: { map: 'string' } },
-  metrics: { map: 'number' },
-  models: { map: 'string' },
-  expect: { map: { array: 'number' } },
-} satisfies Record<keyof CaseManifest, Kind>;
-
-export const INDEX = {
-  schema: 'string',
-  engine_version: 'string',
-  n_cases: 'integer',
-  default_case: 'string',
-  cases: { array: { object: { case_id: 'string', title: 'text', category: 'text', manifest_path: 'string' } satisfies Record<keyof CaseIndexEntry, Kind> } },
-} satisfies Record<keyof CaseIndex, Kind>;
-
-/** The 503 body of the API: the state and the bilingual reason. */
-export const UNAVAILABLE = { detail: { object: { state: 'string', reason: 'text' } } } satisfies Record<keyof UnavailableBody, Kind>;
-
+export const SCHEMAS = {readiness:'softqp.readiness/v2',index:'softqp.artifact-index/v1',manifest:'softqp.manifest/v1'} as const;
+export const UNAVAILABLE = {detail:{object:{state:'string',reason:'text'}}} satisfies Record<keyof UnavailableBody,Kind>;
+export type Kind='string'|'number'|'integer'|'boolean'|'text'|{array:Kind}|{object:Record<string,Kind>}|{map:Kind}|{nullable:Kind};
 export const READINESS = {
   schema: 'string',
   product_version: 'string',

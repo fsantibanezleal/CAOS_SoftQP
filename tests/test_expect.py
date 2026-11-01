@@ -1,29 +1,24 @@
-"""Expected ranges (core/expect.py): a baked value outside its case's range fails the bake, with its name."""
+import json
+from pathlib import Path
 import pytest
-
-from pipeline import registry
-from pipeline.core.expect import ExpectationError, check
-from pipeline.io.schema import SIRResult
-from pipeline.stages import infer
-
-
-def _result(peak: float, t_peak: float, attack: float) -> SIRResult:
-    return SIRResult(case_id="x", t=[0.0], S=[0.0], I=[0.0], R=[0.0], peak_I=peak, t_peak=t_peak, attack_rate=attack)
+from pipeline.core.expect import ExpectationError, check, check_document
 
 
 def test_every_registered_case_meets_its_declared_range():
-    for case in registry.list_cases():
-        ranges = check(case.id, case.expect, infer.run(case.params))
-        assert ranges, case.id
+    root = Path(__file__).parents[1] / "data/derived/softqp"
+    for path in root.glob("C*.json"):
+        check_document(json.loads(path.read_text(encoding="utf-8")))
 
 
 def test_a_value_outside_its_range_is_named():
-    with pytest.raises(ExpectationError, match=r"attack_rate=0\.75 outside \[0\.9, 0\.95\]"):
-        check("EX", {"attack_rate": (0.9, 0.95)}, _result(10.0, 20.0, 0.75))
+    with pytest.raises(ExpectationError, match="hard_violation"):
+        check("C01", {"hard_violation": (0, 1e-6)}, {"hard_violation": 1e-3})
 
 
 def test_adversarial_a_case_without_expectations_or_with_an_unknown_metric_fails():
     with pytest.raises(ExpectationError, match="no expected range"):
-        check("EX", {}, _result(1.0, 1.0, 0.1))
-    with pytest.raises(ExpectationError, match="unknown expected metric 'peak'"):
-        check("EX", {"peak": (0.0, 1.0)}, _result(1.0, 1.0, 0.1))
+        check("C01", {}, {})
+    with pytest.raises(ExpectationError, match="unknown expected metric"):
+        check("C01", {"unknown": (0, 1)}, {})
+    with pytest.raises(ExpectationError):
+        check("C01", {"objective": (0, 1)}, {"objective": True})

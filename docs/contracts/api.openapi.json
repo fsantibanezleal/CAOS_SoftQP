@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "Product dormant API",
-    "version": "1.2.0",
+    "version": "2.0.0",
     "summary": "Catalog row api 1.1.0: the read-only API of app/ (ADR-0057), dormant until the API lane is activated.",
     "description": "Serves the committed documents of data/derived unchanged, GET only. A document that does not exist yet is a declared state, never an empty body that looks like data: the API answers 503 with the state missing and its reason. The schemas are the catalog's schema files; this document and docs/contracts/schemas/ are the single source the TypeScript types are generated from (frontend/src/lib/contract.gen.ts)."
   },
@@ -121,7 +121,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Trace"
+                  "$ref": "#/components/schemas/SoftQPCaseResult"
                 }
               }
             }
@@ -160,20 +160,11 @@
   },
   "components": {
     "schemas": {
-      "ParamsRecord": {
-        "$ref": "./schemas/params-record.schema.json"
-      },
       "CaseIndex": {
         "$ref": "./schemas/case-index.schema.json"
       },
       "CaseManifest": {
         "$ref": "./schemas/case-manifest.schema.json"
-      },
-      "Trace": {
-        "$ref": "./schemas/trace.schema.json"
-      },
-      "SurrogateModel": {
-        "$ref": "./schemas/surrogate-model.schema.json"
       },
       "Readiness": {
         "$ref": "./schemas/readiness.schema.json"

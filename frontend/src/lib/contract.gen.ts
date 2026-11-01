@@ -112,153 +112,63 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /**
-         * ParamsRecord
-         * @description Contract 1 (ingestion), catalog row params-record 1.0.0: one operating point as accepted by data-pipeline/pipeline/io/contract.py validate_rows. The raw source is a table (CSV) with the columns case_id, beta, gamma, N, I0 and an optional days; values arrive as text and are parsed, never coerced: a row that fails a rule below is rejected with a reason, and a row with R0 = beta / gamma above 20 is accepted and flagged. Cross-field rule the schema cannot state: I0 <= N. EXAMPLE domain: an SIR epidemic; a product replaces the fields.
-         */
-        ParamsRecord: {
-            /** @description The case identifier. */
-            case_id: string;
-            /** @description Effective contact rate, 1/day. */
-            beta: number;
-            /** @description Recovery rate, 1/day. */
-            gamma: number;
-            /** @description Population, individuals. */
-            N: number;
-            /** @description Initial infected, individuals; at most N. */
-            I0: number;
-            /** @description Horizon in days; 160 when the source leaves it empty. */
-            days: number;
-        };
-        /**
-         * CaseIndex
-         * @description Contract 2 (artifact), catalog row case-index 2.0.0: the flat inventory of every baked case, written by data-pipeline/pipeline/core/manifest.py build_index to data/derived/manifests/index.json. Rules the schema cannot state, checked by the producer and consumer tests: n_cases equals the number of entries, default_case is one of their case_id values, and the entries are sorted by case_id.
-         */
         CaseIndex: {
             /** @constant */
-            schema: "example.index/v2";
-            /** @description The product version that baked the index; older than VERSION means the bake is stale. */
-            engine_version: components["schemas"]["version"];
+            schema: "softqp.artifact-index/v1";
+            engine_version: string;
             n_cases: number;
             default_case: string;
             cases: {
                 case_id: string;
-                title: components["schemas"]["text"];
-                category: components["schemas"]["text"];
+                title: {
+                    en: string;
+                    es: string;
+                };
+                category: {
+                    en: string;
+                    es: string;
+                };
                 manifest_path: string;
             }[];
+            files: string[];
         };
-        /**
-         * CaseManifest
-         * @description Contract 2 (artifact), catalog row case-manifest 4.0.0: the authoritative record of one baked case, written by data-pipeline/pipeline/core/manifest.py build_case_manifest to data/derived/manifests/<case>.json. A pure function of (params, seed): no wall-clock time. Rules the schema cannot state, checked by scripts/check_artifacts.py: artifact.bytes equals the size of the file at artifact.path, and lane equals gate.lane.
-         */
         CaseManifest: {
             /** @constant */
-            schema: "example.manifest/v4";
+            schema: "softqp.manifest/v1";
             case_id: string;
-            title: components["schemas"]["text"];
-            category: components["schemas"]["text"];
-            /** @enum {unknown} */
-            real_or_synthetic: "real" | "synthetic";
-            expected_band: components["schemas"]["text"];
+            title: {
+                en: string;
+                es: string;
+            };
+            category: {
+                en: string;
+                es: string;
+            };
             engine: {
-                package: string;
-                version: components["schemas"]["version"];
-                model: string;
+                /** @constant */
+                package: "softqp";
+                version: string;
             };
-            params: {
-                beta: number;
-                gamma: number;
-                N: number;
-                I0: number;
-                days: number;
-            };
+            product_version: string;
             seed: number;
+            source: string;
             artifact: {
-                /** @description Relative to data/derived; no leading slash, no '..', no backslash. */
                 path: string;
+                bytes: number;
+                sha256: string;
                 /** @constant */
                 format: "json";
-                /** @constant */
-                trace_schema: "example.trace/v1";
-                bytes: number;
             };
-            /** @enum {unknown} */
-            lane: "live" | "precompute";
+            /** @constant */
+            lane: "precompute";
             gate: {
-                /** @enum {unknown} */
-                lane: "live" | "precompute";
-                pure_python: boolean;
-                wheels: string[];
-                trace_bytes: number;
-                run_ms_budget: number;
-                trace_bytes_budget: number;
-                reasons: string[];
+                /** @constant */
+                lane: "precompute";
+                reasons: {
+                    en: string;
+                    es: string;
+                }[];
             };
-            /** @description The rows contract 1 accepted with a flag. */
-            flags: {
-                [key: string]: string;
-            }[];
-            /** @description Evaluation metrics of this bake (the surrogate model slot's held-out error, among others). */
-            metrics: {
-                [key: string]: number;
-            };
-            /** @description Per model slot (catalog row id), what produced this bake's metrics: the released bundle (real) or the slot's baseline. */
-            models: {
-                [key: string]: "real" | "baseline";
-            };
-            /** @description The checked expectation of the case: [low, high] per result metric. */
-            expect: {
-                [key: string]: [
-                    number,
-                    number
-                ];
-            };
-        };
-        /**
-         * Trace
-         * @description Contract 2 (artifact), catalog row trace 1.0.0: the compact replay artifact of one case, written by data-pipeline/pipeline/core/trace.py to data/derived/<case>/trace.json. The trajectory is decimated to at most 200 points; t, S, I and R have the same length (a rule the schema cannot state; the producer test checks it).
-         */
-        Trace: {
-            /** @constant */
-            schema: "example.trace/v1";
-            case_id: string;
-            /** @description Time, days. */
-            t: components["schemas"]["series"];
-            /** @description Susceptible, individuals. */
-            S: components["schemas"]["series"];
-            /** @description Infected, individuals. */
-            I: components["schemas"]["series"];
-            /** @description Recovered, individuals. */
-            R: components["schemas"]["series"];
-            summary: {
-                /** @description Largest infected count, individuals. */
-                peak_I: number;
-                /** @description Time of the peak, days. */
-                t_peak: number;
-                /** @description Share of the population ever infected. */
-                attack_rate: number;
-            };
-        };
-        /**
-         * SurrogateModel
-         * @description Model slot, catalog row surrogate-model 1.0.0: the released surrogate bundle models/surrogate.json written by data-pipeline/pipeline/stages/train.py and read by stages/evaluate.py. Slot input: r0 = beta / gamma (dimensionless, > 0). Slot output: the peak infected fraction peak_I / N, in [0, 1] (the predictor clamps). When no valid bundle exists the baseline data-pipeline/pipeline/model/baseline.py answers: 1 - (1 + ln r0) / r0 for r0 > 1, else 0 (the SIR peak with S0 = 1 and I0 near 0). EXAMPLE: a real product's bundle is its exported model (ONNX, say) plus a card like this one.
-         */
-        SurrogateModel: {
-            /** @constant */
-            kind: "linear-lstsq";
-            /**
-             * @description The design-matrix columns, in order.
-             * @constant
-             */
-            basis: [
-                "1",
-                "r0",
-                "ln(r0)",
-                "1/r0"
-            ];
-            /** @description One coefficient per basis column. */
-            coeffs: number[];
         };
         /**
          * Readiness
@@ -266,7 +176,7 @@ export interface components {
          */
         Readiness: {
             /** @constant */
-            schema: "example.readiness/v1";
+            schema: "softqp.readiness/v2";
             product_version: components["schemas"]["version"];
             /** @description SHA-256 of docs/contracts/catalog.md (its UTF-8 bytes with CRLF normalised to LF) the document was computed from. */
             catalog_sha256: string;
@@ -431,14 +341,6 @@ export interface components {
             request: components["schemas"]["SoftQPRequestPayload"];
             result: components["schemas"]["SoftQPResultPayload"];
         };
-        /** @description Every reader-facing string is bilingual at the source. */
-        text: {
-            en: string;
-            es: string;
-        };
-        /** @description The product version format X.XX.XXX. */
-        version: string;
-        series: number[];
         entry: {
             /** @description The catalog row id. */
             id: string;
@@ -465,6 +367,13 @@ export interface components {
          * @enum {unknown}
          */
         state: "available" | "partial" | "stale" | "provider" | "training" | "missing";
+        /** @description Every reader-facing string is bilingual at the source. */
+        text: {
+            en: string;
+            es: string;
+        };
+        /** @description The product version format X.XX.XXX. */
+        version: string;
         SoftQPProblemPayload: {
             P: {
                 shape: [
@@ -702,7 +611,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Trace"];
+                    "application/json": components["schemas"]["SoftQPCaseResult"];
                 };
             };
             404: components["responses"]["NotFound"];

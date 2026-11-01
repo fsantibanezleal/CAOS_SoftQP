@@ -1,5 +1,5 @@
 # DEV lane, lint + test. Pinned to the verified install (Python 3.12, 2026-06-20).
-pytest==9.1.1
+pytest==9.2.0
 ruff==0.15.18
 # Contract tests (docs/contracts/): the schema files and the OpenAPI document are validated on the Python side
 jsonschema==4.26.0

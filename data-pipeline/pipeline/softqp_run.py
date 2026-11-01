@@ -164,7 +164,8 @@ def run_case(case):
     if case.problem is not None:
         from .softqp_requests import encode_problem
         document["problem"] = encode_problem(case.problem)
-    return document
+    from .core.expect import check_document
+    return check_document(document)
 
 
 def bake(output: Path, selected=None):
