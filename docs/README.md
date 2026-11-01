@@ -1,21 +1,14 @@
-# Docs, the product wiki
+# Product documentation
 
-The product wiki (ADR-0056), written as the product is built, unit by unit, never at the end. The pipeline, its
-validation and these documents are the product; the web app is its companion workbench. The design, with every
-requirement and its gate, is [design/SDD.md](design/SDD.md).
+SoftQP Studio studies declared hard and soft policies in convex quadratic programs. The native scientific pipeline is authoritative; the static workbench verifies and replays its results and can import a matching locally executed cost-edit request.
 
-## Map
-- **[architecture/](architecture/)**, how the repo works: the frozen base, the two data contracts, determinism +
-  trace, the live/precompute gate, the staged pipeline, model evaluation, deploy.
-- **[frameworks/](frameworks/)**, one card per research-chosen engine/library (what/why · install · usage ·
-  applying). The deep research, made binding (each is pinned in a `requirements-*.txt`).
-- **[guides/](guides/)**, runnable how-tos: **instantiate the template**, run the precompute pipeline,
-  **bring your own data**, the GPU lane, run the API.
-- **[cases/](cases/)**, the CATEGORY taxonomy + the coverage matrix + one page per documented case.
+- [Scientific execution and local editing](softqp-development.md): install the exact engine pin, bake fifteen cases, export a request, execute it locally and import a verified result.
+- [Software design](design/SDD.md): approved scope, mathematical assumptions, EARS requirements, sizing and gates.
+- [Contracts](contracts/catalog.md): sparse problem, request, result, inventory, deployment, readiness and local export boundaries with schema versions and tests.
+- [Research sources](research.md): published generalized projection, explicit lifting, DAQP and current related work, with scope and novelty limits.
+- [Cases](cases/README.md): taxonomy and individual scientific cases.
+- [Architecture](architecture/): execution, evidence, replay and deployment boundaries.
+- [Frameworks](frameworks/): the pinned native and numerical engines, installation, use and licensing.
+- [Guides](guides/): product operation, validation and contribution procedures.
 
-## Honesty + data policy
-- Numbers come from the calibrated engine / committed artifacts, never from a claim. The EXAMPLE engine (SIR) is
-  synthetic and clearly labelled; a real product states sources, licenses and what is real vs synthetic.
-- Public derived artifacts are committed (`data/derived/`); raw/private sources stay out of git (`data/raw/`,
-  vault) per ADR-0055. The two data contracts ([architecture/08_data-contracts.md](architecture/08_data-contracts.md))
-  govern raw→pipeline and pipeline→web.
+The current branch is development source. The focused browser probe, source tests and a build are bounded checks. Full held-out/streaming evidence, executable EN/ES curriculum, report/package publication, full UI gates and deployed commit verification remain separate release requirements. No speed or novelty claim follows from this documentation.
