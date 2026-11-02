@@ -18,7 +18,7 @@ pytestmark = pytest.mark.skipif(not HAS_PEAK, reason='Coupled validation require
 @pytest.mark.parametrize('family', ['sparse', 'thermal'])
 @pytest.mark.parametrize('curvature', ['positive-definite', 'semidefinite', 'zero-hessian'])
 @pytest.mark.parametrize('quadratic', [0., 1.])
-def test_synthetic_forecasts_have_same_semantics_and_native_oracle_accuracy(family, curvature, quadratic):
+def test_adversarial_synthetic_forecasts_have_same_semantics_and_native_oracle_accuracy(family, curvature, quadratic):
     from pipeline.coupled_accuracy import accept
     from pipeline.coupled_cases import generated_batch
     from softqp.peak import PreparedPeakSolver, solve_peak
@@ -52,7 +52,7 @@ def test_synthetic_forecasts_have_same_semantics_and_native_oracle_accuracy(fami
         assert accept(problem, bad, oracle_check['metrics']['objective'])['state'] != 'accepted'
 
 
-def test_independent_gate_rejects_joint_dual_and_raw_stationarity_counterexamples():
+def test_adversarial_independent_gate_rejects_joint_dual_and_raw_stationarity_counterexamples():
     from pipeline.coupled_accuracy import original_metrics, accept
     from softqp.peak import PeakGroup, PeakProblem
 

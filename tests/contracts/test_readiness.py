@@ -142,3 +142,38 @@ def test_adversarial_check_readiness_reports_an_unknown_status(repo):
         text=True,
     )
     assert proc.returncode == 1 and "invalid status" in proc.stdout
+
+
+@pytest.mark.parametrize("rid", [
+    "softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign",
+])
+def test_adversarial_coupled_examples_do_not_establish_deployed_evidence(tmp_path, rid):
+    """An implemented offline exchange is not a deployed research-data source."""
+    for derived in (ROOT / "data/derived", tmp_path / "absent-derived"):
+        entry = row(readiness.compute(repo_root=ROOT, derived_root=derived), rid)
+        assert entry["state"] == "missing"
+        assert entry["provenance"] is None
+        assert "offline" in entry["reason"]["en"].lower()
+
+
+@pytest.mark.parametrize("payload", ["{}", "not-json", '{"state":"accepted"}'])
+def test_adversarial_undeclared_coupled_payload_cannot_become_available(tmp_path, payload):
+    """Planting a file cannot admit an undeclared or unvalidated replay lane."""
+    target = tmp_path / "coupled"
+    target.mkdir()
+    (target / "campaign.json").write_text(payload, encoding="utf-8")
+    document = readiness.compute(repo_root=ROOT, derived_root=tmp_path)
+    for rid in ("softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign"):
+        assert row(document, rid)["state"] == "missing"
+
+
+def test_adversarial_fixture_coupled_rows_remain_labelled_providers(tmp_path):
+    document = readiness.compute(
+        repo_root=ROOT, derived_root=tmp_path,
+        catalog_path=ROOT / "docs/contracts/fixtures/catalog.md",
+    )
+    for rid in ("softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign"):
+        entry = row(document, rid)
+        assert entry["state"] == "provider"
+        assert entry["provenance"] == "fixture"
+        assert entry["reason"] is not None

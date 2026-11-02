@@ -29,7 +29,7 @@ def test_exact_separate_profile_matches_all_protocol_pins(profile):
 
 @pytest.mark.parametrize('mutation', ['old-sdk', 'range', 'duplicate', 'missing', 'extra', 'option', 'url',
                                     'attached-comment', 'invalid-version', 'empty', 'sdk-metadata'])
-def test_dependency_drift_or_unpinned_options_are_rejected(profile, mutation):
+def test_adversarial_dependency_drift_or_unpinned_options_are_rejected(profile, mutation):
     path = profile/'experiments/coupled-v1/requirements.txt'
     text = path.read_text()
     if mutation == 'old-sdk':

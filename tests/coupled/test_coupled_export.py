@@ -120,7 +120,7 @@ def test_complete_downstream_replay_and_exact_csv(evidence):
 
 @pytest.mark.parametrize('mutation', ['raw-checksum', 'source-map', 'dataset-summary', 'frame-metric',
                                     'backend-label', 'omitted-row', 'csv-content', 'changed-input'])
-def test_replay_rejects_tampering_even_when_outer_checksums_are_recomputed(evidence, mutation):
+def test_adversarial_replay_rejects_tampering_even_when_outer_checksums_are_recomputed(evidence, mutation):
     from pipeline.coupled_campaign import file_hash
     from pipeline.coupled_export import validate_output
     from pipeline.coupled_freeze import canonical_digest

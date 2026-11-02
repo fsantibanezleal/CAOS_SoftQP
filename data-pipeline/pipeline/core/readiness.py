@@ -75,6 +75,15 @@ def compute(*, repo_root, derived_root, models_dir=None, catalog_path=None, vers
                 "La API está inactiva; el navegador lee artefactos estáticos.",
                 provenance=None,
             )
+        elif rid in (
+            "softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign"
+        ):
+            state(
+                "missing",
+                "This offline research lane has no declared validated replay adapter in this app.",
+                "Esta vía de investigación sin conexión no tiene un adaptador de reproducción validado declarado en esta aplicación.",
+                provenance=None,
+            )
         elif rid.startswith("softqp-") and rid in (
             "softqp-stream", "softqp-campaign", "softqp-datasets", "softqp-experiment-index"
         ):

@@ -35,7 +35,7 @@ def test_batch_producer_consumer_roundtrip():
 @pytest.mark.skipif(not HAS_PEAK, reason='Separate softqp0.2 coupled environment required')
 @pytest.mark.parametrize('mutation', ['negative-pointer', 'row-index', 'duplicate-row', 'vector-shape',
                                     'scale-shape', 'overlap', 'nan-update', 'unit-shape', 'side-pattern', 'bool-row'])
-def test_malformed_batch_rejects_before_native_setup(mutation):
+def test_adversarial_malformed_batch_rejects_before_native_setup(mutation):
     from pipeline.coupled_contract import decode_batch
     document = copy.deepcopy(json.loads(EXAMPLE.read_text()))
     problem = document['problem']

@@ -36,7 +36,7 @@ def test_fastest_registered_baseline_and_seed_bootstrap():
 
 
 @pytest.mark.parametrize('mutation', ['missing', 'failed', 'unexpected-incompatible', 'zero-time', 'nan-time'])
-def test_bad_baseline_cannot_disappear_or_improve_the_primary_endpoint(mutation):
+def test_adversarial_bad_baseline_cannot_disappear_or_improve_the_primary_endpoint(mutation):
     records, inventory, protocol = data()
     index = next(i for i, row in enumerate(records) if row['method'] == 'epigraph')
     if mutation == 'missing':
@@ -68,7 +68,7 @@ def test_predeclared_incompatibility_is_visible_and_warmups_do_not_enter_estimat
     assert all('gsp' not in row['median_seconds'] for row in result['pairs'])
 
 
-def test_spoofed_compatibility_or_partial_population_cannot_qualify():
+def test_adversarial_spoofed_compatibility_or_partial_population_cannot_qualify():
     records, inventory, protocol = data()
     for row in records:
         if row['method'] == 'epigraph':
