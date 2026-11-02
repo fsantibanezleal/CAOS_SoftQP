@@ -19,4 +19,3 @@ Cinco lecciones avanzan desde una política escalar hasta integridad de control,
 | [05-directional-group-peaks](01-soft-constraint-decisions/05-directional-group-peaks.ipynb) | 4 | ¿Cómo conserva un máximo direccional la integridad dura y la covarianza por fila? |
 
 Ejecución y entorno: [flujo de cuadernos](../README.md). La última lección conserva el resultado registrado negativo y no afirma ventaja temporal.
-

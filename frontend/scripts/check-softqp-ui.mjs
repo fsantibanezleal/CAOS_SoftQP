@@ -3,21 +3,26 @@ import { chromium } from 'playwright';
 import { servePages } from '@fasl-work/caos-app-shell/serve';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { LANG_STORAGE_KEY, THEME_STORAGE_KEY } from '@fasl-work/caos-app-shell/keys';
 import { installLib } from '../node_modules/@fasl-work/caos-app-shell/gate/inpage.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const urlAt = process.argv.indexOf('--url');
+const remote = urlAt >= 0 ? new URL(process.argv[urlAt + 1]) : null;
+if (remote && !['http:', 'https:'].includes(remote.protocol)) throw new Error('--url requires an HTTP(S) site');
 const at = process.argv.indexOf('--out');
 const out = at >= 0 ? process.argv[at + 1] : null;
 const pythonAt = process.argv.indexOf('--python');
 if (pythonAt < 0) throw new Error('--python must name the validated native scientific environment');
 const python = process.argv[pythonAt + 1];
-const localDir = mkdtempSync(join(tmpdir(), 'softqp-ui-'));
+const localDir = mkdtempSync(join(process.env.CAOS_TEMP_ROOT || tmpdir(), 'softqp-ui-'));
 if (out) mkdirSync(out, { recursive: true });
-const server = await servePages(join(root, 'dist'), '/', 0);
+const server = remote
+  ? { url: remote.href.endsWith('/') ? remote.href : remote.href + '/', close: async () => {} }
+  : await servePages(join(root, 'dist'), '/', 0);
 let browser;
 try {
   browser = await chromium.launch({ headless: true });
@@ -152,6 +157,12 @@ try {
   }
   console.log('SoftQP probe: native solve/import, tamper rejection, C12 cold/warm and incompatibility, campaign filters/plots, exact raw CSV download, Focus return and phone widths passed');
   if (errors.length) throw new Error(errors.join('\n'));
+  if (out) {
+    // Keep the genuine downloaded requests and native answers for reproducible review/video imports.
+    for (const name of ['C01-request.json', 'result.json', 'corrupted.json', 'l1-request.json', 'l1-result.json']) {
+      copyFileSync(join(localDir, name), join(out, name));
+    }
+  }
 } finally {
   if (browser) await browser.close();
   await server.close();

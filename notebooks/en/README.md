@@ -19,4 +19,3 @@ Five worked lessons move from a scalar policy to control integrity, published im
 | [05-directional-group-peaks](01-soft-constraint-decisions/05-directional-group-peaks.ipynb) | 4 | How does a shared directional peak preserve hard integrity and row-unit covariance? |
 
 Execution and environment: [notebook workflow](../README.md). The final lesson preserves the negative registered result and does not claim a timing advantage.
-
