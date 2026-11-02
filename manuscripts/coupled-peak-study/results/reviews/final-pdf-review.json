@@ -1,0 +1,30 @@
+{
+  "pdf": "D:\\_Repos\\Research_Caos\\CAOS_SoftQP\\output\\pdf\\softqp-coupled-peak-study-v0.02.000.pdf",
+  "pdf_sha256": "09b63de5e2a844b694b44515cfd99f5c28368cbbf812959e07755fa959e59936",
+  "pdf_md5": "4deb451aec7416fce79bff5194e99d2b",
+  "pdf_bytes": 635170,
+  "pages": 12,
+  "source_sha256": "d269414640cf5ffe4015a3d55ee6fc9d00824a67f57941e1e46dda795f5e7a68",
+  "metadata_sha256": "47f6a10697ba6f779bb65cf4e05745c7e72cf9a3693f0bda400201b269b5faa5",
+  "metadata_canonical_sha256": "21fadf31a2016f2e4cb1463a79386ed582584b5c09863ffef56f05ea6a9ad7da",
+  "build_receipt_sha256": "be4e246d8d7b48fbb33954a54412043976b8a31b25ceda482cfcffe1028eac35",
+  "report_doi": "10.5281/zenodo.23875072",
+  "report_concept_doi": "10.5281/zenodo.23875071",
+  "evidence_doi": "10.5281/zenodo.23875194",
+  "evidence_concept_doi": "10.5281/zenodo.23875193",
+  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+  "evidence_review_sha256": "f5ade8cca3ff79c91bda6386f78245a419e292574451c3c821d0436c9aa6bff0",
+  "archive_sha256": "45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418",
+  "decision": "ACCEPT_FINAL_PDF_AND_MANUSCRIPT_METADATA",
+  "review_date": "2026-11-02",
+  "checks_sha256": "d47c7440306e29070fa464fbd0a23213f18e6edc24b258c0a077842ba4ae551f",
+  "checker_sha256": "eda083f89e453ae53ce9576bbfb2cdb8ea501b9e9ef569d79673c3494931b5b0",
+  "narrative_sha256": "fc214e2253e4cbeb171b1a39db765d00bcb216be4d380458bd4ebc90fc813dfe",
+  "visual_review": "All12 final pages independently rasterized;9 byte-identical to accepted inspected preview; changed1/11/12 independently inspected.",
+  "findings": [],
+  "limits": [
+    "Exact local final bytes and manuscript metadata accepted; public record/file-set/byte verification remains separate.",
+    "Scientific criterion remains NOT ESTABLISHED; no app qualification or priority acceptance.",
+    "Freeze must select this final PDF, replacing preview in the pending plan."
+  ]
+}

@@ -33,5 +33,10 @@ the frozen experiment profile. Every rendered page and figure requires independe
 visual review; successful source/preflight checks alone do not accept a PDF.
 
 The earlier published report remains [version 0.01.000](https://doi.org/10.5281/zenodo.23851660).
-The current record's reserved/published identifiers are recorded in its publication
-receipt once those external gates complete. No DOI is inferred from a local build.
+The standalone report is [published as version 0.02.000](https://doi.org/10.5281/zenodo.23875072),
+under [concept 23875071](https://doi.org/10.5281/zenodo.23875071). Its exact one-PDF
+public inventory and fresh anonymous bytes pass independent review. The supporting
+[dataset](https://doi.org/10.5281/zenodo.23875194) is published separately; full-byte
+public verification independently accepts its exact ZIP and checksum, metadata
+and reciprocal report relationship. The publication receipt
+records the exact verification state. No DOI is inferred from a local build.

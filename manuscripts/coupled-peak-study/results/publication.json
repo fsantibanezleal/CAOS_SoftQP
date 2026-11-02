@@ -1,0 +1,45 @@
+{
+  "kind": "standalone-negative-coupled-study-publication",
+  "scientific_source_commit": "246bf87e690f4d010494c556e2021d311d587422",
+  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+  "report": {
+    "id": 23875072,
+    "doi": "10.5281/zenodo.23875072",
+    "concept_doi": "10.5281/zenodo.23875071",
+    "version": "0.02.000",
+    "state": "published",
+    "bytes": 635170,
+    "sha256": "09b63de5e2a844b694b44515cfd99f5c28368cbbf812959e07755fa959e59936",
+    "md5": "4deb451aec7416fce79bff5194e99d2b",
+    "publication_date": "2026-11-02"
+  },
+  "report_independent_public_review_sha256": "ddf118fd86f4f3052ad472936a7429cf587d7eb6ab1c294f051600405727e937",
+  "dataset": {
+    "id": 23875194,
+    "doi": "10.5281/zenodo.23875194",
+    "concept_doi": "10.5281/zenodo.23875193",
+    "state": "published",
+    "files": [
+      {
+        "name": "softqp-coupled-study-v1.zip",
+        "bytes": 429502979,
+        "sha256": "45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418",
+        "md5": "2283abe6d5105dc8564436c27c7d3d0b"
+      },
+      {
+        "name": "softqp-coupled-study-v1.zip.sha256",
+        "bytes": 94,
+        "sha256": "925037cc1f48213a56a2e2c90a49a82af0f7402d0f8ec2fe07114fd2a4d763c0",
+        "md5": "511dc897a92b265361aeecdc72e7c0ef"
+      }
+    ],
+    "independent_public_verification": "accepted: full anonymous ZIP and checksum streams, metadata, inventories, latest and reciprocal report binding",
+    "published_utc": "2026-11-02T04:34:10Z",
+    "publicly_verified_utc": "2026-11-02T04:44:43Z",
+    "independent_public_review_sha256": "ae99576950bcac7cbd457f322d19f1526d7d3f43246d67e154d77aece54bfdaa"
+  },
+  "scientific_criterion_established": false,
+  "qualified_app_release": false,
+  "product_version": "0.01.000",
+  "original_study_and_report_unchanged": true
+}

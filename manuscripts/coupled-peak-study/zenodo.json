@@ -27,6 +27,11 @@
         "identifier": "10.5281/zenodo.23851660",
         "relation": "references",
         "resource_type": "publication-report"
+      },
+      {
+        "identifier": "10.5281/zenodo.23875194",
+        "relation": "issupplementedby",
+        "resource_type": "dataset"
       }
     ]
   }

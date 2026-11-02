@@ -1,0 +1,56 @@
+{
+  "state": "pass",
+  "verified_utc": "2026-11-02T04:44:15.538295+00:00",
+  "record_id": "23875194",
+  "doi": "10.5281/zenodo.23875194",
+  "concept_doi": "10.5281/zenodo.23875193",
+  "record_url": "https://zenodo.org/records/23875194",
+  "metadata_exact_to_accepted_local": true,
+  "metadata_sha256": "44cdcc69a3c55fcab06c8021c6e0bd25580c47ec60dd97b2c3a9973d94c915d6",
+  "latest_is_exact_record": true,
+  "inventory": [
+    "softqp-coupled-study-v1.zip",
+    "softqp-coupled-study-v1.zip.sha256"
+  ],
+  "anonymous_streams": [
+    {
+      "name": "softqp-coupled-study-v1.zip",
+      "url": "https://zenodo.org/api/records/23875194/files/softqp-coupled-study-v1.zip/content?independent_verification=55d04406778046a29b61349d389594d4",
+      "bytes": 429502979,
+      "sha256": "45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418",
+      "md5": "2283abe6d5105dc8564436c27c7d3d0b",
+      "authorization_header": false
+    },
+    {
+      "name": "softqp-coupled-study-v1.zip.sha256",
+      "url": "https://zenodo.org/api/records/23875194/files/softqp-coupled-study-v1.zip.sha256/content?independent_verification=22b791bb663a495a8fbfee5a90fdbde7",
+      "bytes": 94,
+      "sha256": "925037cc1f48213a56a2e2c90a49a82af0f7402d0f8ec2fe07114fd2a4d763c0",
+      "md5": "511dc897a92b265361aeecdc72e7c0ef",
+      "authorization_header": false
+    }
+  ],
+  "post_stream_metadata_inventory_unchanged": true,
+  "reciprocal_published_manuscript_doi": "10.5281/zenodo.23875072",
+  "snapshots_sha256": {
+    "public-dataset-record.json": "2305c9dd29676d6ce585226f586cbb274250d39764674cb760d42f3a56b63004",
+    "public-dataset-latest.json": "2305c9dd29676d6ce585226f586cbb274250d39764674cb760d42f3a56b63004",
+    "public-dataset-files.json": "9a4bb7c1bd00610c9cf0cce9fbffb412d4935093dfaf5975064237e939dfce8f",
+    "public-dataset-record-after-stream.json": "2305c9dd29676d6ce585226f586cbb274250d39764674cb760d42f3a56b63004",
+    "public-dataset-files-after-stream.json": "9a4bb7c1bd00610c9cf0cce9fbffb412d4935093dfaf5975064237e939dfce8f",
+    "public-report-reciprocal-after-dataset.json": "99655e16ed7d1dab68f632d7c2ae34415be6b9880f9d424b48081dd7d78748f7"
+  },
+  "checker_sha256": "79510dd55838537d931ea5c91dd905abe588ca31c82bb39baac1237ade80730b",
+  "publisher_source_sha256": "5091ba645a8468762c39df007c8b80a924d348bd6265e57b9c1b5d18e44e16c3",
+  "reviewer_remote_writes": 0,
+  "limits": [
+    "Public evidence integrity and availability only; scientific criterion remains NOT ESTABLISHED.",
+    "No app qualification, operational performance or algorithmic priority acceptance."
+  ],
+  "decision": "ACCEPT_PUBLIC_DATASET_AND_RECIPROCAL_BINDINGS",
+  "checks_sha256": "50ac3aa90616029d13b459b988426e766ee571ebe6532a8f70c3eef6a20b4a7e",
+  "narrative_sha256": "ddd249cda27c0598c24184adf178b52a34472c60e9da3251f11c192309fb1138",
+  "independent_public_report_review_sha256": "ddf118fd86f4f3052ad472936a7429cf587d7eb6ab1c294f051600405727e937",
+  "scientific_criterion": "NOT ESTABLISHED",
+  "qualified_application_release": false
+}
