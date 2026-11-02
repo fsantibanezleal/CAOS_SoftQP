@@ -3,7 +3,9 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/fsantibanezleal/CAOS_SoftQP/ci.yml?branch=main&label=CI)](https://github.com/fsantibanezleal/CAOS_SoftQP/actions)
 [![License](https://img.shields.io/github/license/fsantibanezleal/CAOS_SoftQP)](LICENSE)
 [![Version](https://img.shields.io/github/v/tag/fsantibanezleal/CAOS_SoftQP?label=version&sort=semver)](https://github.com/fsantibanezleal/CAOS_SoftQP/tags)
-**Development source. No accepted release or verified deployment yet.**
+**[Research preview v0.01.001](https://github.com/fsantibanezleal/CAOS_SoftQP/releases/tag/v0.01.001) is available at the [verified public workbench](https://fsantibanezleal.github.io/CAOS_SoftQP/).** Both registered timing-improvement criteria remain unsuccessful; deployment establishes availability, not scientific qualification or operational benefit.
+
+[Software archive](https://doi.org/10.5281/zenodo.23891596) · [software concept](https://doi.org/10.5281/zenodo.23891595) · [native LaTeX sources](manuscripts/README.md)
 
 Inspect constraint trade-offs with reproducible quadratic programs.
 
@@ -18,15 +20,15 @@ The repository by area: its folder, whether the area is active or dormant, and w
 | Web | [`frontend/`](frontend/) | active | The workbench and the documentation routes on the shared shell. Build and test: `cd frontend && npm ci && npm run build && npm test`. |
 | API | [`app/`](app/) | dormant: this solution does not require it at the moment | Ships dormant; activation is [guide 04](docs/guides/04_run-the-api.md). |
 | Core pipelines | [`data-pipeline/`](data-pipeline/) | active | The named pipeline stages and the bake: `./scripts/precompute.sh all --output OUTPUT`. See [data-pipeline/README.md](data-pipeline/README.md). |
-| Packages | (PyPI) [softqp](https://pypi.org/project/softqp/0.1.0/) | active: consumes pinned SoftQP engine and numerical dependencies | The separate [native engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine), numerical dependencies and exact distribution requirements; softqp 0.1.0 is published and its public-index installation is verified. |
+| Packages | (PyPI) [softqp 0.1.0](https://pypi.org/project/softqp/0.1.0/) and [0.2.0](https://pypi.org/project/softqp/0.2.0/) | active: separate pinned ordinary and advanced-teaching profiles | The separate [native engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine) owns the implementation. The app uses SDK1; the [advanced lesson](notebooks/en/01-soft-constraint-decisions/05-directional-group-peaks.ipynb) explicitly isolates SDK2. Public-index distribution and installation are verified. |
 | Notebooks | [`notebooks/`](notebooks/) | active | The didactic notebooks in English and Spanish, by topic and level. Run: `./scripts/setup.sh --notebooks`, then `python scripts/run_notebooks.py`. Guide: [guide 08](docs/guides/08_notebooks.md). |
 | Data | [`data/`](data/) | active | The committed derived artifacts and the sources with their licence classes. |
 | Contracts | [`docs/contracts/`](docs/contracts/) | active | The contract catalog and the schemas. |
 | Documentation | [`docs/`](docs/) | active | The SDD ([docs/design/SDD.md](docs/design/SDD.md)), the [guides](docs/guides.md) and the case pages. |
 | Tests and gates | [`tests/`](tests/), [`scripts/`](scripts/) | active | `python -m pytest` and the checks (`scripts/check_*.py`). See [scripts/README.md](scripts/README.md). |
-| Deploy | [`deploy/`](deploy/) | active: GitHub Pages configured; release pending | Where it is deployed and how, never credentials. |
+| Deploy | [`deploy/`](deploy/) | active: verified GitHub Pages research preview | Where it is deployed and how, never credentials. |
 
-See [the scientific development workflow](docs/softqp-development.md) for the actual fifteen-case bake and local cost editing, native execution and verified import. The native scientific core and paired experiment exports are implemented. Public release remains subject to scientific and distribution acceptance.
+See [the scientific development workflow](docs/softqp-development.md) for the actual fifteen-case bake and local cost editing, native execution and verified import. The native scientific core and paired experiment exports are implemented. The research-preview release passed its engineering and distribution checks; both unsuccessful scientific criteria remain unchanged.
 
 ## Run it
 
@@ -56,7 +58,7 @@ an explicit external output directory. Teaching instructions and unchanged histo
 - [docs/design/SDD.md](docs/design/SDD.md): the design, every requirement with its gate.
 - [docs/](docs/README.md): architecture, guides, cases and frameworks.
 
-Licensed under the MIT License (see [LICENSE](LICENSE)). The configured Pages destination has not yet passed deployment acceptance.
+Licensed under the MIT License (see [LICENSE](LICENSE)), with the separate explanatory-material terms in [LICENSES.md](LICENSES.md). Pages deployment passed exact-main CI, route/404/build checks, anonymous verification of all 39 declared data files and actual deployed-browser interaction with independent review.
 
 ## Measured finding
 
