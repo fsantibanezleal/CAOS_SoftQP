@@ -74,6 +74,8 @@ The [product technical report](https://doi.org/10.5281/zenodo.23851659) covers m
 The research preprint derives both original-row updates and presents their distinct experiments.
 Both use the canonical section-based LaTeX article template; [editable sources and build instructions](manuscripts/README.md)
 are available alongside the PDFs. Neither registered improvement criterion is established.
+The independently verified replacements are [technical report 0.01.002](https://doi.org/10.5281/zenodo.23899079)
+and [research preprint 0.02.002](https://doi.org/10.5281/zenodo.23899142).
 
 The complete numerical validation uses [explicit test profiles](docs/testing-profiles.md): the ordinary public-wheel regression, exact historical-source positive controls and the separate SDK2 suite. Source identity is never replaced by a matching version label.
 

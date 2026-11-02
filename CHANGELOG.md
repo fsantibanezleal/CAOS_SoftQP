@@ -12,6 +12,7 @@ tagged.
 - Require independent content, mathematics and every-page acceptance before reserving or publishing replacement Zenodo versions. Bind recursive inputs and both immutable numerical authorities.
 - Preserve the released numerical data and protocols; this document correction does not establish either proposed timing advantage.
 - Refresh deterministic readiness metadata to identify the preserved older bake, and point the directional lessons at the stable research concept without changing their code or outputs.
+- Display canonical readiness reasons in every scientific-record view and define the empty-hard-set diagnostic as zero.
 
 ## [0.01.001], 2026-11-02
 

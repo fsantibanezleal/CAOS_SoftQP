@@ -17,6 +17,8 @@
   "independent_review": "independent-review.json",
   "independent_review_sha256": "71d7babc0f17f15b7b42c22cfd7ed9c2d3869c8e3ea46eda6db6eeaca45c8324",
   "scientific_qualification": false,
-  "public_completion_verified": false,
-  "source_publication_required_before_live_publish": true
+  "public_completion_verified": true,
+  "source_publication_required_before_live_publish": true,
+  "public_review": "independent-public-manuscripts-review.json",
+  "public_review_sha256": "371faca311a0cb8f701e33c9ecc9f6dde0ca7cb8620f3dd8cc57ff73ac4d5ad6"
 }

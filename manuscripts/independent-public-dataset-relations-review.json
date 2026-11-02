@@ -1,0 +1,47 @@
+{
+  "decision": "ACCEPT_PUBLIC_RECIPROCAL_DATASET_METADATA",
+  "reviewer": "/root/notebook_review",
+  "unresolved_findings": [],
+  "checked_utc": "2026-11-02T23:20:49.628326+00:00",
+  "record_url": "https://zenodo.org/records/23875194",
+  "version": "1.0.0",
+  "version_doi": "10.5281/zenodo.23875194",
+  "concept_doi": "10.5281/zenodo.23875193",
+  "only_changed_metadata_field": "related_identifiers",
+  "old_relations_preserved": 3,
+  "new_relation_count": 5,
+  "reciprocal_graph": [
+    {
+      "manuscript_record_id": "23899079",
+      "resource_type": "publication-report",
+      "paper_is_supplemented_by_dataset": true,
+      "dataset_is_supplement_to_paper": true
+    },
+    {
+      "manuscript_record_id": "23899142",
+      "resource_type": "publication-preprint",
+      "paper_is_supplemented_by_dataset": true,
+      "dataset_is_supplement_to_paper": true
+    }
+  ],
+  "unchanged_complete_file_inventory": {
+    "softqp-coupled-study-v1.zip": {
+      "key": "softqp-coupled-study-v1.zip",
+      "size": 429502979,
+      "checksum": "md5:2283abe6d5105dc8564436c27c7d3d0b",
+      "id": "04182232-ae26-4dcb-adbe-1ef4fa487b88"
+    },
+    "softqp-coupled-study-v1.zip.sha256": {
+      "key": "softqp-coupled-study-v1.zip.sha256",
+      "size": 94,
+      "checksum": "md5:511dc897a92b265361aeecdc72e7c0ef",
+      "id": "564d18d9-8365-41f6-9f58-5bcb47346079"
+    }
+  },
+  "public_checksum_complete_bytes_verified": true,
+  "original_archive_sha256": "45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418",
+  "archive_redownloaded_for_this_metadata_edit": false,
+  "scope": "Independent anonymous post-edit full metadata/file-identity/checksum/reciprocal-graph verification. Original429MB archive was not streamed again; its exact original UUID,size,MD5 and complete public inventory are unchanged. No service writes or scientific computation.",
+  "accepted_delta_review_sha256": "e8822123bc8f23b8381edbf40fc3baa4a090fbac44b56a2847c75d59ccfa689c",
+  "public_metadata_snapshot_sha256": "6e4ee3f4f393c7d46f055e765d2caf8df666d0061a6db192229745c4410c8bf2"
+}

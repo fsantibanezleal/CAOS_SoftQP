@@ -4,6 +4,7 @@ import { methodNames as names } from '../lib/methodNames';
 import { MeasuredExperiments } from './MeasuredExperiments';
 import { P, useT } from '../content/bi';
 import { useScientificRecords } from '../lib/useScientificRecords';
+import { ReadinessNote } from '../readiness/ReadinessNote';
 const local={en:'Computed from verified committed scientific records.',es:'Calculado desde registros científicos versionados y verificados.'};
 export function Benchmark(){
   const t=useT();const format=useFormat();const {records,error}=useScientificRecords();const [method,setMethod]=useState('asymmetric');
@@ -16,6 +17,7 @@ export function Benchmark(){
     {!records&&<p role="status">{t('Loading verified comparison records…','Cargando registros comparativos verificados…')}</p>}
     <MeasuredExperiments />
     <DocSection area="results" title={{en:'Development matrix',es:'Matriz de desarrollo'}} noRefsReason={local}>
+      <ReadinessNote ids={['softqp-index', 'softqp-case-result']} />
       <p>{t(`${records?.length??0} cases; ${good.length} successful compatible cells; ${cells.filter(c=>c.run.state==='incompatible').length} incompatible; ${cells.filter(c=>c.run.state==='failed').length} failed.`,`${records?.length??0} casos; ${good.length} celdas compatibles exitosas; ${cells.filter(c=>c.run.state==='incompatible').length} incompatibles; ${cells.filter(c=>c.run.state==='failed').length} fallidas.`)}</p>
       <label htmlFor="matrix-case">{t('Development case','Caso de desarrollo')}</label>
       <select id="matrix-case" value={matrixCase} onChange={e=>setMatrixCase(e.target.value)}>

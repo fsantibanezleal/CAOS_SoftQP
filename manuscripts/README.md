@@ -46,3 +46,10 @@ New manuscript versions require independent acceptance before DOI reservation, f
 PDF and metadata acceptance before publication. Each manuscript record carries exactly one PDF. Editable sources
 and supporting artifacts remain in Git and the separate dataset. The technical report is a report; the research
 manuscript is a preprint. Publication does not establish scientific superiority or qualified product acceptance.
+
+The current independently verified versions are [technical report 0.01.002](https://doi.org/10.5281/zenodo.23899079)
+and [research preprint 0.02.002](https://doi.org/10.5281/zenodo.23899142). Each passed all 39 governed publication checks;
+anonymous complete public PDFs, exact metadata and public editable sources were independently verified.
+
+[Independent reciprocal dataset verification](independent-public-dataset-relations-review.md) confirms both new citations,
+all historical relations and the unchanged original dataset version and file objects.
