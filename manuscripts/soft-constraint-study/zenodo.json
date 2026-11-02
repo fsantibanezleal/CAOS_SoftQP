@@ -9,7 +9,7 @@
         "orcid": "0000-0002-0150-3246"
       }
     ],
-    "description": "<p>Soft constraints in control and energy optimization represent priced departures from selected operating limits. Their interpretation depends on which rows remain hard, which interval side is violated and whether the price is linear, quadratic or coupled across rows. We implement separable side-specific linear-quadratic interval costs in a native OSQP-style projection path and compare equivalent formulations through independent lifting, the published generalized slack projection implementation, DAQP, a fixed-parameter FlexQP reconstruction and ElastiQP. Fifteen synthetic or source-faithful cases cover scalar semantics, mixed hard/soft rows, grouped penalties, semidefinite curvature, control conflict and a building-energy model. A preregistered computation comprises 456 seeded instances and seven measured repetitions, retaining 11592 accepted observations and 7560 incompatible cells without numerical or accuracy-rejected observations. The primary paired relative cold end-to-end reduction against the faster matched baseline is 0.50%, with a 95% seed-cluster interval of [-3.29%,3.94%], so the predicted 10% improvement is not established. A separate 32-frame common-trajectory control example distinguishes warm-state reuse from hard-constraint safety. The results support numerical equivalence within the tested families, while showing that unchanged principal dimensions alone do not establish an end-to-end advantage or algorithmic novelty.</p><p>Code and data: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP\">CAOS_SoftQP</a>. Native source: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>.</p>",
+    "description": "<p>Soft constraints price departures from selected operating preferences while preserving physical hard limits. We implement side-specific separable linear-quadratic interval costs in a native OSQP-style projection path and compare equivalent formulations through independent lifting, generalized slack projection, DAQP, a fixed-parameter FlexQP reconstruction and ElastiQP. Fifteen cases cover scalar semantics, grouped penalties, semidefinite curvature, control conflict and a building-energy model. An initial preregistered computation comprises 456 seeded instances, retaining 11592 accepted and 7560 incompatible measured observations. Its median paired relative cold end-to-end reduction is 0.50%, with a 95% seed-cluster interval of [-3.29%,3.94%], so the predicted 10% improvement is not established. A separate native directional group-peak implementation retains original interval rows and is evaluated against exact row-split and compact-epigraph alternatives in 210 synthetic repeated-forecast instances. In its 144-instance heldout population, the median paired reduction score is -212.449875%, with 95% limits -225.336618% and -192.873759%, retaining 9 failed pairs. That prediction is also not established. Original-space checks, immutable numerical evidence and explicit failure states distinguish mathematical agreement from computational advantage. The static workbench, native package, local execution and offline research lanes have separate capabilities. Neither smaller principal dimensions nor a published engineering package establishes algorithmic novelty, operational safety or a general runtime advantage.</p><p>Code, editable LaTeX sources and reproducible evidence: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP\">CAOS_SoftQP</a>. Native implementation: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>. Coupled-study evidence: <a href=\"https://doi.org/10.5281/zenodo.23875194\">archived dataset</a>.</p>",
     "keywords": [
       "quadratic programming",
       "soft constraints",
@@ -20,7 +20,20 @@
     ],
     "license": "cc-by-4.0",
     "language": "eng",
-    "version": "0.01.000",
-    "publication_date": "2026-11-01"
+    "version": "0.01.001",
+    "publication_date": "2026-11-02",
+    "version_notes": "Native LaTeX report-class typesetting, editable public sources, corrected standard front matter and running headers. The registered numerical evidence and negative criteria are unchanged.",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.23885695",
+        "relation": "references",
+        "resource_type": "publication-report"
+      },
+      {
+        "identifier": "10.5281/zenodo.23875194",
+        "relation": "issupplementedby",
+        "resource_type": "dataset"
+      }
+    ]
   }
 }

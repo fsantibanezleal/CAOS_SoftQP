@@ -1,0 +1,21 @@
+{
+  "release_ready": true,
+  "scope": "Independent source, mathematics, exact negative-evidence fidelity, final reserved-DOI PDF/all-page QA and matching metadata acceptance for this technical-report correction only. Requires governed freeze/publication plus public source/inventory/bytes/reciprocal dataset verification; does not establish scientific superiority or product release/deployment completion.",
+  "record_id": 23885695,
+  "version_doi": "10.5281/zenodo.23885695",
+  "concept_doi": "10.5281/zenodo.23875071",
+  "bytes": 548062,
+  "md5": "5e0e7db3039c739e167cb4cfc222d34b",
+  "sha256": "58396c692aa785ef4a3543416a26bb75b150cc37e475236141d138b2bef92fc8",
+  "tex_sha256": "4181a9f10bc0946f2ebd04b99d669df67a6bb5c6f70c5e5252ded65e6c65d3b9",
+  "metadata_sha256": "06b8bb5e08c305427a494c286ff25d1340953b6bca2e7c3c696e3651e8960154",
+  "warnings": 0,
+  "overfull": 0,
+  "underfull": 0,
+  "pages": 16,
+  "rendered_pages_reviewed": 16,
+  "independent_review": "final-native-manuscripts-review.md",
+  "scientific_qualification": false,
+  "public_completion_verified": false,
+  "source_publication_required_before_live_publish": true
+}

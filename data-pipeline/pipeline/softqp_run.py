@@ -12,6 +12,7 @@ from .softqp_rows import rows_for
 from .environment import environment
 
 SETTINGS = dict(eps_abs=1e-7, eps_rel=1e-7, max_iter=200000, adaptive_rho_interval=25)
+CANONICAL_MATRIX_METHODS = ("lifted", "generalized", "asymmetric", "daqp")
 
 
 def validate_document(value, name):
@@ -104,7 +105,7 @@ def run_reference(case, method):
 
 def run_case(case, methods=None):
     rows = []
-    for method in methods or ["lifted", "generalized", "asymmetric", "daqp"]:
+    for method in methods or CANONICAL_MATRIX_METHODS:
         reason = None
         if method == "asymmetric" and case.reference is not None:
             reason = "The separable asymmetric candidate does not support grouped or Huber penalties."

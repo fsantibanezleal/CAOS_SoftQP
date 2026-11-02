@@ -8,10 +8,12 @@ The profile includes NumPy, SciPy, OSQP, DAQP, ElastiQP, jsonschema, pytest and
 packaging at the exact registered versions. Installing the SDK alone is sufficient
 for its API, but does not install every comparison backend used by the study.
 
+Set `SOFTQP_STUDY_ENV`, `SOFTQP_STUDY_PYTHON` and `SOFTQP_STUDY_ROOT` to external environment/interpreter/evidence locations before these commands. Set the process TEMP/TMP/TMPDIR to an external `CAOS_TEMP_ROOT` for worker files.
+
 ```powershell
-py -3.12 -m venv .venv-coupled
-.venv-coupled\Scripts\python.exe -m pip install -r experiments/coupled-v1/requirements.txt
-.venv-coupled\Scripts\python.exe data-pipeline/run_coupled_study.py --check-freeze
+py -3.12 -m venv $env:SOFTQP_STUDY_ENV
+& $env:SOFTQP_STUDY_PYTHON -m pip install -r experiments/coupled-v1/requirements.txt
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --check-freeze
 ```
 
 No external operational dataset, customer data or private building records are
@@ -31,15 +33,15 @@ the full 144-instance heldout population.
 To replay a completed extracted split, use the registered source and environment:
 
 ```powershell
-.venv-coupled\Scripts\python.exe data-pipeline/run_coupled_study.py --validate-output --output <extracted-split-directory>
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --validate-output --output <extracted-split-directory>
 ```
 
 A fresh execution requires a new output directory and the unchanged registration:
 
 ```powershell
-.venv-coupled\Scripts\python.exe -u data-pipeline/run_coupled_study.py --split development --output output/new-development
-.venv-coupled\Scripts\python.exe -u data-pipeline/run_coupled_study.py --split heldout --output output/new-heldout
-.venv-coupled\Scripts\python.exe -u data-pipeline/run_coupled_study.py --split robustness --output output/new-robustness
+& $env:SOFTQP_STUDY_PYTHON -u data-pipeline/run_coupled_study.py --split development --output "$env:SOFTQP_STUDY_ROOT/reproduction-development"
+& $env:SOFTQP_STUDY_PYTHON -u data-pipeline/run_coupled_study.py --split heldout --output "$env:SOFTQP_STUDY_ROOT/reproduction-heldout"
+& $env:SOFTQP_STUDY_PYTHON -u data-pipeline/run_coupled_study.py --split robustness --output "$env:SOFTQP_STUDY_ROOT/reproduction-robustness"
 ```
 
 Keep the historical 0.1.0 notebook/product environments and original 456-instance

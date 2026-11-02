@@ -1,44 +1,78 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper,notitlepage]{report}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern,amsmath,amssymb,booktabs,longtable,graphicx,geometry,xurl,hyperref,microtype}
-\geometry{margin=25mm}
-\hypersetup{colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=blue}
-\renewcommand{\topfraction}{0.9}
-\renewcommand{\textfraction}{0.08}
-\renewcommand{\floatpagefraction}{0.85}
+\usepackage{lmodern,microtype}
+\usepackage[margin=1.1in,headheight=14pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,array,longtable,graphicx,xurl}
+\usepackage{xcolor}
+\definecolor{linknavy}{RGB}{25,55,125}
+\usepackage[colorlinks=true,linkcolor=linknavy,citecolor=linknavy,urlcolor=linknavy]{hyperref}
+\usepackage{orcidlink}
+\usepackage{fancyhdr}
+\hypersetup{pdftitle={Side-Specific Soft Constraints in Quadratic Programming},
+pdfauthor={Felipe Santibáñez-Leal},pdfsubject={Side-specific soft constraints and a registered negative computational result}}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\prox}{prox}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\median}{median}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\pos}[1]{\left(#1\right)_{+}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert_{\infty}}
+
 \newcommand{\doctype}{Technical report}
-\newcommand{\docversion}{0.01.000}
-\newcommand{\docdate}{1 November 2026}
-\newcommand{\versiondoi}{10.5281/zenodo.23851660}
+\newcommand{\docversion}{v0.01.001}
+\newcommand{\docdate}{2 November 2026}
+\newcommand{\versiondoi}{10.5281/zenodo.23885690}
 \newcommand{\conceptdoi}{10.5281/zenodo.23851659}
 \newcommand{\docrepo}{github.com/fsantibanezleal/CAOS\_SoftQP}
-\newcommand{\headerblock}{\begin{center}\fbox{\parbox{0.94\textwidth}{\small\raggedright
-\textbf{\doctype}\quad v\docversion, \docdate\quad Licence CC BY 4.0\\[3pt]
-CAOS Research\quad Soft-constrained optimization\\[3pt]
-Version DOI: \texttt{\versiondoi}\\
-Concept DOI (always latest): \texttt{\conceptdoi}\\[3pt]
-Not peer reviewed. Source code, data and computational records:\\
+\newcommand{\headerblock}{%
+\begin{center}
+\fbox{\parbox{0.94\textwidth}{\small\raggedright
+\textbf{\doctype} \quad$\cdot$\quad \docversion, \docdate \quad$\cdot$\quad Licence CC BY 4.0\\[2pt]
+CAOS open-research programme \quad$\cdot$\quad side-specific soft constraints\\[2pt]
+Version DOI \href{https://doi.org/\versiondoi}{\texttt{\versiondoi}}\\[2pt]
+Concept DOI (always latest) \href{https://doi.org/\conceptdoi}{\texttt{\conceptdoi}}\\[2pt]
+Not peer reviewed. Source code, data and computational records:
 \href{https://\docrepo}{\texttt{\docrepo}}
-}}\end{center}}
+}}
+\end{center}
+\vspace{4pt}}
+
 \title{Side-Specific Soft Constraints in Quadratic Programming}
-\author{Felipe Santibáñez-Leal\\\small ORCID: \href{https://orcid.org/0000-0002-0150-3246}{0000-0002-0150-3246}}
+\author{Felipe Santib\'a\~nez-Leal\,\orcidlink{0000-0002-0150-3246}\\
+\small CAOS open-research programme, Santiago, Chile}
 \date{}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small CAOS Research \doctype}
+\fancyhead[R]{\small Side-specific constraints \textperiodcentered\ \docversion}
+\fancyfoot[C]{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[L]{\small CAOS Research \doctype}\fancyhead[R]{\small Side-specific constraints \textperiodcentered\ \docversion}\fancyfoot[C]{\small \thepage}\renewcommand{\headrulewidth}{0.4pt}}
+\fancypagestyle{titlepage}{\fancyhf{}\fancyfoot[C]{\small \thepage}\renewcommand{\headrulewidth}{0pt}}
+\input{results.tex}
+
 \begin{document}
 \maketitle
+\thispagestyle{titlepage}
 \headerblock
 \begin{abstract}
-Soft constraints in control and energy optimization represent priced departures from selected operating limits. Their interpretation depends on which rows remain hard, which interval side is violated and whether the price is linear, quadratic or coupled across rows. We implement separable side-specific linear--quadratic interval costs in a native OSQP-style projection path and compare equivalent formulations through independent lifting, the published generalized slack projection implementation, DAQP, a fixed-parameter FlexQP reconstruction and ElastiQP. Fifteen synthetic or source-faithful cases cover scalar semantics, mixed hard/soft rows, grouped penalties, semidefinite curvature, control conflict and a building-energy model. A preregistered computation comprises 456 seeded instances and seven measured repetitions, retaining 11592 accepted observations and 7560 incompatible cells without numerical or accuracy-rejected observations. The primary paired relative cold end-to-end reduction against the faster matched baseline is 0.50\%, with a 95\% seed-cluster interval of $[-3.29\%,3.94\%]$, so the predicted 10\% improvement is not established. A separate 32-frame common-trajectory control example distinguishes warm-state reuse from hard-constraint safety. The results support numerical equivalence within the tested families, while showing that unchanged principal dimensions alone do not establish an end-to-end advantage or algorithmic novelty.
+Soft constraints price departures from selected operating preferences while preserving physical hard limits. We implement side-specific separable linear--quadratic interval costs in a native OSQP-style projection path and compare equivalent formulations through independent lifting, generalized slack projection, DAQP, a fixed-parameter FlexQP reconstruction and ElastiQP. Fifteen cases cover scalar semantics, grouped penalties, semidefinite curvature, control conflict and a building-energy model. An initial preregistered computation comprises 456 seeded instances, retaining 11592 accepted and 7560 incompatible measured observations. Its median paired relative cold end-to-end reduction is 0.50\%, with a 95\% seed-cluster interval of $[-3.29\%,3.94\%]$, so the predicted 10\% improvement is not established. A separate native directional group-peak implementation retains original interval rows and is evaluated against exact row-split and compact-epigraph alternatives in 210 synthetic repeated-forecast instances. In its 144-instance heldout population, the median paired reduction score is $\PrimaryEstimate\%$, with 95\% limits $\PrimaryLower\%$ and $\PrimaryUpper\%$, retaining \PrimaryFailed{} failed pairs. That prediction is also not established. Original-space checks, immutable numerical evidence and explicit failure states distinguish mathematical agreement from computational advantage. The static workbench, native package, local execution and offline research lanes have separate capabilities. Neither smaller principal dimensions nor a published engineering package establishes algorithmic novelty, operational safety or a general runtime advantage.
 \end{abstract}
 
-\section{Problem and operating context}
+\chapter{Problem and operating context}
 Quadratic programs frequently combine immutable physical limits with preferences that may yield. In model predictive control, actuator capacity and model equations can remain hard while selected comfort or state targets incur a cost. In energy scheduling, a temperature departure, a battery-health departure and a contracted grid overage have different physical units and consequences. A single undifferentiated label ``soft'' is therefore insufficient to specify the optimization problem.
 
 The engineering policy precedes the numerical algorithm. Assigning a finite cost to a row permits departure when its benefit elsewhere exceeds its price. A mathematically optimal elastic solution can violate an original operational inequality. Conversely, an infeasible hard model cannot be repaired merely by reporting a successful status for a different relaxed objective. Physical safety, model adequacy and numerical optimality are distinct questions.
 
 We study transparent synthetic models rather than field performance. Scalar inputs isolate sign conventions. Sparse instances vary numerical structure. A condensed double integrator isolates recovery under bounded actuation. A published two-zone building model supplies a coupled energy example with mixed penalties. Its two separable variants deliberately change the objective, so their resulting policies are not reproductions of the mixed-penalty optimum.
 
-\section{Related work and comparison boundary}
+\chapter{Related work and comparison boundary}
 OSQP solves convex quadratic programs by operator splitting and provides warm starts, sparse linear-system preparation and numerical infeasibility checks \cite{osqp}. Generalized slack projections extend soft-constraint handling through proximal operations without necessarily increasing the principal QP dimensions \cite{gsp}. The published implementation supports symmetric separable penalties and selected grouped or Huber costs. Its unconditional-penalty assumptions are more specific than arbitrary asymmetric convex costs.
 
 DAQP already exposes separate lower/upper linear and quadratic soft weights \cite{daqp}. Consequently, unequal side costs are not a new modeling capability. A comparison restricted to a symmetric default would confound a policy change with an algorithmic difference. The DAQP adapter used here preserves original-scale prices, maps its reciprocal quadratic convention and refuses unsupported objectives rather than adding a small regularizer.
@@ -47,7 +81,7 @@ FlexQP and Deep FlexQP address elastic optimization through a splitting formulat
 
 Active-set reuse and reduced-system correction are also established ideas. qpOASES exploits parametric QP structure \cite{qpoases}, and OSQP polishing guesses an active set before solving an additional linear system \cite{osqp}. Neither an active-set guess nor a subsequent KKT check alone establishes a new method. No global priority claim is made for asymmetric proximal handling, fixed-size representations or elastic feasibility.
 
-\section{Original-space formulation}
+\chapter{Original-space formulation}
 Let $P\succeq0$, $q\in\mathbb R^n$, $A\in\mathbb R^{m\times n}$ and $\ell_i\le u_i$, allowing a missing interval side. For $z=Ax$, define
 \begin{equation}
 v_{\ell,i}=(\ell_i-z_i)_+,\qquad v_{u,i}=(z_i-u_i)_+ .
@@ -64,7 +98,7 @@ Each scalar soft cost is proper, closed and convex for the stated coefficients a
 
 The signed slack convention is $s_i=v_{\ell,i}-v_{u,i}$: an upper overshoot has negative recovered slack. Physical violation plots retain lower and upper nonnegative quantities instead of allowing signed cancellation. A sum of raw meters, degrees and kilowatt-hours has no physical interpretation without a separately defined normalization or cost.
 
-\subsection{Explicit lifting}
+\section{Explicit lifting}
 An ordinary lift introduces nonnegative finite-side variables and imposes
 \begin{equation}
 A_ix+t_{\ell,i}\ge\ell_i,\qquad A_ix-t_{u,i}\le u_i,
@@ -74,7 +108,7 @@ with the corresponding linear--quadratic costs. Hard rows receive no such relaxa
 
 The lift is an independent representation of the original objective, not a change in its policy. Recovered original variables and duals are evaluated outside the backend. High-accuracy stock OSQP supplies the independent numerical oracle. Timed ordinary lifting instead uses the same native fork as the projection path, separating formulation effects from differences between OSQP builds.
 
-\subsection{Side-specific interval proximal operation}
+\section{Side-specific interval proximal operation}
 For a scalar temporary value $v$ and $\rho>0$, consider
 \begin{equation}
 \operatorname{prox}_{g_i/\rho}(v)
@@ -95,12 +129,12 @@ The missing-side branch is omitted. A hard row uses interval projection.
 \paragraph{Derivation.}
 Inside the interval, both $g_i$ and the squared displacement are minimized at $z=v$. Above the upper endpoint, differentiating the smooth exterior branch gives $(\rho+b_{u,i})(z-u_i)=\rho(v-u_i)-a_{u,i}$. If the right side is nonpositive, the minimizer is the endpoint; otherwise it gives the stated exterior displacement. The lower case follows by reversing the signed displacement and using lower-side coefficients. Strong convexity of the proximal subproblem and the endpoint subgradient conditions establish uniqueness. This argument is a scalar convex minimization, not a novelty claim.
 
-\subsection{Operator splitting and convergence scope}
+\section{Operator splitting and convergence scope}
 Writing the problem as $\min_{x,z}f(x)+g(z)$ subject to $Ax=z$ yields the usual two-block splitting. The side coefficients enter the proximal operation rather than enlarging the principal quadratic system. With fixed numerical parameters, its linear-system dimensions retain the original variables and constraint rows. Adaptive changes of numerical $\rho$ can still require refactorization; unchanged dimensions are not a promise of one factorization forever.
 
 Convergence is conditional on the assumptions required by the underlying convex splitting method, including an appropriate primal--dual solution. The scalar derivation does not prove arbitrary adaptive-parameter behavior, every implementation-level scaling rule, or every numerical infeasibility certificate. The source tests cover concrete bounded/unbounded and hard-infeasible examples, but finite test coverage is not a general theorem for all such instances.
 
-\section{Optimality and semantic verification}
+\chapter{Optimality and semantic verification}
 Original-space stationarity is
 \begin{equation}
 Px+q+A^\top y=0.
@@ -120,8 +154,8 @@ Backend statuses have distinct meanings. DAQP's status two denotes a soft optimu
 \end{equation}
 and maximum raw hard-row violation at most $10^{-6}$. Stationarity is diagnostic in that preregistered computation. Full primal/dual vectors remain available in the catalog and control examples; the repeated timing JSONL stores scalar diagnostics rather than every solution vector.
 
-\section{Implemented comparison paths}
-\begin{longtable}{p{0.18\textwidth}p{0.37\textwidth}p{0.37\textwidth}}
+\chapter{Implemented comparison paths}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.37\textwidth}>{\raggedright\arraybackslash}p{0.37\textwidth}@{}}
 \toprule Method & Compared objective & Important boundary\\\midrule
 Ordinary lifting & Symmetric compact or separate-side separable costs; exact helpers for mixed published examples & Independent stock oracle; matched native backend for timed lift\\
 Generalized projection & Published symmetric separable, Huber and selected grouped costs & Unequal side coefficients are incompatible\\
@@ -139,8 +173,8 @@ These proximal terms stabilize numerical subproblems and do not add a scientific
 
 DAQP and ElastiQP conversions are bounded to 2048 variables and 8192 finite sides/rows where applicable. DAQP retains active state through its documented vector-update API without resending sense flags. The generalized, asymmetric and lifted workspaces retain fixed matrices, coefficients, hard masks and finite-side patterns; only q and bounds may change. A comparison must not force a capable reference to rebuild on every update while allowing reuse only for the candidate.
 
-\section{Case taxonomy and source provenance}
-\begin{longtable}{p{0.10\textwidth}p{0.31\textwidth}p{0.51\textwidth}}
+\chapter{Case taxonomy and source provenance}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.51\textwidth}@{}}
 \toprule Input & Coverage & Distinguishing property\\\midrule
 C01--C03 & Scalar side semantics & Lower/upper reflection and unequal side prices\\
 C04 & Hard/soft integrity & Soft coordinate bounds with a hard coupling equality\\
@@ -159,15 +193,15 @@ The building input is adapted from OSQPSlack commit \nolinkurl{2e5d5ce8968207d08
 
 The model has two coupled thermal zones, a 20~kWh battery, HVAC, battery discharge and grid import over 96 quarter-hour intervals. C13 retains quadratic comfort, grouped peak grid overage, elastic battery-health and Huber HVAC-ramp costs. C14 and C15 replace those mixed penalties with explicitly separable prices whose upper/lower ratios are three and 1.5. Comparisons across those policies measure changed optimization objectives, not algorithmic accuracy.
 
-\section{Experimental design}
-\subsection{Seeded families and controlled variation}
+\chapter{Experimental design}
+\section{Seeded families and controlled variation}
 The protocol was fixed before held-out generation. The main grid has $n\in\{32,64,128,256\}$, $m=2n$, density 0.05 or 0.2, diagonal Hessian condition one or 1000, and three families: symmetric elastic, asymmetric elastic and asymmetric L1. Rows are normalized to unit Euclidean length. Linear targets have standard deviation three; linear side prices are sampled from $[0.1,1]$, quadratic prices from $[0.5,4]$ and asymmetric upper multipliers from $[1.5,3]$.
 
 Elastic families retain a hard-row fraction 0.2. The pure L1 family explicitly has all rows soft and zero quadratic side prices; changing that family is a model choice rather than a hidden relaxation inside one algorithm. Development seeds are 1000--1002 and held-out seeds 9000--9005, giving 144 development and 288 held-out instances. A further 24-instance robustness sweep uses six separate seeds and conditions $1,10^2,10^4,10^6$ at $n=32$, keeping A, q, bounds and prices fixed within each seed.
 
 Every instance has one warm-up per backend and seven measured repetitions. Method order is randomized within each paired repetition with a fixed order seed. Unsupported, failed, timeout and inaccurate cells remain explicit. The raw archive contains 21888 observations including warm-ups, of which 19152 are measured. This denominator is checked for missing or duplicate instance/method/repetition cells before summary computation.
 
-\subsection{Primary quantity and uncertainty}
+\section{Primary quantity and uncertainty}
 The primary population is asymmetric elastic with $n\ge128$ and density 0.05. For paired observation $j$, define
 \begin{equation}
 r_j=1-\frac{T_{{\rm asym},j}}{\min(T_{{\rm lift},j},T_{{\rm DAQP},j})}.
@@ -176,18 +210,18 @@ Negative values indicate slower candidate execution. The predicted practical imp
 
 The primary definition is not replaced with an attractive post-hoc subgroup. Matrix dimensions, native timers, numerical degradation and the control stream are secondary descriptive observations. Incompatible cells have no fabricated numerical discrepancy and no contribution to a compatible objective comparison.
 
-\subsection{Computational environment and timing scope}
+\section{Computational environment and timing scope}
 The computation uses Python 3.12.10, NumPy 2.5.4, SciPy 1.18.1, stock OSQP 1.1.3, DAQP 0.10.3 and ElastiQP 0.2.0 on Windows. The native engine source is \nolinkurl{d0c69ed974d577ba02adbd4806332270d9425651}; the numerical runner source is identified by app commit \texttt{1a0c664}. The machine-readable manifest additionally stores platform, native binary hash, protocol digest and numerical source hashes.
 
 Cold end-to-end time includes input validation, formulation construction, setup, solve and original-space evaluation. Imports, input generation and serialization are excluded from each timed call. Numerical setup includes linear-system preparation, so an isolated factorization time is not instrumented. One worker and one BLAS/OMP/MKL thread are used, with a 10~s trial limit, 7200~s total limit and 4~GiB RSS polling limit. Observed total wall time is 1363.063~s, worker peak RSS is 87.766~MiB and no worker restart occurs. These are process observations, not isolated native allocation peaks for each method.
 
-\section{Results}
-\subsection{Numerical agreement and compatibility}
+\chapter{Results}
+\section{Numerical agreement and compatibility}
 All 456 instances complete. The measured observations contain 11592 accepted solutions and 7560 incompatible method/family cells, with no numerical failure, timeout or accuracy rejection. The catalog separately contains 44 available and 16 incompatible cells over fifteen cases. Its maximum absolute objective difference to lifting is approximately $2.546\times10^{-6}$, while the normalized acceptance criterion remains satisfied. Maximum raw catalog hard error is approximately $1.828\times10^{-7}$.
 
 The distinction between raw and normalized discrepancies matters for large energy costs. An objective difference alone is not a residual certificate; original stationarity, dual recovery, penalty subgradient and hard-policy checks remain separate evidence. Coupled or Huber objectives are compared only through compatible reference paths.
 
-\subsection{Primary timing result}
+\section{Primary timing result}
 The median paired relative reduction is 0.499839\%. The 95\% seed-cluster interval is
 \[[-3.291967\%,3.944835\%].\]
 All 168 primary pairs satisfy external numerical acceptance. The practical 10\% prediction is not established, and the interval includes zero. Numerical equivalence and principal-dimension preservation therefore do not imply a useful overall cold execution improvement against the stronger matched baseline.
@@ -202,7 +236,7 @@ All 168 primary pairs satisfy external numerical acceptance. The practical 10\% 
 \caption{Held-out asymmetric elastic observations at density 0.05. Lines show medians over evaluation seeds and seven measured repetitions; bands show interquartile ranges. Each cold call includes validation and original-space evaluation. Differences between numerical setup and the outer operation prevent inferring an isolated factorization advantage from these curves.}
 \end{figure}
 
-\subsection{Controlled conditioning}
+\section{Controlled conditioning}
 The robustness sweep changes only the diagonal objective condition within a seed. All compatible observations remain within the registered objective and hard-row thresholds through condition $10^6$. Figure~\ref{fig:conditioning} shows the maximum normalized objective discrepancy among accepted observations; no unsuccessful observation is replaced with zero. This finite synthetic sweep does not establish reliability for arbitrary row scales, nearly dependent constraints or every semidefinite problem.
 
 \begin{figure}[htbp]\centering
@@ -210,7 +244,7 @@ The robustness sweep changes only the diagonal objective condition within a seed
 \caption{Maximum accepted normalized objective discrepancy in the controlled 32-variable sweep. The original-space acceptance ceiling is $10^{-6}$. Rows, targets, bounds and prices are unchanged within each seed; only the Hessian diagonal condition varies.}\label{fig:conditioning}
 \end{figure}
 
-\subsection{Common-trajectory predictive control}
+\section{Common-trajectory predictive control}
 The condensed double integrator has sampling period 0.2~s, horizon 20 and initial state $(1.6,0)$. Its state transition and input vector are
 \begin{equation}
 F=\begin{pmatrix}1&0.2\\0&1\end{pmatrix},\qquad B=\begin{pmatrix}0.02\\0.2\end{pmatrix}.
@@ -226,7 +260,7 @@ Three compatible methods each have cold and warm observations at every frame, gi
 
 The condensed objective omits a state-dependent constant. Restoring $\tfrac12c^\top Wc$ is necessary before interpreting the predicted physical horizon cost, where $c$ is the uncontrolled state offset. Successive horizon predictions overlap and must not be summed as realized plant cost.
 
-\subsection{Building-energy policies}
+\section{Building-energy policies}
 The published mixed-cost building input has objective approximately 36.660488. The two authored separable policies have objectives approximately 48.402991 and 42.682180 under their own distinct costs. Those values cannot rank algorithms or policy quality across objectives. Within each policy, compatible native and lifted formulations agree under the external criterion and preserve physical hard constraints.
 
 \begin{figure}[htbp]\centering
@@ -234,16 +268,118 @@ The published mixed-cost building input has objective approximately 36.660488. T
 \caption{Thermal predictions under the mixed source policy and two explicitly changed separable policies. The shaded occupied comfort band applies from 8 to 20~h. Curves differ because the optimization prices differ; their shapes are not a solver-accuracy ranking. Source inputs are synthetic and preserve the upstream MIT attribution.}
 \end{figure}
 
-\section{Limitations}
-The primary result is a negative cold end-to-end comparison on one environment and six evaluation seeds, not an equivalence theorem for runtime. Python validation, reference formulation work, native preparation and the implementation language are included in the operation that was actually measured. A different measurement boundary would answer another question. Isolated numeric factorization and per-method native allocation peaks are unavailable.
+\chapter{Directional group peaks in repeated forecasts}
+\section{Implemented model and mathematical boundary}
+The separate directional group-peak implementation extends the software's offline
+research scope beyond coordinate-separable side prices. A group shares its largest
+weighted departure, so its proximal correction couples several original interval
+rows. For disjoint groups $I_g$ and strictly positive directional scales, define
+\begin{equation}
+M_g(z)=\max\left\{0,\max_{i\in I_g}c_{U,i}(z_i-u_i)_+,
+                       \max_{i\in I_g}c_{L,i}(\ell_i-z_i)_+\right\}.
+\end{equation}
+The objective adds $a_gM_g(Ax)+\tfrac12b_gM_g(Ax)^2$, with $a_g,b_g\geq0$, to the
+original quadratic cost. Ungrouped rows remain hard. A group with both prices zero
+is free rather than hard. Missing interval sides contribute no departure.
 
-The asymmetric native extension is separable and does not implement side-dependent Huber transitions or coupled asymmetric group penalties. The bounded dense references do not cover every convex input accepted by the native sparse path. The fixed FlexQP reconstruction does not reproduce a learned policy or the authors' timing environment. An external hard-optimum interpretation of L1 elasticity additionally requires the appropriate penalty-size conditions.
+The public \texttt{softqp==0.2.0} interface provides canonical peak problems, directional groups,
+one-shot solves and prepared workspaces. It is a separate research profile; the
+historical product and lesson profile remains \texttt{softqp==0.1.0}. The native implementation
+uses a fixed positive diagonal metric, direct linear solves and immutable finite
+relaxation $0<\alpha<2$, defaulting to 1.6. It refuses adaptive penalty updates,
+automatic OSQP scaling, polishing, directional sensitivities and code generation.
+Ambiguous coupled semidefinite blocks beyond the exact 32-variable certification
+scope remain unsupported, rather than silently regularized.
+
+For a nonnegative proper closed convex residual penalty $\Psi$ with $\Psi(0)=0$,
+coordinate-contraction monotonicity means $\Psi(Dw)\leq\Psi(w)$ for diagonal
+$0\leq D\leq I$. It is equivalent to the all-box slack-elimination identity
+\begin{equation}
+\inf_{s\in C}\Psi(z-s)=\Psi(z-\Pi_C(z)).
+\end{equation}
+Let $C$ be a nonempty closed box and define
+$g_C(z)=\inf_{s\in C}\Psi(z-s)$. With fixed positive diagonal $H$, the corresponding proximal identity is
+\begin{equation}
+\prox_{g_C}^H(v)=\Pi_C(v)+\prox_\Psi^H(v-\Pi_C(v)).
+\end{equation}
+For a directional group, the residual proximal calculation reduces to a sorted
+scalar threshold. Its conjugate depends on the joint quantity
+\begin{equation}
+L_g(y)=\sum_{i\in I_g}\left((y_i)_+/c_{U,i}+(-y_i)_+/c_{L,i}\right),
+\end{equation}
+not independent row caps. The separate group-peak study gives the complete proofs,
+fixed-metric splitting assumptions, threshold branches, conjugates and scaling
+relations~\cite{coupled}. These identities explain an implementation and do not
+establish historical priority or a runtime improvement.
+
+\section{Exact comparison paths and measured scope}
+The same directional objective is already expressible by one-sided row splitting
+and compact epigraph variables. The registered comparison therefore retains nine
+profiles: native original rows; default and fixed-control stock-OSQP compact
+epigraphs; default and fixed-control row-split generalized slack projections; direct
+DAQP epigraphs; automatic and forced proximal DAQP with one-shot linear-program
+policy; and a persistent DAQP linear-program Model policy. Direct DAQP requires
+positive-definite augmented curvature. The pinned row-split infinity penalty
+declares squared peaks incompatible. Proximal policies preserve the original
+semidefinite or linear objective, and candidate statuses require external checks.
+
+One measured observation includes owned preparation and factorization, all 32 vector
+updates and solves, original-unit recovery and independent numerical checks.
+Generation, library/process startup and serialization are excluded symmetrically
+from that timer; process supervision includes them. Each observation uses a fresh
+worker, while its workspace is reused within the forecast batch. All raw warmups,
+failures, timeouts and declared incompatibilities remain available.
+
+The complete synthetic inventory has 48 development, 144 heldout and 18 robustness
+instances. Sparse cases vary dimensions, geometric diagonal span and positive or
+semidefinite base curvature. Hourly thermal forecasts have two independent zones,
+hard initial conditions/dynamics/heater limits and horizon-shared directional comfort
+peaks. They are authored forecasts, distinct from the quarter-hourly C13 model,
+and are neither operational measurements nor independently evolving closed-loop
+policies. The package versions, canonical inputs and exact protocol are archived
+with the complete evidence~\cite{coupleddata}.
+
+Every candidate forecast is checked for hard-row error, raw and repaired normalized
+stationarity, local absolute Fenchel gap, joint dual-domain error and objective
+agreement with an independent high-accuracy compact-epigraph oracle. These checks
+are stricter than the diagnostic-only stationarity boundary of the original
+separable timing study. The two accuracy policies are not retroactively pooled.
+
+\section{Complete negative result and product integration}
+Across all \PrimaryPopulation{} heldout instances in six seed clusters, the median
+paired reduction score is $\PrimaryEstimate\%$, with 95\% confidence limits
+$\PrimaryLower\%$ and $\PrimaryUpper\%$. The \PrimaryFailed{} failed pairs retain the
+prescribed score $-1$ and prevent qualification. The registered 10\% prediction is
+not established. The score mixes observed relative times with the fixed failure
+policy and is not one universal slowdown multiplier.
+
+The complete three-split journals contain 7770 observations, including warmups and
+common oracles. The 5670 measured method observations contain 3667 accepted,
+twelve accuracy-rejected, 1719 incompatible, 270 dependent oracle-failed and two
+timed-out rows. The accuracy-rejected batches contain backend iteration limits
+without candidate vectors, rather than inaccurate completed KKT solutions.
+Independent recomputation accepts 163390 returned candidate frames and retains
+44 separate noncandidate backend-limit frames. Failed oracles and workers are not
+retried, replaced or removed from the population.
+
+The static workbench presents the original case matrix, complete historical
+experiment and verified local cost-edit imports. It does not execute the coupled
+engine in a browser or supply a coupled-study replay adapter. The public native
+engine and the separate offline research profile are implemented capabilities;
+their existence does not imply field safety, deployed service availability or an
+accepted computational advantage. Both registered performance predictions remain
+negative, and their raw evidence and numerical source identities remain distinct.
+
+\chapter{Limitations}
+The original separable study's primary result is a negative cold end-to-end comparison on one environment and six evaluation seeds, not an equivalence theorem for runtime. Python validation, reference formulation work, native preparation and the implementation language are included in the operation that was actually measured. A different measurement boundary would answer another question. Isolated numeric factorization and per-method native allocation peaks are unavailable.
+
+The original SoftQP 0.1.0 asymmetric native extension is separable and does not implement side-dependent Huber transitions or coupled asymmetric group penalties. The bounded dense references do not cover every convex input accepted by the native sparse path. The fixed FlexQP reconstruction does not reproduce a learned policy or the authors' timing environment. An external hard-optimum interpretation of L1 elasticity additionally requires the appropriate penalty-size conditions.
 
 The control example uses a deterministic known model and shared oracle-driven states. It does not evaluate estimation errors, independent closed-loop policies, actuator dynamics outside the model or safety of deliberately softened state rows. The building input is a published synthetic model, and changing its penalties creates authored variants rather than field evidence.
 
 The scalar proximal derivation and numerical tests do not establish global algorithmic novelty or all adaptive-parameter convergence conditions. Parametric active-set reuse and reduced-system correction already have substantial prior work. A replacement computational proposal would need its own mathematical argument, prior-art assessment and prospective comparison; it cannot inherit a positive interpretation from a failed endpoint.
 
-\section{Conclusions}
+\chapter{Conclusions}
 Side-specific convex prices make the meaning of a soft interval explicit and can be implemented through a native proximal update while retaining the principal QP dimensions. Independent lifting and compatible published references support original-space numerical agreement over the tested cases. Hard rows, physical units, side violations and backend-specific statuses remain essential parts of that interpretation.
 
 The preregistered cold end-to-end improvement is not established against the faster matched reference. The result limits a performance argument based only on smaller formulations. Reusable workspaces and a common-trajectory control example remain inspectable computational mechanisms, while their practical value requires representative workloads and comparisons with equally capable reference updates.
@@ -258,5 +394,7 @@ Source and computational inputs are available at \url{https://github.com/fsantib
 \bibitem{flex} A. Oshin and collaborators. Deep FlexQP: Accelerated Nonlinear Programming via Deep Unfolding. ICLR 2026. Fixed-equation source: \url{https://arxiv.org/html/2512.01565v2}.
 \bibitem{elasti} D. Morton and collaborators. ElastiQP: An Always-Feasible QP Solver for Constrained Robot Control, 2026. Published implementation: \url{https://github.com/StanfordASL/elastiqp}.
 \bibitem{qpoases} qpOASES contributors. qpOASES User's Manual. Online active-set strategy for parametric quadratic programming. \url{https://coin-or.github.io/qpOASES/doc/3.0/manual.pdf}.
+\bibitem{coupled} F. Santib\'a\~nez-Leal. Directional coupled peak penalties with original interval rows. Technical report, 2026. \url{https://doi.org/10.5281/zenodo.23885695}.
+\bibitem{coupleddata} F. Santib\'a\~nez-Leal. Directional coupled peak study: registered synthetic inputs and complete execution evidence. Dataset, 2026. \url{https://doi.org/10.5281/zenodo.23875194}.
 \end{thebibliography}
 \end{document}

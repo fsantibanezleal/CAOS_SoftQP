@@ -6,6 +6,8 @@ SoftQP Studio studies declared hard and soft policies in convex quadratic progra
 - [Software design](design/SDD.md): approved scope, mathematical assumptions, EARS requirements, sizing and gates.
 - [Contracts](contracts/catalog.md): sparse problem, request, result, inventory, deployment, readiness and local export boundaries with schema versions and tests.
 - [Research sources](research.md): published generalized projection, explicit lifting, DAQP and current related work, with scope and novelty limits.
+- [Completed directional group-peak study](design/coupled-study.md): mathematical source, complete negative result, retained failures and external reproduction profile.
+- [Licenses](../LICENSES.md) and [attribution](../ATTRIBUTION.md): exact third-party source/data terms and authored synthetic boundaries.
 - [Cases](cases/README.md): taxonomy and individual scientific cases.
 - [Architecture](architecture/): execution, evidence, replay and deployment boundaries.
 - [Frameworks](frameworks/): the pinned native and numerical engines, installation, use and licensing.

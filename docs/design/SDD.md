@@ -62,11 +62,11 @@ Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distri
 
 ## Technology and versions
 
-The approved implementation instantiates template 0.14.001 and shared shell 0.19.1. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. These direct dependencies match the actual requirements and committed npm lock.
+This development correction adopts released template 0.14.003 and published shared shell 0.19.12. The local admission/runtime correction is implemented in the shared base first and carried verbatim while its correction release gates complete; this does not assert a released newer base or full foundation acceptance. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. These direct dependencies match the actual requirements and committed npm lock.
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|
-| shell | @fasl-work/caos-app-shell | 0.19.1 | Shared workbench and measured gate | Custom shell duplication |
+| shell | @fasl-work/caos-app-shell | 0.19.12 | Shared workbench and measured gate | Custom shell duplication |
 | tooling | @types/node | 24.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -81,6 +81,7 @@ The approved implementation instantiates template 0.14.001 and shared shell 0.19
 | tooling | katex | 0.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | lucide-react | 1.52.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | scientific figures | matplotlib | 3.11.2 | Executed notebook plots | Baked screenshots |
+| codegenerator compatibility | minimatch | 11.0.1 | Reviewed scoped override for the pinned OpenAPI generator | An incompatible Redocly major override |
 | notebook runner | nbclient | 0.11.0 | Fresh-kernel execution | Unexecuted notebooks |
 | notebook format | nbformat | 5.11.1 | Structured notebook files | Hand-edited output JSON |
 | arrays | numpy | 2.5.4 | Original-space vector arithmetic | Scalar loops |
@@ -227,7 +228,7 @@ Offline stages: ingest source/registry -> validate -> generate/pin seeds and spl
 
 ## Application, UI and deliverables
 
-Instantiate current `CAOS_PRODUCT_TEMPLATE` exactly, use `@fasl-work/caos-app-shell` pinned to the version current at scaffold time, and follow the current template six-route contract: App, Introduction, Methodology, Implementation, Experiments, Benchmark. English and Spanish plus light and dark themes are release requirements. App opens on one selected case, provides real supported parameter edits, solve/compare, visible hard/soft row policy, side-specific violation chart, convergence/residual inspection and portable export. Cross-case selection and result matrices belong in Experiments/Benchmark. The page viewport is the app; keyboard access, focus behavior, empty/error/stale/incompatible states and responsive layouts are part of the measured gate.
+Instantiate current `CAOS_PRODUCT_TEMPLATE` exactly, use `@fasl-work/caos-app-shell` pinned exactly to the current adopted release, revalidated whenever the base changes, and follow the current template six-route contract: App, Introduction, Methodology, Implementation, Experiments, Benchmark. English and Spanish plus light and dark themes are release requirements. App opens on one selected case, provides real supported parameter edits, solve/compare, visible hard/soft row policy, side-specific violation chart, convergence/residual inspection and portable export. Cross-case selection and result matrices belong in Experiments/Benchmark. The page viewport is the app; keyboard access, focus behavior, empty/error/stale/incompatible states and responsive layouts are part of the measured gate.
 
 Architecture modal: five bilingual, theme-aware tabs with complete product architecture and data-flow content. The `docs/` wiki is maintained in the same implementation units and contains method derivations, assumptions, API/contracts, reproducibility, licensing, data provenance, limitations, operations, and contribution guidance. Bilingual notebooks run from simple penalty semantics to published-method comparison and AAGSP falsification; numerical output is executed and checked, never placeholders. Final technical report is required. A separate proposed-method manuscript is prepared only if the method is correct, reproducible and scientifically interesting; otherwise the technical report records negative/inconclusive evidence. Manuscript authorship is reviewed explicitly before publication.
 

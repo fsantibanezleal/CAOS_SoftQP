@@ -1,16 +1,16 @@
 # Directional coupled peak study
 
-This is a separate prospective study. The original preregistration, 456-instance data, negative timing result, report and notebook outputs remain unchanged. The coupled study has no accepted timing result or qualified app release. Its JSON protocol stays locked until independent source/protocol review and public SDK provenance are recorded and committed.
+This prospectively registered computation is complete: 48 development, 144 heldout and 18 robustness instances, retaining 7770 raw observations and 210 canonical synthetic inputs. The original 456-instance study and historical notebook outputs remain separate and unchanged. The coupled primary score is -212.449875%, with a 95% seed-cluster interval [-225.336618%,-192.873759%] and nine failed pairs. Its registered 10% prediction is not established; no qualified app release follows.
 
 The narrow question is whether preserving original interval rows helps a complete repeated-forecast operation compared with exact existing formulations. Directional expressibility, weighted threshold projections and relaxed ADMM are established methods. The closest comparator is the published symmetric grouped projection after directional one-sided row splitting; compact stock-OSQP epigraph and direct/proximal DAQP policies are also registered. The original failed 10% result cannot be replaced by a favourable subset of the new study.
 
 ## Environment and data
 
-Use a separate CPython 3.12 environment on supported Windows x64 or Linux x86_64:
+Use a separate CPython 3.12 environment on supported Windows x64 or Linux x86_64. Set `SOFTQP_STUDY_ENV` to its external directory, `SOFTQP_STUDY_PYTHON` to its interpreter, and `SOFTQP_STUDY_ROOT` to the external evidence root. Set `CAOS_TEMP_ROOT` externally and map the process TEMP/TMP/TMPDIR there before worker execution. These locations do not change the scientific parameters:
 
 ```powershell
-py -3.12 -m venv .venv-coupled
-.venv-coupled/Scripts/python -m pip install --index-url https://pypi.org/simple -r experiments/coupled-v1/requirements.txt
+py -3.12 -m venv $env:SOFTQP_STUDY_ENV
+& $env:SOFTQP_STUDY_PYTHON -m pip install --index-url https://pypi.org/simple -r experiments/coupled-v1/requirements.txt
 ```
 
 All inputs are generated from committed formulas and preregistered seeds. No external dataset, private records, API key or downloaded operational building data is required. The sparse cases have hard coordinate bounds and disjoint directional groups. The hourly thermal cases use an original RC forecast model with hard initial conditions, dynamics and heater-energy limits and one comfort peak per zone across the horizon. Their coefficients and prices are synthetic; these are forecasts, not measured building performance or closed-loop control trajectories. Every variable, row and objective coefficient has an explicit unit map in the canonical batch.
@@ -31,16 +31,22 @@ The separate registration manifest pins the exact protocol, source map and accep
 
 ## Execution and verification
 
-After registration has passed and been committed remotely:
+The complete registered evidence is available from [the dataset](https://doi.org/10.5281/zenodo.23875194). Replay an extracted split with `--validate-output`; no new observation is required to inspect the recorded outcome. The following commands describe an explicit fresh reproduction with the unchanged registration and new external directories; they do not replace historical evidence:
 
 ```powershell
-.venv-coupled/Scripts/python data-pipeline/run_coupled_study.py --check-freeze
-.venv-coupled/Scripts/python data-pipeline/run_coupled_study.py --split development --output output/coupled-development-v1
-.venv-coupled/Scripts/python data-pipeline/run_coupled_study.py --split heldout --output output/coupled-heldout-v1
-.venv-coupled/Scripts/python data-pipeline/run_coupled_study.py --split robustness --output output/coupled-robustness-v1
-.venv-coupled/Scripts/python data-pipeline/run_coupled_study.py --validate-output --output output/coupled-heldout-v1
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --check-freeze
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --split development --output "$env:SOFTQP_STUDY_ROOT/reproduction-development"
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --split heldout --output "$env:SOFTQP_STUDY_ROOT/reproduction-heldout"
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --split robustness --output "$env:SOFTQP_STUDY_ROOT/reproduction-robustness"
+& $env:SOFTQP_STUDY_PYTHON data-pipeline/run_coupled_study.py --validate-output --output "$env:SOFTQP_STUDY_ROOT/reproduction-heldout"
 ```
 
 Each output directory must be new. It contains the protocol snapshot, canonical input batches, full oracle/method JSONL, exact method CSV, index and independent replay validation. Schemas version the batch, observation and index boundaries. The consumer verifies checksums, full inventories, original-space accepted solutions, counts, CSV correspondence and the complete primary analysis. An interrupted directory remains evidence and is never overwritten as a successful run.
 
 The public 0.2 SDK is an engineering release. Companion-app research qualification still requires the preregistered outcome, product integration, source promotion, deployment/live proof and owner acceptance. A negative result remains negative.
+
+## Complete outcome and mathematics
+
+All 3667 accepted measured method observations, 12 iteration-limited accuracy-rejected batches, 1719 declared incompatible cells, 270 dependent oracle-failed rows and two supervised timeouts remain in the full 5670 measured-method inventory. Independent recomputation checks 163390 returned candidate frames; backend-limit frames without vectors are separate. The three split populations are not pooled to replace the primary endpoint.
+
+The [native LaTeX source](../../manuscripts/coupled-peak-study/main.tex) contains the complete box-contraction equivalence, diagonal-metric proximal proof, directional threshold/conjugate, fixed-relaxation assumptions, row/bound/dual scaling, exact comparator policies and failure taxonomy. The [study reproduction guide](../../manuscripts/coupled-peak-study/reproduction.md) names the actual public packages and full evidence. The current app has no coupled-study replay adapter; these offline data must not appear as loaded app evidence merely because their schemas exist.

@@ -1,5 +1,8 @@
 # scripts/
 
+Start with the [numbered local workflow](local/README.md): check prerequisites, initialize, optionally generate
+into an external sandbox, then start the declared local frontend/API. Existing flat commands remain compatible.
+
 Environment and pipeline scripts in both `*.sh` and `*.ps1`, and the guards CI runs (each runs locally too, with the
 standard library only).
 
