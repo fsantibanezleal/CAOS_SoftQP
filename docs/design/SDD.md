@@ -26,7 +26,7 @@ The sourced bilingual brief and three authored illustrations frame the engineeri
 
 ## Research basis
 
-Directional study primary derivation and complete negative evidence: https://doi.org/10.5281/zenodo.23885695 .
+Separate research manuscript on side-specific and directional peak updates, with both negative timing studies: https://doi.org/10.5281/zenodo.23875071 .
 
 Research is documented in [the source review](../research.md). It reviews classical explicit lifting, OSQP, the 2025 quadratic-slack ADMM result, the 2026 generalized slack projection paper and its OSQPSlack implementation, DAQP, ElastiQP, PIQP, MPC soft constraints, benchmark protocols, and ICLR 2026 FlexQP/Deep FlexQP.
 
@@ -92,6 +92,7 @@ This development correction adopts released template 0.14.005 (main be5eb2c8d0d6
 | independent oracle | osqp | 1.1.3 | Stock explicit-lift reference | Same native fork as the only oracle |
 | tooling | playwright | 1.63.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tests | pytest | 9.2.0 | Native, contract and adversarial checks | Manual-only checks |
+| manuscript PDF inspection | pypdf | 6.21.4 | Read PDF objects in the raster-refusal tests | Raster figures passing as vector assets |
 | tooling | react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | react-router | 8.4.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |

@@ -1,0 +1,241 @@
+{
+  "id": "softqp-case-spec",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-case-spec.schema.json",
+  "schema_sha256": "dff9f1f23f5867aea4f8b7e5be14b06d4c4aa84372b2e468663771cdc2861a9a",
+  "producer": "data-pipeline/pipeline/io/contract.py",
+  "fields": [
+    "P",
+    "q",
+    "A",
+    "lower",
+    "upper",
+    "penalty"
+  ],
+  "consumer_test": "frontend/src/lib/softqp.local.test.ts",
+  "missing": "missing: local execution is unavailable until a complete matching request and validated export exist; replay remains available",
+  "nested_fields": [
+    [
+      "P",
+      "object",
+      "additionalProperties=False; required=['shape', 'data', 'indices', 'indptr']",
+      "structural metadata / nested units"
+    ],
+    [
+      "P.shape",
+      "array",
+      "minItems=2; maxItems=2",
+      "count / integer identifier"
+    ],
+    [
+      "P.shape[0]",
+      "integer",
+      "minimum=0; maximum=20000",
+      "count / integer identifier"
+    ],
+    [
+      "P.shape[1]",
+      "integer",
+      "minimum=0; maximum=20000",
+      "count / integer identifier"
+    ],
+    [
+      "P.data",
+      "array",
+      "maxItems=2000000",
+      "cost / decision units squared"
+    ],
+    [
+      "P.data[]",
+      "number",
+      "See defined object / value type",
+      "cost / decision units squared"
+    ],
+    [
+      "P.indices",
+      "array",
+      "maxItems=2000000",
+      "count / integer identifier"
+    ],
+    [
+      "P.indices[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "P.indptr",
+      "array",
+      "maxItems=20001",
+      "count / integer identifier"
+    ],
+    [
+      "P.indptr[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "q",
+      "array",
+      "maxItems=20000",
+      "cost / decision unit"
+    ],
+    [
+      "q[]",
+      "number",
+      "See defined object / value type",
+      "cost / decision unit"
+    ],
+    [
+      "A",
+      "object",
+      "additionalProperties=False; required=['shape', 'data', 'indices', 'indptr']",
+      "structural metadata / nested units"
+    ],
+    [
+      "A.shape",
+      "array",
+      "minItems=2; maxItems=2",
+      "count / integer identifier"
+    ],
+    [
+      "A.shape[0]",
+      "integer",
+      "minimum=0; maximum=20000",
+      "count / integer identifier"
+    ],
+    [
+      "A.shape[1]",
+      "integer",
+      "minimum=0; maximum=20000",
+      "count / integer identifier"
+    ],
+    [
+      "A.data",
+      "array",
+      "maxItems=2000000",
+      "row / decision unit"
+    ],
+    [
+      "A.data[]",
+      "number",
+      "See defined object / value type",
+      "row / decision unit"
+    ],
+    [
+      "A.indices",
+      "array",
+      "maxItems=2000000",
+      "count / integer identifier"
+    ],
+    [
+      "A.indices[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "A.indptr",
+      "array",
+      "maxItems=20001",
+      "count / integer identifier"
+    ],
+    [
+      "A.indptr[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "lower",
+      "array",
+      "maxItems=20000",
+      "original row unit"
+    ],
+    [
+      "lower[]",
+      "number / null",
+      "See defined object / value type",
+      "original row unit"
+    ],
+    [
+      "upper",
+      "array",
+      "maxItems=20000",
+      "original row unit"
+    ],
+    [
+      "upper[]",
+      "number / null",
+      "See defined object / value type",
+      "original row unit"
+    ],
+    [
+      "penalty",
+      "object",
+      "additionalProperties=False; required=['lower_linear', 'upper_linear', 'lower_quadratic', 'upper_quadratic', 'soft']",
+      "structural metadata / nested units"
+    ],
+    [
+      "penalty.lower_linear",
+      "array",
+      "maxItems=20000",
+      "cost / row unit"
+    ],
+    [
+      "penalty.lower_linear[]",
+      "number",
+      "minimum=0",
+      "cost / row unit"
+    ],
+    [
+      "penalty.upper_linear",
+      "array",
+      "maxItems=20000",
+      "cost / row unit"
+    ],
+    [
+      "penalty.upper_linear[]",
+      "number",
+      "minimum=0",
+      "cost / row unit"
+    ],
+    [
+      "penalty.lower_quadratic",
+      "array",
+      "maxItems=20000",
+      "cost / row unit squared"
+    ],
+    [
+      "penalty.lower_quadratic[]",
+      "number",
+      "minimum=0",
+      "cost / row unit squared"
+    ],
+    [
+      "penalty.upper_quadratic",
+      "array",
+      "maxItems=20000",
+      "cost / row unit squared"
+    ],
+    [
+      "penalty.upper_quadratic[]",
+      "number",
+      "minimum=0",
+      "cost / row unit squared"
+    ],
+    [
+      "penalty.soft",
+      "array",
+      "maxItems=20000",
+      "structural metadata / nested units"
+    ],
+    [
+      "penalty.soft[]",
+      "boolean",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ]
+  ]
+}

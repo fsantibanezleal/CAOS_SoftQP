@@ -1,0 +1,11 @@
+{
+  "authority": "CAOS_MANAGE/conventions/manuscript-content-bar.md",
+  "checker": "CAOS_MANAGE/tools/zenodo/check_manuscript_depth.py",
+  "observed_date": "2026-11-02",
+  "checker_sha256": "843642b5f152d712bb49eda7b19ebb930b2c1b5c0f5022faf2b3747a387cd075",
+  "template": "CAOS_RESEARCH/manuscripts/jacobian-conjecture/foundational/main.tex",
+  "template_sha256": "4603c261f0ea251fd7502a6fb741adbd0e6b6896a49355249dbd1dfcc7139e1c",
+  "vendored_checker": "scripts/manuscript_content_bar.py",
+  "vendored_checker_sha256": "e6a9799dd0148bd39f42ecdb613dd492d3868215e377cc0ca8d087d05016c4c7",
+  "adaptation": "Equivalent temporary-variable extraction for Python 3.11 f-string compatibility; no changed content rules."
+}

@@ -2,8 +2,8 @@
   "name": "SoftQP Studio",
   "slug": "softqp",
   "tagline": {
-    "en": "Inspect constraint trade-offs with reproducible quadratic programs.",
-    "es": "Examina compromisos entre restricciones con programas cuadráticos reproducibles."
+    "en": "Inspect priced constraints and complete negative timing evidence.",
+    "es": "Examina restricciones con costos y evidencia temporal negativa completa."
   },
   "repo": "https://github.com/fsantibanezleal/CAOS_SoftQP",
   "visibility": "public",
@@ -25,18 +25,20 @@
     {
       "kind": "technical-report",
       "concept_doi": "10.5281/zenodo.23851659",
-      "title": "Side-Specific Soft Constraints in Quadratic Programming",
-      "version": "0.01.001",
+      "title": "Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results",
+      "version": "0.01.002",
       "covers": [
-        "BS-1"
+        "BS-1",
+        "BS-2"
       ]
     },
     {
       "kind": "manuscript",
       "concept_doi": "10.5281/zenodo.23875071",
-      "title": "Directional coupled peak penalties with original interval rows",
-      "version": "0.02.001",
+      "title": "Original-Row Proximal Updates for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies",
+      "version": "0.02.002",
       "covers": [
+        "BS-1",
         "BS-2"
       ]
     }

@@ -1,7 +1,7 @@
 {
-  "title": "fsantibanezleal/CAOS_SoftQP: v0.01.001 (research preview)",
+  "title": "fsantibanezleal/CAOS_SoftQP: v0.01.002 (document correction, research preview)",
   "upload_type": "software",
-  "description": "<p>SoftQP Studio is an open research workbench for inspecting soft-constrained quadratic objectives, hard and soft row policy, equivalent formulations, numerical acceptance and reproducible synthetic evidence. The browser replays verified records and accepts independently checked local native results; it does not run a hosted or browser-native solver.</p><p>This research preview includes source, contracts, bilingual worked notebooks, native LaTeX report sources and compact public numerical artifacts. The separately published softqp SDK owns the native implementation. Historical SDK1 and coupled SDK2 profiles remain isolated.</p><p>Both preregistered timing-improvement criteria failed. Complete negative results, failures, incompatibilities and uncertainty are retained. This archive establishes software availability, not algorithmic novelty, timing superiority, operational safety, peer review or scientific product qualification.</p>",
+  "description": "<p>SoftQP Studio is an open research workbench for inspecting soft-constrained quadratic objectives, hard and soft row policy, equivalent formulations, numerical acceptance and reproducible synthetic evidence. The browser replays verified records and accepts independently checked local native results; it does not run a hosted or browser-native solver.</p><p>This research preview includes source, contracts, bilingual worked notebooks, separate canonical LaTeX technical-report and research-preprint sources and compact public numerical artifacts. The separately published softqp SDK owns the native implementation. Historical SDK1 and coupled SDK2 profiles remain isolated.</p><p>Both preregistered timing-improvement criteria failed. Complete negative results, failures, incompatibilities and uncertainty are retained. This archive establishes software availability, not algorithmic novelty, timing superiority, operational safety, peer review or scientific product qualification.</p>",
   "creators": [
     {
       "name": "Santibáñez-Leal, Felipe",
@@ -11,12 +11,30 @@
   ],
   "access_right": "open",
   "license": "MIT",
-  "version": "0.01.001",
-  "keywords": ["quadratic programming", "soft constraints", "reproducibility", "negative results", "synthetic computational study"],
+  "version": "0.01.002",
+  "keywords": [
+    "quadratic programming",
+    "soft constraints",
+    "reproducibility",
+    "negative results",
+    "synthetic computational study"
+  ],
   "related_identifiers": [
-    {"identifier": "10.5281/zenodo.23885690", "scheme": "doi", "relation": "isDocumentedBy"},
-    {"identifier": "10.5281/zenodo.23885695", "scheme": "doi", "relation": "isDocumentedBy"},
-    {"identifier": "10.5281/zenodo.23875194", "scheme": "doi", "relation": "isSupplementedBy"}
+    {
+      "identifier": "10.5281/zenodo.23899079",
+      "scheme": "doi",
+      "relation": "isDocumentedBy"
+    },
+    {
+      "identifier": "10.5281/zenodo.23899142",
+      "scheme": "doi",
+      "relation": "isDocumentedBy"
+    },
+    {
+      "identifier": "10.5281/zenodo.23875194",
+      "scheme": "doi",
+      "relation": "isSupplementedBy"
+    }
   ],
   "notes": "Software and third-party code retain their declared licenses and attribution. Manuscript text/figures and the separate research dataset carry their own CC BY 4.0 terms. Software archiving is performed only by the configured Zenodo GitHub integration for the current actual release."
 }

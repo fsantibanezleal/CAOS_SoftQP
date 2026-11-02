@@ -1,0 +1,359 @@
+{
+  "id": "readiness",
+  "version": "2.0.1",
+  "schema": "docs/contracts/schemas/readiness.schema.json",
+  "schema_sha256": "98af12b6d5620bcd07fb684e580a5715712d280ed6f3ab97edf16b215a5914f3",
+  "producer": "data-pipeline/pipeline/core/readiness.py",
+  "fields": [
+    "schema",
+    "product_version",
+    "catalog_sha256",
+    "contracts"
+  ],
+  "consumer_test": "frontend/src/readiness/readiness.test.ts",
+  "missing": "missing: the site build stops at copy-data; if the document cannot be loaded at run time the views keep working and each says readiness unknown; the API answers 503 missing",
+  "nested_fields": [
+    [
+      "schema",
+      "string",
+      "const=softqp.readiness/v2",
+      "structural metadata / nested units"
+    ],
+    [
+      "product_version",
+      "string",
+      "pattern=^\\d+\\.\\d{2}\\.\\d{3}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "catalog_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts",
+      "array",
+      "minItems=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[]",
+      "object",
+      "additionalProperties=False; required=['id', 'version', 'status', 'provenance', 'state', 'reason', 'missing']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].id",
+      "string",
+      "pattern=^[a-z0-9][a-z0-9-]*$",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].version",
+      "string",
+      "pattern=^\\d+\\.\\d+\\.\\d+$",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].status",
+      "enumerated value",
+      "enum=['real', 'active']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].provenance",
+      "enumerated value",
+      "enum=['real', 'stub', 'simulator', 'fixture', 'baseline', None]",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].state",
+      "enumerated value",
+      "enum=['available', 'partial', 'stale', 'provider', 'training', 'missing']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].reason",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].reason (oneOf1)",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].reason (oneOf1).en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].reason (oneOf1).es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].reason (oneOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].missing",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[].missing[]",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (if).state",
+      "string",
+      "const=available",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (then).reason",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (then).provenance",
+      "string",
+      "const=real",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (else)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (else).reason",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (else).reason.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf1) (else).reason.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2) (if).state",
+      "string",
+      "const=partial",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2) (then).missing",
+      "array",
+      "minItems=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2) (else)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf2) (else).missing",
+      "array",
+      "maxItems=0",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3) (if).state",
+      "string",
+      "const=missing",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3) (then).provenance",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3) (else)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf3) (else).provenance",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf4)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf4) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf4) (if).state",
+      "string",
+      "const=provider",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf4) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf4) (then).provenance",
+      "enumerated value",
+      "enum=['stub', 'simulator', 'fixture', 'baseline']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf5)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf5) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf5) (if).state",
+      "string",
+      "const=training",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf5) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf5) (then).provenance",
+      "enumerated value",
+      "enum=['real', 'baseline']",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf6)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf6) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf6) (if).status",
+      "string",
+      "const=active",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf6) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf6) (then).provenance",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "contracts[] (allOf6) (then).provenance (not)",
+      "string",
+      "const=real",
+      "structural metadata / nested units"
+    ]
+  ]
+}

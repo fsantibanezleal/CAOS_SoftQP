@@ -1,0 +1,572 @@
+{
+  "id": "softqp-coupled-observation",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-coupled-observation.schema.json",
+  "schema_sha256": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710",
+  "producer": "data-pipeline/pipeline/coupled_campaign.py",
+  "fields": [
+    "schema_version",
+    "kind",
+    "role",
+    "id",
+    "split",
+    "seed",
+    "family",
+    "curvature",
+    "quadratic",
+    "method",
+    "repetition",
+    "warmup",
+    "state",
+    "reason",
+    "elapsed_seconds",
+    "batch_sha256",
+    "predeclared_incompatible",
+    "frames",
+    "backend_results",
+    "objectives",
+    "n",
+    "group_size",
+    "condition",
+    "horizon",
+    "zones"
+  ],
+  "consumer_test": "tests/coupled/test_coupled_export.py::test_adversarial_replay_rejects_tampering_even_when_outer_checksums_are_recomputed",
+  "missing": "missing: this offline research exchange has no declared validated replay adapter in the app; schema examples and archived evidence do not establish deployed data availability",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=1.0.0",
+      "structural metadata / nested units"
+    ],
+    [
+      "kind",
+      "string",
+      "const=directional-coupled-observation",
+      "structural metadata / nested units"
+    ],
+    [
+      "role",
+      "enumerated value",
+      "enum=['oracle', 'method']",
+      "structural metadata / nested units"
+    ],
+    [
+      "id",
+      "string",
+      "pattern=^(development|heldout|robustness)-[0-9]{4}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "split",
+      "enumerated value",
+      "enum=['development', 'heldout', 'robustness']",
+      "structural metadata / nested units"
+    ],
+    [
+      "seed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "family",
+      "enumerated value",
+      "enum=['sparse', 'thermal']",
+      "structural metadata / nested units"
+    ],
+    [
+      "curvature",
+      "enumerated value",
+      "enum=['positive-definite', 'semidefinite', 'zero-hessian']",
+      "structural metadata / nested units"
+    ],
+    [
+      "quadratic",
+      "number",
+      "minimum=0",
+      "cost / peak unit squared"
+    ],
+    [
+      "method",
+      "enumerated value",
+      "enum=['__oracle__', 'native', 'epigraph-default', 'epigraph-fixed', 'row-split-default', 'row-split-fixed', 'daqp-direct', 'daqp-prox-auto', 'daqp-prox-forced', 'daqp-lp-model']",
+      "structural metadata / nested units"
+    ],
+    [
+      "repetition",
+      "integer / null",
+      "minimum=-1; maximum=2",
+      "count / integer identifier"
+    ],
+    [
+      "warmup",
+      "boolean",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "state",
+      "enumerated value",
+      "enum=['accepted', 'failed', 'accuracy-rejected', 'incompatible', 'oracle-failed', 'resource-limit', 'timeout']",
+      "structural metadata / nested units"
+    ],
+    [
+      "reason",
+      "string / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "elapsed_seconds",
+      "number / null",
+      "exclusiveMinimum=0",
+      "s"
+    ],
+    [
+      "batch_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "predeclared_incompatible",
+      "boolean",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames",
+      "array",
+      "maxItems=32",
+      "count / integer identifier"
+    ],
+    [
+      "frames[]",
+      "object",
+      "required=['state', 'reason', 'metrics']",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].state",
+      "enumerated value",
+      "enum=['accepted', 'failed', 'accuracy-rejected']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].reason",
+      "string / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].metrics",
+      "object / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].metrics.objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].metrics.peaks",
+      "array",
+      "See defined object / value type",
+      "group peak unit; model map"
+    ],
+    [
+      "frames[].metrics.peaks[]",
+      "number",
+      "minimum=0",
+      "group peak unit; model map"
+    ],
+    [
+      "frames[].metrics.hard_violation",
+      "number",
+      "minimum=0",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].metrics.stationarity",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].metrics.dual_domain",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].metrics.dual_repair",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].metrics.fenchel",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].metrics.aggregate_fenchel",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].metrics.objective_gap",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[] (allOf1)",
+      "object",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "frames[] (allOf1) (if)",
+      "object",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "frames[] (allOf1) (if).state",
+      "string",
+      "const=accepted",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[] (allOf1) (then)",
+      "object",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "frames[] (allOf1) (then).reason",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[] (allOf1) (then).metrics",
+      "object",
+      "required=['objective', 'hard_violation', 'stationarity', 'dual_domain', 'dual_repair', 'fenchel', 'objective_gap']",
+      "structural metadata / nested units"
+    ],
+    [
+      "backend_results",
+      "array",
+      "maxItems=32",
+      "structural metadata / nested units"
+    ],
+    [
+      "backend_results[]",
+      "object",
+      "required=['method', 'status', 'status_code', 'x', 'y', 'dimensions']",
+      "structural metadata / nested units"
+    ],
+    [
+      "backend_results[].method",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "backend_results[].status",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "backend_results[].status_code",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "backend_results[].x",
+      "array / null",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "backend_results[].x[]",
+      "number",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "backend_results[].y",
+      "array / null",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "backend_results[].y[]",
+      "number",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "backend_results[].dimensions",
+      "object",
+      "required=['variables', 'rows']",
+      "structural metadata / nested units"
+    ],
+    [
+      "backend_results[].dimensions.variables",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "backend_results[].dimensions.rows",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "objectives",
+      "array / null",
+      "maxItems=32",
+      "model cost unit"
+    ],
+    [
+      "objectives[]",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "n",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "group_size",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "condition",
+      "number",
+      "minimum=1",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "horizon",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "zones",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      " (allOf1)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (if).role",
+      "string",
+      "const=oracle",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (then).method",
+      "string",
+      "const=__oracle__",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (then).repetition",
+      "null",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      " (allOf1) (then).warmup",
+      "boolean",
+      "const=False",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (else)",
+      "object",
+      "required=['elapsed_seconds']",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (else).repetition",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      " (allOf1) (else).method",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1) (else).method (not)",
+      "string",
+      "const=__oracle__",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2) (if).state",
+      "string",
+      "const=accepted",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2) (then)",
+      "object",
+      "required=['batch_sha256', 'frames', 'backend_results']",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2) (then).reason",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2) (then).frames",
+      "object",
+      "minItems=32",
+      "count / integer identifier"
+    ],
+    [
+      " (allOf2) (then).frames[]",
+      "object",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      " (allOf2) (then).frames[].state",
+      "string",
+      "const=accepted",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2) (then).backend_results",
+      "object",
+      "minItems=32",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3) (if).role",
+      "string",
+      "const=oracle",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3) (if).state",
+      "string",
+      "const=accepted",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3) (then)",
+      "object",
+      "required=['objectives']",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3) (then).objectives",
+      "array",
+      "minItems=32",
+      "model cost unit"
+    ],
+    [
+      " (allOf4)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf4) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf4) (if).role",
+      "string",
+      "const=method",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf4) (if).state",
+      "string",
+      "const=accepted",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf4) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf4) (then).elapsed_seconds",
+      "number",
+      "exclusiveMinimum=0",
+      "s"
+    ]
+  ]
+}

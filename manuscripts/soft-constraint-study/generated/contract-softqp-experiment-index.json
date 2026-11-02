@@ -1,0 +1,71 @@
+{
+  "id": "softqp-experiment-index",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-experiment-index.schema.json",
+  "schema_sha256": "6b49695e50e5177586347b0596553d0e4e960f376b7b9aa3d6130e63ba7cf42f",
+  "producer": "data-pipeline/pipeline/experiment_export.py",
+  "fields": [
+    "schema_version",
+    "protocol_id",
+    "artifacts",
+    "state"
+  ],
+  "consumer_test": "frontend/src/lib/experiments.contract.test.ts",
+  "missing": "missing: experiment evidence is unavailable; show the missing path and retain the other case records",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=softqp.experiments/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol_id",
+      "string",
+      "const=softqp-experiments-v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[]",
+      "object",
+      "additionalProperties=False; required=['path', 'bytes', 'sha256', 'schema']",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[].path",
+      "string",
+      "pattern=^[a-z][a-z0-9-]*\\.(json|csv|jsonl)$",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[].bytes",
+      "integer",
+      "minimum=0",
+      "bytes"
+    ],
+    [
+      "artifacts[].sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[].schema",
+      "enumerated value",
+      "enum=['softqp-stream', 'softqp-campaign', 'softqp-datasets', 'softqp-trial', 'csv']",
+      "structural metadata / nested units"
+    ],
+    [
+      "state",
+      "enumerated value",
+      "enum=['development', 'measured']",
+      "structural metadata / nested units"
+    ]
+  ]
+}
