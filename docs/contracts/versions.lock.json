@@ -1,37 +1,92 @@
 {
-  "params-record": {
-    "version": "1.0.0",
-    "schema": "docs/contracts/schemas/params-record.schema.json",
-    "sha256": "9bb67b0438a99919879390e60ed4c4fa5622d954b671b4fe65d0c84fa58c08d7"
-  },
   "case-index": {
-    "version": "2.0.0",
+    "version": "3.1.0",
     "schema": "docs/contracts/schemas/case-index.schema.json",
-    "sha256": "251a03c8b3443fbca43d836f6c3a317612bc0024cae17bd2eb0115ad8474e1b4"
+    "sha256": "4e8771d2500900a6cbd93e6eb5e216680a596ebadef75f039e1194949ffae783"
   },
   "case-manifest": {
-    "version": "4.0.0",
+    "version": "5.0.0",
     "schema": "docs/contracts/schemas/case-manifest.schema.json",
-    "sha256": "ee989d8e0168baadeea2ee8b4636217456cd295a8c9934319cccc7de6698d257"
-  },
-  "trace": {
-    "version": "1.0.0",
-    "schema": "docs/contracts/schemas/trace.schema.json",
-    "sha256": "289a6a33872155448b1c8b41d39d26606e828f90f7d7b8447d8614d49b26202d"
-  },
-  "surrogate-model": {
-    "version": "1.0.0",
-    "schema": "docs/contracts/schemas/surrogate-model.schema.json",
-    "sha256": "8c4389be72823246f840283ceb2a2d1ee0527d30b089559a11dc052ed75eb814"
+    "sha256": "19e2a7d1395b658ce202a96ec337c3d7eb90d12c716e61db434d81dd304290af"
   },
   "readiness": {
-    "version": "1.0.0",
+    "version": "2.0.1",
     "schema": "docs/contracts/schemas/readiness.schema.json",
-    "sha256": "de86ae161c0f333c11b95884ef07fd3e7f59b54f74d513cb823a093889f76d5a"
+    "sha256": "98af12b6d5620bcd07fb684e580a5715712d280ed6f3ab97edf16b215a5914f3"
   },
   "api": {
-    "version": "1.0.0",
+    "version": "2.1.0",
     "schema": "docs/contracts/api.openapi.json",
-    "sha256": "46a68a0faf5256d3e39e51316f645ce1593c6f2da77c76b2188d05cdb21b14e5"
+    "sha256": "a276b8f7e142dcb1a9bc7c2c646418c64a408e31281aee2171d0fbe3424f449c"
+  },
+  "softqp-index": {
+    "version": "1.1.0",
+    "schema": "docs/contracts/schemas/softqp-index.schema.json",
+    "sha256": "de57805f3de3201523c930c846fffc2c19a2008b49f18986325139b307581209"
+  },
+  "softqp-case-result": {
+    "version": "2.3.0",
+    "schema": "docs/contracts/schemas/softqp-case-result.schema.json",
+    "sha256": "2b2b3555fa39e779e7485b5c9f673610f2255eb79fdb2e307e52cbaa0c69691f"
+  },
+  "softqp-case-spec": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-case-spec.schema.json",
+    "sha256": "dff9f1f23f5867aea4f8b7e5be14b06d4c4aa84372b2e468663771cdc2861a9a"
+  },
+  "softqp-run-request": {
+    "version": "1.1.0",
+    "schema": "docs/contracts/schemas/softqp-run-request.schema.json",
+    "sha256": "3010be005e625af758f2faefb13b5949ef911cef46a89ca53bd2b7dcab440ba3"
+  },
+  "softqp-local-export": {
+    "version": "1.1.0",
+    "schema": "docs/contracts/schemas/softqp-local-export.schema.json",
+    "sha256": "02aa2b23e683fb5ceec97466457d95820aa9d214e58818d92567fdc5ca8a2036"
+  },
+  "softqp-stream": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-stream.schema.json",
+    "sha256": "68bd41e2d4f220154a417e7d87dbb4c5d16346aaba4548187b8a6b8762f10032"
+  },
+  "softqp-campaign": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-campaign.schema.json",
+    "sha256": "e56ea150f6c020f240a5bf1be8562e4c907476985fff230a484c55e4be6f21d3"
+  },
+  "softqp-datasets": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-datasets.schema.json",
+    "sha256": "545f3d134bc3cf9160b6c157cd0f3262f778b7d227571401ba69ad385fe379e4"
+  },
+  "softqp-trial": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-trial.schema.json",
+    "sha256": "1ab928bccf5349be333947316a11575e85abe40d79d8ff8a88efec32aac86e0b"
+  },
+  "softqp-experiment-index": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-experiment-index.schema.json",
+    "sha256": "6b49695e50e5177586347b0596553d0e4e960f376b7b9aa3d6130e63ba7cf42f"
+  },
+  "softqp-coupled-batch": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-batch.schema.json",
+    "sha256": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54"
+  },
+  "softqp-coupled-observation": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-observation.schema.json",
+    "sha256": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710"
+  },
+  "softqp-coupled-campaign": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-campaign.schema.json",
+    "sha256": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372"
+  },
+  "softqp-coupled-lesson": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-lesson.schema.json",
+    "sha256": "24426bfa8bc8285f129ef3b87751442159e926049412bfd1db1091d9c665968c"
   }
 }

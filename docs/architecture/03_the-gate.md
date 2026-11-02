@@ -1,19 +1,11 @@
-# The lane gate
+# Choosing the execution lane
 
-`data-pipeline/pipeline/core/gate.py :: classify_lane()` decides, per case and by measurement, whether the case is
-light enough to be re-run live in the browser:
+The authoritative solver is a native C extension with Python orchestration. It has not been compiled to a browser module and verified for parity. The deployment lane is therefore precompute/replay, with optional locally executed requests. This choice is implemented in each scientific deployment manifest, including a bilingual reason; it is not inferred from a browser button label.
 
-- the engine is light (pure Python, with its wheels within a small allowed set: a proxy for an engine small enough to
-  port or to run client side), and
-- one run finishes within `RUN_MS_GATE` (1500 ms), and
-- the committed trace is within `TRACE_BYTES_GATE` (256 KiB).
+A live browser lane would require the same original-space inputs, side weights, hard policy, statuses and accuracy over the full matrix. It would also require a measured download budget, memory budget and interaction latency on supported phone and desktop devices. A WebAssembly compilation or a single scalar example would establish neither full semantic parity nor acceptable resource behavior.
 
-Otherwise the case is `precompute`: the pipeline bakes it and the web only replays it. Either way a committed
-artifact exists, so the site shows every case on first load.
+The current reader loads checksummed case records lazily and supports a real file-based request/solve/import cycle. Supported edits multiply only soft side coefficients; hard-row values are retained. Setting the quadratic factor to zero explicitly creates a pure L1 variant and can make FlexQP or ElastiQP compatible while making the DAQP elastic adapter incompatible. The reader exposes those state changes rather than preserving a misleading success label.
 
-The verdict and the measured numbers are written into the manifest (`gate`), and `scripts/check_artifacts.py`
-fails when a manifest's `lane` disagrees with its gate, so a heavy case cannot be labelled live. The Benchmark page
-measures the live engine again in the reader's browser against the same run budget.
+Execution-lane availability is different from release readiness. A schema-valid replay can still have an inaccurate scientific result, an unfinished notebook, missing package publication or unverified deployment. Conversely, the read-only API may remain dormant while the static lane is fully functional. The six-state readiness vocabulary records actual missing, partial, stale or provider evidence; it does not invent a live numerical engine.
 
-This is the pipeline's gate. The web has its own, measured on the built site: `npm run gate` (`caos-shell-gate`,
-see [07, deploy](07_deploy.md)).
+See [browser behavior](04_live-lane.md), [the local workflow](../softqp-development.md) and [the contract catalog](../contracts/catalog.md).

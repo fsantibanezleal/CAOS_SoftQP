@@ -77,7 +77,7 @@ export interface paths {
         };
         /**
          * An artifact a manifest names (catalog row trace), by its path under data/derived.
-         * @description rel_path may contain slashes (for example EX02_epidemic/trace.json); only a path an indexed manifest names is served; anything else is not found, and an artifact that cannot be read is unavailable.
+         * @description rel_path may contain slashes (for example C02/trace.json); only a path an indexed manifest names is served; anything else is not found, and an artifact that cannot be read is unavailable.
          */
         get: operations["getArtifact"];
         put?: never;
@@ -112,153 +112,63 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        /**
-         * ParamsRecord
-         * @description Contract 1 (ingestion), catalog row params-record 1.0.0: one operating point as accepted by data-pipeline/pipeline/io/contract.py validate_rows. The raw source is a table (CSV) with the columns case_id, beta, gamma, N, I0 and an optional days; values arrive as text and are parsed, never coerced: a row that fails a rule below is rejected with a reason, and a row with R0 = beta / gamma above 20 is accepted and flagged. Cross-field rule the schema cannot state: I0 <= N. EXAMPLE domain: an SIR epidemic; a product replaces the fields.
-         */
-        ParamsRecord: {
-            /** @description The case identifier. */
-            case_id: string;
-            /** @description Effective contact rate, 1/day. */
-            beta: number;
-            /** @description Recovery rate, 1/day. */
-            gamma: number;
-            /** @description Population, individuals. */
-            N: number;
-            /** @description Initial infected, individuals; at most N. */
-            I0: number;
-            /** @description Horizon in days; 160 when the source leaves it empty. */
-            days: number;
-        };
-        /**
-         * CaseIndex
-         * @description Contract 2 (artifact), catalog row case-index 2.0.0: the flat inventory of every baked case, written by data-pipeline/pipeline/core/manifest.py build_index to data/derived/manifests/index.json. Rules the schema cannot state, checked by the producer and consumer tests: n_cases equals the number of entries, default_case is one of their case_id values, and the entries are sorted by case_id.
-         */
         CaseIndex: {
             /** @constant */
-            schema: "example.index/v2";
-            /** @description The product version that baked the index; older than VERSION means the bake is stale. */
-            engine_version: components["schemas"]["version"];
+            schema: "softqp.artifact-index/v1";
+            engine_version: string;
             n_cases: number;
             default_case: string;
             cases: {
                 case_id: string;
-                title: components["schemas"]["text"];
-                category: components["schemas"]["text"];
+                title: {
+                    en: string;
+                    es: string;
+                };
+                category: {
+                    en: string;
+                    es: string;
+                };
                 manifest_path: string;
             }[];
+            files: string[];
         };
-        /**
-         * CaseManifest
-         * @description Contract 2 (artifact), catalog row case-manifest 4.0.0: the authoritative record of one baked case, written by data-pipeline/pipeline/core/manifest.py build_case_manifest to data/derived/manifests/<case>.json. A pure function of (params, seed): no wall-clock time. Rules the schema cannot state, checked by scripts/check_artifacts.py: artifact.bytes equals the size of the file at artifact.path, and lane equals gate.lane.
-         */
         CaseManifest: {
             /** @constant */
-            schema: "example.manifest/v4";
+            schema: "softqp.manifest/v1";
             case_id: string;
-            title: components["schemas"]["text"];
-            category: components["schemas"]["text"];
-            /** @enum {unknown} */
-            real_or_synthetic: "real" | "synthetic";
-            expected_band: components["schemas"]["text"];
+            title: {
+                en: string;
+                es: string;
+            };
+            category: {
+                en: string;
+                es: string;
+            };
             engine: {
-                package: string;
-                version: components["schemas"]["version"];
-                model: string;
+                /** @constant */
+                package: "softqp";
+                version: string;
             };
-            params: {
-                beta: number;
-                gamma: number;
-                N: number;
-                I0: number;
-                days: number;
-            };
+            product_version: string;
             seed: number;
+            source: string;
             artifact: {
-                /** @description Relative to data/derived; no leading slash, no '..', no backslash. */
                 path: string;
+                bytes: number;
+                sha256: string;
                 /** @constant */
                 format: "json";
-                /** @constant */
-                trace_schema: "example.trace/v1";
-                bytes: number;
             };
-            /** @enum {unknown} */
-            lane: "live" | "precompute";
+            /** @constant */
+            lane: "precompute";
             gate: {
-                /** @enum {unknown} */
-                lane: "live" | "precompute";
-                pure_python: boolean;
-                wheels: string[];
-                trace_bytes: number;
-                run_ms_budget: number;
-                trace_bytes_budget: number;
-                reasons: string[];
+                /** @constant */
+                lane: "precompute";
+                reasons: {
+                    en: string;
+                    es: string;
+                }[];
             };
-            /** @description The rows contract 1 accepted with a flag. */
-            flags: {
-                [key: string]: string;
-            }[];
-            /** @description Evaluation metrics of this bake (the surrogate model slot's held-out error, among others). */
-            metrics: {
-                [key: string]: number;
-            };
-            /** @description Per model slot (catalog row id), what produced this bake's metrics: the released bundle (real) or the slot's baseline. */
-            models: {
-                [key: string]: "real" | "baseline";
-            };
-            /** @description The checked expectation of the case: [low, high] per result metric. */
-            expect: {
-                [key: string]: [
-                    number,
-                    number
-                ];
-            };
-        };
-        /**
-         * Trace
-         * @description Contract 2 (artifact), catalog row trace 1.0.0: the compact replay artifact of one case, written by data-pipeline/pipeline/core/trace.py to data/derived/<case>/trace.json. The trajectory is decimated to at most 200 points; t, S, I and R have the same length (a rule the schema cannot state; the producer test checks it).
-         */
-        Trace: {
-            /** @constant */
-            schema: "example.trace/v1";
-            case_id: string;
-            /** @description Time, days. */
-            t: components["schemas"]["series"];
-            /** @description Susceptible, individuals. */
-            S: components["schemas"]["series"];
-            /** @description Infected, individuals. */
-            I: components["schemas"]["series"];
-            /** @description Recovered, individuals. */
-            R: components["schemas"]["series"];
-            summary: {
-                /** @description Largest infected count, individuals. */
-                peak_I: number;
-                /** @description Time of the peak, days. */
-                t_peak: number;
-                /** @description Share of the population ever infected. */
-                attack_rate: number;
-            };
-        };
-        /**
-         * SurrogateModel
-         * @description Model slot, catalog row surrogate-model 1.0.0: the released surrogate bundle models/surrogate.json written by data-pipeline/pipeline/stages/train.py and read by stages/evaluate.py. Slot input: r0 = beta / gamma (dimensionless, > 0). Slot output: the peak infected fraction peak_I / N, in [0, 1] (the predictor clamps). When no valid bundle exists the baseline data-pipeline/pipeline/model/baseline.py answers: 1 - (1 + ln r0) / r0 for r0 > 1, else 0 (the SIR peak with S0 = 1 and I0 near 0). EXAMPLE: a real product's bundle is its exported model (ONNX, say) plus a card like this one.
-         */
-        SurrogateModel: {
-            /** @constant */
-            kind: "linear-lstsq";
-            /**
-             * @description The design-matrix columns, in order.
-             * @constant
-             */
-            basis: [
-                "1",
-                "r0",
-                "ln(r0)",
-                "1/r0"
-            ];
-            /** @description One coefficient per basis column. */
-            coeffs: number[];
         };
         /**
          * Readiness
@@ -266,7 +176,7 @@ export interface components {
          */
         Readiness: {
             /** @constant */
-            schema: "example.readiness/v1";
+            schema: "softqp.readiness/v2";
             product_version: components["schemas"]["version"];
             /** @description SHA-256 of docs/contracts/catalog.md (its UTF-8 bytes with CRLF normalised to LF) the document was computed from. */
             catalog_sha256: string;
@@ -289,14 +199,604 @@ export interface components {
                 };
             };
         };
-        /** @description Every reader-facing string is bilingual at the source. */
-        text: {
-            en: string;
-            es: string;
+        SoftQPIndex: {
+            /** @constant */
+            schema_version: "softqp.index/v1";
+            /** @constant */
+            state: "development";
+            default_case: string | null;
+            cases: {
+                case_id: string;
+                title: {
+                    en: string;
+                    es: string;
+                };
+                category: {
+                    en: string;
+                    es: string;
+                };
+                path: string;
+                sha256: string;
+                failed: boolean;
+            }[];
+            environment: {
+                python: string;
+                platform: string;
+                packages: {
+                    [key: string]: string;
+                };
+                engine_revision?: string | null;
+                engine_source_dirty?: boolean | null;
+                native_binary_sha256?: string;
+            };
+            limitations: string[];
         };
-        /** @description The product version format X.XX.XXX. */
-        version: string;
-        series: number[];
+        SoftQPCaseResult: {
+            /** @constant */
+            schema_version: "softqp.case-result/v2";
+            case_id: string;
+            title: {
+                en: string;
+                es: string;
+            };
+            category: {
+                en: string;
+                es: string;
+            };
+            seed: number;
+            source: string;
+            settings: {
+                eps_abs: number;
+                eps_rel: number;
+                max_iter: number;
+                adaptive_rho_interval: number;
+            };
+            runs: ({
+                /** @enum {unknown} */
+                method: "lifted" | "generalized" | "asymmetric" | "daqp" | "flex" | "elastiqp";
+                /** @enum {unknown} */
+                state: "available" | "failed" | "incompatible";
+                reason: string | null;
+                result: {
+                    method: string;
+                    status: string;
+                    status_code: number;
+                    x: number[] | null;
+                    y?: number[] | null;
+                    metrics: {
+                        base_objective: number;
+                        penalty_objective: number;
+                        objective: number;
+                        hard_violation: number;
+                        lower_violation: number[];
+                        upper_violation: number[];
+                        slack: number[];
+                        stationarity_residual?: number;
+                        objective_gap_against_lifted: number | null;
+                    } | null;
+                    dimensions: {
+                        variables: number;
+                        rows: number;
+                        nnz: number;
+                    };
+                    iterations: number;
+                    setup_seconds: number;
+                    solve_seconds: number;
+                    elapsed_seconds: number;
+                    backend_settings?: {
+                        [key: string]: number;
+                    };
+                } | null;
+            } & (unknown & unknown))[];
+            rows: {
+                id: string;
+                label: {
+                    en: string;
+                    es: string;
+                };
+                unit: string;
+                soft: boolean;
+            }[];
+            problem?: components["schemas"]["SoftQPProblemPayload"];
+        };
+        SoftQPCaseSpec: {
+            P: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            q: number[];
+            A: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            lower: (number | null)[];
+            upper: (number | null)[];
+            penalty: {
+                lower_linear: number[];
+                upper_linear: number[];
+                lower_quadratic: number[];
+                upper_quadratic: number[];
+                soft: boolean[];
+            };
+        };
+        SoftQPRunRequest: {
+            /** @constant */
+            schema_version: "softqp.run-request/v1";
+            case_id: string;
+            base_sha256: string;
+            lower_multiplier: number;
+            upper_multiplier: number;
+            quadratic_multiplier: number;
+        };
+        SoftQPLocalExport: {
+            /** @constant */
+            schema_version: "softqp.local-export/v1";
+            request: components["schemas"]["SoftQPRequestPayload"];
+            result: components["schemas"]["SoftQPResultPayload"];
+            environment?: {
+                python: string;
+                platform: string;
+                packages: {
+                    [key: string]: string;
+                };
+                engine_revision?: string | null;
+                engine_source_dirty?: boolean | null;
+                native_binary_sha256?: string;
+            };
+        };
+        SoftQPStream: {
+            /** @constant */
+            schema_version: "softqp.stream/v1";
+            /** @constant */
+            case_id: "C12";
+            /** @constant */
+            protocol_id: "softqp-experiments-v1";
+            engine_source: string;
+            environment: {
+                python: string;
+                platform: string;
+                packages: {
+                    [key: string]: string;
+                };
+                engine_revision?: string | null;
+                engine_source_dirty?: boolean | null;
+                native_binary_sha256?: string;
+            };
+            specification: {
+                /** @constant */
+                case_id: "C12";
+                /** @constant */
+                frames: 32;
+                /** @constant */
+                horizon: 20;
+                /** @constant */
+                dt_seconds: 0.2;
+                initial_state: [
+                    1.6,
+                    0
+                ];
+                velocity_impulses: {
+                    /** @constant */
+                    8: 0.8;
+                    /** @constant */
+                    20: -0.6;
+                };
+                /** @constant */
+                policy: "Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts.";
+                methods: [
+                    "lifted",
+                    "generalized",
+                    "asymmetric",
+                    "daqp"
+                ];
+                modes: [
+                    "cold",
+                    "warm"
+                ];
+                /** @constant */
+                timing: "one documented stream observation per frame; no statistical superiority claim from it";
+            };
+            frames: {
+                frame: number;
+                time_seconds: number;
+                state: number[];
+                velocity_impulse: number;
+                oracle_objective: number;
+                objective_constant: number;
+                oracle_horizon_cost: number;
+                oracle_control: number;
+                applied_control: number;
+                next_state: number[];
+                generation_seconds: number;
+                runs: {
+                    /** @enum {unknown} */
+                    method: "lifted" | "generalized" | "asymmetric" | "daqp" | "flex" | "elastiqp";
+                    /** @enum {unknown} */
+                    mode: "cold" | "warm";
+                    /** @enum {unknown} */
+                    state: "accepted" | "incompatible" | "failed" | "accuracy-rejected" | "timeout" | "resource-limit" | "oracle-failed";
+                    reason: string | null;
+                    metrics: {
+                        base_objective: number;
+                        penalty_objective: number;
+                        objective: number;
+                        hard_violation: number;
+                        lower_violation: number[];
+                        upper_violation: number[];
+                        slack: number[];
+                        stationarity_residual?: number | null;
+                        objective_gap_against_lifted?: number | null;
+                    } | null;
+                    normalized_gap: number | null;
+                    elapsed_seconds: number | null;
+                    update_seconds: number | null;
+                    workspace_setup_seconds: number | null;
+                    result: {
+                        method: string;
+                        status: string;
+                        status_code: number;
+                        x: number[] | null;
+                        y?: number[] | null;
+                        metrics: {
+                            base_objective: number;
+                            penalty_objective: number;
+                            objective: number;
+                            hard_violation: number;
+                            lower_violation: number[];
+                            upper_violation: number[];
+                            slack: number[];
+                            stationarity_residual?: number | null;
+                            objective_gap_against_lifted?: number | null;
+                        } | null;
+                        dimensions: {
+                            variables: number;
+                            rows: number;
+                            nnz: number;
+                        };
+                        iterations: number;
+                        setup_seconds: number;
+                        solve_seconds: number;
+                        elapsed_seconds: number;
+                        backend_settings?: {
+                            [key: string]: number;
+                        };
+                    } | null;
+                }[];
+            }[];
+            counts: {
+                accepted?: number;
+                incompatible?: number;
+                failed?: number;
+                "accuracy-rejected"?: number;
+                timeout?: number;
+                "resource-limit"?: number;
+                "oracle-failed"?: number;
+            };
+            limitations: string[];
+        };
+        SoftQPCampaign: {
+            /** @constant */
+            schema_version: "softqp.campaign/v1";
+            protocol: {
+                /** @constant */
+                protocol_id: "softqp-experiments-v1";
+                /** @constant */
+                phase: "registered before held-out generation";
+                /** @constant */
+                created: "2026-10-31";
+                /** @constant */
+                engine_source: "d0c69ed974d577ba02adbd4806332270d9425651";
+                operating_limits: {
+                    /** @constant */
+                    blas_threads: 1;
+                    /** @constant */
+                    wall_seconds: 7200;
+                    /** @constant */
+                    process_memory_limit_bytes: 4294967296;
+                    /** @constant */
+                    parallel_workers: 1;
+                    /** @constant */
+                    trial_timeout_seconds: 10;
+                };
+                accuracy: {
+                    /** @constant */
+                    eps_abs: 1e-7;
+                    /** @constant */
+                    eps_rel: 1e-7;
+                    /** @constant */
+                    max_iter: 200000;
+                    /** @constant */
+                    adaptive_rho_interval: 25;
+                    /** @constant */
+                    normalized_objective_gap_limit: 0.000001;
+                    /** @constant */
+                    hard_row_error_limit: 0.000001;
+                };
+                methods: [
+                    "lifted",
+                    "generalized",
+                    "asymmetric",
+                    "daqp",
+                    "flex",
+                    "elastiqp"
+                ];
+                backends: {
+                    /** @constant */
+                    lifted_timed: "pinned native fork";
+                    /** @constant */
+                    lifted_oracle: "independent stock OSQP with eps_abs=eps_rel=1e-9";
+                    /** @constant */
+                    flex: "fixed-parameter paper-equation reconstruction";
+                    /** @constant */
+                    elastiqp: "published 0.2.0 dual active set";
+                };
+                generator: {
+                    n: [
+                        32,
+                        64,
+                        128,
+                        256
+                    ];
+                    /** @constant */
+                    m_per_n: 2;
+                    density: [
+                        0.05,
+                        0.2
+                    ];
+                    hessian_condition: [
+                        1,
+                        1000
+                    ];
+                    families: [
+                        "symmetric-elastic",
+                        "asymmetric-elastic",
+                        "asymmetric-l1"
+                    ];
+                    /** @constant */
+                    hard_row_fraction_elastic: 0.2;
+                    /** @constant */
+                    hard_row_fraction_l1: 0;
+                    /** @constant */
+                    row_norm: 1;
+                    /** @constant */
+                    q_standard_deviation: 3;
+                    linear_cost_range: [
+                        0.1,
+                        1
+                    ];
+                    quadratic_cost_range: [
+                        0.5,
+                        4
+                    ];
+                    asymmetric_upper_factor_range: [
+                        1.5,
+                        3
+                    ];
+                    /** @constant */
+                    lower: -0.4;
+                    /** @constant */
+                    upper: 0.6;
+                };
+                seeds: {
+                    development: [
+                        1000,
+                        1001,
+                        1002
+                    ];
+                    heldout: [
+                        9000,
+                        9001,
+                        9002,
+                        9003,
+                        9004,
+                        9005
+                    ];
+                    robustness: [
+                        8500,
+                        8501,
+                        8502,
+                        8503,
+                        8504,
+                        8505
+                    ];
+                    /** @constant */
+                    order: 271828;
+                    /** @constant */
+                    bootstrap: 314159;
+                };
+                repetitions: {
+                    /** @constant */
+                    warmup_per_backend: 1;
+                    /** @constant */
+                    measured: 7;
+                    /** @constant */
+                    paired_order: "seeded random method order within each instance and repetition";
+                    /** @constant */
+                    bootstrap_seed_clusters: 2000;
+                };
+                primary_endpoint: {
+                    /** @constant */
+                    family: "asymmetric-elastic";
+                    /** @constant */
+                    n_minimum: 128;
+                    /** @constant */
+                    density: 0.05;
+                    /** @constant */
+                    quantity: "median paired relative reduction in cold end-to-end time against the faster of native compact lifting and DAQP";
+                    /** @constant */
+                    minimum_reduction: 0.1;
+                    /** @constant */
+                    confidence: "two-sided 95 percent seed-cluster bootstrap interval has a lower endpoint above zero";
+                    /** @constant */
+                    success_condition: "all compared cells satisfy external original-space acceptance; failures are retained";
+                };
+                secondary_endpoints: [
+                    "native solve/setup and update time",
+                    "iterations",
+                    "formulation dimensions and nonzeros",
+                    "accuracy versus conditioning",
+                    "within-method warm/cold stream measurements"
+                ];
+                robustness: {
+                    /** @constant */
+                    n: 32;
+                    /** @constant */
+                    m: 64;
+                    /** @constant */
+                    density: 0.1;
+                    hessian_condition: [
+                        1,
+                        100,
+                        10000,
+                        1000000
+                    ];
+                    /** @constant */
+                    same_A_q_and_costs_within_seed: true;
+                };
+                stream: {
+                    /** @constant */
+                    case_id: "C12";
+                    /** @constant */
+                    frames: 32;
+                    /** @constant */
+                    horizon: 20;
+                    /** @constant */
+                    dt_seconds: 0.2;
+                    initial_state: [
+                        1.6,
+                        0
+                    ];
+                    velocity_impulses: {
+                        /** @constant */
+                        8: 0.8;
+                        /** @constant */
+                        20: -0.6;
+                    };
+                    /** @constant */
+                    policy: "Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts.";
+                    methods: [
+                        "lifted",
+                        "generalized",
+                        "asymmetric",
+                        "daqp"
+                    ];
+                    modes: [
+                        "cold",
+                        "warm"
+                    ];
+                    /** @constant */
+                    timing: "one documented stream observation per frame; no statistical superiority claim from it";
+                };
+                measurement_scope: {
+                    /** @constant */
+                    cold_end_to_end: "validated original QP input to independently evaluated returned result; includes validation, formulation construction, setup and solve; excludes generator, module import and export";
+                    /** @constant */
+                    generation: "measured separately";
+                    /** @constant */
+                    warm_end_to_end: "vector validation, update, solve and original-space evaluation; one initial workspace setup is recorded separately";
+                    /** @constant */
+                    factorization: "backend setup currently includes linear-system preparation; isolated numeric factor time is not instrumented and cannot be inferred";
+                    /** @constant */
+                    memory: "process RSS and campaign high-water mark are resource observations, not per-method native allocation peaks";
+                };
+                /** @constant */
+                failure_policy: "Preserve incompatible, maximum-iteration, timeout, numerical and accuracy-rejected cells with reasons. Never replace an objective or drop a failed evaluation seed.";
+                /** @constant */
+                claims: "A successful implementation benchmark does not establish global algorithmic novelty, safety or universal solver superiority. Deep FlexQP trained weights are not available in this reconstruction.";
+            };
+            environment: {
+                python: string;
+                platform: string;
+                packages: {
+                    [key: string]: string;
+                };
+                engine_revision?: string | null;
+                engine_source_dirty?: boolean | null;
+                native_binary_sha256?: string;
+            };
+            protocol_sha256: string;
+            source_sha256: {
+                [key: string]: string;
+            };
+            observed_wall_seconds: number;
+            worker_peak_rss_bytes: number;
+            worker_restarts: number;
+            planned_instances: number;
+            completed_instances: number;
+            cells: {
+                /** @enum {unknown} */
+                split: "development" | "heldout" | "robustness";
+                n: number;
+                density: number;
+                condition: number;
+                /** @enum {unknown} */
+                family: "symmetric-elastic" | "asymmetric-elastic" | "asymmetric-l1";
+                /** @enum {unknown} */
+                method: "lifted" | "generalized" | "asymmetric" | "daqp" | "flex" | "elastiqp";
+                counts: {
+                    accepted?: number;
+                    incompatible?: number;
+                    failed?: number;
+                    "accuracy-rejected"?: number;
+                    timeout?: number;
+                    "resource-limit"?: number;
+                    "oracle-failed"?: number;
+                };
+                median_seconds: number | null;
+                quantile_25_seconds: number | null;
+                quantile_75_seconds: number | null;
+                max_normalized_gap: number | null;
+                max_hard_violation: number | null;
+            }[];
+            primary_endpoint: {
+                /** @enum {unknown} */
+                state: "met" | "not-established";
+                median_relative_reduction: number | null;
+                confidence_interval_95: number[] | null;
+                paired_samples: number;
+                rejected_pairs: number;
+                seed_clusters: number;
+            };
+            counts: {
+                accepted?: number;
+                incompatible?: number;
+                failed?: number;
+                "accuracy-rejected"?: number;
+                timeout?: number;
+                "resource-limit"?: number;
+                "oracle-failed"?: number;
+            };
+            artifacts: {
+                path: string;
+                bytes: number;
+                sha256: string;
+            }[];
+        };
+        SoftQPExperimentIndex: {
+            /** @constant */
+            schema_version: "softqp.experiments/v1";
+            /** @constant */
+            protocol_id: "softqp-experiments-v1";
+            artifacts: {
+                path: string;
+                bytes: number;
+                sha256: string;
+                /** @enum {unknown} */
+                schema: "softqp-stream" | "softqp-campaign" | "softqp-datasets" | "softqp-trial" | "csv";
+            }[];
+            /** @enum {unknown} */
+            state: "development" | "measured";
+        };
         entry: {
             /** @description The catalog row id. */
             id: string;
@@ -323,6 +823,120 @@ export interface components {
          * @enum {unknown}
          */
         state: "available" | "partial" | "stale" | "provider" | "training" | "missing";
+        /** @description Every reader-facing string is bilingual at the source. */
+        text: {
+            en: string;
+            es: string;
+        };
+        /** @description The product version format X.XX.XXX. */
+        version: string;
+        SoftQPProblemPayload: {
+            P: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            q: number[];
+            A: {
+                shape: [
+                    number,
+                    number
+                ];
+                data: number[];
+                indices: number[];
+                indptr: number[];
+            };
+            lower: (number | null)[];
+            upper: (number | null)[];
+            penalty: {
+                lower_linear: number[];
+                upper_linear: number[];
+                lower_quadratic: number[];
+                upper_quadratic: number[];
+                soft: boolean[];
+            };
+        };
+        SoftQPRequestPayload: {
+            /** @constant */
+            schema_version: "softqp.run-request/v1";
+            case_id: string;
+            base_sha256: string;
+            lower_multiplier: number;
+            upper_multiplier: number;
+            quadratic_multiplier: number;
+        };
+        SoftQPResultPayload: {
+            /** @constant */
+            schema_version: "softqp.case-result/v2";
+            case_id: string;
+            title: {
+                en: string;
+                es: string;
+            };
+            category: {
+                en: string;
+                es: string;
+            };
+            seed: number;
+            source: string;
+            settings: {
+                eps_abs: number;
+                eps_rel: number;
+                max_iter: number;
+                adaptive_rho_interval: number;
+            };
+            runs: ({
+                /** @enum {unknown} */
+                method: "lifted" | "generalized" | "asymmetric" | "daqp" | "flex" | "elastiqp";
+                /** @enum {unknown} */
+                state: "available" | "failed" | "incompatible";
+                reason: string | null;
+                result: {
+                    method: string;
+                    status: string;
+                    status_code: number;
+                    x: number[] | null;
+                    y?: number[] | null;
+                    metrics: {
+                        base_objective: number;
+                        penalty_objective: number;
+                        objective: number;
+                        hard_violation: number;
+                        lower_violation: number[];
+                        upper_violation: number[];
+                        slack: number[];
+                        stationarity_residual?: number;
+                        objective_gap_against_lifted: number | null;
+                    } | null;
+                    dimensions: {
+                        variables: number;
+                        rows: number;
+                        nnz: number;
+                    };
+                    iterations: number;
+                    setup_seconds: number;
+                    solve_seconds: number;
+                    elapsed_seconds: number;
+                    backend_settings?: {
+                        [key: string]: number;
+                    };
+                } | null;
+            } & (unknown & unknown))[];
+            rows: {
+                id: string;
+                label: {
+                    en: string;
+                    es: string;
+                };
+                unit: string;
+                soft: boolean;
+            }[];
+            problem?: components["schemas"]["SoftQPProblemPayload"];
+        };
     };
     responses: {
         /** @description No such case or artifact. */
@@ -453,7 +1067,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Trace"];
+                    "application/json": components["schemas"]["SoftQPCaseResult"];
                 };
             };
             404: components["responses"]["NotFound"];

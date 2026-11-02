@@ -1,0 +1,138 @@
+{
+  "case_id": "C05",
+  "category": {
+    "en": "Semantics",
+    "es": "Semántica"
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Normalized row 0",
+        "es": "Fila normalizada 0"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0001",
+      "label": {
+        "en": "Normalized row 1",
+        "es": "Fila normalizada 1"
+      },
+      "soft": true,
+      "unit": "1"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 11,
+          "rows": 5,
+          "variables": 3
+        },
+        "elapsed_seconds": 0.002448200000799261,
+        "iterations": 50,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -5.999999999966744,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0,
+            1.4999999999566425
+          ],
+          "objective": -4.499999999999999,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 1.4999999999667446,
+          "slack": [
+            -1.4999999999667446,
+            1.4999999999566425
+          ],
+          "upper_violation": [
+            1.4999999999667446,
+            0.0
+          ]
+        },
+        "setup_seconds": 1.77e-05,
+        "solve_seconds": 1.09e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.9999999999667446,
+          -1.9999999999566425
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 4,
+          "rows": 2,
+          "variables": 2
+        },
+        "elapsed_seconds": 0.0007583000115118921,
+        "iterations": 50,
+        "method": "generalized",
+        "metrics": {
+          "base_objective": -6.000000000022769,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0,
+            1.4999999999323292
+          ],
+          "objective": -4.500000000000002,
+          "objective_gap_against_lifted": 2.6645352591003757e-15,
+          "penalty_objective": 1.500000000022768,
+          "slack": [
+            -1.500000000022768,
+            1.4999999999323292
+          ],
+          "upper_violation": [
+            1.500000000022768,
+            0.0
+          ]
+        },
+        "setup_seconds": 2.56e-05,
+        "solve_seconds": 2.2e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          2.000000000022768,
+          -1.9999999999323292
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "asymmetric",
+      "reason": "The separable asymmetric candidate does not support grouped or Huber penalties.",
+      "result": null,
+      "state": "incompatible"
+    },
+    {
+      "method": "daqp",
+      "reason": "The DAQP reference adapter supports separable elastic side costs, not grouped or Huber penalties.",
+      "result": null,
+      "state": "incompatible"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Grouped peak violation",
+    "es": "Incumplimiento máximo agrupado"
+  }
+}

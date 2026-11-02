@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fsantibanezleal/CAOS_SoftQP/schemas/softqp-coupled-observation/1.0.0",
+  "title": "Complete coupled peak oracle or method observation",
+  "type": "object",
+  "required": ["schema_version", "kind", "role", "id", "split", "seed", "family", "curvature", "quadratic", "method", "repetition", "warmup", "state", "reason"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "kind": {"const": "directional-coupled-observation"},
+    "role": {"enum": ["oracle", "method"]}, "id": {"type": "string", "pattern": "^(development|heldout|robustness)-[0-9]{4}$"},
+    "split": {"enum": ["development", "heldout", "robustness"]}, "seed": {"type": "integer", "minimum": 0},
+    "family": {"enum": ["sparse", "thermal"]}, "curvature": {"enum": ["positive-definite", "semidefinite", "zero-hessian"]},
+    "quadratic": {"type": "number", "minimum": 0},
+    "method": {"enum": ["__oracle__", "native", "epigraph-default", "epigraph-fixed", "row-split-default", "row-split-fixed", "daqp-direct", "daqp-prox-auto", "daqp-prox-forced", "daqp-lp-model"]},
+    "repetition": {"type": ["integer", "null"], "minimum": -1, "maximum": 2}, "warmup": {"type": "boolean"},
+    "state": {"enum": ["accepted", "failed", "accuracy-rejected", "incompatible", "oracle-failed", "resource-limit", "timeout"]},
+    "reason": {"type": ["string", "null"]}, "elapsed_seconds": {"type": ["number", "null"], "exclusiveMinimum": 0},
+    "batch_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "predeclared_incompatible": {"type": "boolean"},
+    "frames": {"type": "array", "maxItems": 32, "items": {"$ref": "#/$defs/check"}},
+    "backend_results": {"type": "array", "maxItems": 32, "items": {"type": "object", "required": ["method", "status", "status_code", "x", "y", "dimensions"], "properties": {"method": {"type": "string"}, "status": {"type": "string"}, "status_code": {"type": "integer"}, "x": {"type": ["array", "null"], "items": {"type": "number"}}, "y": {"type": ["array", "null"], "items": {"type": "number"}}, "dimensions": {"type": "object", "required": ["variables", "rows"], "properties": {"variables": {"type": "integer", "minimum": 1}, "rows": {"type": "integer", "minimum": 1}}}}}},
+    "objectives": {"type": ["array", "null"], "maxItems": 32, "items": {"type": "number"}},
+    "n": {"type": "integer", "minimum": 1}, "group_size": {"type": "integer", "minimum": 1}, "condition": {"type": "number", "minimum": 1}, "horizon": {"type": "integer", "minimum": 1}, "zones": {"type": "integer", "minimum": 1}
+  },
+  "allOf": [
+    {"if": {"properties": {"role": {"const": "oracle"}}}, "then": {"properties": {"method": {"const": "__oracle__"}, "repetition": {"type": "null"}, "warmup": {"const": false}}}, "else": {"required": ["elapsed_seconds"], "properties": {"repetition": {"type": "integer"}, "method": {"not": {"const": "__oracle__"}}}}},
+    {"if": {"properties": {"state": {"const": "accepted"}}}, "then": {"required": ["batch_sha256", "frames", "backend_results"], "properties": {"reason": {"type": "null"}, "frames": {"minItems": 32, "items": {"properties": {"state": {"const": "accepted"}}}}, "backend_results": {"minItems": 32}}}},
+    {"if": {"properties": {"role": {"const": "oracle"}, "state": {"const": "accepted"}}}, "then": {"required": ["objectives"], "properties": {"objectives": {"type": "array", "minItems": 32}}}},
+    {"if": {"properties": {"role": {"const": "method"}, "state": {"const": "accepted"}}}, "then": {"properties": {"elapsed_seconds": {"type": "number", "exclusiveMinimum": 0}}}}
+  ],
+  "$defs": {
+    "check": {"type": "object", "required": ["state", "reason", "metrics"], "properties": {"state": {"enum": ["accepted", "failed", "accuracy-rejected"]}, "reason": {"type": ["string", "null"]}, "metrics": {"type": ["object", "null"], "properties": {"objective": {"type": "number"}, "peaks": {"type": "array", "items": {"type": "number", "minimum": 0}}, "hard_violation": {"type": "number", "minimum": 0}, "stationarity": {"type": "number", "minimum": 0}, "dual_domain": {"type": "number", "minimum": 0}, "dual_repair": {"type": "number", "minimum": 0}, "fenchel": {"type": "number", "minimum": 0}, "aggregate_fenchel": {"type": "number", "minimum": 0}, "objective_gap": {"type": "number", "minimum": 0}}}}, "allOf": [{"if": {"properties": {"state": {"const": "accepted"}}}, "then": {"properties": {"reason": {"type": "null"}, "metrics": {"type": "object", "required": ["objective", "hard_violation", "stationarity", "dual_domain", "dual_repair", "fenchel", "objective_gap"]}}}}]}
+  }
+}

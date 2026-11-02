@@ -79,11 +79,11 @@ def test_the_residue_allow_file_of_the_template_has_no_em_dash() -> None:
 
 
 CATALOG = "docs/contracts/catalog.md"
-DOCUMENTS, PRODUCER, CONSUMER = 5, 6, 7  # the columns of the params-record row, whose documents cell is "-"
+DOCUMENTS, PRODUCER, CONSUMER = 5, 6, 7  # the columns of the softqp-case-spec row, whose documents cell is "-"
 
 
 def declare_binary(repo: Path, glob: str, rel: str, payload: bytes) -> None:
-    set_cell(repo, CATALOG, "params-record", DOCUMENTS, glob)
+    set_cell(repo, CATALOG, "softqp-case-spec", DOCUMENTS, glob)
     target = repo / rel
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_bytes(payload)
@@ -97,17 +97,17 @@ def test_a_declared_onnx_file_passes_when_its_row_names_a_test(docs: Path) -> No
 
 def test_a_declared_onnx_file_fails_when_its_row_names_no_test(docs: Path) -> None:
     declare_binary(docs, "models/planted/*.onnx", "models/planted/net.onnx", b"\x08\x07onnx\x00\xff\xfe")
-    set_cell(docs, CATALOG, "params-record", PRODUCER, "-")
-    set_cell(docs, CATALOG, "params-record", CONSUMER, "")
+    set_cell(docs, CATALOG, "softqp-case-spec", PRODUCER, "-")
+    set_cell(docs, CATALOG, "softqp-case-spec", CONSUMER, "")
     r = guard(docs, "check_documents.py")
-    assert r.returncode == 1 and "models/planted/net.onnx" in r.stdout and "params-record" in r.stdout and "producer test" in r.stdout, r.stdout
+    assert r.returncode == 1 and "models/planted/net.onnx" in r.stdout and "softqp-case-spec" in r.stdout and "producer test" in r.stdout, r.stdout
 
 
 def test_a_declared_csv_table_passes_with_a_test_and_fails_without_one(docs: Path) -> None:
     declare_binary(docs, "data/tables/*.csv", "data/tables/rates.csv", b"a,b\n1,2\n")
     assert guard(docs, "check_documents.py").returncode == 0
-    set_cell(docs, CATALOG, "params-record", PRODUCER, "-")
-    set_cell(docs, CATALOG, "params-record", CONSUMER, "-")
+    set_cell(docs, CATALOG, "softqp-case-spec", PRODUCER, "-")
+    set_cell(docs, CATALOG, "softqp-case-spec", CONSUMER, "-")
     r = guard(docs, "check_documents.py")
     assert r.returncode == 1 and "data/tables/rates.csv" in r.stdout, r.stdout
 

@@ -1,64 +1,13 @@
-// The architecture modal (ADR-0058): five tabs, each an inline SVG (imported with ?raw, so it reads the page's
-// theme tokens) that carries both languages, and a body in both languages. The shell validates this on mount: at
-// least five tabs, inline SVG only, only defined tokens, no hex colours, both languages.
 import type { ArchitectureConfig } from '@fasl-work/caos-app-shell';
 import app from './01-the-app.svg?raw';
 import lanes from './02-lanes.svg?raw';
 import flow from './03-web-flow.svg?raw';
 import science from './04-the-science.svg?raw';
 import contracts from './05-data-contracts.svg?raw';
-
-export const architecture: ArchitectureConfig = {
-  tabs: [
-    {
-      id: 'app',
-      en: 'The app',
-      es: 'La app',
-      svg: app,
-      body_en:
-        'One workbench: the rail on the left holds the case, its immunisation variant, the two rates of the live engine and the live values; the instrument on the right holds the views of the case, grouped by question, and the open view takes the height the tab row leaves.',
-      body_es:
-        'Un banco de trabajo: el panel de la izquierda contiene el caso, su variante de inmunización, las dos tasas del motor en vivo y los valores en vivo; el instrumento de la derecha contiene las vistas del caso, agrupadas por pregunta, y la vista abierta toma la altura que deja la fila de pestañas.',
-    },
-    {
-      id: 'lanes',
-      en: 'Lanes',
-      es: 'Carriles',
-      svg: lanes,
-      body_en:
-        'Offline, the Python pipeline bakes every case and checks it against its expected range. The artifacts are committed and replayed by the web as they are. Live, a TypeScript port of the engine re-runs the case with the reader\'s values, and a parity test holds it to the baked traces.',
-      body_es:
-        'Fuera de línea, el pipeline en Python precalcula cada caso y lo verifica contra su rango esperado. Los artefactos se comprometen y la web los reproduce tal cual. En vivo, una versión en TypeScript del motor vuelve a correr el caso con los valores del lector, y una prueba de paridad lo sujeta a las trazas precalculadas.',
-    },
-    {
-      id: 'flow',
-      en: 'Web flow',
-      es: 'Flujo web',
-      svg: flow,
-      body_en:
-        'The index names the cases and the one the App opens on; a case loads its manifest and trace as JSON; the live engine runs with the rail values; every view carries the key of the selection it draws. Before a deploy the gate walks all of it.',
-      body_es:
-        'El índice nombra los casos y el caso en que abre la App; un caso carga su manifiesto y su traza como JSON; el motor en vivo corre con los valores del panel; cada vista lleva la clave de la selección que dibuja. Antes de desplegar, la compuerta lo recorre todo.',
-    },
-    {
-      id: 'science',
-      en: 'The science',
-      es: 'La ciencia',
-      svg: science,
-      body_en:
-        'The example model is SIR: infection by homogeneous contact and recovery at a constant rate. Its threshold is R0 = β/γ, and its final size z = 1 - exp(-R0 z) checks any engine independently of the time course. A product replaces this tab with its own science.',
-      body_es:
-        'El modelo de ejemplo es SIR: contagio por contacto homogéneo y recuperación a tasa constante. Su umbral es R0 = β/γ, y su tamaño final z = 1 - exp(-R0 z) verifica cualquier motor independientemente de la trayectoria. Un producto reemplaza esta pestaña por su propia ciencia.',
-    },
-    {
-      id: 'contracts',
-      en: 'Data contracts',
-      es: 'Contratos de datos',
-      svg: contracts,
-      body_en:
-        'Contract 1 validates what enters the pipeline; contract 2 is what the pipeline commits for the web. The web declares contract 2 in TypeScript, and a test reads every committed artifact against that declaration in both directions.',
-      body_es:
-        'El contrato 1 valida lo que entra al pipeline; el contrato 2 es lo que el pipeline compromete para la web. La web declara el contrato 2 en TypeScript, y una prueba lee cada artefacto comprometido contra esa declaración en ambos sentidos.',
-    },
-  ],
-};
+export const architecture: ArchitectureConfig={tabs:[
+  {id:'app',en:'The app',es:'La app',svg:app,body_en:'The rail selects one of fifteen cases, a solver and an original row unit. The instrument separates lower and upper violations and compares compatible formulations. Cost factors modify only soft penalties; a downloaded request runs in the local native environment, and the imported result is verified before display. Focus preserves the selected case, method and unit.',body_es:'El panel selecciona uno de quince casos, un solver y una unidad original. El instrumento separa incumplimientos por lado y compara formulaciones compatibles. Los factores modifican solo penalizaciones blandas; la solicitud descargada se ejecuta en el entorno nativo local y su resultado se verifica antes de mostrarlo. El foco conserva caso, método y unidad.'},
+  {id:'lanes',en:'Lanes',es:'Carriles',svg:lanes,body_en:'The native Python/C package performs optimization. The static browser validates and replays committed records or imports a matching local execution. There is no remote solver service. A browser solver remains disabled until a real compiled implementation passes parity, latency, memory and interaction gates. Recorded native solve time is distinct from rendering latency.',body_es:'El paquete Python/C nativo ejecuta la optimización. El navegador estático valida registros versionados o importa una ejecución local correspondiente. No existe servicio remoto de solución. Un solver de navegador permanece desactivado hasta que una implementación compilada supere paridad, latencia, memoria e interacción. El tiempo nativo es distinto de la latencia visual.'},
+  {id:'flow',en:'Web flow',es:'Flujo web',svg:flow,body_en:'The inventory names a case artifact and its SHA256 digest. The reader loads exact raw bytes, checks that digest, validates the schema and case identity, and cancels obsolete loads after selection changes. Unit filters affect the chart, while an export retains every row. Failed or incompatible method cells preserve explicit states rather than masquerading as zero-valued results.',body_es:'El inventario identifica un artefacto y su hash SHA256. El lector carga bytes originales, verifica el hash, valida esquema e identidad y cancela cargas obsoletas al cambiar la selección. El filtro afecta al gráfico; la exportación conserva todas las filas. Los métodos fallidos o incompatibles mantienen estados explícitos, sin aparentar resultados numéricos nulos.'},
+  {id:'science',en:'The science',es:'La ciencia',svg:science,body_en:'A symmetric positive semidefinite Hessian defines the convex base cost. Selected interval rows acquire nonnegative linear and quadratic violation costs with distinct lower and upper coefficients; other rows remain hard. Original signed slack is lower undershoot minus upper overshoot. Independent lifting checks original costs and hard-row residuals. Asymmetric penalties alone are not new, and performance or research superiority remains unestablished.',body_es:'Una hessiana simétrica semidefinida define el costo convexo. Ciertas filas reciben costos lineales y cuadráticos no negativos con coeficientes por lado; las demás siguen duras. La holgura firmada es déficit inferior menos exceso superior. Las holguras explícitas verifican costos y residuos originales. La asimetría por sí sola no es nueva y no se establece superioridad científica ni de desempeño.'},
+  {id:'contracts',en:'Data contracts',es:'Contratos de datos',svg:contracts,body_en:'Versioned JSON Schemas govern sparse problems, results, inventory, bounded requests and local exports. The producer validates dimensions and finite numbers; generated TypeScript and runtime validators enforce the reader boundary. The local importer additionally verifies unchanged matrices and hard-row policy, recomputes costs and violations, and checks comparison gaps. An isolated C01 fixture uses the same loader and checksum checks.',body_es:'Esquemas JSON versionados gobiernan problemas dispersos, resultados, inventario, solicitudes y exportaciones locales. El productor valida dimensiones y valores finitos; tipos generados y validadores aseguran la lectura. El importador además verifica matrices y política dura, recalcula costos e incumplimientos y comprueba brechas. Un proveedor C01 aislado usa el mismo lector y verificación de hash.'},
+]};

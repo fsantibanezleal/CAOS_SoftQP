@@ -1,0 +1,9 @@
+# Development scientific environment; exact published engine distribution.
+softqp==0.1.0
+numpy==2.5.4
+scipy==1.18.1
+osqp==1.1.3
+pytest==9.2.0
+jsonschema==4.26.0
+daqp==0.10.3
+elastiqp==0.2.0

@@ -1,0 +1,13 @@
+# Independent public manuscript verification
+
+Decision: **ACCEPT_PUBLIC_REPORT**, 2 November 2026. The public manuscript record is verified; complete joint publication remains pending separate dataset verification.
+
+I made independent unauthenticated GET requests, without importing or invoking the publisher, to the public record `https://zenodo.org/records/23875072`, its API record, versions/latest and complete files subresource. Both record and latest identify 23875072, published and publicly accessible. The DOI is `10.5281/zenodo.23875072` and parent/concept DOI is `10.5281/zenodo.23875071`.
+
+Public metadata exactly matches the previously independently accepted title, description, version 0.02.000, publication date 2026-11-02, sole creator name/ORCID, CC BY 4.0, English, report resource type and keywords. The Unicode author name is correct in the decoded JSON. The report has precisely the intended References relation to the distinct old report 23851660 and IsSupplementedBy relation to dataset 23875194. No version relation to the older report concept is present. Negative findings and the failed 10% criterion remain explicit.
+
+The embedded record inventory and separately fetched full files subresource both contain exactly one PDF: `softqp-coupled-peak-study-v0.02.000.pdf`, 635170 bytes, MD5 `4deb451aec7416fce79bff5194e99d2b`. There are no extra manuscript files. I freshly streamed its public content using a cache-busting URL, no Authorization header and no local copy substitution. The entire response has PDF magic bytes, the exact size and MD5 above, and SHA256 `09b63de5e2a844b694b44515cfd99f5c28368cbbf812959e07755fa959e59936`, matching the accepted final twelve-page PDF byte-for-byte. The response Content-Type is application/octet-stream; the public file metadata correctly identifies application/pdf.
+
+Evidence: `public-report-check.py`, `public-report-checks.json`, and separately saved public record/latest/files JSON snapshots. The first checker run assumed the files subresource used an entries mapping; the actual API returns a list. The checker was corrected to require exactly one row/key and was rerun successfully. No candidate/source/public record changes were made by the reviewer.
+
+At verification the dataset upload was still active. The public report's supplement relation and reserved dataset DOI do not establish dataset publication, availability or byte integrity. That record requires its own complete public two-file inventory, reciprocal metadata and fresh anonymous byte verification. This acceptance concerns the public manuscript only; the study remains negative and no qualified companion-app release, operational performance or priority acceptance follows.

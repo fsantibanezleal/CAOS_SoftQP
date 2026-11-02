@@ -1,0 +1,122 @@
+"""Generator invariants and preregistered endpoint refusal, without held-out fitting."""
+
+from dataclasses import replace
+import json
+from pathlib import Path
+import time
+import numpy as np
+import pytest
+from historical_profile import require_registered_engine
+from pipeline.softqp_campaign import generated_problem, instances, primary_endpoint, BoundedWorker, run_campaign
+from pipeline.experiment_common import oracle
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def protocol():
+    return json.loads((ROOT / "docs/design/experiments-v1.json").read_text(encoding="utf-8"))
+
+
+def test_conditioning_changes_only_hessian():
+    spec = dict(n=32, density=0.1, seed=1000, family="asymmetric-elastic", condition=1)
+    first = generated_problem(spec)
+    other = generated_problem(dict(spec, condition=1e6))
+    assert (first.A != other.A).nnz == 0
+    np.testing.assert_array_equal(first.q, other.q)
+    np.testing.assert_array_equal(first.penalty.upper_linear, other.penalty.upper_linear)
+    np.testing.assert_allclose(np.sqrt(first.A.multiply(first.A).sum(axis=1)).A1, 1)
+    assert other.P.diagonal().max() / other.P.diagonal().min() == 1e6
+    assert (~first.penalty.soft).sum() == int(0.2 * 64)
+    l1 = generated_problem(dict(spec, family="asymmetric-l1"))
+    assert l1.penalty.soft.all()
+    assert not l1.penalty.lower_quadratic.any() and not l1.penalty.upper_quadratic.any()
+
+
+def test_endpoint_retains_a_rejected_pair():
+    rows = []
+    for spec in instances(protocol(), "heldout"):
+        if spec["family"] != "asymmetric-elastic" or spec["n"] < 128 or spec["density"] != 0.05:
+            continue
+        for repetition in range(7):
+            for method, elapsed in [("asymmetric", 1), ("lifted", 2), ("daqp", 3)]:
+                rows.append(dict(**spec, method=method, repetition=repetition, warmup=False,
+                                 state="accepted", elapsed_seconds=elapsed))
+    result = primary_endpoint(rows, protocol())
+    assert result["state"] == "met" and result["median_relative_reduction"] == 0.5
+    rows[-1]["state"] = "accuracy-rejected"
+    result = primary_endpoint(rows, protocol())
+    assert result["state"] == "not-established" and result["rejected_pairs"] == 1
+    rows.pop()
+    assert primary_endpoint(rows, protocol())["rejected_pairs"] == 1
+
+
+def test_planned_matrix_has_exact_split_sizes():
+    assert [len(instances(protocol(), split)) for split in ("development", "heldout", "robustness")] == [144, 288, 24]
+
+
+def test_adversarial_bounded_worker_keeps_invalid_input_as_failure(monkeypatch):
+    for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+        monkeypatch.setenv(name, "1")
+    problem = generated_problem(dict(n=4, density=0.2, seed=1000, family="asymmetric-elastic", condition=1))
+    _, objective = oracle(problem)
+    runner = BoundedWorker(protocol()["operating_limits"])
+    try:
+        good = runner.observe(problem, "asymmetric", objective, time.monotonic() + 30)
+        assert good["state"] == "accepted"
+        assert 0 < runner.peak_rss < 4 * 1024**3
+        invalid = replace(problem, q=np.array([np.nan] * 4))
+        bad = runner.observe(invalid, "asymmetric", objective, time.monotonic() + 30)
+        assert bad["state"] == "failed" and "NaN" in bad["reason"]
+    finally:
+        runner.close()
+
+
+def test_export_bytes_are_lf_on_every_platform(monkeypatch, tmp_path):
+    require_registered_engine()
+    import pipeline.softqp_campaign as campaign
+
+    for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
+        monkeypatch.setenv(name, "1")
+    spec = dict(id="development-0000", split="development", n=4, density=0.2,
+                seed=1000, family="asymmetric-elastic", condition=1)
+    monkeypatch.setattr(campaign, "instances", lambda protocol, split: [spec])
+    result = run_campaign(tmp_path, ("development",))
+    assert result["completed_instances"] == 1
+    for file in tmp_path.iterdir():
+        assert b"\r\n" not in file.read_bytes(), file.name
+
+
+@pytest.mark.parametrize("identity", ["missing", "wrong", "dirty", "unknown-cleanliness"])
+def test_adversarial_registered_paths_refuse_unregistered_source(monkeypatch, tmp_path, identity):
+    import pipeline.softqp_campaign as campaign
+    import pipeline.softqp_stream as stream
+
+    expected = protocol()["engine_source"]
+    observed = dict(engine_revision=expected, engine_source_dirty=False)
+    if identity == "missing":
+        observed["engine_revision"] = None
+    elif identity == "wrong":
+        observed["engine_revision"] = "0" * 40
+    else:
+        observed["engine_source_dirty"] = True if identity == "dirty" else None
+    calls = []
+
+    def forbidden(*args, **kwargs):
+        calls.append(True)
+        raise AssertionError("No generation, oracle, workspace or numerical call before source admission")
+
+    for module in (campaign, stream):
+        monkeypatch.setattr(module, "environment", lambda: dict(observed))
+        monkeypatch.setattr(module, "oracle", forbidden)
+    monkeypatch.setattr(campaign, "instances", forbidden)
+    monkeypatch.setattr(campaign, "generated_problem", forbidden)
+    monkeypatch.setattr(campaign, "BoundedWorker", forbidden)
+    monkeypatch.setattr(stream, "mpc", forbidden)
+    monkeypatch.setattr(stream, "PreparedSolver", forbidden)
+    monkeypatch.setattr(stream, "DaqpWorkspace", forbidden)
+    with pytest.raises(RuntimeError, match="exact clean preregistered"):
+        campaign.run_campaign(tmp_path / identity, ("development",))
+    with pytest.raises(RuntimeError, match="exact clean native source"):
+        stream.run_stream()
+    assert calls == []
+    assert list((tmp_path / identity).iterdir()) == []

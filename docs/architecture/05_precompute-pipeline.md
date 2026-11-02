@@ -1,19 +1,13 @@
-# The staged precompute pipeline
+# Scientific pipeline stages
 
-`data-pipeline/pipeline/pipeline.py` orchestrates the **named stages** (frozen names/signatures, rework bodies):
+`data-pipeline/run.py all --output OUTPUT` is the explicit scientific bake. Output is mandatory, even when the intended destination is the canonical tree. Tests use their own temporary roots and a session guard rejects mutations of committed data or model files. Do not edit either guarded tree while pytest is running.
 
-| Stage | Module | Does |
-|---|---|---|
-| preprocess | `stages/preprocess.py` | read raw → apply **CONTRACT 1** (validate + outlier policy) |
-| feature_extraction | `stages/feature_extraction.py` | validated params → feature rows |
-| train | `stages/train.py` | fit the model → `models/` (OFFLINE; skippable; EXAMPLE = numpy lstsq surrogate) |
-| infer | `stages/infer.py` | run the engine → trace (EXAMPLE = SIR) |
-| evaluate | `stages/evaluate.py` | held-out, leakage-safe metrics (R²/RMSE) |
-| export | `stages/export.py` | **CONTRACT 2**, compact artifact + manifest |
+1. **Validate.** Check sparse dimensions, finite coefficients, symmetric positive-semidefinite P, interval directions and nonnegative side prices. The standalone CSC decoder also checks offsets, lengths and sorted unique row indices.
+2. **Assemble.** Construct authored cases or the preserved published building model. Retain original physical units and hard policy. Select a compatible solver formulation without changing the objective to fit an adapter.
+3. **Solve.** Execute native generalized/asymmetric projection, independent lifting or an explicitly supported reference adapter. An unsupported family becomes an incompatible cell; a numerical failure remains failed with its reason.
+4. **Evaluate.** Recover original x/y, recompute base and penalty objective, lower/upper violations and raw hard error. Compare successful cells to the declared oracle using the external tolerance rather than treating every backend success integer as equivalent.
+5. **Export.** Validate JSON Schema, write finite UTF-8 records, build the SHA-256 inventory and wrap the scientific records in deployment manifests. Readiness is recomputed from the actual catalog and inventory.
 
-Run: `python data-pipeline/run.py [all|<case_id>] [--seed N]` (or `scripts/precompute.{sh,ps1}`). It writes
-`data/derived/<case>/trace.json` + `data/derived/manifests/<case>.json` + `index.json`.
+The separate experiment runner adds registered seed splits, randomized paired method order, warm-ups, seven measured repetitions, time/RSS limits, retained JSONL/CSV and cluster-aware summaries. A common high-accuracy stock oracle drives the 32-frame C12 trajectory; all methods receive identical state inputs. The stream records initial setup independently from update/solve work.
 
-To instantiate a real product: keep the stage names, replace the bodies, `infer`/`train` call the
-research-chosen SOTA engine (pinned in `data-pipeline/requirements.txt`, documented in
-[../frameworks/](../frameworks/)). No hand-rolled toy substitute for an engine the research prescribed.
+There is no fitted model or training stage. Deterministic optimization and a learned parameter policy are distinct capabilities; Deep FlexQP training assets are not supplied. See [evaluation](06_model-evaluation.md) and [the registered protocol](../design/experiments-v1.json).

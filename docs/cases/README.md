@@ -1,20 +1,21 @@
-# Cases + categories
+# Scientific case taxonomy
 
-Each case (`data-pipeline/pipeline/cases/`) declares a **CATEGORY** (the domain problem-type taxonomy), its
-params, an expected band (what a domain expert should see), and a real|synthetic flag. `registry.list_categories()`
-groups them. The **App shows ONE selected case**; **Experiments/Benchmark show cross-case summaries by category**
-(never mixed into the App).
+The catalog contains fifteen authored or source-faithful synthetic cases. It covers penalty semantics, hard-row integrity, numerical structure, repeated control and energy management. These are transparent model problems, not field measurements or certified controllers. The App presents one selected case; cross-case results belong to Experiments and Benchmark.
 
-## Coverage matrix (EXAMPLE, SIR; replace with your real, varied matrix)
-
-| id | category | expected band | real/synthetic |
-|---|---|---|---|
-| `EX01_subcritical` | sub-critical (R0<1) | no outbreak; attack rate ≈ 0 | synthetic |
-| `EX02_epidemic` | epidemic (R0>1) | clear single peak; attack rate ≈ 0.7–0.9 | synthetic |
-| `EX03_fast_burn` | fast-burn (high R0) | early sharp peak; attack rate → ~1 | synthetic |
-| `EX04_slow_spread` | slow-spread (R0~1.2) | broad low peak | synthetic |
-| `CTRL_degenerate` | control: degenerate | `I0=0` → no dynamics (must not crash) | synthetic |
-
-A real product fills a matrix spanning its real axes (not "two of everything") + explicit negative/sanity
-controls, and adds one `docs/cases/<category>/<case-id>.md` per case (formalization + expected results + anchor).
-Copy [`00_TEMPLATE.md`](00_TEMPLATE.md) as the starting point for each per-case page.
+| Case | Category | Scientific question |
+|---|---|---|
+| [C01](./semantics/C01.md) | semantics | Lower-bound undershoot |
+| [C02](./semantics/C02.md) | semantics | Upper-bound overshoot |
+| [C03](./semantics/C03.md) | semantics | Competing side costs |
+| [C04](./integrity/C04.md) | integrity | Mixed hard and soft rows |
+| [C05](./semantics/C05.md) | semantics | Grouped peak violation |
+| [C06](./numerical/C06.md) | numerical | Sparse scaling instance |
+| [C07](./numerical/C07.md) | numerical | Semidefinite Hessian |
+| [C08](./numerical/C08.md) | numerical | Ill-conditioned Hessian |
+| [C09](./control/C09.md) | control | Feasible double-integrator MPC |
+| [C10](./control/C10.md) | control | Disturbed state constraints |
+| [C11](./control/C11.md) | control | Conflicting safety boundaries |
+| [C12](./control/C12.md) | control | Parameter-stream initial state |
+| [C13](./energy/C13.md) | energy | Published building-energy model |
+| [C14](./energy/C14.md) | energy | Side-specific energy trade-offs |
+| [C15](./energy/C15.md) | energy | Mixed elastic side costs |

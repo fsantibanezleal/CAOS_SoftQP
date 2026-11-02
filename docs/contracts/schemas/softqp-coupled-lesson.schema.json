@@ -1,0 +1,367 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-coupled-lesson.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "sdk_version",
+    "worker_sha256",
+    "input_sha256",
+    "input",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "softqp.coupled-lesson/v1"
+    },
+    "sdk_version": {
+      "const": "0.2.0"
+    },
+    "worker_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "linear",
+        "quadratic",
+        "upper_scale",
+        "row_scale"
+      ],
+      "properties": {
+        "linear": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "quadratic": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "upper_scale": {
+          "type": "number",
+          "maximum": 4,
+          "minimum": 0.25
+        },
+        "row_scale": {
+          "type": "number",
+          "maximum": 100,
+          "minimum": 0.01
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "method",
+          "state",
+          "reason",
+          "objective",
+          "x",
+          "peak",
+          "hard_violation",
+          "kkt_max",
+          "dimensions"
+        ],
+        "properties": {
+          "method": {
+            "enum": [
+              "native",
+              "epigraph",
+              "row-split-gsp"
+            ]
+          },
+          "state": {
+            "enum": [
+              "accepted",
+              "incompatible",
+              "failed",
+              "accuracy-rejected"
+            ]
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "objective": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "x": {
+            "anyOf": [
+              {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "peak": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hard_violation": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kkt_max": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dimensions": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "variables",
+                  "rows",
+                  "nnz"
+                ],
+                "properties": {
+                  "variables": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "rows": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "nnz": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "accepted",
+                    "accuracy-rejected"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "objective": {
+                  "type": "number"
+                },
+                "x": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "peak": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "hard_violation": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "kkt_max": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "dimensions": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "variables",
+                    "rows",
+                    "nnz"
+                  ],
+                  "properties": {
+                    "variables": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "rows": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "nnz": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "accepted"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "reason": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "reason": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "enum": [
+                    "incompatible",
+                    "failed"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "objective": {
+                  "type": "null"
+                },
+                "x": {
+                  "type": "null"
+                },
+                "peak": {
+                  "type": "null"
+                },
+                "hard_violation": {
+                  "type": "null"
+                },
+                "kkt_max": {
+                  "type": "null"
+                },
+                "dimensions": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "records": {
+          "contains": {
+            "properties": {
+              "method": {
+                "const": "native"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "records": {
+          "contains": {
+            "properties": {
+              "method": {
+                "const": "epigraph"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      }
+    },
+    {
+      "properties": {
+        "records": {
+          "contains": {
+            "properties": {
+              "method": {
+                "const": "row-split-gsp"
+              }
+            }
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "softqp.run-request/v1"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^C[0-9]{2}$"
+    },
+    "base_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "lower_multiplier": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 100
+    },
+    "upper_multiplier": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 100
+    },
+    "quadratic_multiplier": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "required": [
+    "schema_version",
+    "case_id",
+    "base_sha256",
+    "lower_multiplier",
+    "upper_multiplier",
+    "quadratic_multiplier"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-run-request.schema.json"
+}

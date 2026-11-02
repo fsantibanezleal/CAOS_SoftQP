@@ -1,0 +1,2059 @@
+{
+  "schema_version": "softqp.units/v1",
+  "modules": [
+    "data-pipeline/pipeline/__init__.py",
+    "data-pipeline/pipeline/cases/__init__.py",
+    "data-pipeline/pipeline/control.py",
+    "data-pipeline/pipeline/core/__init__.py",
+    "data-pipeline/pipeline/core/expect.py",
+    "data-pipeline/pipeline/core/gate.py",
+    "data-pipeline/pipeline/core/manifest.py",
+    "data-pipeline/pipeline/core/readiness.py",
+    "data-pipeline/pipeline/core/rng.py",
+    "data-pipeline/pipeline/coupled_accuracy.py",
+    "data-pipeline/pipeline/coupled_analysis.py",
+    "data-pipeline/pipeline/coupled_campaign.py",
+    "data-pipeline/pipeline/coupled_cases.py",
+    "data-pipeline/pipeline/coupled_contract.py",
+    "data-pipeline/pipeline/coupled_export.py",
+    "data-pipeline/pipeline/coupled_freeze.py",
+    "data-pipeline/pipeline/coupled_lesson_worker.py",
+    "data-pipeline/pipeline/coupled_lessons.py",
+    "data-pipeline/pipeline/coupled_plan.py",
+    "data-pipeline/pipeline/coupled_resources.py",
+    "data-pipeline/pipeline/energy_reference.py",
+    "data-pipeline/pipeline/environment.py",
+    "data-pipeline/pipeline/experiment_common.py",
+    "data-pipeline/pipeline/experiment_export.py",
+    "data-pipeline/pipeline/io/__init__.py",
+    "data-pipeline/pipeline/io/contract.py",
+    "data-pipeline/pipeline/io/formats.py",
+    "data-pipeline/pipeline/lesson_process.py",
+    "data-pipeline/pipeline/optimality.py",
+    "data-pipeline/pipeline/oracles.py",
+    "data-pipeline/pipeline/pipeline.py",
+    "data-pipeline/pipeline/registry.py",
+    "data-pipeline/pipeline/softqp_campaign.py",
+    "data-pipeline/pipeline/softqp_cases.py",
+    "data-pipeline/pipeline/softqp_requests.py",
+    "data-pipeline/pipeline/softqp_rows.py",
+    "data-pipeline/pipeline/softqp_run.py",
+    "data-pipeline/pipeline/softqp_stream.py",
+    "data-pipeline/pipeline/stages/__init__.py",
+    "data-pipeline/run.py",
+    "data-pipeline/run_coupled_study.py",
+    "data-pipeline/run_experiments.py",
+    "data-pipeline/run_request.py",
+    "data-pipeline/run_softqp.py"
+  ],
+  "constants": {
+    "data-pipeline/pipeline/control.py:6:41": {
+      "value": "0.2",
+      "context_sha256": "2c378a41b484f15c6b220eb349c08cbf5f82ea9052ebf84f2ce078c575d4b97f",
+      "expression": "def predict_states(initial, controls, dt=0.2):",
+      "quantity": "double-integrator sample duration",
+      "unit": "s in canonical coordinates; supplied time-coordinate unit after conversion",
+      "rationale": "This authored double-integrator sample duration is expressed in s in canonical coordinates; supplied time-coordinate unit after conversion; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/control.py:14:19": {
+      "value": "1.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "state-transition diagonal identity",
+      "unit": "dimensionless",
+      "rationale": "This literal defines state-transition diagonal identity in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/control.py:14:30": {
+      "value": "0.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "absent position-to-velocity transition coefficient",
+      "unit": "1/s (structural zero)",
+      "rationale": "This literal defines absent position-to-velocity transition coefficient in 1/s (structural zero); its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/control.py:14:35": {
+      "value": "1.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "state-transition diagonal identity",
+      "unit": "dimensionless",
+      "rationale": "This literal defines state-transition diagonal identity in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/core/expect.py:36:38": {
+      "value": "1e-06",
+      "context_sha256": "c209011e9126a508103d7a6bcad2170edfdacd257a8dcb7ec5bb6ab1fa33c540",
+      "expression": "band = {\"hard_violation\": (0, 1e-6)}",
+      "quantity": "unchanged hard-row deployment acceptance tolerance",
+      "unit": "original physical row-unit",
+      "rationale": "This authored unchanged hard-row deployment acceptance tolerance is expressed in original physical row-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/core/expect.py:39:55": {
+      "value": "1e-06",
+      "context_sha256": "ee5fc3ab6834e56f21e7df2c1b1a47968353ca368cee7e68287930bf693c42da",
+      "expression": "band[\"objective_gap_against_lifted\"] = (0, 1e-6 * max(1, abs(metrics[\"objective\"])))",
+      "quantity": "unchanged relative objective deployment acceptance ratio",
+      "unit": "dimensionless",
+      "rationale": "This authored unchanged relative objective deployment acceptance ratio is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/core/gate.py:8:14": {
+      "value": "1500.0",
+      "context_sha256": "2853885b75ffe6af699241114cd8d8bac1d1843576a1be096a3e4bf8d5af5b84",
+      "expression": "RUN_MS_GATE = 1500.0                 # a live run must complete well within an interaction budget",
+      "quantity": "interactive live-run budget",
+      "unit": "ms",
+      "rationale": "This authored interactive live-run budget is expressed in ms; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:59:19": {
+      "value": "0.0",
+      "context_sha256": "a0f721e0bc457872cfc2af0f0cc5c2fd8e6b521c91803e3c5dbf7e4034eef016",
+      "expression": "stationarity = 0.",
+      "quantity": "initial normalized stationarity error",
+      "unit": "dimensionless zero",
+      "rationale": "This authored initial normalized stationarity error is expressed in dimensionless zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:79:61": {
+      "value": "1e-06",
+      "context_sha256": "c73ef29e781ee60824a19a58eafb4f08dbf1c4bf2dc186d1565f8efe7b700165",
+      "expression": "def accept(problem, result, oracle_objective=None, tolerance=1e-6):",
+      "quantity": "original-space acceptance threshold",
+      "unit": "dimensionless normalized metrics; original hard-row coordinate tolerance",
+      "rationale": "This authored original-space acceptance threshold is expressed in dimensionless normalized metrics; original hard-row coordinate tolerance; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:26:50": {
+      "value": "0.0",
+      "context_sha256": "b6eb729781c8cb7162b6e34ee6b09cedde683bec6d2acafa2410053c5acb60f7",
+      "expression": "penalty, conjugate, budget_error, local_gap = 0., 0., 0., 0.",
+      "quantity": "initial accumulated peak penalty",
+      "unit": "objective-unit zero",
+      "rationale": "This literal defines initial accumulated peak penalty in objective-unit zero; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:26:54": {
+      "value": "0.0",
+      "context_sha256": "b6eb729781c8cb7162b6e34ee6b09cedde683bec6d2acafa2410053c5acb60f7",
+      "expression": "penalty, conjugate, budget_error, local_gap = 0., 0., 0., 0.",
+      "quantity": "initial accumulated conjugate",
+      "unit": "objective-unit zero",
+      "rationale": "This literal defines initial accumulated conjugate in objective-unit zero; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:26:58": {
+      "value": "0.0",
+      "context_sha256": "b6eb729781c8cb7162b6e34ee6b09cedde683bec6d2acafa2410053c5acb60f7",
+      "expression": "penalty, conjugate, budget_error, local_gap = 0., 0., 0., 0.",
+      "quantity": "initial normalized polar budget error",
+      "unit": "dimensionless zero",
+      "rationale": "This literal defines initial normalized polar budget error in dimensionless zero; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:26:62": {
+      "value": "0.0",
+      "context_sha256": "b6eb729781c8cb7162b6e34ee6b09cedde683bec6d2acafa2410053c5acb60f7",
+      "expression": "penalty, conjugate, budget_error, local_gap = 0., 0., 0., 0.",
+      "quantity": "initial normalized local Fenchel gap",
+      "unit": "dimensionless zero",
+      "rationale": "This literal defines initial normalized local Fenchel gap in dimensionless zero; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:37:26": {
+      "value": "0.0",
+      "context_sha256": "956520a646146177162f8e7adb0fea02d125ce308f24f4ef72d9110e4b13cead",
+      "expression": "group_conjugate = 0.",
+      "quantity": "zero conjugate for a linear admissible polar budget",
+      "unit": "objective-unit zero",
+      "rationale": "This authored zero conjugate for a linear admissible polar budget is expressed in objective-unit zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:89:69": {
+      "value": "0.0",
+      "context_sha256": "add1bc8d8126d941bcbd24a85965bab68d995625bea89144caa2c94e6aeb03e0",
+      "expression": "if oracle_objective is not None else 0.)",
+      "quantity": "absent-oracle gap convention",
+      "unit": "dimensionless zero",
+      "rationale": "This authored absent-oracle gap convention is expressed in dimensionless zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:92:46": {
+      "value": "1e-07",
+      "context_sha256": "de1a7289066c290401e63e3d32d6de02c65146a9fbbb363e85ece9d0faf67a4b",
+      "expression": "and metrics['dual_repair'] <= 1e-7 and metrics['objective_gap'] <= tolerance)",
+      "quantity": "relative dual repair acceptance threshold",
+      "unit": "dimensionless",
+      "rationale": "This authored relative dual repair acceptance threshold is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:88:79": {
+      "value": "1.0",
+      "context_sha256": "add1bc8d8126d941bcbd24a85965bab68d995625bea89144caa2c94e6aeb03e0",
+      "expression": "metrics['objective_gap'] = (abs(metrics['objective']-oracle_objective)/max(1., abs(oracle_objective))",
+      "quantity": "objective-gap normalization floor",
+      "unit": "objective-unit",
+      "rationale": "This authored objective-gap normalization floor is expressed in objective-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:34:33": {
+      "value": "0.5",
+      "context_sha256": "ba963c2c921198d2904b4ad7b9148ebaf3c7c2bece71bb8aeb181c5d20fc67c7",
+      "expression": "cost = group.linear*peak+.5*group.quadratic*peak**2",
+      "quantity": "quadratic peak price factor",
+      "unit": "dimensionless one-half",
+      "rationale": "This authored quadratic peak price factor is expressed in dimensionless one-half; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:51:28": {
+      "value": "1.0",
+      "context_sha256": "24fb903ac5b5824a50cba7d007cb8856b2901f393d2b0e8215b252b9ac1d9bba",
+      "expression": "max(1., abs(cost), abs(group_support), abs(inner)))",
+      "quantity": "local Fenchel normalization floor",
+      "unit": "objective-unit",
+      "rationale": "This authored local Fenchel normalization floor is expressed in objective-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:65:12": {
+      "value": "1.0",
+      "context_sha256": "c7eecc2b32cc0ff92a20274003a8217e6a2df85e83196d519e8f3d57d9c72835",
+      "expression": "1., float(np.max(np.abs(px), initial=0)), float(np.max(np.abs(problem.q), initial=0)),",
+      "quantity": "stationarity normalization floor",
+      "unit": "objective-unit / original decision-unit",
+      "rationale": "This authored stationarity normalization floor is expressed in objective-unit / original decision-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:71:79": {
+      "value": "1.0",
+      "context_sha256": "917719ba425cf541399d294f6dabbf2a2bdc09a51760ed0c4a1e8576352c1048",
+      "expression": "dual_repair=float(np.max(np.abs(y-repaired), initial=0))/max(1., float(np.max(np.abs(y), initial=0))),",
+      "quantity": "relative dual repair normalization floor",
+      "unit": "original dual row-coordinate unit",
+      "rationale": "This authored relative dual repair normalization floor is expressed in original dual row-coordinate unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:73:77": {
+      "value": "1.0",
+      "context_sha256": "917719ba425cf541399d294f6dabbf2a2bdc09a51760ed0c4a1e8576352c1048",
+      "expression": "aggregate_fenchel=abs(penalty+support+conjugate-inner)/max(1., abs(penalty), abs(support), abs(inner)))",
+      "quantity": "aggregate Fenchel normalization floor",
+      "unit": "objective-unit",
+      "rationale": "This authored aggregate Fenchel normalization floor is expressed in objective-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:39:76": {
+      "value": "1.0",
+      "context_sha256": "6bb579b447ff8f1e48ec57c46357de0a872eadb7e0271ca46704daae663dada3",
+      "expression": "budget_error = max(budget_error, max(polar-group.linear, 0)/max(1., polar, group.linear))",
+      "quantity": "polar budget normalization floor",
+      "unit": "original dual polar coordinate unit",
+      "rationale": "This authored polar budget normalization floor is expressed in original dual polar coordinate unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:56:62": {
+      "value": "1.0",
+      "context_sha256": "84c86685e95aef405f529acf928ff16467e8e7414d28de5f82355dfd2f0869fe",
+      "expression": "local_gap = max(local_gap, abs(product-inner)/max(1., abs(product), abs(inner)))",
+      "quantity": "hard-row Fenchel normalization floor",
+      "unit": "objective-unit",
+      "rationale": "This authored hard-row Fenchel normalization floor is expressed in objective-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_accuracy.py:68:34": {
+      "value": "0.5",
+      "context_sha256": "917719ba425cf541399d294f6dabbf2a2bdc09a51760ed0c4a1e8576352c1048",
+      "expression": "result = dict(objective=float(.5*x @ px+problem.q @ x+penalty), peaks=peaks,",
+      "quantity": "quadratic objective factor",
+      "unit": "dimensionless one-half",
+      "rationale": "This authored quadratic objective factor is expressed in dimensionless one-half; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_analysis.py:61:24": {
+      "value": "1.0",
+      "context_sha256": "5a9033973f832d0d1128c7d4239a163cdb9f86b174e3439841c72ab736db9dea",
+      "expression": "reduction = 1.-durations['native']/baselines[comparator]",
+      "quantity": "relative elapsed-time reduction numerator",
+      "unit": "dimensionless ratio or probability",
+      "rationale": "This authored relative elapsed-time reduction numerator is expressed in dimensionless ratio or probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_analysis.py:58:37": {
+      "value": "1.0",
+      "context_sha256": "9c3056f6afaffd44d27dfd319aa2d69db26f493299ef40185242b6b1d31b2a03",
+      "expression": "reduction, comparator = -1., None",
+      "quantity": "fixed failed-pair reduction score",
+      "unit": "dimensionless ratio or probability",
+      "rationale": "This authored fixed failed-pair reduction score is expressed in dimensionless ratio or probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_analysis.py:73:66": {
+      "value": "0.025",
+      "context_sha256": "71bb76d53e9f9791c2274a049161c7dfc9d6487d37791beabbf4bd07f95066f7",
+      "expression": "lower, upper = [float(value) for value in np.quantile(draws, [.025, .975], method='linear')]",
+      "quantity": "seed bootstrap tail probabilities",
+      "unit": "dimensionless ratio or probability",
+      "rationale": "This authored seed bootstrap tail probabilities is expressed in dimensionless ratio or probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_analysis.py:73:72": {
+      "value": "0.975",
+      "context_sha256": "71bb76d53e9f9791c2274a049161c7dfc9d6487d37791beabbf4bd07f95066f7",
+      "expression": "lower, upper = [float(value) for value in np.quantile(draws, [.025, .975], method='linear')]",
+      "quantity": "seed bootstrap tail probabilities",
+      "unit": "dimensionless ratio or probability",
+      "rationale": "This authored seed bootstrap tail probabilities is expressed in dimensionless ratio or probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_analysis.py:77:40": {
+      "value": "0.1",
+      "context_sha256": "d128d170b21e3b88ba1feb8397cf993f87dd00906db10030eedb29b6a10bd4de",
+      "expression": "established=estimate >= .1 and lower > 0 and failures == 0,",
+      "quantity": "registered median timing reduction criterion",
+      "unit": "dimensionless ratio or probability",
+      "rationale": "This authored registered median timing reduction criterion is expressed in dimensionless ratio or probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_campaign.py:55:57": {
+      "value": "1e-10",
+      "context_sha256": "8383d815b40562d5ec3b55254b214ec44fa9b277fd1fdf7b14838a31f4bd1ee2",
+      "expression": "result = solve_peak(current, 'epigraph', eps_abs=1e-10, eps_rel=1e-10,",
+      "quantity": "absolute backend residual stopping tolerance",
+      "unit": "declared numerical backend residual coordinate",
+      "rationale": "The unchanged solver parameter supplies an absolute numerical threshold in each canonical primal or dual residual coordinate; it is not a universal physical limit."
+    },
+    "data-pipeline/pipeline/coupled_campaign.py:55:72": {
+      "value": "1e-10",
+      "context_sha256": "8383d815b40562d5ec3b55254b214ec44fa9b277fd1fdf7b14838a31f4bd1ee2",
+      "expression": "result = solve_peak(current, 'epigraph', eps_abs=1e-10, eps_rel=1e-10,",
+      "quantity": "relative backend residual stopping ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative backend residual stopping ratio in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_campaign.py:56:82": {
+      "value": "1.6",
+      "context_sha256": "8383d815b40562d5ec3b55254b214ec44fa9b277fd1fdf7b14838a31f4bd1ee2",
+      "expression": "max_iter=200000, adaptive_rho=True, scaling=10, alpha=1.6)",
+      "quantity": "fixed ADMM relaxation parameter",
+      "unit": "dimensionless",
+      "rationale": "This authored fixed ADMM relaxation parameter is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_campaign.py:57:52": {
+      "value": "1e-07",
+      "context_sha256": "d91746c7fa7f96d52eca81ba5221496ef8d3e48f452caa23a01064b64b745271",
+      "expression": "checked = accept(current, result, tolerance=1e-7)",
+      "quantity": "original-space oracle acceptance tolerance",
+      "unit": "dimensionless normalized metrics; original hard-row coordinate tolerance",
+      "rationale": "This authored original-space oracle acceptance tolerance is expressed in dimensionless normalized metrics; original hard-row coordinate tolerance; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_campaign.py:169:38": {
+      "value": "0.01",
+      "context_sha256": "20256ee30de3f1463afb9da4905643e7eb9a657dc81c8eb134581b0bae5184d8",
+      "expression": "self.process.join(.01)",
+      "quantity": "owned worker join interval",
+      "unit": "s",
+      "rationale": "This authored owned worker join interval is expressed in s; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:92:28": {
+      "value": "0.88",
+      "context_sha256": "2c4c9f918b07ce9f453ad65b7ce5363fc9d529d97796125f09146d339d259d08",
+      "expression": "retention = rng.uniform(.88, .94, zones)",
+      "quantity": "hourly thermal retention factor",
+      "unit": "dimensionless",
+      "rationale": "This authored hourly thermal retention factor is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:92:33": {
+      "value": "0.94",
+      "context_sha256": "2c4c9f918b07ce9f453ad65b7ce5363fc9d529d97796125f09146d339d259d08",
+      "expression": "retention = rng.uniform(.88, .94, zones)",
+      "quantity": "hourly thermal retention factor",
+      "unit": "dimensionless",
+      "rationale": "This authored hourly thermal retention factor is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:93:23": {
+      "value": "0.22",
+      "context_sha256": "fba45432d15c8c56bf7b1f753e5e95d22a0ceff6bb36036a6c6d114158feb588",
+      "expression": "gain = rng.uniform(.22, .3, zones)  # degrees Celsius per kWh at hourly resolution",
+      "quantity": "hourly heater gain",
+      "unit": "degC/kWh",
+      "rationale": "This authored hourly heater gain is expressed in degC/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:93:28": {
+      "value": "0.3",
+      "context_sha256": "fba45432d15c8c56bf7b1f753e5e95d22a0ceff6bb36036a6c6d114158feb588",
+      "expression": "gain = rng.uniform(.22, .3, zones)  # degrees Celsius per kWh at hourly resolution",
+      "quantity": "hourly heater gain",
+      "unit": "degC/kWh",
+      "rationale": "This authored hourly heater gain is expressed in degC/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:50:43": {
+      "value": "0.1",
+      "context_sha256": "2021d26a03d062324bf8d7c9b398f47aeb302866a5183456723a32c6b44a7f53",
+      "expression": "matrix = sparse.random(2*n, n, density=.1, format='lil', random_state=rng,",
+      "quantity": "abstract sparse row density",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract sparse row density is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:72:16": {
+      "value": "0.05",
+      "context_sha256": "ddd677bb987326c6480e81e2b604fa39a4a3abb6f3eb539f87e9145f400a048a",
+      "expression": "shift = .05*np.sin(phase+phases)",
+      "quantity": "abstract soft interval oscillation amplitude",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract soft interval oscillation amplitude is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:99:22": {
+      "value": "1.0",
+      "context_sha256": "2c2e10fe20c5065da7e35c79dc0b8522b8dd3f2b7f764376088cb4995c1c63ac",
+      "expression": "values.append(1.)",
+      "quantity": "identity row coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored identity row coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:121:18": {
+      "value": "8.0",
+      "context_sha256": "36c165ff501764f51a9b87e7be4770fd378fbca878d2107f652ab8cedd423c62",
+      "expression": "outside = 8.+3.*np.sin(2*np.pi*hour/24)",
+      "quantity": "outside temperature level",
+      "unit": "degC",
+      "rationale": "This literal defines outside temperature level in degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:122:18": {
+      "value": "21.5",
+      "context_sha256": "3adf6b47539d817563c56833fc30c8617ac8acc0e917f5a21c431120333700a5",
+      "expression": "initial = 21.5+.5*np.sin(phase+phases)",
+      "quantity": "initial temperature level",
+      "unit": "degC",
+      "rationale": "This literal defines initial temperature level in degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:124:16": {
+      "value": "0.2",
+      "context_sha256": "594d782b28c870534bc97fd0d2ea5ec4f2fdd3d7e98651c7a6e26537a4b18fe9",
+      "expression": "price = .2+.08*np.sin(2*np.pi*hour/24)",
+      "quantity": "hourly energy price and amplitude",
+      "unit": "objective-unit/kWh",
+      "rationale": "This authored hourly energy price and amplitude is expressed in objective-unit/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:121:21": {
+      "value": "3.0",
+      "context_sha256": "36c165ff501764f51a9b87e7be4770fd378fbca878d2107f652ab8cedd423c62",
+      "expression": "outside = 8.+3.*np.sin(2*np.pi*hour/24)",
+      "quantity": "outside temperature amplitude",
+      "unit": "delta-degC",
+      "rationale": "This literal defines outside temperature amplitude in delta-degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:122:23": {
+      "value": "0.5",
+      "context_sha256": "3adf6b47539d817563c56833fc30c8617ac8acc0e917f5a21c431120333700a5",
+      "expression": "initial = 21.5+.5*np.sin(phase+phases)",
+      "quantity": "initial temperature amplitude",
+      "unit": "delta-degC",
+      "rationale": "This literal defines initial temperature amplitude in delta-degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:124:19": {
+      "value": "0.08",
+      "context_sha256": "594d782b28c870534bc97fd0d2ea5ec4f2fdd3d7e98651c7a6e26537a4b18fe9",
+      "expression": "price = .2+.08*np.sin(2*np.pi*hour/24)",
+      "quantity": "hourly energy price and amplitude",
+      "unit": "objective-unit/kWh",
+      "rationale": "This authored hourly energy price and amplitude is expressed in objective-unit/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:62:79": {
+      "value": "2.0",
+      "context_sha256": "31d855df06905674550acb3d1e4fef7acbbf6e822f4989bb30bac6b6d3ec2db2",
+      "expression": "lower, upper = np.r_[np.full(n, -2.), np.full(2*n, -.3)], np.r_[np.full(n, 2.), np.full(2*n, .4)]",
+      "quantity": "abstract hard and soft row interval endpoints",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract hard and soft row interval endpoints is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:62:97": {
+      "value": "0.4",
+      "context_sha256": "31d855df06905674550acb3d1e4fef7acbbf6e822f4989bb30bac6b6d3ec2db2",
+      "expression": "lower, upper = np.r_[np.full(n, -2.), np.full(2*n, -.3)], np.r_[np.full(n, 2.), np.full(2*n, .4)]",
+      "quantity": "abstract hard and soft row interval endpoints",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract hard and soft row interval endpoints is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:104:27": {
+      "value": "1.0",
+      "context_sha256": "ab145a213ec2ee4cbd4fefabc7ed85490602c8c09ea769d716e528bee381d5f0",
+      "expression": "values.extend([1., -retention[zone], -gain[zone]])",
+      "quantity": "thermal balance incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored thermal balance incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:112:41": {
+      "value": "1.0",
+      "context_sha256": "c6ecc79a335f92c0b5360b5a3549af9e2fad21e03f2235ff5f772502e8392912",
+      "expression": "lower_scale=1., upper_scale=1.5,",
+      "quantity": "lower thermal directional severity",
+      "unit": "dimensionless",
+      "rationale": "This literal is lower thermal directional severity in dimensionless, matching the immutable registered thermal unit map; a one-hour energy interval is not relabeled as power."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:112:57": {
+      "value": "1.5",
+      "context_sha256": "c6ecc79a335f92c0b5360b5a3549af9e2fad21e03f2235ff5f772502e8392912",
+      "expression": "lower_scale=1., upper_scale=1.5,",
+      "quantity": "upper thermal directional severity",
+      "unit": "dimensionless",
+      "rationale": "This literal is upper thermal directional severity in dimensionless, matching the immutable registered thermal unit map; a one-hour energy interval is not relabeled as power."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:113:36": {
+      "value": "5.0",
+      "context_sha256": "c6ecc79a335f92c0b5360b5a3549af9e2fad21e03f2235ff5f772502e8392912",
+      "expression": "linear=5., quadratic=spec['quadratic']) for z in range(zones))",
+      "quantity": "linear shared thermal peak price",
+      "unit": "objective-unit/degC",
+      "rationale": "This literal is linear shared thermal peak price in objective-unit/degC, matching the immutable registered thermal unit map; a one-hour energy interval is not relabeled as power."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:114:63": {
+      "value": "0.002",
+      "context_sha256": "9ecb62bd5508ee4045da27e68f0de0d8bba8b4889803dc7cd9ff63132d9d69dc",
+      "expression": "diagonal = _curvature(spec['curvature'], np.r_[np.full(nt, .002), np.full(nu, .04)])",
+      "quantity": "thermal state quadratic regularization",
+      "unit": "objective-unit/degC^2",
+      "rationale": "This literal defines thermal state quadratic regularization in objective-unit/degC^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:114:82": {
+      "value": "0.04",
+      "context_sha256": "9ecb62bd5508ee4045da27e68f0de0d8bba8b4889803dc7cd9ff63132d9d69dc",
+      "expression": "diagonal = _curvature(spec['curvature'], np.r_[np.full(nt, .002), np.full(nu, .04)])",
+      "quantity": "hourly heater-energy quadratic regularization",
+      "unit": "objective-unit/kWh^2",
+      "rationale": "This literal is hourly heater-energy quadratic regularization in objective-unit/kWh^2, matching the immutable registered thermal unit map; a one-hour energy interval is not relabeled as power."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:126:58": {
+      "value": "21.0",
+      "context_sha256": "102d1de2e71e45a86243d19b43631d391ef10b3a191bebca4025e1a5e8d27831",
+      "expression": "lower = np.r_[equality, np.zeros(nu), np.full(nu, 21.)]",
+      "quantity": "soft lower comfort temperature",
+      "unit": "degC",
+      "rationale": "This authored soft lower comfort temperature is expressed in degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:127:44": {
+      "value": "6.0",
+      "context_sha256": "780a346f9f1a9952936a0460bec4634063e34c4c9ac3629ea03b189eeefdedb9",
+      "expression": "upper = np.r_[equality, np.full(nu, 6.), np.full(nu, 23.)]",
+      "quantity": "hard hourly heater-energy cap",
+      "unit": "kWh",
+      "rationale": "This literal is hard hourly heater-energy cap in kWh, matching the immutable registered thermal unit map; a one-hour energy interval is not relabeled as power."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:127:61": {
+      "value": "23.0",
+      "context_sha256": "780a346f9f1a9952936a0460bec4634063e34c4c9ac3629ea03b189eeefdedb9",
+      "expression": "upper = np.r_[equality, np.full(nu, 6.), np.full(nu, 23.)]",
+      "quantity": "soft comfort upper temperature",
+      "unit": "degC",
+      "rationale": "This literal defines soft comfort upper temperature in degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:62:37": {
+      "value": "2.0",
+      "context_sha256": "31d855df06905674550acb3d1e4fef7acbbf6e822f4989bb30bac6b6d3ec2db2",
+      "expression": "lower, upper = np.r_[np.full(n, -2.), np.full(2*n, -.3)], np.r_[np.full(n, 2.), np.full(2*n, .4)]",
+      "quantity": "abstract hard and soft row interval endpoints",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract hard and soft row interval endpoints is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:62:56": {
+      "value": "0.3",
+      "context_sha256": "31d855df06905674550acb3d1e4fef7acbbf6e822f4989bb30bac6b6d3ec2db2",
+      "expression": "lower, upper = np.r_[np.full(n, -2.), np.full(2*n, -.3)], np.r_[np.full(n, 2.), np.full(2*n, .4)]",
+      "quantity": "abstract hard and soft row interval endpoints",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract hard and soft row interval endpoints is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:125:19": {
+      "value": "22.0",
+      "context_sha256": "9e2fbf566d12ca361625e62ae7f9c322150e9936ea4784ba35ef361afa61fba9",
+      "expression": "q = np.r_[-22.*diagonal[:nt], np.tile(price, zones)]",
+      "quantity": "temperature tracking setpoint",
+      "unit": "degC",
+      "rationale": "This authored temperature tracking setpoint is expressed in degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:65:54": {
+      "value": "0.5",
+      "context_sha256": "5ecc2399c7aaa5e428b8077de9690a7e6b021394ca5ab2fceeb61c42999f6dfd",
+      "expression": "linear=float(rng.uniform(.5, 1.5)), quadratic=spec['quadratic'])",
+      "quantity": "abstract group linear peak price",
+      "unit": "objective-unit for dimensionless peak",
+      "rationale": "This authored abstract group linear peak price is expressed in objective-unit for dimensionless peak; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:65:58": {
+      "value": "1.5",
+      "context_sha256": "5ecc2399c7aaa5e428b8077de9690a7e6b021394ca5ab2fceeb61c42999f6dfd",
+      "expression": "linear=float(rng.uniform(.5, 1.5)), quadratic=spec['quadratic'])",
+      "quantity": "abstract group linear peak price",
+      "unit": "objective-unit for dimensionless peak",
+      "rationale": "This authored abstract group linear peak price is expressed in objective-unit for dimensionless peak; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_cases.py:73:32": {
+      "value": "0.2",
+      "context_sha256": "0ec60f20bd51da9ba2f25d1392f88a46e8881673af5d4766b0f15356f9c8db7b",
+      "expression": "updates.append(dict(q=q+.2*np.sin(phase)*q_direction,",
+      "quantity": "relative objective direction perturbation",
+      "unit": "dimensionless multiplier",
+      "rationale": "This authored relative objective direction perturbation is expressed in dimensionless multiplier; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_export.py:33:82": {
+      "value": "1e-08",
+      "context_sha256": "08b2fa3268e04b7a0079f26c344f2cd21468d20319bba395fee750b4a818a2eb",
+      "expression": "if set(left) != set(right) or any(not np.allclose(left[key], right[key], rtol=1e-8, atol=1e-10)",
+      "quantity": "relative replay metric agreement band",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative replay metric agreement band in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_export.py:33:93": {
+      "value": "1e-10",
+      "context_sha256": "08b2fa3268e04b7a0079f26c344f2cd21468d20319bba395fee750b4a818a2eb",
+      "expression": "if set(left) != set(right) or any(not np.allclose(left[key], right[key], rtol=1e-8, atol=1e-10)",
+      "quantity": "absolute replay metric agreement band",
+      "unit": "corresponding original metric unit",
+      "rationale": "This literal defines absolute replay metric agreement band in corresponding original metric unit; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_export.py:100:94": {
+      "value": "1e-07",
+      "context_sha256": "77f621639db2f20bedf2ba8417585ff2fd8900e3ee487a07fce999cad8d7122f",
+      "expression": "checked = accept(replace(batch.problem, **update), backend, tolerance=1e-7)",
+      "quantity": "independent original-space oracle acceptance tolerance",
+      "unit": "dimensionless normalized metrics; original hard-row coordinate tolerance",
+      "rationale": "This authored independent original-space oracle acceptance tolerance is expressed in dimensionless normalized metrics; original hard-row coordinate tolerance; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_export.py:102:125": {
+      "value": "1e-10",
+      "context_sha256": "be66f2595637e16c088c68ad23799ca998a00a6d1bb936aaef997474ff77677d",
+      "expression": "if checked['state'] != 'accepted' or not np.isclose(objective, checked['metrics']['objective'], rtol=1e-10, atol=1e-10):",
+      "quantity": "relative oracle objective agreement band",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative oracle objective agreement band in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_export.py:102:137": {
+      "value": "1e-10",
+      "context_sha256": "be66f2595637e16c088c68ad23799ca998a00a6d1bb936aaef997474ff77677d",
+      "expression": "if checked['state'] != 'accepted' or not np.isclose(objective, checked['metrics']['objective'], rtol=1e-10, atol=1e-10):",
+      "quantity": "absolute oracle objective agreement band",
+      "unit": "objective-unit",
+      "rationale": "This literal defines absolute oracle objective agreement band in objective-unit; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/coupled_lesson_worker.py:80:57": {
+      "value": "1e-09",
+      "context_sha256": "b814048c5d17abf9820cfaa3456fc19dbcf54bf0260e612a74199896ccdad0f7",
+      "expression": "result = solve_peak(problem, method, eps_abs=1e-9, eps_rel=1e-9, max_iter=200000,",
+      "quantity": "absolute backend residual stopping tolerance",
+      "unit": "declared numerical backend residual coordinate",
+      "rationale": "This didactic worker threshold has its own residual-coordinate role and never revises any registered campaign acceptance threshold."
+    },
+    "data-pipeline/pipeline/coupled_lesson_worker.py:80:71": {
+      "value": "1e-09",
+      "context_sha256": "b814048c5d17abf9820cfaa3456fc19dbcf54bf0260e612a74199896ccdad0f7",
+      "expression": "result = solve_peak(problem, method, eps_abs=1e-9, eps_rel=1e-9, max_iter=200000,",
+      "quantity": "relative backend residual stopping ratio",
+      "unit": "dimensionless",
+      "rationale": "This didactic worker threshold has its own residual-coordinate role and never revises any registered campaign acceptance threshold."
+    },
+    "data-pipeline/pipeline/coupled_lesson_worker.py:72:62": {
+      "value": "1.5",
+      "context_sha256": "f844f0cdfc4cf277e48a496677b196d7dd3ffebb7e03fe3639242ed09ec3228f",
+      "expression": "(PeakGroup(np.array([0, 1]), lower_scale=np.array([1, 1.5])/d,",
+      "quantity": "authored lower directional departure scale",
+      "unit": "1/m",
+      "rationale": "This authored authored lower directional departure scale is expressed in 1/m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:160:29": {
+      "value": "0.6",
+      "context_sha256": "bd807b17d1ff8dd336ce953c3f9bd3786f44f9a5fbcd71398deb87d9fee43d19",
+      "expression": "def run_comparison(*, linear=0.6, quadratic=0, upper_scale=1, row_scale=1):",
+      "quantity": "authored linear dimensionless-peak price",
+      "unit": "objective-unit",
+      "rationale": "This authored authored linear dimensionless-peak price is expressed in objective-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:131:19": {
+      "value": "1.5",
+      "context_sha256": "fa70ab53a55388d5ec05815be4063a9e050c31eae850a1280d3e9907ca340647",
+      "expression": "k = max(upper, 1.5)",
+      "quantity": "authored lower directional departure scale",
+      "unit": "1/m",
+      "rationale": "This authored authored lower directional departure scale is expressed in 1/m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:149:65": {
+      "value": "1.5",
+      "context_sha256": "720be69fb14396bb3348a7d33eec7ae494a7f2f94750331e6f6fdd06ed442fe8",
+      "expression": "peak = max(upper*max(x-1, 0), max(y-1, 0), max(-1-x, 0), 1.5*max(-1-y, 0))",
+      "quantity": "authored lower directional departure scale",
+      "unit": "1/m",
+      "rationale": "This authored authored lower directional departure scale is expressed in 1/m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:154:84": {
+      "value": "1e-05",
+      "context_sha256": "5d09c141e1fbcbc1a8e38133b4747ce0c1a51b19acb56e82cd64e90548286358",
+      "expression": "if record[\"state\"] == \"accepted\" and (max(abs(x-optimum), abs(y+optimum)) > 1e-5",
+      "quantity": "didactic analytic decision agreement band",
+      "unit": "m",
+      "rationale": "This authored didactic analytic decision agreement band is expressed in m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:155:70": {
+      "value": "1e-06",
+      "context_sha256": "5d09c141e1fbcbc1a8e38133b4747ce0c1a51b19acb56e82cd64e90548286358",
+      "expression": "or record[\"kkt_max\"] > 1e-6 or abs(x+y) > 1e-6):",
+      "quantity": "original hard equality acceptance band",
+      "unit": "m",
+      "rationale": "This didactic original hard equality acceptance band is measured in m; it is separate from frozen scientific criteria."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:155:89": {
+      "value": "1e-06",
+      "context_sha256": "5d09c141e1fbcbc1a8e38133b4747ce0c1a51b19acb56e82cd64e90548286358",
+      "expression": "or record[\"kkt_max\"] > 1e-6 or abs(x+y) > 1e-6):",
+      "quantity": "original hard equality acceptance band",
+      "unit": "m",
+      "rationale": "This didactic original hard equality acceptance band is measured in m; it is separate from frozen scientific criteria."
+    },
+    "data-pipeline/pipeline/coupled_lessons.py:151:44": {
+      "value": "1e-07",
+      "context_sha256": "2baacdbcf5fa4e159e3cf7bcd844ffcee43bec8267fc7983b02303ffaf7536ac",
+      "expression": "if any(abs(record[name] - actual) > 1e-7*max(1, abs(actual)) for name, actual in",
+      "quantity": "relative didactic physical metric comparison band",
+      "unit": "dimensionless ratio scaled by each original metric unit",
+      "rationale": "This authored relative didactic physical metric comparison band is expressed in dimensionless ratio scaled by each original metric unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:24:5": {
+      "value": "0.25",
+      "context_sha256": "20423e122d82ee94e5759c6864ac539de09429c1fd7642b09bbf24755992eb33",
+      "expression": "DT = 0.25  # sample time [h]",
+      "quantity": "sample duration",
+      "unit": "h",
+      "rationale": "This authored sample duration is expressed in h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:33:19": {
+      "value": "1.0",
+      "context_sha256": "fb04a92208fe9a618e85cd96593688edb69f3b5645c187b905913f933f1f15ff",
+      "expression": "DOOR_CONDUCTANCE = 1.0",
+      "quantity": "inter-zone conductance",
+      "unit": "1/h",
+      "rationale": "This authored inter-zone conductance is expressed in 1/h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:34:17": {
+      "value": "0.45",
+      "context_sha256": "c0e7f0b0cf7103fc4464f95a0b379195783a286f7749c0f8d9f30b9339fe2f44",
+      "expression": "COOLING_EFFECT = 0.45",
+      "quantity": "HVAC cooling coefficient",
+      "unit": "degC/kWh",
+      "rationale": "This authored HVAC cooling coefficient is expressed in degC/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:37:19": {
+      "value": "20.0",
+      "context_sha256": "06bbe2b6f51a5af12104eb98866c7f2386bb659d608a2c38626bb18ee4acbfad",
+      "expression": "BATTERY_CAPACITY = 20.0",
+      "quantity": "battery capacity",
+      "unit": "kWh",
+      "rationale": "This authored battery capacity is expressed in kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:38:22": {
+      "value": "5.0",
+      "context_sha256": "4d6e9de7c8361104b58a40cdaffe8d03e7a15abf37d261a122b753aa21ce3e20",
+      "expression": "BATTERY_POWER_LIMIT = 5.0",
+      "quantity": "battery discharge bound",
+      "unit": "kW",
+      "rationale": "This authored battery discharge bound is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:39:17": {
+      "value": "5.0",
+      "context_sha256": "472595bfce2a655c1d65c8fb07fa8433472764ba471be4b36adf7ea77d5cc32b",
+      "expression": "INITIAL_CHARGE = 5.0",
+      "quantity": "initial battery charge",
+      "unit": "kWh",
+      "rationale": "This authored initial battery charge is expressed in kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:42:19": {
+      "value": "8.0",
+      "context_sha256": "847a5380f0a7f638ef43485584264a9e63785efb812f835421177a221c367b51",
+      "expression": "HVAC_POWER_LIMIT = 8.0",
+      "quantity": "HVAC power bound",
+      "unit": "kW",
+      "rationale": "This authored HVAC power bound is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:43:15": {
+      "value": "25.0",
+      "context_sha256": "89f96ad68fc075769c6f65ab1e7be07b8133e1a689747db7b47d44213b7e60b2",
+      "expression": "FEEDER_LIMIT = 25.0  # hard, physical grid limit",
+      "quantity": "hard feeder power limit",
+      "unit": "kW",
+      "rationale": "This authored hard feeder power limit is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:44:17": {
+      "value": "8.0",
+      "context_sha256": "2c81f92f4201aff7568affe54a65acc7d82b8960ac5d8ef734d12fc79eeb5755",
+      "expression": "CONTRACT_LIMIT = 8.0  # soft, billed by its daily peak overage",
+      "quantity": "priced grid contract limit",
+      "unit": "kW",
+      "rationale": "This authored priced grid contract limit is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:45:13": {
+      "value": "1.6",
+      "context_sha256": "272436ec6e27a527efe0b6d42401c6a38abdc78577f937ed5388cd7c57b38699",
+      "expression": "RAMP_LIMIT = 1.6  # soft, HVAC ramp rate [kW/h]",
+      "quantity": "HVAC ramp rate bound",
+      "unit": "kW/h",
+      "rationale": "This authored HVAC ramp rate bound is expressed in kW/h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:48:10": {
+      "value": "10.0",
+      "context_sha256": "0e49f98dd56cfd0e3712cf40061aa72759f7a69c42cd6a87f05ae2951625c9a9",
+      "expression": "SETBACK = 10.0  # the comfort band widens by this outside occupancy",
+      "quantity": "unoccupied temperature-band widening",
+      "unit": "delta-degC",
+      "rationale": "This authored unoccupied temperature-band widening is expressed in delta-degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:58:15": {
+      "value": "0.001",
+      "context_sha256": "4bc1db641ce97e46003c0afe70e8b6d996d1215ea7644c1ea117e2280db45332",
+      "expression": "POWER_WEIGHT = 1e-3  # tie-breaking regularization POWER_WEIGHT * |u_k|^2 of all inputs",
+      "quantity": "quadratic power regularizer",
+      "unit": "objective-unit/kW^2",
+      "rationale": "This authored quadratic power regularizer is expressed in objective-unit/kW^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:63:18": {
+      "value": "0.9",
+      "context_sha256": "d4dc2d1cfac80a8ad216a6e40246aff4dc795e996305ee6583885562872ba755",
+      "expression": "CONTRACT_WEIGHT = 0.9",
+      "quantity": "daily shared import peak price",
+      "unit": "objective-unit/kW",
+      "rationale": "This authored daily shared import peak price is expressed in objective-unit/kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:35:23": {
+      "value": "22.0",
+      "context_sha256": "f4512c94fe5d4fdc05629ebfb4964cea216d87145a068931fa0c8f0658d61d59",
+      "expression": "INITIAL_TEMPERATURE = (22.0, 22.5)",
+      "quantity": "initial zone temperatures",
+      "unit": "degC",
+      "rationale": "This authored initial zone temperatures is expressed in degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:35:29": {
+      "value": "22.5",
+      "context_sha256": "f4512c94fe5d4fdc05629ebfb4964cea216d87145a068931fa0c8f0658d61d59",
+      "expression": "INITIAL_TEMPERATURE = (22.0, 22.5)",
+      "quantity": "initial zone temperatures",
+      "unit": "degC",
+      "rationale": "This authored initial zone temperatures is expressed in degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:40:12": {
+      "value": "0.2",
+      "context_sha256": "097e06986a5e86018f978cac9f1051129df38ff5d635a37674dd17a0c6e40b57",
+      "expression": "SOC_BAND = (0.2, 0.8)  # soft, fraction of capacity",
+      "quantity": "soft state-of-charge fractions",
+      "unit": "dimensionless fraction of capacity",
+      "rationale": "This authored soft state-of-charge fractions is expressed in dimensionless fraction of capacity; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:40:17": {
+      "value": "0.8",
+      "context_sha256": "097e06986a5e86018f978cac9f1051129df38ff5d635a37674dd17a0c6e40b57",
+      "expression": "SOC_BAND = (0.2, 0.8)  # soft, fraction of capacity",
+      "quantity": "soft state-of-charge fractions",
+      "unit": "dimensionless fraction of capacity",
+      "rationale": "This authored soft state-of-charge fractions is expressed in dimensionless fraction of capacity; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:47:16": {
+      "value": "21.0",
+      "context_sha256": "180976f3183055a2b02070c17ad3506a52be375fb44715414f6d79b86c991a1c",
+      "expression": "COMFORT_BAND = (21.0, 24.0)  # soft, during occupancy",
+      "quantity": "occupied comfort temperature interval",
+      "unit": "degC",
+      "rationale": "This authored occupied comfort temperature interval is expressed in degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:47:22": {
+      "value": "24.0",
+      "context_sha256": "180976f3183055a2b02070c17ad3506a52be375fb44715414f6d79b86c991a1c",
+      "expression": "COMFORT_BAND = (21.0, 24.0)  # soft, during occupancy",
+      "quantity": "occupied comfort temperature interval",
+      "unit": "degC",
+      "rationale": "This authored occupied comfort temperature interval is expressed in degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:49:13": {
+      "value": "8.0",
+      "context_sha256": "aaa7de3838d7cef6c55903418b59a2c2ec7d4b54e7cb8a9662f63b1e8d317679",
+      "expression": "OCCUPANCY = (8.0, 20.0)",
+      "quantity": "occupancy start/end times",
+      "unit": "h",
+      "rationale": "This authored occupancy start/end times is expressed in h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:49:18": {
+      "value": "20.0",
+      "context_sha256": "aaa7de3838d7cef6c55903418b59a2c2ec7d4b54e7cb8a9662f63b1e8d317679",
+      "expression": "OCCUPANCY = (8.0, 20.0)",
+      "quantity": "occupancy start/end times",
+      "unit": "h",
+      "rationale": "This authored occupancy start/end times is expressed in h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:51:53": {
+      "value": "26.0",
+      "context_sha256": "f7501d8e1e71b208d73e8e67885e30101900948d7d600cc79a212f7311a82479",
+      "expression": "OUTSIDE_MEAN, OUTSIDE_AMPLITUDE, OUTSIDE_PEAK_HOUR = 26.0, 9.0, 15.0",
+      "quantity": "outside mean temperature",
+      "unit": "degC",
+      "rationale": "This literal defines outside mean temperature in degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:51:59": {
+      "value": "9.0",
+      "context_sha256": "f7501d8e1e71b208d73e8e67885e30101900948d7d600cc79a212f7311a82479",
+      "expression": "OUTSIDE_MEAN, OUTSIDE_AMPLITUDE, OUTSIDE_PEAK_HOUR = 26.0, 9.0, 15.0",
+      "quantity": "outside temperature oscillation amplitude",
+      "unit": "delta-degC",
+      "rationale": "This literal defines outside temperature oscillation amplitude in delta-degC; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:51:64": {
+      "value": "15.0",
+      "context_sha256": "f7501d8e1e71b208d73e8e67885e30101900948d7d600cc79a212f7311a82479",
+      "expression": "OUTSIDE_MEAN, OUTSIDE_AMPLITUDE, OUTSIDE_PEAK_HOUR = 26.0, 9.0, 15.0",
+      "quantity": "outside daily maximum time",
+      "unit": "h",
+      "rationale": "This literal defines outside daily maximum time in h; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:52:13": {
+      "value": "2.0",
+      "context_sha256": "06909cfffadfa7daa00d16e1016a07ac6bf1d3a21479bff56dd87b8f4a3b8c29",
+      "expression": "BASE_LOAD = (2.0, 4.0)  # unoccupied, occupied [kW]",
+      "quantity": "occupied/unoccupied base load",
+      "unit": "kW",
+      "rationale": "This authored occupied/unoccupied base load is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:52:18": {
+      "value": "4.0",
+      "context_sha256": "06909cfffadfa7daa00d16e1016a07ac6bf1d3a21479bff56dd87b8f4a3b8c29",
+      "expression": "BASE_LOAD = (2.0, 4.0)  # unoccupied, occupied [kW]",
+      "quantity": "occupied/unoccupied base load",
+      "unit": "kW",
+      "rationale": "This authored occupied/unoccupied base load is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:53:13": {
+      "value": "0.1",
+      "context_sha256": "53fb697f1a7bed6539b0a85af38a1bdb859f923a680f6100417892602b5c566a",
+      "expression": "HEAT_GAIN = (0.10, 0.45)  # unoccupied, occupied [degC/h]",
+      "quantity": "internal heat gain rate",
+      "unit": "degC/h",
+      "rationale": "This authored internal heat gain rate is expressed in degC/h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:53:19": {
+      "value": "0.45",
+      "context_sha256": "53fb697f1a7bed6539b0a85af38a1bdb859f923a680f6100417892602b5c566a",
+      "expression": "HEAT_GAIN = (0.10, 0.45)  # unoccupied, occupied [degC/h]",
+      "quantity": "internal heat gain rate",
+      "unit": "degC/h",
+      "rationale": "This authored internal heat gain rate is expressed in degC/h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:54:44": {
+      "value": "0.4",
+      "context_sha256": "35c2d950276a6fa9759700ea8b27dd0aba945a291d63cedecb7d8fe28001c91e",
+      "expression": "HEAT_EVENT, HEAT_EVENT_GAIN = (13.0, 18.0), 0.40  # zone 1 only",
+      "quantity": "extra zone1 heat gain rate",
+      "unit": "degC/h",
+      "rationale": "This literal defines extra zone1 heat gain rate in degC/h; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:55:10": {
+      "value": "0.1",
+      "context_sha256": "ba73d72397220c80c3f46b34cffa675f6ded8654735080f964c763c547d31d2d",
+      "expression": "PRICES = (0.10, 0.18, 0.40)  # off-peak (before 14 h), shoulder, peak [per kWh]",
+      "quantity": "time-of-use energy prices",
+      "unit": "objective-unit/kWh",
+      "rationale": "This authored time-of-use energy prices is expressed in objective-unit/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:55:16": {
+      "value": "0.18",
+      "context_sha256": "ba73d72397220c80c3f46b34cffa675f6ded8654735080f964c763c547d31d2d",
+      "expression": "PRICES = (0.10, 0.18, 0.40)  # off-peak (before 14 h), shoulder, peak [per kWh]",
+      "quantity": "time-of-use energy prices",
+      "unit": "objective-unit/kWh",
+      "rationale": "This authored time-of-use energy prices is expressed in objective-unit/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:55:22": {
+      "value": "0.4",
+      "context_sha256": "ba73d72397220c80c3f46b34cffa675f6ded8654735080f964c763c547d31d2d",
+      "expression": "PRICES = (0.10, 0.18, 0.40)  # off-peak (before 14 h), shoulder, peak [per kWh]",
+      "quantity": "time-of-use energy prices",
+      "unit": "objective-unit/kWh",
+      "rationale": "This authored time-of-use energy prices is expressed in objective-unit/kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:56:8": {
+      "value": "14.0",
+      "context_sha256": "fb86190616da1a6e913327fa76ddbc0b6df8a81e7083716bafd97614dbb55344",
+      "expression": "PEAK = (14.0, 20.0)",
+      "quantity": "peak price window endpoints",
+      "unit": "h",
+      "rationale": "This authored peak price window endpoints is expressed in h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:56:14": {
+      "value": "20.0",
+      "context_sha256": "fb86190616da1a6e913327fa76ddbc0b6df8a81e7083716bafd97614dbb55344",
+      "expression": "PEAK = (14.0, 20.0)",
+      "quantity": "peak price window endpoints",
+      "unit": "h",
+      "rationale": "This authored peak price window endpoints is expressed in h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:62:22": {
+      "value": "2.0",
+      "context_sha256": "4bc63266e786f8529bbdb0909fe43e5e1bdf52daa25dfb13632a5313f5a215dd",
+      "expression": "COMFORT_WEIGHT = DT * 2.0",
+      "quantity": "comfort running quadratic rate",
+      "unit": "objective-unit/(h*degC^2), multiplied by sample h",
+      "rationale": "This authored comfort running quadratic rate is expressed in objective-unit/(h*degC^2), multiplied by sample h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:65:24": {
+      "value": "0.5",
+      "context_sha256": "60ecc51f058ecc00a3e8cfac6e8c4faec9591125f60c4a9b54dbcf9889195b29",
+      "expression": "RAMP_HUBER = (DT * 0.5, 0.5)  # weight, delta",
+      "quantity": "ramp Huber transition breakpoint",
+      "unit": "kW/h",
+      "rationale": "This literal defines ramp Huber transition breakpoint in kW/h; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:32:32": {
+      "value": "0.1",
+      "context_sha256": "20ae150c679e6a55f454fb72e382a3f274bbfc34fc87bfb1e3d0bcdec7f77b78",
+      "expression": "OUTSIDE_CONDUCTANCE = np.array([0.10, 0.12])",
+      "quantity": "outside thermal conductance",
+      "unit": "1/h",
+      "rationale": "This authored outside thermal conductance is expressed in 1/h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:32:38": {
+      "value": "0.12",
+      "context_sha256": "20ae150c679e6a55f454fb72e382a3f274bbfc34fc87bfb1e3d0bcdec7f77b78",
+      "expression": "OUTSIDE_CONDUCTANCE = np.array([0.10, 0.12])",
+      "quantity": "outside thermal conductance",
+      "unit": "1/h",
+      "rationale": "This authored outside thermal conductance is expressed in 1/h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:54:31": {
+      "value": "13.0",
+      "context_sha256": "35c2d950276a6fa9759700ea8b27dd0aba945a291d63cedecb7d8fe28001c91e",
+      "expression": "HEAT_EVENT, HEAT_EVENT_GAIN = (13.0, 18.0), 0.40  # zone 1 only",
+      "quantity": "extra heat event start",
+      "unit": "h",
+      "rationale": "This literal defines extra heat event start in h; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:54:37": {
+      "value": "18.0",
+      "context_sha256": "35c2d950276a6fa9759700ea8b27dd0aba945a291d63cedecb7d8fe28001c91e",
+      "expression": "HEAT_EVENT, HEAT_EVENT_GAIN = (13.0, 18.0), 0.40  # zone 1 only",
+      "quantity": "extra heat event end",
+      "unit": "h",
+      "rationale": "This literal defines extra heat event end in h; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:64:20": {
+      "value": "0.2",
+      "context_sha256": "63f99f3c9e3d633f0ffa336c1698d002766d6ab929942af3a8a50ce5e4c421af",
+      "expression": "SOC_WEIGHTS = (DT * 0.2, DT * 0.2 / 0.3)  # l1, quadratic",
+      "quantity": "state-of-charge linear running cost rate",
+      "unit": "objective-unit/(h*kWh)",
+      "rationale": "This literal defines state-of-charge linear running cost rate in objective-unit/(h*kWh); its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:64:36": {
+      "value": "0.3",
+      "context_sha256": "63f99f3c9e3d633f0ffa336c1698d002766d6ab929942af3a8a50ce5e4c421af",
+      "expression": "SOC_WEIGHTS = (DT * 0.2, DT * 0.2 / 0.3)  # l1, quadratic",
+      "quantity": "energy scale converting linear to quadratic charge cost",
+      "unit": "kWh",
+      "rationale": "This literal defines energy scale converting linear to quadratic charge cost in kWh; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:65:19": {
+      "value": "0.5",
+      "context_sha256": "60ecc51f058ecc00a3e8cfac6e8c4faec9591125f60c4a9b54dbcf9889195b29",
+      "expression": "RAMP_HUBER = (DT * 0.5, 0.5)  # weight, delta",
+      "quantity": "ramp Huber running quadratic rate",
+      "unit": "objective-unit/(h*(kW/h)^2)",
+      "rationale": "This literal defines ramp Huber running quadratic rate in objective-unit/(h*(kW/h)^2); its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:86:33": {
+      "value": "0.0",
+      "context_sha256": "2b874354384a7b38c9f5883442c4ac1a5f788c43771fbebfa361226de509f634",
+      "expression": "setback = np.where(occupied, 0.0, SETBACK)",
+      "quantity": "occupied zero setback",
+      "unit": "delta-degC",
+      "rationale": "This authored occupied zero setback is expressed in delta-degC; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:133:28": {
+      "value": "1.0",
+      "context_sha256": "2d2458650d24eb5cdee2cd2988b49aec1d7546a6614c44141d842da4dc761644",
+      "expression": "def select(cols, values=1.0):",
+      "quantity": "row selector identity coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored row selector identity coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:64:30": {
+      "value": "0.2",
+      "context_sha256": "63f99f3c9e3d633f0ffa336c1698d002766d6ab929942af3a8a50ce5e4c421af",
+      "expression": "SOC_WEIGHTS = (DT * 0.2, DT * 0.2 / 0.3)  # l1, quadratic",
+      "quantity": "state-of-charge linear running cost rate",
+      "unit": "objective-unit/(h*kWh)",
+      "rationale": "This literal defines state-of-charge linear running cost rate in objective-unit/(h*kWh); its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/energy_reference.py:157:46": {
+      "value": "0.0",
+      "context_sha256": "91b27b05c22468e3e59506d6563f4992ceac6968eb1f31b487e610fdbbdc8251",
+      "expression": "(\"hvac power\", select(u_index(HVAC)), 0.0, HVAC_POWER_LIMIT),",
+      "quantity": "HVAC lower power bound",
+      "unit": "kW",
+      "rationale": "This authored HVAC lower power bound is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:159:47": {
+      "value": "0.0",
+      "context_sha256": "91b27b05c22468e3e59506d6563f4992ceac6968eb1f31b487e610fdbbdc8251",
+      "expression": "(\"grid feeder\", select(u_index(GRID)), 0.0, FEEDER_LIMIT),",
+      "quantity": "grid lower import bound",
+      "unit": "kW",
+      "rationale": "This authored grid lower import bound is expressed in kW; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:160:54": {
+      "value": "0.0",
+      "context_sha256": "91b27b05c22468e3e59506d6563f4992ceac6968eb1f31b487e610fdbbdc8251",
+      "expression": "(\"battery capacity\", select(x_index(CHARGE)), 0.0, BATTERY_CAPACITY),",
+      "quantity": "battery lower charge bound",
+      "unit": "kWh",
+      "rationale": "This authored battery lower charge bound is expressed in kWh; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:95:26": {
+      "value": "0.0",
+      "context_sha256": "aca84c08dc7c47dae4f4a38f858ac826703b6f810fc4abe7893a4aebe68a8acb",
+      "expression": "G = np.column_stack(([0.0, -COOLING_EFFECT], OUTSIDE_CONDUCTANCE, np.eye(2)))",
+      "quantity": "absent direct HVAC channel coupling",
+      "unit": "degC/kWh zero",
+      "rationale": "This authored absent direct HVAC channel coupling is expressed in degC/kWh zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:144:37": {
+      "value": "1.0",
+      "context_sha256": "91efc2508da125376d8969b3277680fe8a642e0a98516077da2dd1886686257a",
+      "expression": "ramp = sparse.diags_array([-1.0, 1.0], offsets=[0, 1], shape=(N - 1, N)) / DT",
+      "quantity": "finite difference incidence coefficient",
+      "unit": "dimensionless, divided by sample duration h",
+      "rationale": "This authored finite difference incidence coefficient is expressed in dimensionless, divided by sample duration h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:144:32": {
+      "value": "1.0",
+      "context_sha256": "91efc2508da125376d8969b3277680fe8a642e0a98516077da2dd1886686257a",
+      "expression": "ramp = sparse.diags_array([-1.0, 1.0], offsets=[0, 1], shape=(N - 1, N)) / DT",
+      "quantity": "finite difference incidence coefficient",
+      "unit": "dimensionless, divided by sample duration h",
+      "rationale": "This authored finite difference incidence coefficient is expressed in dimensionless, divided by sample duration h; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:92:44": {
+      "value": "1.0",
+      "context_sha256": "9cee9274ef975e293501e479e24003c7db3fc591275c85d9cb86218eff37a229",
+      "expression": "F = DOOR_CONDUCTANCE * np.array([[-1.0, 1.0], [1.0, -1.0]]) - np.diag(OUTSIDE_CONDUCTANCE)",
+      "quantity": "thermal incidence signs",
+      "unit": "dimensionless",
+      "rationale": "This authored thermal incidence signs is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:92:51": {
+      "value": "1.0",
+      "context_sha256": "9cee9274ef975e293501e479e24003c7db3fc591275c85d9cb86218eff37a229",
+      "expression": "F = DOOR_CONDUCTANCE * np.array([[-1.0, 1.0], [1.0, -1.0]]) - np.diag(OUTSIDE_CONDUCTANCE)",
+      "quantity": "thermal incidence signs",
+      "unit": "dimensionless",
+      "rationale": "This authored thermal incidence signs is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:92:39": {
+      "value": "1.0",
+      "context_sha256": "9cee9274ef975e293501e479e24003c7db3fc591275c85d9cb86218eff37a229",
+      "expression": "F = DOOR_CONDUCTANCE * np.array([[-1.0, 1.0], [1.0, -1.0]]) - np.diag(OUTSIDE_CONDUCTANCE)",
+      "quantity": "thermal incidence signs",
+      "unit": "dimensionless",
+      "rationale": "This authored thermal incidence signs is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/energy_reference.py:92:57": {
+      "value": "1.0",
+      "context_sha256": "9cee9274ef975e293501e479e24003c7db3fc591275c85d9cb86218eff37a229",
+      "expression": "F = DOOR_CONDUCTANCE * np.array([[-1.0, 1.0], [1.0, -1.0]]) - np.diag(OUTSIDE_CONDUCTANCE)",
+      "quantity": "thermal incidence signs",
+      "unit": "dimensionless",
+      "rationale": "This authored thermal incidence signs is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/experiment_common.py:9:24": {
+      "value": "1e-07",
+      "context_sha256": "c7aa8c5edd6a2ce60930a6b920ec9726c1f2f6b48032177a5b7094aef73cadae",
+      "expression": "SETTINGS = dict(eps_abs=1e-7, eps_rel=1e-7, max_iter=200000, adaptive_rho_interval=25)",
+      "quantity": "absolute backend residual stopping tolerance",
+      "unit": "declared numerical backend residual coordinate",
+      "rationale": "The unchanged solver parameter supplies an absolute numerical threshold in each canonical primal or dual residual coordinate; it is not a universal physical limit."
+    },
+    "data-pipeline/pipeline/experiment_common.py:9:38": {
+      "value": "1e-07",
+      "context_sha256": "c7aa8c5edd6a2ce60930a6b920ec9726c1f2f6b48032177a5b7094aef73cadae",
+      "expression": "SETTINGS = dict(eps_abs=1e-7, eps_rel=1e-7, max_iter=200000, adaptive_rho_interval=25)",
+      "quantity": "relative backend residual stopping ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative backend residual stopping ratio in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/experiment_common.py:71:35": {
+      "value": "1e-06",
+      "context_sha256": "861a8c75a1c4c222448c0b0cc073f47d6a903940133a9ecd76507fd636352af6",
+      "expression": "if metrics[\"hard_violation\"] > 1e-6:",
+      "quantity": "frozen hard-row oracle acceptance bound",
+      "unit": "original physical row-unit",
+      "rationale": "This authored frozen hard-row oracle acceptance bound is expressed in original physical row-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/experiment_common.py:21:54": {
+      "value": "1.0",
+      "context_sha256": "24a60119fe6d8039faa23391fc0e762822f5e8fb246b2836ce8ac28f2c31fb60",
+      "expression": "gap = abs(metrics[\"objective\"] - objective) / max(1.0, abs(objective))",
+      "quantity": "relative objective-gap denominator floor",
+      "unit": "objective-unit of each canonical case",
+      "rationale": "This authored relative objective-gap denominator floor is expressed in objective-unit of each canonical case; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/experiment_common.py:22:22": {
+      "value": "1e-06",
+      "context_sha256": "4b9311070a39c588a9719ad92ebb713e67791cbf2787d5fdecdd4e16eacfd80d",
+      "expression": "accepted = gap <= 1e-6 and metrics[\"hard_violation\"] <= 1e-6",
+      "quantity": "relative original objective acceptance band",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative original objective acceptance band in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/experiment_common.py:22:60": {
+      "value": "1e-06",
+      "context_sha256": "4b9311070a39c588a9719ad92ebb713e67791cbf2787d5fdecdd4e16eacfd80d",
+      "expression": "accepted = gap <= 1e-6 and metrics[\"hard_violation\"] <= 1e-6",
+      "quantity": "original hard-row acceptance band",
+      "unit": "corresponding original physical row-unit",
+      "rationale": "This literal defines original hard-row acceptance band in corresponding original physical row-unit; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/experiment_common.py:66:73": {
+      "value": "1e-09",
+      "context_sha256": "7f17ad7214f66fbf46c41e9cd80ebd852f5ed743e40e34ab31830f1f18e2ee31",
+      "expression": "result = solve(problem, \"lifted\", reference_backend=\"stock\", eps_abs=1e-9, eps_rel=1e-9,",
+      "quantity": "absolute backend residual stopping tolerance",
+      "unit": "declared numerical backend residual coordinate",
+      "rationale": "The unchanged solver parameter supplies an absolute numerical threshold in each canonical primal or dual residual coordinate; it is not a universal physical limit."
+    },
+    "data-pipeline/pipeline/experiment_common.py:66:87": {
+      "value": "1e-09",
+      "context_sha256": "7f17ad7214f66fbf46c41e9cd80ebd852f5ed743e40e34ab31830f1f18e2ee31",
+      "expression": "result = solve(problem, \"lifted\", reference_backend=\"stock\", eps_abs=1e-9, eps_rel=1e-9,",
+      "quantity": "relative backend residual stopping ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative backend residual stopping ratio in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/lesson_process.py:175:27": {
+      "value": "0.01",
+      "context_sha256": "154b3aa0effebcce42a0edb843a1d00ef80d4fc92f15ffda7b20955801db2c30",
+      "expression": "time.sleep(0.01)",
+      "quantity": "owned worker or cleanup polling interval",
+      "unit": "s",
+      "rationale": "This authored owned worker or cleanup polling interval is expressed in s; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/lesson_process.py:138:31": {
+      "value": "0.01",
+      "context_sha256": "154b3aa0effebcce42a0edb843a1d00ef80d4fc92f15ffda7b20955801db2c30",
+      "expression": "time.sleep(0.01)",
+      "quantity": "owned worker or cleanup polling interval",
+      "unit": "s",
+      "rationale": "This authored owned worker or cleanup polling interval is expressed in s; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/optimality.py:34:16": {
+      "value": "1.0",
+      "context_sha256": "13d2f6e74e1a35aca22fa2368b754a99b9c6c6d1757d25657f04761b02083d2a",
+      "expression": "scale = max(1.0, float(np.max(np.abs(px), initial=0)),",
+      "quantity": "stationarity normalization floor",
+      "unit": "objective-unit / decision-unit in original canonical coordinates",
+      "rationale": "This authored stationarity normalization floor is expressed in objective-unit / decision-unit in original canonical coordinates; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:35:29": {
+      "value": "3.0",
+      "context_sha256": "d2a28962854168792da79928eac647d8737618d0a61b8405bdd9134f1f9a0f09",
+      "expression": "q = rng.normal(size=n) * 3.0",
+      "quantity": "abstract objective linear coefficient scale",
+      "unit": "objective-unit in dimensionless QP coordinates",
+      "rationale": "This authored abstract objective linear coefficient scale is expressed in objective-unit in dimensionless QP coordinates; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:36:25": {
+      "value": "0.1",
+      "context_sha256": "376b006de55b5902004b8b67e588e8b1007c97c707f57d1d21b8b9471ecd5e97",
+      "expression": "linear = rng.uniform(0.1, 1.0, m)",
+      "quantity": "abstract linear departure price",
+      "unit": "objective-unit for dimensionless departure",
+      "rationale": "This authored abstract linear departure price is expressed in objective-unit for dimensionless departure; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:36:30": {
+      "value": "1.0",
+      "context_sha256": "376b006de55b5902004b8b67e588e8b1007c97c707f57d1d21b8b9471ecd5e97",
+      "expression": "linear = rng.uniform(0.1, 1.0, m)",
+      "quantity": "abstract linear departure price",
+      "unit": "objective-unit for dimensionless departure",
+      "rationale": "This authored abstract linear departure price is expressed in objective-unit for dimensionless departure; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:37:28": {
+      "value": "0.5",
+      "context_sha256": "83346a89d0a7d353b013db9798ebc67a18061dfa916997c09d0c936a0c309c9e",
+      "expression": "quadratic = rng.uniform(0.5, 4.0, m)",
+      "quantity": "abstract quadratic departure price",
+      "unit": "objective-unit for squared dimensionless departure",
+      "rationale": "This authored abstract quadratic departure price is expressed in objective-unit for squared dimensionless departure; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:37:33": {
+      "value": "4.0",
+      "context_sha256": "83346a89d0a7d353b013db9798ebc67a18061dfa916997c09d0c936a0c309c9e",
+      "expression": "quadratic = rng.uniform(0.5, 4.0, m)",
+      "quantity": "abstract quadratic departure price",
+      "unit": "objective-unit for squared dimensionless departure",
+      "rationale": "This authored abstract quadratic departure price is expressed in objective-unit for squared dimensionless departure; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:38:25": {
+      "value": "1.5",
+      "context_sha256": "52a593eb2e2fb34ca35301627856cefa87264191103219d1ca54093433b1f5a9",
+      "expression": "factor = rng.uniform(1.5, 3.0, m)",
+      "quantity": "upper/lower directional price ratio",
+      "unit": "dimensionless",
+      "rationale": "This authored upper/lower directional price ratio is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:38:30": {
+      "value": "3.0",
+      "context_sha256": "52a593eb2e2fb34ca35301627856cefa87264191103219d1ca54093433b1f5a9",
+      "expression": "factor = rng.uniform(1.5, 3.0, m)",
+      "quantity": "upper/lower directional price ratio",
+      "unit": "dimensionless",
+      "rationale": "This authored upper/lower directional price ratio is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:31:30": {
+      "value": "1.0",
+      "context_sha256": "06870bb1669526cef81dd61a769d9e19906c5a17b1bce23adfafb944ab92ef89",
+      "expression": "A[row, row % n] = 1.0",
+      "quantity": "abstract row incidence identity",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract row incidence identity is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:49:48": {
+      "value": "0.6",
+      "context_sha256": "7e84ff01b77fb5856c39b59d8ffebf1b0922b40440b055f9da91f4fb8abedaff",
+      "expression": "np.full(m, -0.4), np.full(m, 0.6), p)",
+      "quantity": "abstract row interval endpoints",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract row interval endpoints is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:211:20": {
+      "value": "1.0",
+      "context_sha256": "e1fba57fdd808fb936a6d0cb298a094afc484232aeb6b33872d683b1f03fe15a",
+      "expression": "reduction = 1.0 - group[\"asymmetric\"][\"elapsed_seconds\"] / baseline",
+      "quantity": "relative elapsed-time reduction numerator",
+      "unit": "dimensionless ratio",
+      "rationale": "This authored relative elapsed-time reduction numerator is expressed in dimensionless ratio; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:48:45": {
+      "value": "1.0",
+      "context_sha256": "7e84ff01b77fb5856c39b59d8ffebf1b0922b40440b055f9da91f4fb8abedaff",
+      "expression": "return Problem(sparse.diags(np.geomspace(1.0, spec[\"condition\"], n), format=\"csc\"), q, A,",
+      "quantity": "initial Hessian eigenvalue",
+      "unit": "objective-unit for squared dimensionless decision",
+      "rationale": "This authored initial Hessian eigenvalue is expressed in objective-unit for squared dimensionless decision; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:49:31": {
+      "value": "0.4",
+      "context_sha256": "7e84ff01b77fb5856c39b59d8ffebf1b0922b40440b055f9da91f4fb8abedaff",
+      "expression": "np.full(m, -0.4), np.full(m, 0.6), p)",
+      "quantity": "abstract row interval endpoints",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract row interval endpoints is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:158:39": {
+      "value": "0.01",
+      "context_sha256": "ff72979f04db17dccabc056b16bb58ea2ab609eb00a7d12ed781c728a63d5a1d",
+      "expression": "while not self.connection.poll(0.01):",
+      "quantity": "worker poll interval",
+      "unit": "s",
+      "rationale": "This authored worker poll interval is expressed in s; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:338:30": {
+      "value": "0.01",
+      "context_sha256": "f918dca6d4e56cdb15251acdf5ee5a0abd2bc67c3bd6331237b9358cb48b4b9e",
+      "expression": "while not parent.poll(0.01):",
+      "quantity": "worker poll interval",
+      "unit": "s",
+      "rationale": "This authored worker poll interval is expressed in s; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:221:37": {
+      "value": "0.025",
+      "context_sha256": "2577a14c372f5ae9f06867ec95e94b8d654f86d4caabbd92435359b784731d1e",
+      "expression": "interval = np.quantile(samples, [0.025, 0.975]).tolist()",
+      "quantity": "seed bootstrap tail probabilities",
+      "unit": "dimensionless probability",
+      "rationale": "This authored seed bootstrap tail probabilities is expressed in dimensionless probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:221:44": {
+      "value": "0.975",
+      "context_sha256": "2577a14c372f5ae9f06867ec95e94b8d654f86d4caabbd92435359b784731d1e",
+      "expression": "interval = np.quantile(samples, [0.025, 0.975]).tolist()",
+      "quantity": "seed bootstrap tail probabilities",
+      "unit": "dimensionless probability",
+      "rationale": "This authored seed bootstrap tail probabilities is expressed in dimensionless probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:34:22": {
+      "value": "1.0",
+      "context_sha256": "01abd52b34e8cf20775ffa884a8a0c55c7f0e465f37352067223bb90082c8cfa",
+      "expression": "A = (sparse.diags(1.0 / lengths) @ A).tocsc()",
+      "quantity": "row norm reciprocal numerator",
+      "unit": "dimensionless",
+      "rationale": "This authored row norm reciprocal numerator is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:43:18": {
+      "value": "0.2",
+      "context_sha256": "90ef32a613b4d09c562dff1f8c39092a09a4c24161c98f94172f7a1fc10d9431",
+      "expression": "soft[:int(0.2 * m)] = False",
+      "quantity": "hard-row fraction",
+      "unit": "dimensionless",
+      "rationale": "This authored hard-row fraction is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:241:59": {
+      "value": "0.25",
+      "context_sha256": "86a18245c31bdc1be7975d0f331eb552db2100f8b5a9f17c4ae56a69d7716c18",
+      "expression": "quantile_25_seconds=float(np.quantile(elapsed, 0.25)) if elapsed else None,",
+      "quantity": "first elapsed-time quartile probability",
+      "unit": "dimensionless probability",
+      "rationale": "This authored first elapsed-time quartile probability is expressed in dimensionless probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_campaign.py:242:59": {
+      "value": "0.75",
+      "context_sha256": "86a18245c31bdc1be7975d0f331eb552db2100f8b5a9f17c4ae56a69d7716c18",
+      "expression": "quantile_75_seconds=float(np.quantile(elapsed, 0.75)) if elapsed else None,",
+      "quantity": "third elapsed-time quartile probability",
+      "unit": "dimensionless probability",
+      "rationale": "This authored third elapsed-time quartile probability is expressed in dimensionless probability; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:30:37": {
+      "value": "1.0",
+      "context_sha256": "50058e9e7c9d27364e6cb474b98b1049c17abd556f7984a3154040dd831c91dd",
+      "expression": "def scalar(target, lower=-1.0, upper=1.0, asymmetric=False):",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:57:59": {
+      "value": "1.2",
+      "context_sha256": "4f7808066c54ad2708c3489643cf8c61b9f70a2758945dbbf9764dca9c2dcf89",
+      "expression": "def mpc(conflict=False, asymmetric=False, initial_position=1.2, initial_velocity=0.0):",
+      "quantity": "initial position",
+      "unit": "m",
+      "rationale": "This literal defines initial position in m; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:57:81": {
+      "value": "0.0",
+      "context_sha256": "4f7808066c54ad2708c3489643cf8c61b9f70a2758945dbbf9764dca9c2dcf89",
+      "expression": "def mpc(conflict=False, asymmetric=False, initial_position=1.2, initial_velocity=0.0):",
+      "quantity": "initial velocity",
+      "unit": "m/s",
+      "rationale": "This literal defines initial velocity in m/s; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:60:9": {
+      "value": "0.2",
+      "context_sha256": "c1cebb90834f600247063b84197b7af23286c2ad9981e6604474dbb62adbcb8b",
+      "expression": "dt = 0.2",
+      "quantity": "double-integrator sample duration",
+      "unit": "s",
+      "rationale": "This authored double-integrator sample duration is expressed in s; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:30:26": {
+      "value": "1.0",
+      "context_sha256": "50058e9e7c9d27364e6cb474b98b1049c17abd556f7984a3154040dd831c91dd",
+      "expression": "def scalar(target, lower=-1.0, upper=1.0, asymmetric=False):",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:46:29": {
+      "value": "0.0",
+      "context_sha256": "5878527a070b624968efceecba23dda225b019893072a5aa85235d4f9673748d",
+      "expression": "diagonal[n // 2 :] = 0.0",
+      "quantity": "semidefinite null eigenvalue",
+      "unit": "dimensionless",
+      "rationale": "This authored semidefinite null eigenvalue is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:73:12": {
+      "value": "0.4",
+      "context_sha256": "2c8eae505471d9e49278b0940a732d3e4fd6a50182eb4eb61f3709dc497cc2ce",
+      "expression": "limit = 0.4 if conflict else 2.0",
+      "quantity": "soft position excursion limit",
+      "unit": "m",
+      "rationale": "This authored soft position excursion limit is expressed in m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:73:33": {
+      "value": "2.0",
+      "context_sha256": "2c8eae505471d9e49278b0940a732d3e4fd6a50182eb4eb61f3709dc497cc2ce",
+      "expression": "limit = 0.4 if conflict else 2.0",
+      "quantity": "soft position excursion limit",
+      "unit": "m",
+      "rationale": "This authored soft position excursion limit is expressed in m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:190:59": {
+      "value": "0.2",
+      "context_sha256": "a5f11a9f2b92e868e1cdbb68973d6ea581177b22f8494431b712d7d4d911e062",
+      "expression": "a = np.where(reference.type == L1L2, reference.alpha1, 0.2)",
+      "quantity": "energy variant linear soft price",
+      "unit": "objective-unit / corresponding row-unit",
+      "rationale": "This authored energy variant linear soft price is expressed in objective-unit / corresponding row-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:191:59": {
+      "value": "0.4",
+      "context_sha256": "1f21c60b66cb88af4df7304c6d831b235f8adc0a96033fceda419a4959d436e4",
+      "expression": "d = np.where(reference.type == L1L2, reference.alpha2, 0.4)",
+      "quantity": "energy variant quadratic soft price",
+      "unit": "objective-unit / corresponding row-unit^2",
+      "rationale": "This authored energy variant quadratic soft price is expressed in objective-unit / corresponding row-unit^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:22:19": {
+      "value": "0.3",
+      "context_sha256": "826c35b369927ea52209c55bea7e3041210f9a341a4c3c94e3b5c569f8ff0763",
+      "expression": "np.full(m, 0.3),",
+      "quantity": "per-row linear departure price",
+      "unit": "objective-unit / row-unit",
+      "rationale": "This authored per-row linear departure price is expressed in objective-unit / row-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:24:19": {
+      "value": "2.0",
+      "context_sha256": "826c35b369927ea52209c55bea7e3041210f9a341a4c3c94e3b5c569f8ff0763",
+      "expression": "np.full(m, 2.0),",
+      "quantity": "per-row quadratic departure price",
+      "unit": "objective-unit / row-unit^2",
+      "rationale": "This authored per-row quadratic departure price is expressed in objective-unit / row-unit^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:43:36": {
+      "value": "0.2",
+      "context_sha256": "ae99bc990012b59f5b602c596eae76892acef0933aac64a0840514ca715bd620",
+      "expression": "A = sparse.random(m, n, density=0.2, format=\"csc\", random_state=rng)",
+      "quantity": "sparse matrix density",
+      "unit": "dimensionless",
+      "rationale": "This authored sparse matrix density is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:44:28": {
+      "value": "1.0",
+      "context_sha256": "09ed495716af58173946db4070d4923c8a89e6232ce8dc93c0a7ba4cf06fd739",
+      "expression": "diagonal = np.geomspace(1.0, 1e6, n) if ill_conditioned else np.ones(n)",
+      "quantity": "Hessian eigenvalue and condition construction",
+      "unit": "dimensionless",
+      "rationale": "This authored Hessian eigenvalue and condition construction is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:44:33": {
+      "value": "1000000.0",
+      "context_sha256": "09ed495716af58173946db4070d4923c8a89e6232ce8dc93c0a7ba4cf06fd739",
+      "expression": "diagonal = np.geomspace(1.0, 1e6, n) if ill_conditioned else np.ones(n)",
+      "quantity": "Hessian eigenvalue and condition construction",
+      "unit": "dimensionless",
+      "rationale": "This authored Hessian eigenvalue and condition construction is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:49:29": {
+      "value": "3.0",
+      "context_sha256": "3d3104318aa341b6b3d86e189b7c505db15341c2a65ce52f7a16a54aa8176c95",
+      "expression": "rng.normal(size=n) * 3.0,",
+      "quantity": "abstract objective linear coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract objective linear coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:52:19": {
+      "value": "0.6",
+      "context_sha256": "3d3104318aa341b6b3d86e189b7c505db15341c2a65ce52f7a16a54aa8176c95",
+      "expression": "np.full(m, 0.6),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:70:17": {
+      "value": "3.0",
+      "context_sha256": "3207264e5faaadb3b459596ac2d2ab9be9084a148f541c56491af694eddffe5b",
+      "expression": "W = np.tile([3.0, 0.3], horizon)",
+      "quantity": "position quadratic tracking weight",
+      "unit": "objective-unit/m^2",
+      "rationale": "This literal defines position quadratic tracking weight in objective-unit/m^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:70:22": {
+      "value": "0.3",
+      "context_sha256": "3207264e5faaadb3b459596ac2d2ab9be9084a148f541c56491af694eddffe5b",
+      "expression": "W = np.tile([3.0, 0.3], horizon)",
+      "quantity": "velocity quadratic tracking weight",
+      "unit": "objective-unit/(m/s)^2",
+      "rationale": "This literal defines velocity quadratic tracking weight in objective-unit/(m/s)^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:71:33": {
+      "value": "0.1",
+      "context_sha256": "0f7d456aef22f2b6f68c84a83c1ba5d29ae70aa935df2a73002fd388b275bedb",
+      "expression": "P = G.T @ (W[:, None] * G) + 0.1 * np.eye(horizon)",
+      "quantity": "control quadratic regularization weight",
+      "unit": "objective-unit/(m/s^2)^2",
+      "rationale": "This authored control quadratic regularization weight is expressed in objective-unit/(m/s^2)^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:114:76": {
+      "value": "1.0",
+      "context_sha256": "7489cf9f36369fe04409a2798d72d2602d68d2a135735b866fae6966f599fbbd",
+      "expression": "grouped = ReferencePenalty.hard(2).soften(np.arange(2), NORMINF, alpha1=1.0, group=0)",
+      "quantity": "dimensionless grouped peak price",
+      "unit": "dimensionless",
+      "rationale": "This authored dimensionless grouped peak price is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:120:19": {
+      "value": "0.5",
+      "context_sha256": "0e2e25d6202f3fbd0b70252019da6b62152826b3954ed54cbbdc32df3054c32c",
+      "expression": "np.full(2, 0.5),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:193:16": {
+      "value": "3.0",
+      "context_sha256": "dde373637990e0a2d2bcbb4b22c49ab369a46b3715267c54ef5a568ad65d6234",
+      "expression": "(\"C14\", 3.0, \"Side-specific energy trade-offs\", \"Compromisos energ\u00e9ticos por lado\"),",
+      "quantity": "upper versus lower price ratio",
+      "unit": "dimensionless",
+      "rationale": "This authored upper versus lower price ratio is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:194:16": {
+      "value": "1.5",
+      "context_sha256": "dde373637990e0a2d2bcbb4b22c49ab369a46b3715267c54ef5a568ad65d6234",
+      "expression": "(\"C15\", 1.5, \"Mixed elastic side costs\", \"Costos el\u00e1sticos mixtos por lado\"),",
+      "quantity": "upper versus lower price ratio",
+      "unit": "dimensionless",
+      "rationale": "This authored upper versus lower price ratio is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:23:19": {
+      "value": "1.2",
+      "context_sha256": "826c35b369927ea52209c55bea7e3041210f9a341a4c3c94e3b5c569f8ff0763",
+      "expression": "np.full(m, 1.2 if asymmetric else 0.3),",
+      "quantity": "per-row linear departure price",
+      "unit": "objective-unit / row-unit",
+      "rationale": "This authored per-row linear departure price is expressed in objective-unit / row-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:23:42": {
+      "value": "0.3",
+      "context_sha256": "826c35b369927ea52209c55bea7e3041210f9a341a4c3c94e3b5c569f8ff0763",
+      "expression": "np.full(m, 1.2 if asymmetric else 0.3),",
+      "quantity": "per-row linear departure price",
+      "unit": "objective-unit / row-unit",
+      "rationale": "This authored per-row linear departure price is expressed in objective-unit / row-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:25:19": {
+      "value": "4.0",
+      "context_sha256": "826c35b369927ea52209c55bea7e3041210f9a341a4c3c94e3b5c569f8ff0763",
+      "expression": "np.full(m, 4.0 if asymmetric else 2.0),",
+      "quantity": "per-row quadratic departure price",
+      "unit": "objective-unit / row-unit^2",
+      "rationale": "This authored per-row quadratic departure price is expressed in objective-unit / row-unit^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:25:42": {
+      "value": "2.0",
+      "context_sha256": "826c35b369927ea52209c55bea7e3041210f9a341a4c3c94e3b5c569f8ff0763",
+      "expression": "np.full(m, 4.0 if asymmetric else 2.0),",
+      "quantity": "per-row quadratic departure price",
+      "unit": "objective-unit / row-unit^2",
+      "rationale": "This authored per-row quadratic departure price is expressed in objective-unit / row-unit^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:51:20": {
+      "value": "0.4",
+      "context_sha256": "3d3104318aa341b6b3d86e189b7c505db15341c2a65ce52f7a16a54aa8176c95",
+      "expression": "np.full(m, -0.4),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:61:19": {
+      "value": "1.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "state-transition diagonal identity",
+      "unit": "dimensionless",
+      "rationale": "This literal defines state-transition diagonal identity in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:61:30": {
+      "value": "0.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "absent position-to-velocity transition coefficient",
+      "unit": "1/s (structural zero)",
+      "rationale": "This literal defines absent position-to-velocity transition coefficient in 1/s (structural zero); its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:61:35": {
+      "value": "1.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "state-transition diagonal identity",
+      "unit": "dimensionless",
+      "rationale": "This literal defines state-transition diagonal identity in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:62:18": {
+      "value": "0.5",
+      "context_sha256": "e955b43e57ae50269e01a17bc7f775f7f1951238f810151d54f75a4aa6aa9191",
+      "expression": "B = np.array([0.5 * dt**2, dt])",
+      "quantity": "constant-acceleration integration multiplier",
+      "unit": "dimensionless",
+      "rationale": "This authored constant-acceleration integration multiplier is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:76:35": {
+      "value": "1.0",
+      "context_sha256": "8db1985f4b34ed84948d6c5e698c4804cb3c650bfef0f1becd5ab0ef476063bc",
+      "expression": "upper = np.r_[np.full(horizon, 1.0), np.tile([limit, 1.5], horizon) - offset]",
+      "quantity": "hard actuator interval endpoint",
+      "unit": "m/s^2",
+      "rationale": "This literal defines hard actuator interval endpoint in m/s^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:90:102": {
+      "value": "3.0",
+      "context_sha256": "775961a1fed8abcfad9f5640bef338eea844d71f0544a05aec759ee4bd159d6f",
+      "expression": "(\"C02\", \"Upper-bound overshoot\", \"Incumplimiento superior\", \"Semantics\", \"Sem\u00e1ntica\", scalar(3.0)),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:97:19": {
+      "value": "3.0",
+      "context_sha256": "775961a1fed8abcfad9f5640bef338eea844d71f0544a05aec759ee4bd159d6f",
+      "expression": "scalar(3.0, asymmetric=True),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:102:24": {
+      "value": "2.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([-3.0, 2.0]),",
+      "quantity": "abstract objective linear coefficients",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract objective linear coefficients is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:104:30": {
+      "value": "0.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([-1.0, -1.0, 0.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:105:18": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([1.0, 1.0, 0.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:105:23": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([1.0, 1.0, 0.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:105:28": {
+      "value": "0.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([1.0, 1.0, 0.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:117:24": {
+      "value": "2.0",
+      "context_sha256": "0e2e25d6202f3fbd0b70252019da6b62152826b3954ed54cbbdc32df3054c32c",
+      "expression": "np.array([-3.0, 2.0]),",
+      "quantity": "abstract objective linear coefficients",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract objective linear coefficients is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:119:20": {
+      "value": "0.5",
+      "context_sha256": "0e2e25d6202f3fbd0b70252019da6b62152826b3954ed54cbbdc32df3054c32c",
+      "expression": "np.full(2, -0.5),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:148:28": {
+      "value": "1.6",
+      "context_sha256": "4a6bd564d4752b945cbc4a9fb73136e2cb026df134817fc29ad6a1a26c4ad483",
+      "expression": "mpc(True, True, 1.6),",
+      "quantity": "disturbed initial position",
+      "unit": "m",
+      "rationale": "This authored disturbed initial position is expressed in m; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:159:18": {
+      "value": "0.0",
+      "context_sha256": "843ad34842eebfcc6cecbb40ed88ca07283168c5fe7e06f79fc91172c0a1a1b9",
+      "expression": "np.array([0.0]),",
+      "quantity": "abstract zero objective coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract zero objective coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:161:18": {
+      "value": "1.0",
+      "context_sha256": "843ad34842eebfcc6cecbb40ed88ca07283168c5fe7e06f79fc91172c0a1a1b9",
+      "expression": "np.array([1.0, -np.inf]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:75:36": {
+      "value": "1.0",
+      "context_sha256": "4882dbab1b6c99776e456c196e7e0594434ceb262e18eb68bdd30f315c729822",
+      "expression": "lower = np.r_[np.full(horizon, -1.0), np.tile([-limit, -1.5], horizon) - offset]",
+      "quantity": "hard actuator interval endpoint",
+      "unit": "m/s^2",
+      "rationale": "This literal defines hard actuator interval endpoint in m/s^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:89:104": {
+      "value": "3.0",
+      "context_sha256": "775961a1fed8abcfad9f5640bef338eea844d71f0544a05aec759ee4bd159d6f",
+      "expression": "(\"C01\", \"Lower-bound undershoot\", \"Incumplimiento inferior\", \"Semantics\", \"Sem\u00e1ntica\", scalar(-3.0)),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:102:19": {
+      "value": "3.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([-3.0, 2.0]),",
+      "quantity": "abstract objective linear coefficients",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract objective linear coefficients is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:103:28": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "sparse.csc_matrix([[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]),",
+      "quantity": "original row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored original row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:103:33": {
+      "value": "0.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "sparse.csc_matrix([[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]),",
+      "quantity": "original row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored original row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:103:40": {
+      "value": "0.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "sparse.csc_matrix([[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]),",
+      "quantity": "original row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored original row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:103:45": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "sparse.csc_matrix([[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]),",
+      "quantity": "original row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored original row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:103:52": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "sparse.csc_matrix([[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]),",
+      "quantity": "original row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored original row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:103:57": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "sparse.csc_matrix([[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]]),",
+      "quantity": "original row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored original row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:104:19": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([-1.0, -1.0, 0.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:104:25": {
+      "value": "1.0",
+      "context_sha256": "bfdb9c6c3e9260b2262342b79b299fd59206c8f3c969d7ac503674badba9ae35",
+      "expression": "np.array([-1.0, -1.0, 0.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:117:19": {
+      "value": "3.0",
+      "context_sha256": "0e2e25d6202f3fbd0b70252019da6b62152826b3954ed54cbbdc32df3054c32c",
+      "expression": "np.array([-3.0, 2.0]),",
+      "quantity": "abstract objective linear coefficients",
+      "unit": "dimensionless",
+      "rationale": "This authored abstract objective linear coefficients is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:160:28": {
+      "value": "1.0",
+      "context_sha256": "843ad34842eebfcc6cecbb40ed88ca07283168c5fe7e06f79fc91172c0a1a1b9",
+      "expression": "sparse.csc_matrix([[1.0], [1.0]]),",
+      "quantity": "row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:160:35": {
+      "value": "1.0",
+      "context_sha256": "843ad34842eebfcc6cecbb40ed88ca07283168c5fe7e06f79fc91172c0a1a1b9",
+      "expression": "sparse.csc_matrix([[1.0], [1.0]]),",
+      "quantity": "row incidence coefficient",
+      "unit": "dimensionless",
+      "rationale": "This authored row incidence coefficient is expressed in dimensionless; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:162:27": {
+      "value": "1.0",
+      "context_sha256": "843ad34842eebfcc6cecbb40ed88ca07283168c5fe7e06f79fc91172c0a1a1b9",
+      "expression": "np.array([np.inf, -1.0]),",
+      "quantity": "abstract scalar or vector target/interval endpoint",
+      "unit": "dimensionless original QP coordinate",
+      "rationale": "This authored abstract scalar or vector target/interval endpoint is expressed in dimensionless original QP coordinate; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:76:57": {
+      "value": "1.5",
+      "context_sha256": "8db1985f4b34ed84948d6c5e698c4804cb3c650bfef0f1becd5ab0ef476063bc",
+      "expression": "upper = np.r_[np.full(horizon, 1.0), np.tile([limit, 1.5], horizon) - offset]",
+      "quantity": "soft velocity interval endpoint",
+      "unit": "m/s",
+      "rationale": "This literal defines soft velocity interval endpoint in m/s; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_cases.py:75:60": {
+      "value": "1.5",
+      "context_sha256": "4882dbab1b6c99776e456c196e7e0594434ceb262e18eb68bdd30f315c729822",
+      "expression": "lower = np.r_[np.full(horizon, -1.0), np.tile([-limit, -1.5], horizon) - offset]",
+      "quantity": "soft velocity interval endpoint",
+      "unit": "m/s",
+      "rationale": "This literal defines soft velocity interval endpoint in m/s; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_run.py:47:11": {
+      "value": "0.0",
+      "context_sha256": "0c3b985aa97877b3c59be4ed9ba11e31a9f712e7d5d2c1a40b9474082ee93857",
+      "expression": "cost = 0.0",
+      "quantity": "initial accumulated penalty",
+      "unit": "objective-unit zero",
+      "rationale": "This authored initial accumulated penalty is expressed in objective-unit zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:14:24": {
+      "value": "1e-07",
+      "context_sha256": "c7aa8c5edd6a2ce60930a6b920ec9726c1f2f6b48032177a5b7094aef73cadae",
+      "expression": "SETTINGS = dict(eps_abs=1e-7, eps_rel=1e-7, max_iter=200000, adaptive_rho_interval=25)",
+      "quantity": "absolute backend residual stopping tolerance",
+      "unit": "declared numerical backend residual coordinate",
+      "rationale": "The unchanged solver parameter supplies an absolute numerical threshold in each canonical primal or dual residual coordinate; it is not a universal physical limit."
+    },
+    "data-pipeline/pipeline/softqp_run.py:14:38": {
+      "value": "1e-07",
+      "context_sha256": "c7aa8c5edd6a2ce60930a6b920ec9726c1f2f6b48032177a5b7094aef73cadae",
+      "expression": "SETTINGS = dict(eps_abs=1e-7, eps_rel=1e-7, max_iter=200000, adaptive_rho_interval=25)",
+      "quantity": "relative backend residual stopping ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal defines relative backend residual stopping ratio in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_run.py:58:64": {
+      "value": "0.0",
+      "context_sha256": "73c1664cf0f345e3c445abfc989894c1b422a9476d741348ab60dcc5c212d148",
+      "expression": "cost += pen.alpha1[rows][0] * np.max(mag[rows], initial=0.0)",
+      "quantity": "empty peak reduction identity",
+      "unit": "row-unit zero",
+      "rationale": "This authored empty peak reduction identity is expressed in row-unit zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:59:17": {
+      "value": "0.5",
+      "context_sha256": "53fadd207d482f8e9ca11360517307bcc60993dcbb35aaeb4465d6efb70a583e",
+      "expression": "base = float(0.5 * x @ (P @ x) + q @ x)",
+      "quantity": "quadratic objective integration multiplier",
+      "unit": "dimensionless one-half",
+      "rationale": "This authored quadratic objective integration multiplier is expressed in dimensionless one-half; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:50:45": {
+      "value": "0.5",
+      "context_sha256": "d47d73f167b71fe858cd2e39c4c7f4d9ee1dda2cde7683a5023db8bf70b3cd07",
+      "expression": "cost += pen.alpha1[i] * mag[i] + 0.5 * pen.alpha2[i] * mag[i] ** 2",
+      "quantity": "quadratic objective integration multiplier",
+      "unit": "dimensionless one-half",
+      "rationale": "This authored quadratic objective integration multiplier is expressed in dimensionless one-half; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:64:46": {
+      "value": "0.0",
+      "context_sha256": "906c281523aec6025b02b0b5e27a15043b72495242a64727a0662d5e02ac897e",
+      "expression": "lower_violation=np.maximum(l - A @ x, 0.0).tolist(),",
+      "quantity": "original interval departure floor",
+      "unit": "corresponding physical row-unit zero",
+      "rationale": "This authored original interval departure floor is expressed in corresponding physical row-unit zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:65:46": {
+      "value": "0.0",
+      "context_sha256": "906c281523aec6025b02b0b5e27a15043b72495242a64727a0662d5e02ac897e",
+      "expression": "upper_violation=np.maximum(A @ x - u, 0.0).tolist(),",
+      "quantity": "original interval departure floor",
+      "unit": "corresponding physical row-unit zero",
+      "rationale": "This authored original interval departure floor is expressed in corresponding physical row-unit zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:67:67": {
+      "value": "0.0",
+      "context_sha256": "906c281523aec6025b02b0b5e27a15043b72495242a64727a0662d5e02ac897e",
+      "expression": "hard_violation=float(np.max(mag[pen.type == NONE], initial=0.0)),",
+      "quantity": "original interval departure floor",
+      "unit": "corresponding physical row-unit zero",
+      "rationale": "This authored original interval departure floor is expressed in corresponding physical row-unit zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:53:37": {
+      "value": "0.5",
+      "context_sha256": "f8c3c14971bd68bce75508eb360476b79bbb0fdd89550c97415eff0039174777",
+      "expression": "cost += pen.alpha1[i] * (0.5 * mag[i] ** 2 if mag[i] <= d else d * mag[i] - 0.5 * d * d)",
+      "quantity": "quadratic objective integration multiplier",
+      "unit": "dimensionless one-half",
+      "rationale": "This authored quadratic objective integration multiplier is expressed in dimensionless one-half; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_run.py:53:88": {
+      "value": "0.5",
+      "context_sha256": "f8c3c14971bd68bce75508eb360476b79bbb0fdd89550c97415eff0039174777",
+      "expression": "cost += pen.alpha1[i] * (0.5 * mag[i] ** 2 if mag[i] <= d else d * mag[i] - 0.5 * d * d)",
+      "quantity": "quadratic objective integration multiplier",
+      "unit": "dimensionless one-half",
+      "rationale": "This authored quadratic objective integration multiplier is expressed in dimensionless one-half; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:30:60": {
+      "value": "0.0",
+      "context_sha256": "f7d8cfde25ffada80e4719c6f9a8e7606f0fb4f95a55b0940dd55f00d160d85d",
+      "expression": "impulse = spec[\"velocity_impulses\"].get(str(frame), 0.0)",
+      "quantity": "absent velocity disturbance",
+      "unit": "m/s zero",
+      "rationale": "This authored absent velocity disturbance is expressed in m/s zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:25:19": {
+      "value": "1.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "state-transition diagonal identity",
+      "unit": "dimensionless",
+      "rationale": "This literal defines state-transition diagonal identity in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:25:30": {
+      "value": "0.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "absent position-to-velocity transition coefficient",
+      "unit": "1/s (structural zero)",
+      "rationale": "This literal defines absent position-to-velocity transition coefficient in 1/s (structural zero); its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:25:35": {
+      "value": "1.0",
+      "context_sha256": "8760f59e049485fc39313bb98db6db87c6b6e7a8039f3eff70d903d9269aa578",
+      "expression": "F = np.array([[1.0, dt], [0.0, 1.0]])",
+      "quantity": "state-transition diagonal identity",
+      "unit": "dimensionless",
+      "rationale": "This literal defines state-transition diagonal identity in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:73:51": {
+      "value": "1.0",
+      "context_sha256": "c390b988a2e1110878c0918f7042045f55556b1fec6ca502c69aa91956a410b1",
+      "expression": "control = float(np.clip(raw_control, -1.0, 1.0))",
+      "quantity": "executed actuator saturation limits",
+      "unit": "m/s^2",
+      "rationale": "This authored executed actuator saturation limits is expressed in m/s^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:38:25": {
+      "value": "0.5",
+      "context_sha256": "3d7990101fcf771bfd30c8cdd08dd6bf790124b568ec1d21a66d538ce4d42f35",
+      "expression": "constant = float(0.5 * offset @ (np.tile([3.0, 0.3], spec[\"horizon\"]) * offset))",
+      "quantity": "quadratic form integration factor",
+      "unit": "dimensionless one-half",
+      "rationale": "This literal defines quadratic form integration factor in dimensionless one-half; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:73:46": {
+      "value": "1.0",
+      "context_sha256": "c390b988a2e1110878c0918f7042045f55556b1fec6ca502c69aa91956a410b1",
+      "expression": "control = float(np.clip(raw_control, -1.0, 1.0))",
+      "quantity": "executed actuator saturation limits",
+      "unit": "m/s^2",
+      "rationale": "This authored executed actuator saturation limits is expressed in m/s^2; it belongs to the stated canonical coordinates, not a universal observable bound."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:38:50": {
+      "value": "3.0",
+      "context_sha256": "3d7990101fcf771bfd30c8cdd08dd6bf790124b568ec1d21a66d538ce4d42f35",
+      "expression": "constant = float(0.5 * offset @ (np.tile([3.0, 0.3], spec[\"horizon\"]) * offset))",
+      "quantity": "position quadratic tracking weight",
+      "unit": "objective-unit/m^2",
+      "rationale": "This literal defines position quadratic tracking weight in objective-unit/m^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:38:55": {
+      "value": "0.3",
+      "context_sha256": "3d7990101fcf771bfd30c8cdd08dd6bf790124b568ec1d21a66d538ce4d42f35",
+      "expression": "constant = float(0.5 * offset @ (np.tile([3.0, 0.3], spec[\"horizon\"]) * offset))",
+      "quantity": "velocity quadratic tracking weight",
+      "unit": "objective-unit/(m/s)^2",
+      "rationale": "This literal defines velocity quadratic tracking weight in objective-unit/(m/s)^2; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/softqp_stream.py:68:98": {
+      "value": "0.0",
+      "context_sha256": "87ef145a0932d903f2b1d54260ef4798875e89c5a39e1f6e5557da8b62f20f04",
+      "expression": "update_seconds=workspace.update_wall_seconds if frame else 0.0,",
+      "quantity": "first-frame absent update duration",
+      "unit": "s zero",
+      "rationale": "This authored first-frame absent update duration is expressed in s zero; it belongs to the stated canonical coordinates, not a universal observable bound."
+    }
+  }
+}

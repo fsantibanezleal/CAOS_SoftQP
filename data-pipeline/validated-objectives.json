@@ -1,0 +1,84 @@
+{
+  "schema": "softqp.validated-objectives/v1",
+  "source_commit": "56ed01cad646fe29894f321eedc9f47cb85a90d8",
+  "purpose": "Reviewed authored-case lifted objective baselines, not a fresh oracle solve or a timing result. All scientific source payloads are unchanged.",
+  "cases": {
+    "C01": {
+      "objective": -2.9816666666666665,
+      "unit": "authored objective units",
+      "source_sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a"
+    },
+    "C02": {
+      "objective": -2.9816666666666665,
+      "unit": "authored objective units",
+      "source_sha256": "d1319c87e0ddeb007528d5ee309e06284f1a4875095943448fee0c5fd763fcd6"
+    },
+    "C03": {
+      "objective": -2.5639999999999996,
+      "unit": "authored objective units",
+      "source_sha256": "82c7ed303e2d47cc9fd417ca3347851a0a83cc96803f919515fe4a3dfeb83970"
+    },
+    "C04": {
+      "objective": -4.140624999999899,
+      "unit": "authored objective units",
+      "source_sha256": "08ae34a8252057249e93709954eac425abc7e86bf2724fc369acdedbef66ff7d"
+    },
+    "C05": {
+      "objective": -4.499999999999999,
+      "unit": "authored objective units",
+      "source_sha256": "c449a5d2950602d83505cfa0121aa1bbdac98c61131aeede1b846ccf100c2657"
+    },
+    "C06": {
+      "objective": -30.61392301238452,
+      "unit": "authored objective units",
+      "source_sha256": "992f8a1f20c3c04198db8ee803736dc5c83a364c2f730ccbca841ff1e4a83c2a"
+    },
+    "C07": {
+      "objective": -34.575711183512816,
+      "unit": "authored objective units",
+      "source_sha256": "d9fdfdf1b4912245fcbb641914565587ce4842ba3305d3eb58661623fe21d664"
+    },
+    "C08": {
+      "objective": -2.6416394351066295,
+      "unit": "authored objective units",
+      "source_sha256": "d85bea4482d0b3d05ca389fd58b52d3cb12d39805a618dfb6eec7d35b56663e3"
+    },
+    "C09": {
+      "objective": -34.07019629899902,
+      "unit": "authored objective units",
+      "source_sha256": "d1442faa4e4626ec2264d56b852bfbb0a375d53105b2970915f5a95e93d699fc"
+    },
+    "C10": {
+      "objective": -31.32471957921138,
+      "unit": "authored objective units",
+      "source_sha256": "30d96a746701607cdeddd3bd54fbb7a99e814411347b42d9653e2ed24963454a"
+    },
+    "C11": {
+      "objective": 3.8992857142857145,
+      "unit": "authored objective units",
+      "source_sha256": "89515d04f414574f63c20404d801399f72042f0fe90ab08809bd567924222332"
+    },
+    "C12": {
+      "objective": -41.20404054243572,
+      "unit": "authored objective units",
+      "source_sha256": "a7130366ee0be3039799f07e394190c4dd8c0528a972c9eaf2d9b8635c7e47e7"
+    },
+    "C13": {
+      "objective": 36.66048776542501,
+      "unit": "authored objective units",
+      "source_sha256": "3ebb9d5b093ecc91d8abfde09046ae95c7055de198656104c95f6a2e159c27e9"
+    },
+    "C14": {
+      "objective": 48.40298811542744,
+      "unit": "authored objective units",
+      "source_sha256": "ee5fbbe986171566c5c7f7761839ed4d68178bf8f4436400710e683da0aa45bd"
+    },
+    "C15": {
+      "objective": 42.68217780369936,
+      "unit": "authored objective units",
+      "source_sha256": "b55500a5723383a0f45739b13939e523671ac480c9b2bb41e878c03c587d75d9"
+    }
+  },
+  "source_commit_product_version": "0.01.001",
+  "historical_numerical_generation_version": "0.01.000"
+}

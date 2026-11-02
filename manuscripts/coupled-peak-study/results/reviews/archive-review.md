@@ -1,0 +1,9 @@
+# Independent complete evidence archive acceptance
+
+ACCEPT_ARCHIVE for the exact ZIP SHA25645b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418. This accepts archived byte integrity and completeness, not scientific qualification or public publication.
+
+The actual429,502,979-byte ZIP was independently streamed through every decompressed member and compared byte-for-byte with original raw journals, CSV, canonical input files, exact review/registration/summary artifacts and tools. Registered study sources were compared to the accepted LF-normalized identities; the original LICENSE is retained. All258members,210canonical input identities,257manifest entries, byte lengths, SHA256values, CRCchecks and external ZIP checksum pass. Total uncompressed content is1,924,284,168bytes. No unsafe path, duplicate/colliding member, symlink or encrypted entry is present. The ZIP stat/hash remained unchanged through verification.
+
+Canonical campaign/validation and raw evidence identities match the final independent ACCEPT_EVIDENCE receipt. All four figure bytes and renderer identity match exact v2ACCEPT_FIGURES. The archive manifest binds registered source246bf87and protocol3d8eb822and accepted evidencef5ade8cca. README instructions point to the exact registered repository commit, synthetic forecast scope and external acceptance interpretation. No files were extracted or rewritten, no optimizer/generator was run and no scientific controls or outcomes changed.
+
+Publication still requires independently accepted dataset metadata and guarded upload/public-file verification. The separate manuscript record must contain exactly one reviewed PDF. PDF source/rendered-page review and DOI/file-set checks remain separate gates. The negative primary and retained failures remain unchanged.

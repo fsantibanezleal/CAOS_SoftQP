@@ -1,0 +1,9 @@
+# Exact historical source profile; distinct from the ordinary published-wheel app.
+softqp @ git+https://github.com/fsantibanezleal/CAOS_SoftQP_Engine.git@d0c69ed974d577ba02adbd4806332270d9425651
+numpy==2.5.4
+scipy==1.18.1
+osqp==1.1.3
+daqp==0.10.3
+elastiqp==0.2.0
+jsonschema==4.26.0
+pytest==9.2.0

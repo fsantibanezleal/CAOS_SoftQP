@@ -1,10 +1,11 @@
-# Model evaluation (the TEST stage)
+# Original-space optimality and comparative evaluation
 
-`stages/evaluate.py` reports held-out, **leakage-safe** metrics, the holdout is a disjoint draw, never the
-training set. EXAMPLE: surrogate-vs-engine on the peak-infected fraction → R² + RMSE (RMSE, not MAPE: MAPE blows
-up on the near-zero peaks of sub-critical cases and would mislead). The metrics are written into each case's
-manifest (`metrics`) and surfaced on the web's Benchmark/Experiments views.
+The objective is evaluated from original P, q, A, bounds and side prices after recovering solver variables. Base objective and violation penalty remain separate. In a condensed control model, the omitted state-dependent constant must be restored before interpreting a predicted physical horizon cost. Overlapping horizon forecasts are not additive realized plant cost.
 
-For a real product this is where the honesty lives: held-out (never calibration-leaked) metrics, negative
-controls, and, when a surrogate emulates a physics engine, a clear statement that "accurate" means *agrees with
-the calibrated engine*, NOT *matches a real plant*. Keep calibration anchors strictly disjoint from validation.
+For separable costs, original stationarity is P x + q + Aᵀ y = 0. This relation alone is insufficient: y must also belong to the interval-penalty subgradient at A x. The product's diagnostic uses the fixed-point relation z = prox_g(z+y), with a unit diagnostic proximal scale. Hard rows use interval projection; soft rows use their own lower/upper threshold and quadratic shrinkage. The defect is retained per original row, and a normalized maximum is a diagnostic rather than a new scientific penalty.
+
+At a kink, the subgradient is an interval, not an arbitrarily chosen derivative. A stationary unconstrained target outside a priced interval can have zero gradient balance with y=0 yet fail the proximal relation. That counterexample is included in the numerical tests. Raw hard violation is checked separately, so a small normalized gradient cannot disguise a changed hard policy.
+
+Catalog comparisons and timing campaigns have different roles. The fifteen-case catalog covers scalar semantics, groups, semidefinite curvature, conditioning, control conflict and a source-faithful energy model. The campaign changes controlled generator parameters and retains held-out seeds. Its registered external acceptance uses objective discrepancy normalized by max(1,|oracle objective|), at most 1e-6, and raw hard error at most 1e-6. Stationarity is diagnostic in that protocol; it is not silently added as a new post-hoc endpoint.
+
+The primary timing comparator is the faster paired observation from native lifting and DAQP. Whole evaluation-seed clusters are resampled for the 95% interval. Incompatible, failed, timeout and rejected cells retain their denominators. A matrix-size reduction, a single warm-start observation or an implementation benchmark does not establish global novelty. Sources: [OSQP](https://osqp.org/docs/solver/), [generalized projection](https://arxiv.org/abs/2610.35631), [DAQP](https://darnstrom.github.io/daqp/start/advanced/soft).

@@ -1,32 +1,11 @@
-# Deploy
+# Static deployment and source promotion
 
-One deploy place per product, decided at instantiation and written in `deploy/TARGET`; this template's is GitHub
-Pages, a static site with no backend at request time (ADR-0055). `scripts/check_deploy_place.py` fails a product
-that carries the files of two places. The instantiator writes the plain `pages` or `vps` sentinel. A product that
-composes a static VPS site with a separately bounded service may replace it with a structured record declaring one
-`target: vps-static+vps-service`; the guard requires both an nginx site file and a systemd unit and rejects Pages
-workflow residue.
+GitHub Pages is the configured host for the static reader. The native engine does not run on Pages. Vite materializes six routes plus a fallback document and a build identity. The copy stage ships exactly the deployment inventory's declared files, including experimental raw downloads, and stops when a required declared artifact is absent.
 
-## Before a deploy
+The scientific inventory and deployment wrappers are separate contracts. A wrapper records native package version, product version, case source, seed, artifact path/size/digest and the replay-lane reason. The deployment index's compatibility field `engine_version` tracks the product pipeline version; it is not the Python distribution version. Confusing these fields would make legitimate version checks meaningless.
 
-Locally: the sandboxed pipeline tests, the canonical bake when the science changed, `npm run build`, `npm test`, and
-`npm run gate`, which serves `dist/` as Pages would (no fallback) and walks every route, tab and case at five sizes,
-in both themes and both languages. A person reads its captures (written under `frontend/`, in gate-output/shots): the gate measures,
-it does not judge content.
+Source promotion follows task branch to develop to main. Each promotion requires exact-head CI; green checks from a parent commit are not substitutes. Release acceptance then verifies the served build identity, every materialized route, artifacts and SHA-256 inventory, phone/desktop behavior, both languages/themes and authorization boundaries of any activated API. A local static build and a focused screenshot remain scoped evidence.
 
-## The deploy
+The native distribution has its own build, license, wheel-install and publication gates. A source merge into engine main does not publish a PyPI package. The scientific report has independent authorship and repository/DOI checks, and owner acceptance follows delivery evidence. No social publication is part of deployment; diffusion materials remain private drafts.
 
-`.github/workflows/deploy-pages.yml` runs after CI succeeds on `main`, on that same commit. It checks the committed
-artifacts, builds the site with the right base path (`/` with a custom domain, `/<repository>/` without), deploys,
-and then runs `scripts/check_live.py` against the live site: `build.json` names the pushed commit, every route
-answers with the app with and without its trailing slash, a missing file answers 404, and the artifact index
-answers JSON. It never trains, rebakes or recomputes (ADR-0069, ADR-0074).
-
-After the deploy, run the gate against the deployed origin: `npm run gate -- --url https://<domain>`.
-
-## CI
-
-`.github/workflows/ci.yml`, on `develop` and `main`: lint, the workflow files parse, contract 2, the version, the
-SDD, the deploy place; a web job (install, build, unit tests, the web baseline); and the guards (tracked secrets,
-venvs, binaries, raw data, machine paths, template residue, document paths, content standards, the CI budget).
-Every step runs under `bash -eo pipefail`.
+Do not claim live completion until the exact deployed commit and served manifest have been observed. Current acceptance status is recorded in the product's design and management records, not inferred from an HTTP 200 alone.

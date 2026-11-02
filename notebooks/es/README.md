@@ -1,36 +1,21 @@
-# Notebooks, español
+# Cuadernos, español
 
-El índice del árbol en español. Los temas van de lo simple a lo complejo; dentro de un tema el orden de lectura es el
-número del notebook y el nivel nunca baja. El equivalente en inglés de cada notebook está en la misma ruta bajo
-[`../en/`](../en/README.md). Cómo correrlos está en [`../README.md`](../README.md).
-
-Niveles: 1 fundamentos, 2 el método en la práctica, 3 comparación con métodos publicados, 4 métodos propuestos.
-
-Cada notebook es una lección trabajada sobre una pregunta: la plantea en su primera celda, corre el motor paso a paso sobre
-los casos del ejemplo, muestra lo que encuentra en figuras, y responde la pregunta en sus Resultados con números que él mismo
-calculó ([`docs/guides/08_notebooks.md`](../../docs/guides/08_notebooks.md)).
+Cinco lecciones avanzan desde una política escalar hasta integridad de control, implementaciones publicadas y una propuesta computacional refutable. Sus compañeros usan rutas idénticas en [el árbol inglés](../en/README.md). Cada cuaderno ejecuta métodos del producto, muestra resultados intermedios y responde una pregunta con números calculados.
 
 ## Temas
 
-Un tema sin notebook de nivel 3 explica por qué en su fila.
-
-| Tema | Requiere | Nivel 3 |
+| Tema | Requisitos | Nivel 3 |
 |---|---|---|
-| [01-getting-started](01-getting-started/) | ninguno, es el tema de entrada | [03-a-higher-order-solver](01-getting-started/03-a-higher-order-solver.ipynb) |
-| [02-threshold-and-final-size](02-threshold-and-final-size/) | tema 01-getting-started | Sin nivel 3: la base de investigación no nombra un método más nuevo para el umbral ni para el tamaño final, y la única comparación del ejemplo con un método publicado, el resolvedor de orden mayor, está en el tema 01 |
+| [01-soft-constraint-decisions](01-soft-constraint-decisions/) | Arreglos Python y cálculo elemental | [Métodos equivalentes](01-soft-constraint-decisions/03-matching-published-methods.ipynb) |
 
-## Notebooks
+## Cuadernos
 
-| Notebook | Nivel | La pregunta que responde |
+| Cuaderno | Nivel | Pregunta |
 |---|---|---|
-| [01-getting-started/01-the-problem-and-the-data.ipynb](01-getting-started/01-the-problem-and-the-data.ipynb) | 1 | cómo recorre una epidemia un pueblo de 100000 personas día a día: el pico, su día y el saldo final, y cómo se mueven cuando cambian los primeros casos o el periodo infeccioso |
-| [01-getting-started/02-the-method-step-by-step.ipynb](01-getting-started/02-the-method-step-by-step.ipynb) | 2 | cuánto se equivoca el paso de Euler hacia adelante del motor, frente al tamaño final y al pico exactos, para qué casos importa, y qué recupera la extrapolación |
-| [01-getting-started/03-a-higher-order-solver.ipynb](01-getting-started/03-a-higher-order-solver.ipynb) | 3 | cómo se compara el RK45 de SciPy con el motor en los mismos casos, por el error según el paso y según el costo |
-| [02-threshold-and-final-size/01-the-threshold.ipynb](02-threshold-and-final-size/01-the-threshold.ipynb) | 1 | con qué tasas de contacto y de recuperación despega un brote, cómo se ve justo sobre el umbral, y qué parte inmune lo detiene |
-| [02-threshold-and-final-size/02-the-final-size.ipynb](02-threshold-and-final-size/02-the-final-size.ipynb) | 2 | qué parte infecta un brote al final, por qué ignora la velocidad del curso, y dónde la corrida del motor no la alcanza |
+| [01-pricing-a-violation](01-soft-constraint-decisions/01-pricing-a-violation.ipynb) | 1 | ¿Cómo desplazan los precios por lado el óptimo escalar? |
+| [02-preserving-control-integrity](01-soft-constraint-decisions/02-preserving-control-integrity.ipynb) | 2 | ¿Puede el control acotado recuperarse de un conflicto blando de estado? |
+| [03-matching-published-methods](01-soft-constraint-decisions/03-matching-published-methods.ipynb) | 3 | ¿Qué métodos publicados resuelven cada objetivo equivalente? |
+| [04-testing-the-computational-claim](01-soft-constraint-decisions/04-testing-the-computational-claim.ipynb) | 4 | ¿Se cumple el criterio computacional reservado registrado? |
+| [05-directional-group-peaks](01-soft-constraint-decisions/05-directional-group-peaks.ipynb) | 4 | ¿Cómo conserva un máximo direccional la integridad dura y la covarianza por fila? |
 
-## Métodos propuestos
-
-Ninguno: el ejemplo es un modelo didáctico, así que no propone un método propio y no tiene notebook de nivel 4. Un
-producto lista cada método que propone en su SDD y lo cubre con un notebook de nivel 4 en cada idioma
-([`docs/guides/08_notebooks.md`](../../docs/guides/08_notebooks.md)).
+Ejecución y entorno: [flujo de cuadernos](../README.md). La última lección conserva el resultado registrado negativo y no afirma ventaja temporal.

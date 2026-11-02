@@ -1,0 +1,38 @@
+{
+  "cases": [
+    {
+      "case_id": "C01",
+      "category": {
+        "en": "Semantics",
+        "es": "Semántica"
+      },
+      "failed": false,
+      "path": "C01.json",
+      "sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
+      "title": {
+        "en": "Lower-bound undershoot",
+        "es": "Incumplimiento inferior"
+      }
+    }
+  ],
+  "default_case": "C01",
+  "environment": {
+    "packages": {
+      "daqp": "0.10.3",
+      "numpy": "2.5.4",
+      "osqp": "1.1.3",
+      "scipy": "1.18.1",
+      "softqp": "0.1.0"
+    },
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.10"
+  },
+  "limitations": [
+    "Development bake, not the complete release experiment matrix.",
+    "DAQP uses original-scale side weights on compatible positive definite cases; FlexQP is not implemented in this bake.",
+    "C12 includes the initial state only; stream and warm-start measurements remain pending.",
+    "No timing superiority or novelty is established."
+  ],
+  "schema_version": "softqp.index/v1",
+  "state": "development"
+}

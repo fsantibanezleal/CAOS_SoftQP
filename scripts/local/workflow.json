@@ -1,0 +1,139 @@
+{
+  "readiness_excludes": [
+    "readiness"
+  ],
+  "stage_inputs": [
+    "data/derived/experiments/campaign.json",
+    "data/derived/experiments/datasets.json",
+    "data/derived/experiments/index.json",
+    "data/derived/experiments/stream.json",
+    "data/derived/experiments/trials.csv",
+    "data/derived/experiments/trials.jsonl"
+  ],
+  "readiness_exceptions": {
+    "api": "missing",
+    "softqp-coupled-batch": "missing",
+    "softqp-coupled-observation": "missing",
+    "softqp-coupled-campaign": "missing",
+    "softqp-coupled-lesson": "missing"
+  },
+  "readiness_check": "scripts/check_readiness.py",
+  "primary_environment": ".venv-local",
+  "generation_environments": [
+    ".venv-local"
+  ],
+  "environments": [
+    {
+      "path": ".venv-local",
+      "requirements": [
+        "requirements-precompute.txt",
+        "requirements-dev.txt"
+      ]
+    },
+    {
+      "path": ".venv-api",
+      "when": "api",
+      "requirements": [
+        "requirements-api.txt"
+      ]
+    },
+    {
+      "path": ".venv-lessons",
+      "when": "notebooks",
+      "requirements": [
+        "notebooks/requirements.txt"
+      ]
+    },
+    {
+      "path": ".venv-coupled-lessons",
+      "when": "notebooks",
+      "requirements": [
+        "docs/teaching/coupled/requirements.txt"
+      ]
+    }
+  ],
+  "node_stamp": ".caos-package-lock.sha256",
+  "required": [
+    "data/derived/manifests/index.json",
+    "data/derived/readiness.json",
+    "data/derived/softqp/index.json",
+    "data/derived/experiments/index.json"
+  ],
+  "promote": [
+    "data/derived"
+  ],
+  "api": {
+    "environment": ".venv-api",
+    "active": false,
+    "port": 8000,
+    "health": "/health",
+    "command": [
+      "{python}",
+      "-m",
+      "uvicorn",
+      "app.main:app",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}"
+    ]
+  },
+  "web_port": 5173,
+  "frontend_environment": {
+    "CAOS_DATA_ROOT": "{root}/data/derived"
+  },
+  "frontend_prepare": [
+    [
+      "{npm}",
+      "run",
+      "predev"
+    ]
+  ],
+  "frontend_command": [
+    "node",
+    "node_modules/vite/bin/vite.js",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "{web_port}",
+    "--strictPort"
+  ],
+  "generation": [
+    {
+      "script": "scripts/local/softqp_adapter.py",
+      "args": [
+        "generate",
+        "{stage}"
+      ]
+    }
+  ],
+  "validators": [
+    {
+      "script": "scripts/local/softqp_adapter.py",
+      "args": [
+        "validate",
+        "{stage}"
+      ]
+    },
+    {
+      "script": "scripts/check_artifacts.py",
+      "args": [
+        "{stage}"
+      ]
+    },
+    {
+      "script": "scripts/check_documents.py",
+      "args": [
+        "{stage}"
+      ]
+    }
+  ],
+  "generation_modules": [
+    "numpy",
+    "scipy",
+    "jsonschema",
+    "softqp"
+  ],
+  "external_environments_required": true,
+  "environment_namespace": "softqp"
+}

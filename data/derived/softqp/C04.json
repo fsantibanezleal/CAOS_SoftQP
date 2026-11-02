@@ -1,0 +1,315 @@
+{
+  "case_id": "C04",
+  "category": {
+    "en": "Integrity",
+    "es": "Integridad"
+  },
+  "problem": {
+    "A": {
+      "data": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "indices": [
+        0,
+        2,
+        1,
+        2
+      ],
+      "indptr": [
+        0,
+        2,
+        4
+      ],
+      "shape": [
+        3,
+        2
+      ]
+    },
+    "P": {
+      "data": [
+        1.0,
+        1.0
+      ],
+      "indices": [
+        0,
+        1
+      ],
+      "indptr": [
+        0,
+        1,
+        2
+      ],
+      "shape": [
+        2,
+        2
+      ]
+    },
+    "lower": [
+      -1.0,
+      -1.0,
+      0.0
+    ],
+    "penalty": {
+      "lower_linear": [
+        0.3,
+        0.3,
+        0.3
+      ],
+      "lower_quadratic": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "soft": [
+        true,
+        true,
+        false
+      ],
+      "upper_linear": [
+        1.2,
+        1.2,
+        1.2
+      ],
+      "upper_quadratic": [
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    "q": [
+      -3.0,
+      2.0
+    ],
+    "upper": [
+      1.0,
+      1.0,
+      0.0
+    ]
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Normalized row 0",
+        "es": "Fila normalizada 0"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0001",
+      "label": {
+        "en": "Normalized row 1",
+        "es": "Fila normalizada 1"
+      },
+      "soft": true,
+      "unit": "1"
+    },
+    {
+      "id": "r0002",
+      "label": {
+        "en": "Normalized row 2",
+        "es": "Fila normalizada 2"
+      },
+      "soft": false,
+      "unit": "1"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 20,
+          "rows": 9,
+          "variables": 6
+        },
+        "elapsed_seconds": 0.0021195000008447096,
+        "iterations": 50,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -4.527343734882075,
+          "hard_violation": 7.338574192772285e-13,
+          "lower_violation": [
+            0.0,
+            0.18749999424028396,
+            0.0
+          ],
+          "objective": -4.140624999999899,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 0.38671873488217656,
+          "slack": [
+            -0.18749999424101782,
+            0.18749999424028396,
+            -7.338574192772285e-13
+          ],
+          "stationarity_residual": 4.884601390031662e-09,
+          "upper_violation": [
+            0.18749999424101782,
+            0.0,
+            7.338574192772285e-13
+          ]
+        },
+        "setup_seconds": 2.38e-05,
+        "solve_seconds": 1.35e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.1874999942410178,
+          -1.187499994240284
+        ],
+        "y": [
+          1.9500000054921751,
+          -0.6750000135112297,
+          -0.1374999948485915
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": "The published unconditional penalty reference requires symmetric side costs.",
+      "result": null,
+      "state": "incompatible"
+    },
+    {
+      "method": "asymmetric",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 6,
+          "rows": 3,
+          "variables": 2
+        },
+        "elapsed_seconds": 0.0008037999941734597,
+        "iterations": 50,
+        "method": "asymmetric",
+        "metrics": {
+          "base_objective": -4.527343754338043,
+          "hard_violation": 6.957734388635117e-10,
+          "lower_violation": [
+            0.0,
+            0.18750000213300289,
+            6.957734388635117e-10
+          ],
+          "objective": -4.140625000095668,
+          "objective_gap_against_lifted": 9.57696144610054e-11,
+          "penalty_objective": 0.38671875424237434,
+          "slack": [
+            -0.18750000143722945,
+            0.18750000213300289,
+            6.957734388635117e-10
+          ],
+          "stationarity_residual": 2.8002402507887325e-08,
+          "upper_violation": [
+            0.18750000143722945,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 1.88e-05,
+        "solve_seconds": 1.48e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.1875000014372294,
+          -1.1875000021330029
+        ],
+        "y": [
+          1.949999999984033,
+          -0.6750000000099052,
+          -0.13750002585949442
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "daqp",
+      "reason": null,
+      "result": {
+        "backend_settings": {
+          "abs_subopt": 0.0,
+          "cycle_tol": 10,
+          "dual_tol": 1e-07,
+          "eps_prox": 0.0,
+          "eq_reduction": 0,
+          "eta_prox": -1.0,
+          "fval_bound": 1e+30,
+          "iter_limit": 200000,
+          "pivot_tol": 1e-08,
+          "primal_tol": 1e-07,
+          "progress_tol": 1e-14,
+          "refactor_tol": 1e-09,
+          "rel_subopt": 0.0,
+          "rho_soft": 1e-06,
+          "sing_tol": 3.7e-11,
+          "time_limit": 0.0,
+          "w_soft": 0.0,
+          "zero_tol": 1e-11
+        },
+        "dimensions": {
+          "nnz": 6,
+          "rows": 3,
+          "variables": 2
+        },
+        "elapsed_seconds": 0.00012040000001434237,
+        "iterations": 3,
+        "method": "daqp",
+        "metrics": {
+          "base_objective": -4.52734375,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0,
+            0.1875,
+            0.0
+          ],
+          "objective": -4.140625,
+          "objective_gap_against_lifted": 1.0125233984581428e-13,
+          "penalty_objective": 0.38671875,
+          "slack": [
+            -0.1875,
+            0.1875,
+            0.0
+          ],
+          "stationarity_residual": 1.1102230246251565e-16,
+          "upper_violation": [
+            0.1875,
+            0.0,
+            0.0
+          ]
+        },
+        "setup_seconds": 3.9e-06,
+        "solve_seconds": 2.9e-06,
+        "status": "soft optimal",
+        "status_code": 2,
+        "x": [
+          1.1875,
+          -1.1875
+        ],
+        "y": [
+          1.9499999999999997,
+          -0.6750000000000002,
+          -0.1374999999999997
+        ]
+      },
+      "state": "available"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Mixed hard and soft rows",
+    "es": "Filas duras y blandas"
+  }
+}

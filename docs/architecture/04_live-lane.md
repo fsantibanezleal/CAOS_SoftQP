@@ -1,22 +1,11 @@
-# The live lane
+# Browser and local-execution boundary
 
-The live lane re-runs a case in the reader's browser with the reader's values: the parameters in the rail and the
-chosen variant. It is a TypeScript port of the pipeline's engine, `frontend/src/engine/sir.ts`, written step for
-step (the same scheme, the same step, the same order of operations, the same clamps).
+The workbench displays one selected case, one method and a row-unit filter. Lower and upper violations remain separate series. Comparing meters with kilowatt-hours in a single raw violation scale is forbidden by the view's unit selection. A missing hard row in the selected unit produces an unavailable hard-row readout, not a fabricated zero.
 
-## What holds it to the pipeline
+The cost editor creates a request tied to the canonical case digest. Lower and upper factors range from 0.01 to 100; the further quadratic factor ranges from zero to 100. Matrices, vectors, bounds and hard-row policy do not change through this editor. Coupled grouped/Huber cases do not admit the separable edit operation and state their limitation.
 
-`frontend/src/engine/sir.parity.test.ts` runs the live engine on the parameters of every baked case and compares it
-with the committed trace at the trace's 200 points, to the trace's rounding (0.005 people), summary included (peak,
-peak day, attack rate). A change to either engine that is not made to the other fails the web's tests. The same
-file checks that the engine converges to the final-size relation at first order in the step, which is the scheme's
-claim on the Methodology page.
+The user executes `data-pipeline/run_request.py` in the scientific environment. The producer rejects an unknown or stale base digest, changed original matrices, malformed sparse structure and unsupported edits. Its exported envelope retains both request and result. The browser checks matching inputs and edit factors, unchanged hard coefficients, complete method states, objective components and recovered lower/upper violations before accepting an import. An altered objective is rejected by the actual interaction probe.
 
-## What runs where
+An imported result is labeled local-native, while a committed record is canonical or fixture. Restore returns to the recorded case and method. Case changes abort stale loads and discard incompatible local imports. Focus mode preserves the selected case and row unit on Escape. The C12 stream is a separate fixed-policy record and is unavailable for a modified local case.
 
-- The live engine computes only what the reader changes: a case's trajectory with other rates, a variant (a share
-  immunised at the start), a sweep over R0 for the final-size view. Everything baked stays baked.
-- Every view shows its lane: live (computed in the browser) or replay (read from an artifact). A view still showing
-  an earlier selection is overlaid as recomputing, through the selection key.
-- A product whose engine cannot be ported keeps only the replay lane and declares its workbench `replayOnly`; the
-  gate then does not expect controls to change the views.
+No request is submitted to a hosted service. The dormant API serves existing files only and never executes an optimizer. A future browser solver would need a separate parity and resource gate; current request editing does not imply that such a solver exists.
