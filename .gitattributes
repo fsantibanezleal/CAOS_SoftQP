@@ -10,3 +10,4 @@
 # Preserve the independently verified bibliography's harmless terminal blank line.
 /manuscripts/*/references.bib whitespace=-blank-at-eof
 /manuscripts/independent-public-dataset-relations-review.json -text whitespace=cr-at-eol
+/docs/verification/readiness-consumer-acceptance.json -text whitespace=cr-at-eol
