@@ -68,10 +68,17 @@ The [technical report](https://doi.org/10.5281/zenodo.23851659) documents the fo
 
 The separate 210-instance directional group-peak study retains its negative result: the median paired reduction
 score is -212.449875%, with 95% limits [-225.336618%,-192.873759%] and nine prescribed failed pairs.
-[Its report](https://doi.org/10.5281/zenodo.23875071) and the
+[The separate research preprint](https://doi.org/10.5281/zenodo.23875071) and the
 [complete archived evidence](https://doi.org/10.5281/zenodo.23875194) document all outcomes and exact assumptions.
-Both corrected native LaTeX reports are published: [product report 0.01.001](https://doi.org/10.5281/zenodo.23885690)
-and [coupled report 0.02.001](https://doi.org/10.5281/zenodo.23885695). Their [editable sources](manuscripts/README.md),
-compiled PDFs and independent reviews are public. Neither registered improvement criterion is established.
+The [product technical report](https://doi.org/10.5281/zenodo.23851659) covers methods, contracts and product scope.
+The research preprint derives both original-row updates and presents their distinct experiments.
+Both use the canonical section-based LaTeX article template; [editable sources and build instructions](manuscripts/README.md)
+are available alongside the PDFs. Neither registered improvement criterion is established.
+The independently verified replacements are [technical report 0.01.002](https://doi.org/10.5281/zenodo.23899079)
+and [research preprint 0.02.002](https://doi.org/10.5281/zenodo.23899142).
 
 The complete numerical validation uses [explicit test profiles](docs/testing-profiles.md): the ordinary public-wheel regression, exact historical-source positive controls and the separate SDK2 suite. Source identity is never replaced by a matching version label.
+
+The document correction retains the numerical bake from 0.01.001. The readiness metadata explicitly labels its
+four version-dependent catalog boundaries as an older bake; the preserved results remain inspectable.
+No numerical observations or registered statistics were regenerated for this correction.

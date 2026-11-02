@@ -4,6 +4,7 @@ import { loadSoftQPCase, loadSoftQPIndex, softQPSource, type SoftQPIndex, type S
 import { methodNames } from '../lib/methodNames';
 import { StreamStage } from './StreamStage';
 import { makeLocalRequest, verifyLocalResult } from '../lib/softqp.local';
+import { ReadinessNote } from '../readiness/ReadinessNote';
 
 const names: Record<string, {en:string;es:string}> = methodNames;
 
@@ -101,6 +102,7 @@ export function Workbench() {
     </details>
   </>;
   const rail = <>
+    <ReadinessNote ids={['softqp-index', 'softqp-case-result']} />
     {softQPSource === 'fixture' && <p data-state="provider">{lang === 'es' ? 'Proveedor de prueba: solo C01. No es la matriz científica completa.' : 'Fixture provider: C01 only. This is not the full scientific matrix.'}</p>}
     <label htmlFor="softqp-method">{lang === 'es' ? 'Método' : 'Method'}</label>
     <select id="softqp-method" value={method} onChange={e => setMethod(e.target.value)}>

@@ -1,3 +1,13 @@
 # LF in the repo for everything (keeps .sh + CI yaml correct on Linux); CRLF only for PowerShell on checkout.
 * text=auto eol=lf
 *.ps1 text eol=crlf
+*.pdf binary
+
+# Exact independent review and compiler receipts retain their hash-bound bytes.
+/manuscripts/*/independent-review.json -text whitespace=cr-at-eol
+/manuscripts/*/independent-public-manuscripts-review.json -text whitespace=cr-at-eol
+/manuscripts/*/main.build.json -text whitespace=cr-at-eol
+# Preserve the independently verified bibliography's harmless terminal blank line.
+/manuscripts/*/references.bib whitespace=-blank-at-eof
+/manuscripts/independent-public-dataset-relations-review.json -text whitespace=cr-at-eol
+/docs/verification/readiness-consumer-acceptance.json -text whitespace=cr-at-eol

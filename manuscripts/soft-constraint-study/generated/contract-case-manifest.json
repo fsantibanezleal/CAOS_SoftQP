@@ -1,0 +1,180 @@
+{
+  "id": "case-manifest",
+  "version": "5.0.0",
+  "schema": "docs/contracts/schemas/case-manifest.schema.json",
+  "schema_sha256": "19e2a7d1395b658ce202a96ec337c3d7eb90d12c716e61db434d81dd304290af",
+  "producer": "data-pipeline/pipeline/core/manifest.py",
+  "fields": [
+    "schema",
+    "case_id",
+    "title",
+    "category",
+    "engine",
+    "product_version",
+    "seed",
+    "source",
+    "artifact",
+    "lane",
+    "gate"
+  ],
+  "consumer_test": "frontend/src/lib/contract.test.ts",
+  "missing": "partial: a manifest the index lists is absent; readiness lists its path, the case selector marks the case not available yet and the other cases work, the API answers 404 for it. stale: as case-index",
+  "nested_fields": [
+    [
+      "schema",
+      "string",
+      "const=softqp.manifest/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "case_id",
+      "string",
+      "pattern=^C[0-9]{2}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "title",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "title.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "title.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "category",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "category.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "category.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "engine",
+      "object",
+      "additionalProperties=False; required=['package', 'version']",
+      "structural metadata / nested units"
+    ],
+    [
+      "engine.package",
+      "string",
+      "const=softqp",
+      "structural metadata / nested units"
+    ],
+    [
+      "engine.version",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "product_version",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "seed",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "source",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifact",
+      "object",
+      "additionalProperties=False; required=['path', 'bytes', 'sha256', 'format']",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifact.path",
+      "string",
+      "pattern=^(?!.*\\.\\.)[A-Za-z0-9_./-]+\\.json$",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifact.bytes",
+      "integer",
+      "minimum=1",
+      "bytes"
+    ],
+    [
+      "artifact.sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifact.format",
+      "string",
+      "const=json",
+      "structural metadata / nested units"
+    ],
+    [
+      "lane",
+      "string",
+      "const=precompute",
+      "structural metadata / nested units"
+    ],
+    [
+      "gate",
+      "object",
+      "additionalProperties=False; required=['lane', 'reasons']",
+      "structural metadata / nested units"
+    ],
+    [
+      "gate.lane",
+      "string",
+      "const=precompute",
+      "structural metadata / nested units"
+    ],
+    [
+      "gate.reasons",
+      "array",
+      "minItems=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "gate.reasons[]",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "gate.reasons[].en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "gate.reasons[].es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ]
+  ]
+}

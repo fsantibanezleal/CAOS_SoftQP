@@ -2,6 +2,7 @@ import { DocPage, DocSection, Equation, Figure, Tabs } from '@fasl-work/caos-app
 import { P, useT } from '../content/bi';
 import { FlowFigure } from '../content/figures';
 import { useScientificRecords } from '../lib/useScientificRecords';
+import { ReadinessNote } from '../readiness/ReadinessNote';
 const local={en:'Describes the authored experiment protocol.',es:'Describe el protocolo experimental propio.'};
 export function Experiments(){
   const t=useT();const {records,error,source}=useScientificRecords();
@@ -9,6 +10,7 @@ export function Experiments(){
   return <DocPage title={{en:'Experiments',es:'Experimentos'}} lede={t('The experiments separate semantic correctness, engineering policy and numerical performance. The committed cases first check whether compatible formulations solve the same original objective and preserve hard constraints. Repeated timing, streaming updates and held-out evidence have their own protocol and cannot be inferred from a single successful solve.', 'Los experimentos separan corrección semántica, política de ingeniería y desempeño numérico. Los casos versionados verifican primero si las formulaciones compatibles resuelven el mismo objetivo original y conservan restricciones duras. Tiempos repetidos, actualizaciones y evidencia reservada requieren protocolos propios y no se infieren de una sola solución correcta.')}>
     {source==='fixture'&&<p data-state="provider">{t('Fixture provider: the loaded records are an isolated subset of the full study.','Proveedor de prueba: los registros cargados son un subconjunto aislado del estudio completo.')}</p>}
     {error&&<p role="alert">{error}</p>}
+    <ReadinessNote ids={['softqp-index', 'softqp-case-result']} />
     <p role="status">{records ? t(`${records.length} cases loaded; ${available!.length} compatible successful method cells.`,`${records.length} casos cargados; ${available!.length} celdas compatibles exitosas.`):t('Loading verified experimental records…','Cargando registros experimentales verificados…')}</p>
     <Tabs ariaLabel={t('Experimental questions and protocol','Preguntas y protocolo experimental')} tabs={[
       {id:'semantics',label:t('Penalty semantics','Semántica'),content:<DocSection area="question" title={{en:'Do the methods solve the declared objective?',es:'¿Resuelven el objetivo declarado?'}} refs={['gsp','daqp']}>
@@ -31,7 +33,7 @@ export function Experiments(){
       </DocSection>},
       {id:'metrics',label:t('Metrics','Métricas'),content:<DocSection area="metrics" title={{en:'Original-space checks',es:'Verificaciones originales'}} refs={['osqp','gsp']}>
         <Equation tex={String.raw`F(x)=\tfrac12x^\top Px+q^\top x+\sum_{i\in\mathcal S}(a_{l,i}v_{l,i}+a_{u,i}v_{u,i}+\tfrac12b_{l,i}v_{l,i}^2+\tfrac12b_{u,i}v_{u,i}^2)`} caption={t('The separable objective is recomputed from original matrices and physical violations. Coupled cases use their declared group objective.', 'El objetivo separable se recalcula con matrices originales e incumplimientos físicos. Los casos acoplados usan su objetivo de grupo.')} />
-        <Equation tex={String.raw`\Delta_F=|F(x_{\rm method})-F(x_{\rm lifted})|,\qquad h_\infty=\max_{i\notin\mathcal S}(v_{l,i}+v_{u,i})`} caption={t('Absolute objective agreement and the raw hard-row violation. Costs and violations have different units and are never combined into one score.', 'Concordancia absoluta del objetivo e incumplimiento duro bruto. Costos e incumplimientos tienen unidades distintas y no se combinan en una puntuación.')} />
+        <Equation tex={String.raw`\Delta_F=|F(x_{\rm method})-F(x_{\rm lifted})|,\qquad h_\infty=\max(\{0\}\cup\{v_{l,i}+v_{u,i}:i\notin\mathcal S\})`} caption={t('Absolute objective agreement and the raw hard-row violation, zero when there are no hard rows. Costs and violations have different units and are never combined into one score.', 'Concordancia absoluta del objetivo e incumplimiento duro bruto, cero cuando no hay filas duras. Costos e incumplimientos tienen unidades distintas y no se combinan en una puntuación.')} />
         <Equation tex={String.raw`r_{\rm stat}=\|Px+q+A^\top y\|_\infty,\qquad \epsilon_{\rm abs}=\epsilon_{\rm rel}=10^{-7},\quad k_{\max}=200000`} caption={t('Recorded development solver settings and original stationarity diagnostic; DAQP records its effective backend settings separately.', 'Parámetros de desarrollo y diagnóstico de estacionariedad original; DAQP registra además sus parámetros efectivos.')} />
       </DocSection>},
       {id:'protocol',label:t('Protocol','Protocolo'),content:<DocSection area="protocol" title={{en:'Freeze before measuring',es:'Fijar antes de medir'}} noRefsReason={local}>

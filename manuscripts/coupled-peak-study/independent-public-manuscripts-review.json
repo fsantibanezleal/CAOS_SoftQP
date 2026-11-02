@@ -1,0 +1,87 @@
+{
+  "decision": "ACCEPT_PUBLIC_MANUSCRIPTS",
+  "reviewer": "/root/notebook_review",
+  "unresolved_findings": [],
+  "checked_utc": "2026-11-02T23:09:29.880457+00:00",
+  "scope": "Independent anonymous requests only; full public inventories, complete PDF streams, exact metadata and own/concept DOI latest resolution. No service writes.",
+  "accepted_final_document_review_sha256": "71d7babc0f17f15b7b42c22cfd7ed9c2d3869c8e3ea46eda6db6eeaca45c8324",
+  "accepted_staged_review_sha256": "96113f66f9b0e3e974a1d652472c9c8d9d313bcdc36aef3ad46bf676b58393ff",
+  "public_source_commit": "b58a92fe6d714d1ab1c07756bc73304610669754",
+  "documents": [
+    {
+      "slug": "soft-constraint-study",
+      "record_id": "23899079",
+      "record_url": "https://zenodo.org/records/23899079",
+      "api_url": "https://zenodo.org/api/records/23899079",
+      "version": "0.01.002",
+      "title": "Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results",
+      "resource_type": "publication-report",
+      "version_doi": "10.5281/zenodo.23899079",
+      "concept_doi": "10.5281/zenodo.23851659",
+      "sole_creator_orcid": "0000-0002-0150-3246",
+      "metadata_matches_independently_accepted_payload": true,
+      "filename": "softqp-studio-soft-constraint-study-v0.01.002.pdf",
+      "file_id": "c34c83f1-0d7b-4f1f-91d5-a4ebe7ab4cc9",
+      "complete_file_inventory_count": 1,
+      "bytes": 906442,
+      "sha256": "b3ac57f723713cf48117a8a41002980637910579404167ff2b7c2efddd0bf300",
+      "md5": "e95eb7fcb8a9f365c2089a5a41e7860c",
+      "anonymous_full_stream": true,
+      "latest_version_endpoint": "https://zenodo.org/api/records/23899079/versions/latest",
+      "latest_version_matches": true,
+      "doi_resolutions": {
+        "version": {
+          "doi": "10.5281/zenodo.23899079",
+          "final_url": "https://zenodo.org/records/23899079",
+          "status": 200
+        },
+        "concept": {
+          "doi": "10.5281/zenodo.23851659",
+          "final_url": "https://zenodo.org/records/23899079",
+          "status": 200
+        }
+      },
+      "public_metadata_snapshot_sha256": "2156d35a93b4c15614812ab7b12ddc0caf85f5befea0eb9c6ff2d40349c3ae55"
+    },
+    {
+      "slug": "coupled-peak-study",
+      "record_id": "23899142",
+      "record_url": "https://zenodo.org/records/23899142",
+      "api_url": "https://zenodo.org/api/records/23899142",
+      "version": "0.02.002",
+      "title": "Original-Row Proximal Updates for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies",
+      "resource_type": "publication-preprint",
+      "version_doi": "10.5281/zenodo.23899142",
+      "concept_doi": "10.5281/zenodo.23875071",
+      "sole_creator_orcid": "0000-0002-0150-3246",
+      "metadata_matches_independently_accepted_payload": true,
+      "filename": "softqp-studio-coupled-peak-study-v0.02.002.pdf",
+      "file_id": "a971c0d2-1dfc-439b-80af-1abce08f14ee",
+      "complete_file_inventory_count": 1,
+      "bytes": 628930,
+      "sha256": "6bfd39512e805398824a0e99506a886abf0982d1d9dd25c50d19bcde304accc2",
+      "md5": "6b5c45dc0f749bff336144ca20ee9fa9",
+      "anonymous_full_stream": true,
+      "latest_version_endpoint": "https://zenodo.org/api/records/23899142/versions/latest",
+      "latest_version_matches": true,
+      "doi_resolutions": {
+        "version": {
+          "doi": "10.5281/zenodo.23899142",
+          "final_url": "https://zenodo.org/records/23899142",
+          "status": 200
+        },
+        "concept": {
+          "doi": "10.5281/zenodo.23875071",
+          "final_url": "https://zenodo.org/records/23899142",
+          "status": 200
+        }
+      },
+      "public_metadata_snapshot_sha256": "db8ea01e838505bd3848f5076d21d81a42600c4c76e962f8a5260625d3743abb"
+    }
+  ],
+  "limits": [
+    "Scientific timing criteria remain negative; publication is not qualification or algorithmic priority.",
+    "Dataset reciprocal metadata update for these new versions is a separately pending graph check.",
+    "This receipt does not establish a new App deployment or full UI-gate completion."
+  ]
+}

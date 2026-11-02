@@ -1,0 +1,505 @@
+{
+  "id": "softqp-coupled-lesson",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-coupled-lesson.schema.json",
+  "schema_sha256": "24426bfa8bc8285f129ef3b87751442159e926049412bfd1db1091d9c665968c",
+  "producer": "data-pipeline/pipeline/coupled_lesson_worker.py",
+  "fields": [
+    "schema_version",
+    "sdk_version",
+    "worker_sha256",
+    "input_sha256",
+    "input",
+    "records"
+  ],
+  "consumer_test": "tests/test_coupled_lessons.py::test_adversarial_real_methods_share_the_original_objective",
+  "missing": "missing: the separately configured offline teaching runtime has no browser replay adapter; a generated shape example does not establish deployed solver execution",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=softqp.coupled-lesson/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "sdk_version",
+      "string",
+      "const=0.2.0",
+      "structural metadata / nested units"
+    ],
+    [
+      "worker_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "input_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "input",
+      "object",
+      "additionalProperties=False; required=['linear', 'quadratic', 'upper_scale', 'row_scale']",
+      "structural metadata / nested units"
+    ],
+    [
+      "input.linear",
+      "number",
+      "minimum=0; maximum=10",
+      "cost / peak unit"
+    ],
+    [
+      "input.quadratic",
+      "number",
+      "minimum=0; maximum=10",
+      "cost / peak unit squared"
+    ],
+    [
+      "input.upper_scale",
+      "number",
+      "minimum=0.25; maximum=4",
+      "dimensionless policy multiplier"
+    ],
+    [
+      "input.row_scale",
+      "number",
+      "minimum=0.01; maximum=100",
+      "dimensionless factor"
+    ],
+    [
+      "records",
+      "array",
+      "minItems=3; maxItems=3",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[]",
+      "object",
+      "additionalProperties=False; required=['method', 'state', 'reason', 'objective', 'x', 'peak', 'hard_violation', 'kkt_max', 'dimensions']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].method",
+      "enumerated value",
+      "enum=['native', 'epigraph', 'row-split-gsp']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].state",
+      "enumerated value",
+      "enum=['accepted', 'incompatible', 'failed', 'accuracy-rejected']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].reason",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].reason (anyOf1)",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].reason (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].objective",
+      "union / composition",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "records[].objective (anyOf1)",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "records[].objective (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "records[].x",
+      "union / composition",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "records[].x (anyOf1)",
+      "array",
+      "minItems=2; maxItems=2",
+      "decision unit"
+    ],
+    [
+      "records[].x (anyOf1)[]",
+      "number",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "records[].x (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "records[].peak",
+      "union / composition",
+      "See defined object / value type",
+      "group peak unit; model map"
+    ],
+    [
+      "records[].peak (anyOf1)",
+      "number",
+      "minimum=0",
+      "group peak unit; model map"
+    ],
+    [
+      "records[].peak (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "group peak unit; model map"
+    ],
+    [
+      "records[].hard_violation",
+      "union / composition",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "records[].hard_violation (anyOf1)",
+      "number",
+      "minimum=0",
+      "original row units; see unit map"
+    ],
+    [
+      "records[].hard_violation (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "records[].kkt_max",
+      "union / composition",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "records[].kkt_max (anyOf1)",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "records[].kkt_max (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "records[].dimensions",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].dimensions (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['variables', 'rows', 'nnz']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[].dimensions (anyOf1).variables",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "records[].dimensions (anyOf1).rows",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "records[].dimensions (anyOf1).nnz",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "records[].dimensions (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf1)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf1) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf1) (if).state",
+      "enumerated value",
+      "enum=['accepted', 'accuracy-rejected']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf1) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf1) (then).objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "records[] (allOf1) (then).x",
+      "array",
+      "minItems=2; maxItems=2",
+      "decision unit"
+    ],
+    [
+      "records[] (allOf1) (then).x[]",
+      "number",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "records[] (allOf1) (then).peak",
+      "number",
+      "minimum=0",
+      "group peak unit; model map"
+    ],
+    [
+      "records[] (allOf1) (then).hard_violation",
+      "number",
+      "minimum=0",
+      "original row units; see unit map"
+    ],
+    [
+      "records[] (allOf1) (then).kkt_max",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "records[] (allOf1) (then).dimensions",
+      "object",
+      "additionalProperties=False; required=['variables', 'rows', 'nnz']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf1) (then).dimensions.variables",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "records[] (allOf1) (then).dimensions.rows",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "records[] (allOf1) (then).dimensions.nnz",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "records[] (allOf2)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf2) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf2) (if).state",
+      "string",
+      "const=accepted",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf2) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf2) (then).reason",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf2) (else)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf2) (else).reason",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf3)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf3) (if)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf3) (if).state",
+      "enumerated value",
+      "enum=['incompatible', 'failed']",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf3) (then)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "records[] (allOf3) (then).objective",
+      "null",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "records[] (allOf3) (then).x",
+      "null",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "records[] (allOf3) (then).peak",
+      "null",
+      "See defined object / value type",
+      "group peak unit; model map"
+    ],
+    [
+      "records[] (allOf3) (then).hard_violation",
+      "null",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "records[] (allOf3) (then).kkt_max",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "records[] (allOf3) (then).dimensions",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1).records",
+      "object",
+      "minContains=1; maxContains=1",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1).records (contains)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf1).records (contains).method",
+      "string",
+      "const=native",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2).records",
+      "object",
+      "minContains=1; maxContains=1",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2).records (contains)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf2).records (contains).method",
+      "string",
+      "const=epigraph",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3).records",
+      "object",
+      "minContains=1; maxContains=1",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3).records (contains)",
+      "object",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      " (allOf3).records (contains).method",
+      "string",
+      "const=row-split-gsp",
+      "structural metadata / nested units"
+    ]
+  ]
+}

@@ -1,22 +1,22 @@
-# Independent public publication verification
+# Independent verification of the published native manuscripts
 
-Decision: **ACCEPT_PUBLIC_NATIVE_PAPER_PUBLICATION**.
+Both new manuscript versions passed independent anonymous public verification. Their complete public PDF bytes equal the exact native LaTeX documents accepted after source, mathematics, evidence and all-page review. The public records contain the correct separate Technical report and Preprint identities.
 
-[Directional coupled peak penalties with original interval rows](https://doi.org/10.5281/zenodo.23885695) is publicly available as version **0.02.001** under concept DOI [10.5281/zenodo.23875071](https://doi.org/10.5281/zenodo.23875071). The complete public inventory contains exactly one completed PDF. Fresh unauthenticated full-PDF bytes match the independently reviewed native LaTeX artifact:
+| Published document | Version | Pages | Full bytes | SHA256 |
+|---|---|---:|---:|---|
+| [Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results](https://doi.org/10.5281/zenodo.23899079) | 0.01.002 | 103 | 906442 | `b3ac57f723713cf48117a8a41002980637910579404167ff2b7c2efddd0bf300` |
+| [Original-Row Proximal Updates for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies](https://doi.org/10.5281/zenodo.23899142) | 0.02.002 | 28 | 628930 | `6bfd39512e805398824a0e99506a886abf0982d1d9dd25c50d19bcde304accc2` |
 
-| Property | Verified value |
-|---|---|
-| Pages | 16 |
-| Bytes | 548062 |
-| PDF SHA-256 | `58396c692aa785ef4a3543416a26bb75b150cc37e475236141d138b2bef92fc8` |
-| PDF MD5 | `5e0e7db3039c739e167cb4cfc222d34b` |
-| LaTeX source SHA-256 | `4181a9f10bc0946f2ebd04b99d669df67a6bb5c6f70c5e5252ded65e6c65d3b9` |
-| Accepted metadata SHA-256 | `06b8bb5e08c305427a494c286ff25d1340953b6bca2e7c3c696e3651e8960154` |
+The independent checks used fresh anonymous requests, without authentication or service writes. They verified each record's published status, exact version DOI and concept DOI, sole creator and ORCID, title, date, license, language, resource type, description and related records against the independently accepted metadata. Each complete public inventory contains exactly one PDF, with the same service file id, size and MD5 as the independently verified staged file. Each PDF was streamed in full and its SHA256 and MD5 were recomputed. Metadata and full inventories were read again after the downloads and remained unchanged.
 
-Public record, complete file API, latest-version API and concept resolution agree. Title, report role, sole creator Felipe Santibáñez-Leal, ORCID 0000-0002-0150-3246, date, version, CC BY 4.0, English description and related identifiers match the approved metadata. Availability links parse as the exact intended absolute URLs. Both corrected reports previously received independent actual review of all 36 pages in total, native equations, proofs, evidence fidelity, report-class styling, front matter, running identity and figures. This fresh public check confirms the exact same PDF bytes.
+The immutable version DOI and the always-latest concept DOI both resolve to the expected new record. The public latest-version API agrees for both concepts: [technical-report concept](https://doi.org/10.5281/zenodo.23851659) and [research-preprint concept](https://doi.org/10.5281/zenodo.23875071).
 
-Editable public sources, builds, metadata and figure inputs were independently downloaded anonymously from immutable [source commit 56ed01cad646fe29894f321eedc9f47cb85a90d8](https://github.com/fsantibanezleal/CAOS_SoftQP/tree/56ed01cad646fe29894f321eedc9f47cb85a90d8). All 22 checked files match the commit's Git objects, including all seven figure inputs. [CI run 41454909418](https://github.com/fsantibanezleal/CAOS_SoftQP/actions/runs/41454909418) completed successfully at that exact head. All 17 protected registered numerical-source hashes remain unchanged.
+The [public source commit b58a92f](https://github.com/fsantibanezleal/CAOS_SoftQP/tree/b58a92fe6d714d1ab1c07756bc73304610669754) was independently downloaded anonymously as a complete source archive. All 94 technical-report and 40 research-article recursive source inputs, all nine declared policy inputs, raw compiler, published-source PDFs, build receipts, exact independent-review JSON and metadata match their accepted identities. All seventeen registered numerical-source hashes remain unchanged. Native equations and vector figures are preserved; the reports were not recreated from rendered equation images.
 
-The separate [evidence dataset](https://doi.org/10.5281/zenodo.23875194), version 1.0.0 under concept 23875193, now has reciprocal IsSupplementTo relations to corrected report versions 23885690 and23885695 while preserving its historical relation to 23875072. Fresh complete metadata equals the independently approved metadata-only delta exactly. Both full file records, including UUIDs, filenames, sizes, MD5 checksums and links, remain unchanged: one 429502979-byte ZIP and one 94-byte checksum. The previously independently verified archive SHA-256 remains `45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418`. This metadata-only check did not download or recreate the archive.
+Publication preserves the complete negative scientific conclusions. Neither timing study establishes its registered ten-percent improvement criterion. The grouped primary retains all 144 members and nine failed scores; publication is evidence delivery, not scientific qualification, an algorithmic-priority claim or a new software release.
 
-This verifies paper publication and dataset reciprocity. Both registered 10% improvement claims remain unestablished; evidence integrity does not imply scientific superiority, historical priority, complete product compliance, app release or deployment. Earlier report versions and historical review failures remain preserved. The independent reviewer made no publication, metadata, scientific-data or solver changes.
+The complete grouped evidence remains the separate [dataset record](https://doi.org/10.5281/zenodo.23875194). Each new manuscript names that supplement. The dataset's reciprocal metadata update for these exact new versions is a separate pending graph check at this receipt's issue time. App deployment and full UI-gate completion are also outside this public-document verification.
+
+The accompanying `independent-public-manuscripts-review.json` records the exact check time, public endpoints, identities, complete-file hashes and phase-specific authorities. Its raw SHA256 is `371faca311a0cb8f701e33c9ecc9f6dde0ca7cb8620f3dd8cc57ff73ac4d5ad6`.
+
+The subsequent [independent dataset relation verification](../independent-public-dataset-relations-review.md) resolves the earlier reciprocal-graph item while preserving every historical relation and both original file objects.

@@ -1,0 +1,291 @@
+{
+  "id": "softqp-coupled-campaign",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-coupled-campaign.schema.json",
+  "schema_sha256": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372",
+  "producer": "data-pipeline/pipeline/coupled_campaign.py",
+  "fields": [
+    "schema_version",
+    "kind",
+    "protocol_id",
+    "split",
+    "environment",
+    "source_sha256",
+    "inventory",
+    "datasets",
+    "counts",
+    "primary",
+    "peak_worker_rss",
+    "worker_restarts",
+    "raw_sha256",
+    "csv_sha256"
+  ],
+  "consumer_test": "tests/coupled/test_coupled_export.py::test_adversarial_replay_rejects_tampering_even_when_outer_checksums_are_recomputed",
+  "missing": "missing: this offline research exchange has no declared validated replay adapter in the app; schema examples and archived evidence do not establish deployed data availability",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=1.0.0",
+      "structural metadata / nested units"
+    ],
+    [
+      "kind",
+      "string",
+      "const=directional-coupled-campaign",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol_id",
+      "string",
+      "const=softqp-directional-coupled-v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "split",
+      "enumerated value",
+      "enum=['development', 'heldout', 'robustness']",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment",
+      "object",
+      "required=['packages', 'native_binary_sha256', 'registration', 'sdk_python_sha256', 'hardware']",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.packages",
+      "object",
+      "additionalProperties={'type': 'string'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.native_binary_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.registration",
+      "object",
+      "required=['commit', 'protocol_sha256', 'review_sha256']",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.registration.commit",
+      "string",
+      "pattern=^[0-9a-f]{40}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.registration.protocol_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.registration.review_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.sdk_python_sha256",
+      "object",
+      "additionalProperties={'$ref': '#/$defs/hash'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.hardware",
+      "object",
+      "required=['machine', 'processor', 'logical_cpu_count']",
+      "structural metadata / nested units"
+    ],
+    [
+      "source_sha256",
+      "object",
+      "additionalProperties={'$ref': '#/$defs/hash'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "inventory",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "inventory[]",
+      "object",
+      "required=['id', 'split', 'seed', 'family', 'curvature', 'quadratic']",
+      "structural metadata / nested units"
+    ],
+    [
+      "datasets",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "datasets[]",
+      "object",
+      "required=['id', 'oracle_state', 'oracle_reason', 'oracle_objectives', 'batch_sha256']",
+      "structural metadata / nested units"
+    ],
+    [
+      "datasets[].id",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "datasets[].oracle_state",
+      "enumerated value",
+      "enum=['accepted', 'oracle-failed', 'failed', 'timeout', 'resource-limit']",
+      "structural metadata / nested units"
+    ],
+    [
+      "datasets[].oracle_reason",
+      "string / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "datasets[].oracle_objectives",
+      "array / null",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "datasets[].oracle_objectives[]",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "datasets[].batch_sha256",
+      "string / null",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "counts",
+      "object",
+      "additionalProperties={'type': 'integer', 'minimum': 0}",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary",
+      "object",
+      "required=['established', 'pairs']",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary.established",
+      "boolean",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary.pairs",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary.pairs[]",
+      "object",
+      "required=['id', 'seed', 'reduction', 'fastest_baseline', 'failure_reasons', 'median_seconds']",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary.pairs[].reduction",
+      "number",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary.pairs[].seed",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "primary.pairs[].failure_reasons",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary.pairs[].failure_reasons[]",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary.pairs[].median_seconds",
+      "object",
+      "additionalProperties={'type': 'number', 'exclusiveMinimum': 0}",
+      "s"
+    ],
+    [
+      "primary.estimate",
+      "number",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary.confidence_interval",
+      "array",
+      "minItems=2; maxItems=2",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary.confidence_interval[]",
+      "number",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary.denominator",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "primary.seed_clusters",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "primary.failed_pairs",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "peak_worker_rss",
+      "integer",
+      "minimum=0",
+      "bytes"
+    ],
+    [
+      "worker_restarts",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "raw_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "csv_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ]
+  ]
+}

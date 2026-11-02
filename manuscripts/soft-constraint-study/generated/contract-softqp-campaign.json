@@ -1,0 +1,1299 @@
+{
+  "id": "softqp-campaign",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-campaign.schema.json",
+  "schema_sha256": "e56ea150f6c020f240a5bf1be8562e4c907476985fff230a484c55e4be6f21d3",
+  "producer": "data-pipeline/pipeline/experiment_export.py",
+  "fields": [
+    "schema_version",
+    "protocol",
+    "environment",
+    "protocol_sha256",
+    "source_sha256",
+    "observed_wall_seconds",
+    "worker_peak_rss_bytes",
+    "worker_restarts",
+    "planned_instances",
+    "completed_instances",
+    "cells",
+    "primary_endpoint",
+    "counts",
+    "artifacts"
+  ],
+  "consumer_test": "frontend/src/lib/experiments.contract.test.ts",
+  "missing": "missing: experiment evidence is unavailable; show the missing path and retain the other case records",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=softqp.campaign/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol",
+      "object",
+      "additionalProperties=False; required=['protocol_id', 'phase', 'created', 'engine_source', 'operating_limits', 'accuracy', 'methods', 'backends', 'generator', 'seeds', 'repetitions', 'primary_endpoint', 'secondary_endpoints', 'robustness', 'stream', 'measurement_scope', 'failure_policy', 'claims']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.protocol_id",
+      "string",
+      "const=softqp-experiments-v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.phase",
+      "string",
+      "const=registered before held-out generation",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.created",
+      "string",
+      "const=2026-10-31",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.engine_source",
+      "string",
+      "const=d0c69ed974d577ba02adbd4806332270d9425651",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.operating_limits",
+      "object",
+      "additionalProperties=False; required=['blas_threads', 'wall_seconds', 'process_memory_limit_bytes', 'parallel_workers', 'trial_timeout_seconds']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.operating_limits.blas_threads",
+      "integer",
+      "const=1",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.operating_limits.wall_seconds",
+      "integer",
+      "const=7200",
+      "s"
+    ],
+    [
+      "protocol.operating_limits.process_memory_limit_bytes",
+      "integer",
+      "const=4294967296",
+      "bytes"
+    ],
+    [
+      "protocol.operating_limits.parallel_workers",
+      "integer",
+      "const=1",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.operating_limits.trial_timeout_seconds",
+      "integer",
+      "const=10",
+      "s"
+    ],
+    [
+      "protocol.accuracy",
+      "object",
+      "additionalProperties=False; required=['eps_abs', 'eps_rel', 'max_iter', 'adaptive_rho_interval', 'normalized_objective_gap_limit', 'hard_row_error_limit']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.accuracy.eps_abs",
+      "number",
+      "const=1e-07",
+      "solver coordinate tolerance; model scaling applies"
+    ],
+    [
+      "protocol.accuracy.eps_rel",
+      "number",
+      "const=1e-07",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "protocol.accuracy.max_iter",
+      "integer",
+      "const=200000",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.accuracy.adaptive_rho_interval",
+      "integer",
+      "const=25",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.accuracy.normalized_objective_gap_limit",
+      "number",
+      "const=1e-06",
+      "dimensionless"
+    ],
+    [
+      "protocol.accuracy.hard_row_error_limit",
+      "number",
+      "const=1e-06",
+      "original row unit; synthetic coordinates"
+    ],
+    [
+      "protocol.methods",
+      "array",
+      "minItems=6; maxItems=6",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.methods[0]",
+      "string",
+      "const=lifted",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.methods[1]",
+      "string",
+      "const=generalized",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.methods[2]",
+      "string",
+      "const=asymmetric",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.methods[3]",
+      "string",
+      "const=daqp",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.methods[4]",
+      "string",
+      "const=flex",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.methods[5]",
+      "string",
+      "const=elastiqp",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.backends",
+      "object",
+      "additionalProperties=False; required=['lifted_timed', 'lifted_oracle', 'flex', 'elastiqp']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.backends.lifted_timed",
+      "string",
+      "const=pinned native fork",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.backends.lifted_oracle",
+      "string",
+      "const=independent stock OSQP with eps_abs=eps_rel=1e-9",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.backends.flex",
+      "string",
+      "const=fixed-parameter paper-equation reconstruction",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.backends.elastiqp",
+      "string",
+      "const=published 0.2.0 dual active set",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.generator",
+      "object",
+      "additionalProperties=False; required=['n', 'm_per_n', 'density', 'hessian_condition', 'families', 'hard_row_fraction_elastic', 'hard_row_fraction_l1', 'row_norm', 'q_standard_deviation', 'linear_cost_range', 'quadratic_cost_range', 'asymmetric_upper_factor_range', 'lower', 'upper']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.generator.n",
+      "array",
+      "minItems=4; maxItems=4",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.generator.n[0]",
+      "integer",
+      "const=32",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.generator.n[1]",
+      "integer",
+      "const=64",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.generator.n[2]",
+      "integer",
+      "const=128",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.generator.n[3]",
+      "integer",
+      "const=256",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.generator.m_per_n",
+      "integer",
+      "const=2",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.density",
+      "array",
+      "minItems=2; maxItems=2",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "protocol.generator.density[0]",
+      "number",
+      "const=0.05",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "protocol.generator.density[1]",
+      "number",
+      "const=0.2",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "protocol.generator.hessian_condition",
+      "array",
+      "minItems=2; maxItems=2",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.hessian_condition[0]",
+      "integer",
+      "const=1",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.hessian_condition[1]",
+      "integer",
+      "const=1000",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.families",
+      "array",
+      "minItems=3; maxItems=3",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.generator.families[0]",
+      "string",
+      "const=symmetric-elastic",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.generator.families[1]",
+      "string",
+      "const=asymmetric-elastic",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.generator.families[2]",
+      "string",
+      "const=asymmetric-l1",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.generator.hard_row_fraction_elastic",
+      "number",
+      "const=0.2",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.hard_row_fraction_l1",
+      "integer",
+      "const=0",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.row_norm",
+      "integer",
+      "const=1",
+      "row / decision unit; generator coordinates"
+    ],
+    [
+      "protocol.generator.q_standard_deviation",
+      "integer",
+      "const=3",
+      "cost / decision unit"
+    ],
+    [
+      "protocol.generator.linear_cost_range",
+      "array",
+      "minItems=2; maxItems=2",
+      "cost / row unit"
+    ],
+    [
+      "protocol.generator.linear_cost_range[0]",
+      "number",
+      "const=0.1",
+      "cost / row unit"
+    ],
+    [
+      "protocol.generator.linear_cost_range[1]",
+      "number",
+      "const=1.0",
+      "cost / row unit"
+    ],
+    [
+      "protocol.generator.quadratic_cost_range",
+      "array",
+      "minItems=2; maxItems=2",
+      "cost / row unit squared"
+    ],
+    [
+      "protocol.generator.quadratic_cost_range[0]",
+      "number",
+      "const=0.5",
+      "cost / row unit squared"
+    ],
+    [
+      "protocol.generator.quadratic_cost_range[1]",
+      "number",
+      "const=4.0",
+      "cost / row unit squared"
+    ],
+    [
+      "protocol.generator.asymmetric_upper_factor_range",
+      "array",
+      "minItems=2; maxItems=2",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.asymmetric_upper_factor_range[0]",
+      "number",
+      "const=1.5",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.asymmetric_upper_factor_range[1]",
+      "number",
+      "const=3.0",
+      "dimensionless"
+    ],
+    [
+      "protocol.generator.lower",
+      "number",
+      "const=-0.4",
+      "original row unit"
+    ],
+    [
+      "protocol.generator.upper",
+      "number",
+      "const=0.6",
+      "original row unit"
+    ],
+    [
+      "protocol.seeds",
+      "object",
+      "additionalProperties=False; required=['development', 'heldout', 'robustness', 'order', 'bootstrap']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.seeds.development",
+      "array",
+      "minItems=3; maxItems=3",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.development[0]",
+      "integer",
+      "const=1000",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.development[1]",
+      "integer",
+      "const=1001",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.development[2]",
+      "integer",
+      "const=1002",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout",
+      "array",
+      "minItems=6; maxItems=6",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout[0]",
+      "integer",
+      "const=9000",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout[1]",
+      "integer",
+      "const=9001",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout[2]",
+      "integer",
+      "const=9002",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout[3]",
+      "integer",
+      "const=9003",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout[4]",
+      "integer",
+      "const=9004",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.heldout[5]",
+      "integer",
+      "const=9005",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness",
+      "array",
+      "minItems=6; maxItems=6",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness[0]",
+      "integer",
+      "const=8500",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness[1]",
+      "integer",
+      "const=8501",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness[2]",
+      "integer",
+      "const=8502",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness[3]",
+      "integer",
+      "const=8503",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness[4]",
+      "integer",
+      "const=8504",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.robustness[5]",
+      "integer",
+      "const=8505",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.order",
+      "integer",
+      "const=271828",
+      "integer random seed"
+    ],
+    [
+      "protocol.seeds.bootstrap",
+      "integer",
+      "const=314159",
+      "integer random seed"
+    ],
+    [
+      "protocol.repetitions",
+      "object",
+      "additionalProperties=False; required=['warmup_per_backend', 'measured', 'paired_order', 'bootstrap_seed_clusters']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.repetitions.warmup_per_backend",
+      "integer",
+      "const=1",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.repetitions.measured",
+      "integer",
+      "const=7",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.repetitions.paired_order",
+      "string",
+      "const=seeded random method order within each instance and repetition",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.repetitions.bootstrap_seed_clusters",
+      "integer",
+      "const=2000",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.primary_endpoint",
+      "object",
+      "additionalProperties=False; required=['family', 'n_minimum', 'density', 'quantity', 'minimum_reduction', 'confidence', 'success_condition']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.primary_endpoint.family",
+      "string",
+      "const=asymmetric-elastic",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.primary_endpoint.n_minimum",
+      "integer",
+      "const=128",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.primary_endpoint.density",
+      "number",
+      "const=0.05",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "protocol.primary_endpoint.quantity",
+      "string",
+      "const=median paired relative reduction in cold end-to-end time against the faster of native compact lifting and DAQP",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.primary_endpoint.minimum_reduction",
+      "number",
+      "const=0.1",
+      "dimensionless"
+    ],
+    [
+      "protocol.primary_endpoint.confidence",
+      "string",
+      "const=two-sided 95 percent seed-cluster bootstrap interval has a lower endpoint above zero",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.primary_endpoint.success_condition",
+      "string",
+      "const=all compared cells satisfy external original-space acceptance; failures are retained",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.secondary_endpoints",
+      "array",
+      "minItems=5; maxItems=5",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.secondary_endpoints[0]",
+      "string",
+      "const=native solve/setup and update time",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.secondary_endpoints[1]",
+      "string",
+      "const=iterations",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.secondary_endpoints[2]",
+      "string",
+      "const=formulation dimensions and nonzeros",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.secondary_endpoints[3]",
+      "string",
+      "const=accuracy versus conditioning",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.secondary_endpoints[4]",
+      "string",
+      "const=within-method warm/cold stream measurements",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.robustness",
+      "object",
+      "additionalProperties=False; required=['n', 'm', 'density', 'hessian_condition', 'same_A_q_and_costs_within_seed']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.robustness.n",
+      "integer",
+      "const=32",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.robustness.m",
+      "integer",
+      "const=64",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.robustness.density",
+      "number",
+      "const=0.1",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "protocol.robustness.hessian_condition",
+      "array",
+      "minItems=4; maxItems=4",
+      "dimensionless"
+    ],
+    [
+      "protocol.robustness.hessian_condition[0]",
+      "integer",
+      "const=1",
+      "dimensionless"
+    ],
+    [
+      "protocol.robustness.hessian_condition[1]",
+      "integer",
+      "const=100",
+      "dimensionless"
+    ],
+    [
+      "protocol.robustness.hessian_condition[2]",
+      "integer",
+      "const=10000",
+      "dimensionless"
+    ],
+    [
+      "protocol.robustness.hessian_condition[3]",
+      "integer",
+      "const=1000000",
+      "dimensionless"
+    ],
+    [
+      "protocol.robustness.same_A_q_and_costs_within_seed",
+      "boolean",
+      "const=True",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream",
+      "object",
+      "additionalProperties=False; required=['case_id', 'frames', 'horizon', 'dt_seconds', 'initial_state', 'velocity_impulses', 'policy', 'methods', 'modes', 'timing']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.case_id",
+      "string",
+      "const=C12",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.frames",
+      "integer",
+      "const=32",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.stream.horizon",
+      "integer",
+      "const=20",
+      "count / integer identifier"
+    ],
+    [
+      "protocol.stream.dt_seconds",
+      "number",
+      "const=0.2",
+      "s"
+    ],
+    [
+      "protocol.stream.initial_state",
+      "array",
+      "minItems=2; maxItems=2",
+      "components: m and m/s"
+    ],
+    [
+      "protocol.stream.initial_state[0]",
+      "number",
+      "const=1.6",
+      "m"
+    ],
+    [
+      "protocol.stream.initial_state[1]",
+      "number",
+      "const=0.0",
+      "m/s"
+    ],
+    [
+      "protocol.stream.velocity_impulses",
+      "object",
+      "additionalProperties=False; required=['8', '20']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.velocity_impulses.8",
+      "number",
+      "const=0.8",
+      "m/s; key is frame index"
+    ],
+    [
+      "protocol.stream.velocity_impulses.20",
+      "number",
+      "const=-0.6",
+      "m/s; key is frame index"
+    ],
+    [
+      "protocol.stream.policy",
+      "string",
+      "const=Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts.",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.methods",
+      "array",
+      "minItems=4; maxItems=4",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.methods[0]",
+      "string",
+      "const=lifted",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.methods[1]",
+      "string",
+      "const=generalized",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.methods[2]",
+      "string",
+      "const=asymmetric",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.methods[3]",
+      "string",
+      "const=daqp",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.modes",
+      "array",
+      "minItems=2; maxItems=2",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.modes[0]",
+      "string",
+      "const=cold",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.modes[1]",
+      "string",
+      "const=warm",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.stream.timing",
+      "string",
+      "const=one documented stream observation per frame; no statistical superiority claim from it",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.measurement_scope",
+      "object",
+      "additionalProperties=False; required=['cold_end_to_end', 'generation', 'warm_end_to_end', 'factorization', 'memory']",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.measurement_scope.cold_end_to_end",
+      "string",
+      "const=validated original QP input to independently evaluated returned result; includes validation, formulation construction, setup and solve; excludes generator, module import and export",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.measurement_scope.generation",
+      "string",
+      "const=measured separately",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.measurement_scope.warm_end_to_end",
+      "string",
+      "const=vector validation, update, solve and original-space evaluation; one initial workspace setup is recorded separately",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.measurement_scope.factorization",
+      "string",
+      "const=backend setup currently includes linear-system preparation; isolated numeric factor time is not instrumented and cannot be inferred",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.measurement_scope.memory",
+      "string",
+      "const=process RSS and campaign high-water mark are resource observations, not per-method native allocation peaks",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.failure_policy",
+      "string",
+      "const=Preserve incompatible, maximum-iteration, timeout, numerical and accuracy-rejected cells with reasons. Never replace an objective or drop a failed evaluation seed.",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol.claims",
+      "string",
+      "const=A successful implementation benchmark does not establish global algorithmic novelty, safety or universal solver superiority. Deep FlexQP trained weights are not available in this reconstruction.",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment",
+      "object",
+      "additionalProperties=False; required=['python', 'platform', 'packages']",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.python",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.platform",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.packages",
+      "object",
+      "additionalProperties={'type': 'string'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.engine_revision",
+      "string / null",
+      "pattern=^[0-9a-f]{40}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.engine_source_dirty",
+      "boolean / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.native_binary_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "source_sha256",
+      "object",
+      "additionalProperties={'type': 'string', 'pattern': '^[0-9a-f]{64}$'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "observed_wall_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "worker_peak_rss_bytes",
+      "integer",
+      "minimum=0",
+      "bytes"
+    ],
+    [
+      "worker_restarts",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "planned_instances",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "completed_instances",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "cells[]",
+      "object",
+      "additionalProperties=False; required=['split', 'n', 'density', 'condition', 'family', 'method', 'counts', 'median_seconds', 'quantile_25_seconds', 'quantile_75_seconds', 'max_normalized_gap', 'max_hard_violation']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cells[].split",
+      "enumerated value",
+      "enum=['development', 'heldout', 'robustness']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cells[].n",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].density",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "cells[].condition",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "cells[].family",
+      "enumerated value",
+      "enum=['symmetric-elastic', 'asymmetric-elastic', 'asymmetric-l1']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cells[].method",
+      "enumerated value",
+      "enum=['lifted', 'generalized', 'asymmetric', 'daqp', 'flex', 'elastiqp']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cells[].counts",
+      "object",
+      "additionalProperties=False; required=[]",
+      "structural metadata / nested units"
+    ],
+    [
+      "cells[].counts.accepted",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].counts.incompatible",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].counts.failed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].counts.accuracy-rejected",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].counts.timeout",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].counts.resource-limit",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].counts.oracle-failed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "cells[].median_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "cells[].median_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "cells[].median_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "cells[].quantile_25_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "cells[].quantile_25_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "cells[].quantile_25_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "cells[].quantile_75_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "cells[].quantile_75_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "cells[].quantile_75_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "cells[].max_normalized_gap",
+      "union / composition",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "cells[].max_normalized_gap (anyOf1)",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "cells[].max_normalized_gap (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "cells[].max_hard_violation",
+      "union / composition",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "cells[].max_hard_violation (anyOf1)",
+      "number",
+      "minimum=0",
+      "original row units; see unit map"
+    ],
+    [
+      "cells[].max_hard_violation (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "primary_endpoint",
+      "object",
+      "additionalProperties=False; required=['state', 'median_relative_reduction', 'confidence_interval_95', 'paired_samples', 'rejected_pairs', 'seed_clusters']",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary_endpoint.state",
+      "enumerated value",
+      "enum=['met', 'not-established']",
+      "structural metadata / nested units"
+    ],
+    [
+      "primary_endpoint.median_relative_reduction",
+      "union / composition",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.median_relative_reduction (anyOf1)",
+      "number",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.median_relative_reduction (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.confidence_interval_95",
+      "union / composition",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.confidence_interval_95 (anyOf1)",
+      "array",
+      "minItems=2; maxItems=2",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.confidence_interval_95 (anyOf1)[]",
+      "number",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.confidence_interval_95 (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "primary_endpoint.paired_samples",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "primary_endpoint.rejected_pairs",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "primary_endpoint.seed_clusters",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts",
+      "object",
+      "additionalProperties=False; required=[]",
+      "structural metadata / nested units"
+    ],
+    [
+      "counts.accepted",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.incompatible",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.failed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.accuracy-rejected",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.timeout",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.resource-limit",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.oracle-failed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "artifacts",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[]",
+      "object",
+      "additionalProperties=False; required=['path', 'bytes', 'sha256']",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[].path",
+      "string",
+      "pattern=^[a-z][a-z0-9-]*\\.(json|csv|jsonl)$",
+      "structural metadata / nested units"
+    ],
+    [
+      "artifacts[].bytes",
+      "integer",
+      "minimum=0",
+      "bytes"
+    ],
+    [
+      "artifacts[].sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ]
+  ]
+}

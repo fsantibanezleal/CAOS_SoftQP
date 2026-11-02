@@ -1,0 +1,643 @@
+{
+  "id": "softqp-trial",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-trial.schema.json",
+  "schema_sha256": "1ab928bccf5349be333947316a11575e85abe40d79d8ff8a88efec32aac86e0b",
+  "producer": "data-pipeline/pipeline/experiment_export.py",
+  "fields": [
+    "id",
+    "split",
+    "n",
+    "density",
+    "condition",
+    "family",
+    "seed",
+    "method",
+    "repetition",
+    "warmup",
+    "state",
+    "reason",
+    "metrics",
+    "normalized_gap",
+    "elapsed_seconds",
+    "update_seconds",
+    "workspace_setup_seconds",
+    "result",
+    "iterations",
+    "dimensions",
+    "native_setup_seconds",
+    "native_solve_seconds",
+    "status",
+    "status_code"
+  ],
+  "consumer_test": "tests/test_experiment_export.py",
+  "missing": "missing: experiment evidence is unavailable; show the missing path and retain the other case records",
+  "nested_fields": [
+    [
+      "id",
+      "string",
+      "pattern=^(development|heldout|robustness)-[0-9]{4}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "split",
+      "enumerated value",
+      "enum=['development', 'heldout', 'robustness']",
+      "structural metadata / nested units"
+    ],
+    [
+      "n",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "density",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "condition",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "family",
+      "enumerated value",
+      "enum=['symmetric-elastic', 'asymmetric-elastic', 'asymmetric-l1']",
+      "structural metadata / nested units"
+    ],
+    [
+      "seed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "method",
+      "enumerated value",
+      "enum=['lifted', 'generalized', 'asymmetric', 'daqp', 'flex', 'elastiqp']",
+      "structural metadata / nested units"
+    ],
+    [
+      "repetition",
+      "integer",
+      "minimum=-1",
+      "count / integer identifier"
+    ],
+    [
+      "warmup",
+      "boolean",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "state",
+      "enumerated value",
+      "enum=['accepted', 'incompatible', 'failed', 'accuracy-rejected', 'timeout', 'resource-limit', 'oracle-failed']",
+      "structural metadata / nested units"
+    ],
+    [
+      "reason",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "reason (anyOf1)",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "reason (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "metrics",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "metrics (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['objective', 'base_objective', 'penalty_objective', 'hard_violation', 'stationarity_residual', 'total_lower_violation', 'total_upper_violation']",
+      "structural metadata / nested units"
+    ],
+    [
+      "metrics (anyOf1).objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "metrics (anyOf1).base_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "metrics (anyOf1).penalty_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "metrics (anyOf1).hard_violation",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "metrics (anyOf1).stationarity_residual",
+      "union / composition",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "metrics (anyOf1).stationarity_residual (anyOf1)",
+      "number",
+      "minimum=0",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "metrics (anyOf1).stationarity_residual (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "metrics (anyOf1).total_lower_violation",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "metrics (anyOf1).total_upper_violation",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "metrics (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "normalized_gap",
+      "union / composition",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "normalized_gap (anyOf1)",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "normalized_gap (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "elapsed_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "elapsed_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "elapsed_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "update_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "update_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "update_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "workspace_setup_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "workspace_setup_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "workspace_setup_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "result",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['method', 'status', 'status_code', 'x', 'metrics', 'dimensions', 'iterations', 'setup_seconds', 'solve_seconds', 'elapsed_seconds']",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).method",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).status",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).status_code",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "result (anyOf1).x",
+      "union / composition",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "result (anyOf1).x (anyOf1)",
+      "array",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "result (anyOf1).x (anyOf1)[]",
+      "number",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "result (anyOf1).x (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "result (anyOf1).y",
+      "union / composition",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "result (anyOf1).y (anyOf1)",
+      "array",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "result (anyOf1).y (anyOf1)[]",
+      "number",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "result (anyOf1).y (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "result (anyOf1).metrics",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['base_objective', 'penalty_objective', 'objective', 'hard_violation', 'lower_violation', 'upper_violation', 'slack']",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).base_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).penalty_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).hard_violation",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).lower_violation",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).lower_violation[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).upper_violation",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).upper_violation[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).slack",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).slack[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).stationarity_residual",
+      "union / composition",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).stationarity_residual (anyOf1)",
+      "number",
+      "minimum=0",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).stationarity_residual (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).objective_gap_against_lifted",
+      "union / composition",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).objective_gap_against_lifted (anyOf1)",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf1).objective_gap_against_lifted (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "result (anyOf1).metrics (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).dimensions",
+      "object",
+      "additionalProperties=False; required=['variables', 'rows', 'nnz']",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf1).dimensions.variables",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "result (anyOf1).dimensions.rows",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "result (anyOf1).dimensions.nnz",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "result (anyOf1).iterations",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "result (anyOf1).setup_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "result (anyOf1).solve_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "result (anyOf1).elapsed_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "result (anyOf1).backend_settings",
+      "object",
+      "additionalProperties={'type': 'number'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "result (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "iterations",
+      "union / composition",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "iterations (anyOf1)",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "iterations (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "dimensions",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "dimensions (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['variables', 'rows', 'nnz']",
+      "structural metadata / nested units"
+    ],
+    [
+      "dimensions (anyOf1).variables",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "dimensions (anyOf1).rows",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "dimensions (anyOf1).nnz",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "dimensions (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "native_setup_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "native_setup_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "native_setup_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "native_solve_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "native_solve_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "native_solve_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "status",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "status (anyOf1)",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "status (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "status_code",
+      "union / composition",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "status_code (anyOf1)",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "status_code (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "count / integer identifier"
+    ]
+  ]
+}

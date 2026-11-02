@@ -1,0 +1,193 @@
+{
+  "source_commit": "2d3f299d80edad49c2599e61bb6e3c875c119043",
+  "source_inputs": {
+    "data/derived/softqp/C01.json": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
+    "data/derived/softqp/C02.json": "d1319c87e0ddeb007528d5ee309e06284f1a4875095943448fee0c5fd763fcd6",
+    "data/derived/softqp/C03.json": "82c7ed303e2d47cc9fd417ca3347851a0a83cc96803f919515fe4a3dfeb83970",
+    "data/derived/softqp/C04.json": "08ae34a8252057249e93709954eac425abc7e86bf2724fc369acdedbef66ff7d",
+    "data/derived/softqp/C05.json": "c449a5d2950602d83505cfa0121aa1bbdac98c61131aeede1b846ccf100c2657",
+    "data/derived/softqp/C06.json": "992f8a1f20c3c04198db8ee803736dc5c83a364c2f730ccbca841ff1e4a83c2a",
+    "data/derived/softqp/C07.json": "d9fdfdf1b4912245fcbb641914565587ce4842ba3305d3eb58661623fe21d664",
+    "data/derived/softqp/C08.json": "d85bea4482d0b3d05ca389fd58b52d3cb12d39805a618dfb6eec7d35b56663e3",
+    "data/derived/softqp/C09.json": "d1442faa4e4626ec2264d56b852bfbb0a375d53105b2970915f5a95e93d699fc",
+    "data/derived/softqp/C10.json": "30d96a746701607cdeddd3bd54fbb7a99e814411347b42d9653e2ed24963454a",
+    "data/derived/softqp/C11.json": "89515d04f414574f63c20404d801399f72042f0fe90ab08809bd567924222332",
+    "data/derived/softqp/C12.json": "a7130366ee0be3039799f07e394190c4dd8c0528a972c9eaf2d9b8635c7e47e7",
+    "data/derived/softqp/C13.json": "3ebb9d5b093ecc91d8abfde09046ae95c7055de198656104c95f6a2e159c27e9",
+    "data/derived/softqp/C14.json": "ee5fbbe986171566c5c7f7761839ed4d68178bf8f4436400710e683da0aa45bd",
+    "data/derived/softqp/C15.json": "b55500a5723383a0f45739b13939e523671ac480c9b2bb41e878c03c587d75d9",
+    "data/derived/experiments/campaign.json": "3a79bc8abf63f70cac054c26bb5ec19bff0321e0047673d7bc3b239d380f00b5",
+    "data/derived/experiments/stream.json": "faab5d6a0d5397748360906b0c5b73d0462cd045c164b67dd963b973f2719f3e",
+    "manuscripts/coupled-peak-study/results/summary/summary.json": "c82bf30bb53c7c10d464fc446bd2b99ee774b581dbe3f4dced86194e1fe54c6d",
+    "docs/contracts/examples/softqp-coupled-lesson.json": "5de72a62398f885cb1cf59164500f5f33bedc38e419c98818e10c12ebe712ab0",
+    "docs/contracts/catalog.md": "00867c47d53d7c709e42cc8bdd1b65a36d33d3b22de58564b3c7fc4c1b7ba85f",
+    "docs/contracts/schemas/case-index.schema.json": "4e8771d2500900a6cbd93e6eb5e216680a596ebadef75f039e1194949ffae783",
+    "docs/contracts/schemas/case-manifest.schema.json": "19e2a7d1395b658ce202a96ec337c3d7eb90d12c716e61db434d81dd304290af",
+    "docs/contracts/schemas/readiness.schema.json": "98af12b6d5620bcd07fb684e580a5715712d280ed6f3ab97edf16b215a5914f3",
+    "docs/contracts/api.openapi.json": "a276b8f7e142dcb1a9bc7c2c646418c64a408e31281aee2171d0fbe3424f449c",
+    "docs/contracts/schemas/softqp-index.schema.json": "de57805f3de3201523c930c846fffc2c19a2008b49f18986325139b307581209",
+    "docs/contracts/schemas/softqp-case-result.schema.json": "2b2b3555fa39e779e7485b5c9f673610f2255eb79fdb2e307e52cbaa0c69691f",
+    "docs/contracts/schemas/softqp-case-spec.schema.json": "dff9f1f23f5867aea4f8b7e5be14b06d4c4aa84372b2e468663771cdc2861a9a",
+    "docs/contracts/schemas/softqp-run-request.schema.json": "3010be005e625af758f2faefb13b5949ef911cef46a89ca53bd2b7dcab440ba3",
+    "docs/contracts/schemas/softqp-local-export.schema.json": "02aa2b23e683fb5ceec97466457d95820aa9d214e58818d92567fdc5ca8a2036",
+    "docs/contracts/schemas/softqp-stream.schema.json": "68bd41e2d4f220154a417e7d87dbb4c5d16346aaba4548187b8a6b8762f10032",
+    "docs/contracts/schemas/softqp-campaign.schema.json": "e56ea150f6c020f240a5bf1be8562e4c907476985fff230a484c55e4be6f21d3",
+    "docs/contracts/schemas/softqp-datasets.schema.json": "545f3d134bc3cf9160b6c157cd0f3262f778b7d227571401ba69ad385fe379e4",
+    "docs/contracts/schemas/softqp-trial.schema.json": "1ab928bccf5349be333947316a11575e85abe40d79d8ff8a88efec32aac86e0b",
+    "docs/contracts/schemas/softqp-experiment-index.schema.json": "6b49695e50e5177586347b0596553d0e4e960f376b7b9aa3d6130e63ba7cf42f",
+    "docs/contracts/schemas/softqp-coupled-batch.schema.json": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54",
+    "docs/contracts/schemas/softqp-coupled-observation.schema.json": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710",
+    "docs/contracts/schemas/softqp-coupled-campaign.schema.json": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372",
+    "docs/contracts/schemas/softqp-coupled-lesson.schema.json": "24426bfa8bc8285f129ef3b87751442159e926049412bfd1db1091d9c665968c",
+    "docs/architecture/01_overview.md": "b510a58902bbb32c217f45e15f20e9ecf589a788a14d33304783b91a15c27f68"
+  },
+  "figures": [
+    {
+      "file": "figures/architecture.pdf",
+      "sha256": "525e6e78a950ef43054bedbd64f7c9795b6490690880c5c15bc80fd494cd5746",
+      "caption": "Implemented data flow from original physical model through native solving and independent acceptance to a versioned static reader. This is an architecture diagram, not a measured speed or reliability result.",
+      "label": "fig:architecture",
+      "sources": [
+        "docs/contracts/catalog.md",
+        "docs/architecture/01_overview.md"
+      ]
+    },
+    {
+      "file": "figures/scalar-objective.pdf",
+      "sha256": "2319bab7b27549c28b42afdeec3d137718b5121474f2c8d65ef6db559624257d",
+      "caption": "Analytic evaluation of the stored C01 objective and actual exported method optima. The shaded interval is the preferred band, and the curve is a mathematical illustration rather than a new timed observation.",
+      "label": "fig:scalar-objective",
+      "sources": [
+        "data/derived/softqp/C01.json"
+      ]
+    },
+    {
+      "file": "figures/formulation-size.pdf",
+      "sha256": "634f7b40af98fd6516235734ad1d5d7556af466decdc532afd3e2da562d0db53",
+      "caption": "Exported variable counts for all fifteen stored catalog cases and four catalog paths. Missing points denote unsupported objectives; the counts describe formulation size and do not measure factorization fill or computational advantage.",
+      "label": "fig:formulation-size",
+      "sources": [
+        "data/derived/softqp/C01.json",
+        "data/derived/softqp/C02.json",
+        "data/derived/softqp/C03.json",
+        "data/derived/softqp/C04.json",
+        "data/derived/softqp/C05.json",
+        "data/derived/softqp/C06.json",
+        "data/derived/softqp/C07.json",
+        "data/derived/softqp/C08.json",
+        "data/derived/softqp/C09.json",
+        "data/derived/softqp/C10.json",
+        "data/derived/softqp/C11.json",
+        "data/derived/softqp/C12.json",
+        "data/derived/softqp/C13.json",
+        "data/derived/softqp/C14.json",
+        "data/derived/softqp/C15.json"
+      ]
+    },
+    {
+      "file": "figures/compatibility.pdf",
+      "sha256": "ef971d03c18adc124a0438ffa32c572c374b5c30b03248662935700ad3e1bbfc",
+      "caption": "Full catalog method-case compatibility: A denotes an available exported solution and I an incompatible requested objective. This four-path catalog is distinct from the six-path original timing study and the separate grouped study.",
+      "label": "fig:compatibility",
+      "sources": [
+        "data/derived/softqp/C01.json",
+        "data/derived/softqp/C02.json",
+        "data/derived/softqp/C03.json",
+        "data/derived/softqp/C04.json",
+        "data/derived/softqp/C05.json",
+        "data/derived/softqp/C06.json",
+        "data/derived/softqp/C07.json",
+        "data/derived/softqp/C08.json",
+        "data/derived/softqp/C09.json",
+        "data/derived/softqp/C10.json",
+        "data/derived/softqp/C11.json",
+        "data/derived/softqp/C12.json",
+        "data/derived/softqp/C13.json",
+        "data/derived/softqp/C14.json",
+        "data/derived/softqp/C15.json"
+      ]
+    },
+    {
+      "file": "figures/original-effect.pdf",
+      "sha256": "a1ce8e87c84a3eb4693a6b75946528f3849e31f02b373c791948d910f5277c46",
+      "caption": "Original held-out timing estimate with its stored 95 percent seed-cluster confidence interval and registered ten percent reference. The interval crosses zero; neither interval nor population is recomputed for this figure.",
+      "label": "fig:original-effect",
+      "sources": [
+        "data/derived/experiments/campaign.json"
+      ]
+    },
+    {
+      "file": "figures/cold-times.pdf",
+      "sha256": "509e076cceae191391fdb91ce5c20bd93fb30eb14b8a7e2983d2a080f3b2a4e8",
+      "caption": "Stored held-out asymmetric-elastic timing cells at density 0.05 and unit diagonal condition. Lines are stored medians and bands stored interquartile ranges; this descriptive subset does not replace the complete primary endpoint.",
+      "label": "fig:cold-times",
+      "sources": [
+        "data/derived/experiments/campaign.json"
+      ]
+    },
+    {
+      "file": "figures/conditioning.pdf",
+      "sha256": "55afd780a548bf3bea9a4b1ae7471637e4a1ad62c48feef90f40e830ad268256",
+      "caption": "Maximum stored objective discrepancy in each compatible robustness cell by diagonal condition. The dashed line is the original external objective criterion; absent methods remain absent rather than receiving an invented zero discrepancy.",
+      "label": "fig:conditioning",
+      "sources": [
+        "data/derived/experiments/campaign.json"
+      ]
+    },
+    {
+      "file": "figures/control-stream.pdf",
+      "sha256": "965aff6372f37776307c6a179b67ebde6676232cbf19b9d89bb04509e2196ca4",
+      "caption": "The stored common C12 plant trajectory and interval-held oracle acceleration across thirty-two frames. Steps retain each complete physical sampling interval; these curves are not separate closed-loop controller performance measurements.",
+      "label": "fig:control-stream",
+      "sources": [
+        "data/derived/experiments/stream.json"
+      ]
+    },
+    {
+      "file": "figures/stream-reuse.pdf",
+      "sha256": "a48de3e4b5ebc0f6a6e3f7350db05c025ed662d786e49e27a5a5a0c75b1dd813",
+      "caption": "Stored cold and warm C12 operation durations for every accepted frame of each compatible method. The box summaries are descriptive paired-path evidence, not a randomized causal isolation of warm starting from all other implementation choices.",
+      "label": "fig:stream-reuse",
+      "sources": [
+        "data/derived/experiments/stream.json"
+      ]
+    },
+    {
+      "file": "figures/coupled-population.pdf",
+      "sha256": "3e9c5a252e5a3123936910f38f856daecf5d7c1beebe728dc04f56b752e3b067",
+      "caption": "All 144 stored grouped-study primary members in original order, with nine failed scores retained. Complete-operation medians preserve missing values as gaps and do not impute a comparator where the primary rule selected none.",
+      "label": "fig:coupled-population",
+      "sources": [
+        "manuscripts/coupled-peak-study/results/summary/summary.json"
+      ]
+    },
+    {
+      "file": "figures/coupled-states.pdf",
+      "sha256": "5b0c440bca04f16bcb9c012de3ae8d8a1c8682394276e5914a6463095067ed9d",
+      "caption": "All 5670 measured method observations of the grouped study, separated by their original development, held-out and robustness splits. Acceptance, accuracy rejection, incompatibility, dependent oracle failure and supervised timeout remain different categories.",
+      "label": "fig:coupled-states",
+      "sources": [
+        "manuscripts/coupled-peak-study/results/summary/summary.json"
+      ]
+    },
+    {
+      "file": "figures/coupled-formulations.pdf",
+      "sha256": "7a8a5f6257bf16aad958a4973189988a960fe0207bf44eba582f0956757b6f35",
+      "caption": "Distributions of stored held-out per-instance medians for each returned compatible formulation. Sample counts differ because compatibility and failures differ; these unmatched descriptive distributions are not the registered paired comparison or a causal ablation.",
+      "label": "fig:coupled-formulations",
+      "sources": [
+        "manuscripts/coupled-peak-study/results/summary/summary.json"
+      ]
+    },
+    {
+      "file": "figures/directional-lesson.pdf",
+      "sha256": "55fd10ca5154bb1d4317a38962da5dc0d4424796843ca8f2a1e8c7e278f8a8c1",
+      "caption": "Stored native, epigraph and directional row-split answers for the same two-variable physical teaching input. Objective and decision agreement are a small numerical illustration, not additional timing evidence or an independent experiment.",
+      "label": "fig:directional-lesson",
+      "sources": [
+        "docs/contracts/examples/softqp-coupled-lesson.json"
+      ]
+    }
+  ],
+  "no_new_solver_or_bootstrap": true
+}

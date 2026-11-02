@@ -1,0 +1,175 @@
+{
+  "id": "softqp-index",
+  "version": "1.1.0",
+  "schema": "docs/contracts/schemas/softqp-index.schema.json",
+  "schema_sha256": "de57805f3de3201523c930c846fffc2c19a2008b49f18986325139b307581209",
+  "producer": "data-pipeline/pipeline/softqp_run.py",
+  "fields": [
+    "schema_version",
+    "state",
+    "default_case",
+    "cases",
+    "environment",
+    "limitations"
+  ],
+  "consumer_test": "frontend/src/lib/softqp.contract.test.ts",
+  "missing": "missing: no scientific inventory; the workbench shows unavailable and no result; development state is displayed until the release matrix is complete",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=softqp.index/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "state",
+      "string",
+      "const=development",
+      "structural metadata / nested units"
+    ],
+    [
+      "default_case",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "default_case (anyOf1)",
+      "string",
+      "pattern=^C[0-9]{2}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "default_case (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[]",
+      "object",
+      "additionalProperties=False; required=['case_id', 'title', 'category', 'path', 'sha256', 'failed']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].case_id",
+      "string",
+      "pattern=^C[0-9]{2}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].title",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].title.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].title.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].category",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].category.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].category.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].path",
+      "string",
+      "pattern=^C[0-9]{2}\\.json$",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].sha256",
+      "string",
+      "pattern=^[a-f0-9]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].failed",
+      "boolean",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment",
+      "object",
+      "additionalProperties=False; required=['python', 'platform', 'packages']",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.python",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.platform",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.packages",
+      "object",
+      "additionalProperties={'type': 'string'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.engine_revision",
+      "string / null",
+      "pattern=^[0-9a-f]{40}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.engine_source_dirty",
+      "boolean / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.native_binary_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "limitations",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "limitations[]",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ]
+  ]
+}
