@@ -1,0 +1,121 @@
+{
+  "id": "softqp-datasets",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-datasets.schema.json",
+  "schema_sha256": "545f3d134bc3cf9160b6c157cd0f3262f778b7d227571401ba69ad385fe379e4",
+  "producer": "data-pipeline/pipeline/experiment_export.py",
+  "fields": [
+    "id",
+    "split",
+    "n",
+    "density",
+    "condition",
+    "family",
+    "seed",
+    "generation_seconds",
+    "problem_sha256",
+    "oracle_state",
+    "oracle_reason",
+    "oracle_objective"
+  ],
+  "consumer_test": "tests/test_experiment_export.py",
+  "missing": "missing: experiment evidence is unavailable; show the missing path and retain the other case records",
+  "nested_fields": [
+    [
+      "id",
+      "string",
+      "pattern=^(development|heldout|robustness)-[0-9]{4}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "split",
+      "enumerated value",
+      "enum=['development', 'heldout', 'robustness']",
+      "structural metadata / nested units"
+    ],
+    [
+      "n",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "density",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "condition",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "family",
+      "enumerated value",
+      "enum=['symmetric-elastic', 'asymmetric-elastic', 'asymmetric-l1']",
+      "structural metadata / nested units"
+    ],
+    [
+      "seed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "generation_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "problem_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "oracle_state",
+      "enumerated value",
+      "enum=['accepted', 'oracle-failed']",
+      "structural metadata / nested units"
+    ],
+    [
+      "oracle_reason",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "oracle_reason (anyOf1)",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "oracle_reason (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "oracle_objective",
+      "union / composition",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "oracle_objective (anyOf1)",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "oracle_objective (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "model cost unit"
+    ]
+  ]
+}

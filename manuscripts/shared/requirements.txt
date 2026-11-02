@@ -1,0 +1,5 @@
+# Isolated external manuscript rendering environment; no numerical experiment runs.
+matplotlib==3.10.7
+numpy==2.3.4
+Pillow==12.3.0
+pypdf==6.21.4

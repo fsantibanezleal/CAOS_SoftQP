@@ -18,8 +18,11 @@ def repo(tmp_path):
     target = tmp_path / "repo"
     (target / "docs/contracts").mkdir(parents=True)
     shutil.copy2(ROOT / "docs/contracts/catalog.md", target / "docs/contracts/catalog.md")
-    shutil.copy2(ROOT / "VERSION", target / "VERSION")
     shutil.copytree(ROOT / "data/derived", target / "data/derived")
+    # The isolated positive fixture deliberately matches its copied bake.
+    # The real checkout's older-bake state is checked independently below.
+    inventory = json.loads((target / "data/derived/manifests/index.json").read_text(encoding="utf-8"))
+    (target / "VERSION").write_text(inventory["engine_version"] + "\n", encoding="utf-8")
     return target
 
 

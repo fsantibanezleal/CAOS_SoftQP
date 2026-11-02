@@ -1,0 +1,115 @@
+{
+  "id": "case-index",
+  "version": "3.1.0",
+  "schema": "docs/contracts/schemas/case-index.schema.json",
+  "schema_sha256": "4e8771d2500900a6cbd93e6eb5e216680a596ebadef75f039e1194949ffae783",
+  "producer": "data-pipeline/pipeline/core/manifest.py",
+  "fields": [
+    "schema",
+    "engine_version",
+    "n_cases",
+    "default_case",
+    "cases",
+    "files"
+  ],
+  "consumer_test": "frontend/src/lib/contract.test.ts",
+  "missing": "missing: the site build stops at copy-data (no site without an inventory), the API answers 503 missing, readiness says missing. stale: engine_version older than VERSION; readiness says stale with both versions and the views show it",
+  "nested_fields": [
+    [
+      "schema",
+      "string",
+      "const=softqp.artifact-index/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "engine_version",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "n_cases",
+      "integer",
+      "minimum=1",
+      "count / integer identifier"
+    ],
+    [
+      "default_case",
+      "string",
+      "pattern=^C[0-9]{2}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases",
+      "array",
+      "minItems=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[]",
+      "object",
+      "additionalProperties=False; required=['case_id', 'title', 'category', 'manifest_path']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].case_id",
+      "string",
+      "pattern=^C[0-9]{2}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].title",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].title.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].title.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].category",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].category.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].category.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "cases[].manifest_path",
+      "string",
+      "pattern=^(?!.*\\.\\.)[A-Za-z0-9_./-]+\\.json$",
+      "structural metadata / nested units"
+    ],
+    [
+      "files",
+      "array",
+      "uniqueItems=True",
+      "structural metadata / nested units"
+    ],
+    [
+      "files[]",
+      "string",
+      "pattern=^(?!.*\\.\\.)[A-Za-z0-9_./-]+\\.(json|csv|jsonl)$",
+      "structural metadata / nested units"
+    ]
+  ]
+}

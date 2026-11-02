@@ -1,3 +1,7 @@
+# Historical verification, superseded
+
+The verification below concerns the earlier document rejected for insufficient content and the wrong structure. It does not accept the current replacement. Current exact source and PDF acceptance is recorded in [independent-review.json](independent-review.json).
+
 # Independent public publication verification
 
 Decision: **ACCEPT_PUBLIC_NATIVE_PAPER_PUBLICATION**.

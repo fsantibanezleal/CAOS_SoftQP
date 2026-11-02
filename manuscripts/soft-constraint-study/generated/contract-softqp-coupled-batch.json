@@ -1,0 +1,355 @@
+{
+  "id": "softqp-coupled-batch",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-coupled-batch.schema.json",
+  "schema_sha256": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54",
+  "producer": "data-pipeline/pipeline/coupled_contract.py",
+  "fields": [
+    "schema_version",
+    "kind",
+    "description",
+    "problem",
+    "updates",
+    "units"
+  ],
+  "consumer_test": "tests/coupled/test_coupled_contract.py",
+  "missing": "missing: this offline research exchange has no declared validated replay adapter in the app; schema examples and archived evidence do not establish deployed data availability",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=1.0.0",
+      "structural metadata / nested units"
+    ],
+    [
+      "kind",
+      "string",
+      "const=directional-coupled-peak-batch",
+      "structural metadata / nested units"
+    ],
+    [
+      "description",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "problem",
+      "object",
+      "additionalProperties=False; required=['P', 'A', 'q', 'lower', 'upper', 'groups']",
+      "structural metadata / nested units"
+    ],
+    [
+      "problem.P",
+      "object",
+      "additionalProperties=False; required=['shape', 'data', 'indices', 'indptr']",
+      "structural metadata / nested units"
+    ],
+    [
+      "problem.P.shape",
+      "array",
+      "minItems=2; maxItems=2",
+      "count / integer identifier"
+    ],
+    [
+      "problem.P.shape[]",
+      "integer",
+      "minimum=1; maximum=16384",
+      "count / integer identifier"
+    ],
+    [
+      "problem.P.data",
+      "array",
+      "maxItems=4194304",
+      "cost / decision units squared"
+    ],
+    [
+      "problem.P.data[]",
+      "number",
+      "See defined object / value type",
+      "cost / decision units squared"
+    ],
+    [
+      "problem.P.indices",
+      "array",
+      "maxItems=4194304",
+      "count / integer identifier"
+    ],
+    [
+      "problem.P.indices[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "problem.P.indptr",
+      "array",
+      "minItems=2; maxItems=16385",
+      "count / integer identifier"
+    ],
+    [
+      "problem.P.indptr[]",
+      "integer",
+      "minimum=0; maximum=4194304",
+      "count / integer identifier"
+    ],
+    [
+      "problem.A",
+      "object",
+      "additionalProperties=False; required=['shape', 'data', 'indices', 'indptr']",
+      "structural metadata / nested units"
+    ],
+    [
+      "problem.A.shape",
+      "array",
+      "minItems=2; maxItems=2",
+      "count / integer identifier"
+    ],
+    [
+      "problem.A.shape[]",
+      "integer",
+      "minimum=1; maximum=16384",
+      "count / integer identifier"
+    ],
+    [
+      "problem.A.data",
+      "array",
+      "maxItems=4194304",
+      "row / decision unit"
+    ],
+    [
+      "problem.A.data[]",
+      "number",
+      "See defined object / value type",
+      "row / decision unit"
+    ],
+    [
+      "problem.A.indices",
+      "array",
+      "maxItems=4194304",
+      "count / integer identifier"
+    ],
+    [
+      "problem.A.indices[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "problem.A.indptr",
+      "array",
+      "minItems=2; maxItems=16385",
+      "count / integer identifier"
+    ],
+    [
+      "problem.A.indptr[]",
+      "integer",
+      "minimum=0; maximum=4194304",
+      "count / integer identifier"
+    ],
+    [
+      "problem.q",
+      "array",
+      "minItems=1; maxItems=16384",
+      "cost / decision unit"
+    ],
+    [
+      "problem.q[]",
+      "number",
+      "See defined object / value type",
+      "cost / decision unit"
+    ],
+    [
+      "problem.lower",
+      "array",
+      "minItems=1; maxItems=16384",
+      "original row unit"
+    ],
+    [
+      "problem.lower[]",
+      "number / null",
+      "See defined object / value type",
+      "original row unit"
+    ],
+    [
+      "problem.upper",
+      "array",
+      "minItems=1; maxItems=16384",
+      "original row unit"
+    ],
+    [
+      "problem.upper[]",
+      "number / null",
+      "See defined object / value type",
+      "original row unit"
+    ],
+    [
+      "problem.groups",
+      "array",
+      "maxItems=16384",
+      "structural metadata / nested units"
+    ],
+    [
+      "problem.groups[]",
+      "object",
+      "additionalProperties=False; required=['rows', 'lower_scale', 'upper_scale', 'linear', 'quadratic']",
+      "structural metadata / nested units"
+    ],
+    [
+      "problem.groups[].rows",
+      "array",
+      "minItems=1; maxItems=16384; uniqueItems=True",
+      "count / integer identifier"
+    ],
+    [
+      "problem.groups[].rows[]",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "problem.groups[].lower_scale",
+      "array",
+      "minItems=1; maxItems=16384",
+      "peak unit / row unit; model map"
+    ],
+    [
+      "problem.groups[].lower_scale[]",
+      "number",
+      "exclusiveMinimum=0",
+      "peak unit / row unit; model map"
+    ],
+    [
+      "problem.groups[].upper_scale",
+      "array",
+      "minItems=1; maxItems=16384",
+      "peak unit / row unit; model map"
+    ],
+    [
+      "problem.groups[].upper_scale[]",
+      "number",
+      "exclusiveMinimum=0",
+      "peak unit / row unit; model map"
+    ],
+    [
+      "problem.groups[].linear",
+      "number",
+      "minimum=0",
+      "cost / peak unit"
+    ],
+    [
+      "problem.groups[].quadratic",
+      "number",
+      "minimum=0",
+      "cost / peak unit squared"
+    ],
+    [
+      "updates",
+      "array",
+      "minItems=1; maxItems=512",
+      "structural metadata / nested units"
+    ],
+    [
+      "updates[]",
+      "object",
+      "additionalProperties=False; required=['q', 'lower', 'upper']",
+      "structural metadata / nested units"
+    ],
+    [
+      "updates[].q",
+      "array",
+      "minItems=1; maxItems=16384",
+      "cost / decision unit"
+    ],
+    [
+      "updates[].q[]",
+      "number",
+      "See defined object / value type",
+      "cost / decision unit"
+    ],
+    [
+      "updates[].lower",
+      "array",
+      "minItems=1; maxItems=16384",
+      "original row unit"
+    ],
+    [
+      "updates[].lower[]",
+      "number / null",
+      "See defined object / value type",
+      "original row unit"
+    ],
+    [
+      "updates[].upper",
+      "array",
+      "minItems=1; maxItems=16384",
+      "original row unit"
+    ],
+    [
+      "updates[].upper[]",
+      "number / null",
+      "See defined object / value type",
+      "original row unit"
+    ],
+    [
+      "units",
+      "object",
+      "additionalProperties={'type': 'string', 'minLength': 1}; required=['variable', 'row', 'q', 'P_diagonal', 'objective']",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.variable",
+      "array",
+      "minItems=1; maxItems=16384",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.variable[]",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.row",
+      "array",
+      "minItems=1; maxItems=16384",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.row[]",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.q",
+      "array",
+      "minItems=1; maxItems=16384",
+      "cost / decision unit"
+    ],
+    [
+      "units.q[]",
+      "string",
+      "minLength=1",
+      "cost / decision unit"
+    ],
+    [
+      "units.P_diagonal",
+      "array",
+      "minItems=1; maxItems=16384",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.P_diagonal[]",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "units.objective",
+      "string",
+      "minLength=1",
+      "model cost unit"
+    ]
+  ]
+}

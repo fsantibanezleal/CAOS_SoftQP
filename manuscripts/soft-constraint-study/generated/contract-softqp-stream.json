@@ -1,0 +1,850 @@
+{
+  "id": "softqp-stream",
+  "version": "1.0.0",
+  "schema": "docs/contracts/schemas/softqp-stream.schema.json",
+  "schema_sha256": "68bd41e2d4f220154a417e7d87dbb4c5d16346aaba4548187b8a6b8762f10032",
+  "producer": "data-pipeline/pipeline/experiment_export.py",
+  "fields": [
+    "schema_version",
+    "case_id",
+    "protocol_id",
+    "engine_source",
+    "environment",
+    "specification",
+    "frames",
+    "counts",
+    "limitations"
+  ],
+  "consumer_test": "frontend/src/lib/experiments.contract.test.ts",
+  "missing": "missing: experiment evidence is unavailable; show the missing path and retain the other case records",
+  "nested_fields": [
+    [
+      "schema_version",
+      "string",
+      "const=softqp.stream/v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "case_id",
+      "string",
+      "const=C12",
+      "structural metadata / nested units"
+    ],
+    [
+      "protocol_id",
+      "string",
+      "const=softqp-experiments-v1",
+      "structural metadata / nested units"
+    ],
+    [
+      "engine_source",
+      "string",
+      "pattern=^[0-9a-f]{40}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment",
+      "object",
+      "additionalProperties=False; required=['python', 'platform', 'packages']",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.python",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.platform",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.packages",
+      "object",
+      "additionalProperties={'type': 'string'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.engine_revision",
+      "string / null",
+      "pattern=^[0-9a-f]{40}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.engine_source_dirty",
+      "boolean / null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "environment.native_binary_sha256",
+      "string",
+      "pattern=^[0-9a-f]{64}$",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification",
+      "object",
+      "additionalProperties=False; required=['case_id', 'frames', 'horizon', 'dt_seconds', 'initial_state', 'velocity_impulses', 'policy', 'methods', 'modes', 'timing']",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.case_id",
+      "string",
+      "const=C12",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.frames",
+      "integer",
+      "const=32",
+      "count / integer identifier"
+    ],
+    [
+      "specification.horizon",
+      "integer",
+      "const=20",
+      "count / integer identifier"
+    ],
+    [
+      "specification.dt_seconds",
+      "number",
+      "const=0.2",
+      "s"
+    ],
+    [
+      "specification.initial_state",
+      "array",
+      "minItems=2; maxItems=2",
+      "components: m and m/s"
+    ],
+    [
+      "specification.initial_state[0]",
+      "number",
+      "const=1.6",
+      "m"
+    ],
+    [
+      "specification.initial_state[1]",
+      "number",
+      "const=0.0",
+      "m/s"
+    ],
+    [
+      "specification.velocity_impulses",
+      "object",
+      "additionalProperties=False; required=['8', '20']",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.velocity_impulses.8",
+      "number",
+      "const=0.8",
+      "m/s; key is frame index"
+    ],
+    [
+      "specification.velocity_impulses.20",
+      "number",
+      "const=-0.6",
+      "m/s; key is frame index"
+    ],
+    [
+      "specification.policy",
+      "string",
+      "const=Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts.",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.methods",
+      "array",
+      "minItems=4; maxItems=4",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.methods[0]",
+      "string",
+      "const=lifted",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.methods[1]",
+      "string",
+      "const=generalized",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.methods[2]",
+      "string",
+      "const=asymmetric",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.methods[3]",
+      "string",
+      "const=daqp",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.modes",
+      "array",
+      "minItems=2; maxItems=2",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.modes[0]",
+      "string",
+      "const=cold",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.modes[1]",
+      "string",
+      "const=warm",
+      "structural metadata / nested units"
+    ],
+    [
+      "specification.timing",
+      "string",
+      "const=one documented stream observation per frame; no statistical superiority claim from it",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames",
+      "array",
+      "minItems=32; maxItems=32",
+      "count / integer identifier"
+    ],
+    [
+      "frames[]",
+      "object",
+      "additionalProperties=False; required=['frame', 'time_seconds', 'state', 'velocity_impulse', 'oracle_objective', 'objective_constant', 'oracle_horizon_cost', 'oracle_control', 'applied_control', 'next_state', 'generation_seconds', 'runs']",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].frame",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].time_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].state",
+      "array",
+      "minItems=2; maxItems=2",
+      "C12 components: m and m/s"
+    ],
+    [
+      "frames[].state[]",
+      "number",
+      "See defined object / value type",
+      "C12 components: m and m/s"
+    ],
+    [
+      "frames[].velocity_impulse",
+      "number",
+      "See defined object / value type",
+      "m/s"
+    ],
+    [
+      "frames[].oracle_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].objective_constant",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].oracle_horizon_cost",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].oracle_control",
+      "number",
+      "See defined object / value type",
+      "m/s squared"
+    ],
+    [
+      "frames[].applied_control",
+      "number",
+      "See defined object / value type",
+      "m/s squared"
+    ],
+    [
+      "frames[].next_state",
+      "array",
+      "minItems=2; maxItems=2",
+      "C12 components: m and m/s"
+    ],
+    [
+      "frames[].next_state[]",
+      "number",
+      "See defined object / value type",
+      "C12 components: m and m/s"
+    ],
+    [
+      "frames[].generation_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs",
+      "array",
+      "minItems=8; maxItems=8",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[]",
+      "object",
+      "additionalProperties=False; required=['method', 'mode', 'state', 'reason', 'metrics', 'normalized_gap', 'elapsed_seconds', 'update_seconds', 'workspace_setup_seconds', 'result']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].method",
+      "enumerated value",
+      "enum=['lifted', 'generalized', 'asymmetric', 'daqp', 'flex', 'elastiqp']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].mode",
+      "enumerated value",
+      "enum=['cold', 'warm']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].state",
+      "enumerated value",
+      "enum=['accepted', 'incompatible', 'failed', 'accuracy-rejected', 'timeout', 'resource-limit', 'oracle-failed']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].reason",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].reason (anyOf1)",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].reason (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].metrics",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['base_objective', 'penalty_objective', 'objective', 'hard_violation', 'lower_violation', 'upper_violation', 'slack']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).base_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).penalty_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).hard_violation",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).lower_violation",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).lower_violation[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).upper_violation",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).upper_violation[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).slack",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).slack[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).stationarity_residual",
+      "union / composition",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).stationarity_residual (anyOf1)",
+      "number",
+      "minimum=0",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).stationarity_residual (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).objective_gap_against_lifted",
+      "union / composition",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).objective_gap_against_lifted (anyOf1)",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf1).objective_gap_against_lifted (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].metrics (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].normalized_gap",
+      "union / composition",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].runs[].normalized_gap (anyOf1)",
+      "number",
+      "minimum=0",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].runs[].normalized_gap (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "dimensionless normalized diagnostic / factor"
+    ],
+    [
+      "frames[].runs[].elapsed_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "frames[].runs[].elapsed_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs[].elapsed_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "frames[].runs[].update_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "frames[].runs[].update_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs[].update_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "frames[].runs[].workspace_setup_seconds",
+      "union / composition",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "frames[].runs[].workspace_setup_seconds (anyOf1)",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs[].workspace_setup_seconds (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "s"
+    ],
+    [
+      "frames[].runs[].result",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['method', 'status', 'status_code', 'x', 'metrics', 'dimensions', 'iterations', 'setup_seconds', 'solve_seconds', 'elapsed_seconds']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).method",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).status",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).status_code",
+      "integer",
+      "See defined object / value type",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).x",
+      "union / composition",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).x (anyOf1)",
+      "array",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).x (anyOf1)[]",
+      "number",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).x (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "decision unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).y",
+      "union / composition",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).y (anyOf1)",
+      "array",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).y (anyOf1)[]",
+      "number",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).y (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "cost / original row unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics",
+      "union / composition",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1)",
+      "object",
+      "additionalProperties=False; required=['base_objective', 'penalty_objective', 'objective', 'hard_violation', 'lower_violation', 'upper_violation', 'slack']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).base_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).penalty_objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).objective",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).hard_violation",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).lower_violation",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).lower_violation[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).upper_violation",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).upper_violation[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).slack",
+      "array",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).slack[]",
+      "number",
+      "See defined object / value type",
+      "original row units; see unit map"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).stationarity_residual",
+      "union / composition",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).stationarity_residual (anyOf1)",
+      "number",
+      "minimum=0",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).stationarity_residual (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "cost / decision unit; raw gradient norm"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).objective_gap_against_lifted",
+      "union / composition",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).objective_gap_against_lifted (anyOf1)",
+      "number",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf1).objective_gap_against_lifted (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "model cost unit"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).metrics (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).dimensions",
+      "object",
+      "additionalProperties=False; required=['variables', 'rows', 'nnz']",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).dimensions.variables",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).dimensions.rows",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).dimensions.nnz",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).iterations",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).setup_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).solve_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).elapsed_seconds",
+      "number",
+      "minimum=0",
+      "s"
+    ],
+    [
+      "frames[].runs[].result (anyOf1).backend_settings",
+      "object",
+      "additionalProperties={'type': 'number'}",
+      "structural metadata / nested units"
+    ],
+    [
+      "frames[].runs[].result (anyOf2)",
+      "null",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "counts",
+      "object",
+      "additionalProperties=False; required=[]",
+      "structural metadata / nested units"
+    ],
+    [
+      "counts.accepted",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.incompatible",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.failed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.accuracy-rejected",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.timeout",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.resource-limit",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "counts.oracle-failed",
+      "integer",
+      "minimum=0",
+      "count / integer identifier"
+    ],
+    [
+      "limitations",
+      "array",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ],
+    [
+      "limitations[]",
+      "string",
+      "See defined object / value type",
+      "structural metadata / nested units"
+    ]
+  ]
+}

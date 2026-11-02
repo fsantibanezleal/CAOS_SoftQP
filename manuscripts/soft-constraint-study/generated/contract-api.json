@@ -1,0 +1,44 @@
+{
+  "id": "api",
+  "version": "2.1.0",
+  "schema": "docs/contracts/api.openapi.json",
+  "schema_sha256": "a276b8f7e142dcb1a9bc7c2c646418c64a408e31281aee2171d0fbe3424f449c",
+  "producer": "app/",
+  "fields": [
+    "detail"
+  ],
+  "consumer_test": "frontend/src/lib/api.contract.test.ts",
+  "missing": "missing: a document the route serves is absent, the API answers 503 with state missing and the reason (never an empty body); an unknown case or artifact is 404. The static readiness says missing for this row while the API lane is dormant; /api/readiness says available",
+  "nested_fields": [
+    [
+      "detail",
+      "object",
+      "additionalProperties=False; required=['state', 'reason']",
+      "structural metadata / nested units"
+    ],
+    [
+      "detail.state",
+      "string",
+      "const=missing",
+      "structural metadata / nested units"
+    ],
+    [
+      "detail.reason",
+      "object",
+      "additionalProperties=False; required=['en', 'es']",
+      "structural metadata / nested units"
+    ],
+    [
+      "detail.reason.en",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ],
+    [
+      "detail.reason.es",
+      "string",
+      "minLength=1",
+      "structural metadata / nested units"
+    ]
+  ]
+}

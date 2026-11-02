@@ -1,32 +1,18 @@
-# Independent native-manuscript review: Directional coupled peak penalties with original interval rows
+# Final DOI rebuild 03: accepted for staging
 
-**Local decision: APPROVE FOR GOVERNED MANUSCRIPT PUBLICATION.** This portable public review summary records independent source, mathematics, evidence, metadata and actual PDF-page checks. It preserves the full original review separately and does not claim that remote publication or product deployment is complete.
+The controlling machine receipt is [independent-review.json](independent-review.json), raw SHA256 `71d7babc0f17f15b7b42c22cfd7ed9c2d3869c8e3ea46eda6db6eeaca45c8324`. Both real current publication-acceptance guard calls passed. This supersedes rebuild 01 only for the exact PDF/build/policy identities; earlier source, mathematical and complete-page review evidence remains preserved.
 
-## Exact reviewed artifact
+| Final document | Pages | PDF SHA256 |
+|---|---:|---|
+| Technical report v0.01.002, DOI 10.5281/zenodo.23899079 | 103 | `b3ac57f723713cf48117a8a41002980637910579404167ff2b7c2efddd0bf300` |
+| Research preprint v0.02.002, DOI 10.5281/zenodo.23899142 | 28 | `6bfd39512e805398824a0e99506a886abf0982d1d9dd25c50d19bcde304accc2` |
 
-- Report version: 0.02.001.
-- Reserved version DOI: [10.5281/zenodo.23885695](https://doi.org/10.5281/zenodo.23885695).
-- Concept DOI: [10.5281/zenodo.23875071](https://doi.org/10.5281/zenodo.23875071).
-- PDF: 16 pages, 548062 bytes.
-- PDF SHA-256: `58396c692aa785ef4a3543416a26bb75b150cc37e475236141d138b2bef92fc8`.
-- PDF MD5: `5e0e7db3039c739e167cb4cfc222d34b`.
-- Editable `main.tex` SHA-256: `4181a9f10bc0946f2ebd04b99d669df67a6bb5c6f70c5e5252ded65e6c65d3b9`.
-- Adjacent `zenodo.json` SHA-256: `06b8bb5e08c305427a494c286ff25d1340953b6bca2e7c3c696e3651e8960154`.
+All 131 actual rebuild-03 pages were independently rasterized. Pixel comparisons show zero changed pages against the accepted final-DOI-01 PDFs. All raw recursive TeX, BibTeX, figure and manuscript-input bytes are identical. The complete candidate-07 mathematical and content review, and the directly viewed own-DOI first pages, therefore remain applicable. Exact page sets and source identities are in `final-doi03-page-source-delta.json` and `final-doi03-pinning-render-inventory.json`.
 
-## Checks actually completed
+The intervening rebuild 02 was likewise independently rendered and all 131 pages were pixel-identical, but no machine approval was issued for it. Primary-source checking of its new development pin found listed parser denial-of-service advisories. The author corrected root development and shared inspection requirements to pypdf 6.21.4 and updated the SDD technology row. At the check, the official [PyPI version metadata](https://pypi.org/pypi/pypdf/6.21.4/json) declares Python >=3.9, non-yanked status and no listed advisories. This statement is a dated registry observation, not a guarantee of absence of vulnerabilities. The original finding and exact primary metadata are preserved separately.
 
-The independent reviewer inspected all36 final pages across the20-page product report and16-page coupled study, using fresh110dpi Poppler renders. All34 non-title pages have running document type and version, including chapter and bibliography openings. Both reports use native LaTeX report class, editable scientific text, the prescribed boxed identity header, ORCID icon, programme affiliation and navy links. Equations and proofs are native mathematics; the only graphics are five legacy evidence figures and two coupled-study evidence plots. Their actual PDF transforms preserve aspect ratio and stay inside the page/text area. No clipping, missing glyph, overlapping caption or blank omitted page was accepted. Build receipts/logs report zero warnings, overfull or underfull boxes.
+Removing the single added SDD technology row reconstructs the accepted rebuild-01 policy identity; replacing the single shared-requirements pypdf version reconstructs its prior pin identity. No numerical module, frozen protocol, evidence, equation, figure or native compiler behavior changed. The reviewed LF-policy normalization remains identical. The new binary PDF Git attribute and exact-receipt -text attributes preserve hash-bound bytes without changing the content.
 
-The mathematical review covers scalar side-specific proximal handling and its exact lift, box contraction necessity/sufficiency, the nonempty closed-box domain, positive diagonal metric proximal identity, threshold degeneracies, joint conjugates, row scaling and fixed-relaxation assumptions. It establishes no general adaptive/inexact convergence theorem, historical-priority claim or universal performance result. The source distinguishes the historical SoftQP0.1 replay from the separate SoftQP0.2 offline coupled implementation, with no coupled browser runtime or operational safety claim.
+Fresh independent authenticated GET-only reads reconfirmed both exact reserved identities, service-returned legacy DOI/recid/concept values, sole creator, unpublished draft status and empty inventories. Fresh metadata and inventory still match the prepared contexts, and both local metadata mirrors remain byte-identical. Prepared payload and context canonical hashes are unchanged from the accepted final-DOI-01 review and are bound explicitly in the new receipt. `final-doi03-independent-context-review.json` records this new actual-state check.
 
-The original456-instance study retains its168 primary pairs,0.499839% median reduction and95% interval[-3.291967%,3.944835%]. The separate210-instance coupled study retains all144 primary pairs, nine failed pairs, -212.449875% median score and95% interval[-225.336618%,-192.873759%]. Both registered10% predictions remain not established. Failure scores, incompatible cells, unsuccessful oracles, timeouts and returned-candidate versus noncandidate backend-limit counts remain explicit. The populations and accuracy policies are not pooled. No numerical study was rerun for this review.
-
-Accepted summary/figure identities and numeric macros are bound in both native builders. The final metadata descriptions match the actual source abstracts with expanded results, followed by availability text; version notes are separate. The metadata mirrors, sole creator/ORCID, report roles, dates, licenses, cross-report links and supporting [evidence dataset](https://doi.org/10.5281/zenodo.23875194) were checked. Read-only service responses independently confirmed the reserved record/concept identities and actual legacy prereserved DOI/recid pairs.
-
-The28 manuscript source/build checks passed. Both approval records pass all six unchanged release-tool S22 checks. Protected numerical-source identities and the original scientific case/campaign trees remain unchanged. The prior ReportLab/template-review failure and initial header/build-guard failures are retained; these native corrections do not rewrite their history.
-
-## Scope and remaining completion checks
-
-The adjacent `publication-gate.json` binds this local approval to the exact PDF, source and metadata above. Publication must use these reviewed bytes and exactly onePDF per manuscript record. The operator must first make the exact editable source/build instructions public, then verify public latest/version metadata, complete inventories, fresh anonymous fullPDF hashes and reciprocal dataset supplement relations. These remote checks are not asserted complete by this local approval. This review is not a scientific-superiority finding, software-release acceptance or deployment verification.
-
-The full original machine-readable review is retained with SHA-256 `2a3f3b6b20d57cc2e22365d40821dcc047c43f4b7f74cb18fc7f5dd5c3250255`. This public summary contains no private machine paths, credentials or access tokens.
+No API write, upload, publication, solver, scientific generator, oracle, timing or bootstrap was run by the reviewer. Exact final PDFs and payload/context are accepted for staging only. The next approval must independently inspect actual staged metadata, sole-PDF inventories and full staged bytes. Governed publication and anonymous public verification remain later gates. Both numerical studies retain their negative conclusions.
