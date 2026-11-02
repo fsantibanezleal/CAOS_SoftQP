@@ -49,3 +49,21 @@ Independent adversarial review keeps failed attempts and their corrections in th
 private management evidence ledger. Public reports and dataset files have separate
 anonymous download and exact-hash verification. Availability, scientific qualification
 and operational acceptance remain distinct.
+
+## Published availability
+
+[Release v0.01.001](https://github.com/fsantibanezleal/CAOS_SoftQP/releases/tag/v0.01.001)
+pins source `2d3f299d80edad49c2599e61bb6e3c875c119043`. Its four exact-main CI jobs
+passed in run 41490767275; Pages run 41491138857 passed build, deploy and live jobs.
+Independent anonymous verification checked all 13 route forms, missing-file 404,
+before/after build identity and all 39 data files (24672171 bytes) against exact Git
+blobs. A deliberately wrong expected commit was refused. Independent real-browser
+navigation, case selection/export, mathematical content, offline boundaries and phone
+layout passed; the full native/import/tamper/filter/CSV probe also passed on that origin.
+
+The [software archive](https://doi.org/10.5281/zenodo.23891596) is the first version
+of concept [23891595](https://doi.org/10.5281/zenodo.23891595), produced by the configured
+GitHub integration. Its single 5018233-byte ZIP has 659 entries and 547 regular files;
+independent full download, CRC and byte comparison matched every regular file to the
+immutable release. This includes both native PDFs, editable TeX and build drivers.
+Post-release documentation updates preserve that tag and every frozen observation.
