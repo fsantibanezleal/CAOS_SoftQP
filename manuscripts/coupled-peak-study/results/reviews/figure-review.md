@@ -1,0 +1,11 @@
+# Independent figure acceptance: corrected summary v2
+
+ACCEPT_FIGURES for the exact four PNG/SVG figures and summary facts pinned in the adjacent JSON. This accepts the complete-population figure content and standalone appearance, not the scientific criterion, embedded PDF readability or public archive.
+
+The initial v1primary figure had an opaque lower-right legend covering some seed910101points. Both root and independent reviewer identified it; v1and its accepted renderer snapshot remain preserved. The only renderer delta moves that legend to upper-right figure whitespace, entirely outside the data axes. The corrected v2primary and observation-state PNGs were visually inspected at full resolution: no point-covering legend, clipping, unreadable label collision or false positive outcome claim was found.
+
+Independent SVG inspection verifies144point coordinates and colors in6clusters,9failed red-cross positions at prescribed-100%, one overall median and the exact frozen CI endpoints. All data centers are within the displayed axes; extreme slow observations remain included. Maximum point-coordinate discrepancy is4.98e-7SVGunits. Fifteen stacked bar segments match every state count and cumulative boundary, with totals1296development,3888heldout and486robustness. The negative median/CI and NOT ESTABLISHED conclusion are explicitly printed; failures and incompatibilities remain visible. Small failure segments retain their actual common scale rather than being inflated.
+
+The directory contains exactly summary.json, four figures and SHA256SUMS.json; all hashes match. Summary facts, full primary pairs, all state counts, registered source/protocol and final evidence-review digest match accepted evidence. The v1/v2summary.jsonbytes are identical. The observation-state PNG is byte-identical to v1. Source comparison proves only the legend-placement line changed; loader/guards/analysis remain unchanged from the separately accepted renderer.
+
+No new inference, optimization, input generation or data/source editing was performed. Embedded PDF scaling/typography, exact complete ZIP/publication and final PDF-page review remain separate gates. The exact source/data/SVG check and hashes are in figure-evidence-check.py/.json. Initial visual failure and correction history are preserved.

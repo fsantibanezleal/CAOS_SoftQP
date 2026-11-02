@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "upload_type": "publication",
+    "publication_type": "report",
+    "title": "Directional coupled peak penalties with original interval rows",
+    "creators": [
+      {
+        "name": "Santibáñez-Leal, Felipe",
+        "orcid": "0000-0002-0150-3246"
+      }
+    ],
+    "description": "<p>Directional group peaks price the largest weighted departure across selected interval rows. We document a native original-row projection implementation, a fixed-metric contraction and proximal argument, exact compact-epigraph and directional row-split alternatives, and a prospectively registered repeated-forecast evaluation. Directional expressibility, weighted threshold operations and relaxed ADMM have prior art; no algorithmic-priority claim is made.</p><p>The complete synthetic inventory contains 48 development, 144 heldout and 18 robustness instances, with 32 forecasts per observation and three measured repetitions across nine registered method profiles. The primary paired reduction score is -212.449875%, with a 95% six-seed cluster interval of [-225.336618%,-192.873759%]. Nine failed primary pairs retain their prescribed scores. The registered 10% criterion is not established. All failures and incompatibilities remain in the evidence; backend iteration limits without candidate vectors are distinguished from returned-candidate accuracy checks.</p><p>This is a standalone negative computational-study technical report, not a peer-reviewed manuscript, qualified companion-app release, deployment or operational building study. The earlier separable study and app technical report remain a distinct immutable record. Supporting evidence is archived separately; the manuscript record contains exactly one PDF. Code: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP/tree/246bf87e690f4d010494c556e2021d311d587422\">registered source</a>; public SDK: <a href=\"https://pypi.org/project/softqp/0.2.0/\">softqp 0.2.0</a>.</p>",
+    "keywords": [
+      "quadratic programming",
+      "coupled peak penalties",
+      "soft constraints",
+      "operator splitting",
+      "negative results",
+      "reproducible optimization"
+    ],
+    "license": "cc-by-4.0",
+    "language": "eng",
+    "version": "0.02.000",
+    "publication_date": "2026-11-02",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.23851660",
+        "relation": "references",
+        "resource_type": "publication-report"
+      }
+    ]
+  }
+}

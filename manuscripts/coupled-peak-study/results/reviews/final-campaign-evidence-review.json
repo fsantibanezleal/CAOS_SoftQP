@@ -1,0 +1,1049 @@
+{
+  "decision": "ACCEPT_EVIDENCE",
+  "scope": "Complete exact registered three-split evidence integrity and independent replay acceptance; scientific performance criterion NOT ESTABLISHED. Not figure/archive/PDF/publication/app-release acceptance.",
+  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+  "campaign_sha256": {
+    "development": "99f4c6819a15789bcb9f3f2362ad1e2cb0f4eb3663068b0f94c4baae24d160c7",
+    "heldout": "2fdb4457ddbbbed616e3b83dc4adb42f9f5a06fd492b81a32677f6b3ad142d46",
+    "robustness": "44ec02f4cc4d7ea34e7098a44b1a167cbacd975b8bfd055917f9ef80b29307b9"
+  },
+  "validation_sha256": {
+    "development": "57dea0445f246a8bd134c67808893ce060ce513134303c0f8b782c0c6ebbdd81",
+    "heldout": "3545f3d7f345fb893b5e2078d0d4d055d2050e389b8741b5b8a9c7fd0758b1ae",
+    "robustness": "572bb73bed21a8cc529cf37d89183b905942da75e29373f19a5f2ae97a5391ea"
+  },
+  "raw_sha256": {
+    "development": "5bc287f6dd247b2c970dd0850c0915fe6d9710501321be5729649309a1856774",
+    "heldout": "f848086a7eb2d45015e5218aaf9fdca82d367477ac73ca7b37acbfa137a9ce5c",
+    "robustness": "d681403f4e4b1c2104923c8fcd4b451d0c8d2c8278a42e0e81137c4c6c303169"
+  },
+  "csv_sha256": {
+    "development": "da5880b7810c9ccc2cbadd3a01ef826fdc6b6ff12d07cf8bac42f23364d707ab",
+    "heldout": "31f89a436e55d5191f20698a4695ee9623bff41a962a45eee9d7146d4b9ed8fe",
+    "robustness": "131fc2168e1f8aa8e951dfdfc9faee8b807e772ed9001b372a4e886038d7214c"
+  },
+  "source_commit": "246bf87e690f4d010494c556e2021d311d587422",
+  "source_sha256": {
+    "data-pipeline/pipeline/__init__.py": "22c41100f64e0d1157378eb3b3f61fa55a189856dd850acbb5b965517a0ed179",
+    "data-pipeline/pipeline/coupled_accuracy.py": "26e44a6c2f94317a1fd2308d4389c647b07eeafd35184ed82060620a8cb3d0e8",
+    "data-pipeline/pipeline/coupled_analysis.py": "652289847e3acda1927629c86ef1f6cd6540b32504c41a0eebce85e49101e573",
+    "data-pipeline/pipeline/coupled_campaign.py": "00a8341b8bbb46fba2bb971d21a56ff171fc11fe088512496d7518a33aad20b2",
+    "data-pipeline/pipeline/coupled_cases.py": "52407fb1fe66c7987d4a01643d7ec00ea998d82973e66b362f89e4edfb450e8a",
+    "data-pipeline/pipeline/coupled_contract.py": "bd0660c5de9e62cc9f714b1f3c912804bafb2a2d4f3a6c5168d07319c233216c",
+    "data-pipeline/pipeline/coupled_export.py": "376c8a796fbeee951df0e221dbf9c356920acc227f9b399b5340391acfd70552",
+    "data-pipeline/pipeline/coupled_freeze.py": "4cbc6afd7f4d4b09fdbc3fab9247e7d03a00c24b935ec6cc9abbd685aea0d014",
+    "data-pipeline/pipeline/coupled_plan.py": "22c74c5d38182b84e4c5bed95e683d3a1fa4eb88e9db2fc0a82481cab8064d9c",
+    "data-pipeline/pipeline/coupled_resources.py": "482beadd56fa55ec31842fe155ecb74af812cb67c3e28ff5d18eab837a6e2a3c",
+    "data-pipeline/pipeline/environment.py": "20b204d82f7fae3001cb8d4993961e503f5eaad1bda75cf77c351126f05ddcf6",
+    "data-pipeline/run_coupled_study.py": "4e0d1d6c02d66dd594dd1326032a4666e59d8d589f26560774dcb5cf0a3aef72",
+    "docs/contracts/schemas/softqp-coupled-batch.schema.json": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54",
+    "docs/contracts/schemas/softqp-coupled-campaign.schema.json": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372",
+    "docs/contracts/schemas/softqp-coupled-observation.schema.json": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710",
+    "experiments/coupled-v1/requirements.txt": "2eff7832a1046fca5040163b98ac88e05c7318bf1f004c16c377206221c42ccc",
+    "scripts/check_coupled_requirements.py": "5897774cfd99b5daff7d8b38a3aa0ead8b6ca8dea952372002947575906a72d5"
+  },
+  "preregistration_review_sha256": "3d7c7c2372f138c2b52aa15b026598932a3a9c9c1ee536d487bed8a1b9d1cdfd",
+  "instances": {
+    "development": 48,
+    "heldout": 144,
+    "robustness": 18
+  },
+  "canonical_input_count": 210,
+  "canonical_input_manifest_sha256": "d00457637de5e3e1d42e7ea56d96bd3d78ea5f7f37b5ad8e391c802d14aa59a1",
+  "observations": 7770,
+  "measured_states": {
+    "development": {
+      "accepted": 879,
+      "incompatible": 396,
+      "oracle-failed": 21
+    },
+    "heldout": {
+      "accepted": 2587,
+      "incompatible": 1188,
+      "accuracy-rejected": 6,
+      "oracle-failed": 105,
+      "timeout": 2
+    },
+    "robustness": {
+      "oracle-failed": 144,
+      "incompatible": 135,
+      "accepted": 201,
+      "accuracy-rejected": 6
+    }
+  },
+  "combined_measured_states": {
+    "accepted": 3667,
+    "incompatible": 1719,
+    "oracle-failed": 270,
+    "accuracy-rejected": 12,
+    "timeout": 2
+  },
+  "application_accepted_batch_frames": 162816,
+  "independent_returned_candidate_frames": 163390,
+  "returned_candidate_KKT_rejections": 0,
+  "noncandidate_backend_limit_frames": 44,
+  "primary": {
+    "estimate": -2.12449874656751,
+    "confidence_interval": [
+      -2.2533661821558257,
+      -1.9287375906532098
+    ],
+    "denominator": 144,
+    "seed_clusters": 6,
+    "failed_pairs": 9,
+    "established": false
+  },
+  "failure_taxonomy": {
+    "development": {
+      "common_oracle_limit_cases": 1,
+      "dependent_measured_oracle_failed": 21,
+      "returned_candidate_KKT_rejections": 0,
+      "returned_candidate_frames": 39021,
+      "application_accepted_batch_frames": 39008
+    },
+    "heldout": {
+      "common_oracle_limits": [
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1000,
+          "curvature": "semidefinite",
+          "id": "heldout-0030",
+          "split": "heldout",
+          "seed": 910102,
+          "quadratic": 0,
+          "failed_frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1000,
+          "curvature": "semidefinite",
+          "id": "heldout-0054",
+          "split": "heldout",
+          "seed": 910103,
+          "quadratic": 0,
+          "failed_frame": 22,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1000,
+          "curvature": "semidefinite",
+          "id": "heldout-0078",
+          "split": "heldout",
+          "seed": 910104,
+          "quadratic": 0,
+          "failed_frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "sparse",
+          "n": 96,
+          "group_size": 8,
+          "condition": 1,
+          "curvature": "semidefinite",
+          "id": "heldout-0106",
+          "split": "heldout",
+          "seed": 910105,
+          "quadratic": 0,
+          "failed_frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "sparse",
+          "n": 96,
+          "group_size": 8,
+          "condition": 1000,
+          "curvature": "semidefinite",
+          "id": "heldout-0110",
+          "split": "heldout",
+          "seed": 910105,
+          "quadratic": 0,
+          "failed_frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        }
+      ],
+      "dependent_measured_oracle_failed": 105,
+      "noncandidate_backend_limits": [
+        {
+          "id": "heldout-0014",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": -1,
+          "frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0014",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": 0,
+          "frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0014",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": 1,
+          "frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0014",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": 2,
+          "frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0026",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": -1,
+          "frame": 22,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0026",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": 0,
+          "frame": 22,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0026",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": 1,
+          "frame": 22,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0026",
+          "method": "row-split-default",
+          "role": "method",
+          "repetition": 2,
+          "frame": 22,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0030",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0054",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 22,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0078",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0106",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "heldout-0110",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 3,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        }
+      ],
+      "returned_candidate_KKT_rejections": 0,
+      "returned_candidate_frames": 115124,
+      "application_accepted_batch_frames": 114848,
+      "timeouts": [
+        {
+          "family": "thermal",
+          "horizon": 24,
+          "zones": 2,
+          "curvature": "semidefinite",
+          "id": "heldout-0095",
+          "split": "heldout",
+          "seed": 910104,
+          "quadratic": 1,
+          "method": "native",
+          "repetition": 1,
+          "warmup": false,
+          "state": "timeout",
+          "reason": "Trial exceeded registered wall limit"
+        },
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1,
+          "curvature": "positive-definite",
+          "id": "heldout-0097",
+          "split": "heldout",
+          "seed": 910105,
+          "quadratic": 1,
+          "method": "daqp-prox-forced",
+          "repetition": 2,
+          "warmup": false,
+          "state": "timeout",
+          "reason": "Trial exceeded registered wall limit"
+        }
+      ],
+      "failed_pair_ids": [
+        "heldout-0014",
+        "heldout-0026",
+        "heldout-0030",
+        "heldout-0054",
+        "heldout-0078",
+        "heldout-0095",
+        "heldout-0097",
+        "heldout-0106",
+        "heldout-0110"
+      ],
+      "measured_batch_accuracy_rejected": 6
+    },
+    "robustness": {
+      "common_oracle_limits": [
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1,
+          "curvature": "zero-hessian",
+          "id": "robustness-0000",
+          "split": "robustness",
+          "seed": 810101,
+          "quadratic": 0,
+          "failed_frame": 21,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "thermal",
+          "horizon": 12,
+          "zones": 2,
+          "curvature": "zero-hessian",
+          "id": "robustness-0002",
+          "split": "robustness",
+          "seed": 810101,
+          "quadratic": 0,
+          "failed_frame": 15,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1,
+          "curvature": "zero-hessian",
+          "id": "robustness-0006",
+          "split": "robustness",
+          "seed": 810102,
+          "quadratic": 0,
+          "failed_frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "thermal",
+          "horizon": 12,
+          "zones": 2,
+          "curvature": "zero-hessian",
+          "id": "robustness-0008",
+          "split": "robustness",
+          "seed": 810102,
+          "quadratic": 0,
+          "failed_frame": 4,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "sparse",
+          "n": 32,
+          "group_size": 8,
+          "condition": 1,
+          "curvature": "zero-hessian",
+          "id": "robustness-0012",
+          "split": "robustness",
+          "seed": 810103,
+          "quadratic": 0,
+          "failed_frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "family": "thermal",
+          "horizon": 12,
+          "zones": 2,
+          "curvature": "zero-hessian",
+          "id": "robustness-0014",
+          "split": "robustness",
+          "seed": 810103,
+          "quadratic": 0,
+          "failed_frame": 13,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        }
+      ],
+      "dependent_measured_oracle_failed": 144,
+      "noncandidate_backend_limits": [
+        {
+          "id": "robustness-0000",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 21,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0002",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 15,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": -1,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": -1,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": -1,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": -1,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": -1,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": -1,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 0,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 0,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 0,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 0,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 0,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 0,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 1,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 1,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 1,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 1,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 1,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 1,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 2,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 2,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "epigraph-fixed",
+          "role": "method",
+          "repetition": 2,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 2,
+          "frame": 1,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 2,
+          "frame": 24,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0003",
+          "method": "native",
+          "role": "method",
+          "repetition": 2,
+          "frame": 25,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0006",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0008",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 4,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0012",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 0,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        },
+        {
+          "id": "robustness-0014",
+          "method": "__oracle__",
+          "role": "oracle",
+          "repetition": null,
+          "frame": 13,
+          "status": "maximum iterations reached",
+          "status_code": 7,
+          "iterations": 200000
+        }
+      ],
+      "returned_candidate_KKT_rejections": 0,
+      "returned_candidate_frames": 9245,
+      "application_accepted_batch_frames": 8960,
+      "measured_batch_accuracy_rejected": 6
+    }
+  },
+  "heldout_failure_taxonomy": {
+    "common_oracle_limits": [
+      {
+        "family": "sparse",
+        "n": 32,
+        "group_size": 8,
+        "condition": 1000,
+        "curvature": "semidefinite",
+        "id": "heldout-0030",
+        "split": "heldout",
+        "seed": 910102,
+        "quadratic": 0,
+        "failed_frame": 0,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "family": "sparse",
+        "n": 32,
+        "group_size": 8,
+        "condition": 1000,
+        "curvature": "semidefinite",
+        "id": "heldout-0054",
+        "split": "heldout",
+        "seed": 910103,
+        "quadratic": 0,
+        "failed_frame": 22,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "family": "sparse",
+        "n": 32,
+        "group_size": 8,
+        "condition": 1000,
+        "curvature": "semidefinite",
+        "id": "heldout-0078",
+        "split": "heldout",
+        "seed": 910104,
+        "quadratic": 0,
+        "failed_frame": 0,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "family": "sparse",
+        "n": 96,
+        "group_size": 8,
+        "condition": 1,
+        "curvature": "semidefinite",
+        "id": "heldout-0106",
+        "split": "heldout",
+        "seed": 910105,
+        "quadratic": 0,
+        "failed_frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "family": "sparse",
+        "n": 96,
+        "group_size": 8,
+        "condition": 1000,
+        "curvature": "semidefinite",
+        "id": "heldout-0110",
+        "split": "heldout",
+        "seed": 910105,
+        "quadratic": 0,
+        "failed_frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      }
+    ],
+    "dependent_measured_oracle_failed": 105,
+    "noncandidate_backend_limits": [
+      {
+        "id": "heldout-0014",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": -1,
+        "frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0014",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": 0,
+        "frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0014",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": 1,
+        "frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0014",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": 2,
+        "frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0026",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": -1,
+        "frame": 22,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0026",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": 0,
+        "frame": 22,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0026",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": 1,
+        "frame": 22,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0026",
+        "method": "row-split-default",
+        "role": "method",
+        "repetition": 2,
+        "frame": 22,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0030",
+        "method": "__oracle__",
+        "role": "oracle",
+        "repetition": null,
+        "frame": 0,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0054",
+        "method": "__oracle__",
+        "role": "oracle",
+        "repetition": null,
+        "frame": 22,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0078",
+        "method": "__oracle__",
+        "role": "oracle",
+        "repetition": null,
+        "frame": 0,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0106",
+        "method": "__oracle__",
+        "role": "oracle",
+        "repetition": null,
+        "frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      },
+      {
+        "id": "heldout-0110",
+        "method": "__oracle__",
+        "role": "oracle",
+        "repetition": null,
+        "frame": 3,
+        "status": "maximum iterations reached",
+        "status_code": 7,
+        "iterations": 200000
+      }
+    ],
+    "returned_candidate_KKT_rejections": 0,
+    "returned_candidate_frames": 115124,
+    "application_accepted_batch_frames": 114848,
+    "timeouts": [
+      {
+        "family": "thermal",
+        "horizon": 24,
+        "zones": 2,
+        "curvature": "semidefinite",
+        "id": "heldout-0095",
+        "split": "heldout",
+        "seed": 910104,
+        "quadratic": 1,
+        "method": "native",
+        "repetition": 1,
+        "warmup": false,
+        "state": "timeout",
+        "reason": "Trial exceeded registered wall limit"
+      },
+      {
+        "family": "sparse",
+        "n": 32,
+        "group_size": 8,
+        "condition": 1,
+        "curvature": "positive-definite",
+        "id": "heldout-0097",
+        "split": "heldout",
+        "seed": 910105,
+        "quadratic": 1,
+        "method": "daqp-prox-forced",
+        "repetition": 2,
+        "warmup": false,
+        "state": "timeout",
+        "reason": "Trial exceeded registered wall limit"
+      }
+    ],
+    "failed_pair_ids": [
+      "heldout-0014",
+      "heldout-0026",
+      "heldout-0030",
+      "heldout-0054",
+      "heldout-0078",
+      "heldout-0095",
+      "heldout-0097",
+      "heldout-0106",
+      "heldout-0110"
+    ],
+    "measured_batch_accuracy_rejected": 6
+  },
+  "scientific_criterion_established": false,
+  "no_retries_reseeding_or_tuning": true,
+  "no_optimizer_or_generator_calls_by_reviewer": true,
+  "no_source_edits_by_reviewer": true,
+  "independent_review_method": "Complete reviewer-owned original-space replays for all three splits; earlier immutable development/heldout results bound by fresh full artifact byte checks, new complete robustness replay, and independently recomputed exact heldout six-cluster bootstrap.",
+  "artifacts": {
+    "combined-evidence-check.py": "10a85ceb340f3d1e5bfe7e8181643832b5d26070fe781c7267bdf725bef0205a",
+    "combined-evidence-checks.json": "d00457637de5e3e1d42e7ea56d96bd3d78ea5f7f37b5ad8e391c802d14aa59a1",
+    "development-evidence-check.py": "cf6c3dbdd299c1d358bc99552433d82ddceafbfe132216be8c8bd85689e57fe9",
+    "development-evidence-checks.json": "ad4e2c4c93bfd52f0c1b0bff9b041cc24dbd60c95b289da0572b46dbf51e0f2b",
+    "development-evidence-review.json": "b278198688b91dbfb097d7b27f1441430b73e23c15a3b2ee57fc007eb6791c2f",
+    "heldout-evidence-check.py": "eb0603e993bd4e8ab32fe6bad66d72087ba71c9b187efef1eb335449500ba08d",
+    "heldout-evidence-checks.json": "e5f7a582f545f42c8e5aeab63e17c36482f3d2ee7a0b77c6a2822a171dee1e76",
+    "heldout-evidence-review.json": "5ca71357e6effb9aeb4b822097287fed9ab7c1e4bcbe5525b0de3a2f2ea1c13a",
+    "heldout-validation-completion-addendum.json": "341f33f14c1c0ac28a44b1390bc1404bc2f5a3c75ae22d42d742b4e265cf8cd6",
+    "robustness-evidence-check.py": "6d59177ae8c06d4ec3a68385e3df14f04440ddbd61982881e202c7f27ac8f646",
+    "robustness-evidence-checks.json": "73b807404cd93c7c2f959491a7dd488e090f183efad1c3692fa15c053f5f92de",
+    "final-campaign-evidence-review.md": "b35b56c1b987f0ee121d1665427efce03dfa0ab7895ca75c8fb4a4d4481004b8"
+  },
+  "limits": [
+    "Evidence acceptance does not establish speed superiority, novelty priority, operational safety, deployment or app qualification.",
+    "All batch failures and incomplete observations remain in the frozen population; no solution or KKT conclusion is invented for noncandidate/timeout frames.",
+    "The public Windows SDK/profile was exercised; protocol Linux hashes are bound public-artifact identities, not a new independent Linux timing campaign.",
+    "Figure appearance, complete archive bytes, PDF pages and public DOI/file sets remain later exact-identity gates.",
+    "Original456-instance negative evidence and all historical review/failure receipts remain unchanged."
+  ]
+}
