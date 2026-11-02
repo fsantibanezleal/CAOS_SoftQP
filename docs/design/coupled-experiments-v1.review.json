@@ -1,0 +1,316 @@
+{
+  "decision": "ACCEPT",
+  "scope": "Exact prospective study protocol/source for preregistration; execution remains gated by committed remote registration and runtime freeze.",
+  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+  "source_sha256": {
+    "data-pipeline/pipeline/__init__.py": "22c41100f64e0d1157378eb3b3f61fa55a189856dd850acbb5b965517a0ed179",
+    "data-pipeline/pipeline/coupled_accuracy.py": "26e44a6c2f94317a1fd2308d4389c647b07eeafd35184ed82060620a8cb3d0e8",
+    "data-pipeline/pipeline/coupled_analysis.py": "652289847e3acda1927629c86ef1f6cd6540b32504c41a0eebce85e49101e573",
+    "data-pipeline/pipeline/coupled_campaign.py": "00a8341b8bbb46fba2bb971d21a56ff171fc11fe088512496d7518a33aad20b2",
+    "data-pipeline/pipeline/coupled_cases.py": "52407fb1fe66c7987d4a01643d7ec00ea998d82973e66b362f89e4edfb450e8a",
+    "data-pipeline/pipeline/coupled_contract.py": "bd0660c5de9e62cc9f714b1f3c912804bafb2a2d4f3a6c5168d07319c233216c",
+    "data-pipeline/pipeline/coupled_export.py": "376c8a796fbeee951df0e221dbf9c356920acc227f9b399b5340391acfd70552",
+    "data-pipeline/pipeline/coupled_freeze.py": "4cbc6afd7f4d4b09fdbc3fab9247e7d03a00c24b935ec6cc9abbd685aea0d014",
+    "data-pipeline/pipeline/coupled_plan.py": "22c74c5d38182b84e4c5bed95e683d3a1fa4eb88e9db2fc0a82481cab8064d9c",
+    "data-pipeline/pipeline/coupled_resources.py": "482beadd56fa55ec31842fe155ecb74af812cb67c3e28ff5d18eab837a6e2a3c",
+    "data-pipeline/pipeline/environment.py": "20b204d82f7fae3001cb8d4993961e503f5eaad1bda75cf77c351126f05ddcf6",
+    "data-pipeline/run_coupled_study.py": "4e0d1d6c02d66dd594dd1326032a4666e59d8d589f26560774dcb5cf0a3aef72",
+    "docs/contracts/schemas/softqp-coupled-batch.schema.json": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54",
+    "docs/contracts/schemas/softqp-coupled-campaign.schema.json": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372",
+    "docs/contracts/schemas/softqp-coupled-observation.schema.json": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710",
+    "experiments/coupled-v1/requirements.txt": "2eff7832a1046fca5040163b98ac88e05c7318bf1f004c16c377206221c42ccc",
+    "scripts/check_coupled_requirements.py": "5897774cfd99b5daff7d8b38a3aa0ead8b6ca8dea952372002947575906a72d5"
+  },
+  "source_commit": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+  "sourcecommit": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+  "reviewer": "Independent adversarial reviewer agent; not an author of candidate source",
+  "independent_assertions": 806,
+  "repeated_locked_control_assertions": 32,
+  "receipt_counts": {
+    "generator-checks.json": 72,
+    "accuracy-checks.json": 374,
+    "analysis-checks.json": 16,
+    "worker-checks.json": 11,
+    "contract-checks.json": 40,
+    "freeze-checks.json": 11,
+    "sdk-identity-checks.json": 6,
+    "observation-checks.json": 32,
+    "model-correctness-checks.json": 36,
+    "export-checks.json": 11,
+    "recorded-commit-checks.json": 8,
+    "draft-lock-checks.json": 3,
+    "ordering-checks.json": 12,
+    "requirements-guard-checks-corrected.json": 37,
+    "ui-loading-checks.json": 137
+  },
+  "findings": [
+    {
+      "id": "STUDY-001",
+      "severity": "P1",
+      "issue": "Signed cross-group/hard-row Fenchel cancellation accepted a wrong solution.",
+      "remedy": "Maximum absolute locally normalized gap for every soft group and hard row; raw and repaired stationarity.",
+      "evidence": "accuracy-checks.json; ../native/local-fenchel-review.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-002",
+      "severity": "P1",
+      "issue": "Nonfinite A.T*y and inf/inf NaN could silently pass stationarity.",
+      "remedy": "Explicit finite products and floating error rejection.",
+      "evidence": "overflow-finding.json; accuracy-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-003",
+      "severity": "P1",
+      "issue": "Freeze did not bind complete protocol/public binary/Python/dependency/review identities.",
+      "remedy": "Separate manifest and canonical review graph; public-wheel and clean tracked-source guards.",
+      "evidence": "freeze-checks.json; sdk-identity-checks.json; final-accepted-source-identities.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-004",
+      "severity": "P1",
+      "issue": "Partial inventories or forged incompatibility could delete the fastest baseline/denominator.",
+      "remedy": "Exact144-instance inventory, derived compatibility, failed-pair penalty and no qualification on failures.",
+      "evidence": "analysis-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-005",
+      "severity": "P1",
+      "issue": "Blocking inherited pipe operations escaped resource supervision.",
+      "remedy": "Spawned per-observation file transport, polling/deadline/highwater checks and bounded control/results.",
+      "evidence": "worker-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-006",
+      "severity": "P2",
+      "issue": "Parent retained full raw frame observations for the whole campaign.",
+      "remedy": "Stream complete raw journal and retain compact inference records.",
+      "evidence": "coupled_campaign.py source audit; export-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-007",
+      "severity": "P2",
+      "issue": "First competing-library import could enter only baseline timing.",
+      "remedy": "Preload all competing native libraries outside every operation timer.",
+      "evidence": "coupled_campaign.py source audit",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-008",
+      "severity": "P2",
+      "issue": "Unrelated legacy imports enlarged unfrozen executable dependency closure.",
+      "remedy": "Dedicated coupled_resources and frozen module/schema/environment closure.",
+      "evidence": "final-accepted-source-identities.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-009",
+      "severity": "P3",
+      "issue": "Missing physical unit maps and split-order-dependent identifiers.",
+      "remedy": "Explicit variable/row/coefficient units and split-local IDs.",
+      "evidence": "generator-checks.json; contract-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-010",
+      "severity": "P3",
+      "issue": "Boolean elapsed_seconds was accepted as a numeric duration.",
+      "remedy": "Explicit bool rejection.",
+      "evidence": "analysis-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-011",
+      "severity": "P2",
+      "issue": "Canonical decoder allowed incompatible fixed-workspace equality classification changes.",
+      "remedy": "Native RHO_TOL classification/finite-side update validation.",
+      "evidence": "contract-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-012",
+      "severity": "P2",
+      "issue": "Malformed/nonfinite/incomplete worker results escaped failed-observation semantics.",
+      "remedy": "Strict JSON, accepted-observation schema and supervised failed result handling.",
+      "evidence": "worker-checks.json; observation-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-013",
+      "severity": "P2",
+      "issue": "Export consumer did not fully anchor raw metrics/datasets/CSV/run-commit provenance.",
+      "remedy": "Original-space replay, canonical regeneration, exact inventory/CSV/index and claimed Git blob verification.",
+      "evidence": "export-checks.json; recorded-commit-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-014",
+      "severity": "P2",
+      "issue": "Canonical-equivalent JSON object ordering changed seeded method order and tie results.",
+      "remedy": "Sort method/setting keys before scheduling and lexical analysis ties.",
+      "evidence": "canonical-order-initial-finding.json; ordering-checks.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-015",
+      "severity": "P2",
+      "issue": "Requirement guard accepted attached hashes, invalid versions, missing jointly edited pins or SDK metadata drift.",
+      "remedy": "PEP440 parsing, whitespace comment rules, exact nine names and SDK release metadata coherence.",
+      "evidence": "requirements-guard-checks-initial.json; requirements-guard-checks-corrected.json",
+      "status": "resolved"
+    },
+    {
+      "id": "STUDY-016",
+      "severity": "P2",
+      "issue": "Full UI sweep measured unmarked asynchronous case loading as an empty successful instrument.",
+      "remedy": "Localized loading/unavailable markers for both plots; actual import race/error tests and full sweep.",
+      "evidence": "ui-gate-initial-failure-receipt.json; ui-loading-checks.json; ui-gate-final-pass-report.json",
+      "status": "resolved"
+    }
+  ],
+  "open_source_findings": [],
+  "gate_evidence": {
+    "ci": {
+      "run": {
+        "id": 41362632671,
+        "head_sha": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+        "status": "completed",
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "html_url": "https://github.com/fsantibanezleal/CAOS_SoftQP/actions/runs/41362632671",
+        "updated_at": "2026-11-01T23:34:47Z"
+      },
+      "jobs": [
+        {
+          "id": 125016068127,
+          "name": "web",
+          "head_sha": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 125016068318,
+          "name": "checks",
+          "head_sha": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 125016068407,
+          "name": "guards",
+          "head_sha": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "method": "Read-only authenticated GitHub REST via gh; connector commit-workflow wrapper returned no workflow_dispatch runs."
+    },
+    "final_ui": {
+      "ok": true,
+      "states": 828,
+      "captures": 157,
+      "failures": [],
+      "build": {
+        "version": "0.01.000",
+        "sha": "4f3f62ef31ec56128526105b24b08fac1d35b226",
+        "built": "2026-11-01T23:34:39.799Z"
+      },
+      "report_sha256": "a7ade5f0e65960791100e60a6f7f105ca20dc8bc532b2e8f942eb4a74ec72e3f",
+      "log_sha256": "a21d11eed93adfc2d0e8d9606577855d37d29ed1a6a53a98c655930bf8ac553d",
+      "report_mtime_ns": 1793576615851019600,
+      "process_exit": 0,
+      "process_exit_provenance": "Owner reports completed session25480; report/log independently inspected."
+    },
+    "legacy": {
+      "passed": 1013,
+      "skipped": 37,
+      "warnings": 297,
+      "seconds": 352.51,
+      "source_commit": "54babbcdff65d4e6b6fa6a29b88f9bd4a4f4affe",
+      "log_sha256": "99ced8c368e3727533896dd787f60cf587224b2349299626562c9d95080ddb13"
+    },
+    "fresh_public_coupled": {
+      "passed": 57,
+      "seconds": 15.47,
+      "log_sha256": "3f7ced6fc1c69631d091ad513a743a8918a50376655f47316c5c605fc27e9f48"
+    },
+    "frontend_unit": {
+      "passed": 94,
+      "provenance": "Owner reported after Workbench correction; independent actual-browser137 also passes."
+    }
+  },
+  "public_consumer": {
+    "binary_sha256": "3a890e0b672a116cb44dc47aba34c4c8ce67c3edf473ae61dfcf5aa904f3f2a4",
+    "packages": {
+      "softqp": "0.2.0",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "osqp": "1.1.3",
+      "daqp": "0.10.3",
+      "jsonschema": "4.26.0",
+      "elastiqp": "0.2.0",
+      "pytest": "9.2.0",
+      "packaging": "26.3"
+    },
+    "python_sources_verified": true,
+    "direct_url_absent": true
+  },
+  "limits": [
+    "Acceptance concerns the exact prospective protocol/source and preregistration readiness, not experimental success, speed superiority, universal novelty priority, operational safety, or app release/deployment.",
+    "No heldout910101-910106 or robustness810101-810103 problems were generated; no timing campaign was run. Real correctness fixtures use exposed development seeds; inference fixtures use fabricated durations.",
+    "Registration/Git mutation tests use isolated mocked fixtures. The actual absent-registration runner guard and exact committed remote source were independently checked. Execution requires the accepted receipt and separate manifest committed/pushed and runtime freeze verification.",
+    "One development true-LP stock-oracle100000-iteration1e-9 limit remains preserved in model-correctness-checks-stock-oracle-limit.json. Independent HiGHS checked that LP; the registered200000-iteration1e-10 oracle policy is unchanged and any campaign oracle failure remains a failure.",
+    "Historical nonzero-Hessian PSD unbounded DAQP iteration-limit observations remain unresolved and retained. They are not successful certificates or grounds for post-hoc incompatibility/deletion.",
+    "Worker RSS control samples current/highwater memory; it is not continuous OS-enforced reservation. Host is recorded and nonexclusive; no timing-based retries or load-based deletion.",
+    "Public consumer verification here ran Windows CPython3.12. Linux public-wheel identity is bound by the protocol and supporting publication evidence, not an independent Linux execution by this reviewer.",
+    "The six-cluster bootstrap estimates only this prespecified synthetic population. A positive endpoint would not establish broad or real-world superiority.",
+    "Original456-instance negative speed criterion, original raw data/protocol/notebooks and historical native review reports remain unchanged. Forecast batches are synthetic and are not closed-loop measured MPC trajectories."
+  ],
+  "no_heldout_generation": true,
+  "no_robustness_generation": true,
+  "no_timing_campaign": true,
+  "original_negative_result_retained": true,
+  "required_before_execution": [
+    "Copy this exact accepted JSON without edits to the protocol review path.",
+    "Create a separate manifest pinning canonical full protocol, exact17source map and canonical accepted review.",
+    "Commit/push and verify remote source/protocol/review/manifest identities; run the existing freeze guards before any generation."
+  ],
+  "artifacts": {
+    "generator-checks.json": "3d57b8355a75ceaac578e1aa4aa6747c4b3412bccf5ede53473fbbfed8e1fecf",
+    "accuracy-checks.json": "05b77e84940ac072c00b9670434a087b8f68c9beb5f8521a4ba906b47074efe2",
+    "analysis-checks.json": "041a585b167aaae96be9a78ece9de10eeaea0742e3e03eef827ffc7121063cf3",
+    "worker-checks.json": "c319d6233d8c6be78f4d694f852eb9830676c358f436a2d0ea410f6469d194d4",
+    "contract-checks.json": "817df291d3279d0783c7aab57f9e880af3944ae5c3e9342a24586094df2dccdd",
+    "freeze-checks.json": "0cb9ea4ea86ca77f78212b6299c91119cc69193d260f17952f897c7f498b0ab5",
+    "sdk-identity-checks.json": "4d4f6a1410c274bdac151309d66fc5951139b9f71503b9b4bced3252e51d5bfa",
+    "observation-checks.json": "0716a0b381c87063c842e1149ab9d71a7c73d129c74cd2b6d423f0d0f146eff5",
+    "model-correctness-checks.json": "3bd6b434ef3798e176bb74a738347329a90f208fb65f682db2e47b5d707c5729",
+    "export-checks.json": "4d59a0bcdf9513e6a4fcaa58046157cf8e1fc41fd9cd0f7a96429c69e8403d50",
+    "recorded-commit-checks.json": "c592eb496eba32d32afe62a3237006b136dd683ae3b8a5c2cc788baf26cbd66d",
+    "draft-lock-checks.json": "b595d4222d420d2b031d9162c97d3f24a08cde28419c79b5b50d97851a3e8c53",
+    "ordering-checks.json": "d2a61079bd8dba15cfd9b2a2a0eeb4d0090a1cd6e01ebea9dc907fef23f70245",
+    "requirements-guard-checks-corrected.json": "7407eb0601b841049becfb208e6d94b65b09f1a9ad3fe31ff00bbaaf5922be01",
+    "ui-loading-checks.json": "2ecf5c995b9e7191d8482f4977ebcad4c9ac7a307fd148e2eba2558130477c08",
+    "locked-ordering-checks.json": "14a05f042a636c8d897273229fd80f747815486c41aa25c4362b48176c3b8669",
+    "locked-registration-lock-checks.json": "25bf39d459b4bb6d93da6708f50afb4ae845476e02b30446c40ff587af790222",
+    "locked-freeze-checks.json": "bb1701cc721cf0e2bd6b08591289baf673f9a9d0d0753ea2d543616478941104",
+    "locked-sdk-identity-checks.json": "cd3bdabb678f641f4573c53de02bb71b1a5fcf300d877577321e9dff5dd174ed",
+    "fresh-public-environment-checks.json": "3b2b93db99d4d7bc9225da034e2af323a26c6d77fa78e0ef7fdce5bc9abb5303",
+    "locked-controls-checks.json": "14bd766efd44f02d4ed1991e773902a040a9c3c933cc3cceb3e7c5b4f7dfb72e",
+    "final-ci-verification.json": "8f4e39230f31f08821d2d77213292eb85fdf6c1fe3cd0dde38ecdd94f2be1779",
+    "final-accepted-source-identities.json": "55120d26fa4439d82b45e1286a672c772ba142292cb86e9c199dac67e723f7b2",
+    "ui-gate-final-pass-report.json": "a7ade5f0e65960791100e60a6f7f105ca20dc8bc532b2e8f942eb4a74ec72e3f",
+    "ui-gate-initial-failure-receipt.json": "14ea0ee2dd9b143146c11994e71e71f88f4096746099ac3866f8f4d6ca26a63d",
+    "ui-gate-initial-failure-report.json": "da1f328725af3fb01e51d0715680b39a8db52edd3e3998cefbcf57985c8b51a1",
+    "requirements-guard-checks-initial.json": "e7e95837328820564c0717345f6b0f340e8ba6fb0f95ae996aeec0693a38c623",
+    "model-correctness-checks-stock-oracle-limit.json": "fc24ed515a1fe45a1f468f2cab9d1f59edbace42a45ece3c94d1d52323d3437f",
+    "ui-loading-review.json": "3e42460a090cbdda16b706daf419916cd9a6fe88fe88139259b7e9283f3536c2",
+    "final-verification.py": "625e6d4d191b87cd5eab8cc21afdab8187ad92c80b9409efe6db8d4c4890b918",
+    "final-prefreeze-review.md": "86e7541c164aca0cafd3be3937cdbf9ea733c2e20e84bf26e3925f1db57a6b10"
+  }
+}

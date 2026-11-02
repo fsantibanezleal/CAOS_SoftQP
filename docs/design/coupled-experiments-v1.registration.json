@@ -1,0 +1,24 @@
+{
+  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+  "source_sha256": {
+    "data-pipeline/pipeline/__init__.py": "22c41100f64e0d1157378eb3b3f61fa55a189856dd850acbb5b965517a0ed179",
+    "data-pipeline/pipeline/coupled_accuracy.py": "26e44a6c2f94317a1fd2308d4389c647b07eeafd35184ed82060620a8cb3d0e8",
+    "data-pipeline/pipeline/coupled_analysis.py": "652289847e3acda1927629c86ef1f6cd6540b32504c41a0eebce85e49101e573",
+    "data-pipeline/pipeline/coupled_campaign.py": "00a8341b8bbb46fba2bb971d21a56ff171fc11fe088512496d7518a33aad20b2",
+    "data-pipeline/pipeline/coupled_cases.py": "52407fb1fe66c7987d4a01643d7ec00ea998d82973e66b362f89e4edfb450e8a",
+    "data-pipeline/pipeline/coupled_contract.py": "bd0660c5de9e62cc9f714b1f3c912804bafb2a2d4f3a6c5168d07319c233216c",
+    "data-pipeline/pipeline/coupled_export.py": "376c8a796fbeee951df0e221dbf9c356920acc227f9b399b5340391acfd70552",
+    "data-pipeline/pipeline/coupled_freeze.py": "4cbc6afd7f4d4b09fdbc3fab9247e7d03a00c24b935ec6cc9abbd685aea0d014",
+    "data-pipeline/pipeline/coupled_plan.py": "22c74c5d38182b84e4c5bed95e683d3a1fa4eb88e9db2fc0a82481cab8064d9c",
+    "data-pipeline/pipeline/coupled_resources.py": "482beadd56fa55ec31842fe155ecb74af812cb67c3e28ff5d18eab837a6e2a3c",
+    "data-pipeline/pipeline/environment.py": "20b204d82f7fae3001cb8d4993961e503f5eaad1bda75cf77c351126f05ddcf6",
+    "data-pipeline/run_coupled_study.py": "4e0d1d6c02d66dd594dd1326032a4666e59d8d589f26560774dcb5cf0a3aef72",
+    "docs/contracts/schemas/softqp-coupled-batch.schema.json": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54",
+    "docs/contracts/schemas/softqp-coupled-campaign.schema.json": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372",
+    "docs/contracts/schemas/softqp-coupled-observation.schema.json": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710",
+    "experiments/coupled-v1/requirements.txt": "2eff7832a1046fca5040163b98ac88e05c7318bf1f004c16c377206221c42ccc",
+    "scripts/check_coupled_requirements.py": "5897774cfd99b5daff7d8b38a3aa0ead8b6ca8dea952372002947575906a72d5"
+  },
+  "review_path": "docs/design/coupled-experiments-v1.review.json",
+  "review_sha256": "3d7c7c2372f138c2b52aa15b026598932a3a9c9c1ee536d487bed8a1b9d1cdfd"
+}

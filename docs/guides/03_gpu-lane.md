@@ -1,12 +1,9 @@
-# Guide, the GPU lane (optional)
+# Numerical backend scope
 
-Only for products whose offline engine/sweep/training genuinely needs CUDA (large DEM, big Monte-Carlo, heavy
-model training). Never required for the live/replay path.
+The implemented engine uses the CPU builtin sparse linear-system backend. No GPU solver or trained parameter policy is declared. The small reference adapters may convert a compatible problem to dense arrays, but dense conversion is bounded and does not make it a GPU method.
 
-1. Pin the CUDA build in `requirements-gpu.txt` (e.g. `cupy-cuda12x`, `torch==…+cu12x`, `numba`, `taichi`).
-2. On a CUDA box: `.venv-pipeline/bin/python -m pip install -r requirements-gpu.txt`.
-3. Document the engine in `docs/frameworks/<tool>/`.
+The native package checks penalty semantics and the supported backend before setup. A future accelerator must preserve lower/upper coefficients, hard rows, original dual recovery, scaling and recession behavior over the complete matrix. It also needs measured setup, transfer, solve, memory and end-to-end cost under a fair protocol. A successful device import or a faster isolated matrix multiplication is insufficient.
 
-The committed artifacts are produced offline regardless of lane, so a GPU-only product still deploys as a static
-replay (the browser never needs the GPU). The template's EXAMPLE has no GPU step, `requirements-gpu.txt` is a
-commented placeholder.
+Use one numerical campaign worker and the registered BLAS/OMP/MKL thread limits for the current comparisons. Native binary rebuilds and imports must be sequential on Windows to avoid replacing a loaded extension. Do not install a new editable binary into the environment used by an active experiment.
+
+The [execution-lane decision](../architecture/03_the-gate.md) and [native engine](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine) define current support. Browser replay and a file-based local solve remain useful without implying GPU or browser-native optimization.

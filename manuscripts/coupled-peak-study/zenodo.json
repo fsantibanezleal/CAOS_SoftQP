@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "upload_type": "publication",
+    "publication_type": "report",
+    "title": "Directional coupled peak penalties with original interval rows",
+    "creators": [
+      {
+        "name": "Santibáñez-Leal, Felipe",
+        "orcid": "0000-0002-0150-3246"
+      }
+    ],
+    "description": "<p>Directional group peaks price the largest weighted departure across selected interval constraints. We derive the box slack-elimination and diagonal-metric proximal identities for coordinate-contraction-monotone penalties, specialize them to directional linear-quadratic group peaks, and describe a native implementation that retains the original interval-row system. Directional row splitting and compact epigraphs already express the same objective; weighted threshold operations and relaxed splitting also have established precedents. The empirical question is whether preserving the original rows reduces complete repeated-forecast computation time against these alternatives. A prospectively registered study retains 210 synthetic instances and 7770 observations across development, heldout and robustness splits. The primary population comprises all 144 heldout instances in six seed clusters, with 32 forecasts and three measured repetitions per method and instance. The median paired reduction score is -212.449875%, with a 95% seed-cluster interval of [-225.336618%,-192.873759%], and 9 failed pairs retained under the prescribed scoring rule. The registered 10% improvement is not established. All returned candidate frames satisfy their applicable original-space numerical criteria; iteration limits, unsuccessful common oracles and timeouts remain part of the result. The findings concern synthetic problems on one nonreserved host and do not establish a general speed advantage, operational safety or historical algorithmic priority.</p><p>Code, editable LaTeX sources and reproducible evidence: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP\">CAOS_SoftQP</a>. Native implementation: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>. Coupled-study evidence: <a href=\"https://doi.org/10.5281/zenodo.23875194\">archived dataset</a>.</p>",
+    "keywords": [
+      "quadratic programming",
+      "coupled peak penalties",
+      "soft constraints",
+      "operator splitting",
+      "negative results",
+      "reproducible optimization"
+    ],
+    "license": "cc-by-4.0",
+    "language": "eng",
+    "version": "0.02.001",
+    "publication_date": "2026-11-02",
+    "related_identifiers": [
+      {
+        "identifier": "10.5281/zenodo.23885690",
+        "relation": "references",
+        "resource_type": "publication-report"
+      },
+      {
+        "identifier": "10.5281/zenodo.23875194",
+        "relation": "issupplementedby",
+        "resource_type": "dataset"
+      }
+    ],
+    "version_notes": "Native LaTeX report-class typesetting, editable public sources, corrected standard front matter and running headers. The registered numerical evidence and negative criteria are unchanged."
+  }
+}

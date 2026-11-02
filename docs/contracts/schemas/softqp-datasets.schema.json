@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-datasets.schema.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^(development|heldout|robustness)-[0-9]{4}$"
+      },
+      "split": {
+        "enum": [
+          "development",
+          "heldout",
+          "robustness"
+        ]
+      },
+      "n": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "density": {
+        "type": "number",
+        "minimum": 0
+      },
+      "condition": {
+        "type": "number",
+        "minimum": 0
+      },
+      "family": {
+        "enum": [
+          "symmetric-elastic",
+          "asymmetric-elastic",
+          "asymmetric-l1"
+        ]
+      },
+      "seed": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "generation_seconds": {
+        "type": "number",
+        "minimum": 0
+      },
+      "problem_sha256": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "oracle_state": {
+        "enum": [
+          "accepted",
+          "oracle-failed"
+        ]
+      },
+      "oracle_reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "oracle_objective": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "split",
+      "n",
+      "density",
+      "condition",
+      "family",
+      "seed",
+      "generation_seconds",
+      "problem_sha256",
+      "oracle_state",
+      "oracle_reason",
+      "oracle_objective"
+    ]
+  }
+}

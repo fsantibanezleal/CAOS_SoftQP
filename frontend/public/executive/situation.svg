@@ -1,113 +1,127 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Four roles each hold part of the picture and the tools they use look back or only days ahead">
-<title>Four roles each hold part of the picture and the tools they use look back or only days ahead</title>
-<rect x="1" y="1" width="798" height="478" rx="12" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="10" y="10" width="330" height="166" rx="10" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="28" y="118" width="112" height="9" rx="3" fill="var(--color-border)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 38 127 L 38 152 M 130 127 L 130 152" fill="none" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="460" y="10" width="330" height="166" rx="10" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="478" y="118" width="112" height="9" rx="3" fill="var(--color-border)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 488 127 L 488 152 M 580 127 L 580 152" fill="none" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="10" y="314" width="330" height="166" rx="10" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="28" y="422" width="112" height="9" rx="3" fill="var(--color-border)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 38 431 L 38 456 M 130 431 L 130 456" fill="none" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="460" y="314" width="330" height="166" rx="10" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="478" y="422" width="112" height="9" rx="3" fill="var(--color-border)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 488 431 L 488 456 M 580 431 L 580 456" fill="none" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="344" y="232" width="112" height="12" rx="3" fill="var(--color-border)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="352" y="244" width="96" height="58" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="358" y="252" width="24" height="20" rx="3" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1.2"/>
-<circle cx="370" cy="262" r="4.5" fill="var(--color-warn)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="388" y="252" width="24" height="20" rx="3" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1.2"/>
-<circle cx="400" cy="262" r="4.5" fill="var(--color-bad)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="418" y="252" width="24" height="20" rx="3" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1.2"/>
-<circle cx="430" cy="262" r="4.5" fill="var(--color-warn)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="388" y="280" width="24" height="22" rx="3" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 340 100 L 372 236" fill="none" stroke="var(--color-fg-faint)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
-<path d="M 460 100 L 428 236" fill="none" stroke="var(--color-fg-faint)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
-<path d="M 340 392 L 372 300" fill="none" stroke="var(--color-fg-faint)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
-<path d="M 460 392 L 428 300" fill="none" stroke="var(--color-fg-faint)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 6"/>
-<circle cx="358" cy="168" r="11" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<path d="M 353 163 L 363 173 M 363 163 L 353 173" fill="none" stroke="var(--color-bad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="442" cy="168" r="11" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<path d="M 437 163 L 447 173 M 447 163 L 437 173" fill="none" stroke="var(--color-bad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="358" cy="346" r="11" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<path d="M 353 341 L 363 351 M 363 341 L 353 351" fill="none" stroke="var(--color-bad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="442" cy="346" r="11" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<path d="M 437 341 L 447 351 M 447 341 L 437 351" fill="none" stroke="var(--color-bad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 354 98 Q 340 98 340 82 Q 340 66 360 66 Q 362 48 386 50 Q 406 42 418 62 Q 444 60 446 82 Q 448 98 430 98 Z" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 356 112 L 364 112 M 360 108 L 360 116" fill="none" stroke="var(--color-accent-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 390 120 L 398 120 M 394 116 L 394 124" fill="none" stroke="var(--color-accent-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 424 110 L 432 110 M 428 106 L 428 114" fill="none" stroke="var(--color-accent-2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 57.9 118.0 L 59.2 88.3 Q 70.0 78.8 80.8 88.3 L 82.2 118.0 Z" fill="var(--color-fg-subtle)" stroke="var(--color-border)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="70" cy="70.8" r="9.5" fill="var(--color-fg-subtle)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 59.2 89.7 L 52.5 107.2 M 80.8 89.7 L 87.5 107.2" fill="none" stroke="var(--color-fg-subtle)" stroke-width="4.050000000000001" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="236" y="58" width="40" height="70" rx="6" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
-<circle cx="256" cy="74" r="8" fill="var(--color-good)" stroke="var(--color-border)" stroke-width="1.2"/>
-<circle cx="256" cy="93" r="8" fill="var(--color-warn)" stroke="var(--color-border)" stroke-width="1.2"/>
-<circle cx="256" cy="112" r="8" fill="var(--color-bad)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 158 84 L 218 84 M 158 98 L 210 98 M 158 112 L 200 112" fill="none" stroke="var(--color-fg-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 507.9 118.0 L 509.2 88.3 Q 520.0 78.8 530.8 88.3 L 532.1 118.0 Z" fill="var(--color-accent-2)" stroke="var(--color-border)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="520" cy="70.8" r="9.5" fill="var(--color-fg-subtle)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 509.2 89.7 L 502.4 107.2 M 530.8 89.7 L 537.5 107.2" fill="none" stroke="var(--color-accent-2)" stroke-width="4.050000000000001" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="600" y="56" width="64" height="72" rx="4" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
-<path d="M 610 72 L 654 72 M 610 84 L 654 84 M 610 96 L 644 96 M 610 108 L 650 108" fill="none" stroke="var(--color-fg-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="716" cy="92" r="22" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="2.4"/>
-<path d="M 716 92 L 716 78 M 716 92 L 704 98" fill="none" stroke="var(--color-fg)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 690 62 Q 682 54 672 56 M 672 56 L 678 48 M 672 56 L 680 62" fill="none" stroke="var(--color-bad)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 57.9 422.0 L 59.2 392.3 Q 70.0 382.9 80.8 392.3 L 82.2 422.0 Z" fill="var(--color-accent)" stroke="var(--color-border)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="70" cy="374.8" r="9.5" fill="var(--color-fg-subtle)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 80.8 393.6 L 99.7 389.6 M 59.2 393.6 L 52.5 411.2" fill="none" stroke="var(--color-accent)" stroke-width="4.050000000000001" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="150" y="360" width="150" height="54" rx="5" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
-<circle cx="174" cy="384" r="10" fill="var(--color-warn)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 174 368 L 174 364 M 174 400 L 174 404 M 158 384 L 154 384 M 190 384 L 194 384" fill="none" stroke="var(--color-warn)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 200 376 L 288 376 M 200 388 L 280 388 M 200 400 L 262 400" fill="none" stroke="var(--color-fg-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 507.9 422.0 L 509.2 392.3 Q 520.0 382.9 530.8 392.3 L 532.1 422.0 Z" fill="var(--color-accent)" stroke="var(--color-border)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="520" cy="374.8" r="9.5" fill="var(--color-fg-subtle)" stroke="var(--color-border)" stroke-width="1.2"/>
-<path d="M 509.2 393.6 L 502.4 411.2 M 530.8 393.6 L 537.5 411.2" fill="none" stroke="var(--color-accent)" stroke-width="4.050000000000001" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="596" y="356" width="166" height="58" rx="5" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="1.5"/>
-<rect x="604" y="364" width="21" height="12" rx="2" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="629" y="364" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="654" y="364" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="679" y="364" width="21" height="12" rx="2" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="704" y="364" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="729" y="364" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="604" y="380" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="629" y="380" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="654" y="380" width="21" height="12" rx="2" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="679" y="380" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="704" y="380" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="729" y="380" width="21" height="12" rx="2" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="604" y="396" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="629" y="396" width="21" height="12" rx="2" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="654" y="396" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="679" y="396" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="704" y="396" width="21" height="12" rx="2" fill="var(--color-accent-soft)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="729" y="396" width="21" height="12" rx="2" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="1"/>
-<rect x="27" y="21" width="166" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="2"/>
-<text data-lang="en" x="110" y="46" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Executives</text>
-<text data-lang="es" x="110" y="46" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Dirección</text>
-<rect x="466" y="21" width="207" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="2"/>
-<text data-lang="en" x="570" y="46" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Public health</text>
-<text data-lang="es" x="570" y="46" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Salud pública</text>
-<rect x="12" y="325" width="248" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="2"/>
-<text data-lang="en" x="136" y="350" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Bed managers</text>
-<text data-lang="es" x="136" y="350" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Gestión de camas</text>
-<rect x="478" y="325" width="288" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" stroke-width="2"/>
-<text data-lang="en" x="622" y="350" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Nursing leaders</text>
-<text data-lang="es" x="622" y="350" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Jefes de enfermería</text>
-<rect x="31" y="135" width="288" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<text data-lang="en" x="175" y="160" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Limit: warns late</text>
-<text data-lang="es" x="175" y="160" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Límite: avisa tarde</text>
-<rect x="474" y="135" width="302" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<text data-lang="en" x="625" y="160" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Reports look back</text>
-<text data-lang="es" x="625" y="160" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Informes miran atrás</text>
-<rect x="40" y="439" width="261" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<text data-lang="en" x="170" y="464" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Whiteboard: today</text>
-<text data-lang="es" x="170" y="464" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Pizarra: solo hoy</text>
-<rect x="474" y="439" width="302" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-bad)" stroke-width="2"/>
-<text data-lang="en" x="625" y="464" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Rosters set early</text>
-<text data-lang="es" x="625" y="464" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Turnos fijados antes</text>
-<rect x="256" y="189" width="288" height="34" rx="8" fill="var(--color-surface)" stroke="var(--color-warn)" stroke-width="2"/>
-<text data-lang="en" x="400" y="214" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Regional forecast</text>
-<text data-lang="es" x="400" y="214" text-anchor="middle" font-size="22" font-weight="600" fill="var(--color-fg)">Pronóstico regional</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img"><title>Building energy policy / Política energética del edificio</title>
+<style>
+.stress { animation: stress 6s ease-in-out infinite; }
+@keyframes stress { 0%, 15% { opacity: .25; } 65%, 100% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .stress { animation: none; opacity: 1; transform: none; }
+}
+</style>
+<rect x="1" y="1" width="998" height="558" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<rect x="30" y="110" width="560" height="350" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="45" y="135" width="530" height="310" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<rect x="58" y="150" width="155" height="185" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="66" y="345" width="139" height="82" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="68" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="68" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="112" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="112" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="156" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="156" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="143" y="260" width="48" height="20" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M150 285h34m-30 10h26m-22 10h18" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<rect x="80" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="80" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M83 383v22m23-22v22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="145" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="145" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M148 383v22m23-22v22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="98" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="88" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M90 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M88 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="164" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="154" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M156 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M154 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="230" y="150" width="155" height="185" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="238" y="345" width="139" height="82" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="240" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="240" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="284" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="284" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="328" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="328" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="315" y="260" width="48" height="20" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M322 285h34m-30 10h26m-22 10h18" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<rect x="252" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="252" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M255 383v22m23-22v22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="317" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="317" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M320 383v22m23-22v22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="270" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="260" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M262 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M260 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="336" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="326" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M328 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M326 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="402" y="150" width="155" height="185" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="410" y="345" width="139" height="82" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="412" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="412" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="456" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="456" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="500" y="165" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="500" y="207" width="34" height="32" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="487" y="260" width="48" height="20" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M494 285h34m-30 10h26m-22 10h18" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<rect x="424" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="424" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M427 383v22m23-22v22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="489" y="375" width="30" height="8" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="489" y="351" width="8" height="27" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M492 383v22m23-22v22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="442" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="432" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M434 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M432 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="508" cy="300" r="9" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="498" y="311" width="20" height="30" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M500 340l-5 22m20-22l5 22" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M498 316l-14 9m34-9l14 9" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="630" y="145" width="145" height="180" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="650" y="167" width="105" height="65" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<circle cx="660" cy="262" r="7" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<circle cx="687" cy="262" r="7" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<circle cx="714" cy="262" r="7" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<circle cx="741" cy="262" r="7" fill="var(--color-bad)" stroke="var(--color-border)"/>
+<rect x="654" y="290" width="20" height="14" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="684" y="290" width="20" height="14" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="714" y="290" width="20" height="14" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="820" y="150" width="125" height="130" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="857" y="132" width="48" height="18" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="833" y="164" width="99" height="100" rx="4" fill="var(--color-surface)" stroke="var(--color-border)"/>
+<rect x="842" y="177" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="842" y="197" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="842" y="217" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<rect x="842" y="237" width="80" height="12" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M590 225h40m145 0h45" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<path d="M700 325v110H450" fill="none" stroke="var(--color-bad)" stroke-width="3" class="stress"/>
+<path d="M880 280v155H700" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<circle cx="930" cy="65" r="23" fill="var(--color-accent)" stroke="var(--color-border)"/>
+<path d="M930.0 35.0L930 25" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M951.0 44.0L958 37" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M960.0 65.0L970 65" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M951.0 86.0L958 93" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M930.0 95.0L930 105" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M909.0 86.0L902 93" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M900.0 65.0L890 65" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<path d="M909.0 44.0L902 37" fill="none" stroke="var(--color-accent)" stroke-width="3" />
+<rect x="650" y="455" width="64" height="50" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<circle cx="682" cy="440" r="11" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M665 505v25m34-25v25" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="735" y="455" width="64" height="50" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<circle cx="767" cy="440" r="11" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M750 505v25m34-25v25" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<rect x="820" y="455" width="64" height="50" rx="4" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<circle cx="852" cy="440" r="11" fill="var(--color-surface-2)" stroke="var(--color-border)"/>
+<path d="M835 505v25m34-25v25" fill="none" stroke="var(--color-fg-subtle)" stroke-width="3" />
+<text data-lang="en" x="42" y="55" fill="var(--color-fg)" font-size="17">Policy reaches several teams</text><text data-lang="es" x="42" y="55" fill="var(--color-fg)" font-size="17">La política involucra varios equipos</text>
+<text data-lang="en" x="58" y="125" fill="var(--color-fg)" font-size="17">Occupied rooms</text><text data-lang="es" x="58" y="125" fill="var(--color-fg)" font-size="17">Salas ocupadas</text>
+<text data-lang="en" x="630" y="125" fill="var(--color-fg)" font-size="17">Supervisory control</text><text data-lang="es" x="630" y="125" fill="var(--color-fg)" font-size="17">Control supervisor</text>
+<text data-lang="en" x="820" y="310" fill="var(--color-fg)" font-size="17">Battery reserve</text><text data-lang="es" x="820" y="310" fill="var(--color-fg)" font-size="17">Reserva de batería</text>
+<text data-lang="en" x="48" y="490" fill="var(--color-fg)" font-size="17">Comfort and power limits</text><text data-lang="es" x="48" y="490" fill="var(--color-fg)" font-size="17">Límites de confort y potencia</text>
+<text data-lang="en" x="630" y="550" fill="var(--color-fg)" font-size="17">Owner · model author · reviewer</text><text data-lang="es" x="630" y="550" fill="var(--color-fg)" font-size="17">Responsable · autor · revisor</text>
 </svg>

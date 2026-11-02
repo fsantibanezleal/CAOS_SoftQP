@@ -1,98 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="900" class="arch-svg" role="img" aria-label="The two data contracts and their checks">
-  <!-- Hand-authored; shell tokens only; both languages in one file (ADR-0058). -->
-  <style>
-    .arch-svg text { font-family: var(--font-sans); }
-    .arch-svg .mono { font-family: var(--font-mono); }
-    .arch-svg .c1 { fill: var(--color-surface); stroke: var(--color-magenta); stroke-width: 1.4; }
-    .arch-svg .c2 { fill: var(--color-surface); stroke: var(--color-good); stroke-width: 1.4; }
-    .arch-svg .web { fill: var(--color-surface); stroke: var(--color-accent); stroke-width: 1.4; }
-    .arch-svg .bx { fill: var(--color-surface-2); stroke: var(--color-border); stroke-width: 1; }
-    .arch-svg .ttl { fill: var(--color-fg); font-size: 15px; font-weight: 700; }
-    .arch-svg .h1 { fill: var(--color-magenta); font-size: 12.5px; font-weight: 700; }
-    .arch-svg .h2 { fill: var(--color-good); font-size: 12.5px; font-weight: 700; }
-    .arch-svg .h3 { fill: var(--color-accent); font-size: 12.5px; font-weight: 700; }
-    .arch-svg .it { fill: var(--color-fg); font-size: 11px; font-weight: 600; }
-    .arch-svg .k { fill: var(--color-fg-subtle); font-size: 10px; }
-    .arch-svg .sub { fill: var(--color-fg-subtle); font-size: 10.5px; }
-    .arch-svg .flow { fill: none; stroke: var(--color-fg-faint); stroke-width: 1.4; }
-  </style>
-  <defs>
-    <marker id="dc5-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L8,4 L0,8 z" fill="var(--color-fg-faint)"/>
-    </marker>
-  </defs>
-
-  <text class="ttl l-en" x="20" y="30">Two contracts, each checked where it is crossed</text>
-  <text class="ttl l-es" x="20" y="30">Dos contratos, cada uno verificado donde se cruza</text>
-
-  <rect class="c1" x="20" y="50" width="250" height="390" rx="10"/>
-  <text class="h1 l-en" x="36" y="76">CONTRACT 1: ingestion</text>
-  <text class="h1 l-es" x="36" y="76">CONTRATO 1: ingesta</text>
-  <rect class="bx" x="36" y="92" width="218" height="90" rx="6"/>
-  <text class="it l-en" x="48" y="112">The case registry</text>
-  <text class="it l-es" x="48" y="112">El registro de casos</text>
-  <text class="k mono" x="48" y="130">id · title · category</text>
-  <text class="k mono" x="48" y="146">params · expected_band</text>
-  <text class="k mono" x="48" y="162">expect: ranges per metric</text>
-  <rect class="bx" x="36" y="194" width="218" height="96" rx="6"/>
-  <text class="it l-en" x="48" y="214">Validated before a run</text>
-  <text class="it l-es" x="48" y="214">Validado antes de correr</text>
-  <text class="sub l-en" x="48" y="234">a bad value is rejected</text>
-  <text class="sub l-es" x="48" y="234">un valor inválido se rechaza</text>
-  <text class="sub l-en" x="48" y="250">with its reason, never coerced;</text>
-  <text class="sub l-es" x="48" y="250">con su razón, nunca se fuerza;</text>
-  <text class="sub l-en" x="48" y="266">an unusual one is flagged</text>
-  <text class="sub l-es" x="48" y="266">uno inusual se marca</text>
-  <text class="k mono" x="48" y="282">io/contract.py</text>
-
-  <rect class="c2" x="325" y="50" width="250" height="390" rx="10"/>
-  <text class="h2 l-en" x="341" y="76">CONTRACT 2: artifacts</text>
-  <text class="h2 l-es" x="341" y="76">CONTRATO 2: artefactos</text>
-  <rect class="bx" x="341" y="92" width="218" height="74" rx="6"/>
-  <text class="it" x="353" y="112">index.json (v2)</text>
-  <text class="k mono" x="353" y="130">n_cases · default_case</text>
-  <text class="k mono" x="353" y="146">cases: id, title, category</text>
-  <rect class="bx" x="341" y="176" width="218" height="104" rx="6"/>
-  <text class="it" x="353" y="196">&lt;case&gt;.json (manifest v3)</text>
-  <text class="k mono" x="353" y="214">params · seed · engine</text>
-  <text class="k mono" x="353" y="230">artifact · lane · gate</text>
-  <text class="k mono" x="353" y="246">metrics · expect · flags</text>
-  <text class="k mono" x="353" y="262">title · expected_band (en, es)</text>
-  <rect class="bx" x="341" y="290" width="218" height="74" rx="6"/>
-  <text class="it" x="353" y="310">&lt;case&gt;/trace.json (v1)</text>
-  <text class="k mono" x="353" y="328">t · S · I · R  (200 points)</text>
-  <text class="k mono" x="353" y="344">summary: peak, day, attack</text>
-  <text class="sub l-en" x="341" y="392">The bake fails on a result</text>
-  <text class="sub l-es" x="341" y="392">El precálculo falla con un resultado</text>
-  <text class="sub l-en" x="341" y="408">outside its expected range.</text>
-  <text class="sub l-es" x="341" y="408">fuera de su rango esperado.</text>
-
-  <rect class="web" x="630" y="50" width="250" height="390" rx="10"/>
-  <text class="h3 l-en" x="646" y="76">The web's declaration</text>
-  <text class="h3 l-es" x="646" y="76">La declaración de la web</text>
-  <rect class="bx" x="646" y="92" width="218" height="74" rx="6"/>
-  <text class="it" x="658" y="112">contract.types.ts</text>
-  <text class="sub l-en" x="658" y="132">interfaces and run-time</text>
-  <text class="sub l-es" x="658" y="132">interfaces y descriptores</text>
-  <text class="sub l-en" x="658" y="148">descriptors, tied by tsc</text>
-  <text class="sub l-es" x="658" y="148">en ejecución, unidos por tsc</text>
-  <rect class="bx" x="646" y="176" width="218" height="104" rx="6"/>
-  <text class="it" x="658" y="196">contract.test.ts</text>
-  <text class="sub l-en" x="658" y="216">every committed artifact read</text>
-  <text class="sub l-es" x="658" y="216">cada artefacto comprometido leído</text>
-  <text class="sub l-en" x="658" y="232">both ways: a key written and not</text>
-  <text class="sub l-es" x="658" y="232">en ambos sentidos: falla una clave</text>
-  <text class="sub l-en" x="658" y="248">read, or read and not written,</text>
-  <text class="sub l-es" x="658" y="248">escrita y no leída, o leída y no</text>
-  <text class="sub l-en" x="658" y="264">fails; booleans are not numbers</text>
-  <text class="sub l-es" x="658" y="264">escrita; un booleano no es número</text>
-  <rect class="bx" x="646" y="290" width="218" height="74" rx="6"/>
-  <text class="it" x="658" y="310">sir.parity.test.ts</text>
-  <text class="sub l-en" x="658" y="330">the live engine against</text>
-  <text class="sub l-es" x="658" y="330">el motor en vivo contra</text>
-  <text class="sub l-en" x="658" y="346">every baked trace</text>
-  <text class="sub l-es" x="658" y="346">cada traza precalculada</text>
-
-  <path class="flow" d="M270,240 H323" marker-end="url(#dc5-arrow)"/>
-  <path class="flow" d="M575,228 H628" marker-end="url(#dc5-arrow)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" class="arch-svg" role="img" aria-label="Versioned scientific contracts">
+<style>.arch-svg text{font-family:var(--font-sans);fill:var(--color-fg)}.arch-svg .title{font-size:24px;font-weight:700}.arch-svg .head{font-size:22px;font-weight:700}.arch-svg .line{font-size:20px}.arch-svg .foot{font-size:19px;fill:var(--color-fg-subtle)}</style>
+<text x="24" y="36" class="title l-en">Versioned scientific contracts</text><text x="24" y="36" class="title l-es">Contratos científicos versionados</text>
+<rect x="24" y="64" width="412" height="184" rx="12" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="2"/><rect x="24" y="64" width="7" height="184" rx="3" fill="var(--color-accent)"/>
+<text x="44" y="100" class="head l-en">Sparse problem</text><text x="44" y="100" class="head l-es">Problema disperso</text>
+<text x="44" y="140" class="line l-en">CSC matrices, original q</text><text x="44" y="140" class="line l-es">Matrices CSC, q original</text>
+<text x="44" y="176" class="line l-en">Null means absent bound</text><text x="44" y="176" class="line l-es">Null indica lado ausente</text>
+<text x="44" y="212" class="line l-en">Soft mask and side costs</text><text x="44" y="212" class="line l-es">Máscara blanda y costos</text>
+<rect x="464" y="64" width="412" height="184" rx="12" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="2"/><rect x="464" y="64" width="7" height="184" rx="3" fill="var(--color-accent)"/>
+<text x="484" y="100" class="head l-en">Result and index</text><text x="484" y="100" class="head l-es">Resultado e índice</text>
+<text x="484" y="140" class="line l-en">Per-method state and reason</text><text x="484" y="140" class="line l-es">Estado y razón por método</text>
+<text x="484" y="176" class="line l-en">Metrics, units and policy</text><text x="484" y="176" class="line l-es">Métricas, unidades y política</text>
+<text x="484" y="212" class="line l-en">Digest and environment</text><text x="484" y="212" class="line l-es">Hash y entorno</text>
+<rect x="24" y="276" width="412" height="184" rx="12" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="2"/><rect x="24" y="276" width="7" height="184" rx="3" fill="var(--color-accent)"/>
+<text x="44" y="312" class="head l-en">Request and local export</text><text x="44" y="312" class="head l-es">Solicitud y exportación</text>
+<text x="44" y="352" class="line l-en">Base artifact digest</text><text x="44" y="352" class="line l-es">Hash del artefacto base</text>
+<text x="44" y="388" class="line l-en">Bounded cost multipliers</text><text x="44" y="388" class="line l-es">Factores de costo acotados</text>
+<text x="44" y="424" class="line l-en">Unchanged hard policy</text><text x="44" y="424" class="line l-es">Política dura conservada</text>
+<rect x="464" y="276" width="412" height="184" rx="12" fill="var(--color-surface-2)" stroke="var(--color-border)" stroke-width="2"/><rect x="464" y="276" width="7" height="184" rx="3" fill="var(--color-accent)"/>
+<text x="484" y="312" class="head l-en">Both contract sides</text><text x="484" y="312" class="head l-es">Ambos lados del contrato</text>
+<text x="484" y="352" class="line l-en">Python producer validation</text><text x="484" y="352" class="line l-es">Validación del productor</text>
+<text x="484" y="388" class="line l-en">Generated TypeScript types</text><text x="484" y="388" class="line l-es">Tipos TypeScript generados</text>
+<text x="484" y="424" class="line l-en">Schema and tamper tests</text><text x="484" y="424" class="line l-es">Pruebas de alteraciones</text>
+<path d="M440 156h18m-7-7 7 7-7 7M440 368h18m-7-7 7 7-7 7M232 250v22m-7-7 7 7 7-7M672 250v22m-7-7 7 7 7-7" fill="none" stroke="var(--color-fg-faint)" stroke-width="2"/>
+<text x="24" y="504" class="foot l-en">The C01 fixture uses the same loader and digest checks.</text><text x="24" y="504" class="foot l-es">El proveedor C01 usa el mismo lector y verificación de hash.</text>
 </svg>

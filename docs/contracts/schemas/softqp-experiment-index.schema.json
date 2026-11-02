@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-experiment-index.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "softqp.experiments/v1"
+    },
+    "protocol_id": {
+      "const": "softqp-experiments-v1"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*\\.(json|csv|jsonl)$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "schema": {
+            "enum": [
+              "softqp-stream",
+              "softqp-campaign",
+              "softqp-datasets",
+              "softqp-trial",
+              "csv"
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "bytes",
+          "sha256",
+          "schema"
+        ]
+      }
+    },
+    "state": {
+      "enum": [
+        "development",
+        "measured"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol_id",
+    "artifacts",
+    "state"
+  ]
+}

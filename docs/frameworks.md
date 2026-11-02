@@ -1,10 +1,12 @@
 # Frameworks
 
-One card per research-chosen engine/library, **the deep research, made binding**. Every engine the pipeline uses
-gets a card here AND an exact pin in the matching `requirements-*.txt`. No hand-rolled toy substitute for a SOTA
-engine the research prescribed.
+These cards describe the actual numerical and presentation dependencies. Exact numerical pins are in `requirements-softqp.txt` and `notebooks/requirements.txt`; the shared shell pin is in `frontend/package.json`. Installation availability, source tests, distribution validation and scientific acceptance are separate gates.
 
-- [00, card TEMPLATE](frameworks/00_TEMPLATE.md), copy per engine to `frameworks/<NN>_<tool>/<tool>.md`
-
-*(The template's EXAMPLE engine is numpy-only SIR, so it ships no SOTA card. A real product adds e.g.
-`01_yade/`, `02_ortools/`, `03_mintpy/`, `04_torch/`.)*
+- [Native soft-QP engine: 0.1.0](frameworks/01_softqp/softqp.md).
+- [NumPy: 2.5.4](frameworks/02_numpy/numpy.md).
+- [SciPy sparse and linear algebra: 1.18.1](frameworks/03_scipy/scipy.md).
+- [Independent stock OSQP: 1.1.3](frameworks/04_osqp/osqp.md).
+- [DAQP active-set reference: 0.10.3](frameworks/05_daqp/daqp.md).
+- [ElastiQP L1 reference: 0.2.0](frameworks/06_elastiqp/elastiqp.md).
+- [Matplotlib lesson figures: 3.11.2](frameworks/07_matplotlib/matplotlib.md).
+- [Shared scientific reader shell: 0.19.1](frameworks/08_shell/shell.md).

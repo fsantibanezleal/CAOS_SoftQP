@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fsantibanezleal/CAOS_SoftQP/schemas/softqp-coupled-campaign/1.0.0",
+  "title": "Coupled peak campaign evidence index",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "protocol_id", "split", "environment", "source_sha256", "inventory", "datasets", "counts", "primary", "peak_worker_rss", "worker_restarts", "raw_sha256", "csv_sha256"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "kind": {"const": "directional-coupled-campaign"},
+    "protocol_id": {"const": "softqp-directional-coupled-v1"}, "split": {"enum": ["development", "heldout", "robustness"]},
+    "environment": {"type": "object", "required": ["packages", "native_binary_sha256", "registration", "sdk_python_sha256", "hardware"], "properties": {"packages": {"type": "object", "additionalProperties": {"type": "string"}}, "native_binary_sha256": {"$ref": "#/$defs/hash"}, "registration": {"type": "object", "required": ["commit", "protocol_sha256", "review_sha256"], "properties": {"commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}, "protocol_sha256": {"$ref": "#/$defs/hash"}, "review_sha256": {"$ref": "#/$defs/hash"}}}, "sdk_python_sha256": {"$ref": "#/$defs/hashes"}, "hardware": {"type": "object", "required": ["machine", "processor", "logical_cpu_count"]}}},
+    "source_sha256": {"$ref": "#/$defs/hashes"},
+    "inventory": {"type": "array", "items": {"type": "object", "required": ["id", "split", "seed", "family", "curvature", "quadratic"]}},
+    "datasets": {"type": "array", "items": {"type": "object", "required": ["id", "oracle_state", "oracle_reason", "oracle_objectives", "batch_sha256"], "properties": {"id": {"type": "string"}, "oracle_state": {"enum": ["accepted", "oracle-failed", "failed", "timeout", "resource-limit"]}, "oracle_reason": {"type": ["string", "null"]}, "oracle_objectives": {"type": ["array", "null"], "items": {"type": "number"}}, "batch_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}}}},
+    "counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "primary": {"type": "object", "required": ["established", "pairs"], "properties": {"established": {"type": "boolean"}, "pairs": {"type": "array", "items": {"type": "object", "required": ["id", "seed", "reduction", "fastest_baseline", "failure_reasons", "median_seconds"], "properties": {"reduction": {"type": "number"}, "seed": {"type": "integer"}, "failure_reasons": {"type": "array", "items": {"type": "string"}}, "median_seconds": {"type": "object", "additionalProperties": {"type": "number", "exclusiveMinimum": 0}}}}}, "estimate": {"type": "number"}, "confidence_interval": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}}, "denominator": {"type": "integer", "minimum": 0}, "seed_clusters": {"type": "integer", "minimum": 0}, "failed_pairs": {"type": "integer", "minimum": 0}}},
+    "peak_worker_rss": {"type": "integer", "minimum": 0}, "worker_restarts": {"type": "integer", "minimum": 0},
+    "raw_sha256": {"$ref": "#/$defs/hash"}, "csv_sha256": {"$ref": "#/$defs/hash"}
+  },
+  "$defs": {"hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "hashes": {"type": "object", "additionalProperties": {"$ref": "#/$defs/hash"}}}
+}

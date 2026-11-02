@@ -1,0 +1,169 @@
+{
+  "protocol_id": "softqp-experiments-v1",
+  "phase": "registered before held-out generation",
+  "created": "2026-10-31",
+  "engine_source": "d0c69ed974d577ba02adbd4806332270d9425651",
+  "operating_limits": {
+    "blas_threads": 1,
+    "wall_seconds": 7200,
+    "process_memory_limit_bytes": 4294967296,
+    "parallel_workers": 1,
+    "trial_timeout_seconds": 10
+  },
+  "accuracy": {
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000,
+    "adaptive_rho_interval": 25,
+    "normalized_objective_gap_limit": 1e-06,
+    "hard_row_error_limit": 1e-06
+  },
+  "methods": [
+    "lifted",
+    "generalized",
+    "asymmetric",
+    "daqp",
+    "flex",
+    "elastiqp"
+  ],
+  "backends": {
+    "lifted_timed": "pinned native fork",
+    "lifted_oracle": "independent stock OSQP with eps_abs=eps_rel=1e-9",
+    "flex": "fixed-parameter paper-equation reconstruction",
+    "elastiqp": "published 0.2.0 dual active set"
+  },
+  "generator": {
+    "n": [
+      32,
+      64,
+      128,
+      256
+    ],
+    "m_per_n": 2,
+    "density": [
+      0.05,
+      0.2
+    ],
+    "hessian_condition": [
+      1,
+      1000
+    ],
+    "families": [
+      "symmetric-elastic",
+      "asymmetric-elastic",
+      "asymmetric-l1"
+    ],
+    "hard_row_fraction_elastic": 0.2,
+    "hard_row_fraction_l1": 0,
+    "row_norm": 1,
+    "q_standard_deviation": 3,
+    "linear_cost_range": [
+      0.1,
+      1.0
+    ],
+    "quadratic_cost_range": [
+      0.5,
+      4.0
+    ],
+    "asymmetric_upper_factor_range": [
+      1.5,
+      3.0
+    ],
+    "lower": -0.4,
+    "upper": 0.6
+  },
+  "seeds": {
+    "development": [
+      1000,
+      1001,
+      1002
+    ],
+    "heldout": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005
+    ],
+    "robustness": [
+      8500,
+      8501,
+      8502,
+      8503,
+      8504,
+      8505
+    ],
+    "order": 271828,
+    "bootstrap": 314159
+  },
+  "repetitions": {
+    "warmup_per_backend": 1,
+    "measured": 7,
+    "paired_order": "seeded random method order within each instance and repetition",
+    "bootstrap_seed_clusters": 2000
+  },
+  "primary_endpoint": {
+    "family": "asymmetric-elastic",
+    "n_minimum": 128,
+    "density": 0.05,
+    "quantity": "median paired relative reduction in cold end-to-end time against the faster of native compact lifting and DAQP",
+    "minimum_reduction": 0.1,
+    "confidence": "two-sided 95 percent seed-cluster bootstrap interval has a lower endpoint above zero",
+    "success_condition": "all compared cells satisfy external original-space acceptance; failures are retained"
+  },
+  "secondary_endpoints": [
+    "native solve/setup and update time",
+    "iterations",
+    "formulation dimensions and nonzeros",
+    "accuracy versus conditioning",
+    "within-method warm/cold stream measurements"
+  ],
+  "robustness": {
+    "n": 32,
+    "m": 64,
+    "density": 0.1,
+    "hessian_condition": [
+      1,
+      100,
+      10000,
+      1000000
+    ],
+    "same_A_q_and_costs_within_seed": true
+  },
+  "stream": {
+    "case_id": "C12",
+    "frames": 32,
+    "horizon": 20,
+    "dt_seconds": 0.2,
+    "initial_state": [
+      1.6,
+      0.0
+    ],
+    "velocity_impulses": {
+      "8": 0.8,
+      "20": -0.6
+    },
+    "policy": "Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts.",
+    "methods": [
+      "lifted",
+      "generalized",
+      "asymmetric",
+      "daqp"
+    ],
+    "modes": [
+      "cold",
+      "warm"
+    ],
+    "timing": "one documented stream observation per frame; no statistical superiority claim from it"
+  },
+  "measurement_scope": {
+    "cold_end_to_end": "validated original QP input to independently evaluated returned result; includes validation, formulation construction, setup and solve; excludes generator, module import and export",
+    "generation": "measured separately",
+    "warm_end_to_end": "vector validation, update, solve and original-space evaluation; one initial workspace setup is recorded separately",
+    "factorization": "backend setup currently includes linear-system preparation; isolated numeric factor time is not instrumented and cannot be inferred",
+    "memory": "process RSS and campaign high-water mark are resource observations, not per-method native allocation peaks"
+  },
+  "failure_policy": "Preserve incompatible, maximum-iteration, timeout, numerical and accuracy-rejected cells with reasons. Never replace an objective or drop a failed evaluation seed.",
+  "claims": "A successful implementation benchmark does not establish global algorithmic novelty, safety or universal solver superiority. Deep FlexQP trained weights are not available in this reconstruction."
+}

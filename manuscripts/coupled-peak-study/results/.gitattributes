@@ -1,0 +1,4 @@
+# Preserve exported bytes and recognize CRLF as an intentional line ending.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Matplotlib SVG path data preserves its reviewed export spacing.
+*.svg -text -whitespace

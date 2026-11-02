@@ -1,0 +1,41 @@
+{
+  "state": "pass",
+  "verified_utc": "2026-11-02T04:03:13.132936+00:00",
+  "record_url": "https://zenodo.org/records/23875072",
+  "record_id": "23875072",
+  "doi": "10.5281/zenodo.23875072",
+  "concept_doi": "10.5281/zenodo.23875071",
+  "status": "published",
+  "metadata_exact_to_accepted_local": true,
+  "latest_is_exact_record": true,
+  "file_inventory": [
+    "softqp-coupled-peak-study-v0.02.000.pdf"
+  ],
+  "anonymous_download": {
+    "url": "https://zenodo.org/api/records/23875072/files/softqp-coupled-peak-study-v0.02.000.pdf/content?independent_verification=c26c596100cc4c0483b45d0e69ec3ec2",
+    "bytes": 635170,
+    "sha256": "09b63de5e2a844b694b44515cfd99f5c28368cbbf812959e07755fa959e59936",
+    "md5": "4deb451aec7416fce79bff5194e99d2b",
+    "content_type": "application/octet-stream",
+    "method": "GET",
+    "authorization_header": false
+  },
+  "reciprocal_relation": {
+    "relation": "issupplementedby",
+    "doi": "10.5281/zenodo.23875194",
+    "target_publication_status": "Dataset still uploading; not inferred from reserved DOI or relation."
+  },
+  "snapshot_sha256": {
+    "public-report-rdm-final.json": "99655e16ed7d1dab68f632d7c2ae34415be6b9880f9d424b48081dd7d78748f7",
+    "public-report-latest.json": "99655e16ed7d1dab68f632d7c2ae34415be6b9880f9d424b48081dd7d78748f7",
+    "public-report-files.json": "481e4963ab44814c7946ca1db131e7d9aaa8d4f4ca92fefcd3700c29dbd14e95"
+  },
+  "checker_sha256": "e80baf68649b0779cdb1b7f93f34a417a05ab3c5bd61ad7ff455b7105cab9f27",
+  "limits": [
+    "Only manuscript public record and exact one-PDF inventory/bytes verified. Dataset remains a separate gate.",
+    "Negative study criterion and no companion-app qualification remain unchanged."
+  ],
+  "decision": "ACCEPT_PUBLIC_REPORT",
+  "checks_sha256": "425b2fc22bbacfcbc2f977c4ba79139085c61a15bf44abc77f7959e0baac1dbd",
+  "narrative_sha256": "68786308250d8f713f44d00fc2240e338bbedce32da46dc7c36512d94ed41562"
+}

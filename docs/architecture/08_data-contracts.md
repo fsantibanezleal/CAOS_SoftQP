@@ -1,86 +1,46 @@
-# The data contracts
+# Versioned boundaries and missing evidence
 
-A product is real when its data flows through enforced contracts. Every boundary of the template is a row of
-[`docs/contracts/catalog.md`](../contracts/catalog.md) (ADR-0080): its owner, its version, one language-neutral
-schema file, an example, a test on each side, its missing-data behavior, a provider that serves it until the real
-producer exists, and a swap test that runs the same consumer assertions against both. The schema files are the
-single source: Python validates against them in its tests, and the TypeScript types are generated from them.
+The [catalog](../contracts/catalog.md) is the inventory of every producer/consumer seam. Each row names a schema, version, owner, example/provider, producer test, consumer test, missing-data behavior and substitution check. Schema changes require a semantic version step, a History row, generated TypeScript and a lock update using the guard's own command. The base-reference check prevents a manually edited lock from hiding an unversioned change.
 
-## The rows
+The scientific contracts cover sparse original problems, case results and their checksummed inventory. Local requests pin a base case and bounded edit factors; local exports preserve request/result and optional public numerical provenance. Experimental contracts cover the fixed C12 stream, campaign summary, instance inventory, raw trial record and experimental artifact index. CSV is a human-readable projection; full JSONL retains nested diagnostics and states.
 
-| Row | Schema | Producer | Consumer |
-|---|---|---|---|
-| params-record | `docs/contracts/schemas/params-record.schema.json` | a source table (`data/examples/params.csv`) | contract 1, `data-pipeline/pipeline/io/contract.py` |
-| case-index | `docs/contracts/schemas/case-index.schema.json` | `data-pipeline/pipeline/core/manifest.py` | the web, the API |
-| case-manifest | `docs/contracts/schemas/case-manifest.schema.json` | `data-pipeline/pipeline/core/manifest.py` | the web, the API |
-| trace | `docs/contracts/schemas/trace.schema.json` | `data-pipeline/pipeline/core/trace.py` | the web, the API |
-| surrogate-model (model slot) | `docs/contracts/schemas/surrogate-model.schema.json` | `data-pipeline/pipeline/stages/train.py` | `data-pipeline/pipeline/stages/evaluate.py` |
-| readiness | `docs/contracts/schemas/readiness.schema.json` | `data-pipeline/pipeline/core/readiness.py` | the web, the API |
-| api | `docs/contracts/api.openapi.json` (OpenAPI 3.1) | `app/` | any HTTP client |
+The API's OpenAPI components reference these same schema files. Self-contained definitions let offline browser validators and generated types agree without fetching an external schema. A schema-valid document still needs byte-integrity and scientific acceptance checks; those are separate tests and cannot be replaced by a successful type generation.
 
-## Contract 1, ingestion (raw to pipeline)
+Readiness uses available, provider, missing, partial and stale where the corresponding evidence exists, while preserving the shared six-state vocabulary. A dormant API is missing by design. An absent experiment export is missing with its path. Missing one declared case should not erase the other cases. An inventory baked for a different product pipeline version is stale, with both versions visible.
 
-`data-pipeline/pipeline/io/contract.py` applies the params-record schema to a source table: the required fields,
-their units and ranges, and the outlier policy. A record is rejected with its reason when a value is missing,
-non-numeric, NaN, infinite or out of range (and, in the example, when the initial infected exceed the population); a
-plausible but unusual record is accepted and flagged (the example flags R0 above 20), and the flag is carried into
-the manifest. Nothing is coerced. A test holds the schema's bounds equal to the code's. This is the door through
-which a reader's own data enters ([guide 02](../guides/02_bring-your-own-data.md)).
+The fixture tree is a real alternative source: C01 plus an actual development campaign/stream provider. It uses the same load, schema and checksum functions. Its visible provider label prevents a substitution test from becoming a scientific completion claim. Native request imports additionally recompute original objective and side violations before rendering.
 
-## Contract 2, artifacts (pipeline to web)
+### Pinned codegenerator compatibility
 
-`data-pipeline/pipeline/core/trace.py` and `data-pipeline/pipeline/core/manifest.py` write, into `data/derived/`:
+`openapi-typescript` 7.13.0 consumes private Redocly 1.x modules. Its resolved
+`@redocly/openapi-core` is pinned by the lockfile to 1.34.22; its scoped `minimatch`
+override is 11.0.1. That release fixes the pattern-amplification advisory
+([GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249),
+[upstream release](https://github.com/isaacs/minimatch/releases/tag/v11.0.1)).
+An audit result alone does not establish generator compatibility: overriding Redocly to 2.7.0
+breaks the private `lib/ref-utils.js` import that this generator uses.
 
-- `data/derived/manifests/index.json` (`example.index/v2`): every case with its bilingual title and category, and the
-  case the App opens on;
-- `manifests/<case>.json` (`example.manifest/v4`): parameters, seed, engine and version, the artifact and its byte
-  size, the lane verdict, the evaluation metrics and the model that produced them (released or baseline), the
-  expected ranges, and the bilingual expected band;
-- `<case>/trace.json` (`example.trace/v1`): at most 200 points of the trajectory and its summary.
+Before dynamically importing `openapi-typescript`, `frontend/scripts/gen-contract-types.mjs`
+runs `frontend/scripts/codegen-compatibility.mjs`. It resolves Redocly through the installed
+producer, checks all three exact versions, local dependency paths, the named minimatch export
+and the complete SHA256 of Redocly's `lib/utils.js`. The only change is
+`const minimatch = require("minimatch");` to
+`const { minimatch } = require("minimatch");`. Original and adapted bytes have distinct pinned
+hashes; a second invocation verifies the adapted bytes without writing. No license notice or
+other vendor byte changes. Unexpected versions, contents, absent dependencies, external or linked
+dependency paths, and shared hard links fail before mutation. The helper never installs anything
+and adds no loader hook. A fresh `npm ci` restores original vendor bytes; the next generation
+reapplies this checked binding change to this frontend's own installation.
 
-## The model slot
+Run `node --test frontend/scripts/codegen-compatibility.test.mjs` from the repository root for
+the original/adapted-byte and adversarial refusal tests. Use an external `CAOS_TEMP_ROOT` when
+choosing a fixture location; otherwise these tests use the operating system temporary directory.
+Then run `npm --prefix frontend run contracts:check`: it compares generated bytes in memory
+against the existing committed types. Also exercise Redocly's actual `readFileFromUrl` header
+patterns with a custom fetch response: matching and nonmatching protocol-qualified and
+protocol-free patterns must include and omit the appropriate headers without a network request.
 
-The surrogate maps r0 = beta / gamma to the peak infected fraction, clamped to [0, 1]. Its released bundle is
-`models/surrogate.json`; when no valid bundle exists, the baseline `data-pipeline/pipeline/model/baseline.py`
-answers (the SIR peak with S0 = 1: `1 - (1 + ln r0) / r0` for r0 > 1, else 0), so the product never waits for a
-model. A swap test runs the same assertions against the baseline and the trained bundle. `--no-train` bakes with the
-released bundle or the baseline and never trains.
-
-## Missing data is a declared state
-
-Every row has one of six states, computed by `data-pipeline/pipeline/core/readiness.py` from the catalog and the
-repository and written to `data/derived/readiness.json`: `available`, `partial` (what is absent is listed),
-`stale` (an older bake answered), `provider` (the row's provider answered), `training` (a model slot answered with
-the released model or the baseline while a newer one trains, or with the baseline while none is released) and
-`missing`. The rules and their bilingual reasons are the catalog's section Missing-data states. The site labels
-every view a provider, a stale bake or the baseline serves and shows not available yet, with the reason, for what is
-missing; the dormant API answers 503 with the state and the reason instead of an empty body that looks like data.
-The readiness document carries the product version and the catalog's SHA-256 instead of a time, so a re-bake does
-not dirty the tree.
-
-## The walking skeleton
-
-`docs/contracts/fixtures/data/derived/` is a provider tree in the layout of `data/derived/`: one case, its
-manifest and trace, the index, and a readiness document that says provider for every row but the dormant api. The site builds on it
-(`CAOS_DATA_ROOT=docs/contracts/fixtures/data/derived npm run build`) and the API serves it
-(`DATA_DIR=docs/contracts/fixtures/data/derived`), so a product's frontend and API are deployed and checked before
-its first real bake, and every contract test runs against it and against the bake with the same assertions.
-
-## How they are held
-
-- The bake fails when a result lies outside its case's expected range (`data-pipeline/pipeline/core/expect.py`).
-- `tests/contracts/` validates every document the pipeline writes (a fresh sandbox bake and the committed one), the
-  provider tree, the model slot and every API response against the schema files and the OpenAPI document
-  (`tests/contracts/contract_schemas.py`, jsonschema with Draft 2020-12).
-- `frontend/src/lib/contract.gen.ts` is generated from `docs/contracts/api.openapi.json` by
-  `frontend/scripts/gen-contract-types.mjs`; the web build fails when it is not current. `frontend/src/lib/contract.types.ts`
-  names the generated types and ties the run-time descriptors to them by `tsc`; `frontend/src/lib/contract.test.ts`
-  reads every committed document and the provider tree against the descriptors in both directions.
-- `scripts/check_artifacts.py` checks that the index, the manifests and the artifacts agree, byte sizes included,
-  and that each lane matches its gate; `scripts/check_readiness.py` that the committed readiness is current;
-  `scripts/check_contracts.py` that every catalog row is complete and every path it names exists;
-  `scripts/check_skeleton.py` lists the rows still served by a provider (allowed while a product is built, never at a
-  release).
-- `frontend/scripts/copy-data.mjs` copies exactly the declared files into the site, the readiness document included,
-  and fails on a missing one; the web fetches them with the version in the address and refuses an answer that is not
-  JSON.
+Remove this bridge only after an explicitly reviewed dependency update supplies a compatible
+patched glob consumer, the byte guard is deliberately retired, real header-pattern operations
+pass, and `contracts:check` preserves the schema-derived output. Do not relax the hash/version
+checks merely to admit an unreviewed update.

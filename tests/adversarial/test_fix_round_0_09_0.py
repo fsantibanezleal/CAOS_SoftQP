@@ -96,7 +96,7 @@ DOC_INPUTS = ("scripts/check_documents.py", "scripts/check_contracts.py", "tests
 @pytest.mark.parametrize("glob", ["../outside/*.json", "/etc/*.json", "C:/Windows/*.json", "data/../../x/*.json"])
 def test_a_documents_glob_outside_the_repository_fails_the_guard_run_alone(tmp_path: Path, glob: str) -> None:
     repo = make_tree(tmp_path / "repo", *DOC_INPUTS)
-    set_cell(repo, "docs/contracts/catalog.md", "params-record", 5, glob)
+    set_cell(repo, "docs/contracts/catalog.md", "softqp-case-spec", 5, glob)
     r = guard(repo, "check_documents.py")
     assert r.returncode == 1 and glob in r.stdout and "outside the repository" in r.stdout, r.stdout
 

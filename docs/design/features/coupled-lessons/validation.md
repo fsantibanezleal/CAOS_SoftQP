@@ -1,0 +1,9 @@
+# Validation: directional group-peak worked lessons
+
+| requirement | adversarial check | gate |
+|---|---|---|
+| CL-001 | Challenge the real bridge with absent/internal executables, bool/NaN/out-of-range requests, timeout/nonzero/malformed/oversized worker output, SDK drift, wrong input/source identity, duplicate/missing method rows and malformed numerical vectors. Preserve a complete valid control. | `tests/test_coupled_lessons.py::test_adversarial_external_lesson_boundary` |
+| CL-002 | local-only: requires the separately installed verified public SDK2 worker environment. Execute the actual public SDK2 worker in its separate installed environment, check native/epigraph parity and independent KKT, and retain quadratic row-split incompatibility rather than dropping or modifying the objective. | `tests/test_coupled_lessons.py::test_adversarial_real_methods_share_the_original_objective` |
+| CL-003 | local-only: requires genuine method execution through the separate verified SDK2 environment. Convert the same original rows/bounds by0.01 and100 with inverse directional scales and verify unchanged original solutions/objectives; a nonreciprocal conversion must change the mathematical question. | `tests/test_coupled_lessons.py::test_adversarial_directional_row_unit_covariance` |
+| CL-004 | Inspect both actual notebooks, real method-call cells, bilingual interpretation and saved figures; alter accepted-summary identity and require refusal. Run the real notebook bar and separate fresh-kernel/independent review. | `tests/test_coupled_lessons.py::test_adversarial_coupled_curriculum_and_evidence_identity` |
+| CL-005 | Rehash or truncate the local summary and require rejection against its independently accepted digest; verify exact complete-population evidence and explicit summary-versus-raw-reanalysis distinction in both languages. | `tests/test_coupled_lessons.py::test_adversarial_coupled_curriculum_and_evidence_identity` |

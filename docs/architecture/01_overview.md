@@ -1,32 +1,11 @@
-# Architecture, overview
+# System and ownership
 
-This repository is an instance of the CAOS product archetype (ADR-0057): the science runs offline, its results are
-committed, and a static web workbench replays them and re-runs what is light enough, live. The base (the layout,
-the two contracts, the stage names, the lanes, the guards, the shared shell) is carried by the template and the
-shell; a product reworks the core: the methods, the cases, the views and the content.
+The product begins with a convex original-space problem: symmetric positive-semidefinite P, q, sparse A, interval bounds and one hard/soft policy per row. A soft row has independent lower/upper linear and quadratic coefficients. Its physical unit is metadata on the original row, so a lift never substitutes auxiliary-variable units for the engineering quantity.
 
-## The lanes
+The separate `softqp` distribution owns the C solver extension, ordinary lifts, reference adapters, prepared workspaces and original-space recovery. The app is scripts rather than an internal Python distribution. Its `data-pipeline/pipeline/softqp_cases.py` defines the fifteen teaching cases; `softqp_rows.py` supplies units; `softqp_run.py` evaluates and exports them. The source-faithful building model is kept distinct from the two authored separable variants.
 
-| Lane | Where | What runs |
-|---|---|---|
-| Offline | `data-pipeline/`, in `.venv-pipeline` | the staged pipeline; it bakes and checks every case |
-| Replay | `data/derived/`, copied into the site | the committed artifacts, read as they are |
-| Live | `frontend/src/engine/` | a TypeScript port of the engine, re-run with the reader's values, held to the baked traces by a parity test |
-| API | `app/` | dormant; a read-only layer over `data/derived`, activated only when a product needs a server |
+The frontend is a static consumer. `frontend/src/lib/softqp.ts` validates JSON and verifies exact bytes against SHA-256 before rendering case records. The experimental reader follows the same boundary for campaign and stream files. Generated TypeScript comes from the contract schemas; handwritten copies of interfaces are avoided.
 
-The [lane gate](03_the-gate.md) decides, by measurement, which cases are light enough to re-run live.
+One selected case belongs to the workbench. Cross-case outcomes belong to Experiments and Benchmark. The C12 stream uses a common independently driven trajectory, so its chart compares solver observations on identical state inputs rather than claiming a comparison of independent controllers. A reader may edit supported cost factors, export a request, execute it locally and import the result. There is no hosted optimization endpoint.
 
-## The flow
-
-Raw inputs, then [contract 1](08_data-contracts.md) (`io/contract.py`), then the named stages (preprocess,
-feature extraction, train, infer, evaluate, export) with every result checked against its case's expected ranges,
-then [contract 2](08_data-contracts.md) (index, manifests, traces) into `data/derived/`, committed. The web copies
-exactly the declared artifacts, reads them as JSON, and re-runs the live engine on them.
-
-## What holds it
-
-The pipeline tests run in a sandbox that fails the session if a committed artifact changes. The web's contract
-test reads every committed artifact against the web's declaration in both directions; the parity test holds the
-live engine to the bakes; the measured gate walks the built site at five sizes, in both themes and both languages.
-The design (`docs/design/SDD.md`) names the gate of every requirement, and `scripts/check_sdd.py` checks that each
-named gate exists.
+Ownership matters for releases: a green app build cannot prove the native wheel is installable, and an engine release cannot establish that the app serves the correct artifact inventory. Each repository records its own source and promotion evidence. See the [contract catalog](../contracts/catalog.md) and [native source repository](https://github.com/fsantibanezleal/CAOS_SoftQP_Engine).

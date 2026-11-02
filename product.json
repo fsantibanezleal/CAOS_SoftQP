@@ -1,20 +1,47 @@
 {
-  "name": "CAOS Product",
-  "slug": "caos-product",
+  "name": "SoftQP Studio",
+  "slug": "softqp",
   "tagline": {
-    "en": "A CAOS product built from the archetype template: an example epidemic model, replayed and re-run live.",
-    "es": "Un producto CAOS construido desde la plantilla arquetipo: un modelo epidémico de ejemplo, reproducido y recalculado en vivo."
+    "en": "Inspect constraint trade-offs with reproducible quadratic programs.",
+    "es": "Examina compromisos entre restricciones con programas cuadráticos reproducibles."
   },
-  "repo": "https://github.com/fsantibanezleal/CAOS_PRODUCT_TEMPLATE",
+  "repo": "https://github.com/fsantibanezleal/CAOS_SoftQP",
   "visibility": "public",
   "license": "MIT",
   "holder": "Felipe Santibáñez-Leal",
   "year": 2026,
-  "method_packages": [],
   "method_entrypoints": [
-    "pipeline.model.sir.simulate",
-    "pipeline.model.sir.derivatives",
-    "pipeline.oracles.final_size",
-    "pipeline.model.baseline.peak_frac"
+    "softqp.solvers.solve",
+    "softqp.flex.solve_flex",
+    "softqp.elasti.solve_elastiqp",
+    "softqp.sessions.PreparedSolver",
+    "softqp.sessions.DaqpWorkspace",
+    "pipeline.optimality.kkt",
+    "pipeline.control.predict_states",
+    "pipeline.softqp_campaign.primary_endpoint",
+    "pipeline.coupled_lessons.run_comparison"
+  ],
+  "manuscripts": [
+    {
+      "kind": "technical-report",
+      "concept_doi": "10.5281/zenodo.23851659",
+      "title": "Side-Specific Soft Constraints in Quadratic Programming",
+      "version": "0.01.001",
+      "covers": [
+        "BS-1"
+      ]
+    },
+    {
+      "kind": "manuscript",
+      "concept_doi": "10.5281/zenodo.23875071",
+      "title": "Directional coupled peak penalties with original interval rows",
+      "version": "0.02.001",
+      "covers": [
+        "BS-2"
+      ]
+    }
+  ],
+  "method_packages": [
+    "softqp"
   ]
 }

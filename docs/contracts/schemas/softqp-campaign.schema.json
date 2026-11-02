@@ -1,0 +1,1013 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-campaign.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "softqp.campaign/v1"
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocol_id": {
+          "const": "softqp-experiments-v1"
+        },
+        "phase": {
+          "const": "registered before held-out generation"
+        },
+        "created": {
+          "const": "2026-10-31"
+        },
+        "engine_source": {
+          "const": "d0c69ed974d577ba02adbd4806332270d9425651"
+        },
+        "operating_limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "blas_threads": {
+              "const": 1
+            },
+            "wall_seconds": {
+              "const": 7200
+            },
+            "process_memory_limit_bytes": {
+              "const": 4294967296
+            },
+            "parallel_workers": {
+              "const": 1
+            },
+            "trial_timeout_seconds": {
+              "const": 10
+            }
+          },
+          "required": [
+            "blas_threads",
+            "wall_seconds",
+            "process_memory_limit_bytes",
+            "parallel_workers",
+            "trial_timeout_seconds"
+          ]
+        },
+        "accuracy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "eps_abs": {
+              "const": 1e-07
+            },
+            "eps_rel": {
+              "const": 1e-07
+            },
+            "max_iter": {
+              "const": 200000
+            },
+            "adaptive_rho_interval": {
+              "const": 25
+            },
+            "normalized_objective_gap_limit": {
+              "const": 1e-06
+            },
+            "hard_row_error_limit": {
+              "const": 1e-06
+            }
+          },
+          "required": [
+            "eps_abs",
+            "eps_rel",
+            "max_iter",
+            "adaptive_rho_interval",
+            "normalized_objective_gap_limit",
+            "hard_row_error_limit"
+          ]
+        },
+        "methods": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "lifted"
+            },
+            {
+              "const": "generalized"
+            },
+            {
+              "const": "asymmetric"
+            },
+            {
+              "const": "daqp"
+            },
+            {
+              "const": "flex"
+            },
+            {
+              "const": "elastiqp"
+            }
+          ],
+          "items": false,
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "backends": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "lifted_timed": {
+              "const": "pinned native fork"
+            },
+            "lifted_oracle": {
+              "const": "independent stock OSQP with eps_abs=eps_rel=1e-9"
+            },
+            "flex": {
+              "const": "fixed-parameter paper-equation reconstruction"
+            },
+            "elastiqp": {
+              "const": "published 0.2.0 dual active set"
+            }
+          },
+          "required": [
+            "lifted_timed",
+            "lifted_oracle",
+            "flex",
+            "elastiqp"
+          ]
+        },
+        "generator": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "n": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 32
+                },
+                {
+                  "const": 64
+                },
+                {
+                  "const": 128
+                },
+                {
+                  "const": 256
+                }
+              ],
+              "items": false,
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "m_per_n": {
+              "const": 2
+            },
+            "density": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 0.05
+                },
+                {
+                  "const": 0.2
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "hessian_condition": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 1
+                },
+                {
+                  "const": 1000
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "families": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": "symmetric-elastic"
+                },
+                {
+                  "const": "asymmetric-elastic"
+                },
+                {
+                  "const": "asymmetric-l1"
+                }
+              ],
+              "items": false,
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "hard_row_fraction_elastic": {
+              "const": 0.2
+            },
+            "hard_row_fraction_l1": {
+              "const": 0
+            },
+            "row_norm": {
+              "const": 1
+            },
+            "q_standard_deviation": {
+              "const": 3
+            },
+            "linear_cost_range": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 0.1
+                },
+                {
+                  "const": 1.0
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "quadratic_cost_range": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 0.5
+                },
+                {
+                  "const": 4.0
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "asymmetric_upper_factor_range": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 1.5
+                },
+                {
+                  "const": 3.0
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "lower": {
+              "const": -0.4
+            },
+            "upper": {
+              "const": 0.6
+            }
+          },
+          "required": [
+            "n",
+            "m_per_n",
+            "density",
+            "hessian_condition",
+            "families",
+            "hard_row_fraction_elastic",
+            "hard_row_fraction_l1",
+            "row_norm",
+            "q_standard_deviation",
+            "linear_cost_range",
+            "quadratic_cost_range",
+            "asymmetric_upper_factor_range",
+            "lower",
+            "upper"
+          ]
+        },
+        "seeds": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "development": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 1000
+                },
+                {
+                  "const": 1001
+                },
+                {
+                  "const": 1002
+                }
+              ],
+              "items": false,
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "heldout": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 9000
+                },
+                {
+                  "const": 9001
+                },
+                {
+                  "const": 9002
+                },
+                {
+                  "const": 9003
+                },
+                {
+                  "const": 9004
+                },
+                {
+                  "const": 9005
+                }
+              ],
+              "items": false,
+              "minItems": 6,
+              "maxItems": 6
+            },
+            "robustness": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 8500
+                },
+                {
+                  "const": 8501
+                },
+                {
+                  "const": 8502
+                },
+                {
+                  "const": 8503
+                },
+                {
+                  "const": 8504
+                },
+                {
+                  "const": 8505
+                }
+              ],
+              "items": false,
+              "minItems": 6,
+              "maxItems": 6
+            },
+            "order": {
+              "const": 271828
+            },
+            "bootstrap": {
+              "const": 314159
+            }
+          },
+          "required": [
+            "development",
+            "heldout",
+            "robustness",
+            "order",
+            "bootstrap"
+          ]
+        },
+        "repetitions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "warmup_per_backend": {
+              "const": 1
+            },
+            "measured": {
+              "const": 7
+            },
+            "paired_order": {
+              "const": "seeded random method order within each instance and repetition"
+            },
+            "bootstrap_seed_clusters": {
+              "const": 2000
+            }
+          },
+          "required": [
+            "warmup_per_backend",
+            "measured",
+            "paired_order",
+            "bootstrap_seed_clusters"
+          ]
+        },
+        "primary_endpoint": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "family": {
+              "const": "asymmetric-elastic"
+            },
+            "n_minimum": {
+              "const": 128
+            },
+            "density": {
+              "const": 0.05
+            },
+            "quantity": {
+              "const": "median paired relative reduction in cold end-to-end time against the faster of native compact lifting and DAQP"
+            },
+            "minimum_reduction": {
+              "const": 0.1
+            },
+            "confidence": {
+              "const": "two-sided 95 percent seed-cluster bootstrap interval has a lower endpoint above zero"
+            },
+            "success_condition": {
+              "const": "all compared cells satisfy external original-space acceptance; failures are retained"
+            }
+          },
+          "required": [
+            "family",
+            "n_minimum",
+            "density",
+            "quantity",
+            "minimum_reduction",
+            "confidence",
+            "success_condition"
+          ]
+        },
+        "secondary_endpoints": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": "native solve/setup and update time"
+            },
+            {
+              "const": "iterations"
+            },
+            {
+              "const": "formulation dimensions and nonzeros"
+            },
+            {
+              "const": "accuracy versus conditioning"
+            },
+            {
+              "const": "within-method warm/cold stream measurements"
+            }
+          ],
+          "items": false,
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "robustness": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "n": {
+              "const": 32
+            },
+            "m": {
+              "const": 64
+            },
+            "density": {
+              "const": 0.1
+            },
+            "hessian_condition": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 1
+                },
+                {
+                  "const": 100
+                },
+                {
+                  "const": 10000
+                },
+                {
+                  "const": 1000000
+                }
+              ],
+              "items": false,
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "same_A_q_and_costs_within_seed": {
+              "const": true
+            }
+          },
+          "required": [
+            "n",
+            "m",
+            "density",
+            "hessian_condition",
+            "same_A_q_and_costs_within_seed"
+          ]
+        },
+        "stream": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "case_id": {
+              "const": "C12"
+            },
+            "frames": {
+              "const": 32
+            },
+            "horizon": {
+              "const": 20
+            },
+            "dt_seconds": {
+              "const": 0.2
+            },
+            "initial_state": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": 1.6
+                },
+                {
+                  "const": 0.0
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "velocity_impulses": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "8": {
+                  "const": 0.8
+                },
+                "20": {
+                  "const": -0.6
+                }
+              },
+              "required": [
+                "8",
+                "20"
+              ]
+            },
+            "policy": {
+              "const": "Independent stock lifting drives the common plant trajectory. Every compared method receives identical state inputs. These are paired solver observations, not separate controller rollouts."
+            },
+            "methods": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": "lifted"
+                },
+                {
+                  "const": "generalized"
+                },
+                {
+                  "const": "asymmetric"
+                },
+                {
+                  "const": "daqp"
+                }
+              ],
+              "items": false,
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "modes": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "const": "cold"
+                },
+                {
+                  "const": "warm"
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "timing": {
+              "const": "one documented stream observation per frame; no statistical superiority claim from it"
+            }
+          },
+          "required": [
+            "case_id",
+            "frames",
+            "horizon",
+            "dt_seconds",
+            "initial_state",
+            "velocity_impulses",
+            "policy",
+            "methods",
+            "modes",
+            "timing"
+          ]
+        },
+        "measurement_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cold_end_to_end": {
+              "const": "validated original QP input to independently evaluated returned result; includes validation, formulation construction, setup and solve; excludes generator, module import and export"
+            },
+            "generation": {
+              "const": "measured separately"
+            },
+            "warm_end_to_end": {
+              "const": "vector validation, update, solve and original-space evaluation; one initial workspace setup is recorded separately"
+            },
+            "factorization": {
+              "const": "backend setup currently includes linear-system preparation; isolated numeric factor time is not instrumented and cannot be inferred"
+            },
+            "memory": {
+              "const": "process RSS and campaign high-water mark are resource observations, not per-method native allocation peaks"
+            }
+          },
+          "required": [
+            "cold_end_to_end",
+            "generation",
+            "warm_end_to_end",
+            "factorization",
+            "memory"
+          ]
+        },
+        "failure_policy": {
+          "const": "Preserve incompatible, maximum-iteration, timeout, numerical and accuracy-rejected cells with reasons. Never replace an objective or drop a failed evaluation seed."
+        },
+        "claims": {
+          "const": "A successful implementation benchmark does not establish global algorithmic novelty, safety or universal solver superiority. Deep FlexQP trained weights are not available in this reconstruction."
+        }
+      },
+      "required": [
+        "protocol_id",
+        "phase",
+        "created",
+        "engine_source",
+        "operating_limits",
+        "accuracy",
+        "methods",
+        "backends",
+        "generator",
+        "seeds",
+        "repetitions",
+        "primary_endpoint",
+        "secondary_endpoints",
+        "robustness",
+        "stream",
+        "measurement_scope",
+        "failure_policy",
+        "claims"
+      ]
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python",
+        "platform",
+        "packages"
+      ],
+      "properties": {
+        "python": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "packages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "engine_revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "engine_source_dirty": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "native_binary_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "protocol_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_sha256": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "observed_wall_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "worker_peak_rss_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "worker_restarts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "planned_instances": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "completed_instances": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "split": {
+            "enum": [
+              "development",
+              "heldout",
+              "robustness"
+            ]
+          },
+          "n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "density": {
+            "type": "number",
+            "minimum": 0
+          },
+          "condition": {
+            "type": "number",
+            "minimum": 0
+          },
+          "family": {
+            "enum": [
+              "symmetric-elastic",
+              "asymmetric-elastic",
+              "asymmetric-l1"
+            ]
+          },
+          "method": {
+            "enum": [
+              "lifted",
+              "generalized",
+              "asymmetric",
+              "daqp",
+              "flex",
+              "elastiqp"
+            ]
+          },
+          "counts": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "accepted": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "incompatible": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "failed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "accuracy-rejected": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "timeout": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "resource-limit": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "oracle-failed": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": []
+          },
+          "median_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "quantile_25_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "quantile_75_seconds": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_normalized_gap": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_hard_violation": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "split",
+          "n",
+          "density",
+          "condition",
+          "family",
+          "method",
+          "counts",
+          "median_seconds",
+          "quantile_25_seconds",
+          "quantile_75_seconds",
+          "max_normalized_gap",
+          "max_hard_violation"
+        ]
+      }
+    },
+    "primary_endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "met",
+            "not-established"
+          ]
+        },
+        "median_relative_reduction": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "confidence_interval_95": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "paired_samples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rejected_pairs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "seed_clusters": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "state",
+        "median_relative_reduction",
+        "confidence_interval_95",
+        "paired_samples",
+        "rejected_pairs",
+        "seed_clusters"
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "incompatible": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "accuracy-rejected": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "timeout": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resource-limit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "oracle-failed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": []
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*\\.(json|csv|jsonl)$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "bytes",
+          "sha256"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "protocol",
+    "environment",
+    "protocol_sha256",
+    "source_sha256",
+    "observed_wall_seconds",
+    "worker_peak_rss_bytes",
+    "worker_restarts",
+    "planned_instances",
+    "completed_instances",
+    "cells",
+    "primary_endpoint",
+    "counts",
+    "artifacts"
+  ]
+}

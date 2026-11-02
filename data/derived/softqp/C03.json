@@ -1,0 +1,245 @@
+{
+  "case_id": "C03",
+  "category": {
+    "en": "Semantics",
+    "es": "Semántica"
+  },
+  "problem": {
+    "A": {
+      "data": [
+        1.0
+      ],
+      "indices": [
+        0
+      ],
+      "indptr": [
+        0,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    "P": {
+      "data": [
+        1.0
+      ],
+      "indices": [
+        0
+      ],
+      "indptr": [
+        0,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    "lower": [
+      -1.0
+    ],
+    "penalty": {
+      "lower_linear": [
+        0.3
+      ],
+      "lower_quadratic": [
+        2.0
+      ],
+      "soft": [
+        true
+      ],
+      "upper_linear": [
+        1.2
+      ],
+      "upper_quadratic": [
+        4.0
+      ]
+    },
+    "q": [
+      -3.0
+    ],
+    "upper": [
+      1.0
+    ]
+  },
+  "rows": [
+    {
+      "id": "r0000",
+      "label": {
+        "en": "Normalized row 0",
+        "es": "Fila normalizada 0"
+      },
+      "soft": true,
+      "unit": "1"
+    }
+  ],
+  "runs": [
+    {
+      "method": "lifted",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 9,
+          "rows": 4,
+          "variables": 3
+        },
+        "elapsed_seconds": 0.0021714000031352043,
+        "iterations": 50,
+        "method": "lifted",
+        "metrics": {
+          "base_objective": -2.8072000008854676,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.5639999999999996,
+          "objective_gap_against_lifted": 0.0,
+          "penalty_objective": 0.24320000088546787,
+          "slack": [
+            -0.16000000048123253
+          ],
+          "stationarity_residual": 5.559213089867399e-10,
+          "upper_violation": [
+            0.16000000048123253
+          ]
+        },
+        "setup_seconds": 2.14e-05,
+        "solve_seconds": 1.13e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.1600000004812325
+        ],
+        "y": [
+          1.8399999989628462
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "generalized",
+      "reason": "The published unconditional penalty reference requires symmetric side costs.",
+      "result": null,
+      "state": "incompatible"
+    },
+    {
+      "method": "asymmetric",
+      "reason": null,
+      "result": {
+        "dimensions": {
+          "nnz": 2,
+          "rows": 1,
+          "variables": 1
+        },
+        "elapsed_seconds": 0.0008875000057742,
+        "iterations": 50,
+        "method": "asymmetric",
+        "metrics": {
+          "base_objective": -2.8071999999655266,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.564,
+          "objective_gap_against_lifted": 4.440892098500626e-16,
+          "penalty_objective": 0.2431999999655266,
+          "slack": [
+            -0.15999999998126446
+          ],
+          "stationarity_residual": 1.994004961147766e-11,
+          "upper_violation": [
+            0.15999999998126446
+          ]
+        },
+        "setup_seconds": 2.32e-05,
+        "solve_seconds": 1.71e-05,
+        "status": "solved",
+        "status_code": 1,
+        "x": [
+          1.1599999999812645
+        ],
+        "y": [
+          1.8399999999987955
+        ]
+      },
+      "state": "available"
+    },
+    {
+      "method": "daqp",
+      "reason": null,
+      "result": {
+        "backend_settings": {
+          "abs_subopt": 0.0,
+          "cycle_tol": 10,
+          "dual_tol": 1e-07,
+          "eps_prox": 0.0,
+          "eq_reduction": 0,
+          "eta_prox": -1.0,
+          "fval_bound": 1e+30,
+          "iter_limit": 200000,
+          "pivot_tol": 1e-08,
+          "primal_tol": 1e-07,
+          "progress_tol": 1e-14,
+          "refactor_tol": 1e-09,
+          "rel_subopt": 0.0,
+          "rho_soft": 1e-06,
+          "sing_tol": 3.7e-11,
+          "time_limit": 0.0,
+          "w_soft": 0.0,
+          "zero_tol": 1e-11
+        },
+        "dimensions": {
+          "nnz": 2,
+          "rows": 1,
+          "variables": 1
+        },
+        "elapsed_seconds": 0.00018180000188294798,
+        "iterations": 2,
+        "method": "daqp",
+        "metrics": {
+          "base_objective": -2.8072000000000004,
+          "hard_violation": 0.0,
+          "lower_violation": [
+            0.0
+          ],
+          "objective": -2.564,
+          "objective_gap_against_lifted": 4.440892098500626e-16,
+          "penalty_objective": 0.24320000000000025,
+          "slack": [
+            -0.16000000000000014
+          ],
+          "stationarity_residual": 0.0,
+          "upper_violation": [
+            0.16000000000000014
+          ]
+        },
+        "setup_seconds": 3.8e-06,
+        "solve_seconds": 3.9e-06,
+        "status": "soft optimal",
+        "status_code": 2,
+        "x": [
+          1.1600000000000001
+        ],
+        "y": [
+          1.8399999999999999
+        ]
+      },
+      "state": "available"
+    }
+  ],
+  "schema_version": "softqp.case-result/v2",
+  "seed": 1729,
+  "settings": {
+    "adaptive_rho_interval": 25,
+    "eps_abs": 1e-07,
+    "eps_rel": 1e-07,
+    "max_iter": 200000
+  },
+  "source": "authored synthetic case",
+  "title": {
+    "en": "Competing side costs",
+    "es": "Costos por lado en conflicto"
+  }
+}

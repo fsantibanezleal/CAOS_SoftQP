@@ -1,0 +1,650 @@
+{
+  "state": "local-static-resource-observations",
+  "build": {
+    "version": "0.01.000",
+    "sha": "55a7e77415f2f73334ffbce286d3559f8a81152a",
+    "built": "2026-11-01T04:01:04.012Z"
+  },
+  "browser": "153.0.8010.12",
+  "limits": "Desktop Chromium with two emulated viewports; local uncompressed static server. Heap is sampled after load, not peak memory or physical-phone performance. No deployed origin or browser-native solver is measured.",
+  "staticFileBytes": 34336119,
+  "staticFileCount": 153,
+  "largestFiles": [
+    {
+      "path": "data/experiments/trials.jsonl",
+      "bytes": 16337030
+    },
+    {
+      "path": "data/experiments/trials.csv",
+      "bytes": 3368039
+    },
+    {
+      "path": "assets/stream-IoBK3pTJ.js",
+      "bytes": 2199618
+    },
+    {
+      "path": "assets/stream-BTb6j4TZ.js",
+      "bytes": 2199555
+    },
+    {
+      "path": "data/experiments/stream.json",
+      "bytes": 2199525
+    },
+    {
+      "path": "assets/C14-DEeaP7lk.js",
+      "bytes": 743532
+    },
+    {
+      "path": "data/softqp/C14.json",
+      "bytes": 743502
+    },
+    {
+      "path": "assets/C15-D2bUNIVw.js",
+      "bytes": 742948
+    }
+  ],
+  "observations": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "route": "app",
+      "case": "C01",
+      "heap": {
+        "usedBytes": 15293152,
+        "totalBytes": 20692992
+      },
+      "documentWidth": 1280,
+      "viewportWidth": 1280,
+      "domNodes": 243,
+      "resources": [
+        {
+          "path": "/assets/index-F3qVN5a-.js",
+          "encodedBodyBytes": 192225,
+          "decodedBodyBytes": 192225
+        },
+        {
+          "path": "/assets/rolldown-runtime-BWaJ3C7D.js",
+          "encodedBodyBytes": 911,
+          "decodedBodyBytes": 911
+        },
+        {
+          "path": "/assets/react-vendor-CbRAFYuN.js",
+          "encodedBodyBytes": 218747,
+          "decodedBodyBytes": 218747
+        },
+        {
+          "path": "/assets/math-vendor-BZ_bdw18.js",
+          "encodedBodyBytes": 259138,
+          "decodedBodyBytes": 259138
+        },
+        {
+          "path": "/assets/math-vendor-Bv5fr4tV.css",
+          "encodedBodyBytes": 29802,
+          "decodedBodyBytes": 29802
+        },
+        {
+          "path": "/assets/index-w0w0ryZu.css",
+          "encodedBodyBytes": 86394,
+          "decodedBodyBytes": 86394
+        },
+        {
+          "path": "/assets/Workbench-DEy4CZSK.js",
+          "encodedBodyBytes": 16512,
+          "decodedBodyBytes": 16512
+        },
+        {
+          "path": "/assets/experiments-CeIrZwKQ.js",
+          "encodedBodyBytes": 102898,
+          "decodedBodyBytes": 102898
+        },
+        {
+          "path": "/assets/softqp-DpP_FQT5.js",
+          "encodedBodyBytes": 156574,
+          "decodedBodyBytes": 156574
+        },
+        {
+          "path": "/assets/C01-B8RfIeRo.js",
+          "encodedBodyBytes": 6218,
+          "decodedBodyBytes": 6218
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "route": "app",
+      "case": "C13",
+      "heap": {
+        "usedBytes": 24543988,
+        "totalBytes": 36376576
+      },
+      "documentWidth": 1280,
+      "viewportWidth": 1280,
+      "domNodes": 661,
+      "resources": [
+        {
+          "path": "/assets/index-F3qVN5a-.js",
+          "encodedBodyBytes": 192225,
+          "decodedBodyBytes": 192225
+        },
+        {
+          "path": "/assets/rolldown-runtime-BWaJ3C7D.js",
+          "encodedBodyBytes": 911,
+          "decodedBodyBytes": 911
+        },
+        {
+          "path": "/assets/math-vendor-Bv5fr4tV.css",
+          "encodedBodyBytes": 29802,
+          "decodedBodyBytes": 29802
+        },
+        {
+          "path": "/assets/react-vendor-CbRAFYuN.js",
+          "encodedBodyBytes": 218747,
+          "decodedBodyBytes": 218747
+        },
+        {
+          "path": "/assets/math-vendor-BZ_bdw18.js",
+          "encodedBodyBytes": 259138,
+          "decodedBodyBytes": 259138
+        },
+        {
+          "path": "/assets/index-w0w0ryZu.css",
+          "encodedBodyBytes": 86394,
+          "decodedBodyBytes": 86394
+        },
+        {
+          "path": "/assets/Workbench-DEy4CZSK.js",
+          "encodedBodyBytes": 16512,
+          "decodedBodyBytes": 16512
+        },
+        {
+          "path": "/assets/experiments-CeIrZwKQ.js",
+          "encodedBodyBytes": 102898,
+          "decodedBodyBytes": 102898
+        },
+        {
+          "path": "/assets/softqp-DpP_FQT5.js",
+          "encodedBodyBytes": 156574,
+          "decodedBodyBytes": 156574
+        },
+        {
+          "path": "/assets/C01-B8RfIeRo.js",
+          "encodedBodyBytes": 6218,
+          "decodedBodyBytes": 6218
+        },
+        {
+          "path": "/assets/C13-BMkXcqbo.js",
+          "encodedBodyBytes": 427181,
+          "decodedBodyBytes": 427181
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "route": "benchmark",
+      "case": null,
+      "heap": {
+        "usedBytes": 15342108,
+        "totalBytes": 40923136
+      },
+      "documentWidth": 1280,
+      "viewportWidth": 1280,
+      "domNodes": 1565,
+      "resources": [
+        {
+          "path": "/assets/rolldown-runtime-BWaJ3C7D.js",
+          "encodedBodyBytes": 911,
+          "decodedBodyBytes": 911
+        },
+        {
+          "path": "/assets/index-F3qVN5a-.js",
+          "encodedBodyBytes": 192225,
+          "decodedBodyBytes": 192225
+        },
+        {
+          "path": "/assets/react-vendor-CbRAFYuN.js",
+          "encodedBodyBytes": 218747,
+          "decodedBodyBytes": 218747
+        },
+        {
+          "path": "/assets/math-vendor-Bv5fr4tV.css",
+          "encodedBodyBytes": 29802,
+          "decodedBodyBytes": 29802
+        },
+        {
+          "path": "/assets/index-w0w0ryZu.css",
+          "encodedBodyBytes": 86394,
+          "decodedBodyBytes": 86394
+        },
+        {
+          "path": "/assets/math-vendor-BZ_bdw18.js",
+          "encodedBodyBytes": 259138,
+          "decodedBodyBytes": 259138
+        },
+        {
+          "path": "/assets/Benchmark-BJDNpbnY.js",
+          "encodedBodyBytes": 27427,
+          "decodedBodyBytes": 27427
+        },
+        {
+          "path": "/assets/experiments-CeIrZwKQ.js",
+          "encodedBodyBytes": 102898,
+          "decodedBodyBytes": 102898
+        },
+        {
+          "path": "/assets/bi-e8gugXWp.js",
+          "encodedBodyBytes": 247,
+          "decodedBodyBytes": 247
+        },
+        {
+          "path": "/assets/softqp-DpP_FQT5.js",
+          "encodedBodyBytes": 156574,
+          "decodedBodyBytes": 156574
+        },
+        {
+          "path": "/assets/useScientificRecords-BWd47HXJ.js",
+          "encodedBodyBytes": 492,
+          "decodedBodyBytes": 492
+        },
+        {
+          "path": "/assets/experiments-DrvaIwc6.js",
+          "encodedBodyBytes": 1070,
+          "decodedBodyBytes": 1070
+        },
+        {
+          "path": "/assets/C01-B8RfIeRo.js",
+          "encodedBodyBytes": 6218,
+          "decodedBodyBytes": 6218
+        },
+        {
+          "path": "/assets/C02-CiZUtSCv.js",
+          "encodedBodyBytes": 6216,
+          "decodedBodyBytes": 6216
+        },
+        {
+          "path": "/assets/C03-DQVqyfjX.js",
+          "encodedBodyBytes": 5336,
+          "decodedBodyBytes": 5336
+        },
+        {
+          "path": "/assets/C04-CORBO8-E.js",
+          "encodedBodyBytes": 6708,
+          "decodedBodyBytes": 6708
+        },
+        {
+          "path": "/assets/C05-TBKFWsoA.js",
+          "encodedBodyBytes": 3357,
+          "decodedBodyBytes": 3357
+        },
+        {
+          "path": "/assets/C06-DwAs81u_.js",
+          "encodedBodyBytes": 72985,
+          "decodedBodyBytes": 72985
+        },
+        {
+          "path": "/assets/C07-C2sFAGun.js",
+          "encodedBodyBytes": 28657,
+          "decodedBodyBytes": 28657
+        },
+        {
+          "path": "/assets/C08-D-U7Zi9Z.js",
+          "encodedBodyBytes": 31521,
+          "decodedBodyBytes": 31521
+        },
+        {
+          "path": "/assets/C09-CDgUIivQ.js",
+          "encodedBodyBytes": 70595,
+          "decodedBodyBytes": 70595
+        },
+        {
+          "path": "/assets/C10-XG9qfOxo.js",
+          "encodedBodyBytes": 73064,
+          "decodedBodyBytes": 73064
+        },
+        {
+          "path": "/assets/C11-B2skb3PV.js",
+          "encodedBodyBytes": 5982,
+          "decodedBodyBytes": 5982
+        },
+        {
+          "path": "/assets/C12-BMTqWp7I.js",
+          "encodedBodyBytes": 67484,
+          "decodedBodyBytes": 67484
+        },
+        {
+          "path": "/assets/C13-BMkXcqbo.js",
+          "encodedBodyBytes": 427181,
+          "decodedBodyBytes": 427181
+        },
+        {
+          "path": "/assets/C14-DEeaP7lk.js",
+          "encodedBodyBytes": 743532,
+          "decodedBodyBytes": 743532
+        },
+        {
+          "path": "/assets/C15-D2bUNIVw.js",
+          "encodedBodyBytes": 742948,
+          "decodedBodyBytes": 742948
+        },
+        {
+          "path": "/assets/campaign-PfuFFGwk.js",
+          "encodedBodyBytes": 265125,
+          "decodedBodyBytes": 265125
+        },
+        {
+          "path": "/assets/stream-BTb6j4TZ.js",
+          "encodedBodyBytes": 2199555,
+          "decodedBodyBytes": 2199555
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "app",
+      "case": "C01",
+      "heap": {
+        "usedBytes": 15296376,
+        "totalBytes": 20955136
+      },
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "domNodes": 243,
+      "resources": [
+        {
+          "path": "/assets/index-F3qVN5a-.js",
+          "encodedBodyBytes": 192225,
+          "decodedBodyBytes": 192225
+        },
+        {
+          "path": "/assets/rolldown-runtime-BWaJ3C7D.js",
+          "encodedBodyBytes": 911,
+          "decodedBodyBytes": 911
+        },
+        {
+          "path": "/assets/react-vendor-CbRAFYuN.js",
+          "encodedBodyBytes": 218747,
+          "decodedBodyBytes": 218747
+        },
+        {
+          "path": "/assets/math-vendor-Bv5fr4tV.css",
+          "encodedBodyBytes": 29802,
+          "decodedBodyBytes": 29802
+        },
+        {
+          "path": "/assets/math-vendor-BZ_bdw18.js",
+          "encodedBodyBytes": 259138,
+          "decodedBodyBytes": 259138
+        },
+        {
+          "path": "/assets/index-w0w0ryZu.css",
+          "encodedBodyBytes": 86394,
+          "decodedBodyBytes": 86394
+        },
+        {
+          "path": "/assets/Workbench-DEy4CZSK.js",
+          "encodedBodyBytes": 16512,
+          "decodedBodyBytes": 16512
+        },
+        {
+          "path": "/assets/experiments-CeIrZwKQ.js",
+          "encodedBodyBytes": 102898,
+          "decodedBodyBytes": 102898
+        },
+        {
+          "path": "/assets/softqp-DpP_FQT5.js",
+          "encodedBodyBytes": 156574,
+          "decodedBodyBytes": 156574
+        },
+        {
+          "path": "/assets/C01-B8RfIeRo.js",
+          "encodedBodyBytes": 6218,
+          "decodedBodyBytes": 6218
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "app",
+      "case": "C13",
+      "heap": {
+        "usedBytes": 24575640,
+        "totalBytes": 36900864
+      },
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "domNodes": 652,
+      "resources": [
+        {
+          "path": "/assets/index-F3qVN5a-.js",
+          "encodedBodyBytes": 192225,
+          "decodedBodyBytes": 192225
+        },
+        {
+          "path": "/assets/rolldown-runtime-BWaJ3C7D.js",
+          "encodedBodyBytes": 911,
+          "decodedBodyBytes": 911
+        },
+        {
+          "path": "/assets/react-vendor-CbRAFYuN.js",
+          "encodedBodyBytes": 218747,
+          "decodedBodyBytes": 218747
+        },
+        {
+          "path": "/assets/math-vendor-Bv5fr4tV.css",
+          "encodedBodyBytes": 29802,
+          "decodedBodyBytes": 29802
+        },
+        {
+          "path": "/assets/index-w0w0ryZu.css",
+          "encodedBodyBytes": 86394,
+          "decodedBodyBytes": 86394
+        },
+        {
+          "path": "/assets/math-vendor-BZ_bdw18.js",
+          "encodedBodyBytes": 259138,
+          "decodedBodyBytes": 259138
+        },
+        {
+          "path": "/assets/Workbench-DEy4CZSK.js",
+          "encodedBodyBytes": 16512,
+          "decodedBodyBytes": 16512
+        },
+        {
+          "path": "/assets/experiments-CeIrZwKQ.js",
+          "encodedBodyBytes": 102898,
+          "decodedBodyBytes": 102898
+        },
+        {
+          "path": "/assets/softqp-DpP_FQT5.js",
+          "encodedBodyBytes": 156574,
+          "decodedBodyBytes": 156574
+        },
+        {
+          "path": "/assets/C01-B8RfIeRo.js",
+          "encodedBodyBytes": 6218,
+          "decodedBodyBytes": 6218
+        },
+        {
+          "path": "/assets/C13-BMkXcqbo.js",
+          "encodedBodyBytes": 427181,
+          "decodedBodyBytes": 427181
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "route": "benchmark",
+      "case": null,
+      "heap": {
+        "usedBytes": 15281992,
+        "totalBytes": 40660992
+      },
+      "documentWidth": 390,
+      "viewportWidth": 390,
+      "domNodes": 1565,
+      "resources": [
+        {
+          "path": "/assets/index-F3qVN5a-.js",
+          "encodedBodyBytes": 192225,
+          "decodedBodyBytes": 192225
+        },
+        {
+          "path": "/assets/rolldown-runtime-BWaJ3C7D.js",
+          "encodedBodyBytes": 911,
+          "decodedBodyBytes": 911
+        },
+        {
+          "path": "/assets/react-vendor-CbRAFYuN.js",
+          "encodedBodyBytes": 218747,
+          "decodedBodyBytes": 218747
+        },
+        {
+          "path": "/assets/math-vendor-BZ_bdw18.js",
+          "encodedBodyBytes": 259138,
+          "decodedBodyBytes": 259138
+        },
+        {
+          "path": "/assets/math-vendor-Bv5fr4tV.css",
+          "encodedBodyBytes": 29802,
+          "decodedBodyBytes": 29802
+        },
+        {
+          "path": "/assets/index-w0w0ryZu.css",
+          "encodedBodyBytes": 86394,
+          "decodedBodyBytes": 86394
+        },
+        {
+          "path": "/assets/Benchmark-BJDNpbnY.js",
+          "encodedBodyBytes": 27427,
+          "decodedBodyBytes": 27427
+        },
+        {
+          "path": "/assets/experiments-CeIrZwKQ.js",
+          "encodedBodyBytes": 102898,
+          "decodedBodyBytes": 102898
+        },
+        {
+          "path": "/assets/softqp-DpP_FQT5.js",
+          "encodedBodyBytes": 156574,
+          "decodedBodyBytes": 156574
+        },
+        {
+          "path": "/assets/bi-e8gugXWp.js",
+          "encodedBodyBytes": 247,
+          "decodedBodyBytes": 247
+        },
+        {
+          "path": "/assets/useScientificRecords-BWd47HXJ.js",
+          "encodedBodyBytes": 492,
+          "decodedBodyBytes": 492
+        },
+        {
+          "path": "/assets/experiments-DrvaIwc6.js",
+          "encodedBodyBytes": 1070,
+          "decodedBodyBytes": 1070
+        },
+        {
+          "path": "/assets/C01-B8RfIeRo.js",
+          "encodedBodyBytes": 6218,
+          "decodedBodyBytes": 6218
+        },
+        {
+          "path": "/assets/C02-CiZUtSCv.js",
+          "encodedBodyBytes": 6216,
+          "decodedBodyBytes": 6216
+        },
+        {
+          "path": "/assets/C03-DQVqyfjX.js",
+          "encodedBodyBytes": 5336,
+          "decodedBodyBytes": 5336
+        },
+        {
+          "path": "/assets/C04-CORBO8-E.js",
+          "encodedBodyBytes": 6708,
+          "decodedBodyBytes": 6708
+        },
+        {
+          "path": "/assets/C05-TBKFWsoA.js",
+          "encodedBodyBytes": 3357,
+          "decodedBodyBytes": 3357
+        },
+        {
+          "path": "/assets/C06-DwAs81u_.js",
+          "encodedBodyBytes": 72985,
+          "decodedBodyBytes": 72985
+        },
+        {
+          "path": "/assets/C07-C2sFAGun.js",
+          "encodedBodyBytes": 28657,
+          "decodedBodyBytes": 28657
+        },
+        {
+          "path": "/assets/C08-D-U7Zi9Z.js",
+          "encodedBodyBytes": 31521,
+          "decodedBodyBytes": 31521
+        },
+        {
+          "path": "/assets/C09-CDgUIivQ.js",
+          "encodedBodyBytes": 70595,
+          "decodedBodyBytes": 70595
+        },
+        {
+          "path": "/assets/C10-XG9qfOxo.js",
+          "encodedBodyBytes": 73064,
+          "decodedBodyBytes": 73064
+        },
+        {
+          "path": "/assets/C11-B2skb3PV.js",
+          "encodedBodyBytes": 5982,
+          "decodedBodyBytes": 5982
+        },
+        {
+          "path": "/assets/C12-BMTqWp7I.js",
+          "encodedBodyBytes": 67484,
+          "decodedBodyBytes": 67484
+        },
+        {
+          "path": "/assets/C13-BMkXcqbo.js",
+          "encodedBodyBytes": 427181,
+          "decodedBodyBytes": 427181
+        },
+        {
+          "path": "/assets/C15-D2bUNIVw.js",
+          "encodedBodyBytes": 742948,
+          "decodedBodyBytes": 742948
+        },
+        {
+          "path": "/assets/C14-DEeaP7lk.js",
+          "encodedBodyBytes": 743532,
+          "decodedBodyBytes": 743532
+        },
+        {
+          "path": "/assets/campaign-PfuFFGwk.js",
+          "encodedBodyBytes": 265125,
+          "decodedBodyBytes": 265125
+        },
+        {
+          "path": "/assets/stream-BTb6j4TZ.js",
+          "encodedBodyBytes": 2199555,
+          "decodedBodyBytes": 2199555
+        }
+      ]
+    }
+  ]
+}

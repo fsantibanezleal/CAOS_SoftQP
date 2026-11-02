@@ -1,0 +1,444 @@
+{
+  "protocol_id": "softqp-directional-coupled-v1",
+  "state": "locked",
+  "created": "2026-11-01",
+  "independent_review": "docs/design/coupled-experiments-v1.review.json",
+  "engine": {
+    "distribution_version": "0.2.0",
+    "release_tag": "v0.02.000",
+    "binary_sha256": [
+      "4378bbfc7edb83799deee80e991c724f0857dbcaa63a6eed82efab7462b4793d",
+      "3a890e0b672a116cb44dc47aba34c4c8ce67c3edf473ae61dfcf5aa904f3f2a4"
+    ],
+    "python_sha256_by_binary": {
+      "4378bbfc7edb83799deee80e991c724f0857dbcaa63a6eed82efab7462b4793d": {
+        "__init__.py": "c5f6a56747b5813ccb0d860e367c9388c1dae1e0dba6db1b7b41d499ba165e30",
+        "builtin.py": "77097420ab585416de59a7f35f486879fdcbdbc7e6fcb4cf52e327d6d767f92b",
+        "elasti.py": "047b8de20b486c5032a62f53c650ec3a4ec0c80cbbe7c3b83a470a478d51a4f2",
+        "flex.py": "5488490bc01d66f762ca667e237e3e560cff6bf5c5e634bfbd133f48a27786fd",
+        "interface.py": "699c75ffe122443412d32f3b25da233869eca13ed1e77351056f0eb5c9df4319",
+        "lifting.py": "bdc8abed7b3b6d41b9e26d9c658260185c9e408c9a736c3232bf25ab8ea79357",
+        "peak.py": "b9f93e4c74b2ae9230c5ebdae5490300caa848e72e6662f111b8bfac1f7e7437",
+        "problem.py": "7c56cce598f53af63e4673a72237578ef9634788c4dc38454cc4886a5d3dbb7d",
+        "reference.py": "b5b6addec896d135015e2d9dcd64a290a1d4c57bb959d88be5a7da1bf833d3f5",
+        "sessions.py": "c9cd8b1905be1dcc428498403ba1fbf1e3dea2db1d264f2386d42aaba16f699d",
+        "solvers.py": "ec1ac81c468c9b4ea0d8dc116abda6f5dd14410abeab0ecd0b7953fe8ddbad63"
+      },
+      "3a890e0b672a116cb44dc47aba34c4c8ce67c3edf473ae61dfcf5aa904f3f2a4": {
+        "builtin.py": "77097420ab585416de59a7f35f486879fdcbdbc7e6fcb4cf52e327d6d767f92b",
+        "elasti.py": "047b8de20b486c5032a62f53c650ec3a4ec0c80cbbe7c3b83a470a478d51a4f2",
+        "flex.py": "5488490bc01d66f762ca667e237e3e560cff6bf5c5e634bfbd133f48a27786fd",
+        "interface.py": "699c75ffe122443412d32f3b25da233869eca13ed1e77351056f0eb5c9df4319",
+        "lifting.py": "bdc8abed7b3b6d41b9e26d9c658260185c9e408c9a736c3232bf25ab8ea79357",
+        "peak.py": "b9f93e4c74b2ae9230c5ebdae5490300caa848e72e6662f111b8bfac1f7e7437",
+        "problem.py": "7c56cce598f53af63e4673a72237578ef9634788c4dc38454cc4886a5d3dbb7d",
+        "reference.py": "b5b6addec896d135015e2d9dcd64a290a1d4c57bb959d88be5a7da1bf833d3f5",
+        "sessions.py": "c9cd8b1905be1dcc428498403ba1fbf1e3dea2db1d264f2386d42aaba16f699d",
+        "solvers.py": "ec1ac81c468c9b4ea0d8dc116abda6f5dd14410abeab0ecd0b7953fe8ddbad63",
+        "__init__.py": "b3768164e543a333b39d74677ce571b3962523300c23359dd7354a59b77db308"
+      }
+    },
+    "release_commit": "bae34c9119a33fd0698be1f321e3afd2e38624c1",
+    "public_files": [
+      {
+        "filename": "softqp-0.2.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+        "bytes": 291432,
+        "sha256": "84a868c4d449d5242632fdba28b5aa628ae9ab6d7551fc54d965f98eb4eb6f59"
+      },
+      {
+        "filename": "softqp-0.2.0-cp312-cp312-win_amd64.whl",
+        "bytes": 440759,
+        "sha256": "0ddc107729ac6590806a65ef96be27ea3500f8a07f38ffb63ec262484398231f"
+      },
+      {
+        "filename": "softqp-0.2.0.tar.gz",
+        "bytes": 384687,
+        "sha256": "de5a33d90b10235d421bcca4ebb2405f65b58e2f529ab168968c6e3f20c80263"
+      }
+    ],
+    "public_verification": "Publishing run41355715750 source/wheels/publication pass; all3 unauthenticated PyPI files byte-match workflow artifacts;186 fresh public-index Windows SDK tests pass."
+  },
+  "packages": {
+    "softqp": "0.2.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "osqp": "1.1.3",
+    "daqp": "0.10.3",
+    "jsonschema": "4.26.0",
+    "elastiqp": "0.2.0",
+    "pytest": "9.2.0",
+    "packaging": "26.3"
+  },
+  "original_study": "docs/design/experiments-v1.json is immutable; its failed 10% criterion remains negative",
+  "contribution": "Test original-row preservation against the existing exact directional row-split GSP; no new expressibility or first-ever theorem claim",
+  "generation": {
+    "primary_population": "Every heldout cell in both families, without a post-hoc subset",
+    "sparse": {
+      "n": [
+        32,
+        96
+      ],
+      "group_size": 8,
+      "condition": [
+        1,
+        1000
+      ],
+      "curvature": [
+        "positive-definite",
+        "semidefinite"
+      ],
+      "quadratic": [
+        0,
+        1
+      ],
+      "density": 0.1,
+      "hard_box": [
+        -2,
+        2
+      ]
+    },
+    "thermal": {
+      "zones": 2,
+      "horizon_hours": [
+        12,
+        24
+      ],
+      "curvature": [
+        "positive-definite",
+        "semidefinite"
+      ],
+      "quadratic": [
+        0,
+        1
+      ]
+    },
+    "counts": {
+      "development": 48,
+      "heldout": 144,
+      "robustness": 18
+    },
+    "robustness": "Sparse n32 and thermal horizon12 LPs, plus sparse n32 condition1e8; each quadratic0/1, three seeds. Separate diagnostics, never substituted into the primary endpoint.",
+    "data_boundary": "Original synthetic sparse and hourly RC forecasts, not operational/laboratory measurements. No external dataset or credentials required. Forecast batches are not closed-loop MPC trajectories.",
+    "robustness_cells": [
+      {
+        "family": "sparse",
+        "n": 32,
+        "group_size": 8,
+        "condition": 1,
+        "curvature": "zero-hessian"
+      },
+      {
+        "family": "thermal",
+        "horizon": 12,
+        "zones": 2,
+        "curvature": "zero-hessian"
+      },
+      {
+        "family": "sparse",
+        "n": 32,
+        "group_size": 8,
+        "condition": 100000000.0,
+        "curvature": "positive-definite"
+      }
+    ],
+    "curvature_definition": "Curvature describes base P. Zero-hessian is a full LP only when all group quadratic coefficients are zero; quadratic1 cells remain convex QPs.",
+    "condition_definition": "Geometric base diagonal span before zeroing; a semidefinite P has infinite full-matrix condition. Labels do not claim a finite PSD Hessian condition number."
+  },
+  "seeds": {
+    "development": [
+      710001,
+      710002
+    ],
+    "heldout": [
+      910101,
+      910102,
+      910103,
+      910104,
+      910105,
+      910106
+    ],
+    "robustness": [
+      810101,
+      810102,
+      810103
+    ],
+    "order": 601117,
+    "bootstrap": 701119,
+    "excluded_exposed": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      1000,
+      1001,
+      1002,
+      8500,
+      8501,
+      8502,
+      8503,
+      8504,
+      8505,
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      271828,
+      314159,
+      7780193,
+      20261101,
+      20261102,
+      20261103,
+      20261104,
+      44981203,
+      63412019,
+      68743129,
+      68743130,
+      68743131,
+      68743132,
+      68743133,
+      68743134,
+      82370911,
+      97342017,
+      867530901
+    ],
+    "old_campaign": "All original1000-1002,9000-9005,8500-8505 plus order271828/bootstrap314159 and public SDK test seeds0-23 excluded."
+  },
+  "frames": 32,
+  "repetitions": {
+    "warmup": 1,
+    "measured": 3
+  },
+  "operating_limits": {
+    "blas_threads": 1,
+    "wall_seconds": 14400,
+    "process_memory_limit_bytes": 4294967296,
+    "parallel_workers": 1,
+    "trial_timeout_seconds": 30,
+    "memory_policy": "Poll current and OS high-water worker RSS every10ms; terminate on observed limit. This is supervised sampling, not an OS reservation or continuous measurement.",
+    "algebra_backend": "builtin CPU in both softqp and stock OSQP; environment fixed before imports and actual wrapper defaults checked",
+    "exclusive_host": false
+  },
+  "timing": {
+    "primary_operation": "One prepared solver plus32 vector updates/solves and independent original-space acceptance checks",
+    "start": "Immediately before method/settings lookup and PreparedPeakSolver construction on a common already generated canonical PeakBatch",
+    "end": "After all32 solves, physical result recovery and independent objective/KKT checks; before result serialization",
+    "included": [
+      "owned canonical validation/copy",
+      "method assembly",
+      "setup/factorization",
+      "all32 vector validation/updates",
+      "all32 solves",
+      "original-space recovery",
+      "all32 common accuracy checks",
+      "one-shot LP setup on every solve"
+    ],
+    "excluded_for_all": [
+      "synthetic data generation",
+      "Python/library process startup",
+      "parent/worker serialization",
+      "independent oracle solves",
+      "JSON/CSV output serialization"
+    ],
+    "design": "One isolated bounded worker per oracle/observation; process startup, generation and serialization excluded from inner method timing but included in supervisory30-second limit. Randomized complete method order per repetition; warmups retained and excluded from inference. No state crosses repetitions.",
+    "parameter_selection": "No timing-based tuning. All method controls below are fixed before heldout generation; no candidate-specific alpha sweep or favourable size/group/conditioning subset. Adaptive/default and fixed stock/GSP baseline policies are both registered.",
+    "host_scope": "Single study worker on the recorded, nonreserved host; unrelated existing workloads are preserved. No retries or cell deletion based on load or observed timing."
+  },
+  "methods": {
+    "native": {
+      "backend": "native",
+      "settings": {
+        "alpha": 1.6,
+        "rho": 0.1,
+        "sigma": 1e-06,
+        "eps_abs": 1e-08,
+        "eps_rel": 1e-08,
+        "max_iter": 200000,
+        "adaptive_rho": false,
+        "scaling": 0,
+        "polishing": false,
+        "row_normalization": true
+      }
+    },
+    "epigraph-default": {
+      "backend": "epigraph",
+      "settings": {
+        "alpha": 1.6,
+        "eps_abs": 1e-08,
+        "eps_rel": 1e-08,
+        "max_iter": 200000,
+        "adaptive_rho": true,
+        "scaling": 10,
+        "polishing": false
+      }
+    },
+    "epigraph-fixed": {
+      "backend": "epigraph",
+      "settings": {
+        "alpha": 1.6,
+        "rho": 0.1,
+        "sigma": 1e-06,
+        "eps_abs": 1e-08,
+        "eps_rel": 1e-08,
+        "max_iter": 200000,
+        "adaptive_rho": false,
+        "scaling": 0,
+        "polishing": false
+      }
+    },
+    "row-split-default": {
+      "backend": "row-split-gsp",
+      "settings": {
+        "alpha": 1.6,
+        "eps_abs": 1e-08,
+        "eps_rel": 1e-08,
+        "max_iter": 200000,
+        "adaptive_rho": true,
+        "scaling": 10,
+        "polishing": false
+      }
+    },
+    "row-split-fixed": {
+      "backend": "row-split-gsp",
+      "settings": {
+        "alpha": 1.6,
+        "rho": 0.1,
+        "sigma": 1e-06,
+        "eps_abs": 1e-08,
+        "eps_rel": 1e-08,
+        "max_iter": 200000,
+        "adaptive_rho": false,
+        "scaling": 0,
+        "polishing": false
+      }
+    },
+    "daqp-direct": {
+      "backend": "epigraph-daqp",
+      "settings": {
+        "eps_abs": 1e-08,
+        "max_iter": 200000
+      }
+    },
+    "daqp-prox-auto": {
+      "backend": "epigraph-daqp-prox",
+      "settings": {
+        "eps_abs": 1e-08,
+        "max_iter": 200000,
+        "eps_prox": -1e-06,
+        "eta_prox": 1e-10,
+        "lp_mode": "one-shot"
+      }
+    },
+    "daqp-prox-forced": {
+      "backend": "epigraph-daqp-prox",
+      "settings": {
+        "eps_abs": 1e-08,
+        "max_iter": 200000,
+        "eps_prox": 1.0,
+        "eta_prox": 1e-10,
+        "lp_mode": "one-shot"
+      }
+    },
+    "daqp-lp-model": {
+      "backend": "epigraph-daqp-prox",
+      "settings": {
+        "eps_abs": 1e-08,
+        "max_iter": 200000,
+        "eps_prox": -1e-06,
+        "eta_prox": 1e-10,
+        "lp_mode": "model"
+      }
+    }
+  },
+  "accuracy": {
+    "oracle": "Compact stock OSQP epigraph, alpha1.6 adaptive rho/scaling10, eps_abs=eps_rel=1e-10, max_iter200000; independent original-space checks <=1e-7, repair<=1e-7",
+    "every_frame": "Hard-row absolute violation<=1e-6 in declared physical units; normalized raw AND repaired stationarity<=1e-6; maximum absolute normalized Fenchel gap separately for each soft group and each hard row<=1e-6; joint dual budget<=1e-6; dual repair<=1e-7; objective gap<=1e-6. Aggregate signed gap is diagnostic only; no cross-group/hard-row cancellation.",
+    "objective_denominator": "max(1,abs(common oracle objective))",
+    "stationarity_denominator": "max(1,||P*x||inf,||q||inf,||A.T*y||inf), separately for raw and repaired y",
+    "fenchel_denominator": "Per group: max(1,abs(group penalty),abs(group box support),abs(repaired_y_group.T*A_group*x)); per hard row: max(1,abs(y_i*bound_i),abs(y_i*(A*x)_i))",
+    "flags": "OSQP1/2 and DAQP1/2/4/5 are candidates only. No accepted batch unless every frame passes. Incompatible semantics are prespecified; unexpected unsupported results are failures."
+  },
+  "analysis": {
+    "metric": "Per-instance median complete-batch time over3 measured repetitions; reduction1-native/fastest compatible preregistered baseline median",
+    "denominator": "All144 heldout instances, six seed clusters, both complete families",
+    "failure_rule": "Any missing, unsuccessful, timed-out or accuracy-rejected compatible baseline/candidate observation assigns reduction-1 to the entire instance and prevents qualification. No deleting failures or incompatible cells masquerading as failures.",
+    "bootstrap_resamples": 10000,
+    "bootstrap": "Sample six whole seeds with replacement, pool their full24-instance vectors, take median; percentile2.5/97.5 by NumPy linear quantile",
+    "acceptance": "Median reduction>=10%, lower95% cluster bound>0, and zero failed primary pairs",
+    "secondary": [
+      "all frame statuses/iterations/metrics",
+      "backend setup/solve timings",
+      "matrix dimensions",
+      "worker peak RSS and restarts",
+      "prespecified family/curvature/quadratic/size/condition strata, descriptive only"
+    ],
+    "negative_result": "Retain full results; no reseeding, favourable endpoint replacement or superiority claim on failure. Engineering publication remains separate from companion-app research qualification."
+  },
+  "source_files": [
+    "data-pipeline/pipeline/__init__.py",
+    "data-pipeline/pipeline/coupled_accuracy.py",
+    "data-pipeline/pipeline/coupled_analysis.py",
+    "data-pipeline/pipeline/coupled_campaign.py",
+    "data-pipeline/pipeline/coupled_cases.py",
+    "data-pipeline/pipeline/coupled_contract.py",
+    "data-pipeline/pipeline/coupled_export.py",
+    "data-pipeline/pipeline/coupled_freeze.py",
+    "data-pipeline/pipeline/coupled_plan.py",
+    "data-pipeline/pipeline/coupled_resources.py",
+    "data-pipeline/pipeline/environment.py",
+    "data-pipeline/run_coupled_study.py",
+    "docs/contracts/schemas/softqp-coupled-batch.schema.json",
+    "docs/contracts/schemas/softqp-coupled-campaign.schema.json",
+    "docs/contracts/schemas/softqp-coupled-observation.schema.json",
+    "experiments/coupled-v1/requirements.txt",
+    "scripts/check_coupled_requirements.py"
+  ],
+  "source_sha256": {
+    "data-pipeline/pipeline/__init__.py": "22c41100f64e0d1157378eb3b3f61fa55a189856dd850acbb5b965517a0ed179",
+    "data-pipeline/pipeline/coupled_accuracy.py": "26e44a6c2f94317a1fd2308d4389c647b07eeafd35184ed82060620a8cb3d0e8",
+    "data-pipeline/pipeline/coupled_analysis.py": "652289847e3acda1927629c86ef1f6cd6540b32504c41a0eebce85e49101e573",
+    "data-pipeline/pipeline/coupled_campaign.py": "00a8341b8bbb46fba2bb971d21a56ff171fc11fe088512496d7518a33aad20b2",
+    "data-pipeline/pipeline/coupled_cases.py": "52407fb1fe66c7987d4a01643d7ec00ea998d82973e66b362f89e4edfb450e8a",
+    "data-pipeline/pipeline/coupled_contract.py": "bd0660c5de9e62cc9f714b1f3c912804bafb2a2d4f3a6c5168d07319c233216c",
+    "data-pipeline/pipeline/coupled_export.py": "376c8a796fbeee951df0e221dbf9c356920acc227f9b399b5340391acfd70552",
+    "data-pipeline/pipeline/coupled_freeze.py": "4cbc6afd7f4d4b09fdbc3fab9247e7d03a00c24b935ec6cc9abbd685aea0d014",
+    "data-pipeline/pipeline/coupled_plan.py": "22c74c5d38182b84e4c5bed95e683d3a1fa4eb88e9db2fc0a82481cab8064d9c",
+    "data-pipeline/pipeline/coupled_resources.py": "482beadd56fa55ec31842fe155ecb74af812cb67c3e28ff5d18eab837a6e2a3c",
+    "data-pipeline/pipeline/environment.py": "20b204d82f7fae3001cb8d4993961e503f5eaad1bda75cf77c351126f05ddcf6",
+    "data-pipeline/run_coupled_study.py": "4e0d1d6c02d66dd594dd1326032a4666e59d8d589f26560774dcb5cf0a3aef72",
+    "docs/contracts/schemas/softqp-coupled-batch.schema.json": "ccaf8d9f26b6956eabcdcdcb0cc9b0d8ca348db5ab37b284fd2b697d989e3f54",
+    "docs/contracts/schemas/softqp-coupled-campaign.schema.json": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372",
+    "docs/contracts/schemas/softqp-coupled-observation.schema.json": "de3defd9fc00ee288e37c435e4f8f2f4b3e4fbb0c9989d3c91d30ce766864710",
+    "experiments/coupled-v1/requirements.txt": "2eff7832a1046fca5040163b98ac88e05c7318bf1f004c16c377206221c42ccc",
+    "scripts/check_coupled_requirements.py": "5897774cfd99b5daff7d8b38a3aa0ead8b6ca8dea952372002947575906a72d5"
+  },
+  "source_identity": "LF-normalized SHA256 for every listed source; exact public wheel binary whitelist and pinned dependency versions; commit protocol/source/review references before heldout generation",
+  "registration_requirements": [
+    "Independent ACCEPT receipt matching this exact canonical protocol and LF-normalized source map",
+    "Tracked and committed separate registration manifest pinning protocol, source and accepted review",
+    "Remote source/protocol/review/registration identity verified before heldout generation",
+    "Runtime public-wheel/dependency/source/seed/worker guards all pass before launching"
+  ],
+  "run_authorized_only_by_accepted_registration_manifest": true
+}

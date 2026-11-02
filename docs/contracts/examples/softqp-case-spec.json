@@ -1,0 +1,60 @@
+{
+  "A": {
+    "data": [
+      1.0
+    ],
+    "indices": [
+      0
+    ],
+    "indptr": [
+      0,
+      1
+    ],
+    "shape": [
+      1,
+      1
+    ]
+  },
+  "P": {
+    "data": [
+      1.0
+    ],
+    "indices": [
+      0
+    ],
+    "indptr": [
+      0,
+      1
+    ],
+    "shape": [
+      1,
+      1
+    ]
+  },
+  "lower": [
+    -1.0
+  ],
+  "penalty": {
+    "lower_linear": [
+      0.3
+    ],
+    "lower_quadratic": [
+      2.0
+    ],
+    "soft": [
+      true
+    ],
+    "upper_linear": [
+      0.3
+    ],
+    "upper_quadratic": [
+      2.0
+    ]
+  },
+  "q": [
+    3.0
+  ],
+  "upper": [
+    1.0
+  ]
+}

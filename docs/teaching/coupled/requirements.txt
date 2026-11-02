@@ -1,0 +1,11 @@
+# Independent study profile; never replace the historical campaign/notebook environments.
+softqp==0.2.0
+numpy==2.5.4
+scipy==1.18.1
+osqp==1.1.3
+daqp==0.10.3
+jsonschema==4.26.0
+# SDK regression verification, including historical comparison adapters.
+elastiqp==0.2.0
+pytest==9.2.0
+packaging==26.3

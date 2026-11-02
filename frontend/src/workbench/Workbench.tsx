@@ -1,139 +1,120 @@
-// The App route (ADR-0016 s9, ADR-0071): one CaseWorkbench. The rail holds the case picker, the variants, the two
-// parameters of the live engine and its live values; the instrument holds the question groups. The replay lane is
-// the committed trace of the case; the live lane is the TypeScript engine re-run with the rail's values.
-// Focus mode (ADR-0070, shell 0.14.0) is on for every case: the `focus` prop puts a Focus button in the rail head that
-// opens the open group in the full viewport (?focus=1 beside ?case= and ?view=); Escape or the exit button returns to the
-// same case, group and sub-view. The template's gate runs with --require-focus, so an App built from it must set `focus`.
-import { CaseWorkbench, Knob, Readout, useShellLang, useWorkbenchState, type CaseDef } from '@fasl-work/caos-app-shell';
-import { useEffect, useMemo, useState } from 'react';
-import { loadCase, loadIndex, useArtifact, type CaseData } from '../api/artifacts';
-import { simulate } from '../engine/sir';
-import { caseAbsent } from '../readiness/readiness';
-import { useReadiness } from '../readiness/useReadiness';
-import { COVERAGE, type Selection } from './model';
-import { CompareView, ContextView, DynamicsView, UnavailableContext, ValidationView } from './views';
+import { BarChart, CaseWorkbench, PlotCard, Readout, useShellLang, useWorkbenchState, useUrlView } from '@fasl-work/caos-app-shell';
+import { useEffect, useRef, useState } from 'react';
+import { loadSoftQPCase, loadSoftQPIndex, softQPSource, type SoftQPIndex, type SoftQPResult, type SoftQPRun } from '../lib/softqp';
+import { methodNames } from '../lib/methodNames';
+import { StreamStage } from './StreamStage';
+import { makeLocalRequest, verifyLocalResult } from '../lib/softqp.local';
 
-function LiveValues({ sel }: { sel: Selection | null }) {
-  const stateKey = useWorkbenchState()?.stateKey;
-  return (
-    <Readout
-      title={{ en: 'Live values', es: 'Valores en vivo' }}
-      lane="live"
-      provenance="synthetic"
-      dataKey={stateKey}
-      items={[
-        { label: { en: 'Basic reproduction number', es: 'Número reproductivo básico' }, value: sel ? sel.beta / sel.gamma : null, unitless: true, format: { decimals: 2 }, good: 1, bad: 1.5, better: 'lower' },
-        { label: { en: 'Peak infected', es: 'Pico de contagiados' }, value: sel ? sel.run.peakI : null, unit: { en: 'people', es: 'personas' }, format: { decimals: 0 } },
-        { label: { en: 'Peak day', es: 'Día del pico' }, value: sel ? sel.run.tPeak : null, unit: 'd', format: { decimals: 1 } },
-        { label: { en: 'Attack rate', es: 'Tasa de ataque' }, value: sel ? sel.run.attackRate : null, unitless: true, format: { percent: true, decimals: 1 } },
-      ]}
-    />
-  );
+const names: Record<string, {en:string;es:string}> = methodNames;
+
+function CaseStatus({ error }: { error: string | null }) {
+  const lang = useShellLang();
+  return <p role={error ? 'alert' : 'status'} data-state={error ? 'unavailable' : 'loading'}>{error
+    ? (lang === 'es' ? `No se puede cargar el registro del caso: ${error}` : `The case record could not be loaded: ${error}`)
+    : (lang === 'es' ? 'Cargando…' : 'Loading…')}</p>;
+}
+
+function Violations({ doc, run, unit, error }: { doc: SoftQPResult | null; run: SoftQPRun | undefined; unit: string; error: string | null }) {
+  const lang = useShellLang(); const key = useWorkbenchState()?.stateKey;
+  const metrics = run?.result?.metrics;
+  const all = doc?.rows.map((r, i) => ({ ...r, lower: metrics?.lower_violation[i] ?? 0, upper: metrics?.upper_violation[i] ?? 0 })).filter(r => r.unit === unit) ?? [];
+  const nonzero = all.filter(r => r.lower > 1e-7 || r.upper > 1e-7);
+  const rows = (nonzero.length ? nonzero : all).slice(0, 18);
+  return <PlotCard fill title={{ en: 'Lower and upper violations', es: 'Incumplimientos por lado' }} note={{ en: 'Lower and upper bounds are separate series. Only rows with the same unit are compared. Values above 1e-7 are prioritized; up to 18 rows are shown. The export includes all values.', es: 'Los lados inferior y superior son series separadas. Solo se comparan filas con la misma unidad. Se priorizan valores mayores que 1e-7; se muestran hasta 18 filas. La exportación conserva todos los valores.' }} lane="replay" provenance="synthetic" dataKey={key}>
+    {!doc ? <CaseStatus error={error} /> : !metrics ? <p data-state="unavailable">{lang === 'es' ? 'Sin resultado compatible para este método.' : 'No compatible result for this method.'}</p> : <>
+      <BarChart height="fill" title={{ en: 'Violation by row and bound side', es: 'Incumplimiento por fila y lado' }}
+        axis={{ label: { en: 'Violation', es: 'Incumplimiento' }, ...(unit === '1' ? {} : { unit: { en: unit, es: unit } }) }}
+        data={rows.flatMap(r => [
+          { id: `${r.id}-lower`, label: { en: 'Lower', es: 'Inferior' }, value: r.lower, tone: 'warn' as const, group: { id: r.id, label: r.label }, hint: { en: r.soft ? 'Soft row' : 'Hard row', es: r.soft ? 'Fila blanda' : 'Fila dura' } },
+          { id: `${r.id}-upper`, label: { en: 'Upper', es: 'Superior' }, value: r.upper, tone: 'accent' as const, group: { id: r.id, label: r.label }, hint: { en: r.soft ? 'Soft row' : 'Hard row', es: r.soft ? 'Fila blanda' : 'Fila dura' } },
+        ])}
+        legend={[{ tone: 'warn', label: { en: 'Lower', es: 'Inferior' } }, { tone: 'accent', label: { en: 'Upper', es: 'Superior' } }]} />
+    </>}
+  </PlotCard>;
+}
+
+function Comparison({ doc, active, error }: { doc: SoftQPResult | null; active: string; error: string | null }) {
+  const key = useWorkbenchState()?.stateKey;
+  const good = doc?.runs.filter(r => r.result) ?? [];
+  return <PlotCard fill title={{ en: 'Matched formulations', es: 'Formulaciones equivalentes' }} note={{ en: 'One development run per method; timing superiority remains unestablished.', es: 'Una medición de desarrollo por método; no se establece superioridad de tiempo.' }} lane="replay" provenance="synthetic" dataKey={key}>
+    {!doc ? <CaseStatus error={error} /> : <BarChart height="fill" title={{ en: 'Formulation dimensions', es: 'Dimensiones de formulación' }}
+      axis={{ label: { en: 'Primal variables', es: 'Variables primales' }, format: { decimals: 0 } }}
+      data={good.map(r => ({ id: r.method, label: names[r.method], value: r.result!.dimensions.variables, tone: r.method === active ? 'accent' as const : r.method === 'lifted' ? 'warn' as const : 'neutral' as const }))} />}
+  </PlotCard>;
 }
 
 export function Workbench() {
   const lang = useShellLang();
-  const readiness = useReadiness();
-  const index = useArtifact((s) => loadIndex(s), []);
-  const [caseId, setCaseId] = useState<string | null>(null);
-  const selected = caseId ?? (index.state === 'ready' ? index.data.default_case : null);
-  const loaded = useArtifact((s) => (selected ? loadCase(selected, s) : new Promise<CaseData>(() => undefined)), [selected]);
-  const [variant, setVariant] = useState<string>('v0');
-  const [params, setParams] = useState<{ caseId: string; beta: number; gamma: number } | null>(null);
-
-  // A new case starts from its own parameters (the rail shows when they were moved, and resets them).
-  const data = loaded.state === 'ready' && loaded.data.manifest.case_id === selected ? loaded.data : null;
+  const [group, setGroup] = useUrlView(['violations', 'comparison', 'stream', 'context'], 'view');
+  const [index, setIndex] = useState<SoftQPIndex | null>(null); const [doc, setDoc] = useState<SoftQPResult | null>(null);
+  const [selected, setSelected] = useState('C01'); const [method, setMethod] = useState('lifted'); const [unit, setUnit] = useState('1'); const [error, setError] = useState<string | null>(null);
+  const [localResult, setLocalResult] = useState<SoftQPResult | null>(null);
+  const [edits, setEdits] = useState({ lower: '1', upper: '1', quadratic: '1' });
+  const importKey = `${selected}|${edits.lower}|${edits.upper}|${edits.quadratic}`;
+  const activeImportKey = useRef(importKey); activeImportKey.current = importKey;
+  useEffect(() => { loadSoftQPIndex().then(setIndex).catch(e => setError(String(e))); }, []);
   useEffect(() => {
-    if (data) setParams({ caseId: data.manifest.case_id, beta: data.manifest.params.beta, gamma: data.manifest.params.gamma });
-  }, [data]);
-  const knobs = params && data && params.caseId === data.manifest.case_id ? params : null;
-  const coverage = COVERAGE.find((v) => v.id === variant)?.share ?? 0;
-
-  const sel: Selection | null = useMemo(() => {
-    if (!data || !knobs) return null;
-    const run = simulate({ ...data.manifest.params, beta: knobs.beta, gamma: knobs.gamma, vaccinated: coverage });
-    return { data, beta: knobs.beta, gamma: knobs.gamma, coverage, run };
-  }, [data, knobs, coverage]);
-
-  // A case the readiness document lists as absent stays in the selector, marked, so its reason can be read.
-  const absent = lang === 'es' ? ' (aún no disponible)' : ' (not available yet)';
-  const cases: CaseDef[] =
-    index.state === 'ready'
-      ? index.data.cases.map((c) => ({ id: c.case_id, name: c.title[lang] + (caseAbsent(readiness ?? null, c.case_id, c.manifest_path) ? absent : ''), category: c.category[lang] }))
-      : [];
-  const unavailable = index.state === 'unavailable' ? index.reason : loaded.state === 'unavailable' ? loaded.reason : null;
-  const moved = data && knobs && (knobs.beta !== data.manifest.params.beta || knobs.gamma !== data.manifest.params.gamma);
-
-  // An unavailable case has no parameters to show: its knobs would read 0, which is not data.
-  const knobRail = unavailable ? (
-    <p className="caos-pending" data-state="unavailable">
-      {lang === 'es' ? 'Los parámetros de este caso aún no están disponibles.' : "This case's parameters are not available yet."}
-    </p>
-  ) : (
-    <>
-      <Knob
-        id="beta"
-        label={{ en: 'Contact rate', es: 'Tasa de contacto' }}
-        hint={{ en: 'New infections per infected person per day, in a fully susceptible population.', es: 'Contagios nuevos por persona contagiada y por día, en una población totalmente susceptible.' }}
-        value={knobs?.beta ?? 0}
-        min={0.05}
-        max={2}
-        step={0.01}
-        unit="1/d"
-        disabled={!knobs}
-        onChange={(beta) => knobs && setParams({ ...knobs, beta })}
-      />
-      <Knob
-        id="gamma"
-        label={{ en: 'Recovery rate', es: 'Tasa de recuperación' }}
-        hint={{ en: 'The inverse of the mean infectious period.', es: 'El inverso del período infeccioso medio.' }}
-        value={knobs?.gamma ?? 0}
-        min={0.05}
-        max={1}
-        step={0.01}
-        unit="1/d"
-        disabled={!knobs}
-        onChange={(gamma) => knobs && setParams({ ...knobs, gamma })}
-      />
-    </>
-  );
-
-  const rail = (
-    <>
-      {knobRail}
-      {index.state === 'error' && <p role="alert">{index.error}</p>}
-      <LiveValues sel={sel} />
-    </>
-  );
-
-  return (
-    <UnavailableContext.Provider value={unavailable}>
-    <CaseWorkbench
-      caseId={selected ?? ''}
-      source={data?.manifest.real_or_synthetic}
-      cases={{
-        cases,
-        selectedId: selected ?? '',
-        onSelect: (id) => {
-          setCaseId(id);
-          setVariant('v0');
-        },
-        layout: 'select',
-        deepLink: true,
-        modifiedFromId: moved ? selected : null,
-        onResetToCanonical: () => data && setParams({ caseId: data.manifest.case_id, beta: data.manifest.params.beta, gamma: data.manifest.params.gamma }),
-      }}
-      controls={knobs ? { beta: knobs.beta, gamma: knobs.gamma } : {}}
-      variants={{ variants: COVERAGE.map((v) => ({ id: v.id, label: v.label, note: v.note, lane: 'live' })), activeId: variant, onSelect: setVariant, title: { en: 'Immunisation', es: 'Inmunización' } }}
-      rail={rail}
-      focus
-      groups={[
-        { id: 'dynamics', label: { en: 'Dynamics', es: 'Dinámica' }, lane: 'live', provenance: 'synthetic', content: <DynamicsView sel={sel} /> },
-        { id: 'validation', label: { en: 'Validation', es: 'Validación' }, lane: 'live', provenance: 'synthetic', content: <ValidationView sel={sel} /> },
-      ]}
-      compare={{ label: { en: 'Compare immunisation', es: 'Comparar inmunización' }, lane: 'live', provenance: 'synthetic', content: <CompareView sel={sel} /> }}
-      context={{ content: <ContextView sel={sel} /> }}
-    />
-    </UnavailableContext.Provider>
-  );
+    const entry = index?.cases.find(c => c.case_id === selected); if (!entry) return;
+    const abort = new AbortController(); setDoc(null); setError(null); setLocalResult(null); setEdits({ lower: '1', upper: '1', quadratic: '1' });
+    loadSoftQPCase(entry, abort.signal).then(result => { if (!abort.signal.aborted) { setDoc(result); setUnit(result.rows.find(r => r.soft)?.unit ?? result.rows[0]?.unit ?? '1'); } }).catch(e => { if (!abort.signal.aborted) setError(String(e)); });
+    return () => abort.abort();
+  }, [selected, index]);
+  const baseline = doc?.case_id === selected ? doc : null;
+  const current = localResult?.case_id === selected ? localResult : baseline; const run = current?.runs.find(r => r.method === method); const units = [...new Set(current?.rows.map(r => r.unit) ?? ['1'])];
+  const hardRows = current?.rows.map((r,i) => ({ ...r, index: i })).filter(r => !r.soft && r.unit === unit) ?? [];
+  const hardInUnit = run?.result?.metrics && hardRows.length ? Math.max(0, ...hardRows.map(r => Math.max(run.result!.metrics!.lower_violation[r.index], run.result!.metrics!.upper_violation[r.index]))) : null;
+  function download(value: unknown, filename: string) {
+    const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: 'application/json' }));
+    const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  function request() {
+    const entry = index?.cases.find(c => c.case_id === selected);
+    if (!entry || !baseline?.problem) throw new Error(lang === 'es' ? 'El caso no admite edición separable.' : 'This case does not support separable cost edits.');
+    return makeLocalRequest(selected, entry.sha256, Number(edits.lower), Number(edits.upper), Number(edits.quadratic));
+  }
+  function exportRequest() {
+    try { download(request(), `${selected}-request.json`); setError(null); } catch(e) { setError(String(e)); }
+  }
+  async function importResult(file?: File) {
+    if (!file || !baseline) return;
+    try {
+      if (file.size > 32 * 1024 * 1024) throw new Error('Local result exceeds 32 MiB');
+      const expected = request(); const original = baseline; const started = importKey;
+      const result = verifyLocalResult(JSON.parse(await file.text()), expected, original);
+      if (activeImportKey.current !== started) return;
+      setLocalResult(result); setError(null);
+    } catch(e) { setError(String(e)); }
+  }
+  function exportResult() {
+    if (!current) return;
+    download({ lane: 'replay', origin: localResult ? 'local-native-import' : softQPSource, selected_method: method, result: current }, `${selected}-${method}.json`);
+  }
+  const editor = <>
+    <details open><summary>{lang === 'es' ? 'Configuración de ejecución local' : 'Local execution settings'}</summary>
+      <p>{lang === 'es' ? 'Los factores modifican costos blandos; las filas duras se conservan. Descargue la solicitud, ejecútela con el paquete científico e importe el resultado. El navegador verifica entradas, objetivo e incumplimientos.' : 'Factors change soft costs; hard rows are preserved. Download the request, execute it with the scientific package, then import the result. The browser verifies inputs, objective and violations.'}</p>
+      {(['lower', 'upper', 'quadratic'] as const).map(key => <div key={key}><label htmlFor={`cost-${key}`}>{key === 'lower' ? (lang === 'es' ? 'Factor inferior' : 'Lower cost factor') : key === 'upper' ? (lang === 'es' ? 'Factor superior' : 'Upper cost factor') : (lang === 'es' ? 'Factor cuadrático' : 'Quadratic cost factor')}</label><input id={`cost-${key}`} type="number" min={key === 'quadratic' ? 0 : 0.01} max="100" step="0.1" value={edits[key]} disabled={!baseline?.problem} onChange={e => { setEdits({ ...edits, [key]: e.target.value }); setLocalResult(null); if (method === 'flex' || method === 'elastiqp') setMethod('lifted'); }} /></div>)}
+      {!baseline?.problem && <p>{lang === 'es' ? 'Las penalizaciones acopladas de este caso no admiten esta edición.' : 'This case’s coupled penalties do not support these edits.'}</p>}
+      <button className="btn" type="button" onClick={exportRequest} disabled={!baseline?.problem}>{lang === 'es' ? 'Descargar solicitud' : 'Download solve request'}</button>
+      <pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}><code>{`python data-pipeline/run_request.py ${selected}-request.json --output local-result.json`}</code></pre>
+      <label htmlFor="local-result">{lang === 'es' ? 'Importar resultado nativo' : 'Import native result'}</label><input id="local-result" type="file" accept="application/json,.json" disabled={!baseline?.problem} onChange={e => { void importResult(e.target.files?.[0]); e.target.value = ''; }} />
+      {localResult && <><p role="status">{lang === 'es' ? 'Resultado nativo importado y verificado.' : 'Imported native result verified.'}</p><button className="btn" type="button" onClick={() => { setLocalResult(null); setMethod('lifted'); setError(null); }}>{lang === 'es' ? 'Volver al registro original' : 'Restore recorded result'}</button></>}
+    </details>
+  </>;
+  const rail = <>
+    {softQPSource === 'fixture' && <p data-state="provider">{lang === 'es' ? 'Proveedor de prueba: solo C01. No es la matriz científica completa.' : 'Fixture provider: C01 only. This is not the full scientific matrix.'}</p>}
+    <label htmlFor="softqp-method">{lang === 'es' ? 'Método' : 'Method'}</label>
+    <select id="softqp-method" value={method} onChange={e => setMethod(e.target.value)}>
+      {(current?.runs.map(r => r.method) ?? ['lifted', 'generalized', 'asymmetric', 'daqp']).map(id =>
+        <option key={id} value={id}>{names[id][lang]}</option>)}
+    </select>
+    <label htmlFor="softqp-unit">{lang === 'es' ? 'Unidad de las filas' : 'Row unit'}</label><select id="softqp-unit" value={unit} onChange={e => setUnit(e.target.value)}>{units.map(u => <option key={u}>{u}</option>)}</select>
+    <Readout title={{ en: localResult ? 'Verified local result' : 'Recorded result', es: localResult ? 'Resultado local verificado' : 'Resultado registrado' }} lane="replay" provenance="synthetic" items={[
+      { label: { en: 'Objective', es: 'Objetivo' }, value: run?.result?.metrics?.objective ?? null, unitless: true },
+      { label: { en: 'Hard-row error', es: 'Error de filas duras' }, value: hardInUnit, ...(unit === '1' ? { unitless: true } : { unit: { en: unit, es: unit } }), hint: { en: 'Maximum hard-row violation in the selected unit. Unavailable when no hard row shares that unit.', es: 'Incumplimiento duro máximo en la unidad seleccionada. No disponible si ninguna fila dura comparte esa unidad.' } },
+    ]} /><button className="btn" type="button" disabled={!current} onClick={exportResult}>{lang === 'es' ? 'Exportar registro' : 'Export record'}</button>
+    <button className="btn" type="button" onClick={() => setGroup('context')}>{lang === 'es' ? 'Editar costos y resolver' : 'Edit costs and solve locally'}</button>
+    {error && <p role="alert">{error}</p>}{run?.state === 'incompatible' && <p data-state="unavailable">{lang === 'es' ? 'El caso no cumple los supuestos que admite este método.' : 'The case is outside this method’s supported assumptions.'}</p>}</>;
+  return <CaseWorkbench group={group} onGroupChange={setGroup} caseId={selected} source="synthetic" cases={{ cases: index?.cases.map(c => ({ id: c.case_id, name: c.title[lang], category: c.category[lang] })) ?? [], selectedId: selected, onSelect: setSelected, layout: 'select', deepLink: true }} controls={{ method, unit, origin: localResult ? 'local-native' : softQPSource, ...(localResult ? edits : {}) }} replayOnly rail={rail} focus
+    groups={[{ id: 'violations', label: { en: 'Violations', es: 'Incumplimientos' }, lane: 'replay', provenance: 'synthetic', content: <Violations doc={current} run={run} unit={unit} error={error} /> }, { id: 'comparison', label: { en: 'Comparison', es: 'Comparación' }, lane: 'replay', provenance: 'synthetic', content: <Comparison doc={current} active={method} error={error} /> }, {id: 'stream',label:{en:'C12 stream',es:'Flujo C12'},lane:'replay',provenance:'synthetic',content:<StreamStage caseId={selected} method={method} edited={!!localResult}/>}]}
+    context={{ content: <div><h2>{current?.title[lang]}</h2>{editor}<p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Un factor cuadrático cero declara una variante puramente L1 e incorpora FlexQP y ElastiQP cuando sus supuestos coinciden. La reconstrucción FlexQP ejecuta ecuaciones del artículo y no una política aprendida. Comparación conserva la campaña temporal registrada, el barrido controlado y el flujo pareado C12. La aceptación científica y de publicación son verificaciones separadas.' : 'A zero quadratic factor declares a pure L1 variant and includes FlexQP and ElastiQP where their assumptions match. The FlexQP reconstruction executes paper equations, not a learned policy. The Benchmark page retains the registered timing campaign, controlled conditioning sweep and paired C12 stream. Release and scientific acceptance remain separate gates.'}</p><p>{lang === 'es' ? 'Iteraciones del método seleccionado: ' : 'Selected method iterations: '}{run?.result?.iterations ?? '-'}</p></div> }} />;
 }

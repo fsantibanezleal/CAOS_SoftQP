@@ -1,0 +1,16 @@
+# Validation: directional coupled-penalty computation
+
+| requirement | adversarial check | gate |
+|---|---|---|
+| CP-001 | Encode and decode the actual canonical batch and compare all serialized fields.  (local-only: requires the separately pinned public SoftQP 0.2 environment.) | `tests/coupled/test_coupled_contract.py::test_adversarial_malformed_batch_rejects_before_native_setup` |
+| CP-002 | Plant ten malformed sparse, scale, group, unit and update boundaries before native setup.  (local-only: requires the separately pinned public SoftQP 0.2 environment.) | `tests/coupled/test_coupled_contract.py::test_adversarial_malformed_batch_rejects_before_native_setup` |
+| CP-003 | Compare independently lifted and native forecasts and perturb the returned primal point.  (local-only: requires the separately pinned public SoftQP 0.2 environment.) | `tests/coupled/test_coupled_correctness.py::test_adversarial_synthetic_forecasts_have_same_semantics_and_native_oracle_accuracy` |
+| CP-004 | Plant joint-budget violations, raw stationarity defects, signed-gap cancellation and overflow.  (local-only: requires the separately pinned public SoftQP 0.2 environment.) | `tests/coupled/test_coupled_correctness.py::test_adversarial_independent_gate_rejects_joint_dual_and_raw_stationarity_counterexamples` |
+| CP-005 | Change, omit or unpin each registered dependency and require refusal. | `tests/coupled/test_coupled_requirements.py::test_adversarial_dependency_drift_or_unpinned_options_are_rejected` |
+| CP-006 | Reconstruct nine fixture observations and all 288 candidate frames through the real export consumer.  (local-only: requires the separately pinned public SoftQP 0.2 environment.) | `tests/coupled/test_coupled_export.py::test_adversarial_replay_rejects_tampering_even_when_outer_checksums_are_recomputed` |
+| CP-007 | Mutate eight producer/export boundaries while recomputing outer digests where applicable.  (local-only: requires the separately pinned public SoftQP 0.2 environment.) | `tests/coupled/test_coupled_export.py::test_adversarial_replay_rejects_tampering_even_when_outer_checksums_are_recomputed` |
+| CP-008 | Supply known paired runtimes and seed clusters, then verify baseline selection and inference. | `tests/coupled/test_coupled_analysis.py::test_adversarial_bad_baseline_cannot_disappear_or_improve_the_primary_endpoint` |
+| CP-009 | Remove a compatible observation or substitute a failure, zero or nonfinite elapsed time. | `tests/coupled/test_coupled_analysis.py::test_adversarial_bad_baseline_cannot_disappear_or_improve_the_primary_endpoint` |
+| CP-010 | Plant false incompatibility and a truncated population; retain real incompatibility and warmups separately. | `tests/coupled/test_coupled_analysis.py::test_adversarial_spoofed_compatibility_or_partial_population_cannot_qualify` |
+| CP-011 | Mutate the registered protocol, source, accepted review, tracked state and dirty state in a temporary Git repository. | `tests/coupled/test_coupled_registration_and_workers.py::test_adversarial_registration_refuses_changed_authorities` |
+| CP-012 | Supply over-limit, oversized, malformed and incomplete controlled worker outputs and verify cleanup and failure preservation. | `tests/coupled/test_coupled_registration_and_workers.py::test_adversarial_supervisor_refuses_limits_and_incomplete_output` |

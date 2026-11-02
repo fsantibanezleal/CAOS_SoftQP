@@ -1,0 +1,46 @@
+{
+  "distribution": "softqp",
+  "version": "0.2.0",
+  "source": "https://pypi.org/pypi/softqp/0.2.0/json",
+  "variants": [
+    {
+      "wheel": "softqp-0.2.0-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+      "wheel_sha256": "84a868c4d449d5242632fdba28b5aa628ae9ab6d7551fc54d965f98eb4eb6f59",
+      "files_sha256": {
+        "softqp/__init__.py": "c5f6a56747b5813ccb0d860e367c9388c1dae1e0dba6db1b7b41d499ba165e30",
+        "softqp/builtin.py": "77097420ab585416de59a7f35f486879fdcbdbc7e6fcb4cf52e327d6d767f92b",
+        "softqp/elasti.py": "047b8de20b486c5032a62f53c650ec3a4ec0c80cbbe7c3b83a470a478d51a4f2",
+        "softqp/ext_builtin.cpython-312-x86_64-linux-gnu.so": "4378bbfc7edb83799deee80e991c724f0857dbcaa63a6eed82efab7462b4793d",
+        "softqp/flex.py": "5488490bc01d66f762ca667e237e3e560cff6bf5c5e634bfbd133f48a27786fd",
+        "softqp/interface.py": "699c75ffe122443412d32f3b25da233869eca13ed1e77351056f0eb5c9df4319",
+        "softqp/lifting.py": "bdc8abed7b3b6d41b9e26d9c658260185c9e408c9a736c3232bf25ab8ea79357",
+        "softqp/peak.py": "b9f93e4c74b2ae9230c5ebdae5490300caa848e72e6662f111b8bfac1f7e7437",
+        "softqp/problem.py": "7c56cce598f53af63e4673a72237578ef9634788c4dc38454cc4886a5d3dbb7d",
+        "softqp/reference.py": "b5b6addec896d135015e2d9dcd64a290a1d4c57bb959d88be5a7da1bf833d3f5",
+        "softqp/sessions.py": "c9cd8b1905be1dcc428498403ba1fbf1e3dea2db1d264f2386d42aaba16f699d",
+        "softqp/solvers.py": "ec1ac81c468c9b4ea0d8dc116abda6f5dd14410abeab0ecd0b7953fe8ddbad63",
+        "softqp-0.2.0.dist-info/METADATA": "ebc63c228ec6fed598280a85c3a4fd21eb24a26a8830cda9864b8f746e46dfa3"
+      }
+    },
+    {
+      "wheel": "softqp-0.2.0-cp312-cp312-win_amd64.whl",
+      "wheel_sha256": "0ddc107729ac6590806a65ef96be27ea3500f8a07f38ffb63ec262484398231f",
+      "files_sha256": {
+        "softqp/builtin.py": "77097420ab585416de59a7f35f486879fdcbdbc7e6fcb4cf52e327d6d767f92b",
+        "softqp/elasti.py": "047b8de20b486c5032a62f53c650ec3a4ec0c80cbbe7c3b83a470a478d51a4f2",
+        "softqp/ext_builtin.cp312-win_amd64.pyd": "3a890e0b672a116cb44dc47aba34c4c8ce67c3edf473ae61dfcf5aa904f3f2a4",
+        "softqp/flex.py": "5488490bc01d66f762ca667e237e3e560cff6bf5c5e634bfbd133f48a27786fd",
+        "softqp/interface.py": "699c75ffe122443412d32f3b25da233869eca13ed1e77351056f0eb5c9df4319",
+        "softqp/lifting.py": "bdc8abed7b3b6d41b9e26d9c658260185c9e408c9a736c3232bf25ab8ea79357",
+        "softqp/peak.py": "b9f93e4c74b2ae9230c5ebdae5490300caa848e72e6662f111b8bfac1f7e7437",
+        "softqp/problem.py": "7c56cce598f53af63e4673a72237578ef9634788c4dc38454cc4886a5d3dbb7d",
+        "softqp/reference.py": "b5b6addec896d135015e2d9dcd64a290a1d4c57bb959d88be5a7da1bf833d3f5",
+        "softqp/sessions.py": "c9cd8b1905be1dcc428498403ba1fbf1e3dea2db1d264f2386d42aaba16f699d",
+        "softqp/solvers.py": "ec1ac81c468c9b4ea0d8dc116abda6f5dd14410abeab0ecd0b7953fe8ddbad63",
+        "softqp/__init__.py": "b3768164e543a333b39d74677ce571b3962523300c23359dd7354a59b77db308",
+        "softqp-0.2.0.dist-info/METADATA": "206cc6308dd86e618ef3ffd9821dae9b0a38002a9697feb8607b4d02f81d4b13",
+        "softqp.libs/msvcp140-a4c2229bdc2a2a630acdc095b4d86008.dll": "a4c2229bdc2a2a630acdc095b4d86008e5c3e3bc7773174354f3da4f5beb9cde"
+      }
+    }
+  ]
+}
