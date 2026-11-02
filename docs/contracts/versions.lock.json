@@ -83,5 +83,10 @@
     "version": "1.0.0",
     "schema": "docs/contracts/schemas/softqp-coupled-campaign.schema.json",
     "sha256": "6dc8b06121c9b4d89f1d4c20d923ad9e278e3abc71713efa517e47a6fc1ca372"
+  },
+  "softqp-coupled-lesson": {
+    "version": "1.0.0",
+    "schema": "docs/contracts/schemas/softqp-coupled-lesson.schema.json",
+    "sha256": "24426bfa8bc8285f129ef3b87751442159e926049412bfd1db1091d9c665968c"
   }
 }

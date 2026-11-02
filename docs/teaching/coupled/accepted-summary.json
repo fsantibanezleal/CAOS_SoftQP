@@ -1,0 +1,2251 @@
+{
+  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+  "evidence_review_sha256": "f5ade8cca3ff79c91bda6386f78245a419e292574451c3c821d0436c9aa6bff0",
+  "source_commit": "246bf87e690f4d010494c556e2021d311d587422",
+  "counts": {
+    "development": {
+      "accepted": 879,
+      "incompatible": 396,
+      "oracle-failed": 21
+    },
+    "heldout": {
+      "accepted": 2587,
+      "accuracy-rejected": 6,
+      "incompatible": 1188,
+      "oracle-failed": 105,
+      "timeout": 2
+    },
+    "robustness": {
+      "accepted": 201,
+      "accuracy-rejected": 6,
+      "incompatible": 135,
+      "oracle-failed": 144
+    }
+  },
+  "primary": {
+    "estimate": -2.12449874656751,
+    "confidence_interval": [
+      -2.2533661821558257,
+      -1.9287375906532098
+    ],
+    "seed_clusters": 6,
+    "denominator": 144,
+    "failed_pairs": 9,
+    "pairs": [
+      {
+        "id": "heldout-0000",
+        "seed": 910101,
+        "reduction": -0.6510910265090939,
+        "fastest_baseline": "row-split-default",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.10057920000053855,
+          "daqp-prox-forced": 0.15183930000057444,
+          "epigraph-default": 0.11160999999992782,
+          "epigraph-fixed": 0.15754070000002685,
+          "native": 0.12937520000014047,
+          "row-split-default": 0.07835739999973157,
+          "row-split-fixed": 0.11375549999957002
+        }
+      },
+      {
+        "id": "heldout-0001",
+        "seed": 910101,
+        "reduction": -1.957578412353763,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.0604974999996557,
+          "daqp-prox-auto": 0.06453220000003057,
+          "daqp-prox-forced": 0.0645899000001009,
+          "epigraph-default": 0.08090939999965485,
+          "epigraph-fixed": 0.17212870000003022,
+          "native": 0.17892610000035347
+        }
+      },
+      {
+        "id": "heldout-0002",
+        "seed": 910101,
+        "reduction": -0.638186667699675,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.12424860000010085,
+          "daqp-prox-forced": 0.2762323999995715,
+          "epigraph-default": 0.4446890999997777,
+          "epigraph-fixed": 0.5440705000000889,
+          "native": 0.20354240000051504,
+          "row-split-default": 0.1783648999999059,
+          "row-split-fixed": 0.25089550000029703
+        }
+      },
+      {
+        "id": "heldout-0003",
+        "seed": 910101,
+        "reduction": -2.042131308823637,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.0917821000002732,
+          "daqp-prox-forced": 0.1130444999998872,
+          "epigraph-default": 0.15952560000005178,
+          "epigraph-fixed": 0.22979599999962375,
+          "native": 0.27921320000041305
+        }
+      },
+      {
+        "id": "heldout-0004",
+        "seed": 910101,
+        "reduction": -2.05440884988478,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.09636299999965559,
+          "daqp-prox-forced": 0.1481017999994947,
+          "epigraph-default": 0.18111129999942932,
+          "epigraph-fixed": 0.5034654999999475,
+          "native": 0.29433200000039506,
+          "row-split-default": 0.130417800000032,
+          "row-split-fixed": 0.271688499999982
+        }
+      },
+      {
+        "id": "heldout-0005",
+        "seed": 910101,
+        "reduction": -3.4857953774222468,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.09576459999971121,
+          "daqp-prox-auto": 0.11063110000031884,
+          "daqp-prox-forced": 0.1360261999998329,
+          "epigraph-default": 0.15977550000025076,
+          "epigraph-fixed": 0.5936125000007451,
+          "native": 0.429580399999395
+        }
+      },
+      {
+        "id": "heldout-0006",
+        "seed": 910101,
+        "reduction": -2.1673228749562625,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.09272970000074565,
+          "daqp-prox-forced": 0.13113919999977952,
+          "epigraph-default": 0.6364229999999225,
+          "epigraph-fixed": 0.5141603000001851,
+          "native": 0.29370490000019345,
+          "row-split-default": 0.45712300000013784,
+          "row-split-fixed": 0.2754420000001119
+        }
+      },
+      {
+        "id": "heldout-0007",
+        "seed": 910101,
+        "reduction": -2.4985189134793675,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.11008810000021185,
+          "daqp-prox-forced": 0.13303080000059708,
+          "epigraph-default": 0.19201450000036857,
+          "epigraph-fixed": 0.44957720000002155,
+          "native": 0.3851452999997491
+        }
+      },
+      {
+        "id": "heldout-0008",
+        "seed": 910101,
+        "reduction": -1.7443856769866382,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.25987549999990733,
+          "daqp-prox-forced": 1.1500172999994902,
+          "epigraph-default": 0.6218818999996074,
+          "epigraph-fixed": 0.6828848999994079,
+          "native": 0.7131985999994868,
+          "row-split-default": 0.3960919000001013,
+          "row-split-fixed": 0.6644360999998753
+        }
+      },
+      {
+        "id": "heldout-0009",
+        "seed": 910101,
+        "reduction": -3.157619791610454,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.16525780000029044,
+          "daqp-prox-auto": 0.17873400000007678,
+          "daqp-prox-forced": 0.18563410000024305,
+          "epigraph-default": 0.2960559999992256,
+          "epigraph-fixed": 0.9806343000000197,
+          "native": 0.6870790999992096
+        }
+      },
+      {
+        "id": "heldout-0010",
+        "seed": 910101,
+        "reduction": -4.058176518722591,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1556934000000183,
+          "daqp-prox-forced": 3.3459899999998015,
+          "epigraph-default": 0.695423999999548,
+          "epigraph-fixed": 0.8737976000002163,
+          "native": 0.7875247000001764,
+          "row-split-default": 0.5752592999997432,
+          "row-split-fixed": 0.7271156999995583
+        }
+      },
+      {
+        "id": "heldout-0011",
+        "seed": 910101,
+        "reduction": -5.632532134532256,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.19770789999984117,
+          "daqp-prox-forced": 3.179238599999735,
+          "epigraph-default": 0.2854238999998415,
+          "epigraph-fixed": 0.7700626000005286,
+          "native": 1.3113039999998364
+        }
+      },
+      {
+        "id": "heldout-0012",
+        "seed": 910101,
+        "reduction": -4.390288235375917,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.21478279999973893,
+          "daqp-prox-forced": 0.3592056000006778,
+          "epigraph-default": 1.151519900000494,
+          "epigraph-fixed": 4.248014599999806,
+          "native": 1.1577411999996912,
+          "row-split-default": 0.378546599999936,
+          "row-split-fixed": 2.2786065999998755
+        }
+      },
+      {
+        "id": "heldout-0013",
+        "seed": 910101,
+        "reduction": -5.608677200144151,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.2306803999999829,
+          "daqp-prox-auto": 0.24806590000025608,
+          "daqp-prox-forced": 0.3248462000001382,
+          "epigraph-default": 1.0242065000002185,
+          "epigraph-fixed": 3.973146799999995,
+          "native": 1.52449230000002
+        }
+      },
+      {
+        "id": "heldout-0014",
+        "seed": 910101,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "row-split-default: unsuccessful registered observation"
+        ],
+        "median_seconds": {
+          "daqp-prox-auto": 0.25444919999972626,
+          "daqp-prox-forced": 3.1225524000001315,
+          "epigraph-default": 3.1977341000001616,
+          "epigraph-fixed": 4.283715200000188,
+          "native": 2.9859465999998065,
+          "row-split-fixed": 3.5540069999997286
+        }
+      },
+      {
+        "id": "heldout-0015",
+        "seed": 910101,
+        "reduction": -2.514584436499932,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.2243555999993987,
+          "daqp-prox-forced": 2.9855398999998215,
+          "epigraph-default": 0.43671919999997044,
+          "epigraph-fixed": 0.7281352999998489,
+          "native": 0.7885166999994908
+        }
+      },
+      {
+        "id": "heldout-0016",
+        "seed": 910101,
+        "reduction": -0.5039742089494545,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05930739999985235,
+          "daqp-prox-forced": 0.07547629999953642,
+          "epigraph-default": 0.11255989999972371,
+          "epigraph-fixed": 0.11280299999998533,
+          "native": 0.08919679999962682,
+          "row-split-default": 0.06639919999997801,
+          "row-split-fixed": 0.10963110000011511
+        }
+      },
+      {
+        "id": "heldout-0017",
+        "seed": 910101,
+        "reduction": -0.8019171135418626,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.03537609999966662,
+          "daqp-prox-auto": 0.037226299999929324,
+          "daqp-prox-forced": 0.06629679999969085,
+          "epigraph-default": 0.04473370000050636,
+          "epigraph-fixed": 0.057282499999928405,
+          "native": 0.06374479999976757
+        }
+      },
+      {
+        "id": "heldout-0018",
+        "seed": 910101,
+        "reduction": -0.2880406086545799,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.041666000000077474,
+          "daqp-prox-forced": 0.06077329999970971,
+          "epigraph-default": 0.06162869999934628,
+          "epigraph-fixed": 0.06307049999941228,
+          "native": 0.053667500000301516,
+          "row-split-default": 0.055085699999835924,
+          "row-split-fixed": 0.062448099999528495
+        }
+      },
+      {
+        "id": "heldout-0019",
+        "seed": 910101,
+        "reduction": -0.372532298405865,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.03682070000013482,
+          "daqp-prox-forced": 0.05026980000002368,
+          "epigraph-default": 0.047799400000258174,
+          "epigraph-fixed": 0.055709700000079465,
+          "native": 0.05053760000009788
+        }
+      },
+      {
+        "id": "heldout-0020",
+        "seed": 910101,
+        "reduction": -4.806858019095533,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05125969999971858,
+          "daqp-prox-forced": 0.3537843000003704,
+          "epigraph-default": 0.10357959999964805,
+          "epigraph-fixed": 0.348900599999979,
+          "native": 0.29765779999979713,
+          "row-split-default": 0.10738099999980477,
+          "row-split-fixed": 0.39100899999994
+        }
+      },
+      {
+        "id": "heldout-0021",
+        "seed": 910101,
+        "reduction": -7.451457182775394,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.04397869999957038,
+          "daqp-prox-auto": 0.04508940000050643,
+          "daqp-prox-forced": 0.28916639999988547,
+          "epigraph-default": 0.08754990000034013,
+          "epigraph-fixed": 0.34519860000000335,
+          "native": 0.37168410000049334
+        }
+      },
+      {
+        "id": "heldout-0022",
+        "seed": 910101,
+        "reduction": -4.874217917059114,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05271179999999731,
+          "daqp-prox-forced": 0.2038959999999861,
+          "epigraph-default": 0.09901650000028894,
+          "epigraph-fixed": 0.29596420000052603,
+          "native": 0.3096406000004208,
+          "row-split-default": 0.08218289999967965,
+          "row-split-fixed": 0.31726309999976365
+        }
+      },
+      {
+        "id": "heldout-0023",
+        "seed": 910101,
+        "reduction": -4.586474655732582,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.04445579999992333,
+          "daqp-prox-forced": 0.18204590000004828,
+          "epigraph-default": 0.08137880000049336,
+          "epigraph-fixed": 0.26729059999979654,
+          "native": 0.2483511999998882
+        }
+      },
+      {
+        "id": "heldout-0024",
+        "seed": 910102,
+        "reduction": -0.9708715968319208,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.058530500000415486,
+          "daqp-prox-forced": 0.10191759999997885,
+          "epigraph-default": 0.08905640000011772,
+          "epigraph-fixed": 0.11061989999961952,
+          "native": 0.11535609999918961,
+          "row-split-default": 0.07722840000042197,
+          "row-split-fixed": 0.10410989999945741
+        }
+      },
+      {
+        "id": "heldout-0025",
+        "seed": 910102,
+        "reduction": -1.9928031219749642,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.04999390000011772,
+          "daqp-prox-auto": 0.05178969999997207,
+          "daqp-prox-forced": 0.059272699999382894,
+          "epigraph-default": 0.06898490000003221,
+          "epigraph-fixed": 0.11217239999950834,
+          "native": 0.14962190000005648
+        }
+      },
+      {
+        "id": "heldout-0026",
+        "seed": 910102,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "row-split-default: unsuccessful registered observation"
+        ],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05827709999994113,
+          "daqp-prox-forced": 0.07794009999997797,
+          "epigraph-default": 0.27097090000006574,
+          "epigraph-fixed": 0.22909310000068217,
+          "native": 0.22973959999944782,
+          "row-split-fixed": 0.1992290000007415
+        }
+      },
+      {
+        "id": "heldout-0027",
+        "seed": 910102,
+        "reduction": -6.911618957844389,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.054364600000553764,
+          "daqp-prox-forced": 0.16190460000052553,
+          "epigraph-default": 0.10320619999947667,
+          "epigraph-fixed": 0.3231604000002335,
+          "native": 0.43011200000000827
+        }
+      },
+      {
+        "id": "heldout-0028",
+        "seed": 910102,
+        "reduction": -0.9360002531948406,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.050562699999318284,
+          "daqp-prox-forced": 0.0698513000006642,
+          "epigraph-default": 0.10548639999979059,
+          "epigraph-fixed": 0.1855085000006511,
+          "native": 0.09788940000089497,
+          "row-split-default": 0.06745539999974426,
+          "row-split-fixed": 0.15088980000018637
+        }
+      },
+      {
+        "id": "heldout-0029",
+        "seed": 910102,
+        "reduction": -1.9287375906532098,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.05256479999934527,
+          "daqp-prox-auto": 0.051412799999525305,
+          "daqp-prox-forced": 0.06887290000031498,
+          "epigraph-default": 0.08566460000020015,
+          "epigraph-fixed": 0.2036086999996769,
+          "native": 0.15057459999934508
+        }
+      },
+      {
+        "id": "heldout-0030",
+        "seed": 910102,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "daqp-prox-auto: unsuccessful registered observation",
+          "daqp-prox-forced: unsuccessful registered observation",
+          "epigraph-default: unsuccessful registered observation",
+          "epigraph-fixed: unsuccessful registered observation",
+          "native: unsuccessful registered observation",
+          "row-split-default: unsuccessful registered observation",
+          "row-split-fixed: unsuccessful registered observation",
+          "native: no accepted complete batch",
+          "no accepted compatible baseline"
+        ],
+        "median_seconds": {}
+      },
+      {
+        "id": "heldout-0031",
+        "seed": 910102,
+        "reduction": -0.807992032338491,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.056628899999850546,
+          "daqp-prox-forced": 0.10479979999945499,
+          "epigraph-default": 0.07777799999985291,
+          "epigraph-fixed": 0.09915530000034778,
+          "native": 0.10238459999982297
+        }
+      },
+      {
+        "id": "heldout-0032",
+        "seed": 910102,
+        "reduction": -3.518034471932947,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.13406269999995857,
+          "daqp-prox-forced": 0.9363060000005134,
+          "epigraph-default": 0.3920287000000826,
+          "epigraph-fixed": 0.6058966999999029,
+          "native": 0.6056999000002179,
+          "row-split-default": 0.28315629999997327,
+          "row-split-fixed": 0.6140765000000101
+        }
+      },
+      {
+        "id": "heldout-0033",
+        "seed": 910102,
+        "reduction": -3.9953775957662687,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.14968899999985297,
+          "daqp-prox-auto": 0.12737960000049497,
+          "daqp-prox-forced": 0.13633440000012342,
+          "epigraph-default": 0.22583360000044195,
+          "epigraph-fixed": 0.5757078000006004,
+          "native": 0.6363092000001416
+        }
+      },
+      {
+        "id": "heldout-0034",
+        "seed": 910102,
+        "reduction": -3.781688507562855,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.15953259999969305,
+          "daqp-prox-forced": 1.6761914000007891,
+          "epigraph-default": 0.8004735000004075,
+          "epigraph-fixed": 0.9440993999996863,
+          "native": 0.7628352000001541,
+          "row-split-default": 0.4681986000005054,
+          "row-split-fixed": 0.8245466999997006
+        }
+      },
+      {
+        "id": "heldout-0035",
+        "seed": 910102,
+        "reduction": -4.456485079024791,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.14142850000007456,
+          "daqp-prox-forced": 2.2897809999994934,
+          "epigraph-default": 0.2765718000000561,
+          "epigraph-fixed": 0.8193385000004128,
+          "native": 0.7717024999992645
+        }
+      },
+      {
+        "id": "heldout-0036",
+        "seed": 910102,
+        "reduction": -4.728330540328778,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.15843150000000605,
+          "daqp-prox-forced": 0.24499639999976353,
+          "epigraph-default": 0.3825693999997384,
+          "epigraph-fixed": 0.9922812999993766,
+          "native": 0.9075480000001335,
+          "row-split-default": 0.2933013000001665,
+          "row-split-fixed": 0.9956793000001198
+        }
+      },
+      {
+        "id": "heldout-0037",
+        "seed": 910102,
+        "reduction": -8.039040196935673,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.1347580999999991,
+          "daqp-prox-auto": 0.13226880000001984,
+          "daqp-prox-forced": 0.2132353000006333,
+          "epigraph-default": 0.40925139999944804,
+          "epigraph-fixed": 1.4895477000000028,
+          "native": 1.1955830000006245
+        }
+      },
+      {
+        "id": "heldout-0038",
+        "seed": 910102,
+        "reduction": -9.029557161066286,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1475479999999152,
+          "daqp-prox-forced": 1.1382088999998814,
+          "epigraph-default": 1.001566200000525,
+          "epigraph-fixed": 1.5952987000000576,
+          "native": 1.479841100000158,
+          "row-split-default": 0.932441299999482,
+          "row-split-fixed": 1.4413235000001805
+        }
+      },
+      {
+        "id": "heldout-0039",
+        "seed": 910102,
+        "reduction": -6.171963989067005,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.14397839999946882,
+          "daqp-prox-forced": 2.51489120000042,
+          "epigraph-default": 0.35877849999997125,
+          "epigraph-fixed": 1.0810174000007464,
+          "native": 1.0326078999996753
+        }
+      },
+      {
+        "id": "heldout-0040",
+        "seed": 910102,
+        "reduction": -0.09690894994310972,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.030568899999707355,
+          "daqp-prox-forced": 0.043477899999743386,
+          "epigraph-default": 0.04057650000049762,
+          "epigraph-fixed": 0.042066100000738516,
+          "native": 0.03353129999959492,
+          "row-split-default": 0.048135300000467396,
+          "row-split-fixed": 0.0371408999999403
+        }
+      },
+      {
+        "id": "heldout-0041",
+        "seed": 910102,
+        "reduction": -0.057401548528138724,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.030880700000125216,
+          "daqp-prox-auto": 0.0312698999996428,
+          "daqp-prox-forced": 0.046003100000234554,
+          "epigraph-default": 0.039405799999258306,
+          "epigraph-fixed": 0.03704310000011901,
+          "native": 0.032653299999765295
+        }
+      },
+      {
+        "id": "heldout-0042",
+        "seed": 910102,
+        "reduction": -0.1435930838533106,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.0337760000002163,
+          "daqp-prox-forced": 0.057999999999992724,
+          "epigraph-default": 0.045665200000257755,
+          "epigraph-fixed": 0.05234420000033424,
+          "native": 0.03862600000047678,
+          "row-split-default": 0.049469600000520586,
+          "row-split-fixed": 0.03850880000027246
+        }
+      },
+      {
+        "id": "heldout-0043",
+        "seed": 910102,
+        "reduction": -0.0537438357734239,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.035101700000268465,
+          "daqp-prox-forced": 0.05490989999998419,
+          "epigraph-default": 0.041436000000430795,
+          "epigraph-fixed": 0.04140000000006694,
+          "native": 0.03698820000045089
+        }
+      },
+      {
+        "id": "heldout-0044",
+        "seed": 910102,
+        "reduction": -0.005508266431954789,
+        "fastest_baseline": "row-split-fixed",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.055086499999561056,
+          "daqp-prox-forced": 0.4800542000002679,
+          "epigraph-default": 0.0661232000002201,
+          "epigraph-fixed": 0.08056840000062948,
+          "native": 0.04974359999960143,
+          "row-split-default": 0.0939302000006137,
+          "row-split-fixed": 0.049471100000118895
+        }
+      },
+      {
+        "id": "heldout-0045",
+        "seed": 910102,
+        "reduction": -0.1206854046030803,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.046478400000523834,
+          "daqp-prox-auto": 0.044213300000592426,
+          "daqp-prox-forced": 0.3155514000000039,
+          "epigraph-default": 0.06109680000008666,
+          "epigraph-fixed": 0.05083109999941371,
+          "native": 0.04954920000000129
+        }
+      },
+      {
+        "id": "heldout-0046",
+        "seed": 910102,
+        "reduction": -0.1578925305389589,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.04771030000028986,
+          "daqp-prox-forced": 0.3992699000000357,
+          "epigraph-default": 0.09526720000030764,
+          "epigraph-fixed": 0.11699239999961719,
+          "native": 0.05524340000010852,
+          "row-split-default": 0.08931870000014897,
+          "row-split-fixed": 0.05657630000041536
+        }
+      },
+      {
+        "id": "heldout-0047",
+        "seed": 910102,
+        "reduction": -0.31391525455086144,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.042395200000100886,
+          "daqp-prox-forced": 0.36061570000038046,
+          "epigraph-default": 0.05832680000003165,
+          "epigraph-fixed": 0.05428380000012112,
+          "native": 0.05570369999986724
+        }
+      },
+      {
+        "id": "heldout-0048",
+        "seed": 910103,
+        "reduction": -0.2622995866549571,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05131270000038057,
+          "daqp-prox-forced": 0.08331749999979365,
+          "epigraph-default": 0.07623179999973217,
+          "epigraph-fixed": 0.06772719999935362,
+          "native": 0.06477200000063021,
+          "row-split-default": 0.06754019999971206,
+          "row-split-fixed": 0.06709700000010344
+        }
+      },
+      {
+        "id": "heldout-0049",
+        "seed": 910103,
+        "reduction": -2.154828491322845,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.05120439999973314,
+          "daqp-prox-auto": 0.05204890000004525,
+          "daqp-prox-forced": 0.05593790000057197,
+          "epigraph-default": 0.0692018999998254,
+          "epigraph-fixed": 0.1391580999998041,
+          "native": 0.16154110000024957
+        }
+      },
+      {
+        "id": "heldout-0050",
+        "seed": 910103,
+        "reduction": -1.441064803610732,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.06690059999982623,
+          "daqp-prox-forced": 0.08438029999979335,
+          "epigraph-default": 0.17298510000000533,
+          "epigraph-fixed": 0.20224940000025526,
+          "native": 0.16330870000001596,
+          "row-split-default": 0.15591249999943102,
+          "row-split-fixed": 0.16393650000009075
+        }
+      },
+      {
+        "id": "heldout-0051",
+        "seed": 910103,
+        "reduction": -2.112164891762859,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.052330099999380764,
+          "daqp-prox-forced": 0.09656420000010257,
+          "epigraph-default": 0.07759960000021238,
+          "epigraph-fixed": 0.13932310000018333,
+          "native": 0.16285990000051243
+        }
+      },
+      {
+        "id": "heldout-0052",
+        "seed": 910103,
+        "reduction": -2.290889770543985,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05335869999998977,
+          "daqp-prox-forced": 0.06836230000044452,
+          "epigraph-default": 0.09452050000072632,
+          "epigraph-fixed": 0.1912899999997535,
+          "native": 0.17559759999949165,
+          "row-split-default": 0.06337859999985085,
+          "row-split-fixed": 0.14970549999998184
+        }
+      },
+      {
+        "id": "heldout-0053",
+        "seed": 910103,
+        "reduction": -6.527779590212299,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.05356339999980264,
+          "daqp-prox-auto": 0.05057849999957398,
+          "daqp-prox-forced": 0.056222400000478956,
+          "epigraph-default": 0.07063800000014453,
+          "epigraph-fixed": 0.2431499000003896,
+          "native": 0.3807438000003458
+        }
+      },
+      {
+        "id": "heldout-0054",
+        "seed": 910103,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "daqp-prox-auto: unsuccessful registered observation",
+          "daqp-prox-forced: unsuccessful registered observation",
+          "epigraph-default: unsuccessful registered observation",
+          "epigraph-fixed: unsuccessful registered observation",
+          "native: unsuccessful registered observation",
+          "row-split-default: unsuccessful registered observation",
+          "row-split-fixed: unsuccessful registered observation",
+          "native: no accepted complete batch",
+          "no accepted compatible baseline"
+        ],
+        "median_seconds": {}
+      },
+      {
+        "id": "heldout-0055",
+        "seed": 910103,
+        "reduction": -1.9207066509124564,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05149359999995795,
+          "daqp-prox-forced": 0.06707809999988967,
+          "epigraph-default": 0.093055600000298,
+          "epigraph-fixed": 0.12768340000002354,
+          "native": 0.15039769999930286
+        }
+      },
+      {
+        "id": "heldout-0056",
+        "seed": 910103,
+        "reduction": -2.045556695546136,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1413250000005064,
+          "daqp-prox-forced": 0.5999446999994689,
+          "epigraph-default": 0.32934190000014496,
+          "epigraph-fixed": 0.5331173000004128,
+          "native": 0.4304132999996,
+          "row-split-default": 0.2447079000003214,
+          "row-split-fixed": 0.5169469000002209
+        }
+      },
+      {
+        "id": "heldout-0057",
+        "seed": 910103,
+        "reduction": -5.266903609252844,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.12785139999959938,
+          "daqp-prox-auto": 0.12588140000025305,
+          "daqp-prox-forced": 0.14164270000037504,
+          "epigraph-default": 0.22488350000003265,
+          "epigraph-fixed": 0.9578265000000101,
+          "native": 0.7888865999993868
+        }
+      },
+      {
+        "id": "heldout-0058",
+        "seed": 910103,
+        "reduction": -1.6922273876343614,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.16954660000010335,
+          "daqp-prox-forced": 2.020882700000584,
+          "epigraph-default": 0.4883406000008108,
+          "epigraph-fixed": 0.5533119000001534,
+          "native": 0.45645800000056624,
+          "row-split-default": 0.4367944000005082,
+          "row-split-fixed": 0.5338406999999279
+        }
+      },
+      {
+        "id": "heldout-0059",
+        "seed": 910103,
+        "reduction": -3.163180327606738,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.13225429999965854,
+          "daqp-prox-forced": 1.2615561000002344,
+          "epigraph-default": 0.2729548999996041,
+          "epigraph-fixed": 0.6882122999995772,
+          "native": 0.5505984999999782
+        }
+      },
+      {
+        "id": "heldout-0060",
+        "seed": 910103,
+        "reduction": -5.254670365271181,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1442339000004722,
+          "daqp-prox-forced": 0.22163759999966715,
+          "epigraph-default": 0.4695885000000999,
+          "epigraph-fixed": 2.201654100000269,
+          "native": 0.9021355000004405,
+          "row-split-default": 0.29132300000037503,
+          "row-split-fixed": 1.3999554000001808
+        }
+      },
+      {
+        "id": "heldout-0061",
+        "seed": 910103,
+        "reduction": -7.498761025256787,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.13804270000036922,
+          "daqp-prox-auto": 0.12825119999979506,
+          "daqp-prox-forced": 0.20881490000010672,
+          "epigraph-default": 0.45081930000014836,
+          "epigraph-fixed": 2.733464000000822,
+          "native": 1.0899763000006715
+        }
+      },
+      {
+        "id": "heldout-0062",
+        "seed": 910103,
+        "reduction": -6.879789142184017,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.16340870000021823,
+          "daqp-prox-forced": 1.6016072000002168,
+          "epigraph-default": 1.611268999999993,
+          "epigraph-fixed": 1.867334500000652,
+          "native": 1.287626100000125,
+          "row-split-default": 1.3715265000000727,
+          "row-split-fixed": 1.5793063000000984
+        }
+      },
+      {
+        "id": "heldout-0063",
+        "seed": 910103,
+        "reduction": -4.416490736093876,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.156548500000099,
+          "daqp-prox-forced": 3.004508799999712,
+          "epigraph-default": 0.4391232999996646,
+          "epigraph-fixed": 0.9811519999993834,
+          "native": 0.8479434999999285
+        }
+      },
+      {
+        "id": "heldout-0064",
+        "seed": 910103,
+        "reduction": -1.2428189223812556,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.03487290000066423,
+          "daqp-prox-forced": 0.13492820000010397,
+          "epigraph-default": 0.060296200000266253,
+          "epigraph-fixed": 0.08874780000041937,
+          "native": 0.07821359999979904,
+          "row-split-default": 0.10857410000062373,
+          "row-split-fixed": 0.10136430000056862
+        }
+      },
+      {
+        "id": "heldout-0065",
+        "seed": 910103,
+        "reduction": -0.7578545371108485,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.04153319999932137,
+          "daqp-prox-auto": 0.03451190000032511,
+          "daqp-prox-forced": 0.11912869999923714,
+          "epigraph-default": 0.049797900000157824,
+          "epigraph-fixed": 0.06508370000028663,
+          "native": 0.06066689999988739
+        }
+      },
+      {
+        "id": "heldout-0066",
+        "seed": 910103,
+        "reduction": -0.6599405061279544,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.0360037000000375,
+          "daqp-prox-forced": 0.09566559999984747,
+          "epigraph-default": 0.08205389999966428,
+          "epigraph-fixed": 0.08280109999941487,
+          "native": 0.05976400000054127,
+          "row-split-default": 0.05290100000001985,
+          "row-split-fixed": 0.06292870000015682
+        }
+      },
+      {
+        "id": "heldout-0067",
+        "seed": 910103,
+        "reduction": -0.6181165537444226,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.03944789999968634,
+          "daqp-prox-forced": 0.06561630000032892,
+          "epigraph-default": 0.06985789999998815,
+          "epigraph-fixed": 0.07831919999989623,
+          "native": 0.06383129999994708
+        }
+      },
+      {
+        "id": "heldout-0068",
+        "seed": 910103,
+        "reduction": -2.3263008537743692,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.06885670000065147,
+          "daqp-prox-forced": 1.7324336000001495,
+          "epigraph-default": 0.15697980000004463,
+          "epigraph-fixed": 0.21428289999948902,
+          "native": 0.2290381000002526,
+          "row-split-default": 0.33969559999968624,
+          "row-split-fixed": 0.3179572000008193
+        }
+      },
+      {
+        "id": "heldout-0069",
+        "seed": 910103,
+        "reduction": -31.973749555796083,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.04727920000004815,
+          "daqp-prox-auto": 0.052624800000558025,
+          "daqp-prox-forced": 1.091472999999496,
+          "epigraph-default": 0.34829309999986435,
+          "epigraph-fixed": 1.4935138999999253,
+          "native": 1.5589724999999817
+        }
+      },
+      {
+        "id": "heldout-0070",
+        "seed": 910103,
+        "reduction": -21.905877234758666,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.06206149999979971,
+          "daqp-prox-forced": 0.7499729999999545,
+          "epigraph-default": 0.28572059999987687,
+          "epigraph-fixed": 1.4006970000000365,
+          "native": 1.421573100000387,
+          "row-split-default": 0.56872790000034,
+          "row-split-fixed": 2.943799200000285
+        }
+      },
+      {
+        "id": "heldout-0071",
+        "seed": 910103,
+        "reduction": -10.126509925078146,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.049108399999568064,
+          "daqp-prox-forced": 1.7310348000000886,
+          "epigraph-default": 0.23032809999949677,
+          "epigraph-fixed": 0.47969780000039464,
+          "native": 0.5464050999999017
+        }
+      },
+      {
+        "id": "heldout-0072",
+        "seed": 910104,
+        "reduction": -0.5350875650344162,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05686059999970894,
+          "daqp-prox-forced": 0.07439280000016879,
+          "epigraph-default": 0.09913250000045082,
+          "epigraph-fixed": 0.08092240000041784,
+          "native": 0.08728599999994913,
+          "row-split-default": 0.08613530000002356,
+          "row-split-fixed": 0.07921729999998206
+        }
+      },
+      {
+        "id": "heldout-0073",
+        "seed": 910104,
+        "reduction": -0.4359379924479647,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.05108410000048025,
+          "daqp-prox-auto": 0.053275399999620277,
+          "daqp-prox-forced": 0.053375299999970593,
+          "epigraph-default": 0.06076469999970868,
+          "epigraph-fixed": 0.06927919999998267,
+          "native": 0.07335360000070068
+        }
+      },
+      {
+        "id": "heldout-0074",
+        "seed": 910104,
+        "reduction": -3.3793060931104035,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05839399999968009,
+          "daqp-prox-forced": 0.12246049999976094,
+          "epigraph-default": 0.1598188999996637,
+          "epigraph-fixed": 0.2484444000001531,
+          "native": 0.2557251999996879,
+          "row-split-default": 0.13713539999935165,
+          "row-split-fixed": 0.2814293000001271
+        }
+      },
+      {
+        "id": "heldout-0075",
+        "seed": 910104,
+        "reduction": -0.5130395635708602,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05642059999991034,
+          "daqp-prox-forced": 0.13623099999949773,
+          "epigraph-default": 0.0716628000000128,
+          "epigraph-fixed": 0.07784459999948012,
+          "native": 0.08536660000027041
+        }
+      },
+      {
+        "id": "heldout-0076",
+        "seed": 910104,
+        "reduction": -1.865304334131611,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.06093959999998333,
+          "daqp-prox-forced": 0.07375230000070587,
+          "epigraph-default": 0.10927140000057989,
+          "epigraph-fixed": 0.19289130000015575,
+          "native": 0.17461050000019895,
+          "row-split-default": 0.0692334999994273,
+          "row-split-fixed": 0.13964360000045417
+        }
+      },
+      {
+        "id": "heldout-0077",
+        "seed": 910104,
+        "reduction": -3.5440086405075313,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.049997000000075786,
+          "daqp-prox-auto": 0.05612569999993866,
+          "daqp-prox-forced": 0.0687911000004533,
+          "epigraph-default": 0.07856970000011643,
+          "epigraph-fixed": 0.2597947000003842,
+          "native": 0.2271867999997994
+        }
+      },
+      {
+        "id": "heldout-0078",
+        "seed": 910104,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "daqp-prox-auto: unsuccessful registered observation",
+          "daqp-prox-forced: unsuccessful registered observation",
+          "epigraph-default: unsuccessful registered observation",
+          "epigraph-fixed: unsuccessful registered observation",
+          "native: unsuccessful registered observation",
+          "row-split-default: unsuccessful registered observation",
+          "row-split-fixed: unsuccessful registered observation",
+          "native: no accepted complete batch",
+          "no accepted compatible baseline"
+        ],
+        "median_seconds": {}
+      },
+      {
+        "id": "heldout-0079",
+        "seed": 910104,
+        "reduction": -2.716548516366272,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.053984899999704794,
+          "daqp-prox-forced": 0.09564880000016274,
+          "epigraph-default": 0.07453680000071472,
+          "epigraph-fixed": 0.1734134999996968,
+          "native": 0.2006375000000844
+        }
+      },
+      {
+        "id": "heldout-0080",
+        "seed": 910104,
+        "reduction": -5.851538305832702,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1323923999998442,
+          "daqp-prox-forced": 0.7793273999996018,
+          "epigraph-default": 0.3813540999999532,
+          "epigraph-fixed": 0.8961465000002136,
+          "native": 0.907091600000058,
+          "row-split-default": 0.5754910000005111,
+          "row-split-fixed": 0.9580704999998488
+        }
+      },
+      {
+        "id": "heldout-0081",
+        "seed": 910104,
+        "reduction": -2.632927168983627,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.14545840000027965,
+          "daqp-prox-auto": 0.13784240000040882,
+          "daqp-prox-forced": 0.15410309999970195,
+          "epigraph-default": 0.19920040000033623,
+          "epigraph-fixed": 0.6641528999998627,
+          "native": 0.5007713999993939
+        }
+      },
+      {
+        "id": "heldout-0082",
+        "seed": 910104,
+        "reduction": -5.898365358373264,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.14864419999958045,
+          "daqp-prox-forced": 1.62857140000051,
+          "epigraph-default": 0.8938693999998577,
+          "epigraph-fixed": 1.058126999999331,
+          "native": 1.0254020000002129,
+          "row-split-default": 0.6820336999999199,
+          "row-split-fixed": 1.076028999999835
+        }
+      },
+      {
+        "id": "heldout-0083",
+        "seed": 910104,
+        "reduction": -4.916095196913927,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1459248999999545,
+          "daqp-prox-forced": 1.2817766000007396,
+          "epigraph-default": 0.2666986000003817,
+          "epigraph-fixed": 1.1628217999996195,
+          "native": 0.863305599999876
+        }
+      },
+      {
+        "id": "heldout-0084",
+        "seed": 910104,
+        "reduction": -5.228179214838939,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.12644710000040504,
+          "daqp-prox-forced": 0.37321699999938573,
+          "epigraph-default": 0.3699957999997423,
+          "epigraph-fixed": 1.096078500000658,
+          "native": 0.7875351999991835,
+          "row-split-default": 0.2212256000002526,
+          "row-split-fixed": 0.7043039999998655
+        }
+      },
+      {
+        "id": "heldout-0085",
+        "seed": 910104,
+        "reduction": -9.453189543214199,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.13470280000001367,
+          "daqp-prox-auto": 0.1184041000005891,
+          "daqp-prox-forced": 0.18763740000031248,
+          "epigraph-default": 0.4453136000001905,
+          "epigraph-fixed": 2.0091460999992705,
+          "native": 1.2377004999998462
+        }
+      },
+      {
+        "id": "heldout-0086",
+        "seed": 910104,
+        "reduction": -10.332737161512927,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.14732890000050247,
+          "daqp-prox-forced": 1.2820403999994596,
+          "epigraph-default": 1.3422906000005241,
+          "epigraph-fixed": 2.0600162000000637,
+          "native": 1.6696397000005163,
+          "row-split-default": 1.1500258000005488,
+          "row-split-fixed": 1.8702968000006877
+        }
+      },
+      {
+        "id": "heldout-0087",
+        "seed": 910104,
+        "reduction": -5.269447814191809,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.13923029999932623,
+          "daqp-prox-forced": 2.1732412999999724,
+          "epigraph-default": 0.3357808999999179,
+          "epigraph-fixed": 1.0006545000005644,
+          "native": 0.8728971000000456
+        }
+      },
+      {
+        "id": "heldout-0088",
+        "seed": 910104,
+        "reduction": -2.1368326013721606,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.03422430000046006,
+          "daqp-prox-forced": 0.1000144999998156,
+          "epigraph-default": 0.06089799999972456,
+          "epigraph-fixed": 0.12584779999997409,
+          "native": 0.10735590000058437,
+          "row-split-default": 0.17655420000028244,
+          "row-split-fixed": 0.12877530000059778
+        }
+      },
+      {
+        "id": "heldout-0089",
+        "seed": 910104,
+        "reduction": -0.7782268913790642,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.03344860000015615,
+          "daqp-prox-auto": 0.03460720000020956,
+          "daqp-prox-forced": 0.07603130000006786,
+          "epigraph-default": 0.04585359999964567,
+          "epigraph-fixed": 0.06355299999995623,
+          "native": 0.059479199999259436
+        }
+      },
+      {
+        "id": "heldout-0090",
+        "seed": 910104,
+        "reduction": -2.2158425937676665,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.034519599999839556,
+          "daqp-prox-forced": 0.056453700000020035,
+          "epigraph-default": 0.06285840000055032,
+          "epigraph-fixed": 0.11415410000063275,
+          "native": 0.11100959999930637,
+          "row-split-default": 0.10257259999980306,
+          "row-split-fixed": 0.14175280000017665
+        }
+      },
+      {
+        "id": "heldout-0091",
+        "seed": 910104,
+        "reduction": -0.8569797264760397,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.03275199999916367,
+          "daqp-prox-forced": 0.05746569999973872,
+          "epigraph-default": 0.050055699999575154,
+          "epigraph-fixed": 0.07196839999960503,
+          "native": 0.06081979999999021
+        }
+      },
+      {
+        "id": "heldout-0092",
+        "seed": 910104,
+        "reduction": -1.375048783440393,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.04945329999918613,
+          "daqp-prox-forced": 0.8208030000005238,
+          "epigraph-default": 0.09376960000008694,
+          "epigraph-fixed": 0.1053687000003265,
+          "native": 0.1174540000001798,
+          "row-split-default": 0.11607569999978296,
+          "row-split-fixed": 0.13583349999953498
+        }
+      },
+      {
+        "id": "heldout-0093",
+        "seed": 910104,
+        "reduction": -3.382344215447536,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.09083600000030856,
+          "daqp-prox-auto": 0.08089700000073208,
+          "daqp-prox-forced": 1.1998383999998623,
+          "epigraph-default": 0.13670820000061212,
+          "epigraph-fixed": 0.27808079999977053,
+          "native": 0.3545185000002675
+        }
+      },
+      {
+        "id": "heldout-0094",
+        "seed": 910104,
+        "reduction": -1.1089017933152463,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.257706500000495,
+          "daqp-prox-forced": 2.841309000000365,
+          "epigraph-default": 0.4896893999994063,
+          "epigraph-fixed": 0.31725969999934023,
+          "native": 0.5434777000000395,
+          "row-split-default": 0.26170580000052723,
+          "row-split-fixed": 0.27769290000014735
+        }
+      },
+      {
+        "id": "heldout-0095",
+        "seed": 910104,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "native: unsuccessful registered observation",
+          "native: no accepted complete batch"
+        ],
+        "median_seconds": {
+          "daqp-prox-auto": 0.18885479999971722,
+          "daqp-prox-forced": 7.555618599999434,
+          "epigraph-default": 0.5274963000001662,
+          "epigraph-fixed": 6.616022799999882
+        }
+      },
+      {
+        "id": "heldout-0096",
+        "seed": 910105,
+        "reduction": -2.024506356621755,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.17703570000048785,
+          "daqp-prox-forced": 0.9946111999997811,
+          "epigraph-default": 2.498565799998687,
+          "epigraph-fixed": 0.374432099999467,
+          "native": 0.5354456000004575,
+          "row-split-default": 2.0633625999998912,
+          "row-split-fixed": 0.413757500000429
+        }
+      },
+      {
+        "id": "heldout-0097",
+        "seed": 910105,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "daqp-prox-forced: unsuccessful registered observation"
+        ],
+        "median_seconds": {
+          "daqp-direct": 1.1564526000001933,
+          "daqp-prox-auto": 0.47460359999968205,
+          "epigraph-default": 0.5792148999989877,
+          "epigraph-fixed": 0.6354382999998052,
+          "native": 0.6164109999990615
+        }
+      },
+      {
+        "id": "heldout-0098",
+        "seed": 910105,
+        "reduction": -0.5083662421026798,
+        "fastest_baseline": "epigraph-default",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.24461690000134695,
+          "daqp-prox-forced": 0.5792662000003475,
+          "epigraph-default": 0.20837910000045667,
+          "epigraph-fixed": 0.26636019999932614,
+          "native": 0.31431200000042736,
+          "row-split-default": 0.24122329999954673,
+          "row-split-fixed": 0.40138520000073186
+        }
+      },
+      {
+        "id": "heldout-0099",
+        "seed": 910105,
+        "reduction": -1.2518693579506706,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.09600890000001527,
+          "daqp-prox-forced": 0.29323010000007343,
+          "epigraph-default": 0.14726789999986067,
+          "epigraph-fixed": 0.1387513999998191,
+          "native": 0.21619950000058452
+        }
+      },
+      {
+        "id": "heldout-0100",
+        "seed": 910105,
+        "reduction": -4.948364392684824,
+        "fastest_baseline": "row-split-default",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.21143800000027113,
+          "daqp-prox-forced": 0.22303759999886097,
+          "epigraph-default": 0.39086309999947844,
+          "epigraph-fixed": 1.365503200000603,
+          "native": 0.6240553999996337,
+          "row-split-default": 0.10491209999963758,
+          "row-split-fixed": 0.9373035000007803
+        }
+      },
+      {
+        "id": "heldout-0101",
+        "seed": 910105,
+        "reduction": -4.089934498641338,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.1803313000000344,
+          "daqp-prox-auto": 0.1335849999995844,
+          "daqp-prox-forced": 0.1766855999994732,
+          "epigraph-default": 0.292578800001138,
+          "epigraph-fixed": 1.5759775999995327,
+          "native": 0.6799388999988878
+        }
+      },
+      {
+        "id": "heldout-0102",
+        "seed": 910105,
+        "reduction": -4.932053909602973,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1270051000010426,
+          "daqp-prox-forced": 0.21363759999985632,
+          "epigraph-default": 0.47538929999973334,
+          "epigraph-fixed": 0.5916039000003366,
+          "native": 0.7534011000007013,
+          "row-split-default": 0.6961664999998902,
+          "row-split-fixed": 0.6237954000007448
+        }
+      },
+      {
+        "id": "heldout-0103",
+        "seed": 910105,
+        "reduction": -2.0868338095189123,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.14757039999858534,
+          "daqp-prox-forced": 0.2937098000002152,
+          "epigraph-default": 0.22489169999971637,
+          "epigraph-fixed": 0.4356579999985115,
+          "native": 0.4555252999998629
+        }
+      },
+      {
+        "id": "heldout-0104",
+        "seed": 910105,
+        "reduction": -1.5816344848374753,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.31473770000047807,
+          "daqp-prox-forced": 1.849251200001163,
+          "epigraph-default": 0.7151699000005465,
+          "epigraph-fixed": 0.8289041999996698,
+          "native": 0.8125376999996661,
+          "row-split-default": 0.6118265000004612,
+          "row-split-fixed": 0.9006246000008105
+        }
+      },
+      {
+        "id": "heldout-0105",
+        "seed": 910105,
+        "reduction": -7.759422204293607,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.28599730000132695,
+          "daqp-prox-auto": 0.2899188999999751,
+          "daqp-prox-forced": 0.3467261999994662,
+          "epigraph-default": 0.6288285999999061,
+          "epigraph-fixed": 2.5665312000000995,
+          "native": 2.505171099999643
+        }
+      },
+      {
+        "id": "heldout-0106",
+        "seed": 910105,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "daqp-prox-auto: unsuccessful registered observation",
+          "daqp-prox-forced: unsuccessful registered observation",
+          "epigraph-default: unsuccessful registered observation",
+          "epigraph-fixed: unsuccessful registered observation",
+          "native: unsuccessful registered observation",
+          "row-split-default: unsuccessful registered observation",
+          "row-split-fixed: unsuccessful registered observation",
+          "native: no accepted complete batch",
+          "no accepted compatible baseline"
+        ],
+        "median_seconds": {}
+      },
+      {
+        "id": "heldout-0107",
+        "seed": 910105,
+        "reduction": -1.8320016852204324,
+        "fastest_baseline": "epigraph-default",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.5004616999995051,
+          "daqp-prox-forced": 3.627751399999397,
+          "epigraph-default": 0.42866680000042834,
+          "epigraph-fixed": 2.118778399999428,
+          "native": 1.2139850999992632
+        }
+      },
+      {
+        "id": "heldout-0108",
+        "seed": 910105,
+        "reduction": -2.384121006358749,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.33653769999909855,
+          "daqp-prox-forced": 0.5144358999987162,
+          "epigraph-default": 0.9312071000003925,
+          "epigraph-fixed": 2.8240655999998125,
+          "native": 1.1388842999986082,
+          "row-split-default": 0.5762979000010091,
+          "row-split-fixed": 2.615581399999428
+        }
+      },
+      {
+        "id": "heldout-0109",
+        "seed": 910105,
+        "reduction": -3.6158871428364323,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.21528100000068662,
+          "daqp-prox-auto": 0.25417060000108904,
+          "daqp-prox-forced": 0.3588746999994328,
+          "epigraph-default": 0.3574214000000211,
+          "epigraph-fixed": 1.5490322999994532,
+          "native": 0.9937128000001394
+        }
+      },
+      {
+        "id": "heldout-0110",
+        "seed": 910105,
+        "reduction": -1.0,
+        "fastest_baseline": null,
+        "failure_reasons": [
+          "daqp-prox-auto: unsuccessful registered observation",
+          "daqp-prox-forced: unsuccessful registered observation",
+          "epigraph-default: unsuccessful registered observation",
+          "epigraph-fixed: unsuccessful registered observation",
+          "native: unsuccessful registered observation",
+          "row-split-default: unsuccessful registered observation",
+          "row-split-fixed: unsuccessful registered observation",
+          "native: no accepted complete batch",
+          "no accepted compatible baseline"
+        ],
+        "median_seconds": {}
+      },
+      {
+        "id": "heldout-0111",
+        "seed": 910105,
+        "reduction": -2.5888463986592773,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.2677215999992768,
+          "daqp-prox-forced": 4.32362269999976,
+          "epigraph-default": 0.5589233999999124,
+          "epigraph-fixed": 1.092192399999476,
+          "native": 0.9608117000007041
+        }
+      },
+      {
+        "id": "heldout-0112",
+        "seed": 910105,
+        "reduction": -1.746446595863052,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.0664574000002176,
+          "daqp-prox-forced": 0.22720859999935783,
+          "epigraph-default": 0.10304980000000796,
+          "epigraph-fixed": 0.2264063000002352,
+          "native": 0.18252170000050683,
+          "row-split-default": 0.14205459999902814,
+          "row-split-fixed": 0.22969879999982368
+        }
+      },
+      {
+        "id": "heldout-0113",
+        "seed": 910105,
+        "reduction": -1.5800653997830034,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.04061179999916931,
+          "daqp-prox-auto": 0.043150299999979325,
+          "daqp-prox-forced": 0.1188624999995227,
+          "epigraph-default": 0.053856200000154786,
+          "epigraph-fixed": 0.11878640000031737,
+          "native": 0.10478110000076413
+        }
+      },
+      {
+        "id": "heldout-0114",
+        "seed": 910105,
+        "reduction": -1.575340931827618,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.06340710000040417,
+          "daqp-prox-forced": 0.1955431000005774,
+          "epigraph-default": 0.11490279999998165,
+          "epigraph-fixed": 0.14557020000029297,
+          "native": 0.16329489999952784,
+          "row-split-default": 0.10264959999949497,
+          "row-split-fixed": 0.18784320000122534
+        }
+      },
+      {
+        "id": "heldout-0115",
+        "seed": 910105,
+        "reduction": -1.7594076219757055,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.07678879999912169,
+          "daqp-prox-forced": 0.11467579999953159,
+          "epigraph-default": 0.09249989999989339,
+          "epigraph-fixed": 0.21430580000014743,
+          "native": 0.21189159999994445
+        }
+      },
+      {
+        "id": "heldout-0116",
+        "seed": 910105,
+        "reduction": -5.086476039498961,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.06255489999966812,
+          "daqp-prox-forced": 2.1222899999993388,
+          "epigraph-default": 0.2209999999995489,
+          "epigraph-fixed": 0.22806189999937487,
+          "native": 0.38073890000123356,
+          "row-split-default": 0.30401160000110394,
+          "row-split-fixed": 0.2855714999986958
+        }
+      },
+      {
+        "id": "heldout-0117",
+        "seed": 910105,
+        "reduction": -2.182615073526398,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.050309100000959006,
+          "daqp-prox-auto": 0.10034819999964384,
+          "daqp-prox-forced": 1.274313500000062,
+          "epigraph-default": 0.12361730000156967,
+          "epigraph-fixed": 0.22185089999948104,
+          "native": 0.16011449999859906
+        }
+      },
+      {
+        "id": "heldout-0118",
+        "seed": 910105,
+        "reduction": -1.8787327678390624,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.11970339999970747,
+          "daqp-prox-forced": 0.9837475000003906,
+          "epigraph-default": 0.2933628000009776,
+          "epigraph-fixed": 0.33520359999965876,
+          "native": 0.3445941000009043,
+          "row-split-default": 0.3956940999996732,
+          "row-split-fixed": 0.49728049999976065
+        }
+      },
+      {
+        "id": "heldout-0119",
+        "seed": 910105,
+        "reduction": -17.94742694454458,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.09721709999939776,
+          "daqp-prox-forced": 1.007905299999038,
+          "epigraph-default": 0.5322987999988982,
+          "epigraph-fixed": 2.0144957000011345,
+          "native": 1.842013899999074
+        }
+      },
+      {
+        "id": "heldout-0120",
+        "seed": 910106,
+        "reduction": -0.6326806018459621,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.14657380000062403,
+          "daqp-prox-forced": 0.22075260000019625,
+          "epigraph-default": 0.16121319999911066,
+          "epigraph-fixed": 0.2579662999996799,
+          "native": 0.23930819999986852,
+          "row-split-default": 0.1832340999990265,
+          "row-split-fixed": 0.2674211000012292
+        }
+      },
+      {
+        "id": "heldout-0121",
+        "seed": 910106,
+        "reduction": -0.7111064826017635,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.1388862000003428,
+          "daqp-prox-auto": 0.1387531999989733,
+          "daqp-prox-forced": 0.1719054999994114,
+          "epigraph-default": 0.14323789999980363,
+          "epigraph-fixed": 0.2731878000013239,
+          "native": 0.2374214999999822
+        }
+      },
+      {
+        "id": "heldout-0122",
+        "seed": 910106,
+        "reduction": -0.5450005796914041,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.135412700001325,
+          "daqp-prox-forced": 0.31779679999999644,
+          "epigraph-default": 0.524171999999453,
+          "epigraph-fixed": 0.6116099000009854,
+          "native": 0.20921269999962533,
+          "row-split-default": 0.2609367999993992,
+          "row-split-fixed": 0.28662679999979446
+        }
+      },
+      {
+        "id": "heldout-0123",
+        "seed": 910106,
+        "reduction": -0.40795756226066526,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.12302260000069509,
+          "daqp-prox-forced": 0.325279299999238,
+          "epigraph-default": 0.17843029999858118,
+          "epigraph-fixed": 0.19343160000062198,
+          "native": 0.1732105999999476
+        }
+      },
+      {
+        "id": "heldout-0124",
+        "seed": 910106,
+        "reduction": -0.5270259121692196,
+        "fastest_baseline": "daqp-prox-forced",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.13282040000012785,
+          "daqp-prox-forced": 0.11393879999923229,
+          "epigraph-default": 0.2375859000003402,
+          "epigraph-fixed": 0.30574909999995725,
+          "native": 0.17398750000029395,
+          "row-split-default": 0.18906580000111717,
+          "row-split-fixed": 0.22531049999997776
+        }
+      },
+      {
+        "id": "heldout-0125",
+        "seed": 910106,
+        "reduction": -2.1931381457269694,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.11313560000053258,
+          "daqp-prox-auto": 0.1218248000004678,
+          "daqp-prox-forced": 0.1223563000003196,
+          "epigraph-default": 0.18255730000055337,
+          "epigraph-fixed": 0.4264937000007194,
+          "native": 0.3612576000014087
+        }
+      },
+      {
+        "id": "heldout-0126",
+        "seed": 910106,
+        "reduction": -0.9216070557204288,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.13955209999949147,
+          "daqp-prox-forced": 0.14087739999922633,
+          "epigraph-default": 0.506632399999944,
+          "epigraph-fixed": 0.54408439999861,
+          "native": 0.26816429999962565,
+          "row-split-default": 0.5447956999996677,
+          "row-split-fixed": 0.2638692999989871
+        }
+      },
+      {
+        "id": "heldout-0127",
+        "seed": 910106,
+        "reduction": -2.298930819437124,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.11211390000062238,
+          "daqp-prox-forced": 0.21774240000013378,
+          "epigraph-default": 0.1435025000009773,
+          "epigraph-fixed": 0.2303062000009959,
+          "native": 0.36985599999934493
+        }
+      },
+      {
+        "id": "heldout-0128",
+        "seed": 910106,
+        "reduction": -4.697095387298244,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.2744600000005448,
+          "daqp-prox-forced": 2.8451590000004217,
+          "epigraph-default": 0.8888873000014428,
+          "epigraph-fixed": 1.2633623000001535,
+          "native": 1.56362480000098,
+          "row-split-default": 0.5598509999999806,
+          "row-split-fixed": 1.835456200000408
+        }
+      },
+      {
+        "id": "heldout-0129",
+        "seed": 910106,
+        "reduction": -7.9631246767093895,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.31311079999977665,
+          "daqp-prox-auto": 0.28573580000011134,
+          "daqp-prox-forced": 0.3216303000008338,
+          "epigraph-default": 0.5095686000004207,
+          "epigraph-fixed": 3.0616167999996833,
+          "native": 2.561085600000297
+        }
+      },
+      {
+        "id": "heldout-0130",
+        "seed": 910106,
+        "reduction": -5.678239930444858,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.15996639999866602,
+          "daqp-prox-forced": 3.3180563999994774,
+          "epigraph-default": 0.5965974000009737,
+          "epigraph-fixed": 0.995393299999705,
+          "native": 1.0682940000006056,
+          "row-split-default": 0.5267569000006915,
+          "row-split-fixed": 1.0740671000003204
+        }
+      },
+      {
+        "id": "heldout-0131",
+        "seed": 910106,
+        "reduction": -4.408402991764915,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.2987673999996332,
+          "daqp-prox-forced": 2.9918751000004704,
+          "epigraph-default": 0.34793319999880623,
+          "epigraph-fixed": 1.0776671000003262,
+          "native": 1.6158544999998412
+        }
+      },
+      {
+        "id": "heldout-0132",
+        "seed": 910106,
+        "reduction": -2.774810365247297,
+        "fastest_baseline": "daqp-prox-forced",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.34287620000031893,
+          "daqp-prox-forced": 0.2632297000000108,
+          "epigraph-default": 0.9591877000002569,
+          "epigraph-fixed": 2.519879100000253,
+          "native": 0.993642200000977,
+          "row-split-default": 0.37091440000040166,
+          "row-split-fixed": 2.5382126000004064
+        }
+      },
+      {
+        "id": "heldout-0133",
+        "seed": 910106,
+        "reduction": -2.500120487517593,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.3171388000009756,
+          "daqp-prox-auto": 0.3054258000011032,
+          "daqp-prox-forced": 0.3808372000003146,
+          "epigraph-default": 0.6313612999983889,
+          "epigraph-fixed": 1.8017940999998245,
+          "native": 1.0690271000003122
+        }
+      },
+      {
+        "id": "heldout-0134",
+        "seed": 910106,
+        "reduction": -10.215329627985824,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.3521363999989262,
+          "daqp-prox-forced": 4.624645500000042,
+          "epigraph-default": 3.044857500000944,
+          "epigraph-fixed": 5.101051100000404,
+          "native": 3.9493258000002243,
+          "row-split-default": 2.597137400000065,
+          "row-split-fixed": 4.003557199999705
+        }
+      },
+      {
+        "id": "heldout-0135",
+        "seed": 910106,
+        "reduction": -7.691192159703213,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.3513119999988703,
+          "daqp-prox-forced": 3.0706102999993163,
+          "epigraph-default": 0.7388382999997702,
+          "epigraph-fixed": 2.765298000000257,
+          "native": 3.053320099999837
+        }
+      },
+      {
+        "id": "heldout-0136",
+        "seed": 910106,
+        "reduction": -0.11530497476454338,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.034674999998969724,
+          "daqp-prox-forced": 0.08632130000114557,
+          "epigraph-default": 0.04345070000090345,
+          "epigraph-fixed": 0.05205580000074406,
+          "native": 0.03867319999881147,
+          "row-split-default": 0.057062199999563745,
+          "row-split-fixed": 0.0433619000014005
+        }
+      },
+      {
+        "id": "heldout-0137",
+        "seed": 910106,
+        "reduction": -0.3464058744477052,
+        "fastest_baseline": "daqp-direct",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.05870830000094429,
+          "daqp-prox-auto": 0.07454850000067381,
+          "daqp-prox-forced": 0.1332129000002169,
+          "epigraph-default": 0.10259250000126485,
+          "epigraph-fixed": 0.07834900000125344,
+          "native": 0.07904520000010962
+        }
+      },
+      {
+        "id": "heldout-0138",
+        "seed": 910106,
+        "reduction": -0.9289111503439949,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.05460350000066683,
+          "daqp-prox-forced": 0.15663929999936954,
+          "epigraph-default": 0.12618699999984528,
+          "epigraph-fixed": 0.13307179999901564,
+          "native": 0.10532529999909457,
+          "row-split-default": 0.1301471999995556,
+          "row-split-fixed": 0.08486629999970319
+        }
+      },
+      {
+        "id": "heldout-0139",
+        "seed": 910106,
+        "reduction": -0.08390719458158014,
+        "fastest_baseline": "epigraph-fixed",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1637695999997959,
+          "daqp-prox-forced": 0.18258260000038717,
+          "epigraph-default": 0.08754020000014862,
+          "epigraph-fixed": 0.07182339999963006,
+          "native": 0.07784989999890968
+        }
+      },
+      {
+        "id": "heldout-0140",
+        "seed": 910106,
+        "reduction": -3.0536434833884263,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.1069374999988213,
+          "daqp-prox-forced": 1.594661900000574,
+          "epigraph-default": 0.28676590000031865,
+          "epigraph-fixed": 0.3066318000001047,
+          "native": 0.43348650000007183,
+          "row-split-default": 0.31897919999937585,
+          "row-split-fixed": 0.392123099998571
+        }
+      },
+      {
+        "id": "heldout-0141",
+        "seed": 910106,
+        "reduction": -6.209567886113976,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-direct": 0.12187420000009297,
+          "daqp-prox-auto": 0.10198700000000827,
+          "daqp-prox-forced": 3.4801981000000524,
+          "epigraph-default": 0.66547619999983,
+          "epigraph-fixed": 0.6894878999992216,
+          "native": 0.7352822000011656
+        }
+      },
+      {
+        "id": "heldout-0142",
+        "seed": 910106,
+        "reduction": -2.0380363416889558,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.12397880000025907,
+          "daqp-prox-forced": 1.2221941999996488,
+          "epigraph-default": 0.26426829999945767,
+          "epigraph-fixed": 0.28644230000099924,
+          "native": 0.3766520999997738,
+          "row-split-default": 0.5401070999996591,
+          "row-split-fixed": 0.4127943999992567
+        }
+      },
+      {
+        "id": "heldout-0143",
+        "seed": 910106,
+        "reduction": -6.223491604427321,
+        "fastest_baseline": "daqp-prox-auto",
+        "failure_reasons": [],
+        "median_seconds": {
+          "daqp-prox-auto": 0.054330899998603854,
+          "daqp-prox-forced": 1.215609000000768,
+          "epigraph-default": 0.20534819999920728,
+          "epigraph-fixed": 0.33742350000102306,
+          "native": 0.3924588000008953
+        }
+      }
+    ],
+    "established": false,
+    "failure_rule": "Any missing/failed registered compatible observation assigns reduction -1 for that entire instance; no denominator deletion or favourable baseline selection."
+  },
+  "scope": "Synthetic forecast problems; measured complete operations on one nonreserved host. Statistical outcome is the frozen primary analysis; app release and deployment are separate."
+}

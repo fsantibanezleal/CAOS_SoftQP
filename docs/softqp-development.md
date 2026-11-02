@@ -5,7 +5,7 @@ SoftQP Studio executes optimization with the separately versioned [SoftQP engine
 ```bash
 python -m pip install -r requirements-softqp.txt
 python -m pytest tests/test_softqp_matrix.py tests/test_softqp_contracts.py tests/test_softqp_requests.py -q
-python data-pipeline/run_softqp.py --output ./local-results
+python data-pipeline/run_softqp.py --output "$CAOS_TEMP_ROOT/softqp-development"
 ```
 
 An explicit output directory prevents exploratory runs from replacing committed records. The fifteen-case development matrix executes explicit lifting, published generalized projection, the separable asymmetric extension and DAQP on compatible formulations. All cells retain available, failed or incompatible states. DAQP requires positive definite curvature and positive quadratic soft costs; it inserts no regularizer. Pure L1 edits additionally run a paper-equation FlexQP reconstruction and published ElastiQP 0.2.0; the learned Deep FlexQP policy is not implemented.
@@ -19,7 +19,7 @@ The building model is adapted from OSQPSlack under MIT. Attribution is in `data-
 3. Download the solve request. In a checkout matching the displayed inventory, run:
 
    ```bash
-   python data-pipeline/run_request.py C01-request.json --output local-result.json
+   python data-pipeline/run_request.py "$CAOS_TEMP_ROOT/C01-request.json" --output "$CAOS_TEMP_ROOT/C01-result.json"
    ```
 
 4. Import the local result in the App. It checks the request, unchanged matrices and row policy, schema, original objective, side violations and comparison gaps before displaying it. Restore the original record with its dedicated control.
@@ -47,3 +47,5 @@ python scripts/check_documents.py
 Publication checks raw sizes/digests, schemas, the complete instance/method/repetition matrix and summaries recomputed from the raw JSONL. Missing or duplicate observations fail even with a changed digest. CSV retains readable scalar fields; JSONL is the complete per-trial record. LF serialization preserves digests across Windows and Git.
 
 The six documentation routes and one-case workbench consume those records. A complete experiment does not establish global novelty or accepted release. The approved plan's strict stop/revise gate applies to the failed candidate hypothesis; notebook/report/package preparation and full product QA remain separate work.
+
+The additional directional-group-peak lesson uses pipeline.coupled_lessons.run_comparison, an actual separate external SDK2 worker. Its schema, installed public SDK fingerprints, source/input identities, original-space checks, direct runtime admission and owned process deadlines are documented in docs/design/features/coupled-lessons/design.md. It runs only instructional two-variable comparisons, not either registered timing campaign. The kernel retains its original SDK1 pins.

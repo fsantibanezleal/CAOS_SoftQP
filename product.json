@@ -18,7 +18,8 @@
     "softqp.sessions.DaqpWorkspace",
     "pipeline.optimality.kkt",
     "pipeline.control.predict_states",
-    "pipeline.softqp_campaign.primary_endpoint"
+    "pipeline.softqp_campaign.primary_endpoint",
+    "pipeline.coupled_lessons.run_comparison"
   ],
   "manuscripts": [
     {
@@ -26,7 +27,18 @@
       "concept_doi": "10.5281/zenodo.23851659",
       "title": "Side-Specific Soft Constraints in Quadratic Programming",
       "version": "0.01.001",
-      "covers": []
+      "covers": [
+        "BS-1"
+      ]
+    },
+    {
+      "kind": "manuscript",
+      "concept_doi": "10.5281/zenodo.23875071",
+      "title": "Directional coupled peak penalties with original interval rows",
+      "version": "0.02.001",
+      "covers": [
+        "BS-2"
+      ]
     }
   ],
   "method_packages": [

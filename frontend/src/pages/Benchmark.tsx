@@ -7,6 +7,7 @@ import { useScientificRecords } from '../lib/useScientificRecords';
 const local={en:'Computed from verified committed scientific records.',es:'Calculado desde registros científicos versionados y verificados.'};
 export function Benchmark(){
   const t=useT();const format=useFormat();const {records,error}=useScientificRecords();const [method,setMethod]=useState('asymmetric');
+  const [matrixCase,setMatrixCase]=useState('C01');
   const cells=records?.flatMap(doc=>doc.runs.map(run=>({doc,run})))??[];
   const fmt=(value:number|null|undefined)=>format(value,{digits:5});
   const good=cells.filter(c=>c.run.state==='available');
@@ -16,7 +17,12 @@ export function Benchmark(){
     <MeasuredExperiments />
     <DocSection area="results" title={{en:'Development matrix',es:'Matriz de desarrollo'}} noRefsReason={local}>
       <p>{t(`${records?.length??0} cases; ${good.length} successful compatible cells; ${cells.filter(c=>c.run.state==='incompatible').length} incompatible; ${cells.filter(c=>c.run.state==='failed').length} failed.`,`${records?.length??0} casos; ${good.length} celdas compatibles exitosas; ${cells.filter(c=>c.run.state==='incompatible').length} incompatibles; ${cells.filter(c=>c.run.state==='failed').length} fallidas.`)}</p>
-      <div style={{overflowX:'auto'}}><table className="caos-table"><thead><tr>{[t('Case','Caso'),t('Method','Método'),t('State','Estado'),t('Objective gap','Brecha de objetivo'),t('Hard-row error','Error duro'),t('Variables / rows','Variables / filas')].map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{cells.map(({doc,run})=><tr key={`${doc.case_id}-${run.method}`}><th>{doc.case_id}</th><td>{t(names[run.method].en,names[run.method].es)}</td><td title={run.reason??undefined}>{run.state==='available'?t('Available','Disponible'):run.state==='failed'?t('Failed','Fallido'):t('Incompatible','Incompatible')}</td><td>{fmt(run.result?.metrics?.objective_gap_against_lifted)}</td><td>{fmt(run.result?.metrics?.hard_violation)}</td><td>{run.result?`${run.result.dimensions.variables} / ${run.result.dimensions.rows}`:'-'}</td></tr>)}</tbody></table></div>
+      <label htmlFor="matrix-case">{t('Development case','Caso de desarrollo')}</label>
+      <select id="matrix-case" value={matrixCase} onChange={e=>setMatrixCase(e.target.value)}>
+        {(records??[]).map(doc=><option key={doc.case_id} value={doc.case_id}>{doc.case_id}: {t(doc.title.en,doc.title.es)}</option>)}
+      </select>
+      <p>{t('Select a case to inspect all four recorded method states. The totals above cover the complete matrix.', 'Seleccione un caso para examinar sus cuatro estados de método. Los totales anteriores abarcan la matriz completa.')}</p>
+      <div style={{overflowX:'auto'}}><table className="caos-table" data-development-matrix><thead><tr>{[t('Case','Caso'),t('Method','Método'),t('State','Estado'),t('Objective gap','Brecha de objetivo'),t('Hard-row error','Error duro'),t('Variables / rows','Variables / filas')].map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{cells.filter(({doc})=>doc.case_id===matrixCase).map(({doc,run})=><tr key={`${doc.case_id}-${run.method}`}><th>{doc.case_id}</th><td>{t(names[run.method].en,names[run.method].es)}</td><td title={run.reason??undefined}>{run.state==='available'?t('Available','Disponible'):run.state==='failed'?t('Failed','Fallido'):t('Incompatible','Incompatible')}</td><td>{fmt(run.result?.metrics?.objective_gap_against_lifted)}</td><td>{fmt(run.result?.metrics?.hard_violation)}</td><td>{run.result?`${run.result.dimensions.variables} / ${run.result.dimensions.rows}`:'-'}</td></tr>)}</tbody></table></div>
     </DocSection>
     <DocSection area="comparison" title={{en:'What is a matched comparison?',es:'¿Qué es una comparación equivalente?'}} refs={['gsp','daqp','flex']}>
       <P en="Explicit lifting and the native projections are compared only when their penalties and hard rows are identical. DAQP joins on supported positive definite elastic problems. The inventory's setup and solve times are individual development observations using different solver builds; they do not establish a ranking. A controlled timing run must compare the ordinary lift and projection under the same native backend and retain a separate independent stock-solver oracle."

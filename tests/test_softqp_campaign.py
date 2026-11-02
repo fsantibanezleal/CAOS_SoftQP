@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import time
 import numpy as np
+import pytest
+from historical_profile import require_registered_engine
 from pipeline.softqp_campaign import generated_problem, instances, primary_endpoint, BoundedWorker, run_campaign
 from pipeline.experiment_common import oracle
 
@@ -70,6 +72,7 @@ def test_adversarial_bounded_worker_keeps_invalid_input_as_failure(monkeypatch):
 
 
 def test_export_bytes_are_lf_on_every_platform(monkeypatch, tmp_path):
+    require_registered_engine()
     import pipeline.softqp_campaign as campaign
 
     for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
@@ -81,3 +84,39 @@ def test_export_bytes_are_lf_on_every_platform(monkeypatch, tmp_path):
     assert result["completed_instances"] == 1
     for file in tmp_path.iterdir():
         assert b"\r\n" not in file.read_bytes(), file.name
+
+
+@pytest.mark.parametrize("identity", ["missing", "wrong", "dirty", "unknown-cleanliness"])
+def test_adversarial_registered_paths_refuse_unregistered_source(monkeypatch, tmp_path, identity):
+    import pipeline.softqp_campaign as campaign
+    import pipeline.softqp_stream as stream
+
+    expected = protocol()["engine_source"]
+    observed = dict(engine_revision=expected, engine_source_dirty=False)
+    if identity == "missing":
+        observed["engine_revision"] = None
+    elif identity == "wrong":
+        observed["engine_revision"] = "0" * 40
+    else:
+        observed["engine_source_dirty"] = True if identity == "dirty" else None
+    calls = []
+
+    def forbidden(*args, **kwargs):
+        calls.append(True)
+        raise AssertionError("No generation, oracle, workspace or numerical call before source admission")
+
+    for module in (campaign, stream):
+        monkeypatch.setattr(module, "environment", lambda: dict(observed))
+        monkeypatch.setattr(module, "oracle", forbidden)
+    monkeypatch.setattr(campaign, "instances", forbidden)
+    monkeypatch.setattr(campaign, "generated_problem", forbidden)
+    monkeypatch.setattr(campaign, "BoundedWorker", forbidden)
+    monkeypatch.setattr(stream, "mpc", forbidden)
+    monkeypatch.setattr(stream, "PreparedSolver", forbidden)
+    monkeypatch.setattr(stream, "DaqpWorkspace", forbidden)
+    with pytest.raises(RuntimeError, match="exact clean preregistered"):
+        campaign.run_campaign(tmp_path / identity, ("development",))
+    with pytest.raises(RuntimeError, match="exact clean native source"):
+        stream.run_stream()
+    assert calls == []
+    assert list((tmp_path / identity).iterdir()) == []

@@ -30,14 +30,26 @@ See [the scientific development workflow](docs/softqp-development.md) for the ac
 
 ## Run it
 
+Configure absolute external CAOS_VENVS_ROOT and CAOS_TEMP_ROOT before initialization. Raw data and models, when
+needed, use CAOS_DATA_ROOT and CAOS_MODELS_ROOT. The [local workflow](scripts/local/README.md) documents both shells,
+exact runtime names, readiness exceptions and source-bound promotion.
+
 ```bash
-./scripts/setup.sh                     # the pipeline environment (.venv-pipeline); setup.ps1 on Windows
-./scripts/precompute.sh all --output data/derived # intentional canonical scientific bake
-.venv-pipeline/bin/python -m pytest    # the pipeline tests, sandboxed
-./scripts/setup.sh --notebooks         # the notebook environment (.venv-notebooks); setup.ps1 -Notebooks on Windows
-python scripts/run_notebooks.py --check # set external CAOS_TEMP_ROOT first; local release gate
-cd frontend && npm ci && npm run build && npm test && npm run gate
+bash scripts/local/00_install-prereqs.sh
+bash scripts/local/01_init.sh
+bash scripts/local/03_dev.sh
 ```
+
+PowerShell uses the matching .ps1 entrypoints. Opening complete shipped data does not execute either registered study.
+Explicit `02_generate-data` creates a fresh external authored-case stage; only `--release --from-stage <stage>`
+(or `-Release -FromStage`) promotes its validated compact artifacts. Historical campaign inputs remain byte-bound.
+The current runtime is created at CAOS_VENVS_ROOT/softqp/.venv-local. Optional teaching/API runtimes are separate;
+the three historical scientific/notebook environments are preserved.
+
+The frontend checks run with `cd frontend && npm run build && npm test`. Run the full measured browser gate with
+an explicit external output directory. Teaching instructions and unchanged historical SDK pins are in
+[notebooks](notebooks/README.md); the separately pinned coupled SDK/reproduction instructions are in the
+[coupled study](manuscripts/coupled-peak-study/reproduction.md).
 
 ## Documentation
 
@@ -51,3 +63,13 @@ Licensed under the MIT License (see [LICENSE](LICENSE)). The configured Pages de
 The frozen 456-instance experiment retained 11592 accepted measured observations and 7560 explicit incompatibilities, without numerical failures or accuracy rejection. The primary timing hypothesis did not pass: median relative reduction 0.50%, 95% seed-cluster interval -3.29% to 3.94%, below the registered 10% criterion. This negative result is preserved in the raw evidence and curriculum; it establishes no timing superiority or global algorithmic novelty.
 
 The [technical report](https://doi.org/10.5281/zenodo.23851659) documents the formulation, methods, complete experiment and limits under CC BY 4.0.
+
+The separate 210-instance directional group-peak study retains its negative result: the median paired reduction
+score is -212.449875%, with 95% limits [-225.336618%,-192.873759%] and nine prescribed failed pairs.
+[Its report](https://doi.org/10.5281/zenodo.23875071) and the
+[complete archived evidence](https://doi.org/10.5281/zenodo.23875194) document all outcomes and exact assumptions.
+Both corrected native LaTeX reports are published: [product report 0.01.001](https://doi.org/10.5281/zenodo.23885690)
+and [coupled report 0.02.001](https://doi.org/10.5281/zenodo.23885695). Their [editable sources](manuscripts/README.md),
+compiled PDFs and independent reviews are public. Neither registered improvement criterion is established.
+
+The complete numerical validation uses [explicit test profiles](docs/testing-profiles.md): the ordinary public-wheel regression, exact historical-source positive controls and the separate SDK2 suite. Source identity is never replaced by a matching version label.

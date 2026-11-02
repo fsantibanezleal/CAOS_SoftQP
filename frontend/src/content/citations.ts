@@ -1,6 +1,7 @@
 // Primary sources for the implemented optimization methods and operating models.
 import type { Citation } from '@fasl-work/caos-app-shell';
 export const CITATIONS: Citation[] = [
+  { id: 'coupled-report', label: 'Directional group-peak study', citation: 'F. Santibáñez-Leal. Directional coupled peak penalties with original interval rows. Technical report, 2026. Not peer reviewed.', doi: '10.5281/zenodo.23885695' },
   { id: 'osqp', label: 'OSQP', citation: 'Stellato et al. OSQP: an operator splitting solver for quadratic programs. Mathematical Programming Computation, 2020.', url: 'https://osqp.org/docs/solver/' },
   { id: 'gsp', label: { en: 'Schwan, Lew and Plancher 2026', es: 'Schwan, Lew y Plancher 2026' }, citation: 'Efficient ADMM for Soft-Constrained Quadratic Programs via Generalized Slack Projections, 2026.', doi: '10.48550/arXiv.2610.35631' },
   { id: 'quadratic', label: 'Lew et al. 2025', citation: 'Solving Quadratic Programs with Slack Variables via ADMM without Increasing the Problem Size.', doi: '10.48550/arXiv.2511.08451' },

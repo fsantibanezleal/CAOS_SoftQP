@@ -554,27 +554,32 @@ def test_adversarial_locked_node_engines(workflow, tmp_path, monkeypatch, capsys
         workflow.compatible_node(tmp_path, (24, 14, 1))
 
 
-def test_adversarial_real_template_generation_admission(workflow, tmp_path, monkeypatch):
+def test_adversarial_real_product_generation_admission(workflow):
+    if (ROOT / ".template-source").is_file():
+        pytest.skip("The template example has a separate actual five-case generation control")
     config = workflow.settings(ROOT)
-    if not (ROOT / ".template-source").is_file():
-        # Product admission uses its own catalog and declared offline capabilities.
-        ready = json.loads((ROOT / "data/derived/readiness.json").read_text())
-        workflow.check_readiness_inventory(ROOT, config, ready)
-        workflow.check_readiness_states(ROOT, config, ready, ROOT)
+    ready = json.loads((ROOT / "data/derived/readiness.json").read_text(encoding="utf-8"))
+    workflow.check_readiness_inventory(ROOT, config, ready)
+    workflow.check_readiness_states(ROOT, config, ready, ROOT)
+    available = next(row["id"] for row in ready["contracts"] if row["state"] == "available")
+    for state in ("missing", None, "dormant", "partial"):
         bad = json.loads(json.dumps(ready))
-        bad["contracts"][0]["state"] = "missing"
+        next(row for row in bad["contracts"] if row["id"] == available)["state"] = state
         with pytest.raises(workflow.Failure, match="Partial readiness"):
             workflow.check_readiness_states(ROOT, config, bad, ROOT)
-        for state in (None, "dormant", "partial"):
-            bad["contracts"][0]["state"] = state
-            with pytest.raises(workflow.Failure, match="Partial readiness"):
-                workflow.check_readiness_states(ROOT, config, bad, ROOT)
-        declared = config.get("readiness_exceptions", {})
-        assert all(any(row["id"] == name and row["state"] == state for row in ready["contracts"])
-                   for name, state in declared.items())
-        assert all((ROOT / name).is_file() for name in config.get("stage_inputs", []))
-        return
+    declared = config.get("readiness_exceptions", {})
+    assert all(any(row["id"] == name and row["state"] == state for row in ready["contracts"])
+               for name, state in declared.items())
+    assert all((ROOT / name).is_file() for name in config.get("stage_inputs", []))
 
+
+TEMPLATE_ONLY = pytest.mark.skipif(not (ROOT / ".template-source").is_file(),
+                                   reason="This integration control requires the template's actual five-case sources")
+
+
+@TEMPLATE_ONLY
+def test_adversarial_real_template_generation_admission(workflow, tmp_path, monkeypatch):
+    config = workflow.settings(ROOT)
     python = workflow.venv_python(ROOT, config["primary_environment"])
     root = tmp_path / "real template sources with spaces"
     # Production sources and authored inputs, unchanged; no fixture producer/validator substitutes.

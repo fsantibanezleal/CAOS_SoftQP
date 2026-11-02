@@ -145,7 +145,7 @@ def test_adversarial_check_readiness_reports_an_unknown_status(repo):
 
 
 @pytest.mark.parametrize("rid", [
-    "softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign",
+    "softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign", "softqp-coupled-lesson",
 ])
 def test_adversarial_coupled_examples_do_not_establish_deployed_evidence(tmp_path, rid):
     """An implemented offline exchange is not a deployed research-data source."""
@@ -163,7 +163,7 @@ def test_adversarial_undeclared_coupled_payload_cannot_become_available(tmp_path
     target.mkdir()
     (target / "campaign.json").write_text(payload, encoding="utf-8")
     document = readiness.compute(repo_root=ROOT, derived_root=tmp_path)
-    for rid in ("softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign"):
+    for rid in ("softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign", "softqp-coupled-lesson"):
         assert row(document, rid)["state"] == "missing"
 
 
@@ -172,7 +172,7 @@ def test_adversarial_fixture_coupled_rows_remain_labelled_providers(tmp_path):
         repo_root=ROOT, derived_root=tmp_path,
         catalog_path=ROOT / "docs/contracts/fixtures/catalog.md",
     )
-    for rid in ("softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign"):
+    for rid in ("softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign", "softqp-coupled-lesson"):
         entry = row(document, rid)
         assert entry["state"] == "provider"
         assert entry["provenance"] == "fixture"

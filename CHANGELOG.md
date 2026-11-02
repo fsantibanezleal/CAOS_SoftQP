@@ -10,6 +10,8 @@ tagged.
 - Refuse invented coupled replay readiness; formalize the complete registered study contracts and adversarial registration/resource checks.
 - Replace the rejected Python PDF generator with native LaTeX report sources, strict compilation and independent all-page review. Preserve both negative scientific results.
 - Adopt the current shared workflow and strengthen checksummed local artifact admission. This development patch is not a qualified scientific release.
+- Adopt released template 0.14.004 and shell 0.19.12; correct method controls, benchmark case inspection and bilingual directional-method documentation.
+- Add two advanced mirrored lessons using the actual isolated public SDK2, physical-unit/constant gates, complete manuscript coverage and explicit offline readiness. No registered numerical observations are regenerated.
 
 ## [0.01.000], 2026-10-31
 

@@ -66,6 +66,8 @@ jobs:
         run: |
           pip install packaging==26.3
           python scripts/check_coupled_requirements.py
+      - name: Owned numerical float constants declare their quantity and unit (static AST only)
+        run: python scripts/check_unit_constants.py
       - name: Contract versions follow their schemas, each with its History entry, against the base (spec area)
         env:
           BEFORE: ${{ github.event.before }}

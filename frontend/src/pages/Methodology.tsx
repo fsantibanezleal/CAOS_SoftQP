@@ -24,5 +24,6 @@ export function Methodology() {
     {id:'formulation',label:t('Formulations','Formulaciones'),tabs:topics.filter(m=>['lifting','separable','grouped','huber'].includes(m.id))},
     {id:'elastic',label:t('Side-specific elastic costs','Costos elásticos por lado'),tabs:topics.filter(m=>['asymmetric','daqp'].includes(m.id))},
     {id:'l1',label:t('L1 references','Referencias L1'),tabs:topics.filter(m=>['flex','elasti'].includes(m.id))},
+    {id:'groups',label:t('Directional group costs','Costos direccionales por grupo'),tabs:topics.filter(m=>m.id==='directional')},
   ]} /></DocPage>;
 }

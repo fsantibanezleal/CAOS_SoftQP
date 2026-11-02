@@ -536,5 +536,84 @@
       "flex",
       "daqp"
     ]
+  },
+  {
+    "id": "directional",
+    "title": {
+      "en": "Directional group peaks",
+      "es": "Máximos direccionales por grupo"
+    },
+    "paragraphs": [
+      {
+        "en": "A directional group peak prices the largest weighted departure among selected interval rows. Positive and negative residuals may have different scales, while disjoint groups represent separate operating consequences. The original interval residual is formed before applying the group price. Rows outside the declared soft groups retain their hard feasible set. This mathematical object differs from summing independent row penalties: lowering one departure can leave the group cost unchanged while another row still determines the maximum.",
+        "es": "Un máximo direccional por grupo asigna un costo al mayor incumplimiento ponderado entre filas seleccionadas. Los residuos positivos y negativos pueden tener escalas distintas, mientras los grupos disjuntos representan consecuencias operativas diferentes. Primero se calcula el residuo del intervalo original y después se aplica el costo del grupo. Las filas fuera de los grupos blandos conservan su conjunto factible duro. La función difiere de sumar penalizaciones independientes: reducir un incumplimiento puede dejar el costo intacto si otra fila todavía determina el máximo."
+      },
+      {
+        "en": "The public SoftQP 0.2.0 implementation evaluates this objective without inserting directional duplicate rows into the principal interval system. Its proximal argument requires coordinate-contraction monotonicity, a nonempty box and a fixed positive diagonal metric. A sorted scalar threshold identifies active weighted departures within each group. Exact compact epigraphs and directional row splitting express the same objective through different numerical systems. Directional expressibility, weighted sorting and relaxed splitting have prior art; their presence is not an algorithmic-priority claim.",
+        "es": "La implementación pública SoftQP 0.2.0 evalúa esta función sin agregar filas direccionales duplicadas al sistema principal de intervalos. El argumento proximal exige monotonía bajo contracciones coordenadas, una caja no vacía y una métrica diagonal positiva fija. Un umbral escalar ordenado identifica los incumplimientos ponderados activos de cada grupo. Los epígrafos compactos exactos y la separación direccional expresan el mismo objetivo con otros sistemas numéricos. La representación direccional, el ordenamiento ponderado y la separación relajada tienen antecedentes; utilizarlos no establece prioridad algorítmica."
+      },
+      {
+        "en": "A separate registered study compares nine method profiles over complete 32-forecast operations. Its inventory retains 210 synthetic instances and all 7770 observations across development, heldout and robustness splits. The primary comparison uses all 144 heldout instances in six seed clusters. Its median paired reduction score is -212.449875%, with 95% limits -225.336618% and -192.873759%; nine failed pairs retain their prescribed scores. The registered ten-percent improvement is not established. This mixed failure/time score must not be converted into a uniform slowdown multiplier.",
+        "es": "Un estudio registrado independiente compara nueve perfiles mediante operaciones completas de 32 pronósticos. Conserva 210 instancias sintéticas y las 7770 observaciones de desarrollo, evaluación reservada y robustez. La comparación principal utiliza las 144 instancias reservadas en seis grupos de semillas. La mediana del puntaje pareado es -212,449875%, con límites del 95% de -225,336618% y -192,873759%; nueve pares fallidos mantienen el puntaje prescrito. No se establece la mejora registrada del diez por ciento. El puntaje combina fallas y tiempos; no debe transformarse en un multiplicador uniforme de ralentización."
+      },
+      {
+        "en": "The coupled implementation is an offline research lane consumed through its separately pinned SDK and reproducible archive. The current browser workbench retains the historical SoftQP 0.1.0 replay and bounded local-edit contract; it does not execute this coupled method in the browser or import arbitrary coupled campaign JSON. The detailed derivation, assumptions, exact comparator constructions, full failure population and reproduction instructions are in the linked report. Neither the package publication nor the negative computation qualifies an improved scientific contribution or an operational controller.",
+        "es": "La implementación acoplada es un carril de investigación fuera del navegador que utiliza un SDK fijado por separado y un archivo reproducible. El banco de trabajo actual conserva la reproducción histórica SoftQP 0.1.0 y su contrato de edición local acotada; no ejecuta este método acoplado en el navegador ni importa campañas JSON arbitrarias. El informe enlazado contiene la derivación, los supuestos, la construcción exacta de los comparadores, todas las fallas y las instrucciones de reproducción. Publicar el paquete o completar el cálculo negativo no califica una contribución mejorada ni un controlador operativo."
+      }
+    ],
+    "equations": [
+      {
+        "tex": "r=Ax-\\Pi_{[l,u]}(Ax),\\quad t_g=\\max_{i\\in g}\\{s_i^+\\max(r_i,0),s_i^-\\max(-r_i,0)\\}",
+        "caption": {
+          "en": "Original interval residual and directional group peak; scales convert each row departure into the group quantity.",
+          "es": "Residuo del intervalo original y máximo direccional; las escalas convierten cada incumplimiento a la magnitud del grupo."
+        }
+      },
+      {
+        "tex": "\\Psi(r)=\\sum_g\\left(a_g t_g+\\tfrac12 b_g t_g^2\\right),\\qquad a_g,b_g\\ge0",
+        "caption": {
+          "en": "Convex linear-quadratic prices for disjoint group peaks.",
+          "es": "Costos convexos lineales y cuadráticos para máximos de grupos disjuntos."
+        }
+      },
+      {
+        "tex": "\\operatorname{prox}_{g_C}^{H}(v)=\\Pi_C(v)+\\operatorname{prox}_{\\Psi}^{H}(v-\\Pi_C(v)),\\quad g_C(z)=\\inf_{s\\in C}\\Psi(z-s)",
+        "caption": {
+          "en": "Fixed diagonal-metric identity for a nonempty soft-block interval box C under contraction monotonicity; hard rows are imposed separately.",
+          "es": "Identidad con métrica diagonal fija para la caja no vacía C de intervalos blandos bajo monotonía por contracción; las filas duras se imponen por separado."
+        }
+      }
+    ],
+    "stages": [
+      {
+        "en": "Authored forecasts",
+        "es": "Pronósticos propios"
+      },
+      {
+        "en": "Equivalent objectives",
+        "es": "Objetivos equivalentes"
+      },
+      {
+        "en": "Native or lifted solve",
+        "es": "Resolución nativa o ampliada"
+      },
+      {
+        "en": "Original-space checks",
+        "es": "Verificación original"
+      },
+      {
+        "en": "Complete negative evidence",
+        "es": "Evidencia íntegra"
+      }
+    ],
+    "scope": {
+      "en": "Offline SDK 0.2.0 research only. Disjoint groups, fixed positive diagonal metric and convex prices; no browser coupled execution, algorithmic-priority or timing-superiority claim.",
+      "es": "Solo investigación fuera del navegador con SDK 0.2.0. Grupos disjuntos, métrica diagonal positiva fija y costos convexos; sin ejecución acoplada en el navegador ni afirmaciones de prioridad o superioridad temporal."
+    },
+    "refs": [
+      "coupled-report",
+      "gsp",
+      "osqp"
+    ]
   }
 ]

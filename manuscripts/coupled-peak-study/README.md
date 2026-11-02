@@ -39,8 +39,8 @@ See [package and data requirements](reproduction.md). No operational or private
 external dataset is needed. Full journals, CSV and canonical inputs are in the
 separate [evidence dataset](https://doi.org/10.5281/zenodo.23875194).
 
-The report's [concept](https://doi.org/10.5281/zenodo.23875071) currently includes
-[version 0.02.000](https://doi.org/10.5281/zenodo.23875072), whose PDF build is being
-superseded by native LaTeX typesetting. The corrected source is in preparation;
-no newer public version is implied by a local build. Manuscript publications
-contain one PDF; supporting data and source archives remain separate.
+The corrected native LaTeX report is [version 0.02.001](https://doi.org/10.5281/zenodo.23885695),
+under the existing [concept](https://doi.org/10.5281/zenodo.23875071). The exact 548062-byte PDF passed
+all 39 publication checks and independent verification of every page, full public bytes, metadata and one-PDF inventory.
+The original version 0.02.000 remains immutable. Publication and code availability do not establish timing superiority,
+algorithmic priority or qualified companion-product acceptance.

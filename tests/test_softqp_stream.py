@@ -5,10 +5,12 @@ from pathlib import Path
 import numpy as np
 import pytest
 from pipeline.softqp_stream import run_stream
+from historical_profile import require_registered_engine
 
 
 @pytest.fixture(scope="module")
 def stream():
+    require_registered_engine()
     return run_stream()
 
 

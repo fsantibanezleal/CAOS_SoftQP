@@ -1,6 +1,6 @@
 # Worked optimization lessons
 
-The [English](en/README.md) and [Spanish](es/README.md) trees contain four mirrored lessons on the product's authored inputs. They progress through scalar prices, hard actuator policy, published numerical methods and the registered computational hypothesis. Every lesson calls the actual methods rather than substituting a baked-result inspection for optimization.
+The [English](en/README.md) and [Spanish](es/README.md) trees contain five mirrored lessons on the product's authored inputs. They progress through scalar prices, hard actuator policy, published numerical methods and the registered computational hypothesis. Every lesson calls the actual methods rather than substituting a baked-result inspection for optimization.
 
 ## Environment and execution
 
@@ -22,3 +22,5 @@ The final lesson requires the complete canonical experimental export and recompu
 The [notebook guide](../docs/guides/08_notebooks.md) sets the worked-lesson bar and requires review by someone other than the author before release. Static floors and fresh execution are necessary evidence, not independent editorial or scientific review. The source report, package publication and product release have their own acceptance gates.
 
 All eight lessons passed [independent curriculum review](../docs/notebook-review.md) after correcting control-interval timing in two figures and Spanish method display names. That review does not establish the rejected timing hypothesis or qualified product-release acceptance.
+
+The fifth lesson teaches directional shared peaks and reciprocal physical row scaling through actual public SDK0.2 methods. Keep the notebook kernel pins unchanged. Install docs/teaching/coupled/requirements.txt into a separate external CPython3.12 environment created from a direct native executable; set SOFTQP_COUPLED_PYTHON to its absolute interpreter and CAOS_TEMP_ROOT to an existing external scratch directory. Windows Store broker bases are refused before execution. The lesson bridge uses isolated startup without site hooks, verifies installed SDK/source identities and retains unsupported quadratic row-split states. It inspects the exact accepted summary while explicitly distinguishing this from raw-trial bootstrap reanalysis. Independent acceptance of these two new lessons is recorded separately from the historical eight.

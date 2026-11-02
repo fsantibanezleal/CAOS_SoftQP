@@ -23,6 +23,11 @@ Neither registered improvement criterion passed. Formatting changes and a develo
 
 ## Publication state
 
-The local corrected PDFs carry reserved version DOIs 23885690 (product 0.01.001) and 23885695 (coupled 0.02.001).
-Their source-bound final reviews are separate from actual Zenodo publication and anonymous byte verification.
-The prior published versions 23851660 and 23875072 remain immutable; a local PDF alone does not supersede them publicly.
+The corrected reports are published as [product report 0.01.001](https://doi.org/10.5281/zenodo.23885690)
+and [coupled report 0.02.001](https://doi.org/10.5281/zenodo.23885695). Both passed all 39 governed publication checks,
+including fresh anonymous complete PDF download verification. Independent review additionally checked all 36 pages,
+metadata, complete one-PDF inventories, latest/concept identity and all 22 public source/figure inputs.
+The linked dataset preserves its original files and now reciprocally links both corrected reports.
+
+Historical versions 23851660 and 23875072 remain immutable. Publication of these negative-result reports does not
+establish algorithmic novelty, timing superiority or qualified product-release acceptance.

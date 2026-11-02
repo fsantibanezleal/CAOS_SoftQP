@@ -76,7 +76,8 @@ def compute(*, repo_root, derived_root, models_dir=None, catalog_path=None, vers
                 provenance=None,
             )
         elif rid in (
-            "softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign"
+            "softqp-coupled-batch", "softqp-coupled-observation", "softqp-coupled-campaign",
+            "softqp-coupled-lesson",
         ):
             state(
                 "missing",

@@ -51,8 +51,8 @@ try {
   execFileSync(python, ['data-pipeline/run_request.py', l1RequestPath, '--output', l1ResultPath], { cwd: join(root, '..'), stdio: 'pipe' });
   await page.getByLabel('Import native result', { exact: true }).setInputFiles(l1ResultPath);
   await page.getByText('Imported native result verified.', { exact: true }).waitFor();
-  await page.getByRole('radio', { name: 'FlexQP reconstruction', exact: true }).click();
-  await page.getByRole('radio', { name: 'ElastiQP', exact: true }).click();
+  await page.getByLabel('Method', { exact: true }).selectOption('flex');
+  await page.getByLabel('Method', { exact: true }).selectOption('elastiqp');
   const l1Record = JSON.parse(readFileSync(l1ResultPath, 'utf8'));
   if (l1Record.result.runs.length !== 6 || l1Record.result.runs.filter(r => ['flex', 'elastiqp'].includes(r.method)).some(r => r.state !== 'available')) throw new Error('L1 references did not execute');
   await page.getByRole('button', { name: 'Restore recorded result', exact: true }).click();
@@ -62,21 +62,21 @@ try {
   if (chartHeight < 300) throw new Error('Comparison plot collapsed');
   if (out) await page.screenshot({ path: join(out, 'workbench-comparison.png'), fullPage: true });
   await page.getByRole('combobox', { name: 'Case selector', exact: true }).selectOption('C12');
-  await page.getByRole('radio', { name: 'Asymmetric projection', exact: true }).click();
+  await page.getByLabel('Method', { exact: true }).selectOption('asymmetric');
   await page.getByRole('tab', { name: 'C12 stream', exact: true }).click();
   const streamPlot = page.locator('[data-plot="C12 cold and warm stream"]');
   await streamPlot.locator('canvas').first().waitFor();
   if (await streamPlot.locator('canvas').first().evaluate(el => el.getBoundingClientRect().height) < 300) throw new Error('Stream plot collapsed');
   if (out) await page.screenshot({ path: join(out, 'workbench-stream.png'), fullPage: true });
-  await page.getByRole('radio', { name: 'Generalized projection', exact: true }).click();
+  await page.getByLabel('Method', { exact: true }).selectOption('generalized');
   await streamPlot.getByText(/The recorded stream requires unedited C12/).waitFor();
   if (await streamPlot.locator('canvas').count()) throw new Error('Incompatible stream retained a numeric plot');
   await page.getByRole('tab', { name: 'Violations', exact: true }).click();
   if (out) await page.screenshot({ path: join(out, 'workbench-desktop.png'), fullPage: true });
   await page.getByRole('combobox', { name: 'Case selector', exact: true }).selectOption('C03');
-  await page.getByRole('radio', { name: 'Generalized projection', exact: true }).click();
+  await page.getByLabel('Method', { exact: true }).selectOption('generalized');
   await page.getByText('The case is outside this method’s supported assumptions.', { exact: true }).waitFor();
-  await page.getByRole('radio', { name: 'Asymmetric projection', exact: true }).click();
+  await page.getByLabel('Method', { exact: true }).selectOption('asymmetric');
   await page.getByRole('combobox', { name: 'Case selector', exact: true }).selectOption('C14');
   await page.getByLabel('Row unit', { exact: true }).selectOption('kWh');
   await page.getByRole('button', { name: 'Open this case in focus mode', exact: true }).click();
@@ -90,6 +90,13 @@ try {
   await page.goto(new URL('benchmark', server.url).href, { waitUntil: 'networkidle' });
   await page.getByText('The campaign completed 456 of 456 seeded instances.', { exact: false }).waitFor();
   await page.getByRole('cell', { name: 'Not established', exact: true }).waitFor();
+  for (let i = 1; i <= 15; i++) {
+    const id = `C${String(i).padStart(2, '0')}`;
+    await page.getByLabel('Development case', { exact: true }).selectOption(id);
+    const rows = page.locator('[data-development-matrix] tbody tr');
+    if (await rows.count() !== 4) throw new Error(`${id} lost recorded method states`);
+    if ((await rows.locator('th').allTextContents()).some(text => text !== id)) throw new Error('Case filter mixed inputs');
+  }
   await page.getByLabel('Penalty family', { exact: true }).selectOption('asymmetric-l1');
   await page.getByLabel('Row density', { exact: true }).selectOption('0.2');
   await page.getByLabel('Hessian condition', { exact: true }).selectOption('1000');

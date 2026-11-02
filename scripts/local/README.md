@@ -109,7 +109,7 @@ their separate roles. No literal device path belongs in the repository.
 ## External runtimes
 
 Set absolute CAOS_VENVS_ROOT before initialization. The namespace is softqp and the primary declared runtime
-is .venv-local; optional API and teaching runtimes are .venv-api and .venv-lessons. They are created below
+is .venv-local; optional API and kernel runtimes are .venv-api and .venv-lessons. With --notebooks, .venv-coupled-lessons is a separate SDK2 worker environment using docs/teaching/coupled/requirements.txt; it never replaces the SDK1 notebook pins. They are created below
 the external role root, never inside this checkout. The three historical scientific/notebook environments
 are preserved separately and are not overwritten by initialization. Missing, internal, redirected and
 non-directory runtime paths refuse before any installation or .env creation.

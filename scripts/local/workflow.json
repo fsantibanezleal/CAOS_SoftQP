@@ -14,7 +14,8 @@
     "api": "missing",
     "softqp-coupled-batch": "missing",
     "softqp-coupled-observation": "missing",
-    "softqp-coupled-campaign": "missing"
+    "softqp-coupled-campaign": "missing",
+    "softqp-coupled-lesson": "missing"
   },
   "readiness_check": "scripts/check_readiness.py",
   "primary_environment": ".venv-local",
@@ -41,6 +42,13 @@
       "when": "notebooks",
       "requirements": [
         "notebooks/requirements.txt"
+      ]
+    },
+    {
+      "path": ".venv-coupled-lessons",
+      "when": "notebooks",
+      "requirements": [
+        "docs/teaching/coupled/requirements.txt"
       ]
     }
   ],

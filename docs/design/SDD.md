@@ -26,6 +26,8 @@ The sourced bilingual brief and three authored illustrations frame the engineeri
 
 ## Research basis
 
+Directional study primary derivation and complete negative evidence: https://doi.org/10.5281/zenodo.23885695 .
+
 Research is documented in [the source review](../research.md). It reviews classical explicit lifting, OSQP, the 2025 quadratic-slack ADMM result, the 2026 generalized slack projection paper and its OSQPSlack implementation, DAQP, ElastiQP, PIQP, MPC soft constraints, benchmark protocols, and ICLR 2026 FlexQP/Deep FlexQP.
 
 | Design decision | Research finding | Consequence |
@@ -62,7 +64,7 @@ Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distri
 
 ## Technology and versions
 
-This development correction adopts released template 0.14.003 and published shared shell 0.19.12. The local admission/runtime correction is implemented in the shared base first and carried verbatim while its correction release gates complete; this does not assert a released newer base or full foundation acceptance. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. These direct dependencies match the actual requirements and committed npm lock.
+This development correction adopts released template 0.14.004 (main70c30d4, exact-head CI41468221260) and published shared shell0.19.12. The external local workflow and admission correction was implemented and independently validated in the shared base before this adoption; full product foundation acceptance is a separate gate. Python 3.12.10 and Node 24.14.1 were measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. These direct dependencies match the actual requirements and committed npm lock.
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|
@@ -130,6 +132,7 @@ Each promised method is a real executable vertical, not a citation. The final se
 | M-4 | sota | FlexQP exact L1 feasibility restoration | Reconstruct from the paper only if its algorithm, assumptions and test oracle are independently reviewed; report as restoration, not a substitute for arbitrary fixed penalty objectives. | Mathematical implementation review and oracle gate |
 | M-6 | sota | ElastiQP 0.2.0 dual active set | Pure L1 positive-definite side costs and hard equalities match independent lifting; hard inequalities and quadratic costs are refused. | Published adapter parity and original dual recovery tests |
 | BS-1 | beyond | AAGSP side-specific generalized projection | Mathematical review passes; independent lifted oracle agrees on all supported cases; preregistered practitioner outcome improves on compatible matched cases without hard-constraint or accuracy regression. | Proof, novelty, adversarial tests, and held-out benchmark gates |
+| BS-2 | beyond | Directional disjoint group-peak update preserving original interval rows | Fixed positive diagonal metric, alpha in(0,2), convex closed monotone scalar price, positive directional scales, nonempty soft box and an attained saddle point; original-space checks pass. Registered144-instance paired10% criterion is false; no novelty or timing superiority established. | `tests/coupled/test_coupled_correctness.py`, `tests/coupled/test_coupled_export.py`, `tests/test_coupled_lessons.py` |
 
 Deep FlexQP remains a conditional unavailable comparator because trained code/weights/data were unavailable. Its former M-5 row is excluded from the executable ladder, rather than fabricating a learned-policy result. The fixed FlexQP reconstruction does not claim trained-policy reproduction.
 
@@ -257,6 +260,8 @@ No requirement is accepted solely because it renders, builds, or returns HTTP 20
 
 BS-1: AAGSP tests the hypothesis that a side-specific separable elastic penalty update can preserve OSQP's original KKT dimensions while improving setup/solve work against matched explicit lifting in a practitioner-relevant regime. The completed held-out comparison did not establish the registered timing improvement; BS-1 remains an unaccepted research hypothesis. The native implementation must include projection, objective, dual conjugate, scaling and recession behavior. An independent explicit-lift oracle, hard-row residual checks and paired measurements refute or support it. It cannot be described as novel or superior before the evidence and prior-art review justify that claim.
 
+BS-2: The implemented SDK0.2 candidate prices disjoint directional group peaks while retaining original interval rows. The exact same objective already has a compact epigraph representation; linear shared prices also have an exact directional row-split generalized-projection reference. Row preservation is a representation property, not an expressibility or priority claim. Convexity, proximal slack elimination, fixed positive diagonal metric, relaxation alpha in(0,2), positive scales, nonempty closed soft boxes and an attained saddle point are the declared convergence scope. Hard rows remain separate. No variable metric or adaptive-relaxation theorem is asserted. Compatible epigraph stock-OSQP, directional row-split, direct/proximal DAQP variants and their limits are retained in the frozen protocol.
+
 Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
 
 UNVERIFIED: novelty, superiority, qualified product release, deployment and operational value; all require the declared gates. The complete catalog and registered experimental grid are executed and retained.
@@ -276,3 +281,11 @@ The release requirements name published distribution `softqp==0.1.0`. The source
 The prospective coupled study uses a separate profile at `experiments/coupled-v1/requirements.txt`, governed by `docs/design/coupled-experiments-v1.json`. It consumes the public SoftQP 0.2.0 SDK. Product/runtime and reviewed legacy notebook requirements retain 0.1.0; historical executed outputs and the original pinned engine environment are preserved. The global technology table continues to govern the product environment. CI separately verifies every study pin against the protocol through `scripts/check_coupled_requirements.py`, and the study runtime verifies dependency versions plus exact public SDK Python/native identities. The separate environment is a scientific reproducibility boundary, not a second product package. Independent registration gates execution; complete independent artifact review establishes the integrity of the recorded result. Product qualification additionally requires the registered scientific criterion to pass.
 
 The registered revision is complete: 48 development, 144 heldout and 18 robustness instances, retaining all 7770 observations and 210 canonical inputs. Independent replay checks 163390 returned candidate frames without a KKT rejection, while retaining backend iteration limits and supervised timeouts. The heldout paired reduction score is -212.449875%, with 95% seed-cluster interval [-225.336618%,-192.873759%] and nine failed pairs; the 10% criterion is not established. The [standalone coupled-study report](../../manuscripts/coupled-peak-study/README.md) records this negative result separately from the original study and app technical report. Evidence acceptance does not authorize qualified app promotion, deployment or a superiority claim.
+
+## Directional coupled method scope
+
+
+
+The registered primary has144heldoutinstances, sixseedclusters and ninefailedpairs. Its score−212.449874656751%,95%interval[−225.33661821558257%,−192.87375906532098%] fails the10%acceptance criterion. Both BS-1 and BS-2 remain unaccepted improvement hypotheses. The published negative manuscript covers BS-2 without declaring successful novelty, general superiority or a qualified product release. The additional EN/ES worked lesson executes the real public SDK2 through an explicit external process boundary, separated from the SDK1 kernel and frozen campaign. See coupled-lessons requirements and the coupled-study manuscript for derivations and honest evidence.
+
+All 33 CAOS product requirements are traced to implemented specifications, real controls and explicit residuals in [the normative crosswalk](caos-requirements.md). This coverage map does not override either negative scientific outcome.
