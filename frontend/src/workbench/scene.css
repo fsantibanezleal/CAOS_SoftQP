@@ -1,0 +1,49 @@
+.softqp-scene { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; flex: 1 1 auto; height: 100%; min-height: 280px; min-width: 0; overflow: hidden; background: var(--color-bg); border-radius: var(--radius-md); }
+.softqp-scene-svg { display: block; color: var(--color-fg); font: 13px var(--font-sans); font-variant-numeric: tabular-nums; }
+.softqp-scene-svg text { fill: currentColor; }
+.softqp-scene-canvas { width: 100%; height: 100%; position: relative; }
+.softqp-scene-grid { stroke: var(--color-border); stroke-width: 1; }
+.softqp-scene-axis { stroke: var(--color-fg-subtle); stroke-width: 1; }
+.softqp-scene-bound { stroke: var(--color-warn); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.softqp-scene-line { fill: none; stroke: var(--color-accent); stroke-width: 2.5; }
+.softqp-scene-cursor { stroke: var(--color-magenta); stroke-width: 1.5; }
+.softqp-scene-point { fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 2; }
+.softqp-scene-comparator { fill: var(--color-fg-subtle); }
+.softqp-scene-cell { fill: var(--color-surface); stroke: var(--color-border); cursor: pointer; }
+.softqp-scene-cell.present { fill: var(--color-fg-faint); }
+.softqp-scene-cell.selected { fill: var(--color-accent); }
+.softqp-scene-method rect { fill: var(--color-surface); stroke: var(--color-border); }
+.softqp-scene-empty { display: grid; place-content: center; height: 100%; padding: var(--space-4); max-width: 64ch; }
+.softqp-scene-takeaway { margin: 0; padding: var(--space-2); background: var(--color-surface); font-size: var(--text-xs); }
+.softqp-scene-takeaway p { margin: 0; }
+.softqp-scene-event { stroke: var(--color-magenta); stroke-width: 1.5; stroke-dasharray: 2 4; }
+.softqp-scene-endpoint { fill: var(--color-fg); }
+.softqp-scene-heading { font-weight: 600; }
+.softqp-scene-band { fill: var(--color-accent); opacity: .15; }
+.softqp-scene-step { fill: var(--color-surface); stroke: var(--color-border); cursor: pointer; }
+.softqp-scene-step.selected { stroke: var(--color-accent); stroke-width: 2; }
+@media (prefers-reduced-motion: no-preference) { .softqp-scene-svg { animation: softqp-scene-reveal 600ms ease-out; } @keyframes softqp-scene-reveal { from { opacity: .35; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } } }
+
+.softqp-scene-scrub { fill: var(--color-bg); fill-opacity: 0; cursor: crosshair; }
+
+.softqp-scene-hit { fill: var(--color-bg); fill-opacity: 0; cursor: pointer; }
+.softqp-domain-coefficient { fill: var(--color-bg); stroke: var(--color-border); stroke-width: 1; }
+.softqp-domain-coefficient.present { fill: var(--color-surface); stroke: var(--color-fg-subtle); }
+.softqp-domain-row { fill: var(--color-bg); stroke: var(--color-border); cursor: pointer; }
+.softqp-domain-row.selected { fill: var(--color-surface); stroke: var(--color-accent); stroke-width: 2; }
+.softqp-domain-index { fill: var(--color-fg-subtle); }
+.softqp-domain-math { font-size: 14px; }
+.softqp-domain-math [data-matrix] text, .softqp-domain-vector { font-family: monospace; font-size: 14px; }
+.softqp-domain-insufficient { max-height: 100%; overflow: auto; overflow-wrap: anywhere; white-space: normal; font-size: 14px; }
+[data-linked-row]:focus-visible .softqp-domain-row { stroke: var(--color-accent); stroke-width: 2; }
+.softqp-inspection { min-width: 0; font-size: var(--text-sm); }
+.softqp-inspection-source { font-size: var(--text-xs); overflow-wrap: anywhere; }
+.softqp-inspection-choices { display: grid; gap: var(--space-1); min-width: 0; }
+.softqp-inspection-choice { display: grid; gap: 2px; width: 100%; min-width: 0; text-align: left; white-space: normal; overflow-wrap: anywhere; padding: var(--space-1); color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
+.softqp-inspection-choice[data-linked-selected="true"] { border-color: var(--color-accent); outline: 1px solid var(--color-accent); }
+.softqp-inspection-choice:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.softqp-inspection-interval { margin: var(--space-2) 0; min-width: 0; }
+.softqp-inspection-interval svg { display: block; width: 100%; height: 112px; color: var(--color-fg); font: 14px var(--font-sans); font-variant-numeric: tabular-nums; }
+.softqp-inspection-interval text { fill: currentColor; }
+.softqp-inspection-interval figcaption, .softqp-inspection details p { overflow-wrap: anywhere; }
+.softqp-inspection input[type="range"] { width: 100%; }

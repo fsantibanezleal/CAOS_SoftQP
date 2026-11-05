@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useT, P } from '../content/bi';
 import { useExperiments } from '../lib/experiments';
 import { methodNames } from '../lib/methodNames';
+import { RegisteredStudies } from './RegisteredStudies';
 
 const own={en:'Measured from the preregistered paired experiment and retained raw trials.',es:'Medido en el experimento pareado prerregistrado y sus registros conservados.'};
 const names:Record<string,{en:string;es:string}>=methodNames;
@@ -14,28 +15,20 @@ export function MeasuredExperiments(){
   const [variable,setVariable]=useState<'position'|'velocity'|'control'>('position');
   if(error)return <p role="alert">{error}</p>;
   if(!evidence)return <p role="status">{t('Loading verified experimental evidence…','Cargando evidencia experimental verificada…')}</p>;
-  const {campaign,stream,index}=evidence;const endpoint=campaign.primary_endpoint;
+  const {campaign,stream,index}=evidence;
   const split=index.state==='measured'?'heldout':'development';
   const timing=campaign.cells.filter(c=>c.split===split&&c.family===family&&c.density===density&&c.condition===condition);
   const robustness=campaign.cells.filter(c=>c.split==='robustness');
   const ns=[32,64,128,256];const conditions=[1,100,10000,1000000];
   const methods=Object.keys(names).filter(method=>timing.some(c=>c.method===method&&c.median_seconds!==null));
-  const percent=(v:number|null|undefined)=>format(v,{percent:true,decimals:1});
   const failures=Object.entries(campaign.counts).filter(([key])=>!['accepted','incompatible'].includes(key));
   return <>
-    <DocSection area="results" title={{en:'Preregistered computational experiment',es:'Experimento computacional prerregistrado'}} noRefsReason={own}>
+    <DocSection area="results" title={{en:'Two separate registered timing studies',es:'Dos estudios temporales registrados separados'}} noRefsReason={own}><RegisteredStudies campaign={campaign} /></DocSection>
+    <DocSection area="results" title={{en:'Original preregistered computational experiment',es:'Experimento computacional original prerregistrado'}} noRefsReason={own}>
       {source==='fixture'&&<Callout variant="honest" title={t('Provider evidence','Evidencia del proveedor')}>{t('This build reads the isolated development provider, using the same validators and byte checks.','Esta compilación lee el proveedor de desarrollo aislado mediante los mismos validadores y controles de bytes.')}</Callout>}
-      <P en={`The campaign completed ${campaign.completed_instances} of ${campaign.planned_instances} seeded instances. It retains ${campaign.counts.accepted??0} accepted measured observations and ${campaign.counts.incompatible??0} incompatible cells, plus ${failures.reduce((s,[,n])=>s+(n??0),0)} failed, rejected or bounded observations. Warm-up records remain in the raw files and are excluded from the summaries. The timed ordinary lift and projection use the same native fork; the accuracy oracle is independent stock OSQP.`}
-        es={`La campaña completó ${campaign.completed_instances} de ${campaign.planned_instances} instancias con semilla. Conserva ${campaign.counts.accepted??0} observaciones medidas aceptadas y ${campaign.counts.incompatible??0} celdas incompatibles, además de ${failures.reduce((s,[,n])=>s+(n??0),0)} observaciones fallidas, rechazadas o limitadas. Los calentamientos se conservan en los archivos y se excluyen de los resúmenes. Las holguras y la proyección temporizadas usan el mismo fork nativo; el oráculo es OSQP estándar independiente.`}/>
-      <table className="caos-table"><thead><tr><th>{t('Primary endpoint','Resultado principal')}</th><th>{t('Measured outcome','Resultado medido')}</th></tr></thead><tbody>
-        <tr><th>{t('Median relative time reduction','Reducción temporal relativa mediana')}</th><td>{percent(endpoint.median_relative_reduction)}</td></tr>
-        <tr><th>{t('95% seed-cluster interval','Intervalo del 95% por semilla')}</th><td>{endpoint.confidence_interval_95?.map(percent).join(' / ')??'-'}</td></tr>
-        <tr><th>{t('Accepted / rejected pairs','Pares aceptados / rechazados')}</th><td>{endpoint.paired_samples} / {endpoint.rejected_pairs}</td></tr>
-        <tr><th>{t('Preregistered criterion','Criterio prerregistrado')}</th><td>{endpoint.state==='met'?t('Met in this measured regime','Cumplido en este régimen medido'):t('Not established','No establecido')}</td></tr>
-      </tbody></table>
-      <P en="The primary comparison uses asymmetric elastic problems with at least 128 variables and density 0.05, against the faster paired observation from native lifting and DAQP. The registered target is at least 10% median reduction with a seed-cluster confidence interval above zero and no rejected compared pair. A negative reduction means the candidate took longer. This implementation outcome cannot establish algorithmic novelty or universal superiority."
-        es="La comparación principal utiliza problemas elásticos asimétricos con al menos 128 variables y densidad 0,05 frente a la observación pareada más rápida entre holguras nativas y DAQP. El objetivo registrado es una reducción mediana mínima del 10%, intervalo por semilla sobre cero y ningún par comparado rechazado. Una reducción negativa indica mayor tiempo del candidato. Este resultado de implementación no establece novedad algorítmica ni superioridad universal."/>
-      <p>{t(`Observed campaign time ${format(campaign.observed_wall_seconds/60,{decimals:1})} min; maximum worker RSS ${format(campaign.worker_peak_rss_bytes/1024**2,{decimals:1})} MiB; ${campaign.worker_restarts} worker restarts. These are process resource observations, not isolated per-method allocation peaks.`,`Tiempo observado ${format(campaign.observed_wall_seconds/60,{decimals:1})} min; RSS máximo del proceso ${format(campaign.worker_peak_rss_bytes/1024**2,{decimals:1})} MiB; ${campaign.worker_restarts} reinicios. Son observaciones del proceso, no máximos de asignación aislados por método.`)}</p>
+      <P en={`The original campaign completed ${campaign.completed_instances} of ${campaign.planned_instances} seeded instances. It retains ${campaign.counts.accepted??0} accepted measured observations and ${campaign.counts.incompatible??0} incompatible cells, plus ${failures.reduce((s,[,n])=>s+(n??0),0)} failed, rejected or bounded observations. Warm-up records remain in the raw files and are excluded from the summaries. The timed ordinary lift and projection use the same native fork; the accuracy oracle is independent stock OSQP.`}
+        es={`La campaña original completó ${campaign.completed_instances} de ${campaign.planned_instances} instancias con semilla. Conserva ${campaign.counts.accepted??0} observaciones medidas aceptadas y ${campaign.counts.incompatible??0} celdas incompatibles, además de ${failures.reduce((s,[,n])=>s+(n??0),0)} observaciones fallidas, rechazadas o limitadas. Los calentamientos se conservan en los archivos y se excluyen de los resúmenes. Las holguras y la proyección temporizadas usan el mismo fork nativo; el oráculo es OSQP estándar independiente.`}/>
+      <p>{t(`Original campaign time ${format(campaign.observed_wall_seconds/60,{decimals:1})} min; maximum worker RSS ${format(campaign.worker_peak_rss_bytes/1024**2,{decimals:1})} MiB; ${campaign.worker_restarts} worker restarts. These are process resource observations, not isolated per-method allocation peaks.`,`Tiempo de la campaña original ${format(campaign.observed_wall_seconds/60,{decimals:1})} min; RSS máximo del proceso ${format(campaign.worker_peak_rss_bytes/1024**2,{decimals:1})} MiB; ${campaign.worker_restarts} reinicios. Son observaciones del proceso, no máximos de asignación aislados por método.`)}</p>
     </DocSection>
     <DocSection area="comparison" title={{en:'Cold end-to-end cost',es:'Costo total con inicio frío'}} noRefsReason={own}>
       <label htmlFor="timing-family">{t('Penalty family','Familia de penalización')}</label><select id="timing-family" value={family} onChange={e=>setFamily(e.target.value)}><option value="asymmetric-elastic">{t('Asymmetric elastic','Elástica asimétrica')}</option><option value="symmetric-elastic">{t('Symmetric elastic','Elástica simétrica')}</option><option value="asymmetric-l1">{t('Asymmetric L1','L1 asimétrica')}</option></select>

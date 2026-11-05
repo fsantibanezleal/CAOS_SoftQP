@@ -45,5 +45,12 @@
   ],
   "method_packages": [
     "softqp"
-  ]
+  ],
+  "pipeline_stage_sources": {
+    "validate": "data-pipeline/pipeline/io/contract.py",
+    "assemble": "data-pipeline/pipeline/softqp_cases.py",
+    "solve": "data-pipeline/pipeline/softqp_run.py",
+    "evaluate": "data-pipeline/pipeline/optimality.py",
+    "export": "data-pipeline/pipeline/softqp_run.py"
+  }
 }

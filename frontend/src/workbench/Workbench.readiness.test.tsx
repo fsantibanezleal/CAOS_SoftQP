@@ -53,7 +53,8 @@ describe('the actual workbench readiness consumer', () => {
 
   it('adversarial: unreadable readiness keeps the workbench and reports unknown', () => {
     mock.document = null;
-    expect(render()).toContain('id="softqp-method"');
+    expect(render()).toContain('id="softqp-scene-view"');
+    expect(render()).toContain('id="softqp-scene-row"');
     for (const html of [render(), renderBenchmark(), renderExperiments()]) {
       expect(html).toContain('data-readiness="unknown"');
     }
