@@ -1,0 +1,101 @@
+{
+  "artifact_id": "protocol",
+  "content_sha256": "fd1a7f4039371542fcdebf8cc07b767b3da64f864bab7aea5cd11376392acef7",
+  "kind": "learning-protocol",
+  "payload": {
+    "bindings": {
+      "check_plan.py": "8ffe548ef8ed91ef84e069b2878051a43be37e323451c561d5bab19158c1617f",
+      "collect_primary.py": "34f3a500b6aae338ee6d8b324ca3da793289c6572e259981d91680c4485c0bae",
+      "contracts.md": "a37b6d9c4736239644c2023e2cd4cfd2470f3729b8fa1c1a789780d735d32da9",
+      "design.md": "c7b75ba3536fa0ed550c22f9fccd655ff93f857074ea766905a3a454f60a9a6f",
+      "expected-keysets/control-repetitions.jsonl.gz": "d2a06e6084f0daea859bb9235682648790b1317e9a4265f56b99f42069553c21",
+      "expected-keysets/control-status.jsonl.gz": "514bd3ee3af4e541650de80941186d8567e9790bc5f777a1f5cc5d70678c1d46",
+      "expected-keysets/diagnostic-status.jsonl.gz": "a95c3a9cba31cc056464d5034efe8fe911b7e2d804178ff61edb48ad644f56db",
+      "expected-keysets/head-checkpoints.jsonl.gz": "1af258e337ab024169f97b9d8b62dc09ce12aad8e544e8f7a43d62b357206a9a",
+      "expected-keysets/inventory.json": "834706c024b923d3f5eec10faae17a11c1d374a29e06b89d9d619fa47b599890",
+      "expected-keysets/label-status.jsonl.gz": "641251e440e5afbd0e6ce906bf226a74455e258e8b9795c62de1a0d1293071ba",
+      "expected-keysets/method-repetitions.jsonl.gz": "fce2c144e8a5514fe9197e10ec5638241e8418effa12acb4af5c2b33e258e881",
+      "expected-keysets/method-status.jsonl.gz": "078c285cdb561269d9e84f5378c7a571a897362a61faabe01c14ae4baa48ad99",
+      "expected-keysets/oracle-status.jsonl.gz": "3fcc421662157f9044b63a5d7dcc64b2ca1daa608a6658b338d8eb3bd55d0afa",
+      "expected-keysets/source-status.jsonl.gz": "4eeddd4fcb7a4a904d3218c3082084e4ed9e48c728ed6a695939a354f800741f",
+      "expected_inventory.py": "6577f7ddc9ca091c24a7d6d6315556de82f91a03c26573a0707486e2d8fd2c69",
+      "generator-spec.md": "6d7e4d318a9e007f5a61009181af4cab24f24155ad10f77fea77ffd558839269",
+      "inspect_pypi.py": "a6458d4af30e010c07d217a4f9fd5be1d564c98ea2c4747b62ee6469b01a3568",
+      "learning-spec.md": "1dac06d1e1f5da1131fff26f34289d6547f67bba302e041d1368d043030e2b33",
+      "negative-controls.json": "ff8d76294bf64fba6a901133aba0db40dea9d624ef023be60a96704c3ebb6116",
+      "normative-rules.json": "a570f81b04bbcfbfc9ce6491f27562fded099c61df72fbf9efd5bd9fbdea0ed7",
+      "numerical-spec.md": "560c172a7a4e310ac0d9ce09b51f56eb8a7b89f9a1294467fe9600417af78a14",
+      "protocol.md": "4d31955538a11a073b65cee92912368ef729fddcae35fe4238cc8718e2789b55",
+      "recovery-spec.md": "9a10bae06b05372651256eacf6a044d09af89007bf6a689b56725fddfba1deab",
+      "revised_math_probes.py": "032e7f3245c293feb1165154174d88bb4c9d5536bb96a4817791968f160abcc2",
+      "semantic-matrix.json": "8b4c02f8e56fe3b677f9b15fbe4c8be70bcccd87394c0ceee281160ba2bf82f6",
+      "serialization.py": "73fe7b7790de98ca39118c1d6ec2dee86f2018ee8ce4fcac7ef099fa8dd74368",
+      "source-audit.json": "84bb491a2c07fb88e32db5d5252364dcd06fe491b090cab7193f51ce6ce873e2",
+      "source-registry.json": "7e86c0173ea51364252f9651c9feab43e8b9e44032bc17179abb78611e64124d",
+      "timing-spec.md": "85db53972d6d05c49d6001a20a0e9680bd94c6ab6f2b5bcb02f5d3ed13367c67",
+      "validate_sources.py": "237d2d29a86d42f6472cddadfd88dd303d92acd768e1435aca7c40450cec0863",
+      "verify_closure.py": "a0f14290353637640b40d5f50e5f120a8b6ca77297d6eace447ccb636515eef9"
+    },
+    "budgets": {
+      "dataset_checkpoint_bytes": 8589934592,
+      "import_seconds": 180,
+      "inference_rss_bytes": 4294967296,
+      "training_rss_bytes": 8589934592,
+      "trial_seconds": 10,
+      "worker_count": 1
+    },
+    "dependency_lock_sha256": "abde2d7319370f8dd523695ddfecb82ad94cb2d3f5d24b373f712ac65bd89291",
+    "design_manifest_sha256": "e098010809f8b4cbb57f04e70279bf0b3f4aa90994be8a1ae022bbb52a4c7fb0",
+    "generator_sha256": "70aa5cd39e33e5ca41ef215a7c2f8d1f40d39cce6b79aafe649d3f4b925d6112",
+    "methods": [
+      "lifted",
+      "generalized",
+      "daqp",
+      "flex",
+      "elastiqp",
+      "asymmetric",
+      "directional",
+      "clarabel",
+      "proxqp",
+      "piqp",
+      "learned_osqp",
+      "learned_daqp"
+    ],
+    "network_seeds": [
+      41001,
+      41002,
+      41003
+    ],
+    "old_exclusions": [
+      "3a79bc8abf63f70cac054c26bb5ec19bff0321e0047673d7bc3b239d380f00b5",
+      "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+      "c82bf30bb53c7c10d464fc446bd2b99ee774b581dbe3f4dced86194e1fe54c6d"
+    ],
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804",
+    "source_entropy_prefix": [
+      20261105,
+      903
+    ],
+    "split_units": {
+      "calibration": 8,
+      "test": 8,
+      "train": 32,
+      "validation": 8
+    },
+    "status": "accepted-design"
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": null,
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-protocol/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

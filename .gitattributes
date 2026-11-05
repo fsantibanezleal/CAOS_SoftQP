@@ -11,3 +11,6 @@
 /manuscripts/*/references.bib whitespace=-blank-at-eof
 /manuscripts/independent-public-dataset-relations-review.json -text whitespace=cr-at-eol
 /docs/verification/readiness-consumer-acceptance.json -text whitespace=cr-at-eol
+
+# Source-bound contract fixtures include exact registered specifications and numeric bytes.
+/tests/fixtures/learned-contracts/** -text

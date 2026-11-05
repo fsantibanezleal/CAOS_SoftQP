@@ -1,0 +1,2757 @@
+{
+  "$comment": "U1 scientific number fields require finite lossless float64 admission via the lossless-float64 format and strict semantic reader. Integer metadata remains exact JSON integer. No coefficient rounding is authorized.",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-method-result/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "payload": {
+            "additionalProperties": false,
+            "properties": {
+              "calibration": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "learning-protocol",
+                          "learning-problem",
+                          "learning-dataset",
+                          "learning-split",
+                          "learning-features",
+                          "learning-labels",
+                          "learning-checkpoint",
+                          "learning-calibration",
+                          "learning-method-result",
+                          "learning-evaluation",
+                          "learning-export-index"
+                        ]
+                      },
+                      "path": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[0-9a-f]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "artifact_id",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "certificate": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "anchor": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "arithmetic": {
+                        "enum": [
+                          "exact-submitted-float64-dyadics"
+                        ]
+                      },
+                      "direction": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "kind": {
+                        "enum": [
+                          "exact-hard-qp-recession"
+                        ]
+                      },
+                      "screen_only": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "anchor",
+                      "direction",
+                      "arithmetic",
+                      "screen_only"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "checkpoint": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "learning-protocol",
+                          "learning-problem",
+                          "learning-dataset",
+                          "learning-split",
+                          "learning-features",
+                          "learning-labels",
+                          "learning-checkpoint",
+                          "learning-calibration",
+                          "learning-method-result",
+                          "learning-evaluation",
+                          "learning-export-index"
+                        ]
+                      },
+                      "path": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[0-9a-f]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "artifact_id",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "diagnostic_native_flag": {
+                "type": [
+                  "integer",
+                  "string",
+                  "null"
+                ]
+              },
+              "dimensions": {
+                "additionalProperties": false,
+                "properties": {
+                  "canonical_m": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "canonical_n": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "original_m": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "original_n": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "original_n",
+                  "original_m",
+                  "canonical_n",
+                  "canonical_m"
+                ],
+                "type": "object"
+              },
+              "injected_state": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "flags": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "scores": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "x": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "y": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y",
+                      "scores",
+                      "flags"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "key": {
+                "items": false,
+                "maxItems": 6,
+                "minItems": 6,
+                "prefixItems": [
+                  {
+                    "enum": [
+                      "lifted",
+                      "generalized",
+                      "daqp",
+                      "flex",
+                      "elastiqp",
+                      "asymmetric",
+                      "directional",
+                      "clarabel",
+                      "proxqp",
+                      "piqp",
+                      "learned_osqp",
+                      "learned_daqp",
+                      "cold_osqp",
+                      "cold_daqp",
+                      "previous_osqp",
+                      "previous_daqp"
+                    ]
+                  },
+                  {
+                    "enum": [
+                      0,
+                      41001,
+                      41002,
+                      41003
+                    ]
+                  },
+                  {
+                    "enum": [
+                      "N01",
+                      "N02",
+                      "N03",
+                      "N04",
+                      "N05",
+                      "N06",
+                      "N07",
+                      "N08",
+                      "N09",
+                      "N10",
+                      "N11",
+                      "N12",
+                      "N13",
+                      "N14",
+                      "N15"
+                    ]
+                  },
+                  {
+                    "maximum": 5,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "maximum": 7,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  {
+                    "maximum": 31,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                ],
+                "type": "array"
+              },
+              "lane": {
+                "enum": [
+                  "offline",
+                  "replay"
+                ]
+              },
+              "memory_bytes": {
+                "maximum": 9223372036854775807,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "method": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "metric_policy_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "oracles": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "accepted": {
+                      "type": "boolean"
+                    },
+                    "backend": {
+                      "enum": [
+                        "stock_osqp",
+                        "clarabel",
+                        "piqp"
+                      ]
+                    },
+                    "candidate": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "epigraph": {
+                              "anyOf": [
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "lambda_lower": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    },
+                                    "lambda_upper": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    },
+                                    "mu": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    },
+                                    "t": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    }
+                                  },
+                                  "required": [
+                                    "t",
+                                    "lambda_lower",
+                                    "lambda_upper",
+                                    "mu"
+                                  ],
+                                  "type": "object"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "lifted_x": {
+                              "anyOf": [
+                                {
+                                  "items": {
+                                    "format": "lossless-float64",
+                                    "maximum": 1e+308,
+                                    "minimum": -1e+308,
+                                    "type": "number"
+                                  },
+                                  "maxItems": 2000000,
+                                  "type": "array"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "lifted_y": {
+                              "anyOf": [
+                                {
+                                  "items": {
+                                    "format": "lossless-float64",
+                                    "maximum": 1e+308,
+                                    "minimum": -1e+308,
+                                    "type": "number"
+                                  },
+                                  "maxItems": 2000000,
+                                  "type": "array"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "x": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "y": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "lifted_x",
+                            "lifted_y",
+                            "epigraph"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "metrics": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "D": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "F": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "F_all": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "G": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "H": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "K": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "base_quadratic": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "f_ref": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "linear": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "objective": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "peak_values": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": 0,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            },
+                            "penalty": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "raw_gradient": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "repaired_gradient": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "violation_lower": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": 0,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            },
+                            "violation_upper": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": 0,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            },
+                            "ybar": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "z": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "objective",
+                            "base_quadratic",
+                            "linear",
+                            "penalty",
+                            "H",
+                            "G",
+                            "K",
+                            "F",
+                            "F_all",
+                            "D",
+                            "ybar",
+                            "raw_gradient",
+                            "repaired_gradient",
+                            "f_ref",
+                            "z",
+                            "violation_lower",
+                            "violation_upper",
+                            "peak_values"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "native_flag": {
+                      "type": [
+                        "integer",
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "reason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "result_sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "settings_sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "accepted",
+                        "accuracy-rejected",
+                        "timeout",
+                        "missing",
+                        "failed"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "backend",
+                    "settings_sha256",
+                    "result_sha256",
+                    "accepted",
+                    "candidate",
+                    "metrics",
+                    "native_flag",
+                    "status",
+                    "reason"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 3,
+                "type": "array"
+              },
+              "problem": {
+                "additionalProperties": false,
+                "properties": {
+                  "artifact_id": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "kind": {
+                    "enum": [
+                      "learning-protocol",
+                      "learning-problem",
+                      "learning-dataset",
+                      "learning-split",
+                      "learning-features",
+                      "learning-labels",
+                      "learning-checkpoint",
+                      "learning-calibration",
+                      "learning-method-result",
+                      "learning-evaluation",
+                      "learning-export-index"
+                    ]
+                  },
+                  "path": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "artifact_id",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "semantic_transform": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "settings_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "accepted",
+                  "accuracy-rejected",
+                  "incompatible",
+                  "oracle-failed",
+                  "timeout",
+                  "missing",
+                  "failed",
+                  "unbounded",
+                  "inconclusive"
+                ]
+              },
+              "trials": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "attempt_flags": {
+                      "items": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "attempt_native_flags": {
+                      "items": {
+                        "type": [
+                          "integer",
+                          "string"
+                        ]
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "candidate": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "epigraph": {
+                              "anyOf": [
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "lambda_lower": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    },
+                                    "lambda_upper": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    },
+                                    "mu": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    },
+                                    "t": {
+                                      "items": {
+                                        "format": "lossless-float64",
+                                        "maximum": 1e+308,
+                                        "minimum": 0,
+                                        "type": "number"
+                                      },
+                                      "maxItems": 2000000,
+                                      "type": "array"
+                                    }
+                                  },
+                                  "required": [
+                                    "t",
+                                    "lambda_lower",
+                                    "lambda_upper",
+                                    "mu"
+                                  ],
+                                  "type": "object"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "lifted_x": {
+                              "anyOf": [
+                                {
+                                  "items": {
+                                    "format": "lossless-float64",
+                                    "maximum": 1e+308,
+                                    "minimum": -1e+308,
+                                    "type": "number"
+                                  },
+                                  "maxItems": 2000000,
+                                  "type": "array"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "lifted_y": {
+                              "anyOf": [
+                                {
+                                  "items": {
+                                    "format": "lossless-float64",
+                                    "maximum": 1e+308,
+                                    "minimum": -1e+308,
+                                    "type": "number"
+                                  },
+                                  "maxItems": 2000000,
+                                  "type": "array"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "x": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "y": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "lifted_x",
+                            "lifted_y",
+                            "epigraph"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "clock": {
+                      "enum": [
+                        "perf-counter",
+                        "contract-fixture"
+                      ]
+                    },
+                    "fallback_count": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "full_cost": {
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "minimum": 0,
+                      "type": "number"
+                    },
+                    "metrics": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "D": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "F": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "F_all": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "G": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "H": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "K": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "base_quadratic": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "f_ref": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "linear": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "objective": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "peak_values": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": 0,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            },
+                            "penalty": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "raw_gradient": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "repaired_gradient": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "violation_lower": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": 0,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            },
+                            "violation_upper": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": 0,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            },
+                            "ybar": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2000000,
+                              "type": "array"
+                            },
+                            "z": {
+                              "items": {
+                                "format": "lossless-float64",
+                                "maximum": 1e+308,
+                                "minimum": -1e+308,
+                                "type": "number"
+                              },
+                              "maxItems": 2048,
+                              "type": "array"
+                            }
+                          },
+                          "required": [
+                            "objective",
+                            "base_quadratic",
+                            "linear",
+                            "penalty",
+                            "H",
+                            "G",
+                            "K",
+                            "F",
+                            "F_all",
+                            "D",
+                            "ybar",
+                            "raw_gradient",
+                            "repaired_gradient",
+                            "f_ref",
+                            "z",
+                            "violation_lower",
+                            "violation_upper",
+                            "peak_values"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "native_flag": {
+                      "anyOf": [
+                        {
+                          "type": [
+                            "integer",
+                            "string"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "phase": {
+                      "enum": [
+                        "warmup",
+                        "measured"
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "removed_rows": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "repetition": {
+                      "maximum": 4,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "status": {
+                      "enum": [
+                        "accepted",
+                        "accuracy-rejected",
+                        "incompatible",
+                        "oracle-failed",
+                        "timeout",
+                        "missing",
+                        "failed",
+                        "unbounded",
+                        "inconclusive"
+                      ]
+                    },
+                    "timing": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "features": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "inference": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "preprocess": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "recovery": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "repair": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "setup": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "solve": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "validation": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "preprocess",
+                        "features",
+                        "inference",
+                        "setup",
+                        "solve",
+                        "repair",
+                        "recovery",
+                        "validation"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "phase",
+                    "repetition",
+                    "status",
+                    "reason",
+                    "native_flag",
+                    "candidate",
+                    "metrics",
+                    "timing",
+                    "full_cost",
+                    "clock",
+                    "attempt_flags",
+                    "removed_rows",
+                    "attempt_native_flags",
+                    "fallback_count"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 7,
+                "type": "array"
+              }
+            },
+            "required": [
+              "problem",
+              "key",
+              "method",
+              "semantic_transform",
+              "lane",
+              "checkpoint",
+              "calibration",
+              "settings_sha256",
+              "status",
+              "reason",
+              "oracles",
+              "trials",
+              "injected_state",
+              "certificate",
+              "dimensions",
+              "memory_bytes",
+              "metric_policy_sha256",
+              "diagnostic_native_flag"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "missing"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "null"
+          },
+          "reason": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-method-result"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "calibration": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "artifact_id": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "kind": {
+                      "enum": [
+                        "learning-protocol",
+                        "learning-problem",
+                        "learning-dataset",
+                        "learning-split",
+                        "learning-features",
+                        "learning-labels",
+                        "learning-checkpoint",
+                        "learning-calibration",
+                        "learning-method-result",
+                        "learning-evaluation",
+                        "learning-export-index"
+                      ]
+                    },
+                    "path": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "artifact_id",
+                    "path",
+                    "sha256"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "certificate": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "anchor": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "arithmetic": {
+                      "enum": [
+                        "exact-submitted-float64-dyadics"
+                      ]
+                    },
+                    "direction": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "kind": {
+                      "enum": [
+                        "exact-hard-qp-recession"
+                      ]
+                    },
+                    "screen_only": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "anchor",
+                    "direction",
+                    "arithmetic",
+                    "screen_only"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "checkpoint": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "artifact_id": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "kind": {
+                      "enum": [
+                        "learning-protocol",
+                        "learning-problem",
+                        "learning-dataset",
+                        "learning-split",
+                        "learning-features",
+                        "learning-labels",
+                        "learning-checkpoint",
+                        "learning-calibration",
+                        "learning-method-result",
+                        "learning-evaluation",
+                        "learning-export-index"
+                      ]
+                    },
+                    "path": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "artifact_id",
+                    "path",
+                    "sha256"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "diagnostic_native_flag": {
+              "type": [
+                "integer",
+                "string",
+                "null"
+              ]
+            },
+            "dimensions": {
+              "additionalProperties": false,
+              "properties": {
+                "canonical_m": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "canonical_n": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "original_m": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "original_n": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "original_n",
+                "original_m",
+                "canonical_n",
+                "canonical_m"
+              ],
+              "type": "object"
+            },
+            "injected_state": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "flags": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "scores": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "x": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "y": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y",
+                    "scores",
+                    "flags"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "key": {
+              "items": false,
+              "maxItems": 6,
+              "minItems": 6,
+              "prefixItems": [
+                {
+                  "enum": [
+                    "lifted",
+                    "generalized",
+                    "daqp",
+                    "flex",
+                    "elastiqp",
+                    "asymmetric",
+                    "directional",
+                    "clarabel",
+                    "proxqp",
+                    "piqp",
+                    "learned_osqp",
+                    "learned_daqp",
+                    "cold_osqp",
+                    "cold_daqp",
+                    "previous_osqp",
+                    "previous_daqp"
+                  ]
+                },
+                {
+                  "enum": [
+                    0,
+                    41001,
+                    41002,
+                    41003
+                  ]
+                },
+                {
+                  "enum": [
+                    "N01",
+                    "N02",
+                    "N03",
+                    "N04",
+                    "N05",
+                    "N06",
+                    "N07",
+                    "N08",
+                    "N09",
+                    "N10",
+                    "N11",
+                    "N12",
+                    "N13",
+                    "N14",
+                    "N15"
+                  ]
+                },
+                {
+                  "maximum": 5,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "maximum": 7,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "maximum": 31,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            "lane": {
+              "enum": [
+                "offline",
+                "replay"
+              ]
+            },
+            "memory_bytes": {
+              "maximum": 9223372036854775807,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "method": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "metric_policy_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "oracles": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "accepted": {
+                    "type": "boolean"
+                  },
+                  "backend": {
+                    "enum": [
+                      "stock_osqp",
+                      "clarabel",
+                      "piqp"
+                    ]
+                  },
+                  "candidate": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "epigraph": {
+                            "anyOf": [
+                              {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "lambda_lower": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  },
+                                  "lambda_upper": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  },
+                                  "mu": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  },
+                                  "t": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  }
+                                },
+                                "required": [
+                                  "t",
+                                  "lambda_lower",
+                                  "lambda_upper",
+                                  "mu"
+                                ],
+                                "type": "object"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "lifted_x": {
+                            "anyOf": [
+                              {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": -1e+308,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "lifted_y": {
+                            "anyOf": [
+                              {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": -1e+308,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "x": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "y": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "lifted_x",
+                          "lifted_y",
+                          "epigraph"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "metrics": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "D": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "F": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "F_all": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "G": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "H": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "K": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "base_quadratic": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "f_ref": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "linear": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "objective": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "peak_values": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          },
+                          "penalty": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "raw_gradient": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "repaired_gradient": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "violation_lower": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          },
+                          "violation_upper": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          },
+                          "ybar": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "z": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "objective",
+                          "base_quadratic",
+                          "linear",
+                          "penalty",
+                          "H",
+                          "G",
+                          "K",
+                          "F",
+                          "F_all",
+                          "D",
+                          "ybar",
+                          "raw_gradient",
+                          "repaired_gradient",
+                          "f_ref",
+                          "z",
+                          "violation_lower",
+                          "violation_upper",
+                          "peak_values"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "native_flag": {
+                    "type": [
+                      "integer",
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "reason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "result_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  },
+                  "settings_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  },
+                  "status": {
+                    "enum": [
+                      "accepted",
+                      "accuracy-rejected",
+                      "timeout",
+                      "missing",
+                      "failed"
+                    ]
+                  }
+                },
+                "required": [
+                  "backend",
+                  "settings_sha256",
+                  "result_sha256",
+                  "accepted",
+                  "candidate",
+                  "metrics",
+                  "native_flag",
+                  "status",
+                  "reason"
+                ],
+                "type": "object"
+              },
+              "maxItems": 3,
+              "type": "array"
+            },
+            "problem": {
+              "additionalProperties": false,
+              "properties": {
+                "artifact_id": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "learning-protocol",
+                    "learning-problem",
+                    "learning-dataset",
+                    "learning-split",
+                    "learning-features",
+                    "learning-labels",
+                    "learning-checkpoint",
+                    "learning-calibration",
+                    "learning-method-result",
+                    "learning-evaluation",
+                    "learning-export-index"
+                  ]
+                },
+                "path": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "artifact_id",
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "semantic_transform": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "settings_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "accepted",
+                "accuracy-rejected",
+                "incompatible",
+                "oracle-failed",
+                "timeout",
+                "missing",
+                "failed",
+                "unbounded",
+                "inconclusive"
+              ]
+            },
+            "trials": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "attempt_flags": {
+                    "items": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "attempt_native_flags": {
+                    "items": {
+                      "type": [
+                        "integer",
+                        "string"
+                      ]
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "candidate": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "epigraph": {
+                            "anyOf": [
+                              {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "lambda_lower": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  },
+                                  "lambda_upper": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  },
+                                  "mu": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  },
+                                  "t": {
+                                    "items": {
+                                      "format": "lossless-float64",
+                                      "maximum": 1e+308,
+                                      "minimum": 0,
+                                      "type": "number"
+                                    },
+                                    "maxItems": 2000000,
+                                    "type": "array"
+                                  }
+                                },
+                                "required": [
+                                  "t",
+                                  "lambda_lower",
+                                  "lambda_upper",
+                                  "mu"
+                                ],
+                                "type": "object"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "lifted_x": {
+                            "anyOf": [
+                              {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": -1e+308,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "lifted_y": {
+                            "anyOf": [
+                              {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": -1e+308,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "x": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "y": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "lifted_x",
+                          "lifted_y",
+                          "epigraph"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "clock": {
+                    "enum": [
+                      "perf-counter",
+                      "contract-fixture"
+                    ]
+                  },
+                  "fallback_count": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "full_cost": {
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "minimum": 0,
+                    "type": "number"
+                  },
+                  "metrics": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "D": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "F": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "F_all": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "G": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "H": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "K": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "base_quadratic": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "f_ref": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "linear": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "objective": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "peak_values": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          },
+                          "penalty": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "raw_gradient": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "repaired_gradient": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "violation_lower": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          },
+                          "violation_upper": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": 0,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          },
+                          "ybar": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          "z": {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2048,
+                            "type": "array"
+                          }
+                        },
+                        "required": [
+                          "objective",
+                          "base_quadratic",
+                          "linear",
+                          "penalty",
+                          "H",
+                          "G",
+                          "K",
+                          "F",
+                          "F_all",
+                          "D",
+                          "ybar",
+                          "raw_gradient",
+                          "repaired_gradient",
+                          "f_ref",
+                          "z",
+                          "violation_lower",
+                          "violation_upper",
+                          "peak_values"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "native_flag": {
+                    "anyOf": [
+                      {
+                        "type": [
+                          "integer",
+                          "string"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "phase": {
+                    "enum": [
+                      "warmup",
+                      "measured"
+                    ]
+                  },
+                  "reason": {
+                    "anyOf": [
+                      {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "removed_rows": {
+                    "items": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "repetition": {
+                    "maximum": 4,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "status": {
+                    "enum": [
+                      "accepted",
+                      "accuracy-rejected",
+                      "incompatible",
+                      "oracle-failed",
+                      "timeout",
+                      "missing",
+                      "failed",
+                      "unbounded",
+                      "inconclusive"
+                    ]
+                  },
+                  "timing": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "features": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "inference": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "preprocess": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "recovery": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "repair": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "setup": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "solve": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "validation": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "preprocess",
+                      "features",
+                      "inference",
+                      "setup",
+                      "solve",
+                      "repair",
+                      "recovery",
+                      "validation"
+                    ],
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "phase",
+                  "repetition",
+                  "status",
+                  "reason",
+                  "native_flag",
+                  "candidate",
+                  "metrics",
+                  "timing",
+                  "full_cost",
+                  "clock",
+                  "attempt_flags",
+                  "removed_rows",
+                  "attempt_native_flags",
+                  "fallback_count"
+                ],
+                "type": "object"
+              },
+              "maxItems": 7,
+              "type": "array"
+            }
+          },
+          "required": [
+            "problem",
+            "key",
+            "method",
+            "semantic_transform",
+            "lane",
+            "checkpoint",
+            "calibration",
+            "settings_sha256",
+            "status",
+            "reason",
+            "oracles",
+            "trials",
+            "injected_state",
+            "certificate",
+            "dimensions",
+            "memory_bytes",
+            "metric_policy_sha256",
+            "diagnostic_native_flag"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "const": "learning-protocol"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact_id",
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-method-result/1.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider",
+        "missing"
+      ]
+    },
+    "version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "kind",
+    "artifact_id",
+    "purpose",
+    "state",
+    "reason",
+    "protocol_id",
+    "protocol_sha256",
+    "source_lock_sha256",
+    "provenance",
+    "payload",
+    "content_sha256",
+    "protocol_ref"
+  ],
+  "type": "object"
+}
