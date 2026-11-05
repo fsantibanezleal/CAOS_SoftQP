@@ -805,7 +805,20 @@ def load_context(root):
     value["source_lock_bytes"] = value.pop("source_lock_utf8").encode()
     value["dependency_lock_bytes"] = value.pop("dependency_lock_utf8").encode()
     value["generator_source_bytes"] = value.pop("generator_source_utf8").encode()
-    value["producer_source_bytes"] = Path(c.__file__).read_bytes()
+    # Committed providers retain their original producer identity; current
+    # consumers validate them without pretending that they were regenerated.
+    current_source = Path(c.__file__).read_bytes()
+    historical_sha256 = "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0"
+    if c.digest(current_source) == value["producer_source_sha256"]:
+        value["producer_source_bytes"] = current_source
+    else:
+        c.ensure(
+            value["producer_source_sha256"] == historical_sha256,
+            "unknown fixture producer source identity",
+        )
+        historical_source = (HERE / "provider-source.py.fixture").read_bytes()
+        c.ensure(c.digest(historical_source) == historical_sha256, "historical producer snapshot changed")
+        value["producer_source_bytes"] = historical_source
     value["fit_source_ids"] = tuple(value["fit_source_ids"])
     value["expected_result_keys"] = tuple(tuple(k) for k in value["expected_result_keys"])
     value["expected_diagnostic_keys"] = tuple(tuple(k) for k in value["expected_diagnostic_keys"])

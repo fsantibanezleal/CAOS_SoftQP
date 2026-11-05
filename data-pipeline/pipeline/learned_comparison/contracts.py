@@ -6,7 +6,10 @@ own claims. Fixture admission is explicit and cannot imply registration.
 
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, OrderedDict
+from collections.abc import Sequence
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass, field
 from fractions import Fraction
 from functools import lru_cache
@@ -298,6 +301,100 @@ class Artifact:
         return self.document["payload"]
 
 
+@dataclass(frozen=True)
+class ReadRequest:
+    """One ordered strict batch request; not a new serialized boundary."""
+
+    path: Path
+    expected_sha256: str | None = None
+    usage: Literal["consume", "fit", "calibrate"] = "consume"
+
+
+MAX_BATCH_REQUESTS = 256
+_CACHE_ENTRIES = 2048
+_CACHE_BYTES = 64 * 1024 * 1024
+
+
+class _BoundedCache:
+    def __init__(self):
+        self.entries = OrderedDict()
+        self.byte_count = 0
+
+    def get(self, key):
+        entry = self.entries.get(key)
+        if entry is None:
+            return None
+        self.entries.move_to_end(key)
+        return entry[0]
+
+    def put(self, key, value, byte_count):
+        previous = self.entries.pop(key, None)
+        if previous is not None:
+            self.byte_count -= previous[1]
+        if byte_count > _CACHE_BYTES:
+            return
+        while self.entries and (
+            len(self.entries) >= _CACHE_ENTRIES or self.byte_count + byte_count > _CACHE_BYTES
+        ):
+            _, (_, removed_bytes) = self.entries.popitem(last=False)
+            self.byte_count -= removed_bytes
+        self.entries[key] = (value, byte_count)
+        self.byte_count += byte_count
+
+
+class _AdmissionSession:
+    """Call-local byte snapshots and bounded semantic reuse, never a stat cache."""
+
+    def __init__(self, context):
+        self.context = context
+        self.raw = _BoundedCache()
+        self.validated = _BoundedCache()
+        self.schemas = {}
+        self.root_identities = {}
+        self.frames = []
+
+    def read(self, path, *, root=False, schema=False):
+        key = os.path.normcase(str(path))
+        raw = self.schemas.get(key) if schema else self.raw.get(key)
+        if raw is None:
+            raw = path.read_bytes()
+            if schema:
+                self.schemas[key] = raw
+            else:
+                self.raw.put(key, raw, len(raw))
+        if root:
+            identity = digest(raw)
+            ensure(
+                self.root_identities.setdefault(key, identity) == identity,
+                "root bytes changed within batch snapshot",
+            )
+        return raw
+
+
+_SESSION: ContextVar[_AdmissionSession | None] = ContextVar("u1_admission_session", default=None)
+
+
+@contextmanager
+def _admission(context, *, fresh=False):
+    current = _SESSION.get()
+    if not fresh and current is not None and current.context is context:
+        yield current
+        return
+    session = _AdmissionSession(context)
+    token = _SESSION.set(session)
+    try:
+        yield session
+    finally:
+        _SESSION.reset(token)
+
+
+def _snapshot_bytes(path, context=None, *, root=False, schema=False):
+    session = _SESSION.get()
+    if session is not None and (context is None or session.context is context):
+        return session.read(path, root=root, schema=schema)
+    return path.read_bytes()
+
+
 def ensure(condition: bool, reason: str) -> None:
     if not condition:
         raise ContractError(reason)
@@ -416,7 +513,9 @@ def schema_validate(document: dict[str, Any]) -> None:
     ensure(document.get("kind") in KINDS, "unknown contract kind")
     path = SCHEMAS / ("softqp-" + document["kind"] + ".schema.json")
     try:
-        errors = sorted(_validator(path.read_bytes()).iter_errors(document), key=lambda e: str(e.path))
+        errors = sorted(
+            _validator(_snapshot_bytes(path, schema=True)).iter_errors(document), key=lambda e: str(e.path)
+        )
         reason = str(errors[0])[:500] if errors else ""
     except ContractError:
         raise
@@ -435,16 +534,21 @@ def schema_validate(document: dict[str, Any]) -> None:
     ensure(not errors, "schema: " + reason)
 
 
-def safe_path(root: Path, relative: str, *, must_exist: bool) -> Path:
+def _relative_parts(relative: str) -> tuple[str, ...]:
     ensure(type(relative) is str and relative != "", "empty artifact path")
     p = PurePosixPath(relative)
     ensure(
         not p.is_absolute() and not any(x in ("", ".", "..") for x in relative.split("/")), "path traversal"
     )
     ensure("\\" not in relative and ":" not in relative and "\x00" not in relative, "unsafe artifact path")
+    return p.parts
+
+
+def safe_path(root: Path, relative: str, *, must_exist: bool) -> Path:
+    parts = _relative_parts(relative)
     base = root.resolve(strict=True)
     current = base
-    for component in p.parts:
+    for component in parts:
         current = current / component
         ensure(
             not current.is_symlink() and not (hasattr(current, "is_junction") and current.is_junction()),
@@ -566,7 +670,7 @@ class AdmissionContext:
     expected_diagnostic_keys: tuple[tuple[Any, ...], ...] = ()
     diagnostic_evidence: Mapping[tuple[Any, ...], str] = field(default_factory=dict)
     forbidden_roots: tuple[Path, ...] = (ROOT,)
-    _validated: dict = field(default_factory=dict, init=False, compare=False, repr=False)
+    _input_aliases: frozenset[str] = field(default_factory=frozenset, init=False, compare=False, repr=False)
 
     def __post_init__(self):
         ensure(self.root.is_absolute() and self.root.exists(), "external context root missing")
@@ -595,6 +699,17 @@ class AdmissionContext:
         copied = strict_loads(json_bytes({key: dict(value) for key, value in self.catalog.items()}))
         object.__setattr__(
             self, "catalog", MappingProxyType({key: MappingProxyType(value) for key, value in copied.items()})
+        )
+        # Pure lexical metadata preflight only. Each actual input/output still
+        # receives current safe_path reparse and root checks when it is used.
+        base = self.root.resolve()
+        object.__setattr__(
+            self,
+            "_input_aliases",
+            frozenset(
+                os.path.normcase(str(base.joinpath(*_relative_parts(ref["path"]))))
+                for ref in self.catalog.values()
+            ),
         )
         object.__setattr__(self, "problem_hashes", MappingProxyType(dict(self.problem_hashes)))
         object.__setattr__(self, "source_records", MappingProxyType(dict(self.source_records)))
@@ -634,16 +749,20 @@ def _reference_entries(value, field_name=""):
     return []
 
 
-def dependency(ref: Reference, context: AdmissionContext, stack: tuple[str, ...]) -> dict[str, Any]:
+def _read_reference(ref: Reference, context: AdmissionContext, stack: tuple[str, ...]) -> Artifact:
     ensure(context.catalog.get(ref["artifact_id"]) == ref, "reference not in sealed catalog")
     ensure(ref["artifact_id"] not in stack, "artifact dependency cycle")
     path = safe_path(context.root, ref["path"], must_exist=True)
-    ensure(digest(path.read_bytes()) == ref["sha256"], "parent raw-byte hash mismatch")
     artifact = read_artifact(path, context, expected_sha256=ref["sha256"], _stack=stack)
     ensure(
         artifact.kind == ref["kind"] and artifact.artifact_id == ref["artifact_id"],
         "parent identity mismatch",
     )
+    return artifact
+
+
+def dependency(ref: Reference, context: AdmissionContext, stack: tuple[str, ...]) -> dict[str, Any]:
+    artifact = _read_reference(ref, context, stack)
     ensure(artifact.payload is not None and artifact.state != "missing", "required parent is missing")
     return artifact.document["payload"]
 
@@ -1764,7 +1883,7 @@ def numeric_file(value, context, *, dtype="float64-le"):
         "executable/unknown numeric serializer",
     )
     path = safe_path(context.root, value["path"], must_exist=True)
-    raw = path.read_bytes()
+    raw = _snapshot_bytes(path, context)
     ensure(len(raw) == value["byte_count"] and digest(raw) == value["sha256"], "missing/stale numeric file")
     if dtype == "float64-le":
         ensure(
@@ -2533,7 +2652,7 @@ def _evaluation(payload, context, document, stack):
         else:
             evidence = diagnostic["evidence"]
             ensure(evidence is not None, "diagnostic evidence missing")
-            raw = safe_path(context.root, evidence["path"], must_exist=True).read_bytes()
+            raw = _snapshot_bytes(safe_path(context.root, evidence["path"], must_exist=True), context)
             ensure(
                 len(raw) == evidence["byte_count"]
                 and digest(raw) == evidence["sha256"] == context.diagnostic_evidence.get(key),
@@ -2816,7 +2935,7 @@ def _export_index(payload, context, document, stack):
         )
 
 
-def validate_artifact(
+def _validate_document(
     document: dict[str, Any], context: AdmissionContext, *, usage="consume", _stack=()
 ) -> Artifact:
     """Actual producer/consumer admission. No permissive absent-field defaults."""
@@ -2873,8 +2992,7 @@ def validate_artifact(
         ):
             ensure(ref_kinds.get(field_name) == ref["kind"], "wrong typed parent boundary")
             ensure(context.catalog.get(ref["artifact_id"]) == ref, "parent is not in sealed catalog")
-            parent = safe_path(context.root, ref["path"], must_exist=True)
-            ensure(digest(parent.read_bytes()) == ref["sha256"], "parent actual bytes mismatch")
+            _read_reference(ref, context, stack)
         if kind == "learning-protocol":
             ensure(document["protocol_ref"] is None, "protocol self-parent")
         else:
@@ -2925,50 +3043,94 @@ def validate_artifact(
     )
 
 
+def _admit_document(document, context, *, usage, stack, raw=None):
+    session = _SESSION.get()
+    ensure(session is not None and session.context is context, "missing admission session")
+    ensure(usage in ("consume", "fit", "calibrate"), "unknown consumer usage")
+    key = (digest(raw), usage) if raw is not None else None
+    cached = session.validated.get(key) if key is not None else None
+    if cached is not None:
+        artifact, identities = cached
+        ensure(not set(stack).intersection(identities), "artifact dependency cycle through cached node")
+        if session.frames:
+            session.frames[-1].update(identities)
+        return artifact
+    identities = set()
+    session.frames.append(identities)
+    try:
+        artifact = _validate_document(document, context, usage=usage, _stack=stack)
+        if raw is not None:
+            ensure(raw == artifact.raw, "noncanonical JSON bytes")
+        identities.add(artifact.artifact_id)
+    finally:
+        session.frames.pop()
+    frozen = frozenset(identities)
+    session.validated.put(
+        (artifact.raw_sha256, usage),
+        (artifact, frozen),
+        len(artifact.raw) + sum(len(value.encode("utf-8")) + 64 for value in frozen),
+    )
+    if session.frames:
+        session.frames[-1].update(frozen)
+    return artifact
+
+
+def validate_artifact(
+    document: dict[str, Any], context: AdmissionContext, *, usage="consume", _stack=()
+) -> Artifact:
+    """Fresh strict producer admission; dependencies share only this call's snapshot."""
+    with _admission(context):
+        return _admit_document(document, context, usage=usage, stack=_stack)
+
+
 def read_artifact(
     path: Path, context: AdmissionContext, *, expected_sha256: str | None = None, usage="consume", _stack=()
 ) -> Artifact:
-    lexical = Path(os.path.abspath(path))
-    ensure(lexical.is_relative_to(context.root.resolve()), "input outside configured artifact root")
-    relative = lexical.relative_to(context.root.resolve()).as_posix()
-    path = safe_path(context.root, relative, must_exist=True)
-    raw = path.read_bytes()
-    if expected_sha256 is not None:
-        ensure(digest(raw) == expected_sha256, "actual input byte hash mismatch")
-    document = strict_loads(raw)
-    # Cache only consumers, with a byte-bound closure fingerprint. Every sealed
-    # JSON/numeric dependency and every schema is rehashed before reuse; a
-    # same-size coefficient/weight mutation cannot use a stale admitted object.
-    closure = []
-    for ref in context.catalog.values():
-        parent_path = safe_path(context.root, ref["path"], must_exist=True)
-        parent_raw = parent_path.read_bytes()
-        closure.append((ref["artifact_id"], digest(parent_raw)))
-        parent_doc = strict_loads(parent_raw)
+    with _admission(context):
+        lexical = Path(os.path.abspath(path))
+        ensure(lexical.is_relative_to(context.root.resolve()), "input outside configured artifact root")
+        relative = lexical.relative_to(context.root.resolve()).as_posix()
+        path = safe_path(context.root, relative, must_exist=True)
+        raw = _snapshot_bytes(path, context, root=not _stack)
+        if expected_sha256 is not None:
+            ensure(digest(raw) == expected_sha256, "actual input byte hash mismatch")
+        return _admit_document(strict_loads(raw), context, usage=usage, stack=_stack, raw=raw)
 
-        def numeric_refs(value):
-            if isinstance(value, dict):
-                if set(value) == {"path", "sha256", "byte_count", "format"}:
-                    numeric_path = safe_path(context.root, value["path"], must_exist=True)
-                    closure.append((value["path"], digest(numeric_path.read_bytes())))
-                else:
-                    for child in value.values():
-                        numeric_refs(child)
-            elif isinstance(value, list):
-                for child in value:
-                    numeric_refs(child)
 
-        numeric_refs(parent_doc)
-    closure.extend(
-        (p.name, digest(p.read_bytes())) for p in sorted(SCHEMAS.glob("softqp-learning-*.schema.json"))
+def read_artifacts(requests: Sequence[ReadRequest], context: AdmissionContext) -> tuple[Artifact, ...]:
+    """Admit an explicit bounded batch, preserving all positions or refusing the call.
+
+    This is a first-read snapshot, not a filesystem-wide atomic transaction.
+    Independent later calls reopen every reachable byte identity.
+    """
+    ensure(
+        isinstance(requests, Sequence) and not isinstance(requests, (str, bytes)),
+        "batch requires a bounded request sequence",
     )
-    cache_key = (digest(raw), usage, digest(canonical_bytes(closure)))
-    if cache_key in context._validated:
-        return context._validated[cache_key]
-    artifact = validate_artifact(document, context, usage=usage, _stack=_stack)
-    ensure(raw == artifact.raw, "noncanonical JSON bytes")
-    context._validated[cache_key] = artifact
-    return artifact
+    ensure(len(requests) <= MAX_BATCH_REQUESTS, "batch request limit exceeded")
+    ordered = []
+    for request in requests:
+        ensure(len(ordered) < MAX_BATCH_REQUESTS, "batch request limit exceeded")
+        ensure(isinstance(request, ReadRequest), "untyped batch request")
+        ensure(isinstance(request.path, Path), "batch request path must be Path")
+        ensure(request.usage in ("consume", "fit", "calibrate"), "unknown consumer usage")
+        ensure(
+            request.expected_sha256 is None
+            or (
+                type(request.expected_sha256) is str
+                and len(request.expected_sha256) == 64
+                and all(character in "0123456789abcdef" for character in request.expected_sha256)
+            ),
+            "invalid expected raw-byte hash",
+        )
+        ordered.append(request)
+    with _admission(context, fresh=True):
+        return tuple(
+            read_artifact(
+                request.path, context, expected_sha256=request.expected_sha256, usage=request.usage
+            )
+            for request in ordered
+        )
 
 
 def write_artifact(document: dict[str, Any], relative: str, context: AdmissionContext) -> Artifact:
@@ -2987,8 +3149,10 @@ def write_artifact(document: dict[str, Any], relative: str, context: AdmissionCo
     )
     for forbidden in context.forbidden_roots:
         ensure(not path.is_relative_to(forbidden.resolve()), "output inside checkout/protected root")
-    aliases = [safe_path(context.root, ref["path"], must_exist=False) for ref in context.catalog.values()]
-    ensure(path not in aliases and not path.exists(), "output aliases an input/existing authority")
+    ensure(
+        os.path.normcase(str(path)) not in context._input_aliases and not path.exists(),
+        "output aliases an input/existing authority",
+    )
     ensure(path.parent.exists(), "output parent must already exist")
     temporary = None
     published = False

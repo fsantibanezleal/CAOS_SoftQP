@@ -1,5 +1,13 @@
 # Method extension U1 design
 
+## Bounded reachable admission unit,2026-11-05
+
+The exact pre-code interface and snapshot/eviction/failure semantics are frozen in reader-admission.md. ReadRequest plus read_artifacts are an internal typed Python batch API, not a twelfth JSON boundary. Each independent call reopens reachable bytes; one explicit batch can share bounded byte/semantic snapshots and records transitive artifact IDs before cache reuse. Unrelated catalog payloads are not traversed. The immutable context builds a lexical alias index once; every actual path is still checked against current reparse/checkout/root state. No numerical, mathematical, schema or registered-population rule changes.
+
+The original195test/helper definitions remain unchanged. Root additionally authorized provider.py::load_context to read a never-executed exact producer-source snapshot from accepted Git9020dba, SHA256cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0. Historical fixture JSON/numeric/context bytes retain that original producer identity; the current changed consumer is a distinct source identity. Only this independently pinned historical hash or the actual current producer hash can select source bytes, and unknown hashes refuse. No fixture is rehashed/resealed as current scientific output.
+
+Source-only implementation and test authoring are permitted while the root-owned shell browser/gate window is active. No new control has executed and full-cardinality fixture/resource evidence is pending explicit resource release and independent source review.
+
 ## Lossless numeric admission correction (independent U1-01)
 
 All scientific schema `number` fields declare the `lossless-float64` format. The strict schema reader checks finite binary64 conversion and exact equality to the submitted Python numeric value before provenance or certificate admission. In particular, a JSON integer is admitted only if float(value) equals that exact integer; values above2^53 are allowed when exactly representable. Positive zero is canonical. Booleans, nonfinite values, negative zero, lossy integers and conversion overflow refuse as ContractError. Explicit JSON integer metadata (indices, counts, seeds and RNG state) retains its exact integer schema and is not coerced to float64. Existing domain limits still apply.
