@@ -1,6 +1,6 @@
 # SoftQP scientific contract catalog
 
-Phase 2 of contract-first parallel delivery (ADR-0080; rule 11 sections 11 to 20 in CAOS_MANAGE). One row per
+The scientific contract catalog follows contract-first design (ADR-0080). One row per
 boundary and per model slot. Each schema file is the single source of its contract: the Python producers and
 consumers validate against it in their tests, and the TypeScript types are generated from it
 (`frontend/src/lib/contract.gen.ts`, from `docs/contracts/api.openapi.json`, whose components reference the schema
@@ -79,10 +79,10 @@ The native pipeline computes readiness from this catalog, product version and sc
 
 | state | condition | provenance | surface behavior | reason en | reason es |
 |---|---|---|---|---|---|
-| provider | status active | declared provider kind | Show a visible provider label | Served by its declared provider; the producer is incomplete. | Servido por su proveedor declarado; el productor estÃƒÂ¡ incompleto. |
-| missing | dormant API | null | Static reader remains available | The API lane is dormant; the browser reads static artifacts. | La API estÃƒÂ¡ inactiva; el navegador lee artefactos estÃƒÂ¡ticos. |
-| missing | inventory absent or unreadable | null | Show unavailable, with its reason | The scientific inventory has not been baked. | El inventario cientÃƒÂ­fico no ha sido generado. |
-| partial | declared manifests or results absent | real | Keep other cases and list missing paths | Declared scientific files are absent. | Faltan archivos cientÃƒÂ­ficos declarados. |
+| provider | status active | declared provider kind | Show a visible provider label | Served by its declared provider; the producer is incomplete. | Servido por su proveedor declarado; el productor está incompleto. |
+| missing | dormant API | null | Static reader remains available | The API lane is dormant; the browser reads static artifacts. | La API está inactiva; el navegador lee artefactos estáticos. |
+| missing | inventory absent or unreadable | null | Show unavailable, with its reason | The scientific inventory has not been baked. | El inventario científico no ha sido generado. |
+| partial | declared manifests or results absent | real | Keep other cases and list missing paths | Declared scientific files are absent. | Faltan archivos científicos declarados. |
 | stale | deployment inventory version differs | real | Show a stale note | Baked by {engine_version}; the product is {version}. | Generado por {engine_version}; el producto es {version}. |
 | available | applicable checks above pass | real | Render verified records | none | ninguna |
 

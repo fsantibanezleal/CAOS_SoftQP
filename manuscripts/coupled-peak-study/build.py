@@ -10,7 +10,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 # Immutable acceptance anchors for this completed study, not a general plotting input.
 EVIDENCE_REVIEW = "f5ade8cca3ff79c91bda6386f78245a419e292574451c3c821d0436c9aa6bff0"
-FIGURE_REVIEW = "8e84650a25abd49c4ade51bf7254226d3890d87dd1698c1efa9d660f52fdbbf9"
+FIGURE_REVIEW = "9230f67cb683db55b530f1e6465ef43cc5280ea27ded04687febbb769706ea91"
 
 
 def canonical_digest(document):

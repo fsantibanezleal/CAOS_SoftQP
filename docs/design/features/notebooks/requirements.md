@@ -1,7 +1,7 @@
 # Requirements: the product notebooks
 
 EARS (Mavin et al., RE'09, doi:10.1109/RE.2009.9). Every requirement names the gate that fails when it is violated.
-The notebooks are the product's didactic layer (CAOS_MANAGE `conventions/product-notebooks.md`, Felipe 2026-10-20): the
+The notebooks are the product's didactic layer (the worked-lesson rule, Felipe 2026-10-20): the
 folder `notebooks/` holds two trees, `en/` and `es/`, with the same notebooks at the same relative paths, by topic and from
 simple to complex (level 1 fundamentals, 2 the method in practice, 3 comparison with published methods, 4 proposed methods). They import the
 product's methods and never re-implement them. The static check is `scripts/check_notebooks.py` (CI and local); the

@@ -1,8 +1,7 @@
 # Requirements: the README states the repository by areas
 
 EARS (Mavin et al., RE'09, doi:10.1109/RE.2009.9). Every requirement names the gate that fails when it is violated.
-The README has a section `## Areas` with one row per area of the convention (CAOS_MANAGE
-`conventions/product-notebooks.md`, section 8): Web, API, Core pipelines, Packages, Notebooks, Data, Contracts,
+The README has a section `## Areas` with one row per area of the convention (the repository-area standard): Web, API, Core pipelines, Packages, Notebooks, Data, Contracts,
 Documentation, Tests and gates, Deploy. Each row links its folder, says whether the area is active or dormant (with the
 reason) and says what the area holds. The check is `scripts/check_readme_areas.py`, run by CI and locally.
 

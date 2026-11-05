@@ -1,6 +1,7 @@
 """Generate vector figures and literal evidence tables; never run a solver or bootstrap."""
 from __future__ import annotations
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import shutil
@@ -19,7 +20,15 @@ def read_blob(name):
     path = ROOT / name
     raw = path.read_bytes()
     canonical = subprocess.check_output(['git', 'show', SOURCE + ':' + name], cwd=ROOT)
-    if raw != canonical and raw.replace(b'\r\n', b'\n') != canonical.replace(b'\r\n', b'\n'):
+    # Reuse the source-admission boundary without importing the generator's writing
+    # top level from the compiler or duplicating its exact catalog repair allowlist.
+    spec = importlib.util.spec_from_file_location('asset_input_admission', ROOT / 'scripts/build_manuscript.py')
+    admission = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(admission)
+    declared = admission.frozen_asset_inputs()
+    if (SOURCE != admission.FROZEN_SOURCE
+            or hashlib.sha256(canonical).hexdigest() != declared['inputs'].get(name)
+            or not admission.matches_frozen_input(name, canonical, raw)):
         raise ValueError('Frozen evidence differs: ' + name)
     # Git text normalization is not a scientific data change. Read the immutable
     # Git blob and record its digest rather than silently hashing checkout CRLF.

@@ -1,24 +1,32 @@
 {
-  "release_ready": true,
-  "scope": "Independent content, mathematics and all131pages accepted for the exact separate LaTeX technical report and research preprint; final DOI and metadata/context accepted. Independent staged inventory/full bytes and governed publication remain required. No scientific qualification is established.",
+  "kind": "historical-publication-record/v1",
   "record_id": 23899079,
   "version_doi": "10.5281/zenodo.23899079",
   "concept_doi": "10.5281/zenodo.23851659",
-  "bytes": 906442,
-  "md5": "e95eb7fcb8a9f365c2089a5a41e7860c",
-  "sha256": "b3ac57f723713cf48117a8a41002980637910579404167ff2b7c2efddd0bf300",
-  "tex_sha256": "71b693210b52327a62df455f13547e15c7116592db224fbfc41e9ca04c2c456e",
-  "metadata_sha256": "052277a4c60277e0f364c2e53af62601f3997055e0a0a65e09855b18592562ab",
-  "warnings": 0,
-  "overfull": 0,
-  "underfull": 0,
-  "pages": 103,
-  "rendered_pages_reviewed": 103,
-  "independent_review": "independent-review.json",
-  "independent_review_sha256": "71d7babc0f17f15b7b42c22cfd7ed9c2d3869c8e3ea46eda6db6eeaca45c8324",
+  "pdf": {
+    "path": "main.pdf",
+    "bytes": 906442,
+    "sha256": "b3ac57f723713cf48117a8a41002980637910579404167ff2b7c2efddd0bf300",
+    "md5": "e95eb7fcb8a9f365c2089a5a41e7860c",
+    "pages": 103
+  },
+  "current_admission_ready": false,
+  "historical_publication_acceptance": true,
+  "historical_gate_sha256": "6abd0733e56b2a6b921866260306bca85f207f0fccafd265ab02648ac56ff076",
+  "approval_at_publication": {
+    "source_commit": "bbdd7909b2ee523881383764eb969eaab079d4de",
+    "path_at_commit": "manuscripts/soft-constraint-study/independent-review.json",
+    "raw_sha256": "71d7babc0f17f15b7b42c22cfd7ed9c2d3869c8e3ea46eda6db6eeaca45c8324"
+  },
+  "public_review_projection": {
+    "path": "independent-review.json",
+    "sha256": "06b21348e709724b5c09c773e787e1059c466fa387c178e07a9a23da695c7734",
+    "authoritative_for_admission": false
+  },
+  "public_completion_receipt": {
+    "path": "independent-public-manuscripts-review.json",
+    "raw_sha256": "371faca311a0cb8f701e33c9ecc9f6dde0ca7cb8620f3dd8cc57ff73ac4d5ad6"
+  },
   "scientific_qualification": false,
-  "public_completion_verified": true,
-  "source_publication_required_before_live_publish": true,
-  "public_review": "independent-public-manuscripts-review.json",
-  "public_review_sha256": "371faca311a0cb8f701e33c9ecc9f6dde0ca7cb8620f3dd8cc57ff73ac4d5ad6"
+  "scope": "Historical acceptance and completed publication for the identified exact PDF. The original raw review belongs to the recorded immutable source commit. The current portable display projection is not that raw approval and cannot authorize publication of changed source."
 }

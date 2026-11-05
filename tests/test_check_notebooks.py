@@ -1138,6 +1138,17 @@ def test_nb055_generic_filler_sentences(bar_root: Path, sentence: str) -> None:
     only(bar_of(bar_root, doc), "generic filler sentence")
 
 
+@pytest.mark.parametrize("sentence", ["Interpreta el método con sus unidades",
+                                      "La pregunta es qué representa el artefacto",
+                                      "Lee los ejes físicos y las unidades",
+                                      "La conclusión está condicionada a"])
+def test_adversarial_spanish_filler_remains_utf8_and_is_rejected(bar_root: Path, sentence: str) -> None:
+    doc = bar_doc("es", 2)
+    assert bar_of(bar_root, doc, "es") == []
+    doc["cells"][1]["source"] += f"\n\n{sentence}."
+    only(bar_of(bar_root, doc, "es"), "generic filler sentence")
+
+
 def test_nb056_two_statements_on_one_line(bar_root: Path) -> None:
     separate = "# separate lines\nA = run(1)\nB = run(2)\nprint(A, B)"
     assert not any("statements" in f for f in bar_of(bar_root, bar_doc("en", 2, extra_code=(separate,))))

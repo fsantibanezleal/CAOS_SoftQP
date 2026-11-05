@@ -1,5 +1,6 @@
 """Manuscript acceptance boundaries that the rejected PDF workflow bypassed."""
 
+import ast
 import json
 import hashlib
 import importlib.util
@@ -7,6 +8,7 @@ from pathlib import Path
 import re
 import subprocess
 import shutil
+from types import SimpleNamespace
 
 import pytest
 
@@ -463,3 +465,199 @@ def test_adversarial_publication_requires_independent_acceptance(tmp_path, mutat
     else:
         with pytest.raises(ValueError):
             guard.require_acceptance(source_file, pdf, review, **kwargs)
+
+
+def frozen_catalog():
+    """The witness is the immutable Git object, not a mutable current table."""
+    return subprocess.check_output([
+        "git", "show", "2d3f299d80edad49c2599e61bb6e3c875c119043:docs/contracts/catalog.md"
+    ], cwd=ROOT)
+
+
+def test_reviewed_catalog_corrections_are_admitted(manuscript):
+    compiler_module().require_evidence(manuscript / "main.tex")
+
+
+@pytest.mark.parametrize("mask", range(32))
+def test_adversarial_catalog_accepts_only_frozen_or_all_five_corrections(mask):
+    compiler = compiler_module()
+    original = frozen_catalog()
+    current = (ROOT / "docs/contracts/catalog.md").read_bytes().replace(b"\r\n", b"\n")
+    old_lines, repaired_lines = original.splitlines(keepends=True), current.splitlines(keepends=True)
+    assert len(old_lines) == len(repaired_lines)
+    changed = [index for index, (old, new) in enumerate(zip(old_lines, repaired_lines)) if old != new]
+    assert len(changed) == 5
+    candidate = old_lines.copy()
+    for bit, index in enumerate(changed):
+        if mask & (1 << bit):
+            candidate[index] = repaired_lines[index]
+    assert compiler.matches_frozen_input(
+        "docs/contracts/catalog.md", original, b"".join(candidate)
+    ) is (mask in {0, 31})
+
+
+@pytest.mark.parametrize("mutation", [
+    "state", "condition", "provenance", "surface", "english-reason", "spanish-meaning",
+    "contract-version", "history", "schema-path", "arbitrary-prose", "extra-prose", "missing-state-table",
+])
+def test_adversarial_catalog_rejects_unreviewed_text_and_normative_changes(mutation):
+    compiler = compiler_module()
+    current = (ROOT / "docs/contracts/catalog.md").read_text(encoding="utf-8")
+    replacements = {
+        "state": ("| provider | status active |", "| available | status active |"),
+        "condition": ("| provider | status active |", "| provider | status real |"),
+        "provenance": ("| status active | declared provider kind |", "| status active | real |"),
+        "surface": ("Show a visible provider label", "Hide the provider label"),
+        "english-reason": ("the producer is incomplete.", "the producer is complete."),
+        "spanish-meaning": ("el productor está incompleto.", "el productor está completo."),
+        "contract-version": ("| softqp-index | 1.1.0 |", "| softqp-index | 9.0.0 |"),
+        "history": ("| softqp-index | 1.0.0 | 2026-10-31 |", "| softqp-index | 1.0.1 | 2026-10-31 |"),
+        "schema-path": ("docs/contracts/schemas/softqp-index.schema.json", "docs/contracts/schemas/forged.json"),
+        "arbitrary-prose": ("Each schema file is the single source", "Each schema file is an optional source"),
+    }
+    if mutation == "extra-prose":
+        candidate = current + "\nAn unrelated replacement explanation.\n"
+    elif mutation == "missing-state-table":
+        candidate = "\n".join(line for line in current.splitlines() if not line.startswith("| provider |")) + "\n"
+    else:
+        old, new = replacements[mutation]
+        assert old in current
+        candidate = current.replace(old, new)
+    assert not compiler.matches_frozen_input("docs/contracts/catalog.md", frozen_catalog(), candidate.encode())
+
+
+@pytest.mark.parametrize("mutation", ["intro", "missing-reason", "duplicate-reason"])
+def test_adversarial_catalog_refuses_a_changed_correction_authority(mutation):
+    compiler = compiler_module()
+    original = frozen_catalog()
+    lines = original.splitlines(keepends=True)
+    if mutation == "intro":
+        lines[2] = lines[2].replace(b"Phase 2", b"Phase 3")
+    else:
+        index = next(i for i, line in enumerate(lines) if line.startswith(b"| provider |"))
+        if mutation == "missing-reason":
+            lines[index] = b"| provider | unrelated replacement |\n"
+        else:
+            lines.append(lines[index])
+    with pytest.raises(ValueError, match="catalog"):
+        compiler.matches_frozen_input("docs/contracts/catalog.md", b"".join(lines), b"".join(lines))
+
+
+def test_reviewed_catalog_correction_preserves_cross_checkout_line_endings():
+    compiler = compiler_module()
+    original = frozen_catalog()
+    current = (ROOT / "docs/contracts/catalog.md").read_bytes().replace(b"\r\n", b"\n")
+    assert compiler.matches_frozen_input("docs/contracts/catalog.md", original, current.replace(b"\n", b"\r\n"))
+    assert compiler.matches_frozen_input("unrelated-input.json", b"{\n}\n", b"{\r\n}\r\n")
+    assert not compiler.matches_frozen_input("unrelated-input.json", b"{\n}\n", b"{\n}\n ")
+
+
+@pytest.fixture
+def copied_frozen_evidence(tmp_path, monkeypatch):
+    """Exercise the actual loader against a complete small copy of its input boundary."""
+    compiler = compiler_module()
+    inputs = json.loads((ROOT / "manuscripts/shared/evidence-inputs.json").read_text(encoding="utf-8"))["inputs"]
+    names = set(inputs)
+    names.update({
+        "manuscripts/shared/evidence-inputs.json", "manuscripts/coupled-peak-study/build.py",
+        "scripts/build_manuscript.py",
+        "manuscripts/coupled-peak-study/results/reviews/final-campaign-evidence-review.json",
+        "manuscripts/coupled-peak-study/results/reviews/figure-review.json",
+    })
+    names.update(p.relative_to(ROOT).as_posix() for p in (HERE / "results/summary").iterdir() if p.is_file())
+    folder = ROOT / "manuscripts/soft-constraint-study"
+    names.update(p.relative_to(ROOT).as_posix() for p in (folder / "figures").iterdir() if p.is_file())
+    names.update("manuscripts/soft-constraint-study/" + name
+                 for name in ["main.tex", "results.tex", "original-results.tex", "generated/asset-manifest.json"])
+    for name in names:
+        dest = tmp_path / name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, dest)
+    original_call = subprocess.check_output
+    monkeypatch.setattr(compiler, "ROOT", tmp_path)
+    monkeypatch.setattr(compiler.subprocess, "check_output", lambda command, **kwargs: original_call(command, cwd=ROOT))
+    return compiler, tmp_path
+
+
+@pytest.mark.parametrize("name", [
+    "data/derived/softqp/C01.json", "docs/contracts/schemas/softqp-index.schema.json", "docs/contracts/catalog.md",
+])
+def test_adversarial_non_catalog_inputs_and_normative_catalog_still_require_exact_admission(copied_frozen_evidence, name):
+    compiler, checkout = copied_frozen_evidence
+    source_file = checkout / "manuscripts/soft-constraint-study/main.tex"
+    compiler.require_evidence(source_file)
+    path = checkout / name
+    path.write_bytes(path.read_bytes() + b" ")
+    with pytest.raises(ValueError, match="Frozen asset input changed"):
+        compiler.require_evidence(source_file)
+
+
+@pytest.mark.parametrize("anchor_kind", ["historical", "projection-self-hash"])
+def test_adversarial_public_display_projection_cannot_authorize_publication(manuscript, anchor_kind):
+    spec = importlib.util.spec_from_file_location("actual_projection_guard", ROOT / "scripts/publication_acceptance.py")
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+    review = manuscript / "independent-review.json"
+    projection = json.loads(review.read_text(encoding="utf-8"))
+    assert projection["kind"] == "public-historical-review-projection/v1"
+    assert projection["authoritative_for_admission"] is False
+    anchor = projection["historical_raw_sha256"] if anchor_kind == "historical" else guard.sha256(review)
+    with pytest.raises(ValueError):
+        guard.require_acceptance(manuscript / "main.tex", manuscript / "main.pdf", review,
+                                 trusted_digest=anchor, phase="before-publication")
+
+
+def test_actual_portable_figure_acceptance_anchor_and_numeric_macros():
+    spec = importlib.util.spec_from_file_location("actual_portable_figure_loader", HERE / "build.py")
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
+    assert builder.FIGURE_REVIEW == "9230f67cb683db55b530f1e6465ef43cc5280ea27ded04687febbb769706ea91"
+    figures = json.loads((HERE / "results/reviews/figure-review.json").read_text(encoding="utf-8"))
+    assert builder.canonical_digest(figures) == builder.FIGURE_REVIEW
+    expected = builder.result_macros()
+    for slug in ["soft-constraint-study", "coupled-peak-study"]:
+        assert (ROOT / "manuscripts" / slug / "results.tex").read_text(encoding="utf-8") == expected
+
+
+def actual_asset_reader(checkout):
+    """Load the actual producer function without executing its figure-writing top level."""
+    path = ROOT / "manuscripts/shared/generate_assets.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    reader = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "read_blob")
+    namespace = {"ROOT": checkout, "SOURCE": "2d3f299d80edad49c2599e61bb6e3c875c119043",
+                 "INPUTS": {}, "subprocess": subprocess, "hashlib": hashlib, "importlib": importlib}
+    exec(compile(ast.Module(body=[reader], type_ignores=[]), str(path), "exec"), namespace)
+    return namespace
+
+
+def test_asset_producer_returns_the_frozen_blob_after_only_reviewed_catalog_corrections(copied_frozen_evidence):
+    _, checkout = copied_frozen_evidence
+    namespace = actual_asset_reader(checkout)
+    original = frozen_catalog()
+    assert (checkout / "docs/contracts/catalog.md").read_bytes().replace(b"\r\n", b"\n") != original
+    assert namespace["read_blob"]("docs/contracts/catalog.md") == original
+    assert namespace["INPUTS"]["docs/contracts/catalog.md"] == hashlib.sha256(original).hexdigest()
+
+
+@pytest.mark.parametrize("mutation", ["catalog-prose", "numeric-byte", "schema-byte", "input-map", "forged-git-blob"])
+def test_adversarial_asset_producer_refuses_other_edits_and_replaced_authority(copied_frozen_evidence, mutation):
+    _, checkout = copied_frozen_evidence
+    namespace = actual_asset_reader(checkout)
+    paths = {"catalog-prose": "docs/contracts/catalog.md", "numeric-byte": "data/derived/softqp/C01.json",
+             "schema-byte": "docs/contracts/schemas/softqp-index.schema.json"}
+    name = paths.get(mutation, "docs/contracts/catalog.md")
+    if mutation == "input-map":
+        path = checkout / "manuscripts/shared/evidence-inputs.json"
+        document = json.loads(path.read_text(encoding="utf-8"))
+        document["inputs"].pop(name)
+        path.write_text(json.dumps(document), encoding="utf-8")
+    elif mutation == "forged-git-blob":
+        forged = frozen_catalog().replace(b"the producer is incomplete.", b"the producer is complete.")
+        (checkout / name).write_bytes(forged)
+        namespace["subprocess"] = SimpleNamespace(check_output=lambda *args, **kwargs: forged)
+    else:
+        path = checkout / name
+        path.write_bytes(path.read_bytes() + b" ")
+    with pytest.raises(ValueError):
+        namespace["read_blob"](name)
+    assert name not in namespace["INPUTS"]

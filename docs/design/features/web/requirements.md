@@ -1,8 +1,7 @@
 # Requirements: the web product's problem context and documentation
 
 EARS (Mavin et al., RE'09, doi:10.1109/RE.2009.9). Every requirement names the gate that fails when it is violated.
-This feature holds the executive view standard (CAOS_MANAGE `conventions/problem-context-first.md`, Felipe 2026-10-12 and
-2026-10-13): the executive view frames the problem space for a decision maker, general, never a client and never a pitch;
+This feature holds the executive view standard (the product problem-context standard, established 2026-10-12 and 2026-10-13): the executive view frames the problem space for a decision maker, general, never a client and never a pitch;
 it is one data file the shell renders, `content/executive.json`, valid against the shell's `executive.schema.json` 2.0.0
 (a landing block and five sub-tabs: the pain, the context, the current situation, the trends, the proposal), with three
 illustrations; the product lands on it while the App stays the leftmost tab (App, Introduction, Methodology, Implementation,

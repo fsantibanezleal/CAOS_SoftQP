@@ -5,7 +5,7 @@ EARS (Mavin et al., RE'09, doi:10.1109/RE.2009.9). Every requirement names the g
 | ID | Requirement | Gate |
 |---|---|---|
 | EX-001 | WHEN the bake runs a case, THE pipeline SHALL fail if a result metric lies outside the range the case declares, naming the metric. | `tests/test_expect.py::test_a_value_outside_its_range_is_named` |
-| EX-002 | THE pipeline SHALL write identical artifacts for the same case and seed. | `tests/test_pipeline_smoke.py::test_adversarial_same_seed_bakes_identical_bytes_and_a_changed_byte_of_equal_size_is_seen` |
+| EX-002 | THE authored case registry SHALL encode identical scientific inputs for the same case and seed, and exported result inventories SHALL detect a changed byte even when file size is preserved; elapsed-time fields SHALL not be claimed byte-deterministic. | `tests/test_pipeline_smoke.py::test_adversarial_same_seed_bakes_identical_bytes_and_a_changed_byte_of_equal_size_is_seen` |
 | EX-003 | IF a test writes into the committed artifacts, THEN THE test session SHALL fail and name the files. | `tests/conftest.py` |
 | EX-004 | WHEN an ingestion value is missing, non-numeric, NaN or out of range, THE pipeline SHALL reject the record with its reason. | `tests/test_contract.py::test_adversarial_bad_rows_rejected_not_coerced` |
 | EX-005 | THE web SHALL read exactly the keys the pipeline writes, with their types, in every committed artifact. | `frontend/src/lib/contract.test.ts::validates the index, manifest, result and byte inventory` (and, per case, `manifest and trace conform`, over the bake and the provider tree) |
