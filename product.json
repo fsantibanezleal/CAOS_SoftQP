@@ -8,6 +8,14 @@
   "repo": "https://github.com/fsantibanezleal/CAOS_SoftQP",
   "visibility": "public",
   "license": "MIT",
+  "showcase": {
+    "story_routes": [
+      "/story/formulate",
+      "/story/price",
+      "/story/compute",
+      "/story/compare"
+    ]
+  },
   "holder": "Felipe Santibáñez-Leal",
   "year": 2026,
   "method_entrypoints": [

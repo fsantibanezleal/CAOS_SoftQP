@@ -44,3 +44,5 @@ Remove this bridge only after an explicitly reviewed dependency update supplies 
 patched glob consumer, the byte guard is deliberately retired, real header-pattern operations
 pass, and `contracts:check` preserves the schema-derived output. Do not relax the hash/version
 checks merely to admit an unreviewed update.
+
+The base web overlay first copies the exact index-declared files. A product can extend this with an adjacent `frontend/scripts/copy-data.product.mjs` hook. The base checks the returned copied, absent and problem paths, and refuses paths outside the overlay. SoftQP uses the declared index directly.

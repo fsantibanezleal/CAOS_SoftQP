@@ -58,6 +58,7 @@ export function SystemDomain({ doc, run, rowIndex, width, height, lang, number, 
     const { pCell: cell, pX, vectorX, xVectorX, braceX, matrixX: aX, cell: aCell } = layout;
     const rowH = 31, pY = 220, aY = 372;
     const xOffset = layout.stackVectors ? columns.length * rowH + 36 : 0;
+    const vectorHeadingY = pY + 1;
     const plotY = height - 100, plotLeft = 34, plotRight = width - 30;
     const values = [policy.lower, policy.upper, model.value].filter((v): v is number => v !== null);
     const lo = Math.min(...values, 0) - 1, hi = Math.max(...values, 0) + 1;
@@ -65,7 +66,8 @@ export function SystemDomain({ doc, run, rowIndex, width, height, lang, number, 
     return <g data-domain-system="sparse-operators" data-domain-row-value={model.value ?? undefined} className="softqp-domain-math">
       <text x={18} y={153} className="softqp-scene-heading">min ½xᵀPx + qᵀx + ∑ φᵢ(Aᵢx)</text>
       <text x={18} y={177}>{t('Algebraic x; units not exported', 'x algebraico; unidades no exportadas')}</text>
-      <text x={pX} y={201}>P [{model.n}×{model.n}]</text><text x={vectorX} y={201}>q</text><text x={xVectorX} y={201 + xOffset}>x</text>
+      <text x={pX} y={201}>P [{model.n}×{model.n}]</text>
+      <text x={vectorX} y={vectorHeadingY}>q</text><text x={xVectorX} y={vectorHeadingY + xOffset}>x</text>
       {columns.map((column, j) => <text key={column} x={pX + (j + .5) * cell} y={pY - 5} textAnchor="middle">{column + 1}</text>)}
       {model.P.values.map((row, i) => <g key={i}><text x={pX - 8} y={pY + i * rowH + 20} textAnchor="end">{columns[i] + 1}</text>{row.map((v, j) => <g key={j} data-matrix="P" data-matrix-row={columns[i]} data-matrix-column={columns[j]} data-coefficient={v}><title>{`${doc.case_id}: ${v}`}</title><rect x={pX + j * cell} y={pY + i * rowH} width={cell - 2} height={rowH - 2} className={`softqp-domain-coefficient${v ? ' present' : ''}`} /><text x={pX + (j + .5) * cell} y={pY + i * rowH + 20} textAnchor="middle">{number(v)}</text></g>)}<text className="softqp-domain-vector" x={vectorX} y={pY + i * rowH + 20}>{number(model.q[i])}</text><text className="softqp-domain-vector" x={xVectorX} y={pY + i * rowH + 20 + xOffset}>{model.x ? number(model.x[i]) : '∅'}</text></g>)}
       <path d={`M${braceX},${pY}h8v${columns.length * rowH + xOffset}h-8`} fill="none" className="softqp-scene-axis" />
@@ -95,7 +97,7 @@ export function SystemDomain({ doc, run, rowIndex, width, height, lang, number, 
     <text x={x0} y={143} className="softqp-scene-heading">min ½xᵀPx + qᵀx + ∑ φᵢ(Aᵢx)</text>
     <text x={x0} y={165}>{t('Stored algebraic coordinates; decision units not exported', 'Coordenadas algebraicas; unidades de x no exportadas')}</text>
     <text x={pX} y={190} className="softqp-scene-heading">P [{model.n}×{model.n}]</text>
-    <text x={vectorX} y={190} className="softqp-scene-heading">q</text><text x={xVectorX} y={190} className="softqp-scene-heading">x</text>
+    <text x={vectorX} y={matrixY - 6} className="softqp-scene-heading">q</text><text x={xVectorX} y={matrixY - 6} className="softqp-scene-heading">x</text>
     {model.P.values.map((row, i) => <g key={i}><text x={pX - 18} y={matrixY + (i + .5) * rh + 5} textAnchor="end">{columns[i] + 1}</text>{row.map((value, j) => <g key={j} data-matrix="P" data-matrix-row={columns[i]} data-matrix-column={columns[j]} data-coefficient={value}><title>{`${doc.case_id}: ${value}`}</title><rect x={pX + j * pCell} y={matrixY + i * rh} width={pCell - 2} height={rh - 2} className={`softqp-domain-coefficient${value ? ' present' : ''}`} /><text x={pX + (j + .5) * pCell} y={matrixY + (i + .5) * rh + 5} textAnchor="middle">{number(value)}</text></g>)}<text className="softqp-domain-vector" x={vectorX} y={matrixY + (i + .5) * rh + 5} data-vector-column={columns[i]}>{number(model.q[i])}</text><text className="softqp-domain-vector" x={xVectorX} y={matrixY + (i + .5) * rh + 5}>{model.x ? number(model.x[i]) : '∅'}</text></g>)}
     <path d={`M${braceX},${matrixY}h8v${rh * columns.length}h-8`} className="softqp-scene-axis" fill="none" />
     <path d={`M${braceX + 8},${matrixY + rh * columns.length / 2} L${split - 8},${selectedY + rh / 2} l-7,-4 m7,4 l-7,4`} className="softqp-scene-axis" fill="none" data-decision-row-link={policy.row.id} />

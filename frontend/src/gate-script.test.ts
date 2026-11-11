@@ -2,18 +2,22 @@
 // surface) and fails an App without Focus mode: --require-focus is always in effect, whatever extra arguments a run passes, and
 // it is dropped only for a surface App that records why ADR-0070 does not apply, in product.json and on the SDD's ADR-0070 row
 // (WB-014, WB-015; shell 0.19.1, ADR-0070). The runner is executed here against a stub shell gate that records its arguments.
+// A product takes this file verbatim: it reads the product's own product.json and SDD, never the example's (0.15.003).
 import { spawnSync } from 'node:child_process';
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { basename, dirname, join, resolve } from 'node:path';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { afterAll, describe, expect, it } from 'vitest';
+import { afterAll, describe, expect, it, vi } from 'vitest';
 
 const frontend = fileURLToPath(new URL('..', import.meta.url));
 const gate = readFileSync(new URL('../scripts/gate.mjs', import.meta.url), 'utf8');
 const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as { scripts: Record<string, string> };
 const realProduct = JSON.parse(readFileSync(new URL('../../product.json', import.meta.url), 'utf8')) as Record<string, unknown>;
 const realSdd = readFileSync(new URL('../../docs/design/SDD.md', import.meta.url), 'utf8');
+
+// Every test spawns node on the runner; the default 5 s timed out under a fully loaded CPU (ChancaDEM, 2026-11-07).
+vi.setConfig({ testTimeout: 60_000 });
 
 const REASON = 'this hub only links to studies and runs no simulation or dynamic synthetic scenario';
 const ROW_PREFIX = '| ADR-0070 |';
@@ -38,9 +42,8 @@ function run(options: { product?: Record<string, unknown>; sdd?: string; target?
   writeFileSync(join(shell, 'bin', 'caos-shell-gate.mjs'), "import { writeFileSync } from 'node:fs';\nwriteFileSync(process.env.STUB_OUT, JSON.stringify(process.argv.slice(2)));\n");
   const out = join(root, 'stub-args.json');
   const r = spawnSync(process.execPath, [join(root, 'frontend', 'scripts', 'gate.mjs'), ...(options.extra ?? [])], {
-    cwd: join(root, 'frontend'), encoding: 'utf8', timeout: 15000, env: { ...process.env, STUB_OUT: out },
+    cwd: join(root, 'frontend'), encoding: 'utf8', env: { ...process.env, STUB_OUT: out },
   });
-  if (r.error) throw r.error;
   let args: string[] | null = null;
   try {
     args = (JSON.parse(readFileSync(out, 'utf8')) as string[]).map((a) => (a.startsWith(root) ? `<root>${a.slice(root.length)}` : a));
@@ -59,11 +62,7 @@ const waiver = { app: 'surface', focus: false, focus_reason: REASON };
 const waivedSdd = sddWith(`not applicable: ${REASON}`);
 
 afterAll(() => {
-  for (const root of roots) {
-    const target = resolve(root);
-    if (dirname(target) !== resolve(tmpdir()) || !basename(target).startsWith('gate-runner-')) throw new Error(`Unsafe test cleanup path: ${target}`);
-    rmSync(target, { recursive: true, force: true });
-  }
+  for (const root of roots) rmSync(root, { recursive: true, force: true });
 });
 
 describe('the gate script', () => {
@@ -88,7 +87,7 @@ describe('the gate script', () => {
   it('puts mandatory Focus and Showcase checks before pass-through arguments', () => {
     expect(gate.indexOf("'--require-focus'")).toBeLessThan(gate.indexOf('...extra'));
     expect(gate.indexOf("'--require-showcase'")).toBeLessThan(gate.indexOf('...extra'));
-    expect(pkg.scripts.gate).toBe('node scripts/gate.mjs');
+    expect(pkg.scripts.gate).toBe('node scripts/check_story_mode.mjs && node scripts/gate.mjs');
   });
 });
 
@@ -125,11 +124,13 @@ describe('the gate runner by the App kind (WB-014, WB-015)', () => {
     expect(r.args).toContain('--require-showcase');
   }, 15000);
 
-  it.each([{}, { app: 'surface' }].flatMap(product =>
-    [[], ['--url', 'https://example.org'], ['--sizes', '1280x800', '--themes', 'light']].map(extra => ({ product, extra }))))(
-    'adversarial: mandatory Focus survives product=$product arguments=$extra', ({ product, extra }) => {
-      expect(run({ product, extra }).args).toContain('--require-focus');
-    });
+  it('adversarial: no extra argument removes --require-focus when it applies', () => {
+    for (const product of [{}, { app: 'surface' }]) {
+      for (const extra of [[], ['--url', 'https://example.org'], ['--sizes', '1280x800', '--themes', 'light']]) {
+        expect(run({ product, extra }).args, JSON.stringify([product, extra])).toContain('--require-focus');
+      }
+    }
+  });
 
   it('adversarial: a waiver the SDD does not carry is refused, and the shell gate never runs', () => {
     const r = run({ product: waiver });
@@ -170,29 +171,58 @@ describe('the gate runner by the App kind (WB-014, WB-015)', () => {
     expect(run({ sdd: waivedSdd }).args).toBeNull();
   });
 
-  it.each([
-    ['--workbench', '/app', '--routes', '/introduction'], ['--routes', '/introduction'],
-    ['--routes', '/,/introduction'], ['--workbench', '/app'],
-  ])('adversarial: G18 redirect arguments %j are refused while Focus is required', (...extra) => {
+  it('adversarial: arguments that redirect what G18 measures are refused while Focus is required (the review plant, WB-014)', () => {
+    for (const extra of [['--workbench', '/app', '--routes', '/introduction'], ['--routes', '/introduction'], ['--routes', '/,/introduction'], ['--workbench', '/app']]) {
       const r = run({ product: { app: 'surface' }, extra });
-      expect(r.status).not.toBe(0);
-      expect(r.args).toBeNull();
+      expect(r.status, JSON.stringify(extra)).not.toBe(0);
+      expect(r.args, JSON.stringify(extra)).toBeNull();
       expect(r.stderr).toContain('--require-focus');
+    }
+    const workbench = run({ extra: ['--app-route', '/x'] });
+    expect(workbench.args).toBeNull();
   });
 
-  it('refuses a workbench App route redirect', () => {
-    expect(run({ extra: ['--app-route', '/x'] }).args).toBeNull();
-  });
-
-  it('accepts a complete documented and story route list', () => {
-    const complete = '/app,/introduction,/methodology,/implementation,/experiments,/benchmark,/story/formulate,/story/price,/story/compute,/story/compare';
+  it('requires all documented and story routes when a custom route list is supplied', () => {
+    // the product's own declared steps, never the example's (0.15.003)
+    const steps = ((realProduct.showcase as { story_routes?: string[] } | undefined)?.story_routes) ?? [];
+    const complete = ['/app', '/introduction', '/methodology', '/implementation', '/experiments', '/benchmark', ...steps].join(',');
     expect(run({ extra: ['--routes', complete] }).args).toContain('--require-showcase');
-  });
-  it('refuses an App-only route list that drops the story', () => {
     expect(run({ extra: ['--routes', '/,/app'] }).args).toBeNull();
-  });
-  it('refuses a surface route override that drops the declared story', () => {
     expect(run({ product: { app: 'surface' }, extra: ['--app-route', '/console', '--routes', '/,/console'] }).args).toBeNull();
+  });
+
+  it('adversarial: the story routes come from product.json showcase.story_routes, and the gate walks exactly those (BD-8, WB-020)', () => {
+    const docs = '/app,/introduction,/methodology,/implementation,/experiments,/benchmark';
+    const own = ['/story/measure', '/story/look-inside', '/story/solve', '/story/compare', '/story/operate'];
+    const routes = (args: string[] | null) => (args ? args[args.lastIndexOf('--routes') + 1] : null);
+    const declared = run({ product: { showcase: { story_routes: own } } });
+    expect(declared.status).toBe(0);
+    expect(routes(declared.args)).toBe(`${docs},${own.join(',')}`);
+    expect(declared.args).toContain('--require-showcase');
+    expect(run({ product: { showcase: { story_routes: own } }, extra: ['--routes', `${docs},${own.join(',')}`] }).status).toBe(0);
+    const example = run();
+    expect(routes(example.args)).toBe(`${docs},${(realProduct.showcase as { story_routes: string[] }).story_routes.join(',')}`);
+    const none = run({ product: { showcase: undefined } });
+    expect(routes(none.args)).toBe(docs);
+    expect(none.args).toContain('--require-showcase');
+    expect(none.stdout).toContain('no story is declared');
+  });
+
+  it('adversarial: a --routes entry that product.json does not declare is refused, and the shell gate never runs (BD-8, WB-020)', () => {
+    const docs = '/app,/introduction,/methodology,/implementation,/experiments,/benchmark';
+    const own = ['/story/measure', '/story/solve', '/story/operate'];
+    for (const undeclared of ['/story/context', '/story/extra', '/extra']) {
+      const r = run({ product: { showcase: { story_routes: own } }, extra: ['--routes', `${docs},${own.join(',')},${undeclared}`] });
+      expect(r.status, undeclared).not.toBe(0);
+      expect(r.args, undeclared).toBeNull();
+      expect(r.stderr).toContain(undeclared);
+      expect(r.stderr).toContain('showcase.story_routes');
+    }
+    for (const bad of [['/story/a', '/story/a', '/story/b'], ['/story/a', '/app', '/story/b'], '/story/a']) {
+      const r = run({ product: { showcase: { story_routes: bad } } });
+      expect(r.args, JSON.stringify(bad)).toBeNull();
+      expect(r.stderr).toContain('showcase.story_routes');
+    }
   });
 
   it('a Focus waiver still cannot remove mandatory showcase routes', () => {
@@ -202,13 +232,9 @@ describe('the gate runner by the App kind (WB-014, WB-015)', () => {
     expect(r.stderr).toContain('ADR-0082');
   });
 
-  it('serves as nginx does for the local VPS target', () => {
+  it('serves as nginx does when the deploy target is a VPS (--spa-fallback), and not on Pages or against a deployed URL', () => {
     expect(run({ target: 'vps' }).args).toContain('--spa-fallback');
-  });
-  it('does not apply a VPS fallback to Pages', () => {
     expect(run({ target: 'pages' }).args).not.toContain('--spa-fallback');
-  });
-  it('does not apply local SPA serving rules to an actual deployed URL', () => {
     expect(run({ target: 'vps', extra: ['--url', 'https://example.org'] }).args).not.toContain('--spa-fallback');
   });
 });

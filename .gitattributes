@@ -14,3 +14,6 @@
 
 # Source-bound contract fixtures include exact registered specifications and numeric bytes.
 /tests/fixtures/learned-contracts/** -text
+
+# Byte-identical published manuscript fixtures exercise the native depth guard.
+/tests/fixtures/manuscript-depth/softqp-published/** -text -whitespace
