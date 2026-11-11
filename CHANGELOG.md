@@ -7,6 +7,7 @@ tagged.
 
 ### Fixed
 
+- Adopt CAOS Product Template 0.15.008 and CAOS App Shell 0.26.0, including the early refusal for version-stamped stage inputs and the latest shared chart, callout, and fitted-card behavior. Requalification against these exact bases remains required before release.
 - Correct the separate native technical report and research preprint with exact method equations, registered acceptance thresholds, reproducible commands, and evidence-derived component and timing tables.
 - Adopt CAOS Product Template 0.15.006 and CAOS App Shell 0.25.0. Use measured callout placement and the shared immersive story layout.
 - Refuse out-of-root or malformed contract inputs consistently and block production fit and calibration until phase-isolated inputs are available.

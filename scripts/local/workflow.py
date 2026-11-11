@@ -468,11 +468,36 @@ def payload_hashes(stage, config, *, directories=None):
     return result
 
 
+VERSION_KEYS = ("engine_version", "product_version")
+
+
+def stamped_input(path):
+    """Whether a file is a version-stamped document: JSON whose top-level object carries a version key."""
+    if path.suffix.lower() != ".json":
+        return False
+    try:
+        value = json.loads(path.read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
+        return False
+    return isinstance(value, dict) and any(key in value for key in VERSION_KEYS)
+
+
 def authored_inputs(root, config):
+    """The ``stage_inputs``: authored sources (tables, configuration) carried byte for byte into the stage.
+
+    A version-stamped document (template 0.15.007, #120) is produced by the generation, never carried: ``validate_stage``
+    refuses a stale stamp only after the whole bake, so the refusal is made here, in the first call of ``generate`` and of
+    the admission, before any stage or generation command exists."""
     inputs = {name: relative(root, name) for name in config.get("stage_inputs", [])}
     for name, path in inputs.items():
         if not path.is_file():
             raise Failure(f"Missing authored stage input: {name}")
+        if stamped_input(path):
+            raise Failure(
+                f"Stage input {name} is a version-stamped document ({' or '.join(VERSION_KEYS)}): such a document is "
+                "produced by the generation and never carried. Remove it from stage_inputs and produce it in a "
+                "generation step (for example the models step before the bake)."
+            )
     return inputs
 
 

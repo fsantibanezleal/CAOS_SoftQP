@@ -76,7 +76,7 @@ The 2026-11-05 candidate pinned published shell 0.20.0. Its v0.20.0 tag peels to
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|
-| shell | @fasl-work/caos-app-shell | 0.25.0 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
+| shell | @fasl-work/caos-app-shell | 0.26.0 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
 | tooling | @types/node | 24.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -241,6 +241,10 @@ Offline stages: ingest source/registry -> validate -> generate/pin seeds and spl
 ## Visualization catalog
 
 Current visualization design reconciliation, 2026-11-05. This section specifies the replacement of the historical violation-chart entry view. It records a present design rather than claiming that these requirements preceded the original implementation. The published base is CAOS_PRODUCT_TEMPLATE 0.15.006 (4b6a1e4058a1b39fb32b0ad52f1c222bffb68165) with CAOS App Shell 0.25.0 (8e8398d55cd9ee40f0d79b3c3f506fb0f2e24c65). The declared story runs Formulate, Price, Compute and Compare. Its callouts reserve the measured shell header band. The remaining height is the drawing surface, and the phone stage floor includes both regions. All views share the selected case, method, interval row and recorded stream frame. Inputs are verified replay or a verified local-native import; a selection never becomes a new browser solve. Shared stage, story, callout and transition behavior belongs to the shell.
+
+### Current base adoption, 2026-11-11
+
+The candidate now adopts CAOS_PRODUCT_TEMPLATE 0.15.008 and CAOS App Shell 0.26.0. The shell fixes natural PlotCard header sizing, redraws moving chart marks, publishes settled callout-band measurements, gives callout values a dedicated row, and exposes carousel semantics only when cards are hidden. It also adds explicit UTC/local time-axis handling and formatter caching. The product's elapsed-day charts use `formatNumber`; it does not use calendar-time axes. The full product gate must be rerun against these exact installed packages before promotion.
 
 | id | question | data contract | kind | interactions | linked views | placement |
 |---|---|---|---|---|---|---|

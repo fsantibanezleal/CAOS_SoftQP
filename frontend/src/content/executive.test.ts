@@ -131,7 +131,7 @@ function citations(): Array<{ source: string; tab: number }> {
 
 describe('the example executive view', () => {
   it('pins the admitted shared shell release with linked scenes and StoryFrame', () => {
-    expect(pkg.dependencies['@fasl-work/caos-app-shell']).toBe('0.25.0');
+    expect(pkg.dependencies['@fasl-work/caos-app-shell']).toBe('0.26.0');
     expect(EXECUTIVE_SCHEMA_VERSION).toBe('2.0.0');
   });
 
