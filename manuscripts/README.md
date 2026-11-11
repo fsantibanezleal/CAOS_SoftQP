@@ -4,7 +4,7 @@ The product technical report and research preprint are separate documents. Both 
 the canonical CAOS Research foundational LaTeX article: native equations, section structure, ORCID, boxed
 document identity, running headers and navy links. The research paper contains no chapters.
 
-| Document | Editable revision source | Published PDF | Persistent concept |
+| Document | Editable source | Published PDF | Persistent concept |
 |---|---|---|---|
 | Seven Methods for Soft-Constraint Quadratic Programming: Contracts and Two Negative Timing Studies | [main.tex](soft-constraint-study/main.tex) | [main.pdf](soft-constraint-study/main.pdf) | [Technical report](https://doi.org/10.5281/zenodo.23851659) |
 | Original-Row Proximal Splitting for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies | [main.tex](coupled-peak-study/main.tex) | [main.pdf](coupled-peak-study/main.pdf) | [Research preprint](https://doi.org/10.5281/zenodo.23875071) |
@@ -14,9 +14,9 @@ and conditional rules. The paper develops each proposed update separately, with 
 and limitations. Coverage maps bind those requirements to distinct source sections. Primary bibliography,
 algorithms, physical units, complete populations, uncertainty and unsuccessful outcomes are included.
 
-The editable sources on this branch are working revisions. The two published PDFs in the table correspond
-to the source tree at commit [bbdd790](https://github.com/fsantibanezleal/CAOS_SoftQP/tree/bbdd7909b2ee523881383764eb969eaab079d4de/manuscripts).
-Running the documented build creates draft PDFs in an external directory.
+The two published PDFs in the table correspond to the editable source tree at commit
+[1860d9a](https://github.com/fsantibanezleal/CAOS_SoftQP/tree/1860d9ad94352999adbcbd364b8a3a015948ed32/manuscripts).
+The documented build writes its output to an external directory.
 
 ## Build and evidence
 
@@ -51,9 +51,9 @@ PDF and metadata acceptance before publication. Each manuscript record carries e
 and supporting artifacts remain in Git and the separate dataset. The technical report is a report; the research
 manuscript is a preprint. Publication does not establish scientific superiority or qualified product acceptance.
 
-The current independently verified versions are [technical report 0.01.002](https://doi.org/10.5281/zenodo.23899079)
-and [research preprint 0.02.002](https://doi.org/10.5281/zenodo.23899142). Each passed all 39 governed publication checks;
-anonymous complete public PDFs, exact metadata and public editable sources were independently verified.
+The current independently verified versions are [technical report 0.01.003](https://doi.org/10.5281/zenodo.24122924)
+and [research preprint 0.02.003](https://doi.org/10.5281/zenodo.24122893).
+Each passed all 39 governed publication checks, including an anonymous full-PDF download and exact metadata verification.
 
-[Independent reciprocal dataset verification](independent-public-dataset-relations-review.md) confirms both new citations,
-all historical relations and the unchanged original dataset version and file objects.
+[Independent reciprocal dataset verification](independent-public-dataset-relations-review.md) records the links
+for the previous manuscript versions and the original dataset file identities.
