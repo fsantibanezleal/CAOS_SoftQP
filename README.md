@@ -74,11 +74,13 @@ The [product technical report](https://doi.org/10.5281/zenodo.23851659) covers m
 The research preprint derives both original-row updates and presents their distinct experiments.
 Both use the canonical section-based LaTeX article template; [editable sources and build instructions](manuscripts/README.md)
 are available alongside the PDFs. Neither registered improvement criterion is established.
-The independently verified replacements are [technical report 0.01.002](https://doi.org/10.5281/zenodo.23899079)
-and [research preprint 0.02.002](https://doi.org/10.5281/zenodo.23899142).
+The current independently verified replacements are [technical report 0.01.003](https://doi.org/10.5281/zenodo.24122924)
+and [research preprint 0.02.003](https://doi.org/10.5281/zenodo.24122893).
 
 The complete numerical validation uses [explicit test profiles](docs/testing-profiles.md): the ordinary public-wheel regression, exact historical-source positive controls and the separate SDK2 suite. Source identity is never replaced by a matching version label.
 
-The document correction retains the numerical bake from 0.01.001. The readiness metadata explicitly labels its
-four version-dependent catalog boundaries as an older bake; the preserved results remain inspectable.
-No numerical observations or registered statistics were regenerated for this correction.
+The current 0.01.003 candidate includes a fresh, externally staged bake of all fifteen authored cases and manifests.
+The workflow validated original-space metrics, contracts, document inventories and current-version readiness before
+promoting the stage. The six historical registered-experiment inputs were carried byte-for-byte; neither timing
+study was rerun or altered by this case bake. The committed case results are newly computed and have their own
+execution timings, which are descriptive rather than substitutes for the frozen studies.

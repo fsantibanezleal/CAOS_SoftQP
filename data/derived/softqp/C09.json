@@ -2762,7 +2762,7 @@
           "rows": 140,
           "variables": 60
         },
-        "elapsed_seconds": 0.0032052000024123117,
+        "elapsed_seconds": 0.005454700003610924,
         "iterations": 275,
         "method": "lifted",
         "metrics": {
@@ -2959,8 +2959,8 @@
             0.0
           ]
         },
-        "setup_seconds": 0.0001434,
-        "solve_seconds": 0.0006109,
+        "setup_seconds": 0.0001602,
+        "solve_seconds": 0.0010815,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -3059,7 +3059,7 @@
           "rows": 60,
           "variables": 20
         },
-        "elapsed_seconds": 0.0012668999988818541,
+        "elapsed_seconds": 0.0024772000033408403,
         "iterations": 250,
         "method": "generalized",
         "metrics": {
@@ -3256,8 +3256,8 @@
             0.0
           ]
         },
-        "setup_seconds": 8.85e-05,
-        "solve_seconds": 0.0003564,
+        "setup_seconds": 8.36e-05,
+        "solve_seconds": 0.0005763,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -3356,7 +3356,7 @@
           "rows": 60,
           "variables": 20
         },
-        "elapsed_seconds": 0.001182599997264333,
+        "elapsed_seconds": 0.00254690001020208,
         "iterations": 250,
         "method": "asymmetric",
         "metrics": {
@@ -3553,8 +3553,8 @@
             0.0
           ]
         },
-        "setup_seconds": 7.59e-05,
-        "solve_seconds": 0.000371,
+        "setup_seconds": 0.0001832,
+        "solve_seconds": 0.0005707,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -3673,7 +3673,7 @@
           "rows": 60,
           "variables": 20
         },
-        "elapsed_seconds": 0.00016999999934341758,
+        "elapsed_seconds": 0.00019759999122470617,
         "iterations": 5,
         "method": "daqp",
         "metrics": {
@@ -3870,8 +3870,8 @@
             0.0
           ]
         },
-        "setup_seconds": 1.74e-05,
-        "solve_seconds": 5e-06,
+        "setup_seconds": 1.54e-05,
+        "solve_seconds": 6.9e-06,
         "status": "optimal",
         "status_code": 1,
         "x": [
