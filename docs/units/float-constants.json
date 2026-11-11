@@ -28,6 +28,8 @@
     "data-pipeline/pipeline/io/__init__.py",
     "data-pipeline/pipeline/io/contract.py",
     "data-pipeline/pipeline/io/formats.py",
+    "data-pipeline/pipeline/learned_comparison/__init__.py",
+    "data-pipeline/pipeline/learned_comparison/contracts.py",
     "data-pipeline/pipeline/lesson_process.py",
     "data-pipeline/pipeline/optimality.py",
     "data-pipeline/pipeline/oracles.py",
@@ -631,15 +633,15 @@
       "unit": "1/m",
       "rationale": "This authored authored lower directional departure scale is expressed in 1/m; it belongs to the stated canonical coordinates, not a universal observable bound."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:160:29": {
+    "data-pipeline/pipeline/coupled_lessons.py:163:29": {
       "value": "0.6",
-      "context_sha256": "bd807b17d1ff8dd336ce953c3f9bd3786f44f9a5fbcd71398deb87d9fee43d19",
+      "context_sha256": "153a1798d033f3eaa63bfb13f7d582b64972739e168841d1287f8f49dbe5e351",
       "expression": "def run_comparison(*, linear=0.6, quadratic=0, upper_scale=1, row_scale=1):",
       "quantity": "authored linear dimensionless-peak price",
       "unit": "objective-unit",
       "rationale": "This authored authored linear dimensionless-peak price is expressed in objective-unit; it belongs to the stated canonical coordinates, not a universal observable bound."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:131:19": {
+    "data-pipeline/pipeline/coupled_lessons.py:134:19": {
       "value": "1.5",
       "context_sha256": "fa70ab53a55388d5ec05815be4063a9e050c31eae850a1280d3e9907ca340647",
       "expression": "k = max(upper, 1.5)",
@@ -647,7 +649,7 @@
       "unit": "1/m",
       "rationale": "This authored authored lower directional departure scale is expressed in 1/m; it belongs to the stated canonical coordinates, not a universal observable bound."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:149:65": {
+    "data-pipeline/pipeline/coupled_lessons.py:152:65": {
       "value": "1.5",
       "context_sha256": "720be69fb14396bb3348a7d33eec7ae494a7f2f94750331e6f6fdd06ed442fe8",
       "expression": "peak = max(upper*max(x-1, 0), max(y-1, 0), max(-1-x, 0), 1.5*max(-1-y, 0))",
@@ -655,7 +657,7 @@
       "unit": "1/m",
       "rationale": "This authored authored lower directional departure scale is expressed in 1/m; it belongs to the stated canonical coordinates, not a universal observable bound."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:154:84": {
+    "data-pipeline/pipeline/coupled_lessons.py:157:84": {
       "value": "1e-05",
       "context_sha256": "5d09c141e1fbcbc1a8e38133b4747ce0c1a51b19acb56e82cd64e90548286358",
       "expression": "if record[\"state\"] == \"accepted\" and (max(abs(x-optimum), abs(y+optimum)) > 1e-5",
@@ -663,7 +665,7 @@
       "unit": "m",
       "rationale": "This authored didactic analytic decision agreement band is expressed in m; it belongs to the stated canonical coordinates, not a universal observable bound."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:155:70": {
+    "data-pipeline/pipeline/coupled_lessons.py:158:70": {
       "value": "1e-06",
       "context_sha256": "5d09c141e1fbcbc1a8e38133b4747ce0c1a51b19acb56e82cd64e90548286358",
       "expression": "or record[\"kkt_max\"] > 1e-6 or abs(x+y) > 1e-6):",
@@ -671,7 +673,7 @@
       "unit": "m",
       "rationale": "This didactic original hard equality acceptance band is measured in m; it is separate from frozen scientific criteria."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:155:89": {
+    "data-pipeline/pipeline/coupled_lessons.py:158:89": {
       "value": "1e-06",
       "context_sha256": "5d09c141e1fbcbc1a8e38133b4747ce0c1a51b19acb56e82cd64e90548286358",
       "expression": "or record[\"kkt_max\"] > 1e-6 or abs(x+y) > 1e-6):",
@@ -679,7 +681,7 @@
       "unit": "m",
       "rationale": "This didactic original hard equality acceptance band is measured in m; it is separate from frozen scientific criteria."
     },
-    "data-pipeline/pipeline/coupled_lessons.py:151:44": {
+    "data-pipeline/pipeline/coupled_lessons.py:154:44": {
       "value": "1e-07",
       "context_sha256": "2baacdbcf5fa4e159e3cf7bcd844ffcee43bec8267fc7983b02303ffaf7536ac",
       "expression": "if any(abs(record[name] - actual) > 1e-7*max(1, abs(actual)) for name, actual in",
@@ -1198,6 +1200,366 @@
       "quantity": "relative backend residual stopping ratio",
       "unit": "dimensionless",
       "rationale": "This literal defines relative backend residual stopping ratio in dimensionless; its dimensional role is specific to this source expression."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1617:48": {
+      "value": "1e-06",
+      "context_sha256": "4f7c3b6a9e0214648438aeee554c9f9d31602bfc2095a51bccfbe5499ac27749",
+      "expression": "def _recovery(problem, candidate, *, hard_limit=1e-6, limit=1e-5):",
+      "quantity": "candidate canonical bound and auxiliary objective tolerance",
+      "unit": "canonical row-coordinate unit for absolute bound departures; dimensionless for relative objective discrepancy",
+      "rationale": "The recovery reader uses this default both for each lifted row bound margin and for the relative mismatch between canonical auxiliary cost and the recomputed original objective. The two checks use their stated canonical reference magnitudes."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1617:60": {
+      "value": "1e-05",
+      "context_sha256": "4f7c3b6a9e0214648438aeee554c9f9d31602bfc2095a51bccfbe5499ac27749",
+      "expression": "def _recovery(problem, candidate, *, hard_limit=1e-6, limit=1e-5):",
+      "quantity": "candidate canonical stationarity and complementarity limit",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The recovery reader bounds the lifted gradient after scaling by the largest canonical gradient term and bounds each dual times bound departure after scaling by canonical cost magnitudes."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1646:21": {
+      "value": "1e-07",
+      "context_sha256": "314379b338b6bb866d14f6589622e940a631fb1673a69d79f8ec8fab709c14b0",
+      "expression": "(dual <= 1e-7 or up is not None) and (dual >= -1e-7 or lo is not None),",
+      "quantity": "positive canonical dual allowance at an absent upper side",
+      "unit": "objective-unit per canonical row unit",
+      "rationale": "With no finite upper bound the positive canonical dual must stay below this absolute allowance in that row's dual coordinate. The recovery map defines positive dual as upper-side orientation."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1646:59": {
+      "value": "1e-07",
+      "context_sha256": "314379b338b6bb866d14f6589622e940a631fb1673a69d79f8ec8fab709c14b0",
+      "expression": "(dual <= 1e-7 or up is not None) and (dual >= -1e-7 or lo is not None),",
+      "quantity": "negative canonical dual allowance at an absent lower side",
+      "unit": "objective-unit per canonical row unit",
+      "rationale": "With no finite lower bound the canonical dual may be negative only down to the negative of this allowance in that row's dual coordinate. The recovery map defines negative dual as lower-side orientation."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1681:70": {
+      "value": "1e-07",
+      "context_sha256": "25d58e5d3dcfedcee712ad7f623c98c8849ab960fdb88b578f02e378d9acb82f",
+      "expression": "e[\"t\"][gid] == value and e[\"mu\"][gid] == mu and value >= -1e-7 and mu >= -1e-7,",
+      "quantity": "recovered epigraph peak nonnegativity allowance",
+      "unit": "declared peak-coordinate unit",
+      "rationale": "The reader checks the returned epigraph peak against the recorded lifted variable and admits a negative roundoff allowance in its canonical peak coordinate. The peak reference magnitude is one."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1681:86": {
+      "value": "1e-07",
+      "context_sha256": "25d58e5d3dcfedcee712ad7f623c98c8849ab960fdb88b578f02e378d9acb82f",
+      "expression": "e[\"t\"][gid] == value and e[\"mu\"][gid] == mu and value >= -1e-7 and mu >= -1e-7,",
+      "quantity": "recovered epigraph nonnegativity dual allowance",
+      "unit": "objective-unit per declared peak-coordinate unit",
+      "rationale": "The reader recovers mu by reversing the signed multiplier on the nonnegative peak row and applies this negative-roundoff allowance in the corresponding peak dual coordinate."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1688:79": {
+      "value": "1e-07",
+      "context_sha256": "0af12366e85b8bbea70389661c99211335462eb096a27553c6ae9b4b6cfabcdf",
+      "expression": "ensure(e[\"lambda_\" + side][i] == multiplier and multiplier >= -1e-7, \"peak side multiplier\")",
+      "quantity": "recovered epigraph side multiplier nonnegativity allowance",
+      "unit": "objective-unit per declared peak-coordinate unit",
+      "rationale": "Each directional epigraph side is expressed in the group peak coordinate. Its recorded multiplier must equal the recovered value and satisfy the stated nonnegativity allowance in objective units per peak unit."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1695:27": {
+      "value": "1e-05",
+      "context_sha256": "873b9547a0f05cb90ebd1db43d53474ede7643d6b814030f9c36377240fad3ae",
+      "expression": "<= 1e-5,",
+      "quantity": "epigraph side complementarity limit",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The recovery reader multiplies a side multiplier by the matching peak-unit slack and divides the resulting objective-scale product by the largest corresponding cost magnitude. R4 numerical-spec.md sets the supplemental side complementarity limit."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1701:93": {
+      "value": "1e-05",
+      "context_sha256": "29f968da1d79a541afeefc93d688659cdbadf966e310c11177184223029d302b",
+      "expression": "abs(g[\"linear\"] + g[\"quadratic\"] * value - sum(multipliers) - mu) / denom <= 1e-5",
+      "quantity": "epigraph group stationarity limit",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The peak price derivative minus recovered side and nonnegativity multipliers has objective units per peak unit. The reader divides by the largest magnitude of those terms and the one-unit reference before applying this R4 limit."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1702:69": {
+      "value": "1e-05",
+      "context_sha256": "29f968da1d79a541afeefc93d688659cdbadf966e310c11177184223029d302b",
+      "expression": "and abs(mu * value) / max(1, abs(mu), abs(value)) <= 1e-5,",
+      "quantity": "epigraph nonnegativity complementarity diagnostic limit",
+      "unit": "dimensionless numeric scalar in fixed canonical reference coordinates",
+      "rationale": "The reader compares the absolute product of mu and the peak with this limit after dividing by the maximum of one and the two separate canonical numeric magnitudes. R4 numerical-spec.md describes cost-unit normalization, so dimensional equivalence of this denominator requires separate review."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1755:79": {
+      "value": "1e-08",
+      "context_sha256": "8644357558e63f6d1d1bc7a2f1759192668e56f05d945f844c8737af8252171a",
+      "expression": "(max(objectives) - min(objectives)) / max(1, *map(abs, objectives)) <= 1e-8,",
+      "quantity": "three-reference objective agreement limit",
+      "unit": "dimensionless relative objective discrepancy",
+      "rationale": "R4 numerical-spec.md bounds the spread of independently recomputed reference objectives divided by the largest absolute objective or the fixed objective reference unit before using their median."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1775:54": {
+      "value": "1e-08",
+      "context_sha256": "f69ca4304c1a8cd19ca2e6baff81294e6137d0c8d3fdc7319135a52237ea56d5",
+      "expression": "_recovery(problem, o[\"candidate\"], hard_limit=1e-8, limit=1e-8)",
+      "quantity": "reference canonical bound and auxiliary objective tolerance",
+      "unit": "canonical row-coordinate unit for absolute bound departures; dimensionless for relative objective discrepancy",
+      "rationale": "The reference admission passes this tighter value to the recovery reader for both lifted row bound departures and the normalized auxiliary objective mismatch. The two uses retain their own canonical reference magnitudes."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1775:66": {
+      "value": "1e-08",
+      "context_sha256": "f69ca4304c1a8cd19ca2e6baff81294e6137d0c8d3fdc7319135a52237ea56d5",
+      "expression": "_recovery(problem, o[\"candidate\"], hard_limit=1e-8, limit=1e-8)",
+      "quantity": "reference canonical stationarity and complementarity limit",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The reference admission tightens the recovery reader's normalized lifted-gradient and dual-product checks. Both ratios use the fixed canonical reference magnitudes."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1781:39": {
+      "value": "1e-08",
+      "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
+      "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "reference original-space hard-row departure limit (H)",
+      "unit": "dimensionless original-row departure divided by its fixed canonical reference magnitude",
+      "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This is the maximum hard-row departure relative to its declared original-row reference magnitude. The stored reference magnitudes are exactly one in canonical coordinates."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1781:52": {
+      "value": "1e-08",
+      "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
+      "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "reference original-space stationarity limit (K)",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This is the worse original-space gradient ratio from the raw and repaired duals, each scaled by its own canonical gradient-term magnitude."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1781:65": {
+      "value": "1e-08",
+      "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
+      "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "reference original-space individual Fenchel defect limit (F)",
+      "unit": "dimensionless relative objective defect",
+      "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This bounds the largest individual row or peak-group Fenchel defect after dividing by its own objective-scale denominator."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1781:82": {
+      "value": "1e-08",
+      "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
+      "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "reference original-space aggregate Fenchel defect limit (F_all)",
+      "unit": "dimensionless relative objective defect",
+      "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This bounds the aggregate Fenchel discrepancy using its objective-scale denominator while the individual row and group checks remain separate."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1781:95": {
+      "value": "1e-09",
+      "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
+      "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "reference original-space dual repair magnitude limit (D)",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This bounds the largest recovered-to-repaired original dual difference relative to the canonical raw dual magnitude and its one-unit reference floor."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1837:45": {
+      "value": "1e-08",
+      "context_sha256": "c8a2c8fa4d504efd83164e9a8e42e34bf998dcab7b1a0f34758b231b8cf3576f",
+      "expression": "_recovery(problem, candidate, hard_limit=1e-8, limit=1e-8)",
+      "quantity": "cold DAQP label candidate canonical bound and auxiliary objective tolerance",
+      "unit": "canonical row-coordinate unit for absolute bound departures; dimensionless for relative objective discrepancy",
+      "rationale": "The cold DAQP label candidate admission passes this tighter value to the recovery reader for both lifted row bound departures and the normalized auxiliary objective mismatch. The two uses retain their own canonical reference magnitudes."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1837:57": {
+      "value": "1e-08",
+      "context_sha256": "c8a2c8fa4d504efd83164e9a8e42e34bf998dcab7b1a0f34758b231b8cf3576f",
+      "expression": "_recovery(problem, candidate, hard_limit=1e-8, limit=1e-8)",
+      "quantity": "cold DAQP label candidate canonical stationarity and complementarity limit",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The cold DAQP label candidate admission tightens the recovery reader's normalized lifted-gradient and dual-product checks. Both ratios use the fixed canonical reference magnitudes."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1842:33": {
+      "value": "1e-08",
+      "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
+      "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "cold DAQP label candidate original-space hard-row departure limit (H)",
+      "unit": "dimensionless original-row departure divided by its fixed canonical reference magnitude",
+      "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This is the maximum hard-row departure relative to its declared original-row reference magnitude. The stored reference magnitudes are exactly one in canonical coordinates."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1842:46": {
+      "value": "1e-08",
+      "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
+      "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "cold DAQP label candidate original-space stationarity limit (K)",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This is the worse original-space gradient ratio from the raw and repaired duals, each scaled by its own canonical gradient-term magnitude."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1842:59": {
+      "value": "1e-08",
+      "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
+      "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "cold DAQP label candidate original-space individual Fenchel defect limit (F)",
+      "unit": "dimensionless relative objective defect",
+      "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This bounds the largest individual row or peak-group Fenchel defect after dividing by its own objective-scale denominator."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1842:76": {
+      "value": "1e-08",
+      "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
+      "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "cold DAQP label candidate original-space aggregate Fenchel defect limit (F_all)",
+      "unit": "dimensionless relative objective defect",
+      "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This bounds the aggregate Fenchel discrepancy using its objective-scale denominator while the individual row and group checks remain separate."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1842:89": {
+      "value": "1e-09",
+      "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
+      "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
+      "quantity": "cold DAQP label candidate original-space dual repair magnitude limit (D)",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This bounds the largest recovered-to-repaired original dual difference relative to the canonical raw dual magnitude and its one-unit reference floor."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1864:14": {
+      "value": "1e-07",
+      "context_sha256": "76f9b7344106f1548e505c017913ec78961f8545b525c1b6fe7619a36506469d",
+      "expression": "tau = 1e-7 * max(1, abs(bound))",
+      "quantity": "GNN inequality label slack tolerance factor",
+      "unit": "dimensionless relative scale",
+      "rationale": "R4 learning-spec.md multiplies this factor by the maximum of one and the absolute signed canonical bound to obtain the slack ambiguity threshold. The resulting threshold has the bound's coordinate unit before nondimensionalization."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1866:48": {
+      "value": "1e-07",
+      "context_sha256": "9b2a24923fb2505648aa073a57448ed1a41c6ee4f145fa8c84dd3a1192ae50c5",
+      "expression": "1 if abs(d) <= tau and multiplier > 1e-7 else (0 if d > tau and abs(multiplier) <= 1e-7 else None)",
+      "quantity": "GNN positive label multiplier threshold",
+      "unit": "dimensionless canonical graph dual coordinate, with physical scale objective-unit per canonical row unit",
+      "rationale": "A close-to-tight inequality is labeled positive only when its signed one-sided cold DAQP multiplier is strictly greater than this threshold. R4 learning-spec.md assigns ambiguous rows no label."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1866:95": {
+      "value": "1e-07",
+      "context_sha256": "9b2a24923fb2505648aa073a57448ed1a41c6ee4f145fa8c84dd3a1192ae50c5",
+      "expression": "1 if abs(d) <= tau and multiplier > 1e-7 else (0 if d > tau and abs(multiplier) <= 1e-7 else None)",
+      "quantity": "GNN negative label multiplier threshold",
+      "unit": "dimensionless canonical graph dual coordinate, with physical scale objective-unit per canonical row unit",
+      "rationale": "A sufficiently slack inequality is labeled negative only when the absolute one-sided cold DAQP multiplier is at most this threshold. R4 learning-spec.md assigns ambiguous rows no label."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2050:29": {
+      "value": "0.001",
+      "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
+      "expression": "\"learning_rate\": 0.001,",
+      "quantity": "AdamW learning rate",
+      "unit": "dimensionless training-step multiplier",
+      "rationale": "R4 learning-spec.md sets the same scalar step size for the normalized L2WS and GNN optimization coordinates. The checkpoint reader compares the recorded setting exactly."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2051:28": {
+      "value": "0.0001",
+      "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
+      "expression": "\"weight_decay\": 0.0001 if method == \"learned_osqp\" else 0.01,",
+      "quantity": "L2WS AdamW decoupled weight-decay coefficient",
+      "unit": "dimensionless optimizer coefficient",
+      "rationale": "R4 learning-spec.md fixes this decay setting for learned_osqp. The checkpoint reader checks the L2WS branch of the optimizer definition."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2051:68": {
+      "value": "0.01",
+      "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
+      "expression": "\"weight_decay\": 0.0001 if method == \"learned_osqp\" else 0.01,",
+      "quantity": "GNN AdamW decoupled weight-decay coefficient",
+      "unit": "dimensionless optimizer coefficient",
+      "rationale": "R4 learning-spec.md fixes this decay setting for learned_daqp. The checkpoint reader checks the GNN branch of the optimizer definition."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2052:21": {
+      "value": "0.9",
+      "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
+      "expression": "\"beta1\": 0.9,",
+      "quantity": "AdamW first-moment decay factor",
+      "unit": "dimensionless",
+      "rationale": "R4 learning-spec.md pins beta1 as the exponential averaging coefficient for the optimizer's first gradient moment. The checkpoint reader compares that value exactly."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2053:21": {
+      "value": "0.999",
+      "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
+      "expression": "\"beta2\": 0.999,",
+      "quantity": "AdamW second-moment decay factor",
+      "unit": "dimensionless",
+      "rationale": "R4 learning-spec.md pins beta2 as the exponential averaging coefficient for the optimizer's second gradient moment. The checkpoint reader compares that value exactly."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2054:19": {
+      "value": "1e-08",
+      "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
+      "expression": "\"eps\": 1e-8,",
+      "quantity": "AdamW denominator stabilizer",
+      "unit": "gradient RMS coordinate in dimensionless training coordinates",
+      "rationale": "R4 learning-spec.md pins epsilon for the optimizer's square-root second-moment denominator. The checkpoint reader checks the exact parameter in the normalized learning coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2153:16": {
+      "value": "0.0",
+      "context_sha256": "f602326b9a51904300cb7c5b6221128e322a430154a4e251eac84fdfe6f93db0",
+      "expression": "mass = [0.0, 0.0]",
+      "quantity": "initial source-weighted negative label mass",
+      "unit": "dimensionless weighted class fraction",
+      "rationale": "This zero initializes N0 before adding each training frame's source-balanced weight times its fraction of unmasked negative labels. An absent class fails the registered fit check."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2153:21": {
+      "value": "0.0",
+      "context_sha256": "f602326b9a51904300cb7c5b6221128e322a430154a4e251eac84fdfe6f93db0",
+      "expression": "mass = [0.0, 0.0]",
+      "quantity": "initial source-weighted positive label mass",
+      "unit": "dimensionless weighted class fraction",
+      "rationale": "This zero initializes N1 before adding each training frame's source-balanced weight times its fraction of unmasked positive labels. The admitted positive prior uses N1 divided by total class mass."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2560:30": {
+      "value": "1e-06",
+      "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
+      "expression": "(\"H\", 1e-6),",
+      "quantity": "candidate original-space hard-row departure limit (H)",
+      "unit": "dimensionless original-row departure divided by its fixed canonical reference magnitude",
+      "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This is the maximum hard-row departure relative to its declared original-row reference magnitude. The stored reference magnitudes are exactly one in canonical coordinates."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2561:30": {
+      "value": "1e-06",
+      "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
+      "expression": "(\"G\", 1e-6),",
+      "quantity": "candidate relative objective-gap limit (G)",
+      "unit": "dimensionless relative objective discrepancy",
+      "rationale": "R4 numerical-spec.md bounds the absolute gap to the admitted median reference objective divided by the larger of its absolute magnitude and the fixed objective reference unit."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2562:30": {
+      "value": "1e-05",
+      "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
+      "expression": "(\"K\", 1e-5),",
+      "quantity": "candidate original-space stationarity limit (K)",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This is the worse original-space gradient ratio from the raw and repaired duals, each scaled by its own canonical gradient-term magnitude."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2563:30": {
+      "value": "1e-05",
+      "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
+      "expression": "(\"F\", 1e-5),",
+      "quantity": "candidate original-space individual Fenchel defect limit (F)",
+      "unit": "dimensionless relative objective defect",
+      "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This bounds the largest individual row or peak-group Fenchel defect after dividing by its own objective-scale denominator."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2564:34": {
+      "value": "1e-05",
+      "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
+      "expression": "(\"F_all\", 1e-5),",
+      "quantity": "candidate original-space aggregate Fenchel defect limit (F_all)",
+      "unit": "dimensionless relative objective defect",
+      "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This bounds the aggregate Fenchel discrepancy using its objective-scale denominator while the individual row and group checks remain separate."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2565:30": {
+      "value": "1e-07",
+      "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
+      "expression": "(\"D\", 1e-7),",
+      "quantity": "candidate original-space dual repair magnitude limit (D)",
+      "unit": "dimensionless in the fixed canonical reference coordinates",
+      "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This bounds the largest recovered-to-repaired original dual difference relative to the canonical raw dual magnitude and its one-unit reference floor."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2834:66": {
+      "value": "0.1",
+      "context_sha256": "68dae15c831f6bb3dcdbb8b33ab237578becf20eeb804ea3c067a5aaf39b5f85",
+      "expression": "and hypothesis[\"qualified\"] == (interval[0] > 0.10)",
+      "quantity": "registered learned-method timing reduction floor",
+      "unit": "dimensionless relative wall-time reduction fraction",
+      "rationale": "R4 timing-spec.md requires the lower crossed-bootstrap interval endpoint to be strictly above ten percent for an otherwise admitted hypothesis. The statistic uses complete trajectory cost ratios."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2914:21": {
+      "value": "0.0125",
+      "context_sha256": "9f939c07e8937e0568b6e26ccf28cdf2afc8497d009551437a07c03c8b6469d2",
+      "expression": "return [quantile(0.0125), quantile(0.9875)]",
+      "quantity": "lower crossed-bootstrap quantile probability",
+      "unit": "dimensionless probability",
+      "rationale": "R4 timing-spec.md selects the lower tail at probability 0.0125 from the ordered bootstrap estimates using type 7 interpolation. This is one endpoint of the 97.5 percent marginal interval."
+    },
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2914:39": {
+      "value": "0.9875",
+      "context_sha256": "9f939c07e8937e0568b6e26ccf28cdf2afc8497d009551437a07c03c8b6469d2",
+      "expression": "return [quantile(0.0125), quantile(0.9875)]",
+      "quantity": "upper crossed-bootstrap quantile probability",
+      "unit": "dimensionless probability",
+      "rationale": "R4 timing-spec.md selects the upper tail at probability 0.9875 from the ordered bootstrap estimates using type 7 interpolation. This is the other endpoint of the 97.5 percent marginal interval."
     },
     "data-pipeline/pipeline/lesson_process.py:175:27": {
       "value": "0.01",
