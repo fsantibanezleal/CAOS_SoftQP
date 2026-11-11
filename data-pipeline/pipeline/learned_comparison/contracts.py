@@ -354,7 +354,9 @@ class _AdmissionSession:
         self.frames = []
 
     def read(self, path, *, root=False, schema=False):
-        key = os.path.normcase(str(path))
+        # Callers resolve artifact paths before lookup. Windows case folding can
+        # collapse distinct NTFS filenames, so retain their resolved spelling.
+        key = str(path)
         raw = self.schemas.get(key) if schema else self.raw.get(key)
         if raw is None:
             raw = path.read_bytes()
@@ -513,9 +515,11 @@ def schema_validate(document: dict[str, Any]) -> None:
     ensure(document.get("kind") in KINDS, "unknown contract kind")
     path = SCHEMAS / ("softqp-" + document["kind"] + ".schema.json")
     try:
-        errors = sorted(
-            _validator(_snapshot_bytes(path, schema=True)).iter_errors(document), key=lambda e: str(e.path)
-        )
+        schema_raw = _snapshot_bytes(path, schema=True)
+    except OSError as error:
+        raise ContractError(f"schema bytes unavailable: {path.name}") from error
+    try:
+        errors = sorted(_validator(schema_raw).iter_errors(document), key=lambda e: str(e.path))
         reason = str(errors[0])[:500] if errors else ""
     except ContractError:
         raise
@@ -544,19 +548,53 @@ def _relative_parts(relative: str) -> tuple[str, ...]:
     return p.parts
 
 
+def _resolved_within(path: Path, root: Path) -> bool:
+    """Compare canonical component spellings without Windows Path case folding."""
+    return path.parts[: len(root.parts)] == root.parts
+
+
+def _inside_protected_root(path: Path, root: Path) -> bool:
+    resolved = root.resolve()
+    if resolved.exists():
+        return _resolved_within(path, resolved)
+    # A future protected location has no filesystem identity. Reserve its aliases conservatively.
+    return path.is_relative_to(resolved)
+
+
+def _refuse_reparse(path: Path) -> None:
+    ensure(
+        not path.is_symlink() and not (hasattr(path, "is_junction") and path.is_junction()),
+        "symlink/reparse escape",
+    )
+
+
+def _requested_relative(path: Path, base: Path) -> str:
+    lexical = Path(os.path.abspath(path))
+    prefix = Path(*lexical.parts[: len(base.parts)])
+    ensure(prefix == base, "input outside configured artifact root")
+    if prefix.parts != base.parts:
+        # A folded prefix match permits an identity check. Windows can fold two
+        # names that the actual filesystem treats as distinct directories.
+        try:
+            for component in (*reversed(prefix.parents), prefix):
+                _refuse_reparse(component)
+            resolved_prefix = prefix.resolve(strict=True)
+        except OSError as error:
+            raise ContractError("input outside configured artifact root") from error
+        ensure(resolved_prefix.parts == base.parts, "input outside configured artifact root")
+    return "/".join(lexical.parts[len(base.parts) :])
+
+
 def safe_path(root: Path, relative: str, *, must_exist: bool) -> Path:
     parts = _relative_parts(relative)
     base = root.resolve(strict=True)
     current = base
     for component in parts:
         current = current / component
-        ensure(
-            not current.is_symlink() and not (hasattr(current, "is_junction") and current.is_junction()),
-            "symlink/reparse escape",
-        )
+        _refuse_reparse(current)
     ensure(not must_exist or current.is_file(), "missing artifact file: " + relative)
     resolved = current.resolve(strict=must_exist)
-    ensure(resolved.is_relative_to(base) and resolved != base, "artifact escaped root")
+    ensure(_resolved_within(resolved, base) and resolved.parts != base.parts, "artifact escaped root")
     return resolved
 
 
@@ -674,6 +712,7 @@ class AdmissionContext:
 
     def __post_init__(self):
         ensure(self.root.is_absolute() and self.root.exists(), "external context root missing")
+        resolved_root = self.root.resolve()
         ensure(
             all(
                 type(raw) is bytes and len(raw) > 0 and digest(raw) == expected
@@ -688,7 +727,7 @@ class AdmissionContext:
         )
         ensure(
             not any(
-                (parent / ".git").exists() for parent in (self.root.resolve(), *self.root.resolve().parents)
+                (parent / ".git").exists() for parent in (resolved_root, *resolved_root.parents)
             ),
             "artifact root inside a Git checkout",
         )
@@ -702,12 +741,11 @@ class AdmissionContext:
         )
         # Pure lexical metadata preflight only. Each actual input/output still
         # receives current safe_path reparse and root checks when it is used.
-        base = self.root.resolve()
         object.__setattr__(
             self,
             "_input_aliases",
             frozenset(
-                os.path.normcase(str(base.joinpath(*_relative_parts(ref["path"]))))
+                os.path.normcase(str(resolved_root.joinpath(*_relative_parts(ref["path"]))))
                 for ref in self.catalog.values()
             ),
         )
@@ -726,7 +764,7 @@ class AdmissionContext:
                 "production diagnostic matrix differs from registration",
             )
         for base in self.forbidden_roots:
-            ensure(not self.root.resolve().is_relative_to(base.resolve()), "context root inside checkout")
+            ensure(not _inside_protected_root(resolved_root, base), "context root inside checkout")
 
 
 def _references(value: Any) -> list[Reference]:
@@ -1251,25 +1289,25 @@ def _dataset(payload, context, document, stack):
 def _split(payload, context, document, stack):
     dataset = dependency(payload["dataset"], context, stack)
     grouped = {}
+    frame_hashes: dict[str, list[str]] = {}
     for entry in dataset["problems"]:
         source = entry["source"]
+        source_id = source["source_id"]
         item = grouped.setdefault(
-            source["source_id"],
+            source_id,
             {
-                "source_id": source["source_id"],
+                "source_id": source_id,
                 "parent_id": source["parent_id"],
                 "input_sha256": source["input_sha256"],
                 "split": source["split"],
                 "problem_ids": [],
             },
         )
-        # Source input digest covers every frame, not an arbitrarily chosen first frame.
+        # Accumulate every frame hash in the existing dataset entry order.
         item["problem_ids"].append(entry["problem"]["artifact_id"])
+        frame_hashes.setdefault(source_id, []).append(source["input_sha256"])
     for source_id, item in grouped.items():
-        entry_hashes = [
-            e["source"]["input_sha256"] for e in dataset["problems"] if e["source"]["source_id"] == source_id
-        ]
-        item["input_sha256"] = digest(canonical_bytes(entry_hashes))
+        item["input_sha256"] = digest(canonical_bytes(frame_hashes[source_id]))
         item["problem_ids"].sort()
     expected = [grouped[k] for k in sorted(grouped)]
     ensure(payload["assignments"] == expected, "split differs from source-bound dataset")
@@ -3068,17 +3106,29 @@ def _admit_document(document, context, *, usage, stack, raw=None):
     session.validated.put(
         (artifact.raw_sha256, usage),
         (artifact, frozen),
-        len(artifact.raw) + sum(len(value.encode("utf-8")) + 64 for value in frozen),
+        # Canonical JSON preserves escaped surrogate code points. Estimate the
+        # string storage without attempting to encode each artifact ID.
+        len(artifact.raw) + sum(4 * len(value) + 64 for value in frozen),
     )
     if session.frames:
         session.frames[-1].update(frozen)
     return artifact
 
 
+def _require_consumer_usage(usage: str, context: AdmissionContext) -> None:
+    ensure(usage in ("consume", "fit", "calibrate"), "unknown consumer usage")
+    # The general admission path traverses the full source-bound graph.
+    ensure(
+        usage == "consume" or context.allow_fixture,
+        "production fit/calibrate requires isolated role-scoped admission",
+    )
+
+
 def validate_artifact(
     document: dict[str, Any], context: AdmissionContext, *, usage="consume", _stack=()
 ) -> Artifact:
     """Fresh strict producer admission; dependencies share only this call's snapshot."""
+    _require_consumer_usage(usage, context)
     with _admission(context):
         return _admit_document(document, context, usage=usage, stack=_stack)
 
@@ -3086,11 +3136,10 @@ def validate_artifact(
 def read_artifact(
     path: Path, context: AdmissionContext, *, expected_sha256: str | None = None, usage="consume", _stack=()
 ) -> Artifact:
+    _require_consumer_usage(usage, context)
     with _admission(context):
-        lexical = Path(os.path.abspath(path))
-        ensure(lexical.is_relative_to(context.root.resolve()), "input outside configured artifact root")
-        relative = lexical.relative_to(context.root.resolve()).as_posix()
-        path = safe_path(context.root, relative, must_exist=True)
+        base = context.root.resolve()
+        path = safe_path(base, _requested_relative(path, base), must_exist=True)
         raw = _snapshot_bytes(path, context, root=not _stack)
         if expected_sha256 is not None:
             ensure(digest(raw) == expected_sha256, "actual input byte hash mismatch")
@@ -3113,7 +3162,7 @@ def read_artifacts(requests: Sequence[ReadRequest], context: AdmissionContext) -
         ensure(len(ordered) < MAX_BATCH_REQUESTS, "batch request limit exceeded")
         ensure(isinstance(request, ReadRequest), "untyped batch request")
         ensure(isinstance(request.path, Path), "batch request path must be Path")
-        ensure(request.usage in ("consume", "fit", "calibrate"), "unknown consumer usage")
+        _require_consumer_usage(request.usage, context)
         ensure(
             request.expected_sha256 is None
             or (
@@ -3148,7 +3197,7 @@ def write_artifact(document: dict[str, Any], relative: str, context: AdmissionCo
         "output inside a Git checkout",
     )
     for forbidden in context.forbidden_roots:
-        ensure(not path.is_relative_to(forbidden.resolve()), "output inside checkout/protected root")
+        ensure(not _inside_protected_root(path, forbidden), "output inside checkout/protected root")
     ensure(
         os.path.normcase(str(path)) not in context._input_aliases and not path.exists(),
         "output aliases an input/existing authority",

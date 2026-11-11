@@ -65,7 +65,7 @@ def test_all_boundaries_roundtrip(bundle, kind):
         "negative-zero",
     ],
 )
-def test_strict_json_both_sides(bundle, mutation):
+def test_adversarial_strict_json_both_sides(bundle, mutation):
     context, docs, _ = bundle
     doc = copy.deepcopy(docs["problem-train"])
     if mutation == "unknown":
@@ -118,7 +118,7 @@ def test_strict_json_both_sides(bundle, mutation):
         "protocol-registration",
     ],
 )
-def test_provenance_mutations(bundle, field):
+def test_adversarial_provenance_mutations(bundle, field):
     context, docs, _ = bundle
     doc = copy.deepcopy(docs["features"] if field == "parent" else docs["problem-train"])
     if field in ["protocol_id", "protocol_sha256", "source_lock_sha256"]:
@@ -162,7 +162,7 @@ def test_provenance_mutations(bundle, field):
         "unknown-transform",
     ],
 )
-def test_problem_mutations(bundle, mutation):
+def test_adversarial_problem_mutations(bundle, mutation):
     context, docs, _ = bundle
     doc = copy.deepcopy(docs["problem-train"])
     p = doc["payload"]
@@ -217,7 +217,7 @@ def test_problem_mutations(bundle, mutation):
         "unknown-head",
     ],
 )
-def test_split_and_features_mutations(bundle, mutation):
+def test_adversarial_split_and_features_mutations(bundle, mutation):
     context, docs, _ = bundle
     doc = copy.deepcopy(
         docs["split"] if mutation in ["heldout-fit", "split-relabel", "parent-overlap"] else docs["features"]
@@ -273,7 +273,7 @@ def test_real_fit_reader_refuses_heldout(bundle):
         "missing-calibration",
     ],
 )
-def test_checkpoint_and_calibration_mutations(bundle, mutation):
+def test_adversarial_checkpoint_and_calibration_mutations(bundle, mutation):
     context, docs, refs = bundle
     doc = copy.deepcopy(
         docs["calibration"]
@@ -344,7 +344,7 @@ def test_checkpoint_and_calibration_mutations(bundle, mutation):
         "failure-dropped",
     ],
 )
-def test_result_mutations(bundle, mutation):
+def test_adversarial_result_mutations(bundle, mutation):
     context, docs, _ = bundle
     doc = copy.deepcopy(docs["result"])
     p = doc["payload"]
@@ -399,7 +399,7 @@ def test_result_mutations(bundle, mutation):
         "model-stale",
     ],
 )
-def test_evaluation_and_export_mutations(bundle, mutation):
+def test_adversarial_evaluation_and_export_mutations(bundle, mutation):
     context, docs, _ = bundle
     doc = copy.deepcopy(
         docs["export"] if mutation.startswith("replay") or mutation == "model-stale" else docs["evaluation"]
@@ -441,7 +441,7 @@ def test_evaluation_and_export_mutations(bundle, mutation):
         "protocol.json",
     ],
 )
-def test_atomic_output_refusal(bundle, path):
+def test_adversarial_atomic_output_refusal(bundle, path):
     context, docs, _ = bundle
     before = {p.name: p.read_bytes() for p in context.root.iterdir() if p.is_file()}
     with pytest.raises(c.ContractError):
@@ -463,7 +463,7 @@ def test_atomic_failure_cleans_temporary_and_preserves_existing(bundle, monkeypa
 
 
 @pytest.mark.parametrize("kind", c.KINDS)
-def test_missing_and_fixture_lanes(bundle, kind):
+def test_adversarial_missing_and_fixture_lanes(bundle, kind):
     context, docs, _ = bundle
     missing = envelope(kind, "missing-" + kind, None, context, missing=True)
     artifact = c.write_artifact(missing, "missing-" + kind + ".json", context)
@@ -651,7 +651,7 @@ def test_hard_and_zero_price_finite_sides(bundle):
         ("NC24-tiny-positive-upper-recession", False),
     ],
 )
-def test_exact_unbounded_reader_refutes_tiny_dyadic_screens(bundle, name, valid):
+def test_adversarial_exact_unbounded_reader_refutes_tiny_dyadic_screens(bundle, name, valid):
     context, docs, _ = bundle
     frozen = next(v["fixture"] for v in context.authority.controls if v["id"] == name)
     o = make_problem()["original"]
@@ -736,7 +736,7 @@ def numeric_refuse(document, context, label, *, reason="lossless-float64"):
         source.unlink()
 
 
-def test_bounded_integer_recession_witness_refused_before_rounding(bundle):
+def test_adversarial_bounded_integer_recession_witness_refused_before_rounding(bundle):
     context, _, _ = bundle
     N = 2**54
     o = make_problem()["original"]
@@ -953,7 +953,7 @@ def test_all_numeric_schema_nodes_declare_lossless_float64():
         "calibration-checkpoint",
     ],
 )
-def test_graph_and_calibration_real_boundaries(graph_bundle, mutation):
+def test_adversarial_graph_and_calibration_real_boundaries(graph_bundle, mutation):
     context, docs, refs = graph_bundle
     for name in ["graph-features", "graph-checkpoint", "calibration-labels", "graph-calibration"]:
         assert c.read_artifact(context.root / refs[name]["path"], context).state == "provider"

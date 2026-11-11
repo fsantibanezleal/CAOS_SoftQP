@@ -1,5 +1,27 @@
 # U1 validation and acceptance boundary
 
+| Requirement | Adversarial check | Gate |
+|---|---|---|
+| LC-001 | Plant invalid or ambiguous JSON in the actual writer and reader. | `tests/test_learned_contracts.py::test_adversarial_strict_json_both_sides` |
+| LC-002 | Rehash artifacts after changing the protocol, source-lock or parent identity and require refusal. | `tests/test_learned_contracts.py::test_adversarial_provenance_mutations` |
+| LC-003 | Plant malformed sparse indices, wrong units, invalid curvature and mismatched transforms. | `tests/test_learned_contracts.py::test_adversarial_problem_mutations` |
+| LC-004 | Plant split and feature identity mutations and require refusal. Payload isolation during fit remains an integration gate. | `tests/test_learned_contracts.py::test_adversarial_split_and_features_mutations` |
+| LC-005 | Substitute checkpoint and calibration identity or numeric payload fields. | `tests/test_learned_contracts.py::test_adversarial_checkpoint_and_calibration_mutations` |
+| LC-006 | Plant false original metrics or recovery values in the result. | `tests/test_learned_contracts.py::test_adversarial_result_mutations` |
+| LC-007 | Plant missing or tampered expected evaluation and replay cells. | `tests/test_learned_contracts.py::test_adversarial_evaluation_and_export_mutations` |
+| LC-008 | Send an aliased, unsafe or outside destination through the actual writer. | `tests/test_learned_contracts.py::test_adversarial_atomic_output_refusal` |
+| LC-009 | Try to consume the fixture as production evidence and require refusal. | `tests/test_learned_contracts.py::test_adversarial_missing_and_fixture_lanes` |
+| LC-010 | Mutate declared representation or input policy and verify the original mapping contract rejects it. | `tests/test_learned_contracts.py::test_adversarial_problem_mutations` |
+| LC-011 | Mutate a graph or calibration boundary backed by actual numeric bytes. | `tests/test_learned_contracts.py::test_adversarial_graph_and_calibration_real_boundaries` |
+| LC-012 | Plant a nonzero dyadic curvature or violated recession sign within numerical screening tolerances. | `tests/test_learned_contracts.py::test_adversarial_exact_unbounded_reader_refutes_tiny_dyadic_screens` |
+| LC-013 | Send invalid payloads through the runtime reader and writer in addition to the static TypedDict schema comparison. | `tests/test_learned_contracts.py::test_adversarial_strict_json_both_sides` |
+| LC-014 | Submit an integer whose rounded value would let a false recession proof pass. | `tests/test_learned_contracts.py::test_adversarial_bounded_integer_recession_witness_refused_before_rounding` |
+| LC-015 | Change bytes without changing file size after an earlier call and require fresh refusal. | `tests/test_learned_contract_scale.py::test_adversarial_cross_call_same_size_mutations_cannot_reuse_success` |
+| LC-016 | Plant an ancestor cycle through a cached dependency and require full batch refusal. | `tests/test_learned_contract_scale.py::test_adversarial_cached_dependency_still_refuses_an_ancestor_cycle` |
+| LC-017 | Try to write to a reserved input and check the untouched unrelated catalog. | `tests/test_learned_contract_scale.py::test_adversarial_writer_alias_index_reads_no_unrelated_paths_and_refuses_reserved_input` |
+| LC-018 | Replace the historical producer identity and require refusal. | `tests/test_learned_contract_scale.py::test_adversarial_unknown_historical_fixture_producer_identity_refuses` |
+| LC-019 | Submit fit and calibration through scalar, validation and mixed batch paths in production context; replace the first I/O boundary with a failure and prove none is reached. | `tests/test_learned_contract_scale.py::test_adversarial_production_training_usage_refuses_before_reads` |
+
 ## Reachable-reader/batch source unit
 
 The accepted195-control baseline is retained unchanged. The new reader-admission.md freezes the reachable first-read snapshot,256request batch bound, bounded2048entry/64MiB caches, exact-byte freshness, cached-cycle refusal and immutable alias-index contract. New tests/test_learned_contract_scale.py records deterministic actual read counts, fresh same-size root/parent/numeric/schema mutation, shared positive DAGs, usage/context/hash/cardinality failures, cache eviction/concurrent mutation semantics and historical-producer source trust. These controls are authored but unexecuted while root owns the shell resource window. No full-count IO, RSS or throughput claim is made at this source stage.
