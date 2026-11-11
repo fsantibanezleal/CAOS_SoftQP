@@ -104,7 +104,7 @@ describe.skipIf(!productURL)('actual Workbench reciprocal inspection (requires a
   });
   it('refutes stale case/method/native content across URL changes and reload', async () => {
     await page.goto(`${productURL}/story/formulate?case=C04&method=lifted&row=1`); await checkRow(c04, 1);
-    await page.locator('#story-case').selectOption('C12'); await checkRow(c12, 1);
+    await page.getByRole('combobox', { name: 'Case', exact: true }).selectOption('C12'); await checkRow(c12, 1);
     expect(await page.locator('[data-linked-id^="C04:"]').count()).toBe(0);
     // A direct unknown-method URL exercises the public unavailable path without modifying artifacts.
     await page.goto(`${productURL}/story/formulate?case=C12&method=unknown-method&row=1`);

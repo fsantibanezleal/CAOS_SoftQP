@@ -32,7 +32,7 @@ The initial reviewed154-test implementation was rejected on independent U1-01: e
 
 Authorship is complete and ready for independent review. U1 has not independently accepted itself and does not admit scientific generation, registration, new solver/runtime packages, training, qualified results, publication or deployment. The global method/model floor remains open.
 
-Focused SDK1 test command: E:/_venvs/softqp/.venv-local/Scripts/python.exe -m pytest tests/test_learned_contracts.py -q -p no:cacheprovider --basetemp=E:/_Temp/softqp-product-bar-20261105/method-extension-contracts/pytest-review-final --junitxml=E:/_Temp/softqp-product-bar-20261105/method-extension-contracts/pytest-review-final.xml. Exit0:154tests,0failures,0errors,0skips. The raw XML/log, all case names, eleven-boundary schema/example hashes and missing-state consumer checks are in the private method-extension-contracts evidence directory. All eleven actual writers/readers are exercised; every accepted emitted file has actual-byte verification, and two explicit writes per boundary produce identical UTF8/LF bytes.
+Run the original focused SDK1 gate with the configured external Python runtime and scratch: `python -m pytest tests/test_learned_contracts.py -q -p no:cacheprovider --basetemp <scratch> --junitxml <receipt>`. The preserved initial run recorded 154 passing tests, with zero failures, errors or skips. Its full log, schema/example digests and missing-state checks remain in the private acceptance evidence.
 
 The final scope also passes compileall with PYTHONPYCACHEPREFIX external on E:, Ruff checks and formatting. The preserved initial red-import.log records ModuleNotFoundError before implementation. Refusals call the real reader and writer, rehash mutated outer envelopes and assert no partial output or changed source bytes. Real NTFS junction and Git checkout escapes are refused, so path admission has no skipped control.
 
@@ -44,7 +44,7 @@ Preservation:78initial protected old contract/example/data/model files have iden
 
 Independent U1 review, root-owned main catalog/SDD/type adoption and later U2-U6 work remain pending. Existing18historical contracts, product metadata, frontend, engine source and manuscript payloads were not edited by this unit.
 
-Final state-audit correction: diagnostic inconclusive records with absent or screen-only exact certificates serialize without public unboundedness. Both tiny-dyadic controls exercise this through the real reader/writer. The prior83-file author candidate and receipts were preserved under E:/_Temp/softqp-product-bar-20261105/method-extension-contracts/author-freeze-r1-preserved/ before this narrow correction. No sealed R4 math/keyset changed.
+Final state-audit correction: diagnostic inconclusive records with absent or screen-only exact certificates serialize without public unboundedness. Both tiny-dyadic controls exercise this through the real reader/writer. The prior83-file author candidate and receipts were preserved under the private author-freeze-r1-preserved evidence directory before this narrow correction. No sealed R4 math/keyset changed.
 
 The final provenance audit also enforces unique registered source-unit slots, held-out-only primary results, checkpoint held-out split membership and identical exact source-frame inputs for paired methods/controls. Individually valid but different inputs are refused at evaluation. Zero-timing negative diagnostics retain their raw native flag separately; absent exact proof remains inconclusive, never public unboundedness.
 

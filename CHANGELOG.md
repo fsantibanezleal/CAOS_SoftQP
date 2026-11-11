@@ -3,6 +3,16 @@
 All notable changes to this product. Versions are X.XX.XXX (VERSION is the single source); every release is
 tagged.
 
+## [0.01.003], 2026-11-10
+
+### Fixed
+
+- Correct the separate native technical report and research preprint with exact method equations, registered acceptance thresholds, reproducible commands, and evidence-derived component and timing tables.
+- Adopt CAOS Product Template 0.15.006 and CAOS App Shell 0.25.0. Use measured callout placement and the shared immersive story layout.
+- Refuse out-of-root or malformed contract inputs consistently and block production fit and calibration until phase-isolated inputs are available.
+
+The site candidate remains under acceptance review. This version does not add trained methods or alter either registered timing study.
+
 ## [0.01.002], 2026-11-02
 
 ### Fixed
