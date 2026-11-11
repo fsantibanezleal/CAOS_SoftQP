@@ -66,7 +66,7 @@ export function SystemDomain({ doc, run, rowIndex, width, height, lang, number, 
     return <g data-domain-system="sparse-operators" data-domain-row-value={model.value ?? undefined} className="softqp-domain-math">
       <text x={18} y={153} className="softqp-scene-heading">min ½xᵀPx + qᵀx + ∑ φᵢ(Aᵢx)</text>
       <text x={18} y={177}>{t('Algebraic x; units not exported', 'x algebraico; unidades no exportadas')}</text>
-      <text x={pX} y={201}>P [{model.n}×{model.n}]</text>
+      <text x={pX} y={190}>P [{model.n}×{model.n}]</text>
       <text x={vectorX} y={vectorHeadingY}>q</text><text x={xVectorX} y={vectorHeadingY + xOffset}>x</text>
       {columns.map((column, j) => <text key={column} x={pX + (j + .5) * cell} y={pY - 5} textAnchor="middle">{column + 1}</text>)}
       {model.P.values.map((row, i) => <g key={i}><text x={pX - 8} y={pY + i * rowH + 20} textAnchor="end">{columns[i] + 1}</text>{row.map((v, j) => <g key={j} data-matrix="P" data-matrix-row={columns[i]} data-matrix-column={columns[j]} data-coefficient={v}><title>{`${doc.case_id}: ${v}`}</title><rect x={pX + j * cell} y={pY + i * rowH} width={cell - 2} height={rowH - 2} className={`softqp-domain-coefficient${v ? ' present' : ''}`} /><text x={pX + (j + .5) * cell} y={pY + i * rowH + 20} textAnchor="middle">{number(v)}</text></g>)}<text className="softqp-domain-vector" x={vectorX} y={pY + i * rowH + 20}>{number(model.q[i])}</text><text className="softqp-domain-vector" x={xVectorX} y={pY + i * rowH + 20 + xOffset}>{model.x ? number(model.x[i]) : '∅'}</text></g>)}

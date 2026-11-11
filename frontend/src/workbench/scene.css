@@ -23,7 +23,7 @@
 .softqp-scene-band { fill: var(--color-accent); opacity: .15; }
 .softqp-scene-step { fill: var(--color-surface); stroke: var(--color-border); cursor: pointer; }
 .softqp-scene-step.selected { stroke: var(--color-accent); stroke-width: 2; }
-@media (prefers-reduced-motion: no-preference) { .softqp-scene-svg { animation: softqp-scene-reveal 600ms ease-out; } @keyframes softqp-scene-reveal { from { opacity: .35; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } } }
+@media (prefers-reduced-motion: no-preference) { .softqp-scene-svg { animation: softqp-scene-reveal 600ms ease-out; } @keyframes softqp-scene-reveal { from { transform: translateY(8px); } to { transform: translateY(0); } } }
 
 .softqp-scene-scrub { fill: var(--color-bg); fill-opacity: 0; cursor: crosshair; }
 

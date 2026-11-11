@@ -23,7 +23,11 @@ export function MeasuredExperiments(){
   const methods=Object.keys(names).filter(method=>timing.some(c=>c.method===method&&c.median_seconds!==null));
   const failures=Object.entries(campaign.counts).filter(([key])=>!['accepted','incompatible'].includes(key));
   return <>
-    <DocSection area="results" title={{en:'Two separate registered timing studies',es:'Dos estudios temporales registrados separados'}} noRefsReason={own}><RegisteredStudies campaign={campaign} /></DocSection>
+    <DocSection area="results" title={{en:'Two separate registered timing studies',es:'Dos estudios temporales registrados separados'}} noRefsReason={own}>
+      <PlotCard title={{en:'Registered paired timing result',es:'Resultado temporal pareado registrado'}} lane="replay" provenance="synthetic">
+        <RegisteredStudies campaign={campaign} />
+      </PlotCard>
+    </DocSection>
     <DocSection area="results" title={{en:'Original preregistered computational experiment',es:'Experimento computacional original prerregistrado'}} noRefsReason={own}>
       {source==='fixture'&&<Callout variant="honest" title={t('Provider evidence','Evidencia del proveedor')}>{t('This build reads the isolated development provider, using the same validators and byte checks.','Esta compilación lee el proveedor de desarrollo aislado mediante los mismos validadores y controles de bytes.')}</Callout>}
       <P en={`The original campaign completed ${campaign.completed_instances} of ${campaign.planned_instances} seeded instances. It retains ${campaign.counts.accepted??0} accepted measured observations and ${campaign.counts.incompatible??0} incompatible cells, plus ${failures.reduce((s,[,n])=>s+(n??0),0)} failed, rejected or bounded observations. Warm-up records remain in the raw files and are excluded from the summaries. The timed ordinary lift and projection use the same native fork; the accuracy oracle is independent stock OSQP.`}
