@@ -9,8 +9,11 @@ model is
  \quad\text{subject to}\quad
  \ell_i\leq A_ix\leq u_i\quad(i\in\mathcal H).
 \end{equation}
-The function $g$ is separable for the first method and a sum over disjoint
-directional groups for the second. Both constructions keep physical hard
+The soft price $g$ is separable for the first method and a sum over disjoint
+directional groups for the second. Write
+$g_{\mathrm{all}}(z)=g(z)+\sum_{i\in\mathcal H}\iota_{[\ell_i,u_i]}(z_i)$,
+where each indicator is zero on its hard interval and infinite outside.
+Both constructions keep physical hard
 policy distinct from numerical penalty parameters. An elastic optimum can
 purchase a preferred-row violation; that does not change what constitutes
 hard feasibility.
@@ -29,9 +32,11 @@ It is not a changing physical price or an arbitrary dense coupling matrix.
 \begin{tabularx}{\textwidth}{@{}lXX@{}}\toprule
 Symbol & Meaning & Dimension\\\midrule
 $x,z=Ax$ & Decision and original row value & Decision / row unit\\
+$P,q,A$ & Curvature, linear cost, row map & Cost/decision unit squared; cost/decision unit; row/decision unit\\
 $C,\Pi_C,r$ & Interval box, box projection and residual & Row space / row unit\\
 $a_i,b_i$ & Linear and quadratic side price & Cost/row unit; cost/row unit squared\\
 $c_{U,i},c_{L,i}$ & Directional scale & Peak unit/row unit\\
+$a_g,b_g$ & Linear and quadratic peak price & Cost/peak unit; cost/peak unit squared\\
 $\Psi,g_C$ & Residual and eliminated interval penalty & Cost\\
 $H,\alpha$ & Fixed proximal metric and relaxation & Cost/row unit squared; dimensionless\\
 $y,\sigma_C,\Psi^*$ & Original multiplier, support and conjugate & Cost/row unit; cost; cost\\

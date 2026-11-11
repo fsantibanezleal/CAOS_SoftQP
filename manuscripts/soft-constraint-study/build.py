@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 import importlib.util
+from generate_timing_cells import TARGET as timing_table, render as render_timing_table
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -22,6 +23,8 @@ if args.refresh_results:
     raise SystemExit(0)
 if not results.is_file() or results.read_text(encoding="utf-8") != expected:
     raise ValueError("Coupled-study numbers differ from the accepted complete-study evidence.")
+if timing_table.read_text(encoding="utf-8") != render_timing_table():
+    raise ValueError("Original timing cell table differs from the committed experiment.")
 spec = importlib.util.spec_from_file_location("manuscript_compiler", ROOT / "scripts/build_manuscript.py")
 compiler = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(compiler)

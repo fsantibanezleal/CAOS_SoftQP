@@ -11,20 +11,20 @@ than justified by assuming a sign-symmetric penalty~\cite{gsp,lew}.
 
 For one nonempty interval $[\ell,u]$, write
 \begin{equation}\label{eq:paper-side-cost}
- g(z)=a_L(\ell-z)_++a_U(z-u)_+
+ \phi(z)=a_L(\ell-z)_++a_U(z-u)_+
        +\tfrac12b_L(\ell-z)_+^2+\tfrac12b_U(z-u)_+^2,
  \quad a_L,a_U,b_L,b_U\geq0.
 \end{equation}
 If a side is absent its term is omitted. A zero linear or quadratic
 coefficient is admissible; a negative quadratic coefficient is not. On a
-hard row $g$ is replaced by the interval indicator rather than approximated
+hard row the corresponding term of $g_{\mathrm{all}}$ is the interval indicator rather than approximated
 by a very large finite price. The distinction avoids confusing an elastic
 optimum with physical hard feasibility. It also keeps the mathematical
 domain unchanged when a local cost multiplier is varied.
 
 For a temporary scalar $v$ and fixed positive metric $h$, define
 \begin{equation}\label{eq:paper-scalar-prox}
- p_h(v)=\argmin_z\left\{g(z)+\tfrac h2(z-v)^2\right\}.
+ p_h(v)=\argmin_z\left\{\phi(z)+\tfrac h2(z-v)^2\right\}.
 \end{equation}
 The displacement term is strongly convex even if both quadratic side
 prices vanish, so the proximal minimizer is unique. The penalty is zero
@@ -73,7 +73,7 @@ $C=[\ell,u]$, $r=z-\Pi_C(z)$ and
  \Psi(r)=a_U(r)_++a_L(-r)_+
              +\tfrac12b_U(r)_+^2+\tfrac12b_L(-r)_+^2.
 \end{equation}
-Then $g(z)=\Psi(z-\Pi_C(z))$. A corrective slack $s$ used in
+Then $\phi(z)=\Psi(z-\Pi_C(z))$. A corrective slack $s$ used in
 $z+s\in C$ has the opposite sign and cost $\Psi(-s)$. Forgetting
 that reflection exchanges lower and upper prices while preserving an
 apparently convex objective. Such a solver can converge successfully to
@@ -84,7 +84,7 @@ coefficients directly.
 Dual consistency supplies another independent check. For finite endpoints
 and positive quadratic coefficients, the conjugate is
 \begin{equation}\label{eq:paper-side-conjugate}
-g^*(y)=\begin{cases}
+\phi^*(y)=\begin{cases}
  uy+[(y-a_U)_+]^2/(2b_U),&y\geq0,\\
  \ell y+[(-y-a_L)_+]^2/(2b_L),&y<0.
 \end{cases}
@@ -101,7 +101,7 @@ For the full problem, original stationarity and subgradient consistency
 require
 \begin{equation}\label{eq:paper-side-kkt}
  Px+q+A^\top y=0,\qquad
- Ax=\prox_g^{H_0}(Ax+H_0^{-1}y),
+ Ax=\prox_{g_{\mathrm{all}}}^{H_0}(Ax+H_0^{-1}y),
 \end{equation}
 where $H_0$ is an explicitly selected positive diagonal diagnostic metric
 with cost per squared row-unit entries, not the iteration's numerical

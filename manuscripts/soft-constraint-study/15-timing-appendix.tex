@@ -1,0 +1,27 @@
+\section{Complete original timing cells}\label{sec:timing-appendix}
+
+Table~\ref{tab:timing-cells} expands the original aggregate timing summary
+used by the experiment reader. Its 600 rows retain 288 development cells,
+288 held-out cells and 24 robustness cells. A row describes one method
+at a specified split, penalty family, decision dimension $n$, matrix
+density and diagonal Hessian condition $\kappa$. The split codes
+D, H and R denote development, held-out and robustness. The family codes
+AE, AL and SE denote asymmetric elastic, asymmetric linear and symmetric
+elastic penalties. Gen.\ projection identifies the published generalized
+slack projection. Side-specific identifies the original-row separable
+interval update.
+
+Each populated timing field gives the median followed by the first and
+third quartiles of cold validated-call durations, in milliseconds.
+The A and I counts preserve the accepted and incompatible measured
+observations. There were no failed, rejected or timed-out observations in
+this original grid. An incompatible cell has no duration. Each cell
+combines repetitions and seeds at its own parameter settings, so its
+interquartile range describes dispersion within that cell. The 95\%
+seed-cluster interval for the paired primary endpoint instead belongs to
+Table~\ref{tab:main-results}. The two summaries answer different questions.
+The complete cell inventory lets a reader inspect the same filters as
+the browser without treating a single selected slice as the primary
+analysis.
+
+\input{generated/timing-cells.tex}

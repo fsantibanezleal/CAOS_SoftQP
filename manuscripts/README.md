@@ -4,15 +4,19 @@ The product technical report and research preprint are separate documents. Both 
 the canonical CAOS Research foundational LaTeX article: native equations, section structure, ORCID, boxed
 document identity, running headers and navy links. The research paper contains no chapters.
 
-| Document | Editable source | PDF | Persistent concept |
+| Document | Editable revision source | Published PDF | Persistent concept |
 |---|---|---|---|
-| Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results | [main.tex](soft-constraint-study/main.tex) | [main.pdf](soft-constraint-study/main.pdf) | [Technical report](https://doi.org/10.5281/zenodo.23851659) |
-| Original-Row Proximal Updates for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies | [main.tex](coupled-peak-study/main.tex) | [main.pdf](coupled-peak-study/main.pdf) | [Research preprint](https://doi.org/10.5281/zenodo.23875071) |
+| Seven Methods for Soft-Constraint Quadratic Programming: Contracts and Two Negative Timing Studies | [main.tex](soft-constraint-study/main.tex) | [main.pdf](soft-constraint-study/main.pdf) | [Technical report](https://doi.org/10.5281/zenodo.23851659) |
+| Original-Row Proximal Splitting for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies | [main.tex](coupled-peak-study/main.tex) | [main.pdf](coupled-peak-study/main.pdf) | [Research preprint](https://doi.org/10.5281/zenodo.23875071) |
 
 The report covers all seven executable method rows and all eighteen contracts, including nested schema fields
 and conditional rules. The paper develops each proposed update separately, with its own derivation, experiment
 and limitations. Coverage maps bind those requirements to distinct source sections. Primary bibliography,
 algorithms, physical units, complete populations, uncertainty and unsuccessful outcomes are included.
+
+The editable sources on this branch are working revisions. The two published PDFs in the table correspond
+to the source tree at commit [bbdd790](https://github.com/fsantibanezleal/CAOS_SoftQP/tree/bbdd7909b2ee523881383764eb969eaab079d4de/manuscripts).
+Running the documented build creates draft PDFs in an external directory.
 
 ## Build and evidence
 

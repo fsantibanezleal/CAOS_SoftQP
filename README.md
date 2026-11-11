@@ -7,9 +7,9 @@
 
 [Software archive, latest version](https://doi.org/10.5281/zenodo.23891595) · [native LaTeX sources](manuscripts/README.md)
 
-Inspect constraint trade-offs with reproducible quadratic programs.
+Explore seven soft-constraint QP methods and the evidence from two timing studies.
 
-*Examina compromisos entre restricciones con programas cuadráticos reproducibles.*
+*Explora siete métodos para QP con restricciones blandas y la evidencia de dos estudios de tiempos.*
 
 ## Areas
 

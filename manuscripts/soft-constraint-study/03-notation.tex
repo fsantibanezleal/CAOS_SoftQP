@@ -10,20 +10,47 @@ problem and its optimizer remain identical.
 
 \begin{table}[htbp]\centering\small
 \caption{Notation and dimensions for the original-space soft quadratic model. Row and decision units belong to the physical metadata of each synthetic case rather than to a universal unit convention.}\label{tab:notation}
-\begin{tabularx}{\textwidth}{@{}lXX@{}}\toprule
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
 Symbol & Meaning & Units\\\midrule
 $x_j$ & Original decision component & Declared decision unit\\
+$n,m$ & Number of decision components and original rows & Counts\\
+$P_{jk},q_j$ & Base Hessian and linear objective coefficient & Objective per product of decision units; objective per decision unit\\
+$A_{ij}$ & Original linear row coefficient & Row unit per decision unit\\
 $A_i x,\ell_i,u_i$ & Row value and interval endpoints & Declared row unit\\
+$\mathcal H,\mathcal S,I_g$ & Hard rows, soft rows and rows in group $g$ & Index sets\\
 $v_{L,i},v_{U,i},s_i$ & Lower/upper departure and corrective slack & Row unit\\
 $f,F,g_i$ & Base, total and interval penalty objective & Objective unit\\
 $a_{L,i},a_{U,i}$ & Linear departure prices & Objective unit per row unit\\
 $b_{L,i},b_{U,i}$ & Quadratic departure prices & Objective unit per squared row unit\\
 $c_{L,i},c_{U,i}$ & Directional peak scales & Peak unit per row unit\\
+$M_g,t$ & Group peak and candidate threshold & Peak unit\\
+$a_g,b_g$ & Linear and quadratic group prices & Objective per peak unit; objective per squared peak unit\\
+$C,\Pi_C$ & Interval box and its projection & Original row coordinates\\
+$r,w$ & Residual before and after the group proximal map & Original row coordinates\\
 $y_i$ & Original row multiplier & Objective unit per row unit\\
 $H_{ii}$ & Positive proximal metric entry & Objective unit per squared row unit\\
 $r_{\rm stat}$ & Stationarity residual & Coordinatewise objective gradient unit\\
 $T,\Delta t$ & Measured duration and physical time step & Seconds, or explicit model hours\\
 $R_i$ & Paired relative timing reduction & Dimensionless; displayed as percent\\\bottomrule
+\end{tabularx}
+\end{table}
+
+Table~\ref{tab:flex-notation} distinguishes the auxiliary FlexQP variables
+from the original row values and multipliers in Table~\ref{tab:notation}.
+The split parameters operate on the problem's numerical coordinates.
+
+\begin{table}[htbp]\centering\small
+\caption{Notation for the fixed FlexQP reconstruction, its signed-side transformation, proximal updates and stopping residuals. The multiplier units use the corresponding signed-side row unit.}\label{tab:flex-notation}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+Symbol & Meaning & Units\\\midrule
+$G,h$ & Signed-side row operator and endpoint & Row unit per decision unit; row unit\\
+$\xi,s,z$ & Elastic slack, nonnegative margin, signed elastic coordinate & Signed-side row unit\\
+$\mu,w,y,\nu$ & Linear prices and margin, elastic and graph multipliers & Objective per signed-side row unit\\
+$K,c$ & Schur matrix and eliminated weight & Hessian units; objective per row unit squared\\
+$\sigma_x,\sigma_s,\rho$ & Primal proximal, margin proximal and dual step weights & Objective per squared decision or row unit\\
+$\alpha,\kappa$ & Relaxation and diagonal condition number & Dimensionless\\
+$\mathcal T_\tau,\Pi_{[0,\mu]}$ & Soft threshold and box projection on multiplier bounds & Argument units\\
+$r_{\rm d},r_{\rm p}$ & Stationarity and projected-box residual & Objective per decision unit; signed-side row unit\\\bottomrule
 \end{tabularx}
 \end{table}
 

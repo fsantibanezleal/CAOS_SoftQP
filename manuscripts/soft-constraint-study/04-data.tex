@@ -9,15 +9,29 @@ splits; neither is inferred from the teaching catalog. The code and model
 attribution retain their separate upstream terms, while explanatory material
 and the archived scientific datasets carry their stated distribution licences.
 
-The C13 building source follows the published two-zone model from OSQPSlack,
-with a 20~kWh battery and 96 quarter-hour intervals. It preserves mixed quadratic,
-grouped, elastic and Huber prices. C14 and C15 reuse the physical structure with
+The C13 building source follows the published two-zone model from OSQPSlack
+Project Contributors~\cite{gsp}. The MIT-licensed source is
+\url{https://github.com/A2R-Lab/OSQPSlack/blob/2e5d5ce8968207d0838d08942a8af7bdda64f634/osqpslack/energy_hub.py}.
+The adaptation retains the original constants and dynamics, redirects the
+penalty import and retains the upstream notice. One synthetic day comprises
+96 quarter-hour intervals and a 20~kWh battery (72~MJ). No calendar period
+or measured operating history is associated with the source. It preserves
+mixed quadratic, grouped, elastic and Huber prices. C14 and C15 reuse the physical structure with
 explicitly changed separable side-price policies, so their optima are not
 reproductions of the mixed objective. The grouped study's hourly thermal inputs
 use a separate synthetic RC forecast model with hard dynamics, initial conditions
 and heater-energy limits. A forecast input is not a measured trajectory or a
 closed-loop controller experiment. These distinctions constrain every comparison
 and figure interpretation.
+
+The authored scalar, control and sparse instances and the two-zone forecast
+generator are distributed with the product source. The original sparse grid
+normalizes each generated row to unit norm before applying its endpoint
+and cost rules. The forecast generator instead retains declared physical
+units and constructs each input from its recorded seed and model parameters.
+The grouped archive distributes the 210 generated inputs and observations
+under CC BY 4.0 with the original code notices. The reproducibility section
+identifies the exact evidence locations for both populations.
 
 The eighteen versioned boundaries below specify how those scientific objects
 move between producers, numerical tools and readers. Tables are generated from
@@ -28,6 +42,13 @@ schema and consumer. Missing data remain missing rather than becoming an empty
 successful result. A schema example establishes shape, not deployed availability.
 Physical units are explicit row/decision metadata where they apply; identifiers,
 hashes, enum states and counts have no physical dimension.
+
+A separate learning-artifact catalog specifies eleven input and output
+boundaries for the developing comparison. Its committed examples exercise
+serialization and admission through provider fixtures. The scientific
+producer, model fitting and solver evaluation for that catalog remain
+pending. The implemented pipeline and the method results below concern
+the eighteen contracts in the scientific catalog.
 
 \subsection{Deployment case inventory}\label{sec:contract-case-index}
 The case-index contract schema 3.1.0 is produced by the manifest component and
