@@ -64,8 +64,8 @@ export function SystemDomain({ doc, run, rowIndex, width, height, lang, number, 
     const lo = Math.min(...values, 0) - 1, hi = Math.max(...values, 0) + 1;
     const sx = (v: number) => plotLeft + (v - lo) / (hi - lo) * (plotRight - plotLeft);
     return <g data-domain-system="sparse-operators" data-domain-row-value={model.value ?? undefined} className="softqp-domain-math">
-      <text x={18} y={153} className="softqp-scene-heading">min ½xᵀPx + qᵀx + ∑ φᵢ(Aᵢx)</text>
-      <text x={18} y={169}>{t('x: units unspecified', 'x: unidades sin declarar')}</text>
+      <text x={18} y={140} className="softqp-scene-heading">min ½xᵀPx + qᵀx + ∑ φᵢ(Aᵢx)</text>
+      <text x={18} y={165}>{t('x: units unspecified', 'x: unidades sin declarar')}</text>
       <text x={pX} y={190}>P [{model.n}×{model.n}]</text>
       <text x={vectorX} y={vectorHeadingY}>q</text><text x={xVectorX} y={vectorHeadingY + xOffset}>x</text>
       {columns.map((column, j) => <text key={column} x={pX + (j + .5) * cell} y={pY - 5} textAnchor="middle">{column + 1}</text>)}
