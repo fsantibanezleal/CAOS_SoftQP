@@ -10,7 +10,7 @@
 \definecolor{linknavy}{RGB}{25,55,125}
 \usepackage[colorlinks=true,linkcolor=linknavy,citecolor=linknavy,urlcolor=linknavy]{hyperref}
 \usepackage{orcidlink}
-\usepackage{fancyhdr}
+\usepackage{fancyhdr,etoolbox}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -30,8 +30,8 @@
 \fbox{\parbox{0.94\textwidth}{\small\raggedright
 \textbf{\doctype} \quad$\cdot$\quad \docversion, \docdate \quad$\cdot$\quad Licence CC BY 4.0\\[2pt]
 CAOS Research programme \quad$\cdot$\quad \docscope\\[2pt]
-Version DOI \href{https://doi.org/\versiondoi}{\texttt{\versiondoi}}\\[2pt] % voice-ok: required page-one header identity, not body narrative
-Concept DOI (always latest) \href{https://doi.org/\conceptdoi}{\texttt{\conceptdoi}}\\[2pt] % voice-ok: required page-one header identity, not body narrative
+\ifdefempty{\versiondoi}{Version DOI: not assigned (unpublished blueprint)}{Version DOI \href{https://doi.org/\versiondoi}{\texttt{\versiondoi}}}\\[2pt] % voice-ok: required page-one header identity, not body narrative
+\ifdefempty{\conceptdoi}{Concept DOI: not assigned}{Concept DOI (always latest) \href{https://doi.org/\conceptdoi}{\texttt{\conceptdoi}}}\\[2pt] % voice-ok: required page-one header identity, not body narrative
 Not peer reviewed. Source code, data and computational records:
 \href{https://\docrepo}{\texttt{\docrepo}}
 }}

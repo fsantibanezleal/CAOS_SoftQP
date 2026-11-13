@@ -1,7 +1,7 @@
 # Guide: the five documentation pages
 
 Every product carries five documentation pages: Introduction, Methodology, Implementation, Experiments and
-Benchmark. This guide says what each must contain. It is transcribed from ADR-0017 section 2.1 of CAOS_MANAGE
+Benchmark. This guide says what each must contain. It applies the documentation-area standard of ADR-0017 section 2.1
 (`conventions/architecture/1-frontend/ADR-0017-rotorvitals-frontend-bar.md`, amended 2026-10-12), which is the binding
 text; if the two differ, the ADR wins and this guide is wrong.
 

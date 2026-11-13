@@ -1,0 +1,81 @@
+{
+  "artifact_id": "split",
+  "content_sha256": "461ecc54e1bde383e5cfc57e2201abe438f3163c8f897c36a948b07760d5cfcf",
+  "kind": "learning-split",
+  "payload": {
+    "assignments": [
+      {
+        "input_sha256": "fcfc2d30683c21e37bd84192d8d5674699a80b065160dda2acea0333459dde63",
+        "parent_id": "fixture-parent-calibration",
+        "problem_ids": [
+          "problem-calibration"
+        ],
+        "source_id": "fixture-source-calibration",
+        "split": "calibration"
+      },
+      {
+        "input_sha256": "8e1880b0163011244ddf6970fa9aef6a4aaffeec922bd6712772e23085b5c71d",
+        "parent_id": "fixture-parent-test",
+        "problem_ids": [
+          "problem-test"
+        ],
+        "source_id": "fixture-source-test",
+        "split": "test"
+      },
+      {
+        "input_sha256": "503f03b4b685e382514b163688f6ebf73f3b5e50824d69dd72bdff63612a9ecf",
+        "parent_id": "fixture-parent-train",
+        "problem_ids": [
+          "problem-train"
+        ],
+        "source_id": "fixture-source-train",
+        "split": "train"
+      },
+      {
+        "input_sha256": "2ea3a37a4539840a8cb48e0471bc4ebebc784a2700e4f93551521bc968e602dc",
+        "parent_id": "fixture-parent-validation",
+        "problem_ids": [
+          "problem-validation"
+        ],
+        "source_id": "fixture-source-validation",
+        "split": "validation"
+      }
+    ],
+    "dataset": {
+      "artifact_id": "dataset",
+      "kind": "learning-dataset",
+      "path": "dataset.json",
+      "sha256": "4331e69aa856b58c9e7cf798096e37bf29e7fc499570c51f5d2500c796cf1f1f"
+    },
+    "disjointness_sha256": "07dca13a5ad972e7e07bcc002866517b75ef33c3e9f742a0919c8442bbdf62da",
+    "entropy_prefix": [
+      20261105,
+      903
+    ],
+    "fit_source_ids": [
+      "fixture-source-train"
+    ]
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "dataset",
+      "protocol"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-split/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

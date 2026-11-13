@@ -1,0 +1,171 @@
+{
+  "catalog": {
+    "calibration": {
+      "artifact_id": "calibration",
+      "kind": "learning-calibration",
+      "path": "calibration.json",
+      "sha256": "808ed652ea1b5726ef67a2a0a6fb6f8f223a8afdbae673ef7910c51bef5a0279"
+    },
+    "calibration-labels": {
+      "artifact_id": "calibration-labels",
+      "kind": "learning-labels",
+      "path": "calibration-labels.json",
+      "sha256": "58bb741d25ebedd8b4dcd92a1be7285098314b1a0e0c09ba06cb3eae95b0826f"
+    },
+    "checkpoint": {
+      "artifact_id": "checkpoint",
+      "kind": "learning-checkpoint",
+      "path": "checkpoint.json",
+      "sha256": "8f58e30dc7649ecb821c87f16dc567621b3c2fd8c0a5246e2a6d3bc8fd686438"
+    },
+    "dataset": {
+      "artifact_id": "dataset",
+      "kind": "learning-dataset",
+      "path": "dataset.json",
+      "sha256": "4331e69aa856b58c9e7cf798096e37bf29e7fc499570c51f5d2500c796cf1f1f"
+    },
+    "evaluation": {
+      "artifact_id": "evaluation",
+      "kind": "learning-evaluation",
+      "path": "evaluation.json",
+      "sha256": "a7c2a8578fa65cc269bb47b8f86abf35b0909152068b931317bf6964ff019e86"
+    },
+    "export": {
+      "artifact_id": "export",
+      "kind": "learning-export-index",
+      "path": "export.json",
+      "sha256": "0f0cf4928e3583c429c5bf68912f70f0726c9d5915a13f589c1be42ccfb9d259"
+    },
+    "features": {
+      "artifact_id": "features",
+      "kind": "learning-features",
+      "path": "features.json",
+      "sha256": "efa7d1884eafca93841f0c109c6559d6058190feb1e04121daf17e14899a33a7"
+    },
+    "graph-calibration": {
+      "artifact_id": "graph-calibration",
+      "kind": "learning-calibration",
+      "path": "graph-calibration.json",
+      "sha256": "fa4be20b33f0e452feb7b0b77d40c5d2d5fd1741aa4202e80df1b7e7c91b2356"
+    },
+    "graph-checkpoint": {
+      "artifact_id": "graph-checkpoint",
+      "kind": "learning-checkpoint",
+      "path": "graph-checkpoint.json",
+      "sha256": "04bb71ee852ba8566292c8249ee4efef90a67f6bc5b0ac4221f2be8931cd3dc8"
+    },
+    "graph-features": {
+      "artifact_id": "graph-features",
+      "kind": "learning-features",
+      "path": "graph-features.json",
+      "sha256": "3dc58d23d4e9040826ad44552aca7254a2eebe9f318234f3111dfcc9a200314f"
+    },
+    "labels": {
+      "artifact_id": "labels",
+      "kind": "learning-labels",
+      "path": "labels.json",
+      "sha256": "f43e55ce56da631034266bacd85d0bceb1bcf591e51ce3461251bae08112355b"
+    },
+    "problem-calibration": {
+      "artifact_id": "problem-calibration",
+      "kind": "learning-problem",
+      "path": "problem-calibration.json",
+      "sha256": "3995eae31dfa4d0d31eee866ff6b353ba0bf6f9cc3aa23b97072151b74a77a3c"
+    },
+    "problem-test": {
+      "artifact_id": "problem-test",
+      "kind": "learning-problem",
+      "path": "problem-test.json",
+      "sha256": "4d0aaf1eb564508c6087bad495b32cbb92fb4a5882070337c5fe150ee4aad890"
+    },
+    "problem-train": {
+      "artifact_id": "problem-train",
+      "kind": "learning-problem",
+      "path": "problem-train.json",
+      "sha256": "18fa132e8b08f62918b3aaf48c9a6b4c29d40b8fe9197b8fa83273f5196cd249"
+    },
+    "problem-validation": {
+      "artifact_id": "problem-validation",
+      "kind": "learning-problem",
+      "path": "problem-validation.json",
+      "sha256": "27165c3d13c34d1205dc855d8a007b36f4955b40cb8f23345d1cc211067849a5"
+    },
+    "protocol": {
+      "artifact_id": "protocol",
+      "kind": "learning-protocol",
+      "path": "protocol.json",
+      "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+    },
+    "result": {
+      "artifact_id": "result",
+      "kind": "learning-method-result",
+      "path": "result.json",
+      "sha256": "634a9b43de965646afea55efeffc89ca4b31fced3ed4f3877f290945a94289c4"
+    },
+    "split": {
+      "artifact_id": "split",
+      "kind": "learning-split",
+      "path": "split.json",
+      "sha256": "c968a32ecf784628de3eea433a8ec0b3dbfc01006e677059fae9e0da9b7197eb"
+    }
+  },
+  "dependency_lock_sha256": "abde2d7319370f8dd523695ddfecb82ad94cb2d3f5d24b373f712ac65bd89291",
+  "dependency_lock_utf8": "contract-fixture:no-admitted-training-runtime",
+  "expected_diagnostic_keys": [],
+  "expected_result_keys": [
+    [
+      "lifted",
+      0,
+      "N01",
+      3,
+      0,
+      0
+    ]
+  ],
+  "fit_source_ids": [
+    "fixture-source-train"
+  ],
+  "generator_sha256": "70aa5cd39e33e5ca41ef215a7c2f8d1f40d39cce6b79aafe649d3f4b925d6112",
+  "generator_source_utf8": "contract-fixture:no-scientific-generator",
+  "problem_hashes": {
+    "problem-calibration": "f2512870415dd77eb36c43f484f3aab7a05931832820f334e12d7733e826e4d8",
+    "problem-test": "d447c456ddc4e6cb1d849903c20fd2eb0a6d47c895e59f8c649abd3c55045fa8",
+    "problem-train": "f023ae2ae9b657786761833108acf7bc0d062aa7ffec8a3e1232a939d5345bed",
+    "problem-validation": "e2a500e3c7ae80f96b3335ea8413f1eade9ade086554bf299d6dfadee5faee73"
+  },
+  "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "purpose": "contract-fixture",
+  "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804",
+  "settings_hashes": {
+    "asymmetric": "c6ada52b802c42663b47c6c67e991734d068247eeae138b1d3f5b8f92100af83",
+    "clarabel": "d5d7ea690ff011c671654eefff0b92dc343d8023c4b89d0e9c64a1bccb6e9e72",
+    "cold_daqp": "52861b89d95a97b917e3ecc53266982cbd41a3d7d3df21d792fbdb06f82db4f5",
+    "cold_osqp": "3968319f45a83c8472f9fe882f3c04dd3678e75fe8a6cdc52c2e1b663c5463c0",
+    "daqp": "71037ba15358188420f23ccacfb851c552f934e5ec33b2f9f6de8c20d8be21b8",
+    "directional": "c0edfc7eec2863d42b54a20d9bc604df1164ff5ea16e01cd75d20d14c9c45b2d",
+    "elastiqp": "995172ef5c4b7ac820e2803d69d8ced1d60b31d70fa97a86c82e83201872224c",
+    "flex": "0972706733c8bf3e7976f1f5355049daa029b95a88eace17c5a4f09414a675c4",
+    "generalized": "89b113418bd813421a1af575bed9042bec9d05ef140834707a4f929779f8cc37",
+    "label:cold_daqp": "ff28c587690f935c5f338063283f606035eecc57a3110180a83e7b925220a453",
+    "learned_daqp": "ca2851aca9d2c097f18c76b2c8e9ee276676d20617adc10b1b2dd62d77232aba",
+    "learned_osqp": "07d0bb711bb21e941296b52f66b95c6aca23a8589145c04aba5b5ec3dfb41942",
+    "lifted": "f059e22323b8697a87b3a60015fc131e30514963688fe60ebd1a170a64708e9b",
+    "oracle:clarabel": "12288b0b166060bb461b544ea6a84764414c59fc3e7d4fa84278b9b05c2fc9c3",
+    "oracle:piqp": "95db430ae157f244fdf6bd25054a6df6097078a7337fccf7dfc029b4aa3237e0",
+    "oracle:stock_osqp": "76d4ebf85a1c7b6c6b7ea1ed608e17a04ee581905ff0dbe1a2fce3ab1e6feff0",
+    "piqp": "cc5df9a3331a469c848f67f800417b3557ff0fe40f8e1957b2f5de5971840816",
+    "previous_daqp": "bd7dd6af662f8c15123712b9d4b882fde8325a38facb44bb3156c920e2ae936b",
+    "previous_osqp": "132be47b610b092b9b851f853a2e3f4d64f319b012fa5861f38f7cf2be44b72b",
+    "proxqp": "fe10ca098795a91eca09c297acaf8c737aeec6474ccbbbad69086125c50696e8"
+  },
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "source_lock_utf8": "contract-fixture:no-source-lock-admission",
+  "source_records": {
+    "problem-calibration": "fdcacb4adf2cdab48709d7a71ef1eac128cfbce77fa7f396a0efa1c452851b3a",
+    "problem-test": "293d6fbb7eb888fc489761ea6a64c2781618dbd6e939db66b22666501bd64716",
+    "problem-train": "58d227a6b3120ffeaea6496c60df9503271fa1e18e8264d7d27eceb890475489",
+    "problem-validation": "0e033d0a7d26bedda72fca4b716097e826e711ec859ba85a8a122d086e7cbe71"
+  }
+}

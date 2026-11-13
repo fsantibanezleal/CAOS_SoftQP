@@ -9,4 +9,4 @@ These cards describe the actual numerical and presentation dependencies. Exact n
 - [DAQP active-set reference: 0.10.3](frameworks/05_daqp/daqp.md).
 - [ElastiQP L1 reference: 0.2.0](frameworks/06_elastiqp/elastiqp.md).
 - [Matplotlib lesson figures: 3.11.2](frameworks/07_matplotlib/matplotlib.md).
-- [Shared scientific reader shell: 0.19.1](frameworks/08_shell/shell.md).
+- [Shared scientific reader shell: 0.26.0](frameworks/08_shell/shell.md).

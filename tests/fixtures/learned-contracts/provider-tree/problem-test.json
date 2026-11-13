@@ -1,0 +1,256 @@
+{
+  "artifact_id": "problem-test",
+  "content_sha256": "de2f023099f74d0ce77cdc2e79501d78a2117659aabc0c77f1c95f594b9d2401",
+  "kind": "learning-problem",
+  "payload": {
+    "curvature": {
+      "actual_condition": null,
+      "diagonal_support": [],
+      "kind": "exact-rational-LDL",
+      "pivots": [
+        "1"
+      ],
+      "rank": 1,
+      "requested_condition": null,
+      "temporary_constructor_sha256": "c785cf8cc46d8393599c9269336a8eaffddabaa0edc1d9fbf45a4f8a3e9f9778"
+    },
+    "expected_control": null,
+    "generator_sha256": "70aa5cd39e33e5ca41ef215a7c2f8d1f40d39cce6b79aafe649d3f4b925d6112",
+    "original": {
+      "A": {
+        "data": [
+          1
+        ],
+        "indices": [
+          0
+        ],
+        "indptr": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          1
+        ]
+      },
+      "P": {
+        "data": [
+          1
+        ],
+        "indices": [
+          0
+        ],
+        "indptr": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          1
+        ]
+      },
+      "formulation": "separable",
+      "groups": [],
+      "lower": [
+        0
+      ],
+      "lower_finite": [
+        true
+      ],
+      "m": 1,
+      "n": 1,
+      "penalty": {
+        "lower_linear": [
+          1
+        ],
+        "lower_quadratic": [
+          1
+        ],
+        "soft": [
+          true
+        ],
+        "upper_linear": [
+          1
+        ],
+        "upper_quadratic": [
+          1
+        ]
+      },
+      "q": [
+        -1
+      ],
+      "units": {
+        "D_r": [
+          1
+        ],
+        "D_t": [],
+        "D_x": [
+          1
+        ],
+        "S_f": 1,
+        "objective": "synthetic-operating-cost",
+        "peak": [],
+        "row": [
+          "dimensionless"
+        ],
+        "variable": [
+          "dimensionless"
+        ]
+      },
+      "upper": [
+        1
+      ],
+      "upper_finite": [
+        true
+      ]
+    },
+    "original_sha256": "d447c456ddc4e6cb1d849903c20fd2eb0a6d47c895e59f8c649abd3c55045fa8",
+    "physical_calibration": {
+      "calibration_sha256": "162f88d6278e73e7c37ab4ea9409e809cfe32df5cd1d9c3306ca43788610e5fa",
+      "scale_policy": "canonical-reference-magnitudes-one"
+    },
+    "source": {
+      "attribution": "Authored analytic serialization fixture; not a generated scientific sample",
+      "entropy": [
+        20261105,
+        903,
+        1,
+        3,
+        3,
+        0,
+        0
+      ],
+      "family": "N01",
+      "frame": 0,
+      "frame_count": 1,
+      "input_sha256": "d447c456ddc4e6cb1d849903c20fd2eb0a6d47c895e59f8c649abd3c55045fa8",
+      "license": "MIT",
+      "parameters": [],
+      "parent_id": "fixture-parent-test",
+      "regime": 3,
+      "rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 1,
+          "state": 0
+        },
+        "uinteger": 0
+      },
+      "rng_state_sha256": "3e3b43cb2b008583ddb9413767d9076f51ec98e108a223a4832c646113a84454",
+      "source_id": "fixture-source-test",
+      "split": "test",
+      "state_origin": "contract-fixture",
+      "unit_index": 0
+    },
+    "transform": {
+      "A": {
+        "data": [
+          1,
+          1,
+          -1,
+          1,
+          1
+        ],
+        "indices": [
+          0,
+          1,
+          0,
+          1,
+          2
+        ],
+        "indptr": [
+          0,
+          2,
+          5
+        ],
+        "shape": [
+          3,
+          2
+        ]
+      },
+      "P": {
+        "data": [
+          1,
+          1
+        ],
+        "indices": [
+          0,
+          1
+        ],
+        "indptr": [
+          0,
+          1,
+          2
+        ],
+        "shape": [
+          2,
+          2
+        ]
+      },
+      "kind": "S",
+      "lower": [
+        null,
+        0,
+        0
+      ],
+      "m": 3,
+      "n": 2,
+      "q": [
+        -1,
+        1
+      ],
+      "row_dual_map": [
+        {
+          "canonical_row": 0,
+          "coefficient": 1,
+          "original_row": 0
+        },
+        {
+          "canonical_row": 1,
+          "coefficient": 1,
+          "original_row": 0
+        }
+      ],
+      "row_order": [
+        "top:0",
+        "lower:0",
+        "nonnegative-s:0"
+      ],
+      "upper": [
+        1,
+        null,
+        null
+      ],
+      "variable_order": [
+        "x:0",
+        "s:0"
+      ],
+      "x_original_indices": [
+        0
+      ]
+    },
+    "transform_sha256": "8c98a95b18bc656c86a59b0e2653b35479064a9cb022409482d94dbfc8118f97"
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "protocol"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-problem/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

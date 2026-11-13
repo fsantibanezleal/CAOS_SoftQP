@@ -1038,7 +1038,7 @@
           "rows": 160,
           "variables": 96
         },
-        "elapsed_seconds": 0.004966799999237992,
+        "elapsed_seconds": 0.009846200002357364,
         "iterations": 75,
         "method": "lifted",
         "metrics": {
@@ -1175,8 +1175,8 @@
             0.0
           ]
         },
-        "setup_seconds": 0.0001283,
-        "solve_seconds": 0.0001188,
+        "setup_seconds": 0.0001417,
+        "solve_seconds": 0.0001856,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -1257,7 +1257,7 @@
           "rows": 40,
           "variables": 16
         },
-        "elapsed_seconds": 0.0009453000093344599,
+        "elapsed_seconds": 0.0014830000000074506,
         "iterations": 50,
         "method": "asymmetric",
         "metrics": {
@@ -1394,8 +1394,8 @@
             0.0
           ]
         },
-        "setup_seconds": 6.88e-05,
-        "solve_seconds": 4.55e-05,
+        "setup_seconds": 6.16e-05,
+        "solve_seconds": 5.42e-05,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -1490,7 +1490,7 @@
           "rows": 40,
           "variables": 16
         },
-        "elapsed_seconds": 0.0001736000122036785,
+        "elapsed_seconds": 0.00018309999722987413,
         "iterations": 5,
         "method": "daqp",
         "metrics": {
@@ -1627,8 +1627,8 @@
             0.0
           ]
         },
-        "setup_seconds": 2.84e-05,
-        "solve_seconds": 7.4e-06,
+        "setup_seconds": 7.1e-06,
+        "solve_seconds": 6e-06,
         "status": "soft optimal",
         "status_code": 2,
         "x": [

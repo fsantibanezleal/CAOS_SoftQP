@@ -1,0 +1,20 @@
+{
+  "artifact_id": "missing-example-learning-checkpoint",
+  "content_sha256": "c1487cc2e34aa307f818ea70ab826ee3672410cda13542689e9d101d750a9680",
+  "kind": "learning-checkpoint",
+  "payload": null,
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": null,
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-checkpoint/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "missing",
+  "version": "1.0.0"
+}

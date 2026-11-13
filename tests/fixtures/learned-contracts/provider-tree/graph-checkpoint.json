@@ -1,0 +1,612 @@
+{
+  "artifact_id": "graph-checkpoint",
+  "content_sha256": "f35f5b3896e5c9316cf7412e4299de05e5fd9899b6d3de34a626b52e7e56b27a",
+  "kind": "learning-checkpoint",
+  "payload": {
+    "architecture": {
+      "coverage": "graph-contract-fixture",
+      "dtype": "float64",
+      "head_ids": [
+        "graph"
+      ],
+      "method": "learned_daqp",
+      "parameter_count": 52098,
+      "parameters": [
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "inner_layer.lin1.bias",
+          "offset": 0,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 16384,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-leakyrelu-slope0.1",
+          "initialization_seed": 828654776623334028,
+          "name": "inner_layer.lin1.weight",
+          "offset": 128,
+          "sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "count": 16384,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-leakyrelu-slope0.1",
+          "initialization_seed": 5561684453004124383,
+          "name": "inner_layer.lin2.weight",
+          "offset": 16512,
+          "sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "inner_layer.lin3.bias",
+          "offset": 32896,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 16384,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-leakyrelu-slope0.1",
+          "initialization_seed": 6428395924913234352,
+          "name": "inner_layer.lin3.weight",
+          "offset": 33024,
+          "sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "input_layer.lin1.bias",
+          "offset": 49408,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 512,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-leakyrelu-slope0.1",
+          "initialization_seed": 4293109491569872088,
+          "name": "input_layer.lin1.weight",
+          "offset": 49536,
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+          "shape": [
+            128,
+            4
+          ]
+        },
+        {
+          "count": 512,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-leakyrelu-slope0.1",
+          "initialization_seed": 6616034495615825248,
+          "name": "input_layer.lin2.weight",
+          "offset": 50048,
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+          "shape": [
+            128,
+            4
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "input_layer.lin3.bias",
+          "offset": 50560,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 512,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-leakyrelu-slope0.1",
+          "initialization_seed": 318795791009137108,
+          "name": "input_layer.lin3.weight",
+          "offset": 50688,
+          "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7",
+          "shape": [
+            128,
+            4
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "norm1.bias",
+          "offset": 51200,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "ones",
+          "initialization_seed": 0,
+          "name": "norm1.weight",
+          "offset": 51328,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "norm2.bias",
+          "offset": 51456,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "ones",
+          "initialization_seed": 0,
+          "name": "norm2.weight",
+          "offset": 51584,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "output_layer.lin1.bias",
+          "offset": 51712,
+          "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "shape": [
+            1
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-output-gain1",
+          "initialization_seed": 5479440870371733804,
+          "name": "output_layer.lin1.weight",
+          "offset": 51713,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            1,
+            128
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-output-gain1",
+          "initialization_seed": 8106962237368326645,
+          "name": "output_layer.lin2.weight",
+          "offset": 51841,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            1,
+            128
+          ]
+        },
+        {
+          "count": 1,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "train-log-positive-odds",
+          "initialization_seed": 0,
+          "name": "output_layer.lin3.bias",
+          "offset": 51969,
+          "sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "shape": [
+            1
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "graph",
+          "initialization_rule": "xavier-output-gain1",
+          "initialization_seed": 7777784463488949514,
+          "name": "output_layer.lin3.weight",
+          "offset": 51970,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            1,
+            128
+          ]
+        }
+      ]
+    },
+    "architecture_sha256": "f84716eca82b51f633d0c9060ce191966a885557410e81520fce37e37b0d1d1d",
+    "best_epoch": {
+      "graph": 0
+    },
+    "best_weights": {
+      "byte_count": 416784,
+      "format": "raw-float64-le",
+      "path": "graph-untrained.f64",
+      "sha256": "e0f7486cfc346a6e010f844bf73511ec2c95b53264b302ba2aa42d0d803adcd2"
+    },
+    "class_statistics": {
+      "N0": 0.5,
+      "N1": 0.5,
+      "labels": [
+        {
+          "artifact_id": "labels",
+          "kind": "learning-labels",
+          "path": "labels.json",
+          "sha256": "f43e55ce56da631034266bacd85d0bceb1bcf591e51ce3461251bae08112355b"
+        }
+      ],
+      "positive_prior": 0.5,
+      "weight0": 1,
+      "weight1": 1
+    },
+    "dataset": {
+      "artifact_id": "dataset",
+      "kind": "learning-dataset",
+      "path": "dataset.json",
+      "sha256": "4331e69aa856b58c9e7cf798096e37bf29e7fc499570c51f5d2500c796cf1f1f"
+    },
+    "epoch": {
+      "graph": 0
+    },
+    "features": [
+      {
+        "artifact_id": "graph-features",
+        "kind": "learning-features",
+        "path": "graph-features.json",
+        "sha256": "3dc58d23d4e9040826ad44552aca7254a2eebe9f318234f3111dfcc9a200314f"
+      }
+    ],
+    "history": [
+      {
+        "epoch": 0,
+        "gradient_finite": true,
+        "gradient_nonzero": false,
+        "head_id": "graph",
+        "optimizer_steps": 0,
+        "train_objective": 0,
+        "validation_objective": 0
+      }
+    ],
+    "initial_weights": {
+      "byte_count": 416784,
+      "format": "raw-float64-le",
+      "path": "graph-untrained.f64",
+      "sha256": "e0f7486cfc346a6e010f844bf73511ec2c95b53264b302ba2aa42d0d803adcd2"
+    },
+    "initial_weights_sha256": "e0f7486cfc346a6e010f844bf73511ec2c95b53264b302ba2aa42d0d803adcd2",
+    "learning_policy_sha256": "1dac06d1e1f5da1131fff26f34289d6547f67bba302e041d1368d043030e2b33",
+    "method": "learned_daqp",
+    "normalizer_sha256": [],
+    "optimizer": {
+      "amsgrad": false,
+      "beta1": 0.9,
+      "beta2": 0.999,
+      "eps": 1e-08,
+      "learning_rate": 0.001,
+      "name": "AdamW",
+      "state_file": {
+        "byte_count": 833568,
+        "format": "raw-float64-le",
+        "path": "graph-moments.f64",
+        "sha256": "72c5c0ca726e18860ead785ea008e76f5b1b2de83e196aa35bd93dbc83b797e8"
+      },
+      "step_count": 0,
+      "tensors": [
+        {
+          "first_moment_offset": 0,
+          "parameter": "graph/inner_layer.lin1.bias",
+          "second_moment_offset": 52098,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 128,
+          "parameter": "graph/inner_layer.lin1.weight",
+          "second_moment_offset": 52226,
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 16512,
+          "parameter": "graph/inner_layer.lin2.weight",
+          "second_moment_offset": 68610,
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 32896,
+          "parameter": "graph/inner_layer.lin3.bias",
+          "second_moment_offset": 84994,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 33024,
+          "parameter": "graph/inner_layer.lin3.weight",
+          "second_moment_offset": 85122,
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 49408,
+          "parameter": "graph/input_layer.lin1.bias",
+          "second_moment_offset": 101506,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 49536,
+          "parameter": "graph/input_layer.lin1.weight",
+          "second_moment_offset": 101634,
+          "shape": [
+            128,
+            4
+          ]
+        },
+        {
+          "first_moment_offset": 50048,
+          "parameter": "graph/input_layer.lin2.weight",
+          "second_moment_offset": 102146,
+          "shape": [
+            128,
+            4
+          ]
+        },
+        {
+          "first_moment_offset": 50560,
+          "parameter": "graph/input_layer.lin3.bias",
+          "second_moment_offset": 102658,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 50688,
+          "parameter": "graph/input_layer.lin3.weight",
+          "second_moment_offset": 102786,
+          "shape": [
+            128,
+            4
+          ]
+        },
+        {
+          "first_moment_offset": 51200,
+          "parameter": "graph/norm1.bias",
+          "second_moment_offset": 103298,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 51328,
+          "parameter": "graph/norm1.weight",
+          "second_moment_offset": 103426,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 51456,
+          "parameter": "graph/norm2.bias",
+          "second_moment_offset": 103554,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 51584,
+          "parameter": "graph/norm2.weight",
+          "second_moment_offset": 103682,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 51712,
+          "parameter": "graph/output_layer.lin1.bias",
+          "second_moment_offset": 103810,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "first_moment_offset": 51713,
+          "parameter": "graph/output_layer.lin1.weight",
+          "second_moment_offset": 103811,
+          "shape": [
+            1,
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 51841,
+          "parameter": "graph/output_layer.lin2.weight",
+          "second_moment_offset": 103939,
+          "shape": [
+            1,
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 51969,
+          "parameter": "graph/output_layer.lin3.bias",
+          "second_moment_offset": 104067,
+          "shape": [
+            1
+          ]
+        },
+        {
+          "first_moment_offset": 51970,
+          "parameter": "graph/output_layer.lin3.weight",
+          "second_moment_offset": 104068,
+          "shape": [
+            1,
+            128
+          ]
+        }
+      ],
+      "weight_decay": 0.01
+    },
+    "rng": {
+      "epoch_order_sha256": "840969c03a5bb453fd81c9817d540f4bae13854a7c4cdf7f3a4200e9041a09ad",
+      "state_file": {
+        "byte_count": 33,
+        "format": "raw-uint8",
+        "path": "graph-rng.u8",
+        "sha256": "6f7561f191b8720efaba77e1aa10d990dc732010def19143eefe5e466b8d57c1"
+      },
+      "streams": [
+        {
+          "parameter": "graph/inner_layer.lin1.weight",
+          "seed": 828654776623334028,
+          "sha256": "eeea97eee2007127d19a777a8f49e906d39007c0a07389de84381c55db1c761a"
+        },
+        {
+          "parameter": "graph/inner_layer.lin2.weight",
+          "seed": 5561684453004124383,
+          "sha256": "ad61ea1e721dbfd1d8bf3447c8dea8160620ed11c3d9de69b42eead6ff28264b"
+        },
+        {
+          "parameter": "graph/inner_layer.lin3.weight",
+          "seed": 6428395924913234352,
+          "sha256": "3bc7ecb3c4f67fcec3024aae788749fc6d6d37b4fb1954d59fdeecb204a837d2"
+        },
+        {
+          "parameter": "graph/input_layer.lin1.weight",
+          "seed": 4293109491569872088,
+          "sha256": "ccb70cf576a3c1ed5db52b24f1b778f90df31a8bfe64e86aba3def82836eed98"
+        },
+        {
+          "parameter": "graph/input_layer.lin2.weight",
+          "seed": 6616034495615825248,
+          "sha256": "5c2313fd98b918148fc5ae8971d147cd7e7a53b0896d24e0cadb548f7013f05e"
+        },
+        {
+          "parameter": "graph/input_layer.lin3.weight",
+          "seed": 318795791009137108,
+          "sha256": "bb8af8df224ed1ef1a3ececcdba4a19e820a6290918ee592d94196d3db7b85b3"
+        },
+        {
+          "parameter": "graph/output_layer.lin1.weight",
+          "seed": 5479440870371733804,
+          "sha256": "0be64568efe6adc5ba263a6cddb1f34b65d4e85829f9ae5a5eb1eb4ea9a786c1"
+        },
+        {
+          "parameter": "graph/output_layer.lin2.weight",
+          "seed": 8106962237368326645,
+          "sha256": "82f932266960fdcc5278845843768e4135b30b6587b799b2424546a9c4bd2c57"
+        },
+        {
+          "parameter": "graph/output_layer.lin3.weight",
+          "seed": 7777784463488949514,
+          "sha256": "4b599455c96292d5b576881abd2ec94e8f972ba9e0e8bb042ec58ac11be2ff1a"
+        }
+      ]
+    },
+    "role": "initial",
+    "seed": 41001,
+    "split": {
+      "artifact_id": "split",
+      "kind": "learning-split",
+      "path": "split.json",
+      "sha256": "c968a32ecf784628de3eea433a8ec0b3dbfc01006e677059fae9e0da9b7197eb"
+    },
+    "training_evidence": "untrained-contract-fixture",
+    "weights": {
+      "byte_count": 416784,
+      "format": "raw-float64-le",
+      "path": "graph-untrained.f64",
+      "sha256": "e0f7486cfc346a6e010f844bf73511ec2c95b53264b302ba2aa42d0d803adcd2"
+    }
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "dataset",
+      "graph-features",
+      "labels",
+      "protocol",
+      "split"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-checkpoint/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

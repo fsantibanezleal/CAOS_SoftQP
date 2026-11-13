@@ -1,0 +1,705 @@
+{
+  "$comment": "U1 scientific number fields require finite lossless float64 admission via the lossless-float64 format and strict semantic reader. Integer metadata remains exact JSON integer. No coefficient rounding is authorized.",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-protocol/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "payload": {
+            "additionalProperties": false,
+            "properties": {
+              "bindings": {
+                "additionalProperties": false,
+                "properties": {
+                  "check_plan.py": {
+                    "const": "8ffe548ef8ed91ef84e069b2878051a43be37e323451c561d5bab19158c1617f"
+                  },
+                  "collect_primary.py": {
+                    "const": "34f3a500b6aae338ee6d8b324ca3da793289c6572e259981d91680c4485c0bae"
+                  },
+                  "contracts.md": {
+                    "const": "a37b6d9c4736239644c2023e2cd4cfd2470f3729b8fa1c1a789780d735d32da9"
+                  },
+                  "design.md": {
+                    "const": "c7b75ba3536fa0ed550c22f9fccd655ff93f857074ea766905a3a454f60a9a6f"
+                  },
+                  "expected-keysets/control-repetitions.jsonl.gz": {
+                    "const": "d2a06e6084f0daea859bb9235682648790b1317e9a4265f56b99f42069553c21"
+                  },
+                  "expected-keysets/control-status.jsonl.gz": {
+                    "const": "514bd3ee3af4e541650de80941186d8567e9790bc5f777a1f5cc5d70678c1d46"
+                  },
+                  "expected-keysets/diagnostic-status.jsonl.gz": {
+                    "const": "a95c3a9cba31cc056464d5034efe8fe911b7e2d804178ff61edb48ad644f56db"
+                  },
+                  "expected-keysets/head-checkpoints.jsonl.gz": {
+                    "const": "1af258e337ab024169f97b9d8b62dc09ce12aad8e544e8f7a43d62b357206a9a"
+                  },
+                  "expected-keysets/inventory.json": {
+                    "const": "834706c024b923d3f5eec10faae17a11c1d374a29e06b89d9d619fa47b599890"
+                  },
+                  "expected-keysets/label-status.jsonl.gz": {
+                    "const": "641251e440e5afbd0e6ce906bf226a74455e258e8b9795c62de1a0d1293071ba"
+                  },
+                  "expected-keysets/method-repetitions.jsonl.gz": {
+                    "const": "fce2c144e8a5514fe9197e10ec5638241e8418effa12acb4af5c2b33e258e881"
+                  },
+                  "expected-keysets/method-status.jsonl.gz": {
+                    "const": "078c285cdb561269d9e84f5378c7a571a897362a61faabe01c14ae4baa48ad99"
+                  },
+                  "expected-keysets/oracle-status.jsonl.gz": {
+                    "const": "3fcc421662157f9044b63a5d7dcc64b2ca1daa608a6658b338d8eb3bd55d0afa"
+                  },
+                  "expected-keysets/source-status.jsonl.gz": {
+                    "const": "4eeddd4fcb7a4a904d3218c3082084e4ed9e48c728ed6a695939a354f800741f"
+                  },
+                  "expected_inventory.py": {
+                    "const": "6577f7ddc9ca091c24a7d6d6315556de82f91a03c26573a0707486e2d8fd2c69"
+                  },
+                  "generator-spec.md": {
+                    "const": "6d7e4d318a9e007f5a61009181af4cab24f24155ad10f77fea77ffd558839269"
+                  },
+                  "inspect_pypi.py": {
+                    "const": "a6458d4af30e010c07d217a4f9fd5be1d564c98ea2c4747b62ee6469b01a3568"
+                  },
+                  "learning-spec.md": {
+                    "const": "1dac06d1e1f5da1131fff26f34289d6547f67bba302e041d1368d043030e2b33"
+                  },
+                  "negative-controls.json": {
+                    "const": "ff8d76294bf64fba6a901133aba0db40dea9d624ef023be60a96704c3ebb6116"
+                  },
+                  "normative-rules.json": {
+                    "const": "a570f81b04bbcfbfc9ce6491f27562fded099c61df72fbf9efd5bd9fbdea0ed7"
+                  },
+                  "numerical-spec.md": {
+                    "const": "560c172a7a4e310ac0d9ce09b51f56eb8a7b89f9a1294467fe9600417af78a14"
+                  },
+                  "protocol.md": {
+                    "const": "4d31955538a11a073b65cee92912368ef729fddcae35fe4238cc8718e2789b55"
+                  },
+                  "recovery-spec.md": {
+                    "const": "9a10bae06b05372651256eacf6a044d09af89007bf6a689b56725fddfba1deab"
+                  },
+                  "revised_math_probes.py": {
+                    "const": "032e7f3245c293feb1165154174d88bb4c9d5536bb96a4817791968f160abcc2"
+                  },
+                  "semantic-matrix.json": {
+                    "const": "8b4c02f8e56fe3b677f9b15fbe4c8be70bcccd87394c0ceee281160ba2bf82f6"
+                  },
+                  "serialization.py": {
+                    "const": "73fe7b7790de98ca39118c1d6ec2dee86f2018ee8ce4fcac7ef099fa8dd74368"
+                  },
+                  "source-audit.json": {
+                    "const": "84bb491a2c07fb88e32db5d5252364dcd06fe491b090cab7193f51ce6ce873e2"
+                  },
+                  "source-registry.json": {
+                    "const": "7e86c0173ea51364252f9651c9feab43e8b9e44032bc17179abb78611e64124d"
+                  },
+                  "timing-spec.md": {
+                    "const": "85db53972d6d05c49d6001a20a0e9680bd94c6ab6f2b5bcb02f5d3ed13367c67"
+                  },
+                  "validate_sources.py": {
+                    "const": "237d2d29a86d42f6472cddadfd88dd303d92acd768e1435aca7c40450cec0863"
+                  },
+                  "verify_closure.py": {
+                    "const": "a0f14290353637640b40d5f50e5f120a8b6ca77297d6eace447ccb636515eef9"
+                  }
+                },
+                "required": [
+                  "design.md",
+                  "protocol.md",
+                  "contracts.md",
+                  "generator-spec.md",
+                  "numerical-spec.md",
+                  "learning-spec.md",
+                  "timing-spec.md",
+                  "recovery-spec.md",
+                  "semantic-matrix.json",
+                  "normative-rules.json",
+                  "negative-controls.json",
+                  "expected_inventory.py",
+                  "revised_math_probes.py",
+                  "check_plan.py",
+                  "serialization.py",
+                  "validate_sources.py",
+                  "verify_closure.py",
+                  "inspect_pypi.py",
+                  "collect_primary.py",
+                  "source-registry.json",
+                  "source-audit.json",
+                  "expected-keysets/inventory.json",
+                  "expected-keysets/control-repetitions.jsonl.gz",
+                  "expected-keysets/control-status.jsonl.gz",
+                  "expected-keysets/diagnostic-status.jsonl.gz",
+                  "expected-keysets/head-checkpoints.jsonl.gz",
+                  "expected-keysets/label-status.jsonl.gz",
+                  "expected-keysets/method-repetitions.jsonl.gz",
+                  "expected-keysets/method-status.jsonl.gz",
+                  "expected-keysets/oracle-status.jsonl.gz",
+                  "expected-keysets/source-status.jsonl.gz"
+                ],
+                "type": "object"
+              },
+              "budgets": {
+                "additionalProperties": false,
+                "properties": {
+                  "dataset_checkpoint_bytes": {
+                    "maximum": 20000000000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "import_seconds": {
+                    "exclusiveMinimum": 0,
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "type": "number"
+                  },
+                  "inference_rss_bytes": {
+                    "maximum": 20000000000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "training_rss_bytes": {
+                    "maximum": 20000000000,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "trial_seconds": {
+                    "exclusiveMinimum": 0,
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "type": "number"
+                  },
+                  "worker_count": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "training_rss_bytes",
+                  "dataset_checkpoint_bytes",
+                  "inference_rss_bytes",
+                  "trial_seconds",
+                  "import_seconds",
+                  "worker_count"
+                ],
+                "type": "object"
+              },
+              "dependency_lock_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "design_manifest_sha256": {
+                "const": "e098010809f8b4cbb57f04e70279bf0b3f4aa90994be8a1ae022bbb52a4c7fb0"
+              },
+              "generator_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "methods": {
+                "const": [
+                  "lifted",
+                  "generalized",
+                  "daqp",
+                  "flex",
+                  "elastiqp",
+                  "asymmetric",
+                  "directional",
+                  "clarabel",
+                  "proxqp",
+                  "piqp",
+                  "learned_osqp",
+                  "learned_daqp"
+                ]
+              },
+              "network_seeds": {
+                "const": [
+                  41001,
+                  41002,
+                  41003
+                ]
+              },
+              "old_exclusions": {
+                "items": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "maxItems": 16,
+                "type": "array"
+              },
+              "registration_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "source_entropy_prefix": {
+                "const": [
+                  20261105,
+                  903
+                ]
+              },
+              "split_units": {
+                "const": {
+                  "calibration": 8,
+                  "test": 8,
+                  "train": 32,
+                  "validation": 8
+                }
+              },
+              "status": {
+                "enum": [
+                  "accepted-design",
+                  "registered"
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "registration_sha256",
+              "generator_sha256",
+              "dependency_lock_sha256",
+              "design_manifest_sha256",
+              "bindings",
+              "methods",
+              "network_seeds",
+              "split_units",
+              "source_entropy_prefix",
+              "old_exclusions",
+              "budgets"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "missing"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "null"
+          },
+          "reason": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-protocol"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bindings": {
+              "additionalProperties": false,
+              "properties": {
+                "check_plan.py": {
+                  "const": "8ffe548ef8ed91ef84e069b2878051a43be37e323451c561d5bab19158c1617f"
+                },
+                "collect_primary.py": {
+                  "const": "34f3a500b6aae338ee6d8b324ca3da793289c6572e259981d91680c4485c0bae"
+                },
+                "contracts.md": {
+                  "const": "a37b6d9c4736239644c2023e2cd4cfd2470f3729b8fa1c1a789780d735d32da9"
+                },
+                "design.md": {
+                  "const": "c7b75ba3536fa0ed550c22f9fccd655ff93f857074ea766905a3a454f60a9a6f"
+                },
+                "expected-keysets/control-repetitions.jsonl.gz": {
+                  "const": "d2a06e6084f0daea859bb9235682648790b1317e9a4265f56b99f42069553c21"
+                },
+                "expected-keysets/control-status.jsonl.gz": {
+                  "const": "514bd3ee3af4e541650de80941186d8567e9790bc5f777a1f5cc5d70678c1d46"
+                },
+                "expected-keysets/diagnostic-status.jsonl.gz": {
+                  "const": "a95c3a9cba31cc056464d5034efe8fe911b7e2d804178ff61edb48ad644f56db"
+                },
+                "expected-keysets/head-checkpoints.jsonl.gz": {
+                  "const": "1af258e337ab024169f97b9d8b62dc09ce12aad8e544e8f7a43d62b357206a9a"
+                },
+                "expected-keysets/inventory.json": {
+                  "const": "834706c024b923d3f5eec10faae17a11c1d374a29e06b89d9d619fa47b599890"
+                },
+                "expected-keysets/label-status.jsonl.gz": {
+                  "const": "641251e440e5afbd0e6ce906bf226a74455e258e8b9795c62de1a0d1293071ba"
+                },
+                "expected-keysets/method-repetitions.jsonl.gz": {
+                  "const": "fce2c144e8a5514fe9197e10ec5638241e8418effa12acb4af5c2b33e258e881"
+                },
+                "expected-keysets/method-status.jsonl.gz": {
+                  "const": "078c285cdb561269d9e84f5378c7a571a897362a61faabe01c14ae4baa48ad99"
+                },
+                "expected-keysets/oracle-status.jsonl.gz": {
+                  "const": "3fcc421662157f9044b63a5d7dcc64b2ca1daa608a6658b338d8eb3bd55d0afa"
+                },
+                "expected-keysets/source-status.jsonl.gz": {
+                  "const": "4eeddd4fcb7a4a904d3218c3082084e4ed9e48c728ed6a695939a354f800741f"
+                },
+                "expected_inventory.py": {
+                  "const": "6577f7ddc9ca091c24a7d6d6315556de82f91a03c26573a0707486e2d8fd2c69"
+                },
+                "generator-spec.md": {
+                  "const": "6d7e4d318a9e007f5a61009181af4cab24f24155ad10f77fea77ffd558839269"
+                },
+                "inspect_pypi.py": {
+                  "const": "a6458d4af30e010c07d217a4f9fd5be1d564c98ea2c4747b62ee6469b01a3568"
+                },
+                "learning-spec.md": {
+                  "const": "1dac06d1e1f5da1131fff26f34289d6547f67bba302e041d1368d043030e2b33"
+                },
+                "negative-controls.json": {
+                  "const": "ff8d76294bf64fba6a901133aba0db40dea9d624ef023be60a96704c3ebb6116"
+                },
+                "normative-rules.json": {
+                  "const": "a570f81b04bbcfbfc9ce6491f27562fded099c61df72fbf9efd5bd9fbdea0ed7"
+                },
+                "numerical-spec.md": {
+                  "const": "560c172a7a4e310ac0d9ce09b51f56eb8a7b89f9a1294467fe9600417af78a14"
+                },
+                "protocol.md": {
+                  "const": "4d31955538a11a073b65cee92912368ef729fddcae35fe4238cc8718e2789b55"
+                },
+                "recovery-spec.md": {
+                  "const": "9a10bae06b05372651256eacf6a044d09af89007bf6a689b56725fddfba1deab"
+                },
+                "revised_math_probes.py": {
+                  "const": "032e7f3245c293feb1165154174d88bb4c9d5536bb96a4817791968f160abcc2"
+                },
+                "semantic-matrix.json": {
+                  "const": "8b4c02f8e56fe3b677f9b15fbe4c8be70bcccd87394c0ceee281160ba2bf82f6"
+                },
+                "serialization.py": {
+                  "const": "73fe7b7790de98ca39118c1d6ec2dee86f2018ee8ce4fcac7ef099fa8dd74368"
+                },
+                "source-audit.json": {
+                  "const": "84bb491a2c07fb88e32db5d5252364dcd06fe491b090cab7193f51ce6ce873e2"
+                },
+                "source-registry.json": {
+                  "const": "7e86c0173ea51364252f9651c9feab43e8b9e44032bc17179abb78611e64124d"
+                },
+                "timing-spec.md": {
+                  "const": "85db53972d6d05c49d6001a20a0e9680bd94c6ab6f2b5bcb02f5d3ed13367c67"
+                },
+                "validate_sources.py": {
+                  "const": "237d2d29a86d42f6472cddadfd88dd303d92acd768e1435aca7c40450cec0863"
+                },
+                "verify_closure.py": {
+                  "const": "a0f14290353637640b40d5f50e5f120a8b6ca77297d6eace447ccb636515eef9"
+                }
+              },
+              "required": [
+                "design.md",
+                "protocol.md",
+                "contracts.md",
+                "generator-spec.md",
+                "numerical-spec.md",
+                "learning-spec.md",
+                "timing-spec.md",
+                "recovery-spec.md",
+                "semantic-matrix.json",
+                "normative-rules.json",
+                "negative-controls.json",
+                "expected_inventory.py",
+                "revised_math_probes.py",
+                "check_plan.py",
+                "serialization.py",
+                "validate_sources.py",
+                "verify_closure.py",
+                "inspect_pypi.py",
+                "collect_primary.py",
+                "source-registry.json",
+                "source-audit.json",
+                "expected-keysets/inventory.json",
+                "expected-keysets/control-repetitions.jsonl.gz",
+                "expected-keysets/control-status.jsonl.gz",
+                "expected-keysets/diagnostic-status.jsonl.gz",
+                "expected-keysets/head-checkpoints.jsonl.gz",
+                "expected-keysets/label-status.jsonl.gz",
+                "expected-keysets/method-repetitions.jsonl.gz",
+                "expected-keysets/method-status.jsonl.gz",
+                "expected-keysets/oracle-status.jsonl.gz",
+                "expected-keysets/source-status.jsonl.gz"
+              ],
+              "type": "object"
+            },
+            "budgets": {
+              "additionalProperties": false,
+              "properties": {
+                "dataset_checkpoint_bytes": {
+                  "maximum": 20000000000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "import_seconds": {
+                  "exclusiveMinimum": 0,
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "type": "number"
+                },
+                "inference_rss_bytes": {
+                  "maximum": 20000000000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "training_rss_bytes": {
+                  "maximum": 20000000000,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "trial_seconds": {
+                  "exclusiveMinimum": 0,
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "type": "number"
+                },
+                "worker_count": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "training_rss_bytes",
+                "dataset_checkpoint_bytes",
+                "inference_rss_bytes",
+                "trial_seconds",
+                "import_seconds",
+                "worker_count"
+              ],
+              "type": "object"
+            },
+            "dependency_lock_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "design_manifest_sha256": {
+              "const": "e098010809f8b4cbb57f04e70279bf0b3f4aa90994be8a1ae022bbb52a4c7fb0"
+            },
+            "generator_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "methods": {
+              "const": [
+                "lifted",
+                "generalized",
+                "daqp",
+                "flex",
+                "elastiqp",
+                "asymmetric",
+                "directional",
+                "clarabel",
+                "proxqp",
+                "piqp",
+                "learned_osqp",
+                "learned_daqp"
+              ]
+            },
+            "network_seeds": {
+              "const": [
+                41001,
+                41002,
+                41003
+              ]
+            },
+            "old_exclusions": {
+              "items": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "maxItems": 16,
+              "type": "array"
+            },
+            "registration_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "source_entropy_prefix": {
+              "const": [
+                20261105,
+                903
+              ]
+            },
+            "split_units": {
+              "const": {
+                "calibration": 8,
+                "test": 8,
+                "train": 32,
+                "validation": 8
+              }
+            },
+            "status": {
+              "enum": [
+                "accepted-design",
+                "registered"
+              ]
+            }
+          },
+          "required": [
+            "status",
+            "registration_sha256",
+            "generator_sha256",
+            "dependency_lock_sha256",
+            "design_manifest_sha256",
+            "bindings",
+            "methods",
+            "network_seeds",
+            "split_units",
+            "source_entropy_prefix",
+            "old_exclusions",
+            "budgets"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "const": "learning-protocol"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact_id",
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-protocol/1.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider",
+        "missing"
+      ]
+    },
+    "version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "kind",
+    "artifact_id",
+    "purpose",
+    "state",
+    "reason",
+    "protocol_id",
+    "protocol_sha256",
+    "source_lock_sha256",
+    "provenance",
+    "payload",
+    "content_sha256",
+    "protocol_ref"
+  ],
+  "type": "object"
+}

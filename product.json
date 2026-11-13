@@ -2,12 +2,20 @@
   "name": "SoftQP Studio",
   "slug": "softqp",
   "tagline": {
-    "en": "Inspect priced constraints and complete negative timing evidence.",
-    "es": "Examina restricciones con costos y evidencia temporal negativa completa."
+    "en": "Explore seven soft-constraint QP methods and the evidence from two timing studies.",
+    "es": "Explora siete métodos para QP con restricciones blandas y la evidencia de dos estudios de tiempos."
   },
   "repo": "https://github.com/fsantibanezleal/CAOS_SoftQP",
   "visibility": "public",
   "license": "MIT",
+  "showcase": {
+    "story_routes": [
+      "/story/formulate",
+      "/story/price",
+      "/story/compute",
+      "/story/compare"
+    ]
+  },
   "holder": "Felipe Santibáñez-Leal",
   "year": 2026,
   "method_entrypoints": [
@@ -25,8 +33,8 @@
     {
       "kind": "technical-report",
       "concept_doi": "10.5281/zenodo.23851659",
-      "title": "Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results",
-      "version": "0.01.002",
+      "title": "Seven Methods for Soft-Constraint Quadratic Programming: Contracts and Two Negative Timing Studies",
+      "version": "0.01.003",
       "covers": [
         "BS-1",
         "BS-2"
@@ -35,8 +43,8 @@
     {
       "kind": "manuscript",
       "concept_doi": "10.5281/zenodo.23875071",
-      "title": "Original-Row Proximal Updates for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies",
-      "version": "0.02.002",
+      "title": "Original-Row Proximal Splitting for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies",
+      "version": "0.02.003",
       "covers": [
         "BS-1",
         "BS-2"
@@ -45,5 +53,12 @@
   ],
   "method_packages": [
     "softqp"
-  ]
+  ],
+  "pipeline_stage_sources": {
+    "validate": "data-pipeline/pipeline/io/contract.py",
+    "assemble": "data-pipeline/pipeline/softqp_cases.py",
+    "solve": "data-pipeline/pipeline/softqp_run.py",
+    "evaluate": "data-pipeline/pipeline/optimality.py",
+    "export": "data-pipeline/pipeline/softqp_run.py"
+  }
 }

@@ -1,0 +1,1447 @@
+{
+  "schema": "softqp.prospective-controls/r2",
+  "status": "DESIGN_NOT_EXECUTED",
+  "scope": "Exact hand-defined algebraic/admission fixtures; not generated registered samples, trained predictions or measured solver outputs.",
+  "seed_policy": "Method targets use seed0 if deterministic, all three registered seeds if a learned method; initialization/evaluator/loader targets use diagnostic seed0.",
+  "repetition_policy": "One expected diagnostic status per declared target/seed, zero timed repetitions. Excluded from primary/training/regime counts.",
+  "controls": [
+    {
+      "id": "NC01-positive-elastic",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -2
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          -1
+        ],
+        "upper": [
+          1
+        ],
+        "soft": [
+          true
+        ],
+        "lower_linear": [
+          0.3
+        ],
+        "upper_linear": [
+          0.3
+        ],
+        "lower_quadratic": [
+          2
+        ],
+        "upper_quadratic": [
+          2
+        ]
+      },
+      "targets": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "daqp",
+        "directional",
+        "clarabel",
+        "proxqp",
+        "piqp",
+        "learned_osqp",
+        "learned_daqp"
+      ],
+      "expected": "accepted-original-KKT",
+      "analytic": {
+        "x": [
+          "37/30"
+        ],
+        "y": [
+          "23/30"
+        ]
+      }
+    },
+    {
+      "id": "NC02-entirely-free-soft-row",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          0
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          null
+        ],
+        "upper": [
+          null
+        ],
+        "soft": [
+          true
+        ],
+        "lower_linear": [
+          0.3
+        ],
+        "upper_linear": [
+          0.3
+        ],
+        "lower_quadratic": [
+          2
+        ],
+        "upper_quadratic": [
+          2
+        ]
+      },
+      "targets": [
+        "lifted",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-original-KKT",
+      "canonical_shape": [
+        2,
+        2
+      ],
+      "analytic": {
+        "x": [
+          0
+        ],
+        "y": [
+          0
+        ],
+        "redundant_s": 0
+      }
+    },
+    {
+      "id": "NC03-empty-equality-block",
+      "fixture_ref": "NC01-positive-elastic",
+      "targets": [
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-zero-equality-block",
+      "equality_shape": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "NC04-hard-equality",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          0
+        ],
+        "upper": [
+          0
+        ],
+        "soft": [
+          false
+        ]
+      },
+      "targets": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-original-KKT",
+      "analytic": {
+        "x": [
+          0
+        ],
+        "y": [
+          1
+        ]
+      }
+    },
+    {
+      "id": "NC05-nonunique-PSD",
+      "fixture": {
+        "P": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "q": [
+          0,
+          0
+        ],
+        "A": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "lower": [
+          -1,
+          -1
+        ],
+        "upper": [
+          1,
+          1
+        ],
+        "soft": [
+          false,
+          false
+        ]
+      },
+      "targets": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-objective-KKT-not-primal-equality",
+      "analytic": {
+        "x0": 0,
+        "x1_interval": [
+          -1,
+          1
+        ],
+        "objective": 0
+      }
+    },
+    {
+      "id": "NC06-zero-objective",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          0
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          -1
+        ],
+        "upper": [
+          1
+        ],
+        "soft": [
+          false
+        ]
+      },
+      "targets": [
+        "lifted",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-zero-objective-gap",
+      "analytic": {
+        "x": [
+          0
+        ],
+        "y": [
+          0
+        ],
+        "objective": 0
+      }
+    },
+    {
+      "id": "NC07-negative-objective",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -1
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          -2
+        ],
+        "upper": [
+          2
+        ],
+        "soft": [
+          false
+        ]
+      },
+      "targets": [
+        "lifted",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-negative-objective-gap",
+      "analytic": {
+        "x": [
+          1
+        ],
+        "y": [
+          0
+        ],
+        "objective": -0.5
+      }
+    },
+    {
+      "id": "NC08-near-kink-subgradient",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -1.5
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          0
+        ],
+        "upper": [
+          1
+        ],
+        "soft": [
+          true
+        ],
+        "lower_linear": [
+          1
+        ],
+        "upper_linear": [
+          1
+        ],
+        "lower_quadratic": [
+          0
+        ],
+        "upper_quadratic": [
+          0
+        ]
+      },
+      "targets": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "flex",
+        "elastiqp",
+        "directional",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-kink-Fenchel",
+      "analytic": {
+        "x": [
+          1
+        ],
+        "y": [
+          0.5
+        ]
+      }
+    },
+    {
+      "id": "NC09-hard-infeasible",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          0
+        ],
+        "A": [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ],
+        "lower": [
+          null,
+          1
+        ],
+        "upper": [
+          0,
+          null
+        ],
+        "soft": [
+          false,
+          false
+        ]
+      },
+      "targets": [
+        "lifted",
+        "generalized",
+        "asymmetric",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "certified-primal-infeasible-or-control-failed-never-accepted-optimum",
+      "analytic": {
+        "original_signed_Farkas_y": [
+          1,
+          -1
+        ],
+        "A_transpose_y": 0,
+        "finite_bound_support": -1
+      },
+      "qualification": "Requires valid infeasibility state and independent Farkas certificate. Missing/unsupported/unresolved statuses remain control-failed, never accepted negative controls."
+    },
+    {
+      "id": "NC10-indefinite-input",
+      "fixture": {
+        "P": [
+          [
+            -1
+          ]
+        ],
+        "q": [
+          0
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          -1
+        ],
+        "upper": [
+          1
+        ],
+        "soft": [
+          false
+        ]
+      },
+      "targets": [
+        "input-loader"
+      ],
+      "expected": "input-rejected-exact-curvature"
+    },
+    {
+      "id": "NC11-overlapping-peak-groups",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          0
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          -1
+        ],
+        "upper": [
+          1
+        ],
+        "groups": [
+          {
+            "rows": [
+              0
+            ],
+            "linear": 1,
+            "quadratic": 1
+          },
+          {
+            "rows": [
+              0
+            ],
+            "linear": 1,
+            "quadratic": 1
+          }
+        ]
+      },
+      "targets": [
+        "input-loader"
+      ],
+      "expected": "input-rejected-overlap"
+    },
+    {
+      "id": "NC12-weighted-peak-dual",
+      "fixture": {
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -19
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "lower": [
+          null
+        ],
+        "upper": [
+          0
+        ],
+        "groups": [
+          {
+            "rows": [
+              0
+            ],
+            "lower_scale": 1,
+            "upper_scale": 4,
+            "linear": 0.5,
+            "quadratic": 1
+          }
+        ]
+      },
+      "targets": [
+        "lifted",
+        "daqp",
+        "directional",
+        "clarabel",
+        "proxqp",
+        "piqp"
+      ],
+      "expected": "accepted-weighted-recovery",
+      "analytic": {
+        "x": [
+          1
+        ],
+        "t": [
+          4
+        ],
+        "lambda_upper": [
+          4.5
+        ],
+        "y": [
+          18
+        ],
+        "wrong_unweighted_stationarity": -13.5
+      }
+    },
+    {
+      "id": "NC13-mixed-units",
+      "fixture": {
+        "P": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "q": [
+          -1,
+          -2
+        ],
+        "A": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "lower": [
+          -1,
+          -1
+        ],
+        "upper": [
+          0,
+          0
+        ],
+        "soft": [
+          true,
+          true
+        ],
+        "lower_linear": [
+          0.3,
+          0.3
+        ],
+        "upper_linear": [
+          0.3,
+          0.3
+        ],
+        "lower_quadratic": [
+          2,
+          2
+        ],
+        "upper_quadratic": [
+          2,
+          2
+        ],
+        "variable_units": [
+          "m",
+          "N"
+        ],
+        "row_units": [
+          "m",
+          "N"
+        ],
+        "D_x": [
+          1,
+          1
+        ],
+        "D_r": [
+          1,
+          1
+        ],
+        "S_f": 1
+      },
+      "targets": [
+        "numerical-evaluator"
+      ],
+      "expected": "dimensionless-consistent-component-metrics"
+    },
+    {
+      "id": "NC14-inconsistent-predicted-working-set",
+      "fixture": {
+        "P": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "q": [
+          -1,
+          -1
+        ],
+        "A": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "lower": [
+          null,
+          null,
+          null
+        ],
+        "upper": [
+          0,
+          0,
+          0
+        ],
+        "hard": [
+          true,
+          true,
+          true
+        ],
+        "predicted_probabilities": [
+          0.9,
+          0.8,
+          0.7
+        ]
+      },
+      "targets": [
+        "learned_daqp-initialization-adapter"
+      ],
+      "expected": "bounded-rank-repair-preserve-constraints",
+      "first_removed_original_row": 2,
+      "max_removals": 3,
+      "removal_order_on_two_rank_failures": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "NC15-undeclared-head",
+      "fixture": {
+        "canonical_n": 3,
+        "canonical_m": 0
+      },
+      "targets": [
+        "learned_osqp",
+        "learned_daqp"
+      ],
+      "expected": "unsupported-input-not-fabricated-model"
+    },
+    {
+      "id": "NC16-checkpoint-identity-tamper",
+      "fixture": {
+        "mutation": "change-one-required-numeric-parameter-byte-without-updating-source-bound-checkpoint"
+      },
+      "targets": [
+        "learned_osqp",
+        "learned_daqp"
+      ],
+      "expected": "checkpoint-rejected-before-inference"
+    },
+    {
+      "id": "NC17-hard-error-denominator-reversal",
+      "fixture": {
+        "hard_violation": 2e-06,
+        "row_unit_scale": 1,
+        "bound_value": 101,
+        "threshold": 1e-06
+      },
+      "targets": [
+        "numerical-evaluator"
+      ],
+      "expected": "accuracy-rejected-H-2e-6"
+    },
+    {
+      "id": "NC18-temporal-estimand-reversal",
+      "fixture": {
+        "cold": [
+          1,
+          1,
+          100
+        ],
+        "learned": [
+          0.5,
+          0.5,
+          120
+        ]
+      },
+      "targets": [
+        "primary-estimator"
+      ],
+      "expected": "negative-19-over-102-not-positive-half"
+    },
+    {
+      "id": "NC19-zero-soft-side-price",
+      "fixture": {
+        "fixture_schema": "softqp.boundary-control/v1",
+        "dtype": "float64",
+        "matrix_representation": "explicit-dense-with-shapes",
+        "finite_values_only": true,
+        "units": {
+          "D_x": [
+            1
+          ],
+          "D_r": [
+            1
+          ],
+          "S_f": 1,
+          "variable": [
+            "dimensionless"
+          ],
+          "row": [
+            "dimensionless"
+          ],
+          "objective": "dimensionless-operating-cost"
+        },
+        "n": 1,
+        "m": 1,
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -2
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "A_shape": [
+          1,
+          1
+        ],
+        "lower": [
+          0
+        ],
+        "upper": [
+          1
+        ],
+        "lower_finite": [
+          true
+        ],
+        "upper_finite": [
+          true
+        ],
+        "soft": [
+          true
+        ],
+        "lower_linear": [
+          2
+        ],
+        "upper_linear": [
+          0
+        ],
+        "lower_quadratic": [
+          3
+        ],
+        "upper_quadratic": [
+          0
+        ],
+        "candidate": {
+          "x": [
+            2
+          ],
+          "y": [
+            0
+          ]
+        }
+      },
+      "targets": [
+        "input-loader",
+        "lifted",
+        "asymmetric",
+        "numerical-evaluator"
+      ],
+      "expected": "finite-original-optimum-with-unpenalized-upper-violation",
+      "outcomes": {
+        "input-loader": "admit-valid-zero-price-without-flooring",
+        "lifted": "accepted-original-KKT-no-slack-curvature-shift",
+        "asymmetric": "accepted-original-KKT-no-price-floor",
+        "numerical-evaluator": "accept-correct-raw-candidate-and-report-upper-violation-one"
+      },
+      "analytic": {
+        "x": [
+          2
+        ],
+        "y": [
+          0
+        ],
+        "objective": -2,
+        "upper_violation": [
+          1
+        ],
+        "upper_penalty": 0
+      },
+      "failure_policy": "A positive price floor or fabricated hard upper constraint fails this control; no minimum-norm lifted slack is required."
+    },
+    {
+      "id": "NC20-zero-group-price",
+      "fixture": {
+        "fixture_schema": "softqp.boundary-control/v1",
+        "dtype": "float64",
+        "matrix_representation": "explicit-dense-with-shapes",
+        "finite_values_only": true,
+        "units": {
+          "D_x": [
+            1
+          ],
+          "D_r": [
+            1
+          ],
+          "S_f": 1,
+          "variable": [
+            "dimensionless"
+          ],
+          "row": [
+            "dimensionless"
+          ],
+          "objective": "dimensionless-operating-cost"
+        },
+        "n": 1,
+        "m": 1,
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          -2
+        ],
+        "A": [
+          [
+            1
+          ]
+        ],
+        "A_shape": [
+          1,
+          1
+        ],
+        "lower": [
+          0
+        ],
+        "upper": [
+          1
+        ],
+        "lower_finite": [
+          true
+        ],
+        "upper_finite": [
+          true
+        ],
+        "groups": [
+          {
+            "rows": [
+              0
+            ],
+            "lower_scale": [
+              1
+            ],
+            "upper_scale": [
+              1.5
+            ],
+            "linear": 0,
+            "quadratic": 0
+          }
+        ],
+        "candidate": {
+          "x": [
+            2
+          ],
+          "y": [
+            0
+          ]
+        }
+      },
+      "targets": [
+        "input-loader",
+        "directional",
+        "lifted",
+        "numerical-evaluator"
+      ],
+      "expected": "finite-optimum-zero-cost-group-with-no-live-t",
+      "outcomes": {
+        "input-loader": "admit-valid-zero-cost-group",
+        "directional": "accepted-original-KKT-unpenalized-group",
+        "lifted": "accepted-original-KKT-canonical-shape-one-zero",
+        "numerical-evaluator": "accept-correct-candidate-report-peak-one-point-five-penalty-zero"
+      },
+      "canonical_shape": [
+        1,
+        0
+      ],
+      "analytic": {
+        "x": [
+          2
+        ],
+        "y": [
+          0
+        ],
+        "objective": -2,
+        "group_peak": [
+          1.5
+        ],
+        "group_penalty": 0,
+        "live_t_count": 0
+      },
+      "failure_policy": "Allocating a fictitious positive group cost or requiring feasibility of its soft interval fails."
+    },
+    {
+      "id": "NC21-finite-coefficient-overflow",
+      "fixture": {
+        "fixture_schema": "softqp.boundary-control/v1",
+        "dtype": "float64",
+        "matrix_representation": "explicit-dense-with-shapes",
+        "finite_values_only": true,
+        "units": {
+          "D_x": [
+            1
+          ],
+          "D_r": [
+            1
+          ],
+          "S_f": 1,
+          "variable": [
+            "dimensionless"
+          ],
+          "row": [
+            "dimensionless"
+          ],
+          "objective": "dimensionless-operating-cost"
+        },
+        "n": 1,
+        "m": 1,
+        "P": [
+          [
+            1
+          ]
+        ],
+        "q": [
+          0
+        ],
+        "A": [
+          [
+            1e+308
+          ]
+        ],
+        "A_shape": [
+          1,
+          1
+        ],
+        "lower": [
+          -1
+        ],
+        "upper": [
+          1
+        ],
+        "lower_finite": [
+          true
+        ],
+        "upper_finite": [
+          true
+        ],
+        "soft": [
+          false
+        ],
+        "lower_linear": [
+          0
+        ],
+        "upper_linear": [
+          0
+        ],
+        "lower_quadratic": [
+          0
+        ],
+        "upper_quadratic": [
+          0
+        ],
+        "transform": {
+          "operation": "K=P+sigma*I+A.T*R*A",
+          "rho": 0.1,
+          "sigma": 1e-06
+        },
+        "candidate": {
+          "claimed_native_success": true,
+          "x": [
+            2
+          ],
+          "y": [
+            0
+          ]
+        }
+      },
+      "targets": [
+        "input-loader",
+        "fixed-point-preprocess-reader",
+        "numerical-evaluator"
+      ],
+      "expected": "finite-input-but-nonrepresentable-transform-and-candidate-evaluation",
+      "outcomes": {
+        "input-loader": "admit-structurally-finite-coefficients-only-no-numerical-qualification",
+        "fixed-point-preprocess-reader": "refuse-nonrepresentable-transform-before-factorization",
+        "numerical-evaluator": "refuse-nonrepresentable-Ax-before-accepted-metrics"
+      },
+      "failure_policy": "No clipping, big-M, diagonal shift, silent scaling substitution or accepted NaN/Infinity. A different solver's well-scaled valid solve is not falsely declared mathematically impossible."
+    },
+    {
+      "id": "NC22-unbounded-convex-objective",
+      "fixture": {
+        "fixture_schema": "softqp.boundary-control/v1",
+        "dtype": "float64",
+        "matrix_representation": "explicit-dense-with-shapes",
+        "finite_values_only": true,
+        "units": {
+          "D_x": [
+            1
+          ],
+          "D_r": [],
+          "S_f": 1,
+          "variable": [
+            "dimensionless"
+          ],
+          "row": [],
+          "objective": "dimensionless-operating-cost"
+        },
+        "n": 1,
+        "m": 0,
+        "P": [
+          [
+            0
+          ]
+        ],
+        "q": [
+          -1
+        ],
+        "A": [],
+        "A_shape": [
+          0,
+          1
+        ],
+        "lower": [],
+        "upper": [],
+        "lower_finite": [],
+        "upper_finite": [],
+        "soft": [],
+        "lower_linear": [],
+        "upper_linear": [],
+        "lower_quadratic": [],
+        "upper_quadratic": [],
+        "candidate": {
+          "x": [
+            0
+          ],
+          "y": [],
+          "claimed_native_success": true
+        }
+      },
+      "targets": [
+        "input-loader",
+        "lifted",
+        "clarabel",
+        "piqp",
+        "numerical-evaluator",
+        "recession-certificate-reader"
+      ],
+      "expected": "unbounded-hard-convex-QP-never-accepted-finite-optimum",
+      "outcomes": {
+        "input-loader": "admit-valid-convex-input-without-claiming-boundedness",
+        "lifted": "certified-dual-infeasible-or-control-failed",
+        "clarabel": "certified-dual-infeasible-or-control-failed",
+        "piqp": "certified-dual-infeasible-or-control-failed",
+        "numerical-evaluator": "reject-any-claimed-finite-optimum",
+        "recession-certificate-reader": "accept-valid-recession-ray-reject-invalid-rays"
+      },
+      "certificate": {
+        "schema": "softqp.hard-qp-recession/v2",
+        "applicability": "PSD-hard-only-QP-no-soft-or-group-cost",
+        "feasible_anchor": [
+          0
+        ],
+        "direction": [
+          1
+        ],
+        "normalization": "infinity-norm-of-Dx-inverse-direction-equals-one",
+        "P_direction": [
+          0
+        ],
+        "A_direction": [],
+        "q_dot_direction": -1,
+        "ray_objective": "f(anchor+tau*direction)=-tau-for-all-tau>=0",
+        "runtime_tolerances": {
+          "anchor_hard": 1e-08,
+          "normalized_P_direction": 1e-09,
+          "normalized_A_recession": 1e-09,
+          "negative_q_direction": -1e-08
+        },
+        "proof_arithmetic": "exact-rational-operations-on-submitted-canonical-float64-dyadics",
+        "numerical_tolerances_role": "candidate-screen-only-never-proof-of-zero-or-recession-sign",
+        "public_unbounded_requires": [
+          "exact-PSD-proof",
+          "exact-feasible-anchor",
+          "finite-nonzero-normalized-direction",
+          "exact-Pd-zero",
+          "exact-negative-q-dot-d",
+          "all-exact-finite-bound-recession-signs"
+        ]
+      },
+      "failure_policy": "A native status and small residuals alone never establish unboundedness. Without independent exact dyadic/rational proof retain inconclusive/refused or control-failed. Never publish an unbounded claim or pass the control without proof; no network head is fabricated."
+    },
+    {
+      "id": "NC23-tiny-positive-curvature",
+      "fixture": {
+        "fixture_schema": "softqp.boundary-control/v1",
+        "dtype": "float64",
+        "matrix_representation": "explicit-dense-with-shapes",
+        "finite_values_only": true,
+        "units": {
+          "D_x": [
+            1
+          ],
+          "D_r": [],
+          "S_f": 1,
+          "variable": [
+            "dimensionless"
+          ],
+          "row": [],
+          "objective": "dimensionless-operating-cost"
+        },
+        "n": 1,
+        "m": 0,
+        "P": [
+          [
+            5.820766091346741e-11
+          ]
+        ],
+        "q": [
+          -1
+        ],
+        "A": [],
+        "A_shape": [
+          0,
+          1
+        ],
+        "lower": [],
+        "upper": [],
+        "lower_finite": [],
+        "upper_finite": [],
+        "soft": [],
+        "lower_linear": [],
+        "upper_linear": [],
+        "lower_quadratic": [],
+        "upper_quadratic": [],
+        "candidate": {
+          "x": [
+            0
+          ],
+          "y": [],
+          "claimed_native_success": true
+        }
+      },
+      "targets": [
+        "recession-certificate-reader",
+        "public-status-reader"
+      ],
+      "expected": "finite-optimum-false-unbounded-certificate-refused",
+      "outcomes": {
+        "recession-certificate-reader": "refuse-unbounded-even-with-native-flag-and-passing-residual-screen",
+        "public-status-reader": "refuse-unbounded-even-with-native-flag-and-passing-residual-screen"
+      },
+      "certificate": {
+        "schema": "softqp.hard-qp-recession/v2",
+        "applicability": "PSD-hard-only-QP-no-soft-or-group-cost",
+        "feasible_anchor": [
+          0
+        ],
+        "direction": [
+          1
+        ],
+        "normalization": "infinity-norm-of-Dx-inverse-direction-equals-one",
+        "P_direction": [
+          5.820766091346741e-11
+        ],
+        "A_direction": [],
+        "q_dot_direction": -1,
+        "runtime_tolerances": {
+          "anchor_hard": 1e-08,
+          "normalized_P_direction": 1e-09,
+          "normalized_A_recession": 1e-09,
+          "negative_q_direction": -1e-08
+        },
+        "proof_arithmetic": "exact-rational-operations-on-submitted-canonical-float64-dyadics",
+        "numerical_tolerances_role": "candidate-screen-only-never-proof-of-zero-or-recession-sign",
+        "public_unbounded_requires": [
+          "exact-PSD-proof",
+          "exact-feasible-anchor",
+          "finite-nonzero-normalized-direction",
+          "exact-Pd-zero",
+          "exact-negative-q-dot-d",
+          "all-exact-finite-bound-recession-signs"
+        ]
+      },
+      "failure_policy": "Reject the claimed unbounded status: exact proof fails despite passing numerical screening. A real solver or separate finite-optimum evaluation is not executed or inferred. If a public exact certificate cannot be established, outcome stays inconclusive/refused; a native unbounded flag cannot override it.",
+      "claimed_native_status": "dual-infeasible",
+      "numerical_screen": {
+        "anchor_hard": 0,
+        "normalized_P_direction": 5.820766091346741e-11,
+        "normalized_A_recession": 0,
+        "q_dot_direction": -1,
+        "passes": true,
+        "role": "candidate-screen-only"
+      },
+      "analytic": {
+        "exact_coefficient": "1/17179869184",
+        "finite_minimizer": [
+          17179869184
+        ],
+        "finite_minimum": -8589934592,
+        "exact_refusal": "exact-P-direction-nonzero",
+        "PSD": true,
+        "anchor_feasible": true,
+        "normalized_direction_nonzero": true,
+        "q_dot_direction": -1
+      }
+    },
+    {
+      "id": "NC24-tiny-positive-upper-recession",
+      "fixture": {
+        "fixture_schema": "softqp.boundary-control/v1",
+        "dtype": "float64",
+        "matrix_representation": "explicit-dense-with-shapes",
+        "finite_values_only": true,
+        "units": {
+          "D_x": [
+            1
+          ],
+          "D_r": [
+            1
+          ],
+          "S_f": 1,
+          "variable": [
+            "dimensionless"
+          ],
+          "row": [
+            "dimensionless"
+          ],
+          "objective": "dimensionless-operating-cost"
+        },
+        "n": 1,
+        "m": 1,
+        "P": [
+          [
+            0
+          ]
+        ],
+        "q": [
+          -1
+        ],
+        "A": [
+          [
+            5.820766091346741e-11
+          ]
+        ],
+        "A_shape": [
+          1,
+          1
+        ],
+        "lower": [
+          null
+        ],
+        "upper": [
+          1
+        ],
+        "lower_finite": [
+          false
+        ],
+        "upper_finite": [
+          true
+        ],
+        "soft": [
+          false
+        ],
+        "lower_linear": [
+          0
+        ],
+        "upper_linear": [
+          0
+        ],
+        "lower_quadratic": [
+          0
+        ],
+        "upper_quadratic": [
+          0
+        ],
+        "candidate": {
+          "x": [
+            0
+          ],
+          "y": [
+            0
+          ],
+          "claimed_native_success": true
+        }
+      },
+      "targets": [
+        "recession-certificate-reader",
+        "public-status-reader"
+      ],
+      "expected": "finite-optimum-false-unbounded-certificate-refused",
+      "outcomes": {
+        "recession-certificate-reader": "refuse-unbounded-even-with-native-flag-and-passing-residual-screen",
+        "public-status-reader": "refuse-unbounded-even-with-native-flag-and-passing-residual-screen"
+      },
+      "certificate": {
+        "schema": "softqp.hard-qp-recession/v2",
+        "applicability": "PSD-hard-only-QP-no-soft-or-group-cost",
+        "feasible_anchor": [
+          0
+        ],
+        "direction": [
+          1
+        ],
+        "normalization": "infinity-norm-of-Dx-inverse-direction-equals-one",
+        "P_direction": [
+          0
+        ],
+        "A_direction": [
+          5.820766091346741e-11
+        ],
+        "q_dot_direction": -1,
+        "runtime_tolerances": {
+          "anchor_hard": 1e-08,
+          "normalized_P_direction": 1e-09,
+          "normalized_A_recession": 1e-09,
+          "negative_q_direction": -1e-08
+        },
+        "proof_arithmetic": "exact-rational-operations-on-submitted-canonical-float64-dyadics",
+        "numerical_tolerances_role": "candidate-screen-only-never-proof-of-zero-or-recession-sign",
+        "public_unbounded_requires": [
+          "exact-PSD-proof",
+          "exact-feasible-anchor",
+          "finite-nonzero-normalized-direction",
+          "exact-Pd-zero",
+          "exact-negative-q-dot-d",
+          "all-exact-finite-bound-recession-signs"
+        ]
+      },
+      "failure_policy": "Reject the claimed unbounded status: exact proof fails despite passing numerical screening. A real solver or separate finite-optimum evaluation is not executed or inferred. If a public exact certificate cannot be established, outcome stays inconclusive/refused; a native unbounded flag cannot override it.",
+      "claimed_native_status": "dual-infeasible",
+      "numerical_screen": {
+        "anchor_hard": 0,
+        "normalized_P_direction": 0,
+        "normalized_A_recession": 5.820766091346741e-11,
+        "q_dot_direction": -1,
+        "passes": true,
+        "role": "candidate-screen-only"
+      },
+      "analytic": {
+        "exact_coefficient": "1/17179869184",
+        "finite_minimizer": [
+          17179869184
+        ],
+        "finite_minimum": -17179869184,
+        "exact_refusal": "exact-upper-anchor-or-recession-sign",
+        "PSD": true,
+        "anchor_feasible": true,
+        "normalized_direction_nonzero": true,
+        "q_dot_direction": -1
+      }
+    }
+  ]
+}

@@ -42,7 +42,13 @@ Research is documented in [the source review](../research.md). It reviews classi
 
 Sources: https://arxiv.org/html/2512.01565v2 ; https://github.com/StanfordASL/elastiqp ; https://www.mathworks.com/help/mpc/ug/optimization-problem.html ; https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
 
-UNVERIFIED: novelty, superiority, complete method coverage, field safety and deployment.
+UNVERIFIED: global novelty, timing superiority, learned-policy coverage and field safety. The declared deterministic method scope has executed comparisons. The static research preview has separate exact-source deployment verification; it does not establish scientific or operational qualification.
+
+The proximal-operator derivation in the worked lessons also follows Parikh and Boyd, Proximal Algorithms, https://doi.org/10.1561/2400000003. This reference supports the convex analysis and does not supply a measured timing competitor.
+
+Worked lessons trace contract/code definitions to https://github.com/fsantibanezleal/CAOS_SoftQP .
+
+Worked lessons trace contract/code definitions to https://doi.org/10.5281/zenodo.23851659 .
 
 ## Sizing and contracts
 
@@ -64,11 +70,13 @@ Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distri
 
 ## Technology and versions
 
-This development correction adopts released template 0.14.005 (main be5eb2c8d0d6d1fa2100e0e8d0994d182329e076, exact-head CI41487592260) and published shared shell0.19.12. The external local workflow, admission correction and template/product test ownership were implemented and independently validated in the shared base before this adoption; full product foundation acceptance is a separate gate. Public SDK regression uses CPython 3.12.14 and the exact-source historical profile retains CPython 3.12.10; Node 24.14.1 was measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. These direct dependencies match the actual requirements and committed npm lock.
+The published 0.01.002 baseline adopted released template 0.14.005 (main be5eb2c8d0d6d1fa2100e0e8d0994d182329e076, exact-head CI41487592260) and published shared shell0.19.12. The external local workflow, admission correction and template/product test ownership were implemented and independently validated in the shared base before this adoption; full product foundation acceptance is a separate gate. Public SDK regression uses CPython 3.12.14 and the exact-source historical profile retains CPython 3.12.10; Node 24.14.1 was measured locally. Linux/Windows native source and wheels are verified. Current development and notebook requirements pin the published engine distribution; the separate historical campaign environment retains its exact Git revision. Public distribution and fresh consumer installation are verified. Those direct dependencies describe that historical release.
+
+The 2026-11-05 candidate pinned published shell 0.20.0. Its v0.20.0 tag peels to38d6ed4d9ec191caaeba100524ef3634dcee28fd; the registry gitHead5c4105e07f894f80bc7b7042a2ec10d3e4ffa257 has the same source tree53e1c77bdd033f2db80778bd958acc957d241db4. An independent local rebuild of the immutable tag matches all27 published package files byte for byte and the registry integrity value. This admits dependency identity, not product visual, domain or deployment acceptance. Current-source App/story/phone gates and the strengthened content-base adoption remain required.
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|
-| shell | @fasl-work/caos-app-shell | 0.19.12 | Shared workbench and measured gate | Custom shell duplication |
+| shell | @fasl-work/caos-app-shell | 0.26.0 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
 | tooling | @types/node | 24.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -230,6 +238,29 @@ States use the template vocabulary and explicitly distinguish `missing`, `partia
 
 Offline stages: ingest source/registry -> validate -> generate/pin seeds and splits -> solve each compatible method/case/settings -> independent oracle and residual checks -> aggregate held-out statistics -> export immutable artifacts -> validate inventory/checksums -> replay. Browser replay loads committed artifacts only. A browser live lane is optional and only admitted if complete solver code is bundleable, result parity is demonstrated, memory/payload limits pass, and per-case latency is within the measured product budget. No server lane is planned.
 
+## Visualization catalog
+
+Current visualization design reconciliation, 2026-11-05. This section specifies the replacement of the historical violation-chart entry view. It records a present design rather than claiming that these requirements preceded the original implementation. The published base is CAOS_PRODUCT_TEMPLATE 0.15.006 (4b6a1e4058a1b39fb32b0ad52f1c222bffb68165) with CAOS App Shell 0.25.0 (8e8398d55cd9ee40f0d79b3c3f506fb0f2e24c65). The declared story runs Formulate, Price, Compute and Compare. Its callouts reserve the measured shell header band. The remaining height is the drawing surface, and the phone stage floor includes both regions. All views share the selected case, method, interval row and recorded stream frame. Inputs are verified replay or a verified local-native import; a selection never becomes a new browser solve. Shared stage, story, callout and transition behavior belongs to the shell.
+
+### Current base adoption, 2026-11-11
+
+The current candidate adopts CAOS_PRODUCT_TEMPLATE 0.15.010 and CAOS App Shell 0.26.0. The shell fixes natural PlotCard header sizing, redraws moving chart marks, publishes settled callout-band measurements, gives callout values a dedicated row, and exposes carousel semantics only when cards are hidden. It also adds explicit UTC/local time-axis handling and formatter caching. The product's elapsed-day charts use `formatNumber`; it does not use calendar-time axes. The template workflow includes an opt-in guarded readiness-provider path, but SoftQP keeps the strict catalog and readiness-inventory lane because its artifact adapter does not independently validate the readiness document. Full product requalification against these exact installed bases is required before promotion.
+
+| id | question | data contract | kind | interactions | linked views | placement |
+|---|---|---|---|---|---|---|
+| V1 | Which decisions, interval rows and prices define this optimization? | softqp-case-spec, softqp-case-result | The system. Two-dimensional decision-to-row-to-price schematic; sparse dimensions and each selected row's physical unit | Select a row in the problem or its docked panel; both highlight the same interval. No physical equipment geometry is claimed; grouped inputs without a separable problem remain explicitly unavailable | Constraint inspection panel and selected original-row cursor | App System and story Formulate |
+| V2 | Which side of this selected interval is hard or priced? | softqp-case-spec, softqp-case-result | The key component. Dissected interval with separate lower/upper prices and the actual original-space value | Select a bound or its panel entry; selected side stays linked to the domain view. Infinite endpoints are absent bounds, not zero; no result means no fabricated marker | Selected original row shared with system and geometry | App Interval |
+| V3 | Where does the returned row value lie relative to its interval and penalty? | softqp-case-spec, softqp-case-result | The domain diagram. Actual interval/violation geometry and isolated row-price characteristic; row unit on x, normalized objective on y | Bound/row selection and details on demand share the interval state. Isolated row pricing is explicitly not the full coupled objective or a new solve; unsupported grouped policies are labelled | Constraint panel, selected side and returned row value | App Geometry and story Price |
+| V4 | How does the identical recorded controller input change through C12? | softqp-stream | State and dynamics. Common oracle-driven position, velocity and actuator trajectories; seconds, m, m/s and m/s squared; impulse/threshold markers | Scrub a recorded frame and update linked state/readouts. Only unedited compatible C12 records; one observation per frame supplies no statistical timing interval or independent method rollout | Selected C12 frame, trajectory cursor and docked state | App Dynamics |
+| V5 | How does the actual method move from formulation to returned original-space evaluation? | softqp-case-spec, softqp-case-result | The method at work. Bound stages: formulation, native solve, original-space recovery, evaluation; selected row values and recorded dimensions/iterations | Select an actual stage in scene or panel; no invented intermediate iteration trajectory. Formulation and terminal output are actual artifacts; intermediate numerical iterates are unavailable and must be named as such | Selected method, formulation phase and original row | App Method and story Compute |
+| V6 | Do compatible methods agree on the selected case in original space? | softqp-case-result | Comparison and decision. Original objective differences against the named lifted reference, or a named compatible peer when lifting is absent; hard-row errors only in the selected row unit; maximum normalized absolute objective difference | Select a method in the panel or scene; the selected case remains fixed and selected row determines the hard-error unit. Objective agreement is descriptive, not a certificate; no per-case timing uncertainty is inferred; incompatibilities remain visible | Selected method, case, and original-row hard-error unit | App Matched evidence and story Compare |
+
+### Registered population uncertainty
+
+What do the two frozen timing studies establish? Separate original and directional 95% seed-cluster intervals, zero, registered target, estimator, denominators, failures and immutable protocol identity. Select one frozen study on Benchmark; retain both negative results and their distinct estimands. Benchmark only. No retuning, merged population, new scientific endpoint or global performance claim; no cross-case aggregate on App/story. Evidence: softqp-campaign; byte-verified directional accepted-summary.
+
+The walkthrough has three to six steps with state-preserving deep links, direct step selection, next/previous, play/pause, keyboard controls outside editable elements, and exit to the same App selection. Reduced motion retains every value and disables continuous motion. Each primary scene has three nonoverlapping subject-anchored value/unit callouts and one finding takeaway. Acceptance includes the actual current viewport-share, motion, linking, LCP/INP/frame-rate measurements and an independent full-language/theme/phone review, not only the older shell gate.
+
 ## Application, UI and deliverables
 
 Instantiate current `CAOS_PRODUCT_TEMPLATE` exactly, use `@fasl-work/caos-app-shell` pinned exactly to the current adopted release, revalidated whenever the base changes, and follow the current template six-route contract: App, Introduction, Methodology, Implementation, Experiments, Benchmark. English and Spanish plus light and dark themes are release requirements. App opens on one selected case, provides real supported parameter edits, solve/compare, visible hard/soft row policy, side-specific violation chart, convergence/residual inspection and portable export. Cross-case selection and result matrices belong in Experiments/Benchmark. The page viewport is the app; keyboard access, focus behavior, empty/error/stale/incompatible states and responsive layouts are part of the measured gate.
@@ -265,7 +296,7 @@ BS-2: The implemented SDK0.2 candidate prices disjoint directional group peaks w
 
 Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver/ ; https://darnstrom.github.io/daqp/start/advanced/soft ; https://openreview.net/pdf?id=HL3TvE4Afm .
 
-UNVERIFIED: novelty, superiority, qualified product release, deployment and operational value; all require the declared gates. The complete catalog and registered experimental grid are executed and retained.
+UNVERIFIED: global novelty, timing superiority, scientific product qualification and operational value; each requires its own evidence. The research preview is deployed with exact-source, route, byte-stream and browser verification. The complete catalog and registered experimental grid are executed and retained.
 
 The Methodology page uses the documented `method-learned` floor waiver: the implemented method set is deterministic convex optimization and has no trained parameter policy. This does not waive any method implementation, comparison, mathematical-depth or executive-brief requirement. Deep FlexQP remains an availability-gated related method with distinct restoration semantics.
 

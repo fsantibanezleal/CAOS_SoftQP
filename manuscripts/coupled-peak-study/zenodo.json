@@ -2,14 +2,14 @@
   "metadata": {
     "upload_type": "publication",
     "publication_type": "preprint",
-    "title": "Original-Row Proximal Updates for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies",
+    "title": "Original-Row Proximal Splitting for Side-Specific and Directional Peak Penalties: Two Negative Timing Studies",
     "creators": [
       {
         "name": "Santibáñez-Leal, Felipe",
         "orcid": "0000-0002-0150-3246"
       }
     ],
-    "description": "<p>Original-row proximal updates can represent selected soft interval penalties without adding explicit departure variables to a quadratic program's principal system. We derive a side-specific separable linear-quadratic interval update and a directional disjoint group-peak update for a fixed positive diagonal metric. The grouped construction follows a box-residual identity under coordinate contractions and reduces to a weighted scalar threshold; a dense-metric counterexample states its limit. Exact lifting, row splitting, compact epigraphs, weighted thresholds and relaxed splitting have established precedents, so no expressibility or algorithmic-priority claim is made. Two separate registered synthetic studies evaluate the implementations. The first contains 456 instances, with 24 distinct primary problems and 168 paired repetitions: the median relative cold end-to-end reduction is 0.499839%, with a 95% seed-cluster interval [-3.291967%,3.944835%]. The second contains 210 repeated-forecast inputs and 7770 raw observations; its complete 144-instance held-out primary score is -212.449875%, with limits [-225.336618%,-192.873759%] and nine retained failed pairs. Neither predicted ten-percent improvement is established. Original-space objective, hard-row and dual checks separate equivalent formulations from computational cost. Existing formulation, conditioning and workspace comparisons characterize components without claiming an unperformed causal intervention. Fewer principal variables or rows do not by themselves establish a faster complete optimization operation on these populations.</p><p>Editable LaTeX sources and code: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP\">CAOS_SoftQP</a>. Native engine: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>. Complete grouped evidence: <a href=\"https://doi.org/10.5281/zenodo.23875194\">dataset</a>.</p>",
+    "description": "<p>Original-row proximal updates can represent selected soft interval penalties without adding explicit departure variables to a quadratic program's principal system. We derive a side-specific separable linear-quadratic update and a directional disjoint group-peak update in a fixed positive diagonal metric. The grouped construction follows a box-residual identity under coordinate contractions and reduces its proximal operation to a weighted scalar threshold. Exact lifting, directional row splitting and compact epigraphs already express the same objectives; no expressibility or algorithmic-priority claim is made. We evaluate the two implementations in separate registered synthetic studies. The first contains 456 instances and 168 held-out accepted pairs: median relative cold end-to-end reduction 0.499839%, with 95% seed-cluster limits -3.291967% and 3.944835%. The second contains 210 repeated-forecast instances, with a 144-member held-out primary score of -212.449875%, limits -225.336618% and -192.873759%, and 9 retained failed pairs. Neither predicted ten-percent timing improvement is established. Original-space objective, hard-row and dual checks distinguish mathematical equivalence from computational cost. Matched formulation, conditioning and workspace comparisons quantify descriptive contrasts without asserting an unperformed causal ablation. The results show that fewer principal variables or rows do not by themselves establish a faster complete optimization operation on these tested populations.</p><p>Editable LaTeX sources and code: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP/tree/1860d9ad94352999adbcbd364b8a3a015948ed32/manuscripts/coupled-peak-study\">CAOS_SoftQP</a>. Native engine: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>. Complete grouped evidence: <a href=\"https://doi.org/10.5281/zenodo.23875194\">dataset</a>.</p>",
     "keywords": [
       "quadratic programming",
       "coupled peak penalties",
@@ -20,8 +20,8 @@
     ],
     "license": "cc-by-4.0",
     "language": "eng",
-    "version": "0.02.002",
-    "publication_date": "2026-11-02",
+    "version": "0.02.003",
+    "publication_date": "2026-11-10",
     "related_identifiers": [
       {
         "identifier": "10.5281/zenodo.23875194",
@@ -29,11 +29,11 @@
         "resource_type": "dataset"
       },
       {
-        "identifier": "10.5281/zenodo.23899079",
+        "identifier": "10.5281/zenodo.23851659",
         "relation": "references",
         "resource_type": "publication-report"
       }
     ],
-    "version_notes": "Complete native LaTeX reimplementation from the canonical CAOS article base, with separate technical-report and research-preprint scope, section structure, expanded derivations and contract definitions, evidence-derived vector figures and tables, verified primary references and independent content, mathematics and all-page review. Both registered numerical populations and negative criteria are unchanged."
+    "version_notes": "Corrected native research preprint. Clarifies hard-row indicator terms, the registered acceptance checks and paired descriptive contrasts. Both registered timing conclusions remain negative."
   }
 }

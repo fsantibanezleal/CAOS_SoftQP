@@ -3,6 +3,21 @@
 All notable changes to this product. Versions are X.XX.XXX (VERSION is the single source); every release is
 tagged.
 
+## [0.01.003], 2026-11-10
+
+### Fixed
+
+- Adopt CAOS Product Template 0.15.010's local workflow, retaining the strict catalog and readiness inventory lane until the product validator covers the readiness document itself.
+- Fix the phone-width sparse-operator label collision and keep the method support/evidence table visible while asynchronous benchmark artifacts load.
+- Keep the measured benchmark panels below the initial results matrix and explicitly waive a learned-versus-classical comparison while the product has no trained method.
+- Keep campaign metadata prose outside the measured-results area and space the compact SVG objective, units note and matrix label as distinct baselines.
+- Adopt CAOS Product Template 0.15.008 and CAOS App Shell 0.26.0, including the early refusal for version-stamped stage inputs and the latest shared chart, callout, and fitted-card behavior. Requalification against these exact bases remains required before release.
+- Correct the separate native technical report and research preprint with exact method equations, registered acceptance thresholds, reproducible commands, and evidence-derived component and timing tables.
+- Adopt CAOS Product Template 0.15.006 and CAOS App Shell 0.25.0. Use measured callout placement and the shared immersive story layout.
+- Refuse out-of-root or malformed contract inputs consistently and block production fit and calibration until phase-isolated inputs are available.
+
+The site candidate remains under acceptance review. This version does not add trained methods or alter either registered timing study.
+
 ## [0.01.002], 2026-11-02
 
 ### Fixed

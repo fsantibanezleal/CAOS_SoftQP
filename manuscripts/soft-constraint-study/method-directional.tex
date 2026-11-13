@@ -72,8 +72,10 @@ dual repair. A signed aggregate gap is retained diagnostically but cannot
 allow an erroneous soft subgradient to cancel a negative hard-row gap.
 
 The fixed-metric relaxation scope is $0<\alpha<2$ with the stated convexity
-and attained-saddle-point assumptions. No variable-metric or arbitrary adaptive-
-relaxation theorem is claimed. The complete repeated-forecast comparison uses
+and attained-saddle-point assumptions. The convergence argument uses
+Douglas--Rachford splitting in the fixed metric~\cite{lions,eckstein}.
+Stronger contraction and rate conclusions need additional quantitative
+assumptions~\cite{giselsson}. The complete repeated-forecast comparison uses
 public SDK 0.2 and includes matched row-split, compact epigraph and direct/proximal
 DAQP policies. Its primary score is \PrimaryEstimate\%, including all failed
 pairs under the prespecified rule. That result refutes the registered timing

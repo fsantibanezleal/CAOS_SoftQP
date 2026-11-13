@@ -11311,7 +11311,7 @@
           "rows": 1640,
           "variables": 1061
         },
-        "elapsed_seconds": 0.024599500000476837,
+        "elapsed_seconds": 0.03503129997989163,
         "iterations": 1050,
         "method": "lifted",
         "metrics": {
@@ -15092,8 +15092,8 @@
             0.0
           ]
         },
-        "setup_seconds": 0.0009204,
-        "solve_seconds": 0.019957,
+        "setup_seconds": 0.0009557,
+        "solve_seconds": 0.0286709,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -15689,7 +15689,7 @@
           "rows": 1255,
           "variables": 579
         },
-        "elapsed_seconds": 0.012645099996007048,
+        "elapsed_seconds": 0.04803360000369139,
         "iterations": 500,
         "method": "generalized",
         "metrics": {
@@ -19470,8 +19470,8 @@
             0.0
           ]
         },
-        "setup_seconds": 0.0005349,
-        "solve_seconds": 0.009089,
+        "setup_seconds": 0.0006342,
+        "solve_seconds": 0.0114044,
         "status": "solved",
         "status_code": 1,
         "x": [

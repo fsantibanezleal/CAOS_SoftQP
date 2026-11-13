@@ -1,0 +1,18 @@
+{
+  "record_id": 24122924,
+  "version": "0.01.003",
+  "version_doi": "10.5281/zenodo.24122924",
+  "concept_doi": "10.5281/zenodo.23851659",
+  "native_source_commit": "1860d9ad94352999adbcbd364b8a3a015948ed32",
+  "pdf": {
+    "file": "softqp-studio-soft-constraint-study-v0.01.003.pdf",
+    "pages": 116,
+    "bytes": 964239,
+    "sha256": "17e955a2300f7c3a2884e503f8dc2bb991f94ac5446c57e6271371f62f29bf16"
+  },
+  "checks_passed": 39,
+  "independent_review_sha256": {
+    "staged-remote-review.json": "f52bbf48b0e9dd14a3fd37e8fcc9a194cbcb581f4f0c3668f88bc81ec492abea",
+    "public-remote-review.json": "43aa0728adcdba448ac88a1f6cc10d16b2250d67fca7ea5304f443f84eb89d1a"
+  }
+}

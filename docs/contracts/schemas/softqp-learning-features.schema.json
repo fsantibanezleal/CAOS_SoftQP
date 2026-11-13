@@ -1,0 +1,889 @@
+{
+  "$comment": "U1 scientific number fields require finite lossless float64 admission via the lossless-float64 format and strict semantic reader. Integer metadata remains exact JSON integer. No coefficient rounding is authorized.",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-features/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "payload": {
+            "additionalProperties": false,
+            "properties": {
+              "coordinate_order": {
+                "items": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "dtype": {
+                "enum": [
+                  "float64"
+                ]
+              },
+              "fit_access": {
+                "items": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "graph": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "edge_index": {
+                        "items": {
+                          "items": {
+                            "maximum": 9223372036854775807,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "maxItems": 2,
+                          "type": "array"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "edge_weight": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "node_features": {
+                        "items": {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "maxItems": 4,
+                          "type": "array"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "node_kind": {
+                        "items": {
+                          "enum": [
+                            "variable",
+                            "inequality",
+                            "equality"
+                          ]
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "row_map": {
+                        "items": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "canonical_row": {
+                              "maximum": 9223372036854775807,
+                              "minimum": 0,
+                              "type": "integer"
+                            },
+                            "equality": {
+                              "type": "boolean"
+                            },
+                            "side": {
+                              "enum": [
+                                "upper",
+                                "lower",
+                                "equality"
+                              ]
+                            },
+                            "sign": {
+                              "enum": [
+                                -1,
+                                1
+                              ]
+                            }
+                          },
+                          "required": [
+                            "canonical_row",
+                            "side",
+                            "sign",
+                            "equality"
+                          ],
+                          "type": "object"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "node_features",
+                      "edge_index",
+                      "edge_weight",
+                      "node_kind",
+                      "row_map"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "head_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "normalizer": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "coordinate_order": {
+                        "items": {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "fit_source_ids": {
+                        "items": {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "fit_split": {
+                        "enum": [
+                          "train"
+                        ]
+                      },
+                      "head_id": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "mean": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "normalizer_id": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "scale": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "sha256": {
+                        "pattern": "^[0-9a-f]{64}$",
+                        "type": "string"
+                      },
+                      "source_weights": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "normalizer_id",
+                      "head_id",
+                      "fit_source_ids",
+                      "fit_split",
+                      "coordinate_order",
+                      "mean",
+                      "scale",
+                      "source_weights",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "problem": {
+                "additionalProperties": false,
+                "properties": {
+                  "artifact_id": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "kind": {
+                    "enum": [
+                      "learning-protocol",
+                      "learning-problem",
+                      "learning-dataset",
+                      "learning-split",
+                      "learning-features",
+                      "learning-labels",
+                      "learning-checkpoint",
+                      "learning-calibration",
+                      "learning-method-result",
+                      "learning-evaluation",
+                      "learning-export-index"
+                    ]
+                  },
+                  "path": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "artifact_id",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "raw_values": {
+                "items": {
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "minimum": -1e+308,
+                  "type": "number"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "representation": {
+                "enum": [
+                  "mlp-v1",
+                  "graph-v1"
+                ]
+              },
+              "split": {
+                "additionalProperties": false,
+                "properties": {
+                  "artifact_id": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "kind": {
+                    "enum": [
+                      "learning-protocol",
+                      "learning-problem",
+                      "learning-dataset",
+                      "learning-split",
+                      "learning-features",
+                      "learning-labels",
+                      "learning-checkpoint",
+                      "learning-calibration",
+                      "learning-method-result",
+                      "learning-evaluation",
+                      "learning-export-index"
+                    ]
+                  },
+                  "path": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "artifact_id",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "transform_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "values": {
+                "items": {
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "minimum": -1e+308,
+                  "type": "number"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              }
+            },
+            "required": [
+              "problem",
+              "split",
+              "representation",
+              "head_id",
+              "transform_sha256",
+              "normalizer",
+              "coordinate_order",
+              "raw_values",
+              "values",
+              "graph",
+              "dtype",
+              "fit_access"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "missing"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "null"
+          },
+          "reason": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-features"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "coordinate_order": {
+              "items": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 2000000,
+              "type": "array"
+            },
+            "dtype": {
+              "enum": [
+                "float64"
+              ]
+            },
+            "fit_access": {
+              "items": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 2000000,
+              "type": "array"
+            },
+            "graph": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "edge_index": {
+                      "items": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "type": "array"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "edge_weight": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "node_features": {
+                      "items": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 4,
+                        "type": "array"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "node_kind": {
+                      "items": {
+                        "enum": [
+                          "variable",
+                          "inequality",
+                          "equality"
+                        ]
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "row_map": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "canonical_row": {
+                            "maximum": 9223372036854775807,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "equality": {
+                            "type": "boolean"
+                          },
+                          "side": {
+                            "enum": [
+                              "upper",
+                              "lower",
+                              "equality"
+                            ]
+                          },
+                          "sign": {
+                            "enum": [
+                              -1,
+                              1
+                            ]
+                          }
+                        },
+                        "required": [
+                          "canonical_row",
+                          "side",
+                          "sign",
+                          "equality"
+                        ],
+                        "type": "object"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "node_features",
+                    "edge_index",
+                    "edge_weight",
+                    "node_kind",
+                    "row_map"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "head_id": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "normalizer": {
+              "anyOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "coordinate_order": {
+                      "items": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "fit_source_ids": {
+                      "items": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "fit_split": {
+                      "enum": [
+                        "train"
+                      ]
+                    },
+                    "head_id": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "mean": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "normalizer_id": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "scale": {
+                      "items": {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "source_weights": {
+                      "items": {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "normalizer_id",
+                    "head_id",
+                    "fit_source_ids",
+                    "fit_split",
+                    "coordinate_order",
+                    "mean",
+                    "scale",
+                    "source_weights",
+                    "sha256"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "problem": {
+              "additionalProperties": false,
+              "properties": {
+                "artifact_id": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "learning-protocol",
+                    "learning-problem",
+                    "learning-dataset",
+                    "learning-split",
+                    "learning-features",
+                    "learning-labels",
+                    "learning-checkpoint",
+                    "learning-calibration",
+                    "learning-method-result",
+                    "learning-evaluation",
+                    "learning-export-index"
+                  ]
+                },
+                "path": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "artifact_id",
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "raw_values": {
+              "items": {
+                "format": "lossless-float64",
+                "maximum": 1e+308,
+                "minimum": -1e+308,
+                "type": "number"
+              },
+              "maxItems": 2000000,
+              "type": "array"
+            },
+            "representation": {
+              "enum": [
+                "mlp-v1",
+                "graph-v1"
+              ]
+            },
+            "split": {
+              "additionalProperties": false,
+              "properties": {
+                "artifact_id": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "learning-protocol",
+                    "learning-problem",
+                    "learning-dataset",
+                    "learning-split",
+                    "learning-features",
+                    "learning-labels",
+                    "learning-checkpoint",
+                    "learning-calibration",
+                    "learning-method-result",
+                    "learning-evaluation",
+                    "learning-export-index"
+                  ]
+                },
+                "path": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "artifact_id",
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "transform_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "values": {
+              "items": {
+                "format": "lossless-float64",
+                "maximum": 1e+308,
+                "minimum": -1e+308,
+                "type": "number"
+              },
+              "maxItems": 2000000,
+              "type": "array"
+            }
+          },
+          "required": [
+            "problem",
+            "split",
+            "representation",
+            "head_id",
+            "transform_sha256",
+            "normalizer",
+            "coordinate_order",
+            "raw_values",
+            "values",
+            "graph",
+            "dtype",
+            "fit_access"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "const": "learning-protocol"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact_id",
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-features/1.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider",
+        "missing"
+      ]
+    },
+    "version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "kind",
+    "artifact_id",
+    "purpose",
+    "state",
+    "reason",
+    "protocol_id",
+    "protocol_sha256",
+    "source_lock_sha256",
+    "provenance",
+    "payload",
+    "content_sha256",
+    "protocol_ref"
+  ],
+  "type": "object"
+}

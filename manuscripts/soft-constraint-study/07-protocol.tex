@@ -14,14 +14,14 @@ as variables, densities 0.05 and 0.2, and diagonal Hessian conditions 1 and 1000
 Its three families are symmetric elastic, asymmetric elastic and asymmetric
 linear. Development seeds 1000--1002 and evaluation seeds 9000--9005 are
 distinct. The 24-instance robustness calculation uses dimension 32, density 0.1,
-six additional seeds and conditions 1,100,10000 and 1000000 while keeping the
+seeds 8500--8505 and conditions 1,100,10000 and 1000000 while keeping the
 other generated quantities fixed within each seed. Together these populations
 contain 456 instances. Rows are normalized before the declared cost/target
 distribution is applied; independent unit and scaling examples are separate
 from a claim that this grid covers arbitrary physical row scaling.
 
 Each original backend has one warm-up and seven measured repetitions.
-Method order is randomized by the fixed ordering seed within an instance
+Method order is randomized by seed 271828 within an instance
 and repetition. The cold end-to-end boundary includes input validation,
 formulation construction, setup, solve and original evaluation. It excludes
 generation, module import and export. The primary population is the asymmetric
@@ -34,8 +34,8 @@ instances would be incorrect. The point estimate is the median paired reduction
  {\min(T_{\mathrm{lift},j},T_{\mathrm{DAQP},j})},\qquad
  \widehat R=\median_j R_j.
 \end{equation}
-The stored 95\% interval resamples seed clusters with the fixed 2000-resample
-procedure. It is not recomputed for the figures. Cluster resampling preserves
+The stored 95\% interval resamples seed clusters 2000 times using seed 314159.
+The figures use the stored interval. Cluster resampling preserves
 dependence among repeated observations from the same generated seed;
 bootstrap accuracy with few clusters remains a limitation~\cite{efron,davison,cameron}.
 The prediction requires a reduction of at least 10\% and a lower interval
@@ -49,6 +49,12 @@ no larger than$10^{-6}$. Stationarity remains diagnostic in that protocol.
 Threading is limited to one BLAS thread; one worker is supervised with a 10 second
 trial deadline, a 7200 second total limit and a 4 GiB process-memory limit.
 These are protocol settings, not observed per-method resource costs.
+The recorded original environment used Windows 11 build 26300, Python
+3.12.10, NumPy 2.5.4, SciPy 1.18.1 and the pinned SoftQP source. The stored
+process observations are 1363.063~s elapsed, 92028928~bytes maximum worker
+RSS and zero restarts. These summarize the execution process. The recorded
+environment does not identify the processor model, so the measurement is
+not a hardware-normalized performance estimate.
 
 The C12 stream contains 32 frames of a horizon 20 double-integrator model with
 a 0.2 second physical step. An independent stock-lift oracle drives the common
@@ -59,7 +65,10 @@ and evaluation. There is one documented observation per frame. The stream
 supports descriptive reuse comparisons, not a statistical superiority claim
 or a comparison of independently controlled plants.
 
-The grouped study retains 48 development,144 held-out and 18 robustness instances.
+The grouped study retains 48 development, 144 held-out and 18 robustness
+instances. Their seeds are 710001--710002, 910101--910106 and 810101--810103,
+respectively. Ordering uses seed 601117 and the confidence interval uses
+10000 whole-seed resamples with seed 701119.
 Each operation includes preparation/factorization and 32 updates, solves,
 physical recovery and independent accuracy checks. Library/process startup
 and serialization are excluded symmetrically from the inner timer; all
@@ -69,7 +78,9 @@ have one warm-up and three measured repetitions per instance, plus an oracle
 observation, yielding 7770 raw and 5670 measured method observations. The primary
 population contains all 144 held-out instances and six seed clusters. Its
 per-instance score compares the native median with the fastest compatible
-registered reference; failed pairs retain the specified score of$-1$.
-An absent native median or failed oracle cannot be replaced with a favorable
-successful subset. The registered minimum improvement and interval condition
-remain false regardless of which descriptive formulation plot is displayed.
+registered reference. An unsuccessful required compatible observation
+assigns the entire instance a score of $-1$ and prevents qualification.
+Qualification requires a median of at least 10\%, a positive lower
+95\% confidence limit and zero failed pairs. An absent native median or
+failed oracle therefore cannot be replaced with a favorable successful
+subset.
