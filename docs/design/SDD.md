@@ -244,7 +244,7 @@ Current visualization design reconciliation, 2026-11-05. This section specifies 
 
 ### Current base adoption, 2026-11-11
 
-The candidate now adopts CAOS_PRODUCT_TEMPLATE 0.15.008 and CAOS App Shell 0.26.0. The shell fixes natural PlotCard header sizing, redraws moving chart marks, publishes settled callout-band measurements, gives callout values a dedicated row, and exposes carousel semantics only when cards are hidden. It also adds explicit UTC/local time-axis handling and formatter caching. The product's elapsed-day charts use `formatNumber`; it does not use calendar-time axes. The full product gate must be rerun against these exact installed packages before promotion.
+The current candidate adopts CAOS_PRODUCT_TEMPLATE 0.15.010 and CAOS App Shell 0.26.0. The shell fixes natural PlotCard header sizing, redraws moving chart marks, publishes settled callout-band measurements, gives callout values a dedicated row, and exposes carousel semantics only when cards are hidden. It also adds explicit UTC/local time-axis handling and formatter caching. The product's elapsed-day charts use `formatNumber`; it does not use calendar-time axes. The template workflow includes an opt-in guarded readiness-provider path, but SoftQP keeps the strict catalog and readiness-inventory lane because its artifact adapter does not independently validate the readiness document. Full product requalification against these exact installed bases is required before promotion.
 
 | id | question | data contract | kind | interactions | linked views | placement |
 |---|---|---|---|---|---|---|

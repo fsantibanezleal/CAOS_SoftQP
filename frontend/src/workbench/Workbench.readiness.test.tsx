@@ -27,6 +27,12 @@ function staleFixture(): Readiness {
 afterEach(() => { mock.document = null; });
 
 describe('the actual workbench readiness consumer', () => {
+  it('keeps method-domain evidence visible while the asynchronous case matrix loads', () => {
+    const html = renderBenchmark();
+    expect(html).toContain('data-method-support');
+    expect(html).toContain('Executed independent reference');
+  });
+
   it('adversarial: actual Workbench shows the recorded stale reason and keeps unrelated rows separate', () => {
     mock.document = staleFixture();
     const row = mock.document.contracts.find(r => r.id === 'softqp-case-result');
