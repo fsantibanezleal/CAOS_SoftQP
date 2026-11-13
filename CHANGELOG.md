@@ -9,6 +9,7 @@ tagged.
 
 - Adopt CAOS Product Template 0.15.010's local workflow, retaining the strict catalog and readiness inventory lane until the product validator covers the readiness document itself.
 - Fix the phone-width sparse-operator label collision and keep the method support/evidence table visible while asynchronous benchmark artifacts load.
+- Keep the measured benchmark panels below the initial results matrix and explicitly waive a learned-versus-classical comparison while the product has no trained method.
 - Adopt CAOS Product Template 0.15.008 and CAOS App Shell 0.26.0, including the early refusal for version-stamped stage inputs and the latest shared chart, callout, and fitted-card behavior. Requalification against these exact bases remains required before release.
 - Correct the separate native technical report and research preprint with exact method equations, registered acceptance thresholds, reproducible commands, and evidence-derived component and timing tables.
 - Adopt CAOS Product Template 0.15.006 and CAOS App Shell 0.25.0. Use measured callout placement and the shared immersive story layout.
