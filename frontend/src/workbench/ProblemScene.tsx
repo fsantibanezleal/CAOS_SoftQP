@@ -45,7 +45,7 @@ export function ProblemScene(props: ProblemSceneProps) {
     : view === 'geometry' ? text('Only this row price is drawn. No returned vector means no candidate point.', 'Se dibuja solo el costo de esta fila. Sin vector devuelto no hay punto candidato.')
     : view === 'dynamics' ? text('One oracle-driven plant: held input, exact within-step kinematics, instantaneous velocity impulses.', 'Una planta común del oráculo: entrada retenida, cinemática exacta por intervalo e impulsos instantáneos.')
     : view === 'method' ? text('These are formulation and recovery phases. Numerical intermediate iterates were not recorded.', 'Son fases de formulación y recuperación. No se registraron iteraciones numéricas intermedias.')
-    : text('Only the selected case is compared. Objective agreement is descriptive; registered population studies are on Benchmark.', 'Se compara solo el caso seleccionado. La concordancia es descriptiva; los estudios poblacionales registrados están en Comparación.'));
+    : text('Descriptive comparison of one case. Registered population studies are on Benchmark.', 'Comparación descriptiva de un caso. Los estudios registrados están en Comparación.'));
 
   function drawing({ width, height: stageHeight }: StageSize) {
     if (unavailable || !doc) return <div className="softqp-scene-empty" data-state={!doc && !error ? 'loading' : 'unavailable'} role={error ? 'alert' : 'status'}>{unavailable}</div>;
@@ -58,7 +58,8 @@ export function ProblemScene(props: ProblemSceneProps) {
       method: (compact ? 700 : 570) - domainOffset,
       comparison: Math.max(350, comparisonHeight),
     }[view];
-    const band = measuredBand?.view === view ? measuredBand.height : 0;
+    const bandReady = measuredBand?.view === view;
+    const band = bandReady ? measuredBand.height : 0;
     const drawingTop = Math.ceil(band) + 12;
     const minimumCanvasHeight = drawingTop + minimumDrawing;
     // Compact layouts let this content size the stage. Keep the observed stage height out of that calculation.
@@ -162,19 +163,28 @@ export function ProblemScene(props: ProblemSceneProps) {
 
       </>;
     }
-    return <div className="softqp-scene-canvas" style={{ height: canvasHeight }}>
-      <svg className="softqp-scene-svg" width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ fontSize: font, top: drawingTop }} role={['system', 'comparison', 'method'].includes(view) ? 'group' : 'img'} aria-label={sceneNames[view][lang]}>
+    return <div className="softqp-scene-canvas" data-state={bandReady ? undefined : 'loading'} style={{ height: canvasHeight }}>
+      <svg className="softqp-scene-svg" width={width} height={canvasHeight} viewBox={`0 0 ${width} ${canvasHeight}`} style={{ fontSize: font, opacity: bandReady ? undefined : 0 }} role="group" aria-label={sceneNames[view][lang]} aria-hidden={bandReady ? undefined : true}>
         <title>{sceneNames[view][lang]} · {doc.case_id}</title><desc>{takeaway}</desc>
-        <g transform={`translate(0 ${-subjectOffset})`}>{body}</g>
+        <g transform={`translate(0 ${drawingTop - subjectOffset})`}>{body}</g>
+        <foreignObject width={width} height={canvasHeight} className="softqp-scene-annotation">
+          <div className="softqp-scene-annotation-body">
+            <SceneCallouts key={view} items={callouts} placement="header" onLayout={({ bandHeight }) => {
+              setMeasuredBand(previous => previous?.view === view && previous.height === bandHeight ? previous : { view, height: bandHeight });
+              props.onStageMinimum?.(Math.min(900, Math.max(300, Math.ceil(bandHeight) + minimumDrawing + 90)));
+            }} />
+          </div>
+        </foreignObject>
       </svg>
-      <SceneCallouts key={view} items={callouts} placement="header" onLayout={({ bandHeight }) => {
-        setMeasuredBand(previous => previous?.view === view && previous.height === bandHeight ? previous : { view, height: bandHeight });
-        props.onStageMinimum?.(Math.min(900, Math.max(300, Math.ceil(bandHeight) + minimumDrawing + 90)));
-      }} />
     </div>;
   }
   return <div className="softqp-scene" data-scene-view={view} data-selected-row={doc?.rows[rowIndex]?.id} data-selected-frame={frameIndex} data-source={edited ? 'local-native-import' : 'verified-replay'}>
     <Stage label={sceneNames[view]} className="softqp-scene-stage">{drawing}</Stage>
-    <div className="softqp-scene-takeaway" data-scene-takeaway=""><p>{takeaway}</p>{incompatible && <p data-active-incompatible="">{text('Active method has no compatible returned vector.', 'El método activo no tiene un vector devuelto compatible.')} {run?.reason}</p>}{view === 'comparison' && peers.unavailable.length > 0 && <p data-peer-states="">{peers.unavailable.map(peer => `${methodNames[peer.method][lang]}: ${peer.state}`).join(' · ')}</p>}</div>
+    <div className="softqp-scene-takeaway" data-scene-takeaway="">
+      <p>{takeaway}
+        {incompatible && <span data-active-incompatible=""> {text('Active method has no compatible returned vector.', 'El método activo no tiene un vector devuelto compatible.')} {run?.reason}</span>}
+        {view === 'comparison' && peers.unavailable.length > 0 && <span data-peer-states=""> {peers.unavailable.map(peer => `${methodNames[peer.method][lang]}: ${peer.state}`).join(' · ')}</span>}
+      </p>
+    </div>
   </div>;
 }

@@ -1,7 +1,9 @@
 .softqp-scene { position: relative; display: grid; grid-template-rows: minmax(0, 1fr) auto; flex: 1 1 auto; height: 100%; min-height: 280px; min-width: 0; overflow: hidden; background: var(--color-bg); border-radius: var(--radius-md); }
 .softqp-scene-stage { overflow: auto; }
-.softqp-scene-svg { position: absolute; inset-inline-start: 0; display: block; color: var(--color-fg); font: 13px var(--font-sans); font-variant-numeric: tabular-nums; }
+.softqp-scene-svg { position: absolute; inset: 0 auto auto 0; display: block; color: var(--color-fg); font: 13px var(--font-sans); font-variant-numeric: tabular-nums; }
 .softqp-scene-svg text { fill: currentColor; }
+.softqp-scene-annotation { pointer-events: none; }
+.softqp-scene-annotation-body { position: relative; width: 100%; height: 100%; }
 .softqp-scene-canvas { width: 100%; position: relative; }
 .softqp-scene-grid { stroke: var(--color-border); stroke-width: 1; }
 .softqp-scene-axis { stroke: var(--color-fg-subtle); stroke-width: 1; }
@@ -23,7 +25,6 @@
 .softqp-scene-band { fill: var(--color-accent); opacity: .15; }
 .softqp-scene-step { fill: var(--color-surface); stroke: var(--color-border); cursor: pointer; }
 .softqp-scene-step.selected { stroke: var(--color-accent); stroke-width: 2; }
-@media (prefers-reduced-motion: no-preference) { .softqp-scene-svg { animation: softqp-scene-reveal 600ms ease-out; } @keyframes softqp-scene-reveal { from { transform: translateY(8px); } to { transform: translateY(0); } } }
 
 .softqp-scene-scrub { fill: var(--color-bg); fill-opacity: 0; cursor: crosshair; }
 

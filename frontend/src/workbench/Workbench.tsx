@@ -57,12 +57,15 @@ export function Workbench() {
 
 function WorkbenchContent() {
   const lang = useShellLang();
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const requestedGroup = params.get('view');
   const group = requestedGroup && ['scene', 'violations', 'comparison', 'stream', 'context'].includes(requestedGroup) ? requestedGroup : 'scene';
   const setGroup = (value: string) => updateParam('view', value);
   const navigate = useNavigate();
   const location = useLocation();
+  const [focusActive, setFocusActive] = useState(() =>
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('focus') === '1');
+  const contextFocus = group === 'context' && focusActive;
   const route = useParams<{ step: string }>();
   const { evidence, error: evidenceError } = useExperiments();
   const selectLinked = useLinkedView(state => state.select);
@@ -74,14 +77,24 @@ function WorkbenchContent() {
   const selected = params.get('case') ?? 'C01';
   const method = params.get('method') ?? 'lifted';
   const nativeToken = params.get('native');
+  function updateAddress(change: (query: URLSearchParams) => void) {
+    // The shell writes Focus with replaceState. Router's last search snapshot may still predate that toggle.
+    const address = typeof window === 'undefined' ? location : window.location;
+    const next = new URLSearchParams(address.search);
+    change(next);
+    const search = next.size ? `?${next}` : '';
+    const state = typeof window === 'undefined' ? location.state : window.history.state?.usr;
+    if (search !== address.search) navigate({ search, hash: address.hash }, { replace: true, state });
+  }
   function updateParam(name: string, value: string) {
-    const next = new URLSearchParams(typeof window === 'undefined' ? params : window.location.search);
-    next.set(name, value); setParams(next, { replace: true });
+    updateAddress(query => query.set(name, value));
   }
   const setSelected = (value: string) => {
     setEdits({ lower: '1', upper: '1', quadratic: '1' });
-    const next = new URLSearchParams(params); next.set('case', value); next.delete('native');
-    setParams(next, { replace: true });
+    updateAddress(query => {
+      query.set('case', value);
+      query.delete('native');
+    });
   };
   const setMethod = (value: string) => updateParam('method', value);
   const [index, setIndex] = useState<SoftQPIndex | null>(null); const [doc, setDoc] = useState<SoftQPResult | null>(null);
@@ -177,21 +190,28 @@ function WorkbenchContent() {
     nativeMemory.clear();
     setLocalResult(null);
     setEdits({ lower: '1', upper: '1', quadratic: '1' });
-    const next = new URLSearchParams(params);
-    next.delete('native');
-    next.set('method', 'lifted');
-    setParams(next, { replace: true });
+    updateAddress(query => {
+      query.delete('native');
+      query.set('method', 'lifted');
+    });
     setError(null);
   }
   const restoreButton = nativeToken && <button className="btn" type="button" onClick={restoreRecordedResult}>{lang === 'es' ? 'Volver al registro original' : 'Restore recorded result'}</button>;
-  const editor = <>
+  const editor = (prefix = '') => <>
     <details open><summary>{lang === 'es' ? 'Configuración de ejecución local' : 'Local execution settings'}</summary>
       <p>{lang === 'es' ? 'Los factores modifican costos blandos; las filas duras se conservan. Descargue la solicitud, ejecútela con el paquete científico e importe el resultado. El navegador verifica entradas, objetivo e incumplimientos.' : 'Factors change soft costs; hard rows are preserved. Download the request, execute it with the scientific package, then import the result. The browser verifies inputs, objective and violations.'}</p>
-      {(['lower', 'upper', 'quadratic'] as const).map(key => <div key={key}><label htmlFor={`cost-${key}`}>{key === 'lower' ? (lang === 'es' ? 'Factor inferior' : 'Lower cost factor') : key === 'upper' ? (lang === 'es' ? 'Factor superior' : 'Upper cost factor') : (lang === 'es' ? 'Factor cuadrático' : 'Quadratic cost factor')}</label><input id={`cost-${key}`} type="number" min={key === 'quadratic' ? 0 : 0.01} max="100" step="0.1" value={edits[key]} disabled={!baseline?.problem} onChange={e => { setEdits({ ...edits, [key]: e.target.value }); setLocalResult(null); const next = new URLSearchParams(params); next.delete('native'); if (method === 'flex' || method === 'elastiqp') next.set('method', 'lifted'); setParams(next, { replace: true }); }} /></div>)}
+      {(['lower', 'upper', 'quadratic'] as const).map(key => <div key={key}><label htmlFor={`${prefix}cost-${key}`}>{key === 'lower' ? (lang === 'es' ? 'Factor inferior' : 'Lower cost factor') : key === 'upper' ? (lang === 'es' ? 'Factor superior' : 'Upper cost factor') : (lang === 'es' ? 'Factor cuadrático' : 'Quadratic cost factor')}</label><input id={`${prefix}cost-${key}`} type="number" min={key === 'quadratic' ? 0 : 0.01} max="100" step="0.1" value={edits[key]} disabled={!baseline?.problem} onChange={e => {
+        setEdits({ ...edits, [key]: e.target.value });
+        setLocalResult(null);
+        updateAddress(query => {
+          query.delete('native');
+          if (method === 'flex' || method === 'elastiqp') query.set('method', 'lifted');
+        });
+      }} /></div>)}
       {!baseline?.problem && <p>{lang === 'es' ? 'Las penalizaciones acopladas de este caso no admiten esta edición.' : 'This case’s coupled penalties do not support these edits.'}</p>}
       <button className="btn" type="button" onClick={exportRequest} disabled={!baseline?.problem}>{lang === 'es' ? 'Descargar solicitud' : 'Download solve request'}</button>
       <pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}><code>{`python data-pipeline/run_request.py ${selected}-request.json --output local-result.json`}</code></pre>
-      <label htmlFor="local-result">{lang === 'es' ? 'Importar resultado nativo' : 'Import native result'}</label><input id="local-result" type="file" accept="application/json,.json" disabled={!baseline?.problem} onChange={e => { void importResult(e.target.files?.[0]); e.target.value = ''; }} />
+      <label htmlFor={`${prefix}local-result`}>{lang === 'es' ? 'Importar resultado nativo' : 'Import native result'}</label><input id={`${prefix}local-result`} type="file" accept="application/json,.json" disabled={!baseline?.problem} onChange={e => { void importResult(e.target.files?.[0]); e.target.value = ''; }} />
       {nativeToken && <p role="status">{nativeError ?? (lang === 'es' ? 'Resultado nativo importado y verificado.' : 'Imported native result verified.')}</p>}
     </details>
   </>;
@@ -203,7 +223,7 @@ function WorkbenchContent() {
         <option key={id} value={id}>{names[id][lang]}</option>)}
     </select>
     <label htmlFor="softqp-unit">{lang === 'es' ? 'Unidad de las filas' : 'Row unit'}</label><select id="softqp-unit" value={unit} onChange={e => setUnit(e.target.value)}>{units.map(u => <option key={u}>{u}</option>)}</select>
-    <button className="btn" type="button" onClick={() => setGroup('context')}>{lang === 'es' ? 'Editar costos y resolver' : 'Edit costs and solve locally'}</button>
+    {!contextFocus && <button className="btn" type="button" onClick={() => setGroup('context')}>{lang === 'es' ? 'Editar costos y resolver' : 'Edit costs and solve locally'}</button>}
     {run?.state === 'incompatible' && <p data-state="unavailable">{lang === 'es' ? 'El caso no cumple los supuestos que admite este método.' : 'The case is outside this method’s supported assumptions.'}</p>}
   </>;
   const resultControls = <><ReadinessNote ids={['softqp-index', 'softqp-case-result']} />
@@ -216,13 +236,13 @@ function WorkbenchContent() {
   const recovery = <>{(nativeError ?? error) && <p role="alert">{nativeError ?? error}</p>}{restoreButton}</>;
   const rail: RailSection[] = [
     { id: 'scene', label: { en: 'Scene', es: 'Escena' }, content: <><ReadinessNote ids={['softqp-index', 'softqp-case-result']} />{sceneControls}<Link className="btn" to={storyHref('formulate')}>{lang === 'es' ? 'Recorrido guiado' : 'Guided walkthrough'}</Link>{recovery}</> },
-    { id: 'method', label: { en: 'Method', es: 'Método' }, content: <>{methodControls}{recovery}</> },
+    { id: 'method', label: contextFocus ? { en: 'Method and costs', es: 'Método y costos' } : { en: 'Method', es: 'Método' }, content: <>{methodControls}{contextFocus && editor('focus-')}{recovery}</> },
     { id: 'result', label: { en: 'Result', es: 'Resultado' }, content: <>{resultControls}{recovery}</> },
     { id: 'inspection', label: { en: 'Inspect row', es: 'Inspeccionar fila' }, content: <>{rowInspection ?? <p>{lang === 'es' ? 'La inspección de fila está en las vistas de estructura, intervalo, costo y método.' : 'Row inspection is available in the structure, interval, price and method views.'}</p>}{recovery}</> },
   ];
   const interval = selectedInterval(current, run, rowIndex);
   const steps: StoryStep[] = [
-    { id: 'formulate', number: 1, accent: 1, verb: { en: 'Formulate', es: 'Formular' }, headline: { en: current ? `${current.rows.length} interval rows define the problem` : 'Problem rows unavailable', es: current ? `${current.rows.length} filas de intervalo definen el problema` : 'Filas del problema no disponibles' }, summary: { en: 'Trace the actual sparse decision-to-row map.', es: 'Sigue el mapa disperso real de decisiones a filas.' }, href: storyHref('formulate'), stage: scene, panel: null },
+    { id: 'formulate', number: 1, accent: 1, verb: { en: 'Formulate', es: 'Formular' }, headline: current?.rows.length === 1 ? { en: '1 interval row defines the problem', es: '1 fila de intervalo define el problema' } : { en: current ? `${current.rows.length} interval rows define the problem` : 'Problem rows unavailable', es: current ? `${current.rows.length} filas de intervalo definen el problema` : 'Filas del problema no disponibles' }, summary: { en: 'Trace the actual sparse decision-to-row map.', es: 'Sigue el mapa disperso real de decisiones a filas.' }, href: storyHref('formulate'), stage: scene, panel: null },
     { id: 'price', number: 2, accent: 2, verb: { en: 'Price', es: 'Asignar costos' }, headline: { en: interval ? `${formatNumber(interval.value, 'en')} ${interval.row.unit} is the returned row value` : 'Returned separable row value unavailable', es: interval ? `${formatNumber(interval.value, 'es')} ${interval.row.unit} es el valor devuelto de la fila` : 'Valor separable devuelto no disponible' }, summary: { en: 'Inspect separate side prices without relaxing hard rows.', es: 'Inspecciona costos por lado sin relajar filas duras.' }, href: storyHref('price'), stage: scene, panel: null },
     { id: 'compute', number: 3, accent: 3, verb: { en: 'Compute', es: 'Calcular' }, headline: { en: run?.result ? `${run.result.iterations} terminal iterations were recorded` : 'Terminal solver record unavailable', es: run?.result ? `Se registraron ${run.result.iterations} iteraciones finales` : 'Registro final del solver no disponible' }, summary: { en: 'Read formulation, solve, recovery and evaluation boundaries.', es: 'Lee los límites de formulación, resolución, recuperación y evaluación.' }, href: storyHref('compute'), stage: scene, panel: null },
     { id: 'compare', number: 4, accent: 5, verb: { en: 'Compare', es: 'Comparar' }, headline: { en: current ? `${current.runs.filter(r => r.state === 'available').length} compatible methods on this selected case` : 'Compatible method population unavailable', es: current ? `${current.runs.filter(r => r.state === 'available').length} métodos compatibles en este caso seleccionado` : 'Población de métodos compatibles no disponible' }, summary: { en: 'Compare original objectives and hard-row errors for this case.', es: 'Compara objetivos originales y errores duros de este caso.' }, href: storyHref('compare'), stage: scene, panel: null },
@@ -236,7 +256,7 @@ function WorkbenchContent() {
   const storyPanel = <>{rowInspection}<ReadinessNote ids={['softqp-index', 'softqp-case-result']} /><div className="softqp-story-selects"><CaseSelector {...casePicker} lang={lang} ariaLabel={lang === 'es' ? 'Caso' : 'Case'} /><label htmlFor="story-method">{lang === 'es' ? 'Método' : 'Method'}</label><select id="story-method" value={method} onChange={e => setMethod(e.target.value)}>{current?.runs.map(r => <option key={r.method} value={r.method}>{names[r.method][lang]}</option>)}</select>{sceneControls}</div>{storyId === 'compare' && <Link to="/benchmark">{lang === 'es' ? 'Estudios poblacionales y sus resultados negativos' : 'Population studies and their negative results'}</Link>}{nativeError && <><p role="alert">{nativeError}</p><Link to={`/app?${params.toString()}&view=context`}>{lang === 'es' ? 'Restaurar o importar en App' : 'Restore or import in App'}</Link></>}<p>{lang === 'es' ? 'Evidencia sintética registrada o importación nativa verificada. El navegador no ejecuta un nuevo QP.' : 'Recorded synthetic evidence or a verified native import. The browser does not execute a new QP.'}</p></>;
   if (story && !knownStory) return <div role="alert"><p>{lang === 'es' ? 'Paso guiado desconocido.' : 'Unknown guided step.'}</p><Link to={`/app?${params}`}>{lang === 'es' ? 'Volver al problema' : 'Return to the problem'}</Link></div>;
   if (story) return <StoryFrame steps={steps.map(step => ({ ...step, panel: storyPanel }))} activeId={storyId} mobileStageMinHeight={storyStageMinimum} onStepChange={id => navigate(storyHref(id as keyof typeof storyViews))} onExit={() => { const next = new URLSearchParams(params); next.set('scene', sceneView); next.set('view', 'scene'); navigate(`/app?${next}`); }} />;
-  return <CaseWorkbench group={group} onGroupChange={setGroup} caseId={selected} source="synthetic" cases={{ ...casePicker, deepLink: true }} controls={{ method, unit, scene: sceneView, row: rowIndex, frame: parsedScene.frame, origin: localResult ? 'local-native' : softQPSource, ...(localResult ? edits : {}) }} replayOnly rail={rail} focus
+  return <CaseWorkbench group={group} onGroupChange={setGroup} caseId={selected} source="synthetic" cases={{ ...casePicker, deepLink: true }} controls={{ method, unit, scene: sceneView, row: rowIndex, frame: parsedScene.frame, origin: localResult ? 'local-native' : softQPSource, ...(localResult ? edits : {}) }} replayOnly rail={rail} focus={{ railLayout: 'disclosure', stage: group === 'context' ? scene : undefined, onChange: setFocusActive }}
     groups={[{ id: 'scene', label: { en: 'Problem scene', es: 'Escena del problema' }, lane: 'replay', provenance: 'synthetic', content: scene }, { id: 'violations', label: { en: 'Violations', es: 'Incumplimientos' }, lane: 'replay', provenance: 'synthetic', content: <Violations doc={current} run={run} unit={unit} error={error} /> }, { id: 'comparison', label: { en: 'Comparison', es: 'Comparación' }, lane: 'replay', provenance: 'synthetic', content: <Comparison doc={current} active={method} error={error} /> }, {id: 'stream',label:{en:'C12 stream',es:'Flujo C12'},lane:'replay',provenance:'synthetic',content:<StreamStage caseId={selected} method={method} edited={!!localResult}/>}]}
-    context={{ content: <div><h2>{current?.title[lang]}</h2>{editor}<p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Un factor cuadrático cero declara una variante puramente L1 e incorpora FlexQP y ElastiQP cuando sus supuestos coinciden. La reconstrucción FlexQP ejecuta ecuaciones del artículo y no una política aprendida. Comparación conserva la campaña temporal registrada, el barrido controlado y el flujo pareado C12. La aceptación científica y de publicación son verificaciones separadas.' : 'A zero quadratic factor declares a pure L1 variant and includes FlexQP and ElastiQP where their assumptions match. The FlexQP reconstruction executes paper equations, not a learned policy. The Benchmark page retains the registered timing campaign, controlled conditioning sweep and paired C12 stream. Release and scientific acceptance remain separate gates.'}</p><p>{lang === 'es' ? 'Iteraciones del método seleccionado: ' : 'Selected method iterations: '}{run?.result?.iterations ?? '-'}</p></div> }} />;
+    context={{ content: <div><h2>{current?.title[lang]}</h2>{editor()}<p>{lang === 'es' ? 'Las unidades y la política dura/blanda se conservan por fila. Un resultado elástico factible no certifica seguridad operativa. Estos registros provienen del pipeline nativo y no son nuevas optimizaciones en vivo.' : 'Units and hard/soft policy are retained per row. An elastic feasible result does not certify operational safety. These records come from the native offline pipeline and are not new live optimizations.'}</p><p>{lang === 'es' ? 'Un factor cuadrático cero declara una variante puramente L1 e incorpora FlexQP y ElastiQP cuando sus supuestos coinciden. La reconstrucción FlexQP ejecuta ecuaciones del artículo y no una política aprendida. Comparación conserva la campaña temporal registrada, el barrido controlado y el flujo pareado C12. La aceptación científica y de publicación son verificaciones separadas.' : 'A zero quadratic factor declares a pure L1 variant and includes FlexQP and ElastiQP where their assumptions match. The FlexQP reconstruction executes paper equations, not a learned policy. The Benchmark page retains the registered timing campaign, controlled conditioning sweep and paired C12 stream. Release and scientific acceptance remain separate gates.'}</p><p>{lang === 'es' ? 'Iteraciones del método seleccionado: ' : 'Selected method iterations: '}{run?.result?.iterations ?? '-'}</p></div> }} />;
 }
