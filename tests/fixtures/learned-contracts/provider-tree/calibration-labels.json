@@ -1,0 +1,289 @@
+{
+  "artifact_id": "calibration-labels",
+  "content_sha256": "a9267c74445ad0e6f7ee842b03cf841dfa17e617ca706e3e7b64d8291611228b",
+  "kind": "learning-labels",
+  "payload": {
+    "bound": [
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "cold_candidate": {
+      "epigraph": null,
+      "lifted_x": [
+        -0.5,
+        0.5
+      ],
+      "lifted_y": [
+        0,
+        -1.5,
+        0
+      ],
+      "x": [
+        -0.5
+      ],
+      "y": [
+        -1.5
+      ]
+    },
+    "cold_native_flag": 1,
+    "fit_access": [],
+    "labels": [
+      null,
+      null,
+      0,
+      1,
+      0
+    ],
+    "mask": [
+      false,
+      false,
+      true,
+      true,
+      true
+    ],
+    "multipliers": [
+      0,
+      0,
+      0,
+      1.5,
+      0
+    ],
+    "node_kind": [
+      "variable",
+      "variable",
+      "inequality",
+      "inequality",
+      "inequality"
+    ],
+    "oracle_results": [
+      {
+        "accepted": true,
+        "backend": "stock_osqp",
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            -0.5,
+            0.5
+          ],
+          "lifted_y": [
+            0,
+            -1.5,
+            0
+          ],
+          "x": [
+            -0.5
+          ],
+          "y": [
+            -1.5
+          ]
+        },
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.125,
+          "f_ref": -0.25,
+          "linear": -1.0,
+          "objective": -0.25,
+          "peak_values": [],
+          "penalty": 0.625,
+          "raw_gradient": [
+            0.0
+          ],
+          "repaired_gradient": [
+            0.0
+          ],
+          "violation_lower": [
+            0.5
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            -1.5
+          ],
+          "z": [
+            -0.5
+          ]
+        },
+        "native_flag": 1,
+        "reason": null,
+        "result_sha256": "ea6d0e7003580a85553d92d4c236b20f3340e36bb0c5f0efc26d5e008bd75448",
+        "settings_sha256": "76d4ebf85a1c7b6c6b7ea1ed608e17a04ee581905ff0dbe1a2fce3ab1e6feff0",
+        "status": "accepted"
+      },
+      {
+        "accepted": true,
+        "backend": "clarabel",
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            -0.5,
+            0.5
+          ],
+          "lifted_y": [
+            0,
+            -1.5,
+            0
+          ],
+          "x": [
+            -0.5
+          ],
+          "y": [
+            -1.5
+          ]
+        },
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.125,
+          "f_ref": -0.25,
+          "linear": -1.0,
+          "objective": -0.25,
+          "peak_values": [],
+          "penalty": 0.625,
+          "raw_gradient": [
+            0.0
+          ],
+          "repaired_gradient": [
+            0.0
+          ],
+          "violation_lower": [
+            0.5
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            -1.5
+          ],
+          "z": [
+            -0.5
+          ]
+        },
+        "native_flag": "Solved",
+        "reason": null,
+        "result_sha256": "71e6833282cd510492b7034d745b12dd1db422615c967d23339b009b40117f41",
+        "settings_sha256": "12288b0b166060bb461b544ea6a84764414c59fc3e7d4fa84278b9b05c2fc9c3",
+        "status": "accepted"
+      },
+      {
+        "accepted": true,
+        "backend": "piqp",
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            -0.5,
+            0.5
+          ],
+          "lifted_y": [
+            0,
+            -1.5,
+            0
+          ],
+          "x": [
+            -0.5
+          ],
+          "y": [
+            -1.5
+          ]
+        },
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.125,
+          "f_ref": -0.25,
+          "linear": -1.0,
+          "objective": -0.25,
+          "peak_values": [],
+          "penalty": 0.625,
+          "raw_gradient": [
+            0.0
+          ],
+          "repaired_gradient": [
+            0.0
+          ],
+          "violation_lower": [
+            0.5
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            -1.5
+          ],
+          "z": [
+            -0.5
+          ]
+        },
+        "native_flag": "PIQP_SOLVED",
+        "reason": null,
+        "result_sha256": "2bf20409833a2d9ed969a75f39e379c33170d499e875e3cd81d2e3a4f09ba4c1",
+        "settings_sha256": "95db430ae157f244fdf6bd25054a6df6097078a7337fccf7dfc029b4aa3237e0",
+        "status": "accepted"
+      }
+    ],
+    "oracle_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "problem": {
+      "artifact_id": "problem-calibration",
+      "kind": "learning-problem",
+      "path": "problem-calibration.json",
+      "sha256": "3995eae31dfa4d0d31eee866ff6b353ba0bf6f9cc3aa23b97072151b74a77a3c"
+    },
+    "reason": null,
+    "settings_sha256": "ff28c587690f935c5f338063283f606035eecc57a3110180a83e7b925220a453",
+    "slack": [
+      0,
+      0,
+      2,
+      0,
+      0.5
+    ],
+    "split": {
+      "artifact_id": "split",
+      "kind": "learning-split",
+      "path": "split.json",
+      "sha256": "c968a32ecf784628de3eea433a8ec0b3dbfc01006e677059fae9e0da9b7197eb"
+    },
+    "status": "accepted",
+    "tau_dual": 1e-07,
+    "tau_tight": 1e-07
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "problem-calibration",
+      "protocol",
+      "split"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-labels/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

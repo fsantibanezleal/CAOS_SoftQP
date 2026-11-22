@@ -1,0 +1,101 @@
+{
+  "artifact_id": "graph-calibration",
+  "content_sha256": "4022d218e3aa000bdb5e627b7a6a5c8e2260b91c3e1d94de80be71616860b78b",
+  "kind": "learning-calibration",
+  "payload": {
+    "applicability": "threshold",
+    "checkpoint": {
+      "artifact_id": "graph-checkpoint",
+      "kind": "learning-checkpoint",
+      "path": "graph-checkpoint.json",
+      "sha256": "04bb71ee852ba8566292c8249ee4efef90a67f6bc5b0ac4221f2be8931cd3dc8"
+    },
+    "class_counts": [
+      2,
+      1
+    ],
+    "mask_count": 3,
+    "method": "learned_daqp",
+    "metrics": {
+      "brier": 0.02,
+      "ece": 0.13333333333333333,
+      "f1": 1,
+      "undefined_reason": null
+    },
+    "objective": "source-weighted-macro-F1",
+    "observations": [
+      {
+        "labels": {
+          "artifact_id": "calibration-labels",
+          "kind": "learning-labels",
+          "path": "calibration-labels.json",
+          "sha256": "58bb741d25ebedd8b4dcd92a1be7285098314b1a0e0c09ba06cb3eae95b0826f"
+        },
+        "probabilities": [
+          0.5,
+          0.5,
+          0.1,
+          0.9,
+          0.2
+        ]
+      }
+    ],
+    "scores": [
+      0.6666666666666666,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "selected_threshold": 0.8,
+    "source_ids": [
+      "fixture-source-calibration"
+    ],
+    "split": {
+      "artifact_id": "split",
+      "kind": "learning-split",
+      "path": "split.json",
+      "sha256": "c968a32ecf784628de3eea433a8ec0b3dbfc01006e677059fae9e0da9b7197eb"
+    },
+    "threshold_grid": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "tie": "largest-threshold"
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "calibration-labels",
+      "graph-checkpoint",
+      "protocol",
+      "split"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-calibration/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

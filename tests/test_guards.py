@@ -101,10 +101,11 @@ def test_residue_marker_flags_the_example_variants_and_not_a_hyphenated_id():
     import check_template_residue as r
 
     marker = dict(r.MARKERS)["the example immunisation variants"]
-    assert marker.search("export const COVERAGE = [")
-    assert marker.search("import { COVERAGE, type Selection } from './model';")
-    assert marker.search("return COVERAGE.map((v) => ({ v }));")
     assert marker.search("the herd threshold is 1 - 1/R0")
+    assert not marker.search("export const COVERAGE = [")
+    assert not marker.search("import { COVERAGE, type Selection } from './model';")
+    assert not marker.search("return COVERAGE.map((v) => ({ v }));")
+    assert not marker.search("coverage of the ray fan")
     assert not marker.search('{"id": "F-SCALED-COVERAGE", "severity": "S3"}')
     assert not marker.search("COVERAGE-LEVELS")
     assert not marker.search("UNCONDITIONAL_COVERAGE = 0.99")
@@ -132,6 +133,19 @@ def test_residue_guard_scans_the_helper_scripts_and_skips_its_own_tests(tmp_path
     assert "scripts/precompute.ps1:1: an example case id" in res.stdout
     assert "scripts/precompute.sh:1: prose about the example engine" in res.stdout
     assert "tests/test_guards.py" not in res.stdout
+
+
+def test_residue_capped_details_still_name_every_affected_path(tmp_path):
+    tree = _git_tree(tmp_path)
+    _put(tree, "a.md", "SIR\n" * 205)
+    _put(tree, "z.md", "EX02_epidemic\n")
+    result = _run("check_template_residue.py", str(tree))
+    assert result.returncode == 1, result.stdout
+    assert "206 line(s)" in result.stdout and "... and 6 more" in result.stdout
+    assert len(re.findall(r"^  [az]\.md:\d+:", result.stdout, flags=re.M)) == 200
+    assert "a.md:200:" in result.stdout and "a.md:201:" not in result.stdout
+    assert "z.md:1:" not in result.stdout
+    assert "Affected paths (2; detail limited to 200 hits):\n  a.md\n  z.md\n" in result.stdout
 
 
 def _instantiate_a_copy(tmp_path: Path, *, ci_edit=None, expected_exit: int = 0) -> tuple[Path, subprocess.CompletedProcess]:

@@ -2,14 +2,14 @@
   "metadata": {
     "upload_type": "publication",
     "publication_type": "report",
-    "title": "Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results",
+    "title": "Seven Methods for Soft-Constraint Quadratic Programming: Contracts and Two Negative Timing Studies",
     "creators": [
       {
         "name": "Santibáñez-Leal, Felipe",
         "orcid": "0000-0002-0150-3246"
       }
     ],
-    "description": "<p>Soft constraints price selected operating departures while preserving physical hard limits. This technical report describes the implemented quadratic-programming system, seven numerical paths, eighteen versioned data contracts, original physical units, local execution and independently evaluated results. It derives explicit slack lifting, generalized projection, side-specific DAQP weights, fixed FlexQP and ElastiQP constructions, side-specific separable interval updates and directional disjoint group-peak updates, with compatibility and convergence limits. Fifteen model cases exercise scalar semantics, mixed hard and soft policy, sparse structure, predictive control and building energy. The original registered computation contains 456 seeded instances: its primary comprises 24 distinct problems and 168 paired repetitions, with median relative cold end-to-end reduction 0.499839% and 95% seed-cluster interval [-3.291967%,3.944835%]. The separate grouped computation retains all 210 inputs and 7770 raw observations. Its complete 144-member held-out primary score is -212.449875%, with limits [-225.336618%,-192.873759%] and nine failed pairs retained. Neither registered ten-percent timing improvement is established. Native equations, algorithms, schema restrictions, vector figures, complete result populations and primary references distinguish mathematical equivalence from computational advantage. The evidence concerns synthetic models on one host and does not establish operational safety, field benefit or algorithmic priority.</p><p>Editable LaTeX sources and code: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP\">CAOS_SoftQP</a>. Native engine: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>. Complete grouped evidence: <a href=\"https://doi.org/10.5281/zenodo.23875194\">dataset</a>.</p>",
+    "description": "<p>Soft constraints price departures from selected operating preferences while preserving immutable physical limits. We describe a reproducible convex quadratic optimization system that makes the original objective, physical units, method compatibility and numerical evidence inspectable. Seven implemented paths cover explicit slack lifting, published generalized projection, side-specific DAQP weights, a fixed FlexQP reconstruction, ElastiQP, a side-specific interval proximal update and a directional disjoint group-peak update. Eighteen versioned contracts connect synthetic input generation, native execution, independent original-space evaluation, local request/result exchange and verified static presentation. Fifteen authored or source-faithful model cases exercise scalar semantics, mixed hard/soft policy, sparse structure, predictive control and building energy. A separate registered computation contains 456 seeded instances, retaining 11592 accepted and 7560 incompatible measured observations across 600 timing cells with recorded counts, medians and interquartile ranges. Its 168-pair held-out median relative cold end-to-end reduction is 0.499839%, with a 95% seed-cluster interval from -3.291967% to 3.944835%. A second computation retains all 210 grouped repeated-forecast inputs and 7770 raw observations. Its complete 144-member held-out primary score is -212.449875%, with interval limits -225.336618% and -192.873759%, including 9 failed pairs. Neither registered ten-percent improvement criterion is established. Equivalent formulations, physical covariance, objective/dual checks and retained failure states distinguish mathematical agreement from elapsed-time advantage. The system supports transparent research and development; the synthetic evidence does not establish operational safety, measured field benefit or algorithmic priority.</p><p>Editable LaTeX sources and code: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP/tree/1860d9ad94352999adbcbd364b8a3a015948ed32/manuscripts/soft-constraint-study\">CAOS_SoftQP</a>. Native engine: <a href=\"https://github.com/fsantibanezleal/CAOS_SoftQP_Engine\">CAOS_SoftQP_Engine</a>. Complete grouped evidence: <a href=\"https://doi.org/10.5281/zenodo.23875194\">dataset</a>.</p>",
     "keywords": [
       "quadratic programming",
       "soft constraints",
@@ -20,9 +20,9 @@
     ],
     "license": "cc-by-4.0",
     "language": "eng",
-    "version": "0.01.002",
-    "publication_date": "2026-11-02",
-    "version_notes": "Complete native LaTeX reimplementation from the canonical CAOS article base, with separate technical-report and research-preprint scope, section structure, expanded derivations and contract definitions, evidence-derived vector figures and tables, verified primary references and independent content, mathematics and all-page review. Both registered numerical populations and negative criteria are unchanged.",
+    "version": "0.01.003",
+    "publication_date": "2026-11-10",
+    "version_notes": "Corrected native report. Includes exact fixed-workspace FlexQP equations and limits, source provenance and all 600 retained timing cells. The registered timing conclusions remain negative.",
     "related_identifiers": [
       {
         "identifier": "10.5281/zenodo.23875194",
@@ -30,7 +30,7 @@
         "resource_type": "dataset"
       },
       {
-        "identifier": "10.5281/zenodo.23899142",
+        "identifier": "10.5281/zenodo.23875071",
         "relation": "references",
         "resource_type": "publication-preprint"
       }

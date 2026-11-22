@@ -1,0 +1,225 @@
+{
+  "artifact_id": "dataset",
+  "content_sha256": "e63d2982a0937d3e1244b8ab8e662a88044c97046e4b0fc6bc954a0befa1731c",
+  "kind": "learning-dataset",
+  "payload": {
+    "attribution": "Four hand-defined contract fixtures only",
+    "counts": {
+      "calibration": 1,
+      "problems": 4,
+      "sources": 4,
+      "test": 1,
+      "train": 1,
+      "validation": 1
+    },
+    "exclusions": [
+      "3a79bc8abf63f70cac054c26bb5ec19bff0321e0047673d7bc3b239d380f00b5",
+      "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+      "c82bf30bb53c7c10d464fc446bd2b99ee774b581dbe3f4dced86194e1fe54c6d"
+    ],
+    "generator_sha256": "70aa5cd39e33e5ca41ef215a7c2f8d1f40d39cce6b79aafe649d3f4b925d6112",
+    "license": "MIT",
+    "parent_manifest_sha256": null,
+    "problems": [
+      {
+        "problem": {
+          "artifact_id": "problem-calibration",
+          "kind": "learning-problem",
+          "path": "problem-calibration.json",
+          "sha256": "3995eae31dfa4d0d31eee866ff6b353ba0bf6f9cc3aa23b97072151b74a77a3c"
+        },
+        "source": {
+          "attribution": "Authored analytic serialization fixture; not a generated scientific sample",
+          "entropy": [
+            20261105,
+            903,
+            1,
+            3,
+            2,
+            0,
+            0
+          ],
+          "family": "N01",
+          "frame": 0,
+          "frame_count": 1,
+          "input_sha256": "f2512870415dd77eb36c43f484f3aab7a05931832820f334e12d7733e826e4d8",
+          "license": "MIT",
+          "parameters": [],
+          "parent_id": "fixture-parent-calibration",
+          "regime": 3,
+          "rng_state": {
+            "bit_generator": "PCG64",
+            "has_uint32": 0,
+            "state": {
+              "inc": 1,
+              "state": 0
+            },
+            "uinteger": 0
+          },
+          "rng_state_sha256": "3e3b43cb2b008583ddb9413767d9076f51ec98e108a223a4832c646113a84454",
+          "source_id": "fixture-source-calibration",
+          "split": "calibration",
+          "state_origin": "contract-fixture",
+          "unit_index": 0
+        }
+      },
+      {
+        "problem": {
+          "artifact_id": "problem-test",
+          "kind": "learning-problem",
+          "path": "problem-test.json",
+          "sha256": "4d0aaf1eb564508c6087bad495b32cbb92fb4a5882070337c5fe150ee4aad890"
+        },
+        "source": {
+          "attribution": "Authored analytic serialization fixture; not a generated scientific sample",
+          "entropy": [
+            20261105,
+            903,
+            1,
+            3,
+            3,
+            0,
+            0
+          ],
+          "family": "N01",
+          "frame": 0,
+          "frame_count": 1,
+          "input_sha256": "d447c456ddc4e6cb1d849903c20fd2eb0a6d47c895e59f8c649abd3c55045fa8",
+          "license": "MIT",
+          "parameters": [],
+          "parent_id": "fixture-parent-test",
+          "regime": 3,
+          "rng_state": {
+            "bit_generator": "PCG64",
+            "has_uint32": 0,
+            "state": {
+              "inc": 1,
+              "state": 0
+            },
+            "uinteger": 0
+          },
+          "rng_state_sha256": "3e3b43cb2b008583ddb9413767d9076f51ec98e108a223a4832c646113a84454",
+          "source_id": "fixture-source-test",
+          "split": "test",
+          "state_origin": "contract-fixture",
+          "unit_index": 0
+        }
+      },
+      {
+        "problem": {
+          "artifact_id": "problem-train",
+          "kind": "learning-problem",
+          "path": "problem-train.json",
+          "sha256": "18fa132e8b08f62918b3aaf48c9a6b4c29d40b8fe9197b8fa83273f5196cd249"
+        },
+        "source": {
+          "attribution": "Authored analytic serialization fixture; not a generated scientific sample",
+          "entropy": [
+            20261105,
+            903,
+            1,
+            3,
+            0,
+            0,
+            0
+          ],
+          "family": "N01",
+          "frame": 0,
+          "frame_count": 1,
+          "input_sha256": "f023ae2ae9b657786761833108acf7bc0d062aa7ffec8a3e1232a939d5345bed",
+          "license": "MIT",
+          "parameters": [],
+          "parent_id": "fixture-parent-train",
+          "regime": 3,
+          "rng_state": {
+            "bit_generator": "PCG64",
+            "has_uint32": 0,
+            "state": {
+              "inc": 1,
+              "state": 0
+            },
+            "uinteger": 0
+          },
+          "rng_state_sha256": "3e3b43cb2b008583ddb9413767d9076f51ec98e108a223a4832c646113a84454",
+          "source_id": "fixture-source-train",
+          "split": "train",
+          "state_origin": "contract-fixture",
+          "unit_index": 0
+        }
+      },
+      {
+        "problem": {
+          "artifact_id": "problem-validation",
+          "kind": "learning-problem",
+          "path": "problem-validation.json",
+          "sha256": "27165c3d13c34d1205dc855d8a007b36f4955b40cb8f23345d1cc211067849a5"
+        },
+        "source": {
+          "attribution": "Authored analytic serialization fixture; not a generated scientific sample",
+          "entropy": [
+            20261105,
+            903,
+            1,
+            3,
+            1,
+            0,
+            0
+          ],
+          "family": "N01",
+          "frame": 0,
+          "frame_count": 1,
+          "input_sha256": "e2a500e3c7ae80f96b3335ea8413f1eade9ade086554bf299d6dfadee5faee73",
+          "license": "MIT",
+          "parameters": [],
+          "parent_id": "fixture-parent-validation",
+          "regime": 3,
+          "rng_state": {
+            "bit_generator": "PCG64",
+            "has_uint32": 0,
+            "state": {
+              "inc": 1,
+              "state": 0
+            },
+            "uinteger": 0
+          },
+          "rng_state_sha256": "3e3b43cb2b008583ddb9413767d9076f51ec98e108a223a4832c646113a84454",
+          "source_id": "fixture-source-validation",
+          "split": "validation",
+          "state_origin": "contract-fixture",
+          "unit_index": 0
+        }
+      }
+    ],
+    "source_ids": [
+      "fixture-source-calibration",
+      "fixture-source-test",
+      "fixture-source-train",
+      "fixture-source-validation"
+    ]
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "problem-calibration",
+      "problem-test",
+      "problem-train",
+      "problem-validation",
+      "protocol"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-dataset/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

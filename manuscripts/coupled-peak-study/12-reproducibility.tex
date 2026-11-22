@@ -28,9 +28,20 @@ The manuscript asset generator reads immutable stored objects
 and writes vector figures, literal tables and a source digest
 manifest. It performs no numerical solve, timing rerun or
 bootstrap recomputation. The separate native build command
-uses LaTeX and BibTeX and refuses unresolved or clipped output.
-Source, mathematical and rendered-page review are distinct
-from successful compilation.
+uses pdfLaTeX and BibTeX and refuses unresolved or clipped output.
+From the product repository root, install the figure dependencies,
+generate the evidence-derived assets and build the paper with these
+commands. Choose a fresh output directory outside the source checkout.
+\begin{verbatim}
+python -m pip install -r manuscripts/shared/requirements.txt
+python manuscripts/shared/generate_assets.py
+python manuscripts/coupled-peak-study/build.py --output /tmp/softqp-paper
+\end{verbatim}
+The original recorded execution took 1363.063~s, with 92028928 bytes
+peak worker RSS and zero restarts. The archive does not identify the
+processor model. This process duration includes work beyond the
+registered per-call estimator. Source, mathematical and rendered-page
+review are distinct from successful compilation.
 
 Replaying the preserved scientific evidence and rebuilding the
 figures does not require private operational data or API

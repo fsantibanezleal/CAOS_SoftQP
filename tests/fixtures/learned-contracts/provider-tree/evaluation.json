@@ -1,0 +1,78 @@
+{
+  "artifact_id": "evaluation",
+  "content_sha256": "98064e727746c8ed02220b3c0fd441a13e99816ad794aa7827bce9a552b8b2e0",
+  "kind": "learning-evaluation",
+  "payload": {
+    "bootstrap": {
+      "crossed_shared_draws": true,
+      "draw_files": [],
+      "draws_sha256": null,
+      "lower_p": 0.0125,
+      "quantile": "type7",
+      "replicates": 10000,
+      "upper_p": 0.9875
+    },
+    "denominators": {
+      "accepted": 1,
+      "expected": 1,
+      "failed": 0,
+      "incompatible": 0
+    },
+    "diagnostic_denominators": {
+      "expected": 0,
+      "failed": 0,
+      "missing": 0,
+      "passed": 0
+    },
+    "diagnostics": [],
+    "expected_keyset_sha256": "fb18001a1afa3aadd7c6c6e437bc0b4ebde599e8ae476b98fb011e89465721f4",
+    "hypotheses": [
+      {
+        "estimate": null,
+        "interval": null,
+        "method": "learned_osqp",
+        "qualified": false,
+        "reason": "no-learned-fixture"
+      },
+      {
+        "estimate": null,
+        "interval": null,
+        "method": "learned_daqp",
+        "qualified": false,
+        "reason": "no-learned-fixture"
+      }
+    ],
+    "limits": "One hand-defined serialization key. Not a scientific matrix, observation, result or performance measurement.",
+    "results": [
+      {
+        "artifact_id": "result",
+        "kind": "learning-method-result",
+        "path": "result.json",
+        "sha256": "634a9b43de965646afea55efeffc89ca4b31fced3ed4f3877f290945a94289c4"
+      }
+    ],
+    "source_totals": []
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "protocol",
+      "result"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-evaluation/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

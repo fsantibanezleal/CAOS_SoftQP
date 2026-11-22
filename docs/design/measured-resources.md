@@ -13,7 +13,7 @@ The protocol was registered on 2026-10-31 before held-out generation. The comple
 | Accepted measured observations | 11592 | Warm-ups excluded |
 | Incompatible measured cells | 7560 | Retained with reasons |
 | Experimental artifact bytes | 22356819 | JSON, JSONL, CSV, and the C12 stream; inventory itself excluded |
-| Current derived tree bytes | 24671035 | All 41 files, before a final release rebake |
+| Current derived tree bytes | 24672595 | All 39 files after the validated 0.01.003 case bake; historical registered-study inputs remain byte-identical |
 
 The worker budget was one process, one BLAS/OMP/MKL thread, a 10 s trial deadline, 7200 s campaign limit and 4 GiB RSS polling limit. These observed values do not establish a native allocation bound, a GPU requirement or a browser-live execution budget.
 
@@ -39,7 +39,7 @@ Install the exact historical engine source in the protocol for the frozen experi
 
 ## Static reader resource observations
 
-Build `55a7e77415f2f73334ffbce286d3559f8a81152a` contains 153 static files totaling 34336119 bytes. The [raw resource observations](static-reader-resources.json) retain the browser version, exact build identity, resource body sizes, sampled V8 heap and DOM counts. The local static server did not apply production compression. Resource body totals are not a measurement of wire traffic, and sampled heap is not a peak-memory bound.
+Build `55a7e77415f2f73334ffbce286d3559f8a81152a` contains 153 static files totaling 34336119 bytes. The [raw resource observations](static-reader-resources.json) retain the browser version, exact build identity, resource body sizes, sampled V8 heap and DOM counts. This is a historical build observation, not the current 0.01.003 candidate after the refreshed case bake and Shell 0.26.0 adoption. The local static server did not apply production compression. Resource body totals are not a measurement of wire traffic, and sampled heap is not a peak-memory bound.
 
 | Viewport | Route / case | Encoded resource body bytes | Sampled used heap bytes | DOM elements |
 |---|---|---|---|---|

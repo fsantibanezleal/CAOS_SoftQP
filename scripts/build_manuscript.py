@@ -22,6 +22,56 @@ PAPER_FIGURES = {'scalar-objective', 'original-effect', 'cold-times', 'condition
                  'coupled-population', 'coupled-states', 'coupled-formulations', 'directional-lesson'}
 REPORT_FIGURES = PAPER_FIGURES | {'architecture', 'formulation-size', 'compatibility', 'control-stream'}
 
+# These are complete, independently reviewed textual repairs to the frozen catalog.
+# The original intro is identified by its exact line digest, avoiding redistribution
+# of the private locator that this one-line correction removes. No candidate hash
+# or projected table can expand the accepted changes.
+CATALOG_INTRO_DIGEST = '844ef56bf513b83901604b154f7ce628654c4139a8b38b6a27af5b0bd0b817a1'
+CATALOG_INTRO_CORRECTION = 'The scientific contract catalog follows contract-first design (ADR-0080). One row per\n'
+CATALOG_REASON_CORRECTIONS = (
+    ('Servido por su proveedor declarado; el productor est\u00c3\u0192\u00c2\u00a1 incompleto.',
+     'Servido por su proveedor declarado; el productor est\u00e1 incompleto.'),
+    ('La API est\u00c3\u0192\u00c2\u00a1 inactiva; el navegador lee artefactos est\u00c3\u0192\u00c2\u00a1ticos.',
+     'La API est\u00e1 inactiva; el navegador lee artefactos est\u00e1ticos.'),
+    ('El inventario cient\u00c3\u0192\u00c2\u00adfico no ha sido generado.',
+     'El inventario cient\u00edfico no ha sido generado.'),
+    ('Faltan archivos cient\u00c3\u0192\u00c2\u00adficos declarados.',
+     'Faltan archivos cient\u00edficos declarados.'),
+)
+
+
+def frozen_asset_inputs():
+    """Read the original complete input map under its unchanged immutable anchor."""
+    declared = json.loads((ROOT / 'manuscripts/shared/evidence-inputs.json').read_text(encoding='utf-8'))
+    identity = hashlib.sha256(json.dumps(declared['inputs'], sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    if identity != ASSET_INPUTS_DIGEST:
+        raise ValueError('Frozen evidence input inventory is incomplete or replaced.')
+    if declared['frozen_source'] != FROZEN_SOURCE:
+        raise ValueError('Frozen evidence input inventory names another source.')
+    return declared
+
+
+def matches_frozen_input(name, canonical, current):
+    """After trusted blob-digest verification, admit only two exact catalog texts."""
+    original = canonical.replace(b'\r\n', b'\n')
+    current = current.replace(b'\r\n', b'\n')
+    if name != 'docs/contracts/catalog.md':
+        return current == original
+    if hashlib.sha256(canonical).hexdigest() != frozen_asset_inputs()['inputs'][name]:
+        raise ValueError('Frozen catalog correction authority differs from its original digest.')
+    text = original.decode('utf-8')
+    lines = text.splitlines(keepends=True)
+    if (len(lines) <= 2 or not lines[2].endswith('\n')
+            or hashlib.sha256(lines[2][:-1].encode('utf-8')).hexdigest() != CATALOG_INTRO_DIGEST):
+        raise ValueError('Frozen catalog introductory correction authority changed.')
+    lines[2] = CATALOG_INTRO_CORRECTION
+    corrected = ''.join(lines)
+    for old, new in CATALOG_REASON_CORRECTIONS:
+        if corrected.count(old) != 1:
+            raise ValueError('Frozen catalog reason correction authority is absent or duplicated.')
+        corrected = corrected.replace(old, new, 1)
+    return current in (original, corrected.encode('utf-8'))
+
 
 def require_evidence(source):
     """Bind both scientific populations even when the shared driver is used directly."""
@@ -52,10 +102,7 @@ def require_evidence(source):
     if (source.parent / 'results.tex').read_text(encoding='utf-8') != module.result_macros():
         raise ValueError('Grouped-study result macros differ from independent evidence.')
     manifest = json.loads((source.parent / 'generated/asset-manifest.json').read_text(encoding='utf-8'))
-    declared = json.loads((ROOT / 'manuscripts/shared/evidence-inputs.json').read_text(encoding='utf-8'))
-    identity = hashlib.sha256(json.dumps(declared['inputs'], sort_keys=True, separators=(',', ':')).encode()).hexdigest()
-    if identity != ASSET_INPUTS_DIGEST:
-        raise ValueError('Frozen evidence input inventory is incomplete or replaced.')
+    declared = frozen_asset_inputs()
     if manifest['source_commit'] != FROZEN_SOURCE or declared['frozen_source'] != FROZEN_SOURCE or manifest['source_inputs'] != declared['inputs']:
         raise ValueError('Asset evidence identity differs from its frozen source.')
     for name, digest in declared['inputs'].items():
@@ -63,7 +110,8 @@ def require_evidence(source):
         if not path.is_relative_to(ROOT):
             raise ValueError('Evidence path escapes repository.')
         canonical = subprocess.check_output(['git', 'show', FROZEN_SOURCE + ':' + name], cwd=ROOT)
-        if hashlib.sha256(canonical).hexdigest() != digest or path.read_bytes().replace(b'\r\n', b'\n') != canonical.replace(b'\r\n', b'\n'):
+        if (hashlib.sha256(canonical).hexdigest() != digest
+                or not matches_frozen_input(name, canonical, path.read_bytes())):
             raise ValueError('Frozen asset input changed: ' + name)
     expected_figures = {'figures/' + name + '.pdf' for name in (PAPER_FIGURES if source.parent.name == 'coupled-peak-study' else REPORT_FIGURES)}
     if {f['file'] for f in manifest['figures']} != expected_figures or len(manifest['figures']) != len(expected_figures):

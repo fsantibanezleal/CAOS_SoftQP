@@ -1,0 +1,2137 @@
+{
+  "$comment": "U1 scientific number fields require finite lossless float64 admission via the lossless-float64 format and strict semantic reader. Integer metadata remains exact JSON integer. No coefficient rounding is authorized.",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-problem/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "payload": {
+            "additionalProperties": false,
+            "properties": {
+              "curvature": {
+                "additionalProperties": false,
+                "properties": {
+                  "actual_condition": {
+                    "anyOf": [
+                      {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "diagonal_support": {
+                    "items": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "kind": {
+                    "enum": [
+                      "exact-rational-LDL",
+                      "exact-diagonal-PSD"
+                    ]
+                  },
+                  "pivots": {
+                    "items": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "rank": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "requested_condition": {
+                    "anyOf": [
+                      {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "temporary_constructor_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "rank",
+                  "pivots",
+                  "diagonal_support",
+                  "temporary_constructor_sha256",
+                  "requested_condition",
+                  "actual_condition"
+                ],
+                "type": "object"
+              },
+              "expected_control": {
+                "anyOf": [
+                  {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "generator_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "original": {
+                "additionalProperties": false,
+                "properties": {
+                  "A": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indices": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indptr": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "shape": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "shape",
+                      "data",
+                      "indices",
+                      "indptr"
+                    ],
+                    "type": "object"
+                  },
+                  "P": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indices": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indptr": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "shape": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "shape",
+                      "data",
+                      "indices",
+                      "indptr"
+                    ],
+                    "type": "object"
+                  },
+                  "formulation": {
+                    "enum": [
+                      "separable",
+                      "peak"
+                    ]
+                  },
+                  "groups": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "group_id": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "linear": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "lower_scale": {
+                          "items": {
+                            "exclusiveMinimum": 0,
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "type": "number"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        },
+                        "quadratic": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "rows": {
+                          "items": {
+                            "maximum": 9223372036854775807,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        },
+                        "upper_scale": {
+                          "items": {
+                            "exclusiveMinimum": 0,
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "type": "number"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "group_id",
+                        "rows",
+                        "lower_scale",
+                        "upper_scale",
+                        "linear",
+                        "quadratic"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "lower": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "lower_finite": {
+                    "items": {
+                      "type": "boolean"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "m": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "n": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "penalty": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "lower_linear": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "lower_quadratic": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "soft": {
+                        "items": {
+                          "type": "boolean"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "upper_linear": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "upper_quadratic": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "soft",
+                      "lower_linear",
+                      "upper_linear",
+                      "lower_quadratic",
+                      "upper_quadratic"
+                    ],
+                    "type": "object"
+                  },
+                  "q": {
+                    "items": {
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "minimum": -1e+308,
+                      "type": "number"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "units": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "D_r": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "D_t": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "D_x": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "S_f": {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      "objective": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "peak": {
+                        "items": {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "row": {
+                        "items": {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "variable": {
+                        "items": {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "variable",
+                      "row",
+                      "peak",
+                      "objective",
+                      "D_x",
+                      "D_r",
+                      "D_t",
+                      "S_f"
+                    ],
+                    "type": "object"
+                  },
+                  "upper": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "upper_finite": {
+                    "items": {
+                      "type": "boolean"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "n",
+                  "m",
+                  "P",
+                  "A",
+                  "q",
+                  "lower",
+                  "upper",
+                  "lower_finite",
+                  "upper_finite",
+                  "penalty",
+                  "groups",
+                  "units",
+                  "formulation"
+                ],
+                "type": "object"
+              },
+              "original_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "physical_calibration": {
+                "additionalProperties": false,
+                "properties": {
+                  "calibration_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  },
+                  "scale_policy": {
+                    "enum": [
+                      "canonical-reference-magnitudes-one"
+                    ]
+                  }
+                },
+                "required": [
+                  "scale_policy",
+                  "calibration_sha256"
+                ],
+                "type": "object"
+              },
+              "source": {
+                "additionalProperties": false,
+                "properties": {
+                  "attribution": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "entropy": {
+                    "items": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "maxItems": 8,
+                    "type": "array"
+                  },
+                  "family": {
+                    "enum": [
+                      "N01",
+                      "N02",
+                      "N03",
+                      "N04",
+                      "N05",
+                      "N06",
+                      "N07",
+                      "N08",
+                      "N09",
+                      "N10",
+                      "N11",
+                      "N12",
+                      "N13",
+                      "N14",
+                      "N15"
+                    ]
+                  },
+                  "frame": {
+                    "maximum": 31,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "frame_count": {
+                    "enum": [
+                      1,
+                      32
+                    ]
+                  },
+                  "input_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  },
+                  "license": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "parameters": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "maxLength": 128,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "stream": {
+                          "enum": [
+                            0,
+                            1,
+                            2
+                          ]
+                        },
+                        "unit": {
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "value": {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "maxItems": 1024,
+                          "minItems": 1,
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "value",
+                        "unit",
+                        "stream"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 1000,
+                    "type": "array"
+                  },
+                  "parent_id": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "regime": {
+                    "maximum": 5,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "rng_state": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "bit_generator": {
+                        "const": "PCG64"
+                      },
+                      "has_uint32": {
+                        "enum": [
+                          0,
+                          1
+                        ]
+                      },
+                      "state": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "inc": {
+                            "maximum": 340282366920938463463374607431768211455,
+                            "minimum": 0,
+                            "type": "integer"
+                          },
+                          "state": {
+                            "maximum": 340282366920938463463374607431768211455,
+                            "minimum": 0,
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "state",
+                          "inc"
+                        ],
+                        "type": "object"
+                      },
+                      "uinteger": {
+                        "maximum": 4294967295,
+                        "minimum": 0,
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "bit_generator",
+                      "state",
+                      "has_uint32",
+                      "uinteger"
+                    ],
+                    "type": "object"
+                  },
+                  "rng_state_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  },
+                  "source_id": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "split": {
+                    "enum": [
+                      "train",
+                      "validation",
+                      "calibration",
+                      "test"
+                    ]
+                  },
+                  "state_origin": {
+                    "enum": [
+                      "generator-produced",
+                      "contract-fixture"
+                    ]
+                  },
+                  "unit_index": {
+                    "maximum": 31,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "source_id",
+                  "parent_id",
+                  "family",
+                  "regime",
+                  "split",
+                  "unit_index",
+                  "frame",
+                  "frame_count",
+                  "input_sha256",
+                  "entropy",
+                  "rng_state_sha256",
+                  "attribution",
+                  "license",
+                  "rng_state",
+                  "state_origin",
+                  "parameters"
+                ],
+                "type": "object"
+              },
+              "transform": {
+                "additionalProperties": false,
+                "properties": {
+                  "A": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indices": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indptr": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "shape": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "shape",
+                      "data",
+                      "indices",
+                      "indptr"
+                    ],
+                    "type": "object"
+                  },
+                  "P": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "data": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indices": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "indptr": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "shape": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "shape",
+                      "data",
+                      "indices",
+                      "indptr"
+                    ],
+                    "type": "object"
+                  },
+                  "kind": {
+                    "enum": [
+                      "S",
+                      "A",
+                      "G"
+                    ]
+                  },
+                  "lower": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "m": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "n": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "q": {
+                    "items": {
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "minimum": -1e+308,
+                      "type": "number"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "row_dual_map": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "canonical_row": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "coefficient": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "original_row": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "original_row",
+                        "canonical_row",
+                        "coefficient"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "row_order": {
+                    "items": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "upper": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "variable_order": {
+                    "items": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  },
+                  "x_original_indices": {
+                    "items": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "maxItems": 2000000,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "n",
+                  "m",
+                  "P",
+                  "A",
+                  "q",
+                  "lower",
+                  "upper",
+                  "x_original_indices",
+                  "row_dual_map",
+                  "variable_order",
+                  "row_order"
+                ],
+                "type": "object"
+              },
+              "transform_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "source",
+              "generator_sha256",
+              "original",
+              "original_sha256",
+              "curvature",
+              "transform",
+              "transform_sha256",
+              "physical_calibration",
+              "expected_control"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "missing"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "null"
+          },
+          "reason": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-problem"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "curvature": {
+              "additionalProperties": false,
+              "properties": {
+                "actual_condition": {
+                  "anyOf": [
+                    {
+                      "exclusiveMinimum": 0,
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "diagonal_support": {
+                  "items": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "kind": {
+                  "enum": [
+                    "exact-rational-LDL",
+                    "exact-diagonal-PSD"
+                  ]
+                },
+                "pivots": {
+                  "items": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "rank": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "requested_condition": {
+                  "anyOf": [
+                    {
+                      "exclusiveMinimum": 0,
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "type": "number"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "temporary_constructor_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "rank",
+                "pivots",
+                "diagonal_support",
+                "temporary_constructor_sha256",
+                "requested_condition",
+                "actual_condition"
+              ],
+              "type": "object"
+            },
+            "expected_control": {
+              "anyOf": [
+                {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "generator_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "original": {
+              "additionalProperties": false,
+              "properties": {
+                "A": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indices": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indptr": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "shape": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2,
+                      "minItems": 2,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "shape",
+                    "data",
+                    "indices",
+                    "indptr"
+                  ],
+                  "type": "object"
+                },
+                "P": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indices": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indptr": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "shape": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2,
+                      "minItems": 2,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "shape",
+                    "data",
+                    "indices",
+                    "indptr"
+                  ],
+                  "type": "object"
+                },
+                "formulation": {
+                  "enum": [
+                    "separable",
+                    "peak"
+                  ]
+                },
+                "groups": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "group_id": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "linear": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "lower_scale": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "quadratic": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "rows": {
+                        "items": {
+                          "maximum": 9223372036854775807,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "upper_scale": {
+                        "items": {
+                          "exclusiveMinimum": 0,
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "group_id",
+                      "rows",
+                      "lower_scale",
+                      "upper_scale",
+                      "linear",
+                      "quadratic"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "lower": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "lower_finite": {
+                  "items": {
+                    "type": "boolean"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "m": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "n": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "penalty": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "lower_linear": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "lower_quadratic": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "soft": {
+                      "items": {
+                        "type": "boolean"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "upper_linear": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "upper_quadratic": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "soft",
+                    "lower_linear",
+                    "upper_linear",
+                    "lower_quadratic",
+                    "upper_quadratic"
+                  ],
+                  "type": "object"
+                },
+                "q": {
+                  "items": {
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "minimum": -1e+308,
+                    "type": "number"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "units": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "D_r": {
+                      "items": {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "D_t": {
+                      "items": {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "D_x": {
+                      "items": {
+                        "exclusiveMinimum": 0,
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "S_f": {
+                      "exclusiveMinimum": 0,
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "type": "number"
+                    },
+                    "objective": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "peak": {
+                      "items": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "row": {
+                      "items": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "variable": {
+                      "items": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "variable",
+                    "row",
+                    "peak",
+                    "objective",
+                    "D_x",
+                    "D_r",
+                    "D_t",
+                    "S_f"
+                  ],
+                  "type": "object"
+                },
+                "upper": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "upper_finite": {
+                  "items": {
+                    "type": "boolean"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "n",
+                "m",
+                "P",
+                "A",
+                "q",
+                "lower",
+                "upper",
+                "lower_finite",
+                "upper_finite",
+                "penalty",
+                "groups",
+                "units",
+                "formulation"
+              ],
+              "type": "object"
+            },
+            "original_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "physical_calibration": {
+              "additionalProperties": false,
+              "properties": {
+                "calibration_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "scale_policy": {
+                  "enum": [
+                    "canonical-reference-magnitudes-one"
+                  ]
+                }
+              },
+              "required": [
+                "scale_policy",
+                "calibration_sha256"
+              ],
+              "type": "object"
+            },
+            "source": {
+              "additionalProperties": false,
+              "properties": {
+                "attribution": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "entropy": {
+                  "items": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "maxItems": 8,
+                  "type": "array"
+                },
+                "family": {
+                  "enum": [
+                    "N01",
+                    "N02",
+                    "N03",
+                    "N04",
+                    "N05",
+                    "N06",
+                    "N07",
+                    "N08",
+                    "N09",
+                    "N10",
+                    "N11",
+                    "N12",
+                    "N13",
+                    "N14",
+                    "N15"
+                  ]
+                },
+                "frame": {
+                  "maximum": 31,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "frame_count": {
+                  "enum": [
+                    1,
+                    32
+                  ]
+                },
+                "input_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "license": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "parameters": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "name": {
+                        "maxLength": 128,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "stream": {
+                        "enum": [
+                          0,
+                          1,
+                          2
+                        ]
+                      },
+                      "unit": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "value": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 1024,
+                        "minItems": 1,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "value",
+                      "unit",
+                      "stream"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 1000,
+                  "type": "array"
+                },
+                "parent_id": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "regime": {
+                  "maximum": 5,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "rng_state": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "bit_generator": {
+                      "const": "PCG64"
+                    },
+                    "has_uint32": {
+                      "enum": [
+                        0,
+                        1
+                      ]
+                    },
+                    "state": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "inc": {
+                          "maximum": 340282366920938463463374607431768211455,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "state": {
+                          "maximum": 340282366920938463463374607431768211455,
+                          "minimum": 0,
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "state",
+                        "inc"
+                      ],
+                      "type": "object"
+                    },
+                    "uinteger": {
+                      "maximum": 4294967295,
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "bit_generator",
+                    "state",
+                    "has_uint32",
+                    "uinteger"
+                  ],
+                  "type": "object"
+                },
+                "rng_state_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "source_id": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "split": {
+                  "enum": [
+                    "train",
+                    "validation",
+                    "calibration",
+                    "test"
+                  ]
+                },
+                "state_origin": {
+                  "enum": [
+                    "generator-produced",
+                    "contract-fixture"
+                  ]
+                },
+                "unit_index": {
+                  "maximum": 31,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "source_id",
+                "parent_id",
+                "family",
+                "regime",
+                "split",
+                "unit_index",
+                "frame",
+                "frame_count",
+                "input_sha256",
+                "entropy",
+                "rng_state_sha256",
+                "attribution",
+                "license",
+                "rng_state",
+                "state_origin",
+                "parameters"
+              ],
+              "type": "object"
+            },
+            "transform": {
+              "additionalProperties": false,
+              "properties": {
+                "A": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indices": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indptr": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "shape": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2,
+                      "minItems": 2,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "shape",
+                    "data",
+                    "indices",
+                    "indptr"
+                  ],
+                  "type": "object"
+                },
+                "P": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indices": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "indptr": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    "shape": {
+                      "items": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "maxItems": 2,
+                      "minItems": 2,
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "shape",
+                    "data",
+                    "indices",
+                    "indptr"
+                  ],
+                  "type": "object"
+                },
+                "kind": {
+                  "enum": [
+                    "S",
+                    "A",
+                    "G"
+                  ]
+                },
+                "lower": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "m": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "n": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "q": {
+                  "items": {
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "minimum": -1e+308,
+                    "type": "number"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "row_dual_map": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "canonical_row": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "coefficient": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "original_row": {
+                        "maximum": 9223372036854775807,
+                        "minimum": 0,
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "original_row",
+                      "canonical_row",
+                      "coefficient"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "row_order": {
+                  "items": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "upper": {
+                  "items": {
+                    "anyOf": [
+                      {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "variable_order": {
+                  "items": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "x_original_indices": {
+                  "items": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "kind",
+                "n",
+                "m",
+                "P",
+                "A",
+                "q",
+                "lower",
+                "upper",
+                "x_original_indices",
+                "row_dual_map",
+                "variable_order",
+                "row_order"
+              ],
+              "type": "object"
+            },
+            "transform_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "generator_sha256",
+            "original",
+            "original_sha256",
+            "curvature",
+            "transform",
+            "transform_sha256",
+            "physical_calibration",
+            "expected_control"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "const": "learning-protocol"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact_id",
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-problem/1.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider",
+        "missing"
+      ]
+    },
+    "version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "kind",
+    "artifact_id",
+    "purpose",
+    "state",
+    "reason",
+    "protocol_id",
+    "protocol_sha256",
+    "source_lock_sha256",
+    "provenance",
+    "payload",
+    "content_sha256",
+    "protocol_ref"
+  ],
+  "type": "object"
+}

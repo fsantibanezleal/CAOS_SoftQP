@@ -1,7 +1,7 @@
 # Guide: the three method tiers and the manuscripts
 
 Every CAOS product implements, for the problem it covers, three tiers of methods, none optional, and keeps its results
-on Zenodo. The rule is CAOS_MANAGE `conventions/method-tiers-and-manuscripts.md` (Felipe, 2026-10-28); this guide is how a
+on Zenodo. The product method policy was established on 2026-10-28; this guide is how a
 product applies it, and the gates below fail a product that does not. The template's own worked example is the one tree that
 may keep a single beyond-the-state-of-the-art line, `None claimed.`, because `.template-source` marks it as the template
 (`instantiate.py` deletes that file, and a product is held to the whole rule from its first commit).
@@ -21,12 +21,11 @@ method by its own name, and the benchmark compares them.
 ## The tier names are internal
 
 "Classical", "state of the art", "beyond the state of the art", SOTA, the ids `M-<n>` and `BS-<n>` and "tier" sort the
-methods here, in the SDD, the plans and the gates. They never reach a reader (from 0.14.000; CAOS_MANAGE
-`conventions/method-tiers-and-manuscripts.md` section 0, Felipe 2026-10-30): no manuscript, notebook, index, README,
+methods here, in the SDD, the plans and the gates. They never reach a reader (from 0.14.000; the reader-facing method naming rule section 0, Felipe 2026-10-30): no manuscript, notebook, index, README,
 page, section, tab, chart, label, post or file name is titled or worded with them. A reader sees each method by its name ("Bond's
 work index", "SciPy's RK45"); a manuscript puts the published methods under Related work and the product's own under
 Method; a notebook uses the sections `Comparison` and `Evidence`. `scripts/check_internal_names.py` fails a product that
-lets them through, and CAOS_MANAGE `tools/zenodo/check_manuscript_voice.py` refuses such a manuscript before its DOI.
+lets them through, and the publication review refuses such a manuscript before reserving its DOI.
 
 A proposal beyond the state of the art answers the problem differently. A validation protocol, a calibration or a benchmark
 design is welcome, but by itself it is not a beyond-the-state-of-the-art method: it checks other people's methods more
@@ -96,9 +95,7 @@ The product declares them in `product.json`:
 | `covers` | the `BS-<n>` claims of the SDD the entry reports; a technical report may cover none, a manuscript covers at least one |
 
 `instantiate.py` writes `"manuscripts": []`, so a new product fails `scripts/check_manuscripts.py` until it declares its
-technical report. The manuscripts follow CAOS_MANAGE `manuscript-header-standard.md` and `manuscript-scientific-voice.md`, are
-authored in the product repository (`manuscripts/<slug>/`), are published with CAOS_MANAGE `tools/zenodo/` and are recorded in
-CAOS_MANAGE `manuscripts/<product>/deposits.json`; the README and the Introduction's technical view link the concept DOIs.
+technical report. The manuscripts follow the native document and scientific-voice requirements in [guide 10](10_manuscripts.md). They are authored in the product repository, built from native LaTeX and independently reviewed before publication. The README and Introduction technical view link the concept DOIs; publication records distinguish each actual version and its exact public PDF.
 
 ## At each release
 

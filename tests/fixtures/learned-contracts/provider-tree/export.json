@@ -1,0 +1,92 @@
+{
+  "artifact_id": "export",
+  "content_sha256": "a8a31e0ff8e242489a537fe20463ed5a4fdc175df89a9320b67fd02046a29f51",
+  "kind": "learning-export-index",
+  "payload": {
+    "bounds_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "cases": [
+      {
+        "case_id": "N01",
+        "results": [
+          {
+            "artifact_id": "result",
+            "kind": "learning-method-result",
+            "path": "result.json",
+            "sha256": "634a9b43de965646afea55efeffc89ca4b31fced3ed4f3877f290945a94289c4"
+          }
+        ],
+        "units": {
+          "D_r": [
+            1
+          ],
+          "D_t": [],
+          "D_x": [
+            1
+          ],
+          "S_f": 1,
+          "objective": "synthetic-operating-cost",
+          "peak": [],
+          "row": [
+            "dimensionless"
+          ],
+          "variable": [
+            "dimensionless"
+          ]
+        }
+      }
+    ],
+    "evaluation": {
+      "artifact_id": "evaluation",
+      "kind": "learning-evaluation",
+      "path": "evaluation.json",
+      "sha256": "a7c2a8578fa65cc269bb47b8f86abf35b0909152068b931317bf6964ff019e86"
+    },
+    "lane": "replay",
+    "model_cards": [
+      {
+        "calibration": {
+          "artifact_id": "calibration",
+          "kind": "learning-calibration",
+          "path": "calibration.json",
+          "sha256": "808ed652ea1b5726ef67a2a0a6fb6f8f223a8afdbae673ef7910c51bef5a0279"
+        },
+        "checkpoint": {
+          "artifact_id": "checkpoint",
+          "kind": "learning-checkpoint",
+          "path": "checkpoint.json",
+          "sha256": "8f58e30dc7649ecb821c87f16dc567621b3c2fd8c0a5246e2a6d3bc8fd686438"
+        },
+        "license": "MIT",
+        "limitations": "Untrained single-head contract provider only; no inference or held-out scientific evidence.",
+        "method": "learned_osqp"
+      }
+    ],
+    "runtime_en": "missing",
+    "supported_controls": []
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "calibration",
+      "checkpoint",
+      "evaluation",
+      "protocol",
+      "result"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-export-index/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

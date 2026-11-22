@@ -1,34 +1,42 @@
 {
-  "decision": "ACCEPT_ARCHIVE",
-  "archive_sha256": "45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418",
-  "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
-  "evidence_review_sha256": "f5ade8cca3ff79c91bda6386f78245a419e292574451c3c821d0436c9aa6bff0",
-  "figure_review_sha256": "8e84650a25abd49c4ade51bf7254226d3890d87dd1698c1efa9d660f52fdbbf9",
-  "archive": "D:\\_Repos\\Research_Caos\\CAOS_SoftQP\\output\\archives\\softqp-coupled-study-v1.zip",
-  "archive_bytes": 429502979,
-  "members": 258,
-  "canonical_inputs": 210,
-  "uncompressed_bytes": 1924284168,
-  "source_commit": "246bf87e690f4d010494c556e2021d311d587422",
-  "scope": "Complete actual archive byte integrity/inventory/originals acceptance only; not a scientific win, dataset publication, manuscript PDF or app qualification.",
-  "verification": {
-    "all_members_crc_checked": true,
-    "all_original_bytes_compared": true,
-    "all_manifest_hashes_and_sizes_checked": true,
-    "source_LF_identity_verified": true,
-    "all210canonical_inputs_present": true,
-    "archive_unchanged_during_verification": true,
-    "unsafe_paths_duplicates_symlinks_encryption_absent": true
-  },
-  "artifacts": {
-    "archive-evidence-check.py": "839557d7ddef5ff85b204ad62dd97d3e0691b78749c63bc64fc0acd69b1d9d81",
-    "archive-evidence-checks.json": "87f6debc72dc7699b67515f82d87ec6737fd480a97166bc4024a79d12208b0e3",
-    "archive-review.md": "b856b0dfcc815cb352e3af25af2ee096b8a1c22d77fde298c582c7ad729f782b"
-  },
-  "limits": [
-    "No archive extraction or publication was performed.",
-    "Actual public dataset metadata/uploads and unauthenticated remote file sets remain separate gates.",
-    "Manuscript must remain a separate one-PDF record; actual rendered PDF acceptance is still required.",
-    "Scientific primary remains NOT ESTABLISHED with all failures retained."
-  ]
+  "kind": "public-historical-review-projection/v1",
+  "decision": "PUBLIC_SUMMARY_ONLY",
+  "authoritative_for_admission": false,
+  "historical_raw_sha256": "8047325ce5fe0f203fa68a6fb53bb9e836244f5c660a65f6d2a7cf15fb6dd433",
+  "historical_source_commit": "bbdd7909b2ee523881383764eb969eaab079d4de",
+  "scope": "Portable display projection of a preserved historical receipt. It is not the raw independently issued approval and cannot authorize a publication.",
+  "historical_receipt": {
+    "decision": "ACCEPT_ARCHIVE",
+    "archive_sha256": "45b4eceda69f80a30a4ce349d0e9baefacace0de394fe315f3c392260ea8d418",
+    "protocol_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+    "evidence_review_sha256": "f5ade8cca3ff79c91bda6386f78245a419e292574451c3c821d0436c9aa6bff0",
+    "figure_review_sha256": "8e84650a25abd49c4ade51bf7254226d3890d87dd1698c1efa9d660f52fdbbf9",
+    "archive": "https://zenodo.org/records/23875194",
+    "archive_bytes": 429502979,
+    "members": 258,
+    "canonical_inputs": 210,
+    "uncompressed_bytes": 1924284168,
+    "source_commit": "246bf87e690f4d010494c556e2021d311d587422",
+    "scope": "Complete actual archive byte integrity/inventory/originals acceptance only; not a scientific win, dataset publication, manuscript PDF or app qualification.",
+    "verification": {
+      "all_members_crc_checked": true,
+      "all_original_bytes_compared": true,
+      "all_manifest_hashes_and_sizes_checked": true,
+      "source_LF_identity_verified": true,
+      "all210canonical_inputs_present": true,
+      "archive_unchanged_during_verification": true,
+      "unsafe_paths_duplicates_symlinks_encryption_absent": true
+    },
+    "artifacts": {
+      "archive-evidence-check.py": "839557d7ddef5ff85b204ad62dd97d3e0691b78749c63bc64fc0acd69b1d9d81",
+      "archive-evidence-checks.json": "87f6debc72dc7699b67515f82d87ec6737fd480a97166bc4024a79d12208b0e3",
+      "archive-review.md": "b856b0dfcc815cb352e3af25af2ee096b8a1c22d77fde298c582c7ad729f782b"
+    },
+    "limits": [
+      "No archive extraction or publication was performed.",
+      "Actual public dataset metadata/uploads and unauthenticated remote file sets remain separate gates.",
+      "Manuscript must remain a separate one-PDF record; actual rendered PDF acceptance is still required.",
+      "Scientific primary remains NOT ESTABLISHED with all failures retained."
+    ]
+  }
 }

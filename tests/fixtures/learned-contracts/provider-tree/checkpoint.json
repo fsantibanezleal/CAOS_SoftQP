@@ -1,0 +1,284 @@
+{
+  "artifact_id": "checkpoint",
+  "content_sha256": "6be5d71bb916943f5c291774886b75cc95fd4bc0e264ab0b557c8818b8a13b8a",
+  "kind": "learning-checkpoint",
+  "payload": {
+    "architecture": {
+      "coverage": "single-head-contract-fixture",
+      "dtype": "float64",
+      "head_ids": [
+        "H-2-3"
+      ],
+      "method": "learned_osqp",
+      "parameter_count": 20229,
+      "parameters": [
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "H-2-3",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "hidden1.bias",
+          "offset": 0,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 2944,
+          "dtype": "float64-le",
+          "head_id": "H-2-3",
+          "initialization_rule": "xavier-relu-sqrt2",
+          "initialization_seed": 7493803699085357308,
+          "name": "hidden1.weight",
+          "offset": 128,
+          "sha256": "2e6c31cbc5f0f6ea215b56ca1c3284b2e6c80799aca74d4fc6d66469d5e5e69d",
+          "shape": [
+            128,
+            23
+          ]
+        },
+        {
+          "count": 128,
+          "dtype": "float64-le",
+          "head_id": "H-2-3",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "hidden2.bias",
+          "offset": 3072,
+          "sha256": "5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+          "shape": [
+            128
+          ]
+        },
+        {
+          "count": 16384,
+          "dtype": "float64-le",
+          "head_id": "H-2-3",
+          "initialization_rule": "xavier-relu-sqrt2",
+          "initialization_seed": 6171362140557034236,
+          "name": "hidden2.weight",
+          "offset": 3200,
+          "sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "count": 5,
+          "dtype": "float64-le",
+          "head_id": "H-2-3",
+          "initialization_rule": "zeros",
+          "initialization_seed": 0,
+          "name": "output.bias",
+          "offset": 19584,
+          "sha256": "2c34ce1df23b838c5abf2a7f6437cca3d3067ed509ff25f11df6b11b582b51eb",
+          "shape": [
+            5
+          ]
+        },
+        {
+          "count": 640,
+          "dtype": "float64-le",
+          "head_id": "H-2-3",
+          "initialization_rule": "xavier-output-gain1",
+          "initialization_seed": 1750596472344033137,
+          "name": "output.weight",
+          "offset": 19589,
+          "sha256": "a11937f356a9b0ba592c82f5290bac8016cb33a3f9bc68d3490147c158ebb10d",
+          "shape": [
+            5,
+            128
+          ]
+        }
+      ]
+    },
+    "architecture_sha256": "c7976c87cccf63fd401bc9042a40f29181ad06176fa50699f807305be5526030",
+    "best_epoch": {
+      "H-2-3": 0
+    },
+    "best_weights": {
+      "byte_count": 161832,
+      "format": "raw-float64-le",
+      "path": "fixture-untrained.f64",
+      "sha256": "ab0519a25d66103e10bf63ccdc3e5729cfa75013257808896fe88253f5d33ae4"
+    },
+    "class_statistics": null,
+    "dataset": {
+      "artifact_id": "dataset",
+      "kind": "learning-dataset",
+      "path": "dataset.json",
+      "sha256": "4331e69aa856b58c9e7cf798096e37bf29e7fc499570c51f5d2500c796cf1f1f"
+    },
+    "epoch": {
+      "H-2-3": 0
+    },
+    "features": [
+      {
+        "artifact_id": "features",
+        "kind": "learning-features",
+        "path": "features.json",
+        "sha256": "efa7d1884eafca93841f0c109c6559d6058190feb1e04121daf17e14899a33a7"
+      }
+    ],
+    "history": [
+      {
+        "epoch": 0,
+        "gradient_finite": true,
+        "gradient_nonzero": false,
+        "head_id": "H-2-3",
+        "optimizer_steps": 0,
+        "train_objective": 0,
+        "validation_objective": 0
+      }
+    ],
+    "initial_weights": {
+      "byte_count": 161832,
+      "format": "raw-float64-le",
+      "path": "fixture-untrained.f64",
+      "sha256": "ab0519a25d66103e10bf63ccdc3e5729cfa75013257808896fe88253f5d33ae4"
+    },
+    "initial_weights_sha256": "ab0519a25d66103e10bf63ccdc3e5729cfa75013257808896fe88253f5d33ae4",
+    "learning_policy_sha256": "1dac06d1e1f5da1131fff26f34289d6547f67bba302e041d1368d043030e2b33",
+    "method": "learned_osqp",
+    "normalizer_sha256": [
+      "c587fe54dc36f720154a7a2a60a37fe914abeffed6fccbc4a2e6599f7990bc2e"
+    ],
+    "optimizer": {
+      "amsgrad": false,
+      "beta1": 0.9,
+      "beta2": 0.999,
+      "eps": 1e-08,
+      "learning_rate": 0.001,
+      "name": "AdamW",
+      "state_file": {
+        "byte_count": 323664,
+        "format": "raw-float64-le",
+        "path": "fixture-moments.f64",
+        "sha256": "0a8dfbc3a02c580a588352cdca86a557eae34f5fe035704c1cd449b3db747ef3"
+      },
+      "step_count": 0,
+      "tensors": [
+        {
+          "first_moment_offset": 0,
+          "parameter": "H-2-3/hidden1.bias",
+          "second_moment_offset": 20229,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 128,
+          "parameter": "H-2-3/hidden1.weight",
+          "second_moment_offset": 20357,
+          "shape": [
+            128,
+            23
+          ]
+        },
+        {
+          "first_moment_offset": 3072,
+          "parameter": "H-2-3/hidden2.bias",
+          "second_moment_offset": 23301,
+          "shape": [
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 3200,
+          "parameter": "H-2-3/hidden2.weight",
+          "second_moment_offset": 23429,
+          "shape": [
+            128,
+            128
+          ]
+        },
+        {
+          "first_moment_offset": 19584,
+          "parameter": "H-2-3/output.bias",
+          "second_moment_offset": 39813,
+          "shape": [
+            5
+          ]
+        },
+        {
+          "first_moment_offset": 19589,
+          "parameter": "H-2-3/output.weight",
+          "second_moment_offset": 39818,
+          "shape": [
+            5,
+            128
+          ]
+        }
+      ],
+      "weight_decay": 0.0001
+    },
+    "rng": {
+      "epoch_order_sha256": "840969c03a5bb453fd81c9817d540f4bae13854a7c4cdf7f3a4200e9041a09ad",
+      "state_file": {
+        "byte_count": 41,
+        "format": "raw-uint8",
+        "path": "fixture-rng.u8",
+        "sha256": "05c1b2702d0be8e7ec504beea9ca3d5ce945b90b0291f7c542847b6f89102b22"
+      },
+      "streams": [
+        {
+          "parameter": "H-2-3/hidden1.weight",
+          "seed": 7493803699085357308,
+          "sha256": "7df10249bcaeab894457d6d1e53926791c61ac381c9715a5c27ac9f923ebb924"
+        },
+        {
+          "parameter": "H-2-3/hidden2.weight",
+          "seed": 6171362140557034236,
+          "sha256": "533a57330e4d3e8f5aba7f8b7f3a18932dba3648bc7c2158c3457579ab237ad5"
+        },
+        {
+          "parameter": "H-2-3/output.weight",
+          "seed": 1750596472344033137,
+          "sha256": "6ae7a2875cf6fd42f91f17f62484005e0d34a07841b846676f448448f48a3e48"
+        }
+      ]
+    },
+    "role": "initial",
+    "seed": 41001,
+    "split": {
+      "artifact_id": "split",
+      "kind": "learning-split",
+      "path": "split.json",
+      "sha256": "c968a32ecf784628de3eea433a8ec0b3dbfc01006e677059fae9e0da9b7197eb"
+    },
+    "training_evidence": "untrained-contract-fixture",
+    "weights": {
+      "byte_count": 161832,
+      "format": "raw-float64-le",
+      "path": "fixture-untrained.f64",
+      "sha256": "ab0519a25d66103e10bf63ccdc3e5729cfa75013257808896fe88253f5d33ae4"
+    }
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "dataset",
+      "features",
+      "protocol",
+      "split"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-checkpoint/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

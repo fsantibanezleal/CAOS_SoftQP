@@ -12,8 +12,8 @@ The admitted model has positive finite-side linear prices and no finite hard
 rows or quadratic soft costs. After converting finite sides to inequalities,
 the elastic problem can be written as
 \begin{equation}\label{eq:flex-model}
- \min_{x,s\geq0}\ \tfrac12x^\top P x+q^\top x+w^\top s
- \quad\text{subject to}\quad Gx-s\leq h,\qquad w>0.
+ \min_{x\in\R^n,\ \xi\geq0}\ \tfrac12x^\top P x+q^\top x+\mu^\top\xi
+ \quad\text{subject to}\quad Gx-\xi\leq h,\qquad \mu>0.
 \end{equation}
 Lower interval sides become signed inequalities with their own prices. This
 conversion preserves directionality, but it does not justify giving a hard
@@ -33,7 +33,13 @@ as an objective regularizer would change the target optimizer. This distinction
 is checked through original objective evaluation and stationarity, not through
 a comparison of the stabilized subproblem's objective.
 
-The implementation uses Python and SciPy iteration around its prepared factors.
+The reconstruction uses \texttt{softqp.flex.FlexWorkspace} in SoftQP 0.1.0
+at the native source revision in the reproducibility section, with SciPy
+1.18.1 for the dense Cholesky factor and solves. The experiment uses the workspace's absolute and relative tolerances of $10^{-7}$
+and an iteration limit of 200000. The proximal parameters above remain
+fixed across the cases. For $k$ finite sides and $n$ decisions, this dense
+implementation uses $O(kn+n^2)$ memory, $O(kn^2+n^3)$ preparation and
+$O(kn+n^2)$ arithmetic per iteration.
 It is less mature and has different language-level overhead from the compiled
 C backends. Observed runtime differences therefore measure these concrete
 implementations under the protocol, rather than an implementation-independent
@@ -41,23 +47,56 @@ lower bound on the FlexQP formulation. The reconstruction is not retuned after
 examining the held-out results. In particular, the comparison does not choose a
 different proximal parameter for each unfavorable test instance.
 
-Algorithm~\ref{alg:flex} states the executable boundary without conflating
-fixed and learned variants. The original dual of \eqref{eq:flex-model} has
-finite-side bounds determined by the linear prices. The implementation checks
-stationarity and the projected dual-box residual rather than accepting only a
-small change between successive iterates. A stable iteration can converge to
-the wrong fixed point if the sign or price mapping is incorrect; original-space
-conditions are needed to distinguish that defect from a genuinely small step.
+The split uses a nonnegative margin $s$ and a signed elastic coordinate
+$z$, with $Gx+s-z=h$ and price $\sum_i\mu_i|z_i|$. For a fixed $x$, each
+row chooses $z_i=(G_i x-h_i)_+$ and $s_i=(h_i-G_i x)_+$ at minimum
+price, recovering \eqref{eq:flex-model}. The signed variable $z$ in this
+split is distinct from an original interval-row value.
+Let $w$ and $y$ be the split multipliers for the margin and elastic
+coordinates. Starting from zero for a cold call, a step computes
+\begin{align}\label{eq:flex-graph}
+ K\widetilde x&=\sigma_x x-q+
+   cG^\top(h-s+w/\sigma_s+z-y/\rho),\\
+ \nu&=c(G\widetilde x+s-w/\sigma_s-z+y/\rho-h),\nonumber\\
+ \widetilde s&=s-w/\sigma_s-\nu/\sigma_s,\qquad
+ \widetilde z=z-y/\rho+\nu/\rho.\nonumber
+\end{align}
+For $d=x,s,z$ put $\bar d=\alpha\widetilde d+(1-\alpha)d$.
+Writing $\mathcal T_{\tau}(v)_i=\operatorname{sign}(v_i)
+(|v_i|-\tau_i)_+$ for componentwise soft thresholding, the remaining
+updates are
+\begin{align}\label{eq:flex-project}
+ x^+&=\bar x,\qquad s^+=(\bar s+w/\sigma_s)_+,\\
+ z^+&=\mathcal T_{\mu/\rho}(\bar z+y/\rho),\nonumber\\
+ w^+&=w+\sigma_s(\bar s-s^+),\qquad
+ y^+=y+\rho(\bar z-z^+).\nonumber
+\end{align}
+Here the superscript $+$ denotes the next iterate, while a subscript $+$
+denotes a positive part. The solver checks the original-space residuals
+\begin{equation}\label{eq:flex-stop}
+ r_{\rm d}=\norm{Px+q+G^\top y},\qquad
+ r_{\rm p}=\frac{\norm{y-\Pi_{[0,\mu]}(y+\rho(Gx-h))}}{\rho}.
+\end{equation}
+The dual tolerance scales its relative part by
+$\max(\norm{Px},\norm{q},\norm{G^\top y})$. The projected-box tolerance
+uses $\max(\norm{Gx},\norm{h})$. Both add the absolute tolerance.
+This checks stationarity and capped inequality complementarity rather
+than just the size of an iterate change. It does not imply convergence
+for arbitrary adaptive parameters or a finite-precision rate.
 
 \begin{algorithm}[htbp]
 \caption{Execute the fixed FlexQP equations on an admitted pure linear elastic problem, preserving original prices and independently testing the returned original-space optimum.}\label{alg:flex}
 \begin{algorithmic}[1]
 \Require Compatible pure linear elastic inequalities and fixed numerical parameters
 \State Refuse finite hard rows, quadratic prices and nonpositive admitted side prices
-\State Convert finite interval sides into $Gx-s\leq h$ with original linear prices
+\State Convert finite interval sides into $Gx-\xi\leq h$ with original linear prices
 \State Prepare \eqref{eq:flex-system} using the fixed proximal parameters
-\State Iterate the paper's fixed splitting and relaxation updates
-\State Check original stationarity and projected dual-box residuals
+\State Set the cold state $(x,s,z,w,y)$ to zero
+\While{the iteration limit is not reached}
+\State Solve \eqref{eq:flex-graph}, then relax and apply \eqref{eq:flex-project}
+\State Refuse a nonfinite decision and test \eqref{eq:flex-stop} against both tolerances
+\State Stop on convergence and retain a distinct status at the iteration limit
+\EndWhile
 \State Recover interval dual signs and compare the original objective to lifting
 \end{algorithmic}
 \end{algorithm}
@@ -75,17 +114,18 @@ Compatibility exclusions remain part of the scientific denominator. Symmetric
 and asymmetric elastic families with nonzero quadratic side prices are outside
 this pure linear reconstruction. They are marked incompatible before timing,
 not counted as inaccurate solves or assigned zero durations. Conversely,
-admitted asymmetric linear cases are genuinely executed and checked, so an
+admitted asymmetric linear cases are executed and checked, so an
 unavailable learned policy is not used to excuse omission of the fixed published
 reference. The complete six-path original comparison can therefore expose
 both semantic limits and implementation costs without pretending that all
 methods solve every penalty family.
-Within a prepared fixed-policy operation, the signed inequality matrix and
-its numerical factor can be retained while admitted vectors change. A new
-hard mask, finite-side pattern or price structure is not such a vector
-change. The reconstruction's boundary checks distinguish these cases before
-reuse. This is also why the complete-call timing is more informative than
-an isolated triangular solve: it includes the work required to admit and
-recover the actual scientific problem. The theoretical proximal regularizers
+The factor in the Schur solve depends on the Hessian, signed inequality
+matrix and proximal settings. A vector-only change can leave that factor
+invariant mathematically. The implemented \path{FlexWorkspace} deep-copies
+one problem at initialization and exposes reset and solve for that fixed
+problem. Changing the vectors requires a new workspace. The dense
+reconstruction caps admission at 2048 decision variables and 8192
+finite sides. The complete-call timer
+includes admission, setup and original-space recovery. The theoretical proximal regularizers
 and the practical implementation overhead must both remain visible when
 interpreting a comparison with a mature compiled backend.

@@ -1,0 +1,59 @@
+{
+  "artifact_id": "calibration",
+  "content_sha256": "edfa0cc6e61b59fd3baea5ee156267a74fe3c08f9758e1ede61ae4b502091364",
+  "kind": "learning-calibration",
+  "payload": {
+    "applicability": "not-applicable",
+    "checkpoint": {
+      "artifact_id": "checkpoint",
+      "kind": "learning-checkpoint",
+      "path": "checkpoint.json",
+      "sha256": "8f58e30dc7649ecb821c87f16dc567621b3c2fd8c0a5246e2a6d3bc8fd686438"
+    },
+    "class_counts": [],
+    "mask_count": 0,
+    "method": "learned_osqp",
+    "metrics": {
+      "brier": null,
+      "ece": null,
+      "f1": null,
+      "undefined_reason": "not-applicable"
+    },
+    "objective": "not-applicable",
+    "observations": [],
+    "scores": [],
+    "selected_threshold": null,
+    "source_ids": [],
+    "split": {
+      "artifact_id": "split",
+      "kind": "learning-split",
+      "path": "split.json",
+      "sha256": "c968a32ecf784628de3eea433a8ec0b3dbfc01006e677059fae9e0da9b7197eb"
+    },
+    "threshold_grid": [],
+    "tie": "not-applicable"
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "checkpoint",
+      "protocol",
+      "split"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-calibration/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

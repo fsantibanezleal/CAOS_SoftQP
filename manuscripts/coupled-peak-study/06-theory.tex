@@ -13,7 +13,8 @@ For the grouped split define a graph-constrained function
  F(x,z)=\tfrac12x^\top P x+q^\top x+
             \iota_{\{z=Ax\}}(x,z),
 \end{equation}
-and let $G$ contain the hard intervals and the admitted soft costs.
+and set $G(x,z)=g_{\mathrm{all}}(z)$, which contains the hard intervals
+and the admitted soft costs.
 The fixed block metric is $\mathcal M=\diag(S,H)$ with $S\succ0$ and
 positive diagonal $H$. The graph subproblem is uniquely defined because
 its reduced matrix $P+S+A^\top H A$ is positive definite. This is
@@ -46,11 +47,14 @@ This interpretation follows established splitting results~\cite{admm,eckstein}.
 
 In original row variables, writing $S$ for the positive primal metric
 and $y=Hd_z$, the same graph solve and relaxed updates take the form
+below. Since $G$ is independent of $x$, its proximal update in that
+coordinate is the identity, and the scaled multiplier $d_x$ is zero
+after a complete step. The native initialization sets it to zero.
 \begin{align}\label{eq:paper-native-updates}
  (P+S+A^\top HA)\widetilde x^{k+1}
    &=Sx^k-q+A^\top(Hz^k-y^k),\\
  x^{k+1}&=\alpha\widetilde x^{k+1}+(1-\alpha)x^k,\nonumber\\
- z^{k+1}&=\prox_g^H\left(\alpha A\widetilde x^{k+1}
+ z^{k+1}&=\prox_{g_{\mathrm{all}}}^H\left(\alpha A\widetilde x^{k+1}
                        +(1-\alpha)z^k+H^{-1}y^k\right),\nonumber\\
  y^{k+1}&=y^k+H\left(\alpha A\widetilde x^{k+1}
                        +(1-\alpha)z^k-z^{k+1}\right).\nonumber

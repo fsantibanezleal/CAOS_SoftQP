@@ -1,0 +1,1101 @@
+{
+  "$comment": "U1 scientific number fields require finite lossless float64 admission via the lossless-float64 format and strict semantic reader. Integer metadata remains exact JSON integer. No coefficient rounding is authorized.",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-evaluation/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "properties": {
+          "payload": {
+            "additionalProperties": false,
+            "properties": {
+              "bootstrap": {
+                "additionalProperties": false,
+                "properties": {
+                  "crossed_shared_draws": {
+                    "const": true
+                  },
+                  "draw_files": {
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "file": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "byte_count": {
+                              "maximum": 20000000,
+                              "minimum": 1,
+                              "type": "integer"
+                            },
+                            "format": {
+                              "const": "raw-uint8"
+                            },
+                            "path": {
+                              "minLength": 1,
+                              "type": "string"
+                            },
+                            "sha256": {
+                              "pattern": "^[0-9a-f]{64}$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "sha256",
+                            "byte_count",
+                            "format"
+                          ],
+                          "type": "object"
+                        },
+                        "method": {
+                          "enum": [
+                            "learned_osqp",
+                            "learned_daqp"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "method",
+                        "file"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 2,
+                    "type": "array"
+                  },
+                  "draws_sha256": {
+                    "anyOf": [
+                      {
+                        "pattern": "^[0-9a-f]{64}$",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "lower_p": {
+                    "const": 0.0125
+                  },
+                  "quantile": {
+                    "const": "type7"
+                  },
+                  "replicates": {
+                    "const": 10000
+                  },
+                  "upper_p": {
+                    "const": 0.9875
+                  }
+                },
+                "required": [
+                  "replicates",
+                  "quantile",
+                  "lower_p",
+                  "upper_p",
+                  "crossed_shared_draws",
+                  "draws_sha256",
+                  "draw_files"
+                ],
+                "type": "object"
+              },
+              "denominators": {
+                "additionalProperties": false,
+                "properties": {
+                  "accepted": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "expected": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "incompatible": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "expected",
+                  "accepted",
+                  "failed",
+                  "incompatible"
+                ],
+                "type": "object"
+              },
+              "diagnostic_denominators": {
+                "additionalProperties": false,
+                "properties": {
+                  "expected": {
+                    "maximum": 101,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "maximum": 101,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "missing": {
+                    "maximum": 101,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "passed": {
+                    "maximum": 101,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "expected",
+                  "passed",
+                  "failed",
+                  "missing"
+                ],
+                "type": "object"
+              },
+              "diagnostics": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "evidence": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "byte_count": {
+                              "maximum": 2000000,
+                              "minimum": 1,
+                              "type": "integer"
+                            },
+                            "format": {
+                              "const": "utf8-log"
+                            },
+                            "path": {
+                              "minLength": 1,
+                              "type": "string"
+                            },
+                            "sha256": {
+                              "pattern": "^[0-9a-f]{64}$",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "sha256",
+                            "byte_count",
+                            "format"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "expected_outcome": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "fixture_sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    "key": {
+                      "items": false,
+                      "maxItems": 3,
+                      "minItems": 3,
+                      "prefixItems": [
+                        {
+                          "pattern": "^NC[0-9]{2}-[a-z0-9-]+$",
+                          "type": "string"
+                        },
+                        {
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        {
+                          "enum": [
+                            0,
+                            41001,
+                            41002,
+                            41003
+                          ]
+                        }
+                      ],
+                      "type": "array"
+                    },
+                    "observed_outcome": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "reason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "state": {
+                      "enum": [
+                        "passed",
+                        "failed",
+                        "missing"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "fixture_sha256",
+                    "state",
+                    "expected_outcome",
+                    "observed_outcome",
+                    "reason",
+                    "evidence"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 101,
+                "type": "array"
+              },
+              "expected_keyset_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "hypotheses": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "estimate": {
+                      "anyOf": [
+                        {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "interval": {
+                      "anyOf": [
+                        {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": -1e+308,
+                            "type": "number"
+                          },
+                          "maxItems": 2,
+                          "type": "array"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "method": {
+                      "enum": [
+                        "learned_osqp",
+                        "learned_daqp"
+                      ]
+                    },
+                    "qualified": {
+                      "type": "boolean"
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "maxLength": 256,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "method",
+                    "estimate",
+                    "interval",
+                    "qualified",
+                    "reason"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 2,
+                "type": "array"
+              },
+              "limits": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "results": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "artifact_id": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "kind": {
+                      "enum": [
+                        "learning-protocol",
+                        "learning-problem",
+                        "learning-dataset",
+                        "learning-split",
+                        "learning-features",
+                        "learning-labels",
+                        "learning-checkpoint",
+                        "learning-calibration",
+                        "learning-method-result",
+                        "learning-evaluation",
+                        "learning-export-index"
+                      ]
+                    },
+                    "path": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "sha256": {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "artifact_id",
+                    "path",
+                    "sha256"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "source_totals": {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "cold": {
+                      "exclusiveMinimum": 0,
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "type": "number"
+                    },
+                    "family": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "learned": {
+                      "exclusiveMinimum": 0,
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "type": "number"
+                    },
+                    "method": {
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "reduction": {
+                      "format": "lossless-float64",
+                      "maximum": 1e+308,
+                      "minimum": -1e+308,
+                      "type": "number"
+                    },
+                    "regime": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "seed": {
+                      "enum": [
+                        41001,
+                        41002,
+                        41003
+                      ]
+                    },
+                    "source_index": {
+                      "maximum": 9223372036854775807,
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "method",
+                    "seed",
+                    "family",
+                    "regime",
+                    "source_index",
+                    "learned",
+                    "cold",
+                    "reduction"
+                  ],
+                  "type": "object"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              }
+            },
+            "required": [
+              "results",
+              "expected_keyset_sha256",
+              "denominators",
+              "source_totals",
+              "hypotheses",
+              "bootstrap",
+              "limits",
+              "diagnostics",
+              "diagnostic_denominators"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "state": {
+            "const": "missing"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "null"
+          },
+          "reason": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-evaluation"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "bootstrap": {
+              "additionalProperties": false,
+              "properties": {
+                "crossed_shared_draws": {
+                  "const": true
+                },
+                "draw_files": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "file": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "byte_count": {
+                            "maximum": 20000000,
+                            "minimum": 1,
+                            "type": "integer"
+                          },
+                          "format": {
+                            "const": "raw-uint8"
+                          },
+                          "path": {
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          "sha256": {
+                            "pattern": "^[0-9a-f]{64}$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "path",
+                          "sha256",
+                          "byte_count",
+                          "format"
+                        ],
+                        "type": "object"
+                      },
+                      "method": {
+                        "enum": [
+                          "learned_osqp",
+                          "learned_daqp"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "method",
+                      "file"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 2,
+                  "type": "array"
+                },
+                "draws_sha256": {
+                  "anyOf": [
+                    {
+                      "pattern": "^[0-9a-f]{64}$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "lower_p": {
+                  "const": 0.0125
+                },
+                "quantile": {
+                  "const": "type7"
+                },
+                "replicates": {
+                  "const": 10000
+                },
+                "upper_p": {
+                  "const": 0.9875
+                }
+              },
+              "required": [
+                "replicates",
+                "quantile",
+                "lower_p",
+                "upper_p",
+                "crossed_shared_draws",
+                "draws_sha256",
+                "draw_files"
+              ],
+              "type": "object"
+            },
+            "denominators": {
+              "additionalProperties": false,
+              "properties": {
+                "accepted": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "expected": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "failed": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "incompatible": {
+                  "maximum": 9223372036854775807,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "expected",
+                "accepted",
+                "failed",
+                "incompatible"
+              ],
+              "type": "object"
+            },
+            "diagnostic_denominators": {
+              "additionalProperties": false,
+              "properties": {
+                "expected": {
+                  "maximum": 101,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "failed": {
+                  "maximum": 101,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "missing": {
+                  "maximum": 101,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "passed": {
+                  "maximum": 101,
+                  "minimum": 0,
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "expected",
+                "passed",
+                "failed",
+                "missing"
+              ],
+              "type": "object"
+            },
+            "diagnostics": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "evidence": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": false,
+                        "properties": {
+                          "byte_count": {
+                            "maximum": 2000000,
+                            "minimum": 1,
+                            "type": "integer"
+                          },
+                          "format": {
+                            "const": "utf8-log"
+                          },
+                          "path": {
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          "sha256": {
+                            "pattern": "^[0-9a-f]{64}$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "path",
+                          "sha256",
+                          "byte_count",
+                          "format"
+                        ],
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "expected_outcome": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "fixture_sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  },
+                  "key": {
+                    "items": false,
+                    "maxItems": 3,
+                    "minItems": 3,
+                    "prefixItems": [
+                      {
+                        "pattern": "^NC[0-9]{2}-[a-z0-9-]+$",
+                        "type": "string"
+                      },
+                      {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      {
+                        "enum": [
+                          0,
+                          41001,
+                          41002,
+                          41003
+                        ]
+                      }
+                    ],
+                    "type": "array"
+                  },
+                  "observed_outcome": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "reason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "state": {
+                    "enum": [
+                      "passed",
+                      "failed",
+                      "missing"
+                    ]
+                  }
+                },
+                "required": [
+                  "key",
+                  "fixture_sha256",
+                  "state",
+                  "expected_outcome",
+                  "observed_outcome",
+                  "reason",
+                  "evidence"
+                ],
+                "type": "object"
+              },
+              "maxItems": 101,
+              "type": "array"
+            },
+            "expected_keyset_sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            "hypotheses": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "estimate": {
+                    "anyOf": [
+                      {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "interval": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2,
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "method": {
+                    "enum": [
+                      "learned_osqp",
+                      "learned_daqp"
+                    ]
+                  },
+                  "qualified": {
+                    "type": "boolean"
+                  },
+                  "reason": {
+                    "anyOf": [
+                      {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "method",
+                  "estimate",
+                  "interval",
+                  "qualified",
+                  "reason"
+                ],
+                "type": "object"
+              },
+              "maxItems": 2,
+              "type": "array"
+            },
+            "limits": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "results": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "artifact_id": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "kind": {
+                    "enum": [
+                      "learning-protocol",
+                      "learning-problem",
+                      "learning-dataset",
+                      "learning-split",
+                      "learning-features",
+                      "learning-labels",
+                      "learning-checkpoint",
+                      "learning-calibration",
+                      "learning-method-result",
+                      "learning-evaluation",
+                      "learning-export-index"
+                    ]
+                  },
+                  "path": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "artifact_id",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "maxItems": 2000000,
+              "type": "array"
+            },
+            "source_totals": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "cold": {
+                    "exclusiveMinimum": 0,
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "type": "number"
+                  },
+                  "family": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "learned": {
+                    "exclusiveMinimum": 0,
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "type": "number"
+                  },
+                  "method": {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "reduction": {
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "minimum": -1e+308,
+                    "type": "number"
+                  },
+                  "regime": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "seed": {
+                    "enum": [
+                      41001,
+                      41002,
+                      41003
+                    ]
+                  },
+                  "source_index": {
+                    "maximum": 9223372036854775807,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "method",
+                  "seed",
+                  "family",
+                  "regime",
+                  "source_index",
+                  "learned",
+                  "cold",
+                  "reduction"
+                ],
+                "type": "object"
+              },
+              "maxItems": 2000000,
+              "type": "array"
+            }
+          },
+          "required": [
+            "results",
+            "expected_keyset_sha256",
+            "denominators",
+            "source_totals",
+            "hypotheses",
+            "bootstrap",
+            "limits",
+            "diagnostics",
+            "diagnostic_denominators"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "const": "learning-protocol"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "artifact_id",
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-evaluation/1.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider",
+        "missing"
+      ]
+    },
+    "version": {
+      "const": "1.0.0"
+    }
+  },
+  "required": [
+    "schema_id",
+    "version",
+    "kind",
+    "artifact_id",
+    "purpose",
+    "state",
+    "reason",
+    "protocol_id",
+    "protocol_sha256",
+    "source_lock_sha256",
+    "provenance",
+    "payload",
+    "content_sha256",
+    "protocol_ref"
+  ],
+  "type": "object"
+}

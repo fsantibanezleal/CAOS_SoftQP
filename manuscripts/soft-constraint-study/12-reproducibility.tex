@@ -24,7 +24,15 @@ The committed manuscript asset generator reads immutable scientific inputs,
 checks their Git identities and emits vector PDF figures, literal result
 tables and source manifests. Running
 \texttt{python manuscripts/shared/generate\_assets.py} rebuilds those assets
-without solving a model or recomputing a confidence interval. Each document's
+without solving a model or recomputing a confidence interval. A separate
+\texttt{generate\_timing\_cells.py} script reproduces
+Table~\ref{tab:timing-cells} from the pinned original summary by running
+\begin{verbatim}
+python manuscripts/soft-constraint-study/generate_timing_cells.py
+\end{verbatim}
+from the repository. The script converts existing durations to milliseconds
+and retains all their outcome counts.
+Each document's
 \texttt{build.py} verifies numeric sources and compiles native LaTeX with
 BibTeX, refusing unresolved or clipped output. The manuscript rendering
 requirements are pinned separately from numerical experiment environments.

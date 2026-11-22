@@ -1,0 +1,18 @@
+{
+  "record_id": 24122893,
+  "version": "0.02.003",
+  "version_doi": "10.5281/zenodo.24122893",
+  "concept_doi": "10.5281/zenodo.23875071",
+  "native_source_commit": "1860d9ad94352999adbcbd364b8a3a015948ed32",
+  "pdf": {
+    "file": "softqp-studio-coupled-peak-study-v0.02.003.pdf",
+    "pages": 29,
+    "bytes": 666802,
+    "sha256": "d620a1fddbb844e6afd1e2b7c189f0ee1081b446ad48d46509bf31651093b5cd"
+  },
+  "checks_passed": 39,
+  "independent_review_sha256": {
+    "staged-upload-independent-review.json": "858e514bde1f683e2a491dba736ce5e367bb453f92a3c35433cfc52e9ecf7b35",
+    "public-publication-independent-review.json": "61122ee6c1d8ca787aa8bf275e3f025042f73c72ce6bb37abdcd3fa2203459cf"
+  }
+}

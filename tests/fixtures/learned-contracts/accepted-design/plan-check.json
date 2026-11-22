@@ -1,0 +1,231 @@
+{
+  "scope": "Prospective source/algebra/keyset checks only. Not independent review, registration, runtime, scientific or product acceptance.",
+  "rejected_snapshot_hashes": {
+    "design.md": "9f169c8bde9d9ff01d82a4f76f35a14c50aa84231d560fbb8cab7fff8c99aceb",
+    "protocol.md": "53592004dcd7be7b3458f0011c11677930597c188861b4c9820df4ed36581949",
+    "contracts.md": "49e362b263719e3396acabea432324a7bdebfc0e2a1ab68dcfd1ec7d0d5b4a03",
+    "generator-spec.md": "a078013589a20db078dd15329b58cfeb722e4613191ebb5bc3f6c01874549e12"
+  },
+  "prior_review_scoped_preservation": {
+    "checked": 43,
+    "changed": [],
+    "source": "rejected-design-2026-11-05-r1/independent-audit.json protected_hashes",
+    "scope": "43 inspected scientific/source files only, not unrelated concurrent workspace work"
+  },
+  "algebraic_probes": {
+    "canonical_PD_rank": 4,
+    "diagonal_PSD_rank": 2,
+    "rounded_nominal_rank_two_outcome": {
+      "refusal": "exact-indefinite"
+    },
+    "F4_preserved": {
+      "cold": [
+        1.0,
+        1.0,
+        100.0
+      ],
+      "learned": [
+        0.5,
+        0.5,
+        120.0
+      ],
+      "median_frame_reduction": 0.5,
+      "total_trajectory_reduction": -0.18627450980392157
+    },
+    "selected_trajectory_reduction_exact": "-19/102",
+    "selected_trajectory_reduction": -0.18627450980392157,
+    "weighted_peak_y": 18,
+    "normalization_witness_rejected": true,
+    "loss_example_exact": "19/3",
+    "crossed_mean_hand_array_exact": "-19/204",
+    "crossed_resampled_seeds_hand_array_exact": "-1/102",
+    "boundary_diagnostics": {
+      "zero_side_price_original_objective": -2,
+      "zero_side_upper_violation": 1,
+      "zero_group_peak_exact": "3/2",
+      "zero_group_penalty": 0,
+      "finite_coefficient": true,
+      "Ax_and_Gram_exceed_float64": true,
+      "unbounded_ray_valid": true,
+      "zero_opposite_nonfinite_rays_refused": true,
+      "ray_objective": "-tau"
+    },
+    "R4_exact_certificate_counterexamples": {
+      "tiny_dyadic": "1/17179869184",
+      "numerical_screens_pass": true,
+      "false_unbounded_claims_refused": [
+        {
+          "id": "NC23-tiny-positive-curvature",
+          "exact_refusal": "exact-P-direction-nonzero"
+        },
+        {
+          "id": "NC24-tiny-positive-upper-recession",
+          "exact_refusal": "exact-upper-anchor-or-recession-sign"
+        }
+      ],
+      "finite_minimizers": [
+        17179869184,
+        17179869184
+      ],
+      "finite_minima": [
+        -8589934592,
+        -17179869184
+      ]
+    },
+    "registered_parameter_streams": [
+      7493803699085357308,
+      5644755605897280827,
+      4395972133697884190
+    ],
+    "scope": "Pure rational/algebraic probes only; no generated candidates, solvers, training, gradients or scientific acceptance."
+  },
+  "counts": {
+    "method_eligible_frames": 26928,
+    "control_eligible_frames": 7352,
+    "method-status": {
+      "count": 35328,
+      "sha256": "52ceab5e2008b408ad642a54d88f1260056115326ba2a71bdf6cfb08ecfeea2c",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "control-status": {
+      "count": 7488,
+      "sha256": "86a029175e48bf328cf2c88f603bbe8830727deeea36be35db92141f8ad68563",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "method-repetitions": {
+      "count": 188496,
+      "sha256": "847cab13d332b0f97d5e46869ab7a349b112b896b3e63f78e5d98c632c20ea69",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "control-repetitions": {
+      "count": 51464,
+      "sha256": "451de09cff64dfc40e036a140236082422f356b1b644fd6b34ea6ba99a267adf",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "oracle-status": {
+      "count": 46368,
+      "sha256": "f58be13f4def91d08700df3b0e27d9b29cc39b866789721481dd000d39764e88",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "label-status": {
+      "count": 14504,
+      "sha256": "93a88b8f476c0c050f3081b8ef0009f929d8a1c17aba69019813080fbec7250d",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "diagnostic-status": {
+      "count": 101,
+      "sha256": "9947e22cb35b2339118a0d8a3600fc933f39a68454be31a06a4ec93691e3fde3",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "head-checkpoints": {
+      "count": 45,
+      "sha256": "b6b4c86f183fcde979677b24bcb808e64f0b357a5310776cd8a0e9e157409025",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    },
+    "source-status": {
+      "count": 13056,
+      "sha256": "4467daa89dd0e17d6921c8a70b6f57c59d58555c562fd9d9d5ce8e0b83227a27",
+      "serialization": "sorted compact UTF8 JSON arrays, LF"
+    }
+  },
+  "mutations_refused": [
+    "wrong-semantic-N01-0-directional",
+    "wrong-semantic-N07-0-learned_daqp",
+    "wrong-semantic-N14-0-generalized",
+    "missing-required-head",
+    "wrong-lift-order-shape",
+    "wrong-rule-l2ws-residual_transition",
+    "wrong-rule-initialization-override_constructor_seed_123",
+    "wrong-rule-gnn-feature_population_ddof",
+    "wrong-rule-source_weights-frames_within_source",
+    "wrong-rule-estimand-source",
+    "missing-status",
+    "duplicate-status",
+    "extra-status",
+    "missing-repetition",
+    "extra-incompatible-repetition",
+    "wrong-boundary-NC19-zero-soft-side-price",
+    "wrong-boundary-NC20-zero-group-price",
+    "wrong-boundary-NC21-finite-coefficient-overflow",
+    "wrong-boundary-NC22-unbounded-convex-objective",
+    "wrong-boundary-NC22-unbounded-convex-objective",
+    "wrong-boundary-NC23-tiny-positive-curvature",
+    "wrong-boundary-NC24-tiny-positive-upper-recession",
+    "wrong-boundary-NC23-tiny-positive-curvature",
+    "wrong-boundary-NC24-tiny-positive-upper-recession",
+    "missing-boundary-target-key",
+    "extra-boundary-target-key"
+  ],
+  "source_controls": [
+    {
+      "id": "intact",
+      "exit": 0,
+      "stdout": "17 primary Git blobs inspected; 0 identity failures"
+    },
+    {
+      "id": "wrong-byte",
+      "exit": 1,
+      "stdout": "17 primary Git blobs inspected; 1 identity failures\nl2ws-readme-pinned"
+    },
+    {
+      "id": "forged-blob",
+      "exit": 1,
+      "stdout": "17 primary Git blobs inspected; 1 identity failures\nl2ws-readme-pinned"
+    },
+    {
+      "id": "extra-newlines",
+      "exit": 1,
+      "stdout": "17 primary Git blobs inspected; 1 identity failures\nl2ws-readme-pinned"
+    }
+  ],
+  "parameter_count": 21922702,
+  "model_weight_bytes_all_three_seeds": 526144848,
+  "conservative_six_copy_checkpoint_bytes": 3156869088,
+  "original_dense_numeric_payload_bound": 112772352,
+  "normative_sha256": {
+    "design.md": "c7b75ba3536fa0ed550c22f9fccd655ff93f857074ea766905a3a454f60a9a6f",
+    "protocol.md": "4d31955538a11a073b65cee92912368ef729fddcae35fe4238cc8718e2789b55",
+    "contracts.md": "a37b6d9c4736239644c2023e2cd4cfd2470f3729b8fa1c1a789780d735d32da9",
+    "generator-spec.md": "6d7e4d318a9e007f5a61009181af4cab24f24155ad10f77fea77ffd558839269",
+    "numerical-spec.md": "560c172a7a4e310ac0d9ce09b51f56eb8a7b89f9a1294467fe9600417af78a14",
+    "learning-spec.md": "1dac06d1e1f5da1131fff26f34289d6547f67bba302e041d1368d043030e2b33",
+    "timing-spec.md": "85db53972d6d05c49d6001a20a0e9680bd94c6ab6f2b5bcb02f5d3ed13367c67",
+    "recovery-spec.md": "9a10bae06b05372651256eacf6a044d09af89007bf6a689b56725fddfba1deab",
+    "semantic-matrix.json": "8b4c02f8e56fe3b677f9b15fbe4c8be70bcccd87394c0ceee281160ba2bf82f6",
+    "normative-rules.json": "a570f81b04bbcfbfc9ce6491f27562fded099c61df72fbf9efd5bd9fbdea0ed7",
+    "negative-controls.json": "ff8d76294bf64fba6a901133aba0db40dea9d624ef023be60a96704c3ebb6116",
+    "expected_inventory.py": "6577f7ddc9ca091c24a7d6d6315556de82f91a03c26573a0707486e2d8fd2c69",
+    "revised_math_probes.py": "032e7f3245c293feb1165154174d88bb4c9d5536bb96a4817791968f160abcc2",
+    "check_plan.py": "8ffe548ef8ed91ef84e069b2878051a43be37e323451c561d5bab19158c1617f",
+    "serialization.py": "73fe7b7790de98ca39118c1d6ec2dee86f2018ee8ce4fcac7ef099fa8dd74368",
+    "validate_sources.py": "237d2d29a86d42f6472cddadfd88dd303d92acd768e1435aca7c40450cec0863",
+    "verify_closure.py": "a0f14290353637640b40d5f50e5f120a8b6ca77297d6eace447ccb636515eef9",
+    "inspect_pypi.py": "a6458d4af30e010c07d217a4f9fd5be1d564c98ea2c4747b62ee6469b01a3568",
+    "collect_primary.py": "34f3a500b6aae338ee6d8b324ca3da793289c6572e259981d91680c4485c0bae",
+    "source-registry.json": "7e86c0173ea51364252f9651c9feab43e8b9e44032bc17179abb78611e64124d",
+    "source-audit.json": "84bb491a2c07fb88e32db5d5252364dcd06fe491b090cab7193f51ce6ce873e2",
+    "expected-keysets/inventory.json": "834706c024b923d3f5eec10faae17a11c1d374a29e06b89d9d619fa47b599890",
+    "expected-keysets/control-repetitions.jsonl.gz": "d2a06e6084f0daea859bb9235682648790b1317e9a4265f56b99f42069553c21",
+    "expected-keysets/control-status.jsonl.gz": "514bd3ee3af4e541650de80941186d8567e9790bc5f777a1f5cc5d70678c1d46",
+    "expected-keysets/diagnostic-status.jsonl.gz": "a95c3a9cba31cc056464d5034efe8fe911b7e2d804178ff61edb48ad644f56db",
+    "expected-keysets/head-checkpoints.jsonl.gz": "1af258e337ab024169f97b9d8b62dc09ce12aad8e544e8f7a43d62b357206a9a",
+    "expected-keysets/label-status.jsonl.gz": "641251e440e5afbd0e6ce906bf226a74455e258e8b9795c62de1a0d1293071ba",
+    "expected-keysets/method-repetitions.jsonl.gz": "fce2c144e8a5514fe9197e10ec5638241e8418effa12acb4af5c2b33e258e881",
+    "expected-keysets/method-status.jsonl.gz": "078c285cdb561269d9e84f5378c7a571a897362a61faabe01c14ae4baa48ad99",
+    "expected-keysets/oracle-status.jsonl.gz": "3fcc421662157f9044b63a5d7dcc64b2ca1daa608a6658b338d8eb3bd55d0afa",
+    "expected-keysets/source-status.jsonl.gz": "4eeddd4fcb7a4a904d3218c3082084e4ed9e48c728ed6a695939a354f800741f"
+  },
+  "read_only_engine_source_sha256": {
+    "src\\softqp\\peak.py": "c71e00ba535bca08f899b73d71fe632c54172f010c1ac99931c5391c3c2dc757",
+    "src\\softqp\\problem.py": "7c56cce598f53af63e4673a72237578ef9634788c4dc38454cc4886a5d3dbb7d",
+    "src\\softqp\\lifting.py": "1bccb2423db935811ea43acc876bde9a3823be89195b6b538a89885cd663da8e",
+    "src\\softqp\\reference.py": "05b40ffcf23f5857756ac243f98a687361af12c51442b1208d24dcd222b0b9b2"
+  },
+  "coupled_protocol_identity": {
+    "raw_sha256": "27571f7d2ac7f23259ad1ae9cef239859ea1e1009dcd2ad4d94c0223ebe0db58",
+    "registered_canonical_json_sha256": "3d8eb822a6b31026c491b66cfb21f474b044a6ca3801074379243b8a3e7ca53f",
+    "evidence": "raw identity unchanged from prior independent canonical verification; identity notions remain distinct"
+  },
+  "historical_numeric_guards": "two checked raw campaign/summary identities unchanged; no claim about unrelated files",
+  "serialization_policy": "actual read_bytes identities; UTF8/LF; source snapshots retain distinct original Git blob/raw identities; verification is read-only"
+}

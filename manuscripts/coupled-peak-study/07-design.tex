@@ -36,14 +36,36 @@ baseline time $T_{B,j}$, the paired quantity is
 \begin{equation}\label{eq:paper-reduction}
  R_j=1-T_{N,j}/T_{B,j}.
 \end{equation}
-The original endpoint uses its registered repeated paired observations.
-The grouped endpoint uses per-instance medians from its three measured
-operations and preserves its prescribed failed-pair rule. These
-different reductions are not pooled. Each stored 95\% interval resamples
-the six seed clusters; original bootstrap settings and seeds are
-retained rather than recomputed for this analysis. Dependence among
-repetitions makes cluster identity important, while few-cluster
+The original endpoint takes the median over its registered repeated
+paired observations. For the grouped endpoint, take each policy's
+median over the three measured operations on a given instance. Set
+$T_B$ to the minimum among the compatible registered baseline medians
+and score the instance as $1-T_N/T_B$. If any required compatible
+measurement is missing, unsuccessful, timed out or rejected for
+accuracy, assign the entire instance a score of $-1$. Prespecified
+incompatible policies contribute no measurement. Qualification requires
+a median of at least $0.10$, a positive lower confidence limit and zero
+failed pairs.
+
+The two endpoints resample six complete seed clusters with replacement.
+The original analysis uses 2{,}000 resamples and seed 314159. The
+grouped analysis uses 10{,}000 resamples and seed 701119, pooling the
+24 instances from each drawn seed, taking the median and using the
+2.5th and 97.5th percentiles with linear interpolation. Dependence
+among repetitions makes cluster identity important, while few-cluster
 coverage remains a limitation~\cite{efron,davison,cameron}.
+Table~\ref{tab:seed-blocks} identifies the generator and order seeds.
+
+\begin{table}[htbp]\centering\small
+\caption{Generator seed blocks for each population and the method-order randomization seeds for the two fixed protocols. Ranges are inclusive.}\label{tab:seed-blocks}
+\begin{tabularx}{\textwidth}{@{}lXX@{}}\toprule
+Role & Original & Grouped\\\midrule
+Development & 1000--1002 & 710001--710002\\
+Held out & 9000--9005 & 910101--910106\\
+Robustness & 8500--8505 & 810101--810103\\
+Method order & 271828 & 601117\\\bottomrule
+\end{tabularx}
+\end{table}
 
 The grouped study contains 48 development,144 held-out and 18 robustness
 inputs across sparse and synthetic hourly thermal families. The
@@ -60,13 +82,29 @@ from inner timing but retained by the outer resource supervisor.
 The grouped references include stock-OSQP compact epigraphs,
 directional row-split generalized projection, direct DAQP epigraphs
 and documented proximal DAQP variants~\cite{daqpprox}. Compatibility
-depends on the original curvature and price family. Every returned
-candidate frame faces original objective, raw/repaired stationarity,
-bounded dual repair, per-group normalized Fenchel and per-hard-row
-complementarity checks. Incompatible cells, oracle limits,
-iteration-limited candidates and timeouts remain separate. Missing
-native or reference values are not imputed to construct a more
-favorable comparison.
+depends on the original curvature and price family. Every candidate batch requires all 32 frames to return and pass. In physical
+units the maximum hard-row departure must be at most $10^{-6}$.
+The objective discrepancy uses $\max(1,|F_{\rm oracle}|)$ as its
+denominator. For each of the raw and repaired multipliers $v$,
+the stationarity denominator is
+$\max(1,\|Px\|_\infty,\|q\|_\infty,\|A^\top v\|_\infty)$.
+For a soft group, the Fenchel defect is divided by the maximum of one
+and the magnitudes of the group penalty, box support and group dual
+pairing. For a hard row, the corresponding maximum uses one and the
+magnitudes of the signed multiplier times its active bound and
+times the returned row value. The objective, both stationarity
+checks, each local normalized Fenchel defect and the joint dual-budget
+check must be at most $10^{-6}$. For $b_g=0$, linear price $a_g$ and
+raw polar value $p_g$, the budget excess is
+$(p_g-a_g)_+/\max(1,p_g,a_g)$. Dual repair, measured by
+$\|y-\bar y\|_\infty/\max(1,\|y\|_\infty)$ for repaired
+multiplier $\bar y$, is bounded by $10^{-7}$.
+Signed cancellation between defects does not certify a frame.
+The common compact-epigraph oracle uses stock OSQP with
+$\epsilon_{\rm abs}=\epsilon_{\rm rel}=10^{-10}$ and at most 200{,}000
+iterations. Its independent original-space checks and repair use
+$10^{-7}$ limits. The recorded states distinguish incompatible cells,
+oracle limits, iteration-limited candidates and timeouts.
 
 Retained component comparisons cover formulation choice, numerical
 conditioning and common-trajectory cold/warm reuse. They were not

@@ -1,8 +1,8 @@
 \documentclass[11pt]{article}
 \newcommand{\doctype}{Technical report}
-\newcommand{\docversion}{v0.01.002}
-\newcommand{\docdate}{2 November 2026}
-\newcommand{\versiondoi}{10.5281/zenodo.23899079}
+\newcommand{\docversion}{v0.01.003}
+\newcommand{\docdate}{10 November 2026}
+\newcommand{\versiondoi}{10.5281/zenodo.24122924}
 \newcommand{\conceptdoi}{10.5281/zenodo.23851659}
 \newcommand{\docrepo}{github.com/fsantibanezleal/CAOS\_SoftQP}
 \newcommand{\docscope}{soft-constraint quadratic programming}
@@ -10,11 +10,11 @@
 \input{base.tex}
 \input{results.tex}
 \input{original-results.tex}
-\title{Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results}
+\title{Seven Methods for Soft-Constraint Quadratic Programming: Contracts and Two Negative Timing Studies}
 \author{Felipe Santib\'a\~nez-Leal\,\orcidlink{0000-0002-0150-3246}\\
 \small CAOS Research program, \texttt{github.com/fsantibanezleal/CAOS\_SoftQP}}
 \date{\docdate}
-\hypersetup{pdftitle={Soft-Constraint Quadratic Programming: Methods, Contracts, and Negative Timing Results},pdfauthor={Felipe Santibáñez-Leal}}
+\hypersetup{pdftitle={Seven Methods for Soft-Constraint Quadratic Programming: Contracts and Two Negative Timing Studies},pdfauthor={Felipe Santibáñez-Leal}}
 \begin{document}
 \maketitle
 \thispagestyle{plain}
@@ -32,11 +32,12 @@ original-space evaluation, local request/result exchange and verified static
 presentation. Fifteen authored or source-faithful model cases exercise scalar
 semantics, mixed hard/soft policy, sparse structure, predictive control and
 building energy. A separate registered computation contains 456 seeded instances,
-retaining 11592 accepted and 7560 incompatible measured observations. Its
+retaining 11592 accepted and 7560 incompatible measured observations across
+600 timing cells with recorded counts, medians and interquartile ranges. Its
 168-pair held-out median relative cold end-to-end reduction is
 \OriginalEstimate\%, with a 95\% seed-cluster interval from \OriginalLower\%
-to \OriginalUpper\%. A second computation retains all 210 grouped repeated-
-forecast inputs and 7770 raw observations. Its complete 144-member held-out
+to \OriginalUpper\%. A second computation retains all 210 grouped
+repeated-forecast inputs and 7770 raw observations. Its complete 144-member held-out
 primary score is \PrimaryEstimate\%, with interval limits \PrimaryLower\%
 and \PrimaryUpper\%, including \PrimaryFailed{} failed pairs. Neither
 registered ten-percent improvement criterion is established. Equivalent
@@ -58,7 +59,8 @@ does not establish operational safety, measured field benefit or algorithmic pri
 \input{11-limitations.tex}
 \input{12-reproducibility.tex}
 \input{13-conclusions.tex}
-\input{14-contract-appendix.tex}
 \bibliographystyle{plain}
 \bibliography{references}
+\input{14-contract-appendix.tex}
+\input{15-timing-appendix.tex}
 \end{document}

@@ -2762,7 +2762,7 @@
           "rows": 140,
           "variables": 60
         },
-        "elapsed_seconds": 0.003240099991671741,
+        "elapsed_seconds": 0.005531300004804507,
         "iterations": 125,
         "method": "lifted",
         "metrics": {
@@ -2959,8 +2959,8 @@
             0.0
           ]
         },
-        "setup_seconds": 0.0001598,
-        "solve_seconds": 0.000305,
+        "setup_seconds": 0.0001568,
+        "solve_seconds": 0.0005302,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -3059,7 +3059,7 @@
           "rows": 60,
           "variables": 20
         },
-        "elapsed_seconds": 0.0012997000012546778,
+        "elapsed_seconds": 0.002805900003295392,
         "iterations": 250,
         "method": "generalized",
         "metrics": {
@@ -3256,8 +3256,8 @@
             0.0
           ]
         },
-        "setup_seconds": 9.98e-05,
-        "solve_seconds": 0.0003456,
+        "setup_seconds": 0.0001597,
+        "solve_seconds": 0.000631,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -3356,7 +3356,7 @@
           "rows": 60,
           "variables": 20
         },
-        "elapsed_seconds": 0.0011839000071631745,
+        "elapsed_seconds": 0.0029298999870661646,
         "iterations": 250,
         "method": "asymmetric",
         "metrics": {
@@ -3553,8 +3553,8 @@
             0.0
           ]
         },
-        "setup_seconds": 8.37e-05,
-        "solve_seconds": 0.000359,
+        "setup_seconds": 8.32e-05,
+        "solve_seconds": 0.000464,
         "status": "solved",
         "status_code": 1,
         "x": [
@@ -3673,7 +3673,7 @@
           "rows": 60,
           "variables": 20
         },
-        "elapsed_seconds": 0.00019439999596215785,
+        "elapsed_seconds": 0.00021319999359548092,
         "iterations": 13,
         "method": "daqp",
         "metrics": {
@@ -3870,8 +3870,8 @@
             0.0
           ]
         },
-        "setup_seconds": 2.26e-05,
-        "solve_seconds": 1.24e-05,
+        "setup_seconds": 1.61e-05,
+        "solve_seconds": 1.49e-05,
         "status": "soft optimal",
         "status_code": 2,
         "x": [

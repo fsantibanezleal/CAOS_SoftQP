@@ -8,7 +8,7 @@
       },
       "failed": false,
       "path": "C01.json",
-      "sha256": "9faa06b5334fe7a062ae8e21f9afa406a39f8f129276a9afcf371fcef1f2c73a",
+      "sha256": "04bd6ea6856984000c8a1cd0e88fbe813c7cdc7f702f51342a4a96e57bf2b997",
       "title": {
         "en": "Lower-bound undershoot",
         "es": "Incumplimiento inferior"
@@ -22,7 +22,7 @@
       },
       "failed": false,
       "path": "C02.json",
-      "sha256": "d1319c87e0ddeb007528d5ee309e06284f1a4875095943448fee0c5fd763fcd6",
+      "sha256": "a0010343670500762489316a5302bb1dff462c54b044bf56786d3c5dd7c8e687",
       "title": {
         "en": "Upper-bound overshoot",
         "es": "Incumplimiento superior"
@@ -36,7 +36,7 @@
       },
       "failed": false,
       "path": "C03.json",
-      "sha256": "82c7ed303e2d47cc9fd417ca3347851a0a83cc96803f919515fe4a3dfeb83970",
+      "sha256": "a4d430a27bb52cb8c58bed6936b9b795df4b18c4b1cc5e2e840b54f2bcf273f6",
       "title": {
         "en": "Competing side costs",
         "es": "Costos por lado en conflicto"
@@ -50,7 +50,7 @@
       },
       "failed": false,
       "path": "C04.json",
-      "sha256": "08ae34a8252057249e93709954eac425abc7e86bf2724fc369acdedbef66ff7d",
+      "sha256": "2402c5046eddc45de7aceb43502a61eda3a76c02ec2eec1c26ea066423203454",
       "title": {
         "en": "Mixed hard and soft rows",
         "es": "Filas duras y blandas"
@@ -64,7 +64,7 @@
       },
       "failed": false,
       "path": "C05.json",
-      "sha256": "c449a5d2950602d83505cfa0121aa1bbdac98c61131aeede1b846ccf100c2657",
+      "sha256": "f01f5a7903558ebc1105c5214fd2833149018a6feb23e3a155f87a50106b52ab",
       "title": {
         "en": "Grouped peak violation",
         "es": "Incumplimiento máximo agrupado"
@@ -78,7 +78,7 @@
       },
       "failed": false,
       "path": "C06.json",
-      "sha256": "992f8a1f20c3c04198db8ee803736dc5c83a364c2f730ccbca841ff1e4a83c2a",
+      "sha256": "0bcd61afb748eef00e953d35106f77047971b0dfe6b10c8096fec988be607cd4",
       "title": {
         "en": "Sparse scaling instance",
         "es": "Instancia dispersa"
@@ -92,7 +92,7 @@
       },
       "failed": false,
       "path": "C07.json",
-      "sha256": "d9fdfdf1b4912245fcbb641914565587ce4842ba3305d3eb58661623fe21d664",
+      "sha256": "7d8967d34687af4ffa0d5e739d08229951debec0378d9f01493ca57131fb9e65",
       "title": {
         "en": "Semidefinite Hessian",
         "es": "Hessiana semidefinida"
@@ -106,7 +106,7 @@
       },
       "failed": false,
       "path": "C08.json",
-      "sha256": "d85bea4482d0b3d05ca389fd58b52d3cb12d39805a618dfb6eec7d35b56663e3",
+      "sha256": "38768dcbf34853085b206b11ab16d72cb25a45e855b8fd6f3b2fbf38b881a11c",
       "title": {
         "en": "Ill-conditioned Hessian",
         "es": "Hessiana mal condicionada"
@@ -120,7 +120,7 @@
       },
       "failed": false,
       "path": "C09.json",
-      "sha256": "d1442faa4e4626ec2264d56b852bfbb0a375d53105b2970915f5a95e93d699fc",
+      "sha256": "1482315a2f607fe9a6f01e71aa35a13586b1dbeebae9923da5bb139f2303972c",
       "title": {
         "en": "Feasible double-integrator MPC",
         "es": "MPC factible de doble integrador"
@@ -134,7 +134,7 @@
       },
       "failed": false,
       "path": "C10.json",
-      "sha256": "30d96a746701607cdeddd3bd54fbb7a99e814411347b42d9653e2ed24963454a",
+      "sha256": "31ca30b50b8017dae4f6e82542ff35ffab665bc05f2a0b9a01effecd1997dd91",
       "title": {
         "en": "Disturbed state constraints",
         "es": "Restricciones de estado perturbadas"
@@ -148,7 +148,7 @@
       },
       "failed": false,
       "path": "C11.json",
-      "sha256": "89515d04f414574f63c20404d801399f72042f0fe90ab08809bd567924222332",
+      "sha256": "9dbfc738d3832d93b214a5becdf8a097cf688835ac6b66c864b56ca20995e8e0",
       "title": {
         "en": "Conflicting safety boundaries",
         "es": "Fronteras de seguridad en conflicto"
@@ -162,7 +162,7 @@
       },
       "failed": false,
       "path": "C12.json",
-      "sha256": "a7130366ee0be3039799f07e394190c4dd8c0528a972c9eaf2d9b8635c7e47e7",
+      "sha256": "d9c37c0f8c6f5987ced85fc65f83d2646c6c7a604056930893508cf7a4b35465",
       "title": {
         "en": "Parameter-stream initial state",
         "es": "Estado inicial de flujo paramétrico"
@@ -176,7 +176,7 @@
       },
       "failed": false,
       "path": "C13.json",
-      "sha256": "3ebb9d5b093ecc91d8abfde09046ae95c7055de198656104c95f6a2e159c27e9",
+      "sha256": "486685f0fa11f7ce94a2d190bb334bab220e1ee83486834ce725db888f7b81bc",
       "title": {
         "en": "Published building-energy model",
         "es": "Modelo energético publicado"
@@ -190,7 +190,7 @@
       },
       "failed": false,
       "path": "C14.json",
-      "sha256": "ee5fbbe986171566c5c7f7761839ed4d68178bf8f4436400710e683da0aa45bd",
+      "sha256": "0319eb782dc33edde04fa141e902f6b52ae31c9e7fec83573ddfc7af0e230748",
       "title": {
         "en": "Side-specific energy trade-offs",
         "es": "Compromisos energéticos por lado"
@@ -204,7 +204,7 @@
       },
       "failed": false,
       "path": "C15.json",
-      "sha256": "b55500a5723383a0f45739b13939e523671ac480c9b2bb41e878c03c587d75d9",
+      "sha256": "1ae51c634b8fc7e62402bcb6167b92855232c1350899f56a7b6e744699d397d4",
       "title": {
         "en": "Mixed elastic side costs",
         "es": "Costos elásticos mixtos por lado"
@@ -213,15 +213,19 @@
   ],
   "default_case": "C01",
   "environment": {
+    "engine_revision": null,
+    "engine_source_dirty": null,
+    "native_binary_sha256": "3711fd90a3a8767437e42fa720e01c715f3060da10443e2b5c59c513e4d80fb9",
     "packages": {
       "daqp": "0.10.3",
+      "elastiqp": "0.2.0",
       "numpy": "2.5.4",
       "osqp": "1.1.3",
       "scipy": "1.18.1",
       "softqp": "0.1.0"
     },
     "platform": "Windows-11-10.0.26300-SP0",
-    "python": "3.12.10"
+    "python": "3.12.14"
   },
   "limitations": [
     "Development bake, not the complete release experiment matrix.",

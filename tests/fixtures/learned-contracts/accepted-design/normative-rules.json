@@ -1,0 +1,135 @@
+{
+  "schema": "softqp.prospective-rules/r2",
+  "status": "DESIGN_NOT_REGISTERED",
+  "unit_scale_magnitudes": {
+    "variable": 1,
+    "row": 1,
+    "peak": 1,
+    "objective": 1
+  },
+  "acceptance": {
+    "hard": 0.000001,
+    "objective_gap": 0.000001,
+    "stationarity": 0.00001,
+    "local_fenchel": 0.00001,
+    "aggregate_fenchel": 0.00001,
+    "dual_domain_repair": 1e-7,
+    "hard_denominator": "declared-row-unit-magnitude",
+    "objective_denominator": "max(S_f,abs(f_ref))",
+    "dual_for_stationarity": [
+      "raw",
+      "explicit-domain-repaired"
+    ],
+    "dual_for_fenchel": "explicit-domain-repaired",
+    "oracle_dual_allowed": false
+  },
+  "oracle": {
+    "backends": [
+      "stock_osqp",
+      "clarabel",
+      "piqp"
+    ],
+    "all_required": true,
+    "objective_pair_gap": 1e-8,
+    "objective_reference": "median-three-recomputed-original-objectives",
+    "candidate_self_certification": false,
+    "failure": "oracle-failed-for-all-candidates-no-replacement",
+    "tight_limits": {
+      "hard": 1e-8,
+      "stationarity": 1e-8,
+      "local_fenchel": 1e-8,
+      "aggregate_fenchel": 1e-8,
+      "dual_domain_repair": 1e-9
+    }
+  },
+  "l2ws": {
+    "dtype": "float64",
+    "unroll_transitions": 5,
+    "residual_transition": 6,
+    "state": [
+      "dimensionless-x",
+      "dimensionless-y",
+      "dimensionless-interval-w"
+    ],
+    "block_weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "block_mean_squared": true,
+    "clamp_derivative_at_boundary": 0,
+    "auxiliary_initialization": "Ahat*xhat0",
+    "loss_target": "T(s5)-s5",
+    "output_normalizer": "none",
+    "required_heads": 14,
+    "missing_train_head": "fail-training-readiness",
+    "training_source_units_per_batch": 32
+  },
+  "gnn": {
+    "parameter_count": 52098,
+    "only_nonzero_initial_logit_bias": "output_layer.lin3.bias",
+    "dtype": "float64",
+    "tau_tight_relative_to_input_bound": 1e-7,
+    "tau_dual": 1e-7,
+    "feature_population_ddof": 0,
+    "normalization_scope": "one-graph-before-batch",
+    "variable_nodes_masked": true,
+    "equality_nodes_masked": true,
+    "zero_mask_frame_loss": 0,
+    "zero_training_class": "fail-training-qualification",
+    "zero_validation_masks": "fail-stopping-qualification",
+    "zero_calibration_masks": "fail-calibration-qualification",
+    "class_weights": "source-weighted-N-over-two-Nc",
+    "loss": "source-weighted-mean-unmasked-weighted-softplus-BCE",
+    "source_units_per_batch": 8
+  },
+  "source_weights": {
+    "families": "equal-eligible",
+    "regimes_within_family": "equal-eligible",
+    "sources_within_regime": "equal",
+    "frames_within_source": "one-over-T",
+    "normalizer_fit": "train-only-weighted-population",
+    "batch_optimizer_steps": "one-after-all-weighted-frames-in-source-batch"
+  },
+  "initialization": {
+    "seeds": [
+      41001,
+      41002,
+      41003
+    ],
+    "scope": "per-parameter-local-generator",
+    "hash_format": "softqp-learning-r2|METHOD|SEED|HEAD|PARAMETER",
+    "hash_integer": "first-eight-bytes-little-endian-modulo-2^63",
+    "override_constructor_seed_123": true,
+    "repeatable_same_stream": true,
+    "distinct_initial_bundle_hashes_required": true
+  },
+  "estimand": {
+    "frame": "third-sorted-of-five-full-cost-repetitions",
+    "source": "one-minus-ratio-of-summed-frame-median-costs",
+    "aggregation": "mean-seeds-mean-families-mean-eligible-regimes-mean-source-units",
+    "failure": "primary-estimate-and-interval-null-qualification-false",
+    "bootstrap": {
+      "replicates": 10000,
+      "seed_entropy_prefix": [
+        20261105,
+        41100
+      ],
+      "seed_draws": 3,
+      "source_draws_per_regime": 8,
+      "crossed_shared_draws": true,
+      "families_regimes_fixed": true,
+      "quantile": "type7",
+      "lower_p": 0.0125,
+      "upper_p": 0.9875
+    },
+    "decision": "all-numerical-completeness-gates-and-lower-bound-strictly-greater-than-0.10"
+  },
+  "recovery": {
+    "symmetric_free_soft_slack": "retain-existing-redundant-slack",
+    "asymmetric_free_soft_slack": "no-finite-side-no-slack",
+    "peak_row_dual": "cU*lambdaU-cL*lambdaL",
+    "peak_group_stationarity": "a+b*t-sum(lambdaU+lambdaL)-mu=0",
+    "zero_cost_or_free_peak_groups": "no-live-t-variable"
+  }
+}

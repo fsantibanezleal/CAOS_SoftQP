@@ -1,0 +1,49 @@
+{
+  "method_eligible_frames": 26928,
+  "control_eligible_frames": 7352,
+  "method-status": {
+    "count": 35328,
+    "sha256": "52ceab5e2008b408ad642a54d88f1260056115326ba2a71bdf6cfb08ecfeea2c",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "control-status": {
+    "count": 7488,
+    "sha256": "86a029175e48bf328cf2c88f603bbe8830727deeea36be35db92141f8ad68563",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "method-repetitions": {
+    "count": 188496,
+    "sha256": "847cab13d332b0f97d5e46869ab7a349b112b896b3e63f78e5d98c632c20ea69",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "control-repetitions": {
+    "count": 51464,
+    "sha256": "451de09cff64dfc40e036a140236082422f356b1b644fd6b34ea6ba99a267adf",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "oracle-status": {
+    "count": 46368,
+    "sha256": "f58be13f4def91d08700df3b0e27d9b29cc39b866789721481dd000d39764e88",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "label-status": {
+    "count": 14504,
+    "sha256": "93a88b8f476c0c050f3081b8ef0009f929d8a1c17aba69019813080fbec7250d",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "diagnostic-status": {
+    "count": 101,
+    "sha256": "9947e22cb35b2339118a0d8a3600fc933f39a68454be31a06a4ec93691e3fde3",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "head-checkpoints": {
+    "count": 45,
+    "sha256": "b6b4c86f183fcde979677b24bcb808e64f0b357a5310776cd8a0e9e157409025",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  },
+  "source-status": {
+    "count": 13056,
+    "sha256": "4467daa89dd0e17d6921c8a70b6f57c59d58555c562fd9d9d5ce8e0b83227a27",
+    "serialization": "sorted compact UTF8 JSON arrays, LF"
+  }
+}

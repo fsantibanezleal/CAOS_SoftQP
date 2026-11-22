@@ -7,6 +7,7 @@
 import react from '@vitejs/plugin-react';
 import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 import { THEME_BOOT_SCRIPT } from '@fasl-work/caos-app-shell/keys';
 
@@ -26,6 +27,9 @@ const SHA = commit();
 
 export default defineConfig({
   base: process.env.VITE_BASE || '/',
+  // Canonical case modules and teaching evidence are siblings of frontend/.
+  // Keep Vite's strict/deny defaults, with this product as the explicit workspace.
+  server: { fs: { allow: [fileURLToPath(root)] } },
   plugins: [
     react(),
     {

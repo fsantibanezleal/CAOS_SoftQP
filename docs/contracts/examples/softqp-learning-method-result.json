@@ -1,0 +1,754 @@
+{
+  "artifact_id": "result",
+  "content_sha256": "7e983e278e83c9e5f3f6288822980ae392c022cbb5ad558c1a72e4cf11931fc2",
+  "kind": "learning-method-result",
+  "payload": {
+    "calibration": null,
+    "certificate": null,
+    "checkpoint": null,
+    "diagnostic_native_flag": null,
+    "dimensions": {
+      "canonical_m": 3,
+      "canonical_n": 2,
+      "original_m": 1,
+      "original_n": 1
+    },
+    "injected_state": null,
+    "key": [
+      "lifted",
+      0,
+      "N01",
+      3,
+      0,
+      0
+    ],
+    "lane": "offline",
+    "memory_bytes": 0,
+    "method": "lifted",
+    "metric_policy_sha256": "560c172a7a4e310ac0d9ce09b51f56eb8a7b89f9a1294467fe9600417af78a14",
+    "oracles": [
+      {
+        "accepted": true,
+        "backend": "stock_osqp",
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "reason": null,
+        "result_sha256": "4d6162d36d88521929170008f249af0e0e4e6cae36c789faf89c740c72ee5cc2",
+        "settings_sha256": "76d4ebf85a1c7b6c6b7ea1ed608e17a04ee581905ff0dbe1a2fce3ab1e6feff0",
+        "status": "accepted"
+      },
+      {
+        "accepted": true,
+        "backend": "clarabel",
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": "Solved",
+        "reason": null,
+        "result_sha256": "6d9ed09ad602fb22efeff39301aafdd321581133d0caf1075515219e2934fba7",
+        "settings_sha256": "12288b0b166060bb461b544ea6a84764414c59fc3e7d4fa84278b9b05c2fc9c3",
+        "status": "accepted"
+      },
+      {
+        "accepted": true,
+        "backend": "piqp",
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": "PIQP_SOLVED",
+        "reason": null,
+        "result_sha256": "c80f6ea545502eb6acd6196423eb23ec92663e2c84a40faedaec52aa8d52ea96",
+        "settings_sha256": "95db430ae157f244fdf6bd25054a6df6097078a7337fccf7dfc029b4aa3237e0",
+        "status": "accepted"
+      }
+    ],
+    "problem": {
+      "artifact_id": "problem-test",
+      "kind": "learning-problem",
+      "path": "problem-test.json",
+      "sha256": "4d0aaf1eb564508c6087bad495b32cbb92fb4a5882070337c5fe150ee4aad890"
+    },
+    "reason": null,
+    "semantic_transform": "S",
+    "settings_sha256": "f059e22323b8697a87b3a60015fc131e30514963688fe60ebd1a170a64708e9b",
+    "status": "accepted",
+    "trials": [
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "warmup",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 0,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      },
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "warmup",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 1,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      },
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "measured",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 0,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      },
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "measured",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 1,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      },
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "measured",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 2,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      },
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "measured",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 3,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      },
+      {
+        "attempt_flags": [],
+        "attempt_native_flags": [],
+        "candidate": {
+          "epigraph": null,
+          "lifted_x": [
+            1,
+            0
+          ],
+          "lifted_y": [
+            0,
+            0,
+            -1
+          ],
+          "x": [
+            1
+          ],
+          "y": [
+            0
+          ]
+        },
+        "clock": "contract-fixture",
+        "fallback_count": 0,
+        "full_cost": 5,
+        "metrics": {
+          "D": 0.0,
+          "F": 0.0,
+          "F_all": 0.0,
+          "G": 0.0,
+          "H": 0,
+          "K": 0.0,
+          "base_quadratic": 0.5,
+          "f_ref": -0.5,
+          "linear": -1,
+          "objective": -0.5,
+          "peak_values": [],
+          "penalty": 0.0,
+          "raw_gradient": [
+            0
+          ],
+          "repaired_gradient": [
+            0
+          ],
+          "violation_lower": [
+            0
+          ],
+          "violation_upper": [
+            0
+          ],
+          "ybar": [
+            0
+          ],
+          "z": [
+            1
+          ]
+        },
+        "native_flag": 1,
+        "phase": "measured",
+        "reason": null,
+        "removed_rows": [],
+        "repetition": 4,
+        "status": "accepted",
+        "timing": {
+          "features": 0,
+          "inference": 0,
+          "preprocess": 1,
+          "recovery": 1,
+          "repair": 0,
+          "setup": 1,
+          "solve": 1,
+          "validation": 1
+        }
+      }
+    ]
+  },
+  "protocol_id": "contract-fixture-not-registered",
+  "protocol_ref": {
+    "artifact_id": "protocol",
+    "kind": "learning-protocol",
+    "path": "protocol.json",
+    "sha256": "2f93a84821e3467b56ec228721e15684b4e38376268c417b60ee0a7e169b2fb5"
+  },
+  "protocol_sha256": "d1bace653fbfb229ab967dc663a7c653d8ec8e3944d7b1eb2a086fd863e6ae75",
+  "provenance": {
+    "parent_ids": [
+      "problem-test",
+      "protocol"
+    ],
+    "producer_source_sha256": "cb20ff7c9f12e5243d92a02418e9c34bdd8ffbc8082cd3d0127c964f1222bae0",
+    "registration_sha256": "494602e7712dfa4e2d15fc01548e1661e3d72e05aca89c63114a4324a060b804"
+  },
+  "purpose": "contract-fixture",
+  "reason": "No scientific producer has run; explicitly synthetic contract provider",
+  "schema_id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-method-result/1.0.0",
+  "source_lock_sha256": "49888230bbe7fcc91bebb49b4d6d29c7d90bb0ece25cfe6949416057d6fa792d",
+  "state": "provider",
+  "version": "1.0.0"
+}

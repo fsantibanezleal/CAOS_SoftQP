@@ -6,7 +6,7 @@ The shell supplies consistent bilingual pages, Focus workbench, accessible contr
 
 ## Install: exact declared version
 
-`@fasl-work/caos-app-shell@0.19.1`. Numerical source validation uses Python 3.12. See the repository requirements rather than substituting an ambient version. Native source installation additionally requires a C/C++ compiler and CMake; clean published-wheel installation has its own release check.
+`@fasl-work/caos-app-shell@0.26.0`, pinned exactly in `frontend/package.json` and `frontend/package-lock.json`. It provides the current shared chart, workbench, callout and story behavior. Shell 0.26.0 also exposes explicit UTC/local calendar-axis handling; SoftQP's charts use elapsed days. Numerical source validation uses Python 3.12. See the repository requirements rather than substituting an ambient version. Native source installation additionally requires a C/C++ compiler and CMake; clean published-wheel installation has its own release check.
 
 ## Usage
 

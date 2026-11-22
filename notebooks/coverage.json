@@ -1,0 +1,116 @@
+{
+  "methods": {
+    "M-1": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "M-2": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "M-3": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "M-4": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "M-6": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "BS-1": [
+      "01-soft-constraint-decisions/04-testing-the-computational-claim.ipynb"
+    ],
+    "BS-2": [
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ]
+  },
+  "contracts": {
+    "softqp-case-spec": [
+      "01-soft-constraint-decisions/01-pricing-a-violation.ipynb"
+    ],
+    "softqp-case-result": [
+      "01-soft-constraint-decisions/01-pricing-a-violation.ipynb"
+    ],
+    "softqp-run-request": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "softqp-local-export": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "softqp-stream": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "api": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "readiness": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "softqp-index": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "case-index": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "case-manifest": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "softqp-datasets": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "softqp-experiment-index": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "softqp-trial": [
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb"
+    ],
+    "softqp-campaign": [
+      "01-soft-constraint-decisions/04-testing-the-computational-claim.ipynb"
+    ],
+    "softqp-coupled-batch": [
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ],
+    "softqp-coupled-observation": [
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ],
+    "softqp-coupled-campaign": [
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ],
+    "softqp-coupled-lesson": [
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ]
+  },
+  "stages": {
+    "validate": [
+      "01-soft-constraint-decisions/01-pricing-a-violation.ipynb",
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "assemble": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb"
+    ],
+    "solve": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb",
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb",
+      "01-soft-constraint-decisions/04-testing-the-computational-claim.ipynb",
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ],
+    "evaluate": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb",
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb",
+      "01-soft-constraint-decisions/04-testing-the-computational-claim.ipynb",
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ],
+    "export": [
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb",
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb",
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ]
+  },
+  "packages": {
+    "softqp": [
+      "01-soft-constraint-decisions/01-pricing-a-violation.ipynb",
+      "01-soft-constraint-decisions/02-preserving-control-integrity.ipynb",
+      "01-soft-constraint-decisions/03-matching-published-methods.ipynb",
+      "01-soft-constraint-decisions/04-testing-the-computational-claim.ipynb",
+      "01-soft-constraint-decisions/05-directional-group-peaks.ipynb"
+    ]
+  }
+}

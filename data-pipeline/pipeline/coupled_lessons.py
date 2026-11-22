@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[2]
 AUTHORITY = ROOT / "docs/teaching/coupled"
 SCHEMA = ROOT / "docs/contracts/schemas/softqp-coupled-lesson.schema.json"
 WORKER = Path(__file__).with_name("coupled_lesson_worker.py")
+# Teaching wall-clock budget in seconds, including cold isolated imports. This
+# changes no numerical-solver or registered-campaign deadline.
+LESSON_WALL_TIMEOUT_SECONDS = 180
 IDENTITIES = {
     "public-sdk-files.json": "e9851d644d0f25837a481cdd22c74345199f416b9b6f67d744cceeb2d04c0fd5",
     "requirements.txt": "2eff7832a1046fca5040163b98ac88e05c7318bf1f004c16c377206221c42ccc",
@@ -181,7 +184,7 @@ def run_comparison(*, linear=0.6, quadratic=0, upper_scale=1, row_scale=1):
     teardown_confirmed = True
     try:
         command = [str(executable), "-I", "-S", "-B", "-X", f"pycache_prefix={scratch}/cache", str(WORKER)]
-        raw = execute(command, canonical(request), scratch, env)
+        raw = execute(command, canonical(request), scratch, env, timeout=LESSON_WALL_TIMEOUT_SECONDS)
         if any(sha(name) != digest for name, digest in snapshot.items()):
             raise ValueError("Lesson source or installed SDK changed during execution")
         # Re-read profile metadata too; version drift can occur outside the SDK directory.

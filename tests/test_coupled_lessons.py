@@ -56,7 +56,8 @@ def test_adversarial_external_lesson_boundary(monkeypatch, tmp_path):
 
 
 def test_adversarial_uncertain_cleanup_preserves_recovery(external, monkeypatch, tmp_path):
-    def uncertain(command, request, scratch, env):
+    def uncertain(command, request, scratch, env, **limits):
+        assert limits["timeout"] == 180
         (Path(scratch) / "stderr.txt").write_text("owned-job cleanup could not be confirmed")
         raise WorkerCleanupError(f"Owned worker cleanup uncertain; recovery directory: {scratch}")
 
@@ -65,6 +66,23 @@ def test_adversarial_uncertain_cleanup_preserves_recovery(external, monkeypatch,
         lessons.run_comparison()
     remaining = list(tmp_path.glob("softqp-lesson-*/stderr.txt"))
     assert len(remaining) == 1 and "could not be confirmed" in remaining[0].read_text()
+
+
+def test_teaching_worker_has_a_bounded_cold_import_allowance(monkeypatch, tmp_path):
+    """A cold isolated scientific import can exceed the generic subprocess limit."""
+    monkeypatch.setenv("SOFTQP_COUPLED_PYTHON", str(tmp_path / "python.exe"))
+    monkeypatch.setenv("CAOS_TEMP_ROOT", str(tmp_path))
+    monkeypatch.setattr(lessons, "runtime_identity", lambda _: (tmp_path / "python.exe", tmp_path / "sdk", {}))
+
+    def deadline(command, request, scratch, env, **limits):
+        assert limits.get("timeout") == 180
+        assert "-I" in command and "-S" in command and "-B" in command
+        raise TimeoutError("bounded teaching deadline reached")
+
+    monkeypatch.setattr(lessons, "execute", deadline)
+    with pytest.raises(TimeoutError, match="bounded teaching"):
+        lessons.run_comparison()
+    assert not list(tmp_path.glob("softqp-lesson-*"))
 
 
 def test_adversarial_real_methods_share_the_original_objective(external):

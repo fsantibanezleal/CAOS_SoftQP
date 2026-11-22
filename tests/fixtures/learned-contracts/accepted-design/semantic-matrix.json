@@ -1,0 +1,7614 @@
+{
+  "schema": "softqp.prospective-semantic-matrix/r2",
+  "status": "DESIGN_NOT_REGISTERED",
+  "methods": [
+    "lifted",
+    "generalized",
+    "daqp",
+    "flex",
+    "elastiqp",
+    "asymmetric",
+    "directional",
+    "clarabel",
+    "proxqp",
+    "piqp",
+    "learned_osqp",
+    "learned_daqp"
+  ],
+  "learned_methods": [
+    "learned_osqp",
+    "learned_daqp"
+  ],
+  "network_seeds": [
+    41001,
+    41002,
+    41003
+  ],
+  "deterministic_seed": 0,
+  "split_units": {
+    "train": 32,
+    "validation": 8,
+    "calibration": 8,
+    "test": 8
+  },
+  "measured_repetitions": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "warmup_repetitions": [
+    0,
+    1
+  ],
+  "heads": [
+    {
+      "id": "H-100-180",
+      "n": 100,
+      "m": 180,
+      "members": [
+        "N10:r0",
+        "N10:r1",
+        "N10:r2",
+        "N10:r3",
+        "N10:r4",
+        "N10:r5",
+        "N12:r0",
+        "N12:r1",
+        "N12:r2",
+        "N12:r3",
+        "N12:r4",
+        "N12:r5"
+      ],
+      "feature_length": 23870,
+      "output_length": 280,
+      "parameter_count": 3108120,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-12-44",
+      "n": 12,
+      "m": 44,
+      "members": [
+        "N05:r0",
+        "N05:r1",
+        "N05:r2",
+        "N05:r3",
+        "N05:r4",
+        "N05:r5"
+      ],
+      "feature_length": 794,
+      "output_length": 56,
+      "parameter_count": 125496,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-128-224",
+      "n": 128,
+      "m": 224,
+      "members": [
+        "N08:r0",
+        "N08:r1",
+        "N08:r2",
+        "N08:r3",
+        "N08:r4",
+        "N08:r5"
+      ],
+      "feature_length": 37952,
+      "output_length": 352,
+      "parameter_count": 4919904,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-130-194",
+      "n": 130,
+      "m": 194,
+      "members": [
+        "N14:r0",
+        "N14:r1",
+        "N14:r3",
+        "N14:r4",
+        "N14:r5"
+      ],
+      "feature_length": 34641,
+      "output_length": 324,
+      "parameter_count": 4492484,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-2-3",
+      "n": 2,
+      "m": 3,
+      "members": [
+        "N01:r0",
+        "N01:r1",
+        "N01:r2",
+        "N01:r3",
+        "N01:r4",
+        "N01:r5"
+      ],
+      "feature_length": 23,
+      "output_length": 5,
+      "parameter_count": 20229,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-3-4",
+      "n": 3,
+      "m": 4,
+      "members": [
+        "N02:r0",
+        "N02:r1",
+        "N02:r2",
+        "N02:r3",
+        "N02:r4",
+        "N02:r5"
+      ],
+      "feature_length": 37,
+      "output_length": 7,
+      "parameter_count": 22279,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-32-56",
+      "n": 32,
+      "m": 56,
+      "members": [
+        "N11:r0",
+        "N11:r1",
+        "N11:r2",
+        "N11:r3",
+        "N11:r4",
+        "N11:r5"
+      ],
+      "feature_length": 2576,
+      "output_length": 88,
+      "parameter_count": 357720,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-40-88",
+      "n": 40,
+      "m": 88,
+      "members": [
+        "N07:r0",
+        "N07:r1",
+        "N07:r2",
+        "N07:r3",
+        "N07:r4",
+        "N07:r5",
+        "N15:r0",
+        "N15:r1",
+        "N15:r2",
+        "N15:r3",
+        "N15:r4",
+        "N15:r5"
+      ],
+      "feature_length": 4732,
+      "output_length": 128,
+      "parameter_count": 638848,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-6-14",
+      "n": 6,
+      "m": 14,
+      "members": [
+        "N04:r0",
+        "N04:r1",
+        "N04:r2",
+        "N04:r3",
+        "N04:r4",
+        "N04:r5"
+      ],
+      "feature_length": 167,
+      "output_length": 20,
+      "parameter_count": 40596,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-6-8",
+      "n": 6,
+      "m": 8,
+      "members": [
+        "N03:r0",
+        "N03:r1",
+        "N03:r2",
+        "N03:r3",
+        "N03:r4",
+        "N03:r5"
+      ],
+      "feature_length": 107,
+      "output_length": 14,
+      "parameter_count": 32142,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-60-140",
+      "n": 60,
+      "m": 140,
+      "members": [
+        "N09:r0",
+        "N09:r1",
+        "N09:r2",
+        "N09:r3",
+        "N09:r4",
+        "N09:r5"
+      ],
+      "feature_length": 10850,
+      "output_length": 200,
+      "parameter_count": 1431240,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-68-132",
+      "n": 68,
+      "m": 132,
+      "members": [
+        "N13:r0",
+        "N13:r1",
+        "N13:r2",
+        "N13:r3",
+        "N13:r4",
+        "N13:r5"
+      ],
+      "feature_length": 11918,
+      "output_length": 200,
+      "parameter_count": 1567944,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-80-176",
+      "n": 80,
+      "m": 176,
+      "members": [
+        "N06:r0",
+        "N06:r1",
+        "N06:r2",
+        "N06:r3",
+        "N06:r4",
+        "N06:r5"
+      ],
+      "feature_length": 18104,
+      "output_length": 256,
+      "parameter_count": 2366976,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    },
+    {
+      "id": "H-98-162",
+      "n": 98,
+      "m": 162,
+      "members": [
+        "N14:r2"
+      ],
+      "feature_length": 21473,
+      "output_length": 260,
+      "parameter_count": 2798724,
+      "dtype": "float64",
+      "network_seeds": [
+        41001,
+        41002,
+        41003
+      ],
+      "required": true
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "N01",
+      "regime": 0,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 2,
+      "lifted_m": 3,
+      "graph_constraints": 3,
+      "graph_equalities": 0,
+      "head_id": "H-2-3",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N01",
+      "regime": 1,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 2,
+      "lifted_m": 3,
+      "graph_constraints": 3,
+      "graph_equalities": 0,
+      "head_id": "H-2-3",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N01",
+      "regime": 2,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 2,
+      "lifted_m": 3,
+      "graph_constraints": 3,
+      "graph_equalities": 0,
+      "head_id": "H-2-3",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N01",
+      "regime": 3,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 2,
+      "lifted_m": 3,
+      "graph_constraints": 3,
+      "graph_equalities": 0,
+      "head_id": "H-2-3",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N01",
+      "regime": 4,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 2,
+      "lifted_m": 3,
+      "graph_constraints": 3,
+      "graph_equalities": 0,
+      "head_id": "H-2-3",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N01",
+      "regime": 5,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 2,
+      "lifted_m": 3,
+      "graph_constraints": 3,
+      "graph_equalities": 0,
+      "head_id": "H-2-3",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N02",
+      "regime": 0,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 3,
+      "lifted_m": 4,
+      "graph_constraints": 4,
+      "graph_equalities": 0,
+      "head_id": "H-3-4",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N02",
+      "regime": 1,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 3,
+      "lifted_m": 4,
+      "graph_constraints": 4,
+      "graph_equalities": 0,
+      "head_id": "H-3-4",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N02",
+      "regime": 2,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 3,
+      "lifted_m": 4,
+      "graph_constraints": 4,
+      "graph_equalities": 0,
+      "head_id": "H-3-4",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N02",
+      "regime": 3,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 3,
+      "lifted_m": 4,
+      "graph_constraints": 4,
+      "graph_equalities": 0,
+      "head_id": "H-3-4",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N02",
+      "regime": 4,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 3,
+      "lifted_m": 4,
+      "graph_constraints": 4,
+      "graph_equalities": 0,
+      "head_id": "H-3-4",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N02",
+      "regime": 5,
+      "original_n": 1,
+      "original_m": 1,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 1,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 3,
+      "lifted_m": 4,
+      "graph_constraints": 4,
+      "graph_equalities": 0,
+      "head_id": "H-3-4",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N03",
+      "regime": 0,
+      "original_n": 2,
+      "original_m": 4,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 8,
+      "graph_constraints": 8,
+      "graph_equalities": 0,
+      "head_id": "H-6-8",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N03",
+      "regime": 1,
+      "original_n": 2,
+      "original_m": 4,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 8,
+      "graph_constraints": 8,
+      "graph_equalities": 0,
+      "head_id": "H-6-8",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N03",
+      "regime": 2,
+      "original_n": 2,
+      "original_m": 4,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 8,
+      "graph_constraints": 8,
+      "graph_equalities": 0,
+      "head_id": "H-6-8",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N03",
+      "regime": 3,
+      "original_n": 2,
+      "original_m": 4,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 8,
+      "graph_constraints": 8,
+      "graph_equalities": 0,
+      "head_id": "H-6-8",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N03",
+      "regime": 4,
+      "original_n": 2,
+      "original_m": 4,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 8,
+      "graph_constraints": 8,
+      "graph_equalities": 0,
+      "head_id": "H-6-8",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N03",
+      "regime": 5,
+      "original_n": 2,
+      "original_m": 4,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 8,
+      "graph_constraints": 8,
+      "graph_equalities": 0,
+      "head_id": "H-6-8",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N04",
+      "regime": 0,
+      "original_n": 2,
+      "original_m": 6,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 14,
+      "graph_constraints": 16,
+      "graph_equalities": 0,
+      "head_id": "H-6-14",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N04",
+      "regime": 1,
+      "original_n": 2,
+      "original_m": 6,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 14,
+      "graph_constraints": 16,
+      "graph_equalities": 0,
+      "head_id": "H-6-14",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N04",
+      "regime": 2,
+      "original_n": 2,
+      "original_m": 6,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 14,
+      "graph_constraints": 16,
+      "graph_equalities": 0,
+      "head_id": "H-6-14",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N04",
+      "regime": 3,
+      "original_n": 2,
+      "original_m": 6,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 14,
+      "graph_constraints": 16,
+      "graph_equalities": 0,
+      "head_id": "H-6-14",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N04",
+      "regime": 4,
+      "original_n": 2,
+      "original_m": 6,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 14,
+      "graph_constraints": 16,
+      "graph_equalities": 0,
+      "head_id": "H-6-14",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N04",
+      "regime": 5,
+      "original_n": 2,
+      "original_m": 6,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 6,
+      "lifted_m": 14,
+      "graph_constraints": 16,
+      "graph_equalities": 0,
+      "head_id": "H-6-14",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N05",
+      "regime": 0,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 12,
+      "lifted_m": 44,
+      "graph_constraints": 52,
+      "graph_equalities": 0,
+      "head_id": "H-12-44",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N05",
+      "regime": 1,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 12,
+      "lifted_m": 44,
+      "graph_constraints": 52,
+      "graph_equalities": 0,
+      "head_id": "H-12-44",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N05",
+      "regime": 2,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 12,
+      "lifted_m": 44,
+      "graph_constraints": 52,
+      "graph_equalities": 0,
+      "head_id": "H-12-44",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N05",
+      "regime": 3,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 12,
+      "lifted_m": 44,
+      "graph_constraints": 52,
+      "graph_equalities": 0,
+      "head_id": "H-12-44",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N05",
+      "regime": 4,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 12,
+      "lifted_m": 44,
+      "graph_constraints": 52,
+      "graph_equalities": 0,
+      "head_id": "H-12-44",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N05",
+      "regime": 5,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 12,
+      "lifted_m": 44,
+      "graph_constraints": 52,
+      "graph_equalities": 0,
+      "head_id": "H-12-44",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N06",
+      "regime": 0,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 80,
+      "lifted_m": 176,
+      "graph_constraints": 208,
+      "graph_equalities": 0,
+      "head_id": "H-80-176",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N06",
+      "regime": 1,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 80,
+      "lifted_m": 176,
+      "graph_constraints": 208,
+      "graph_equalities": 0,
+      "head_id": "H-80-176",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N06",
+      "regime": 2,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 80,
+      "lifted_m": 176,
+      "graph_constraints": 208,
+      "graph_equalities": 0,
+      "head_id": "H-80-176",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N06",
+      "regime": 3,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 80,
+      "lifted_m": 176,
+      "graph_constraints": 208,
+      "graph_equalities": 0,
+      "head_id": "H-80-176",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N06",
+      "regime": 4,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 80,
+      "lifted_m": 176,
+      "graph_constraints": 208,
+      "graph_equalities": 0,
+      "head_id": "H-80-176",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N06",
+      "regime": 5,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 80,
+      "lifted_m": 176,
+      "graph_constraints": 208,
+      "graph_equalities": 0,
+      "head_id": "H-80-176",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N07",
+      "regime": 0,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 0,
+      "base_pd": false,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "base-hessian-not-PD"
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-base-rank"
+        }
+      }
+    },
+    {
+      "case_id": "N07",
+      "regime": 1,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 2,
+      "base_pd": false,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "base-hessian-not-PD"
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-base-rank"
+        }
+      }
+    },
+    {
+      "case_id": "N07",
+      "regime": 2,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 4,
+      "base_pd": false,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "base-hessian-not-PD"
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-base-rank"
+        }
+      }
+    },
+    {
+      "case_id": "N07",
+      "regime": 3,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 8,
+      "base_pd": false,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "base-hessian-not-PD"
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-base-rank"
+        }
+      }
+    },
+    {
+      "case_id": "N07",
+      "regime": 4,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 12,
+      "base_pd": false,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "base-hessian-not-PD"
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-base-rank"
+        }
+      }
+    },
+    {
+      "case_id": "N07",
+      "regime": 5,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N08",
+      "regime": 0,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 128,
+      "lifted_m": 224,
+      "graph_constraints": 256,
+      "graph_equalities": 0,
+      "head_id": "H-128-224",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N08",
+      "regime": 1,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 128,
+      "lifted_m": 224,
+      "graph_constraints": 256,
+      "graph_equalities": 0,
+      "head_id": "H-128-224",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N08",
+      "regime": 2,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 128,
+      "lifted_m": 224,
+      "graph_constraints": 256,
+      "graph_equalities": 0,
+      "head_id": "H-128-224",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N08",
+      "regime": 3,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 128,
+      "lifted_m": 224,
+      "graph_constraints": 256,
+      "graph_equalities": 0,
+      "head_id": "H-128-224",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N08",
+      "regime": 4,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 128,
+      "lifted_m": 224,
+      "graph_constraints": 256,
+      "graph_equalities": 0,
+      "head_id": "H-128-224",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N08",
+      "regime": 5,
+      "original_n": 32,
+      "original_m": 80,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 32,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 128,
+      "lifted_m": 224,
+      "graph_constraints": 256,
+      "graph_equalities": 0,
+      "head_id": "H-128-224",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N09",
+      "regime": 0,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 60,
+      "lifted_m": 140,
+      "graph_constraints": 160,
+      "graph_equalities": 0,
+      "head_id": "H-60-140",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N09",
+      "regime": 1,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 60,
+      "lifted_m": 140,
+      "graph_constraints": 160,
+      "graph_equalities": 0,
+      "head_id": "H-60-140",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N09",
+      "regime": 2,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 60,
+      "lifted_m": 140,
+      "graph_constraints": 160,
+      "graph_equalities": 0,
+      "head_id": "H-60-140",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N09",
+      "regime": 3,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 60,
+      "lifted_m": 140,
+      "graph_constraints": 160,
+      "graph_equalities": 0,
+      "head_id": "H-60-140",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N09",
+      "regime": 4,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 60,
+      "lifted_m": 140,
+      "graph_constraints": 160,
+      "graph_equalities": 0,
+      "head_id": "H-60-140",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N09",
+      "regime": 5,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 60,
+      "lifted_m": 140,
+      "graph_constraints": 160,
+      "graph_equalities": 0,
+      "head_id": "H-60-140",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N10",
+      "regime": 0,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N10",
+      "regime": 1,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N10",
+      "regime": 2,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N10",
+      "regime": 3,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N10",
+      "regime": 4,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N10",
+      "regime": 5,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N11",
+      "regime": 0,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 32,
+      "lifted_m": 56,
+      "graph_constraints": 56,
+      "graph_equalities": 0,
+      "head_id": "H-32-56",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N11",
+      "regime": 1,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 32,
+      "lifted_m": 56,
+      "graph_constraints": 56,
+      "graph_equalities": 0,
+      "head_id": "H-32-56",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N11",
+      "regime": 2,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 32,
+      "lifted_m": 56,
+      "graph_constraints": 56,
+      "graph_equalities": 0,
+      "head_id": "H-32-56",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N11",
+      "regime": 3,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 32,
+      "lifted_m": 56,
+      "graph_constraints": 56,
+      "graph_equalities": 0,
+      "head_id": "H-32-56",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N11",
+      "regime": 4,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 32,
+      "lifted_m": 56,
+      "graph_constraints": 56,
+      "graph_equalities": 0,
+      "head_id": "H-32-56",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N11",
+      "regime": 5,
+      "original_n": 8,
+      "original_m": 24,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": true,
+      "exact_base_rank": 8,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 32,
+      "lifted_m": 56,
+      "graph_constraints": 56,
+      "graph_equalities": 0,
+      "head_id": "H-32-56",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "finite-soft-side-has-zero-quadratic-cost"
+        },
+        "flex": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "elastiqp": {
+          "eligible": true,
+          "transform": "original-pure-L1",
+          "reason": null
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "canonical-lift-hessian-not-PD-zero-slack-curvature"
+        }
+      }
+    },
+    {
+      "case_id": "N12",
+      "regime": 0,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 32,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N12",
+      "regime": 1,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 32,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N12",
+      "regime": 2,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 32,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N12",
+      "regime": 3,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 32,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N12",
+      "regime": 4,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 32,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N12",
+      "regime": 5,
+      "original_n": 20,
+      "original_m": 60,
+      "frames": 32,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 20,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 100,
+      "lifted_m": 180,
+      "graph_constraints": 200,
+      "graph_equalities": 0,
+      "head_id": "H-100-180",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N13",
+      "regime": 0,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 68,
+      "lifted_m": 132,
+      "graph_constraints": 164,
+      "graph_equalities": 34,
+      "head_id": "H-68-132",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N13",
+      "regime": 1,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 68,
+      "lifted_m": 132,
+      "graph_constraints": 164,
+      "graph_equalities": 34,
+      "head_id": "H-68-132",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N13",
+      "regime": 2,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 68,
+      "lifted_m": 132,
+      "graph_constraints": 164,
+      "graph_equalities": 34,
+      "head_id": "H-68-132",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N13",
+      "regime": 3,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 68,
+      "lifted_m": 132,
+      "graph_constraints": 164,
+      "graph_equalities": 34,
+      "head_id": "H-68-132",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N13",
+      "regime": 4,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 68,
+      "lifted_m": 132,
+      "graph_constraints": 164,
+      "graph_equalities": 34,
+      "head_id": "H-68-132",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N13",
+      "regime": 5,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "disjoint-peak",
+      "symmetric_sides": null,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "G",
+      "lifted_n": 68,
+      "lifted_m": 132,
+      "graph_constraints": 164,
+      "graph_equalities": 34,
+      "head_id": "H-68-132",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "quadratic-peak-not-supported-by-published-NORMINF"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "G-existing-epigraph-daqp",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": false,
+          "transform": null,
+          "reason": "native-separable-method-does-not-represent-group-peak"
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "original-peak",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "G",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N14",
+      "regime": 0,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 130,
+      "lifted_m": 194,
+      "graph_constraints": 226,
+      "graph_equalities": 34,
+      "head_id": "H-130-194",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N14",
+      "regime": 1,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 130,
+      "lifted_m": 194,
+      "graph_constraints": 226,
+      "graph_equalities": 34,
+      "head_id": "H-130-194",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N14",
+      "regime": 2,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 98,
+      "lifted_m": 162,
+      "graph_constraints": 194,
+      "graph_equalities": 34,
+      "head_id": "H-98-162",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N14",
+      "regime": 3,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 130,
+      "lifted_m": 194,
+      "graph_constraints": 226,
+      "graph_equalities": 34,
+      "head_id": "H-130-194",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N14",
+      "regime": 4,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 130,
+      "lifted_m": 194,
+      "graph_constraints": 226,
+      "graph_equalities": 34,
+      "head_id": "H-130-194",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N14",
+      "regime": 5,
+      "original_n": 66,
+      "original_m": 98,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": false,
+      "pure_l1": false,
+      "exact_base_rank": 66,
+      "base_pd": true,
+      "canonical_lift": "A",
+      "lifted_n": 130,
+      "lifted_m": 194,
+      "graph_constraints": 226,
+      "graph_equalities": 34,
+      "head_id": "H-130-194",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": false,
+          "transform": null,
+          "reason": "asymmetric-side-costs"
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": false,
+          "transform": null,
+          "reason": "side-linear-and-quadratic-ratios-do-not-admit-singleton-peak"
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "A",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N15",
+      "regime": 0,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N15",
+      "regime": 1,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N15",
+      "regime": 2,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N15",
+      "regime": 3,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N15",
+      "regime": 4,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    },
+    {
+      "case_id": "N15",
+      "regime": 5,
+      "original_n": 16,
+      "original_m": 40,
+      "frames": 1,
+      "formulation": "separable",
+      "symmetric_sides": true,
+      "pure_l1": false,
+      "exact_base_rank": 16,
+      "base_pd": true,
+      "canonical_lift": "S",
+      "lifted_n": 40,
+      "lifted_m": 88,
+      "graph_constraints": 104,
+      "graph_equalities": 0,
+      "head_id": "H-40-88",
+      "methods": {
+        "lifted": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "generalized": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "daqp": {
+          "eligible": true,
+          "transform": "original-side-weights",
+          "reason": null
+        },
+        "flex": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "elastiqp": {
+          "eligible": false,
+          "transform": null,
+          "reason": "requires-pure-L1-all-finite-rows-soft"
+        },
+        "asymmetric": {
+          "eligible": true,
+          "transform": "original-separable",
+          "reason": null
+        },
+        "directional": {
+          "eligible": true,
+          "transform": "D-singleton-groups",
+          "reason": null
+        },
+        "clarabel": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "proxqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "piqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_osqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        },
+        "learned_daqp": {
+          "eligible": true,
+          "transform": "S",
+          "reason": null
+        }
+      }
+    }
+  ],
+  "control_definitions": [
+    {
+      "id": "cold_osqp",
+      "families": "all",
+      "seed": 0,
+      "eligible_from": "learned_osqp",
+      "purpose": "matched-fixed-setting-stock-OSQP-cold-control"
+    },
+    {
+      "id": "cold_daqp",
+      "families": "all",
+      "seed": 0,
+      "eligible_from": "learned_daqp",
+      "purpose": "matched-canonical-lift-DAQP-cold-control"
+    },
+    {
+      "id": "previous_osqp",
+      "families": [
+        "N12"
+      ],
+      "seed": 0,
+      "eligible_from": "learned_osqp",
+      "purpose": "identity-coordinate-previous-vector-control"
+    },
+    {
+      "id": "previous_daqp",
+      "families": [
+        "N12"
+      ],
+      "seed": 0,
+      "eligible_from": "learned_daqp",
+      "purpose": "identity-row-previous-working-set-control"
+    }
+  ],
+  "rep_policy": "One status per required method/seed/frame. Compatible cells require two warmup and five measured records. Incompatible cells have status/reason only and MUST have zero repetition records.",
+  "shape_policy": "Every listed head and graph shape is required before training; no easy-shape selection. Unknown external shapes refuse explicitly.",
+  "snapshot": "Old reviewed design and F4 reversal retained in rejected-design-2026-11-05-r1."
+}

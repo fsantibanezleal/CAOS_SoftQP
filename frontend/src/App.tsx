@@ -29,6 +29,7 @@ const config: ShellConfig = {
   license: { en: `${product.license} licence`, es: `Licencia ${product.license}` },
   visibility: product.visibility === 'private' ? 'private' : 'public',
   contain: true,
+  immersiveRoutes: ['/story'],
   architecture,
 };
 
@@ -40,6 +41,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/app" element={<Workbench />} />
+            <Route path="/story/:step" element={<Workbench />} />
             <Route path="/introduction" element={<Introduction />} />
             <Route path="/methodology" element={<Methodology />} />
             <Route path="/implementation" element={<Implementation />} />

@@ -13,7 +13,7 @@ the same input. These are instructional method executions, not extra registered 
 benchmarks or additions to the scientific case count. No timing values enter notebook conclusions.
 
 One request is bounded to finite prices/scales and a positive row conversion; output is bounded
-to64KiB, exactly three method rows and two-element decision vectors. Each process has a30-second
+to64KiB, exactly three method rows and two-element decision vectors. Each process has a180-second
 timeout and an empty stdin beyond the canonical JSON request. Standard output contains one JSON
 envelope, bound to canonical input SHA and worker source SHA. The envelope includes exact SDK
 version, states/reasons, original metrics, decision vectors and formulation dimensions. No raw
@@ -74,7 +74,7 @@ execution prevent writes into either package environment.
 Each call allocates a unique scratch directory under absolute external CAOS_TEMP_ROOT.
 Its canonical request, stdout and stderr stay there and are removed after owned
 process cleanup. Both output files are polled while the worker runs; either exceeding
-64KiB is a refusal. Worker execution has a30-second wall deadline; it is followed
+64KiB is a refusal. Worker execution has a180-second wall deadline; it is followed
 only by at most three additional seconds of owned cleanup, never an unbounded inherited-pipe wait. A Windows
 worker is created suspended, assigned to a non-breakaway kill-on-close Job Object,
 then resumed; closing/terminating that job covers descendants even if the launcher
@@ -101,3 +101,7 @@ The caller fingerprints the actual files in the explicitly selected external env
 The external notebook sandbox receives exact copies of the public SDK fingerprint manifest, the nine-distribution study profile and the accepted summary under docs/teaching/coupled. These are byte-identical copies of their original authorities, bound by the bridge and adversarial tests; they are never alternative mutable profiles. Canonical input is at most4KiB before worker creation.
 
 On Windows, a direct native base executable is required. Store AppExecutionAlias broker launchers can create a runtime outside the launchers Job Object; their virtual environments are explicitly refused before execution. The didactic SDK2 environment is separately created from a direct Python3.12 executable with the unchanged nine pins. Historical Store-based study and notebook environments remain untouched. This is a process-ownership restriction, not a different numerical profile.
+
+## Current cold-start envelope reconciliation
+
+The teaching caller permits at most 180 seconds for the complete cold start, isolated imports and three-method solve. A read-only direct-runtime probe measured 90.031 seconds before any solve on a concurrently loaded host; a 30-second generic subprocess allowance therefore rejected startup. The caller-specific bound retains the generic worker default, 64 KiB output ceiling, input cap, source/package fingerprint verification, owned process tree and three-second cleanup boundary. It changes no registered campaign deadline, solver stopping rule, trial or reported timing. The refusal test captures the explicit bound and confirms that timeout propagates and scratch is removed; uncertain owned cleanup still preserves recovery evidence.
