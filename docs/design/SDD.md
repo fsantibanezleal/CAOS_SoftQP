@@ -76,7 +76,7 @@ The 2026-11-05 candidate pinned published shell 0.20.0. Its v0.20.0 tag peels to
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|
-| shell | @fasl-work/caos-app-shell | 0.26.0 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
+| shell | @fasl-work/caos-app-shell | 0.26.2 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
 | tooling | @types/node | 24.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -245,6 +245,14 @@ Current visualization design reconciliation, 2026-11-05. This section specifies 
 ### Current base adoption, 2026-11-11
 
 The current candidate adopts CAOS_PRODUCT_TEMPLATE 0.15.010 and CAOS App Shell 0.26.0. The shell fixes natural PlotCard header sizing, redraws moving chart marks, publishes settled callout-band measurements, gives callout values a dedicated row, and exposes carousel semantics only when cards are hidden. It also adds explicit UTC/local time-axis handling and formatter caching. The product's elapsed-day charts use `formatNumber`; it does not use calendar-time axes. The template workflow includes an opt-in guarded readiness-provider path, but SoftQP keeps the strict catalog and readiness-inventory lane because its artifact adapter does not independently validate the readiness document. Full product requalification against these exact installed bases is required before promotion.
+
+### Current base adoption, 2026-11-22
+
+The candidate updates to CAOS_PRODUCT_TEMPLATE 0.15.014 (release commit `c9ec0e94908ce084b6a62a6a529535c90e44ab57`) and CAOS App Shell 0.26.2 (release commit `e5f6df0e4e0bcbf657480b3d890d95408dc6537d`). The shared chart readout wraps as it grows and restores the keyboard crosshair after the chart rebuilds. The loopback story check launches Chromium without proxy discovery. The product retains its strict catalog and readiness-inventory lane. The installed browser gate and capture review remain required before promotion.
+
+### Focus content and allocation, 2026-11-22
+
+Focus preserves the selected case, group and sub-view. The shared shell keeps the parameter column accessible in an initially closed Controls disclosure. The scientific drawing composes the selected mathematical view and its anchored observations in one surface and fits at least 80% of the 1280 × 800 and 1600 × 900 Focus viewport with the disclosure closed. The explanatory Context group remains available as a separate view without an area claim.
 
 | id | question | data contract | kind | interactions | linked views | placement |
 |---|---|---|---|---|---|---|

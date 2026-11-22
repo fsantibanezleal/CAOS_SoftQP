@@ -41,3 +41,17 @@ The sealed R4 matrix remains90rows/12methods/14heads with24controls/101diagnosti
 ## Later obligations
 
 All environment/ABI/source admission, official solver and differentiable operator implementations, real labels/gradients/model initialization/resume/inference injection, data generation/registration, complete scientific execution, performance/memory sizing at scale, compact public replay integration, EN/ES lessons, native LaTeX technical-report update and independent publication/deployment gates remain pending. Initial/fixture checkpoints do not qualify public learned inference; actual produced selected best/final arrays and later runtime review are required. The global method/model floor remains unmet.
+
+## Factored scientific inputs and streamed features
+
+The prospective v2 storage kinds use explicit producer and reader entry points in `pipeline.learned_comparison.stream_inputs`. The existing eleven v1 contracts remain the compatible legacy lane. Each example is a typed projection from an actually admitted external software-fixture tree. Reproducing the complete ancestry and numeric sidecars uses the executable positive controls, since the catalog examples show selected files.
+
+| Kind | Version | Schema | Typed example | Runtime admission |
+|---|---|---|---|---|
+| learning-stream-source | 2.0.0 | [schema](schemas/softqp-learning-stream-source.schema.json) | [fixture](examples/softqp-learning-stream-source.json) | `factor_source`, `write_stream_artifact`, `read_stream_artifact` |
+| learning-stream-frame | 2.0.0 | [schema](schemas/softqp-learning-stream-frame.schema.json) | [fixture](examples/softqp-learning-stream-frame.json) | `factor_frame`, `write_stream_artifact`, `read_stream_artifact` |
+| learning-feature-stream | 2.0.0 | [schema](schemas/softqp-learning-feature-stream.schema.json) | [fixture](examples/softqp-learning-feature-stream.json) | `derive_stream_payload`, `write_stream_artifact`, `preflight_stream`, `StreamingPhaseReader.read_feature` |
+| learning-stream-labels | 2.0.0 | [schema](schemas/softqp-learning-stream-labels.schema.json) | [fixture](examples/softqp-learning-stream-labels.json) | `write_stream_artifact`, `read_stream_artifact`, `StreamingPhaseReader.read_label` |
+| learning-stream-checkpoint | 2.0.0 | [schema](schemas/softqp-learning-stream-checkpoint.schema.json) | [fixture](examples/softqp-learning-stream-checkpoint.json) | `write_stream_artifact`, `read_stream_artifact` with independently opened train and validation phases |
+
+See [stream inputs](../design/features/method-extension/stream-inputs.md) and `tests/test_stream_inputs.py`. Frame references always bind real files. Logical feature keys have their own versioned digest and no filesystem path. Compatible missing and oracle-failed labels remain explicit. Scientific successful label admission awaits independent native source-run evidence. The stream checkpoint example is an untrained contract fixture.

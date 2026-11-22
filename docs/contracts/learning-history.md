@@ -19,3 +19,15 @@ Authorship only, pending independent U1 review. Existing historical contracts/re
 | learning-export-index | 1.0.0 | 2026-11-05 | initial prospective | Strict typed source-bound serialization/admission, explicit fixture/missing states and two-sided adversaries. |
 
 The replacement also preserves generic JSON integer min/max validation, translates bounded numeric parser/error-format limits to ContractError without changing Python limits, and tests both actual APIs. The191-case intermediate red source/result and raw metadata/overflow witnesses remain separate; final195-case source-bound regression requires independent closure.
+
+## Factored stream revision, 2026-11-22
+
+| Contract | Version | Change |
+|---|---|---|
+| learning-stream-source | 2.0.0 | New source-unit coefficient, policy and curvature boundary. |
+| learning-stream-frame | 2.0.0 | New thin frame vectors, actual source reference and original/lift identities. |
+| learning-feature-stream | 2.0.0 | New complete logical feature/label domain and frozen train-only head statistics. |
+| learning-stream-labels | 2.0.0 | New frame and population binding, raw signed side evidence, and separately gated successful production labels. |
+| learning-stream-checkpoint | 2.0.0 | New descriptor and independent role phase binding for the existing strict numeric model format. |
+
+Legacy v1 schemas and historical examples keep their exact versions and bytes. The versioned streamed phase receipt is independent of the legacy v1 phase manifest. Full-volume scientific, runtime resumption and held-out gates remain pending.

@@ -499,6 +499,30 @@ def _source_key(record):
     )
 
 
+def _check_role_inventory(root, paths, *, manifest_raw):
+    try:
+        actual = {path.name for path in root.iterdir()}
+        temporary = root / ".unpublished-manifest"
+        if temporary.name in actual:
+            try:
+                temporary_info = _path_stat(temporary)
+            except FileNotFoundError:
+                # A publishing call may remove the temporary hard link
+                # between the directory inventory and this stat.
+                pass
+            else:
+                published = root / _MANIFEST
+                c.ensure(
+                    os.path.samestat(temporary_info, _path_stat(published))
+                    and _open_bytes(root, _MANIFEST) == manifest_raw,
+                    "foreign file masquerades as transient phase manifest",
+                )
+            actual.remove(temporary.name)
+    except OSError as error:
+        raise c.ContractError("phase inventory unavailable") from error
+    c.ensure(actual == paths | {_MANIFEST}, "phase directory inventory differs from trusted manifest")
+
+
 class PhaseInputReader:
     """Consume one role using independently trusted manifest and preflight hashes."""
 
@@ -567,27 +591,7 @@ class PhaseInputReader:
         self._identities = MappingProxyType(manifest["identities"])
 
     def _check_inventory(self, paths, *, manifest_raw):
-        try:
-            actual = {path.name for path in self._root.iterdir()}
-            temporary = self._root / ".unpublished-manifest"
-            if temporary.name in actual:
-                try:
-                    temporary_info = _path_stat(temporary)
-                except FileNotFoundError:
-                    # A publishing call may remove the temporary hard link
-                    # between the directory inventory and this stat.
-                    pass
-                else:
-                    published = self._root / _MANIFEST
-                    c.ensure(
-                        os.path.samestat(temporary_info, _path_stat(published))
-                        and _open_bytes(self._root, _MANIFEST) == manifest_raw,
-                        "foreign file masquerades as transient phase manifest",
-                    )
-                actual.remove(temporary.name)
-        except OSError as error:
-            raise c.ContractError("phase inventory unavailable") from error
-        c.ensure(actual == paths | {_MANIFEST}, "phase directory inventory differs from trusted manifest")
+        _check_role_inventory(self._root, paths, manifest_raw=manifest_raw)
 
     @property
     def records(self):

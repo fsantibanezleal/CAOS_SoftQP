@@ -1,0 +1,867 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-stream-labels/2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-stream-labels"
+    },
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "bound": {
+          "items": {
+            "format": "lossless-float64",
+            "maximum": 1e+308,
+            "minimum": -1e+308,
+            "type": "number"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "cold_candidate": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "epigraph": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "lambda_lower": {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        },
+                        "lambda_upper": {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        },
+                        "mu": {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        },
+                        "t": {
+                          "items": {
+                            "format": "lossless-float64",
+                            "maximum": 1e+308,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "maxItems": 2000000,
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "t",
+                        "lambda_lower",
+                        "lambda_upper",
+                        "mu"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "lifted_x": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "lifted_y": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "maxItems": 2000000,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "x": {
+                  "items": {
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "minimum": -1e+308,
+                    "type": "number"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                },
+                "y": {
+                  "items": {
+                    "format": "lossless-float64",
+                    "maximum": 1e+308,
+                    "minimum": -1e+308,
+                    "type": "number"
+                  },
+                  "maxItems": 2000000,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "x",
+                "y",
+                "lifted_x",
+                "lifted_y",
+                "epigraph"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cold_native_flag": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "fit_access": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "frame": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "const": "learning-stream-frame"
+            },
+            "path": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "artifact_id",
+            "kind",
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "labels": {
+          "items": {
+            "anyOf": [
+              {
+                "enum": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "mask": {
+          "items": {
+            "type": "boolean"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "multipliers": {
+          "items": {
+            "format": "lossless-float64",
+            "maximum": 1e+308,
+            "minimum": -1e+308,
+            "type": "number"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "native_evidence": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "input_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "native_flag": {
+                  "enum": [
+                    1,
+                    2
+                  ]
+                },
+                "producer_source_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "raw_primal": {
+                  "items": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  },
+                  "maxItems": 2000,
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "raw_side_duals": {
+                  "items": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  },
+                  "maxItems": 4000,
+                  "minItems": 0,
+                  "type": "array"
+                },
+                "settings_sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[0-9a-f]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "input_sha256",
+                "native_flag",
+                "producer_source_sha256",
+                "raw_primal",
+                "raw_side_duals",
+                "settings_sha256",
+                "sha256"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "node_kind": {
+          "items": {
+            "enum": [
+              "variable",
+              "inequality",
+              "equality"
+            ]
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "oracle_results": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "accepted": {
+                "type": "boolean"
+              },
+              "backend": {
+                "enum": [
+                  "stock_osqp",
+                  "clarabel",
+                  "piqp"
+                ]
+              },
+              "candidate": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "epigraph": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "lambda_lower": {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": 0,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              "lambda_upper": {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": 0,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              "mu": {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": 0,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              },
+                              "t": {
+                                "items": {
+                                  "format": "lossless-float64",
+                                  "maximum": 1e+308,
+                                  "minimum": 0,
+                                  "type": "number"
+                                },
+                                "maxItems": 2000000,
+                                "type": "array"
+                              }
+                            },
+                            "required": [
+                              "t",
+                              "lambda_lower",
+                              "lambda_upper",
+                              "mu"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lifted_x": {
+                        "anyOf": [
+                          {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "lifted_y": {
+                        "anyOf": [
+                          {
+                            "items": {
+                              "format": "lossless-float64",
+                              "maximum": 1e+308,
+                              "minimum": -1e+308,
+                              "type": "number"
+                            },
+                            "maxItems": 2000000,
+                            "type": "array"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "x": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "y": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "x",
+                      "y",
+                      "lifted_x",
+                      "lifted_y",
+                      "epigraph"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "metrics": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "D": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "F": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "F_all": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "G": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "H": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "K": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "base_quadratic": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "f_ref": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "linear": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "objective": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": -1e+308,
+                        "type": "number"
+                      },
+                      "peak_values": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2048,
+                        "type": "array"
+                      },
+                      "penalty": {
+                        "format": "lossless-float64",
+                        "maximum": 1e+308,
+                        "minimum": 0,
+                        "type": "number"
+                      },
+                      "raw_gradient": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "repaired_gradient": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "violation_lower": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2048,
+                        "type": "array"
+                      },
+                      "violation_upper": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": 0,
+                          "type": "number"
+                        },
+                        "maxItems": 2048,
+                        "type": "array"
+                      },
+                      "ybar": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2000000,
+                        "type": "array"
+                      },
+                      "z": {
+                        "items": {
+                          "format": "lossless-float64",
+                          "maximum": 1e+308,
+                          "minimum": -1e+308,
+                          "type": "number"
+                        },
+                        "maxItems": 2048,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "objective",
+                      "base_quadratic",
+                      "linear",
+                      "penalty",
+                      "H",
+                      "G",
+                      "K",
+                      "F",
+                      "F_all",
+                      "D",
+                      "ybar",
+                      "raw_gradient",
+                      "repaired_gradient",
+                      "f_ref",
+                      "z",
+                      "violation_lower",
+                      "violation_upper",
+                      "peak_values"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "native_flag": {
+                "type": [
+                  "integer",
+                  "string",
+                  "null"
+                ]
+              },
+              "reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "result_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "settings_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "accepted",
+                  "accuracy-rejected",
+                  "timeout",
+                  "missing",
+                  "failed"
+                ]
+              }
+            },
+            "required": [
+              "backend",
+              "settings_sha256",
+              "result_sha256",
+              "accepted",
+              "candidate",
+              "metrics",
+              "native_flag",
+              "status",
+              "reason"
+            ],
+            "type": "object"
+          },
+          "maxItems": 3,
+          "type": "array"
+        },
+        "oracle_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "population_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "settings_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "slack": {
+          "items": {
+            "format": "lossless-float64",
+            "maximum": 1e+308,
+            "minimum": -1e+308,
+            "type": "number"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "accepted",
+            "oracle-failed"
+          ]
+        },
+        "tau_dual": {
+          "const": 1e-07
+        },
+        "tau_tight": {
+          "const": 1e-07
+        }
+      },
+      "required": [
+        "bound",
+        "cold_candidate",
+        "cold_native_flag",
+        "fit_access",
+        "frame",
+        "labels",
+        "mask",
+        "multipliers",
+        "native_evidence",
+        "node_kind",
+        "oracle_results",
+        "oracle_source_sha256",
+        "population_sha256",
+        "reason",
+        "settings_sha256",
+        "slack",
+        "status",
+        "tau_dual",
+        "tau_tight"
+      ],
+      "type": "object"
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "learning-protocol"
+        },
+        "path": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-stream-labels/2.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider"
+      ]
+    },
+    "version": {
+      "const": "2.0.0"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "content_sha256",
+    "kind",
+    "payload",
+    "protocol_id",
+    "protocol_ref",
+    "protocol_sha256",
+    "provenance",
+    "purpose",
+    "reason",
+    "schema_id",
+    "source_lock_sha256",
+    "state",
+    "version"
+  ],
+  "title": "Raw-side stream labels v2.0.0",
+  "type": "object"
+}

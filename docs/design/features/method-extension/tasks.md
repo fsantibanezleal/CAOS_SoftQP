@@ -27,3 +27,9 @@ Pending after U1 acceptance: isolated environment/ABI admission, actual comparat
 1. Verify call-local normalizer cache identity, accounting, byte freshness and transitive cycle refusal with actual readers.
 2. Refuse a tightly stationary cold candidate whose original objective differs from the independent three-oracle reference.
 3. Admit the exact source independently. Measure complete-population wall time and memory before production qualification.
+
+## Factored scientific stream (LC-025 through LC-028)
+
+1. Independently review the dimensioned [streamed input design](stream-inputs.md) and freeze new schemas without changing the legacy formats.
+2. Verify exact original and feature parity on actual role-local files and exercise independent stream/phase/checkpoint trust.
+3. Record fixture storage/read/working-set measurements and reserve actual full population and training admission for the independently registered campaign.

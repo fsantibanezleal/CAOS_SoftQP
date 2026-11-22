@@ -851,26 +851,46 @@ def rational(value: int | float) -> Q:
     return Q(value)
 
 
+def _exact_decimal(number):
+    """Format a nonnegative integer without altering the interpreter digit limit."""
+    if number.bit_length() <= 2000:
+        return str(number)
+    digits = 128
+    base = 10**digits
+    chunks = []
+    while number >= base:
+        number, remainder = divmod(number, base)
+        chunks.append(f"{remainder:0{digits}d}")
+    return str(number) + "".join(reversed(chunks))
+
+
+def _exact_pivot_text(pivot):
+    numerator = _exact_decimal(pivot.numerator)
+    return numerator if pivot.denominator == 1 else numerator + "/" + _exact_decimal(pivot.denominator)
+
+
 def exact_curvature(P: list[list[float]]) -> tuple[int, list[str]]:
     n = len(P)
     ensure(all(len(r) == n for r in P), "Hessian shape")
     ensure(all(P[i][j] == P[j][i] for i in range(n) for j in range(n)), "exact Hessian symmetry")
     a = [[rational(v) for v in row] for row in P]
     pivots = []
+    rank = 0
     for k in range(n):
         pivot = a[k][k]
         ensure(
             pivot >= 0 and (pivot != 0 or all(a[j][k] == 0 for j in range(k + 1, n))),
             "exact nonconvex Hessian",
         )
-        pivots.append(str(pivot))
+        pivots.append(_exact_pivot_text(pivot))
         if pivot:
+            rank += 1
             for i in range(k + 1, n):
                 if a[i][k]:
                     for j in range(i, n):
                         value = a[j][i] - a[i][k] * a[j][k] / pivot
                         a[j][i] = a[i][j] = value
-    return sum(Q(x) > 0 for x in pivots), pivots
+    return rank, pivots
 
 
 def canonical_transform(original: dict[str, Any]) -> dict[str, Any]:
@@ -1221,6 +1241,10 @@ def _protocol(payload, context, document):
 
 
 def _dataset(payload, context, document, stack):
+    _dataset_sources(payload, context, lambda ref: dependency(ref, context, stack)["source"])
+
+
+def _dataset_sources(payload, context, read_source):
     ensure(
         payload["parent_manifest_sha256"] is None,
         "unread parent manifest cannot authorize this first-generation dataset",
@@ -1232,8 +1256,7 @@ def _dataset(payload, context, document, stack):
     sources, parents, hashes = {}, {}, {}
     by_source = {}
     for entry in entries:
-        problem = dependency(entry["problem"], context, stack)
-        source = problem["source"]
+        source = read_source(entry["problem"])
         ensure(entry["source"] == source, "dataset relabeled original source")
         for field_name, seen in [("source_id", sources), ("parent_id", parents), ("input_sha256", hashes)]:
             value = source[field_name]
@@ -1460,20 +1483,7 @@ def _compute_fitted_normalizer(head_id, dataset, context, stack):
             if f"H-{t['n']}-{t['m']}" == head_id:
                 problems.append(problem)
     ensure(bool(problems), "required head has no training source")
-    groups = {}
-    for problem in problems:
-        s = problem["source"]
-        groups.setdefault((s["family"], s["regime"]), set()).add(s["source_id"])
-    families = {f for f, _ in groups}
-    weights = []
-    for problem in problems:
-        s = problem["source"]
-        regimes = sum(f == s["family"] for f, _ in groups)
-        weights.append(
-            1 / (len(families) * regimes * len(groups[(s["family"], s["regime"])]) * s["frame_count"])
-        )
-    total = sum(weights)
-    weights = [w / total for w in weights]
+    weights = _normalizer_weights([problem["source"] for problem in problems])
     arrays = [mlp_coordinates(p["transform"])[1] for p in problems]
     names = mlp_coordinates(problems[0]["transform"])[0]
     means = [sum(w * row[j] for w, row in zip(weights, arrays)) for j in range(len(names))]
@@ -1482,6 +1492,23 @@ def _compute_fitted_normalizer(head_id, dataset, context, stack):
         variance = sum(w * (row[j] - mean) ** 2 for w, row in zip(weights, arrays))
         scales.append(math.sqrt(variance) if variance > 0 else 1)
     return names, means, scales, sorted({p["source"]["source_id"] for p in problems}), weights
+
+
+
+def _normalizer_weights(sources):
+    groups = {}
+    for s in sources:
+        groups.setdefault((s["family"], s["regime"]), set()).add(s["source_id"])
+    families = {f for f, _ in groups}
+    weights = []
+    for s in sources:
+        regimes = sum(f == s["family"] for f, _ in groups)
+        weights.append(
+            1 / (len(families) * regimes * len(groups[(s["family"], s["regime"])]) * s["frame_count"])
+        )
+    total = sum(weights)
+    weights = [w / total for w in weights]
+    return weights
 
 
 def _features(payload, context, document, stack):
@@ -1874,7 +1901,11 @@ def _failed_oracles(oracles, context):
 def _labels(payload, context, document, stack):
     problem = dependency(payload["problem"], context, stack)
     split = dependency(payload["split"], context, stack)
-    ensure(set(payload["fit_access"]) <= set(split["fit_source_ids"]), "held-out labels in fit path")
+    _label_values(payload, problem, split["fit_source_ids"], context)
+
+
+def _label_values(payload, problem, fit_source_ids, context, *, raw_side_duals=None):
+    ensure(set(payload["fit_access"]) <= set(fit_source_ids), "held-out labels in fit path")
     ensure(
         payload["oracle_source_sha256"] == context.producer_source_sha256
         and payload["settings_sha256"] == context.settings_hashes.get("label:cold_daqp"),
@@ -1920,11 +1951,14 @@ def _labels(payload, context, document, stack):
         [False] * t["n"],
         [0] * t["n"],
     )
-    for row, mapping, features in zip(G, graph["row_map"], nodes[t["n"] :]):
+    for side_index, (row, mapping, features) in enumerate(zip(G, graph["row_map"], nodes[t["n"] :])):
         bound = features[1]
         d = bound - _dot(row, candidate["lifted_x"])
         value = candidate["lifted_y"][mapping["canonical_row"]]
-        multiplier = value if mapping["equality"] else max(mapping["sign"] * value, 0)
+        multiplier = (
+            raw_side_duals[side_index] if raw_side_duals is not None
+            else value if mapping["equality"] else max(mapping["sign"] * value, 0)
+        )
         tau = 1e-7 * max(1, abs(bound))
         label = (
             1 if abs(d) <= tau and multiplier > 1e-7 else (0 if d > tau and abs(multiplier) <= 1e-7 else None)
@@ -2004,6 +2038,74 @@ def _checkpoint(payload, context, document, stack):
     )
     features = [dependency(ref, context, stack) for ref in payload["features"]]
     ensure(all(f["split"] == payload["split"] for f in features), "checkpoint stale split")
+    _checkpoint_values(payload, context)
+    a, method = payload["architecture"], payload["method"]
+    norms = [f["normalizer"]["sha256"] for f in features if f["normalizer"] is not None]
+    ensure(
+        payload["normalizer_sha256"] == norms and len(set(norms)) == len(norms), "stale checkpoint normalizer"
+    )
+    ensure(
+        {f["head_id"] for f in features}
+        == (set(a["head_ids"]) if method == "learned_osqp" else {f["head_id"] for f in features})
+        and bool(features),
+        "missing head feature contract",
+    )
+    ensure(
+        all((f["representation"] == "mlp-v1") == (method == "learned_osqp") for f in features),
+        "checkpoint feature architecture mismatch",
+    )
+    if method == "learned_osqp":
+        ensure(payload["class_statistics"] is None, "invented classifier statistics for L2WS")
+    else:
+        stats = payload["class_statistics"]
+        ensure(stats is not None and bool(stats["labels"]), "missing GNN train class statistics")
+        label_data = []
+        for ref in stats["labels"]:
+            label = dependency(ref, context, stack)
+            problem = dependency(label["problem"], context, stack)
+            ensure(
+                label["split"] == payload["split"]
+                and label["status"] == "accepted"
+                and problem["source"]["split"] == "train",
+                "test/failed labels in class fit",
+            )
+            label_data.append((label, problem["source"]))
+        ensure(
+            len({l["problem"]["artifact_id"] for l, s in label_data}) == len(label_data),
+            "duplicate class-fit label",
+        )
+        expected_labels = {
+            e["problem"]["artifact_id"]
+            for e in dataset["problems"]
+            if e["source"]["split"] == "train"
+            and context.authority.row(e["source"]["family"], e["source"]["regime"])["methods"][
+                "learned_daqp"
+            ]["eligible"]
+        }
+        ensure(
+            {l["problem"]["artifact_id"] for l, s in label_data} == expected_labels,
+            "missing training class-fit label population",
+        )
+        _checkpoint_class_values(stats, label_data)
+
+
+def _checkpoint_class_values(stats, label_data):
+    weighted = _source_frame_weights([s for l, s in label_data])
+    mass = [0.0, 0.0]
+    for (label, source), weight in zip(label_data, weighted):
+        active = [v for v, mask in zip(label["labels"], label["mask"]) if mask]
+        if active:
+            for cls in [0, 1]:
+                mass[cls] += weight * active.count(cls) / len(active)
+    ensure(all(v > 0 for v in mass), "zero training class cannot be qualified")
+    total = sum(mass)
+    ensure(
+        [stats["N0"], stats["N1"], stats["weight0"], stats["weight1"], stats["positive_prior"]]
+        == [mass[0], mass[1], total / (2 * mass[0]), total / (2 * mass[1]), mass[1] / total],
+        "wrong source-weighted class loss/prior",
+    )
+
+def _checkpoint_values(payload, context):
     a, method, seed = payload["architecture"], payload["method"], payload["seed"]
     ensure(
         payload["learning_policy_sha256"]
@@ -2120,20 +2222,6 @@ def _checkpoint(payload, context, document, stack):
         },
         "optimizer definition changed",
     )
-    norms = [f["normalizer"]["sha256"] for f in features if f["normalizer"] is not None]
-    ensure(
-        payload["normalizer_sha256"] == norms and len(set(norms)) == len(norms), "stale checkpoint normalizer"
-    )
-    ensure(
-        {f["head_id"] for f in features}
-        == (set(a["head_ids"]) if method == "learned_osqp" else {f["head_id"] for f in features})
-        and bool(features),
-        "missing head feature contract",
-    )
-    ensure(
-        all((f["representation"] == "mlp-v1") == (method == "learned_osqp") for f in features),
-        "checkpoint feature architecture mismatch",
-    )
     ensure(
         set(payload["epoch"]) == set(payload["best_epoch"]) == set(a["head_ids"]),
         "checkpoint head progress inventory",
@@ -2180,52 +2268,6 @@ def _checkpoint(payload, context, document, stack):
             payload["training_evidence"] in ["real-produced", "initialized"]
             and a["coverage"] == "complete-bundle",
             "fixture/partial model cannot be available",
-        )
-    if method == "learned_osqp":
-        ensure(payload["class_statistics"] is None, "invented classifier statistics for L2WS")
-    else:
-        stats = payload["class_statistics"]
-        ensure(stats is not None and bool(stats["labels"]), "missing GNN train class statistics")
-        label_data = []
-        for ref in stats["labels"]:
-            label = dependency(ref, context, stack)
-            problem = dependency(label["problem"], context, stack)
-            ensure(
-                label["split"] == payload["split"]
-                and label["status"] == "accepted"
-                and problem["source"]["split"] == "train",
-                "test/failed labels in class fit",
-            )
-            label_data.append((label, problem["source"]))
-        ensure(
-            len({l["problem"]["artifact_id"] for l, s in label_data}) == len(label_data),
-            "duplicate class-fit label",
-        )
-        expected_labels = {
-            e["problem"]["artifact_id"]
-            for e in dataset["problems"]
-            if e["source"]["split"] == "train"
-            and context.authority.row(e["source"]["family"], e["source"]["regime"])["methods"][
-                "learned_daqp"
-            ]["eligible"]
-        }
-        ensure(
-            {l["problem"]["artifact_id"] for l, s in label_data} == expected_labels,
-            "missing training class-fit label population",
-        )
-        weighted = _source_frame_weights([s for l, s in label_data])
-        mass = [0.0, 0.0]
-        for (label, source), weight in zip(label_data, weighted):
-            active = [v for v, mask in zip(label["labels"], label["mask"]) if mask]
-            if active:
-                for cls in [0, 1]:
-                    mass[cls] += weight * active.count(cls) / len(active)
-        ensure(all(v > 0 for v in mass), "zero training class cannot be qualified")
-        total = sum(mass)
-        ensure(
-            [stats["N0"], stats["N1"], stats["weight0"], stats["weight1"], stats["positive_prior"]]
-            == [mass[0], mass[1], total / (2 * mass[0]), total / (2 * mass[1]), mass[1] / total],
-            "wrong source-weighted class loss/prior",
         )
 
 

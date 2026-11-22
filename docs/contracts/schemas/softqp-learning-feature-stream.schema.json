@@ -1,0 +1,454 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-feature-stream/2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "content_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "learning-feature-stream"
+    },
+    "payload": {
+      "additionalProperties": false,
+      "properties": {
+        "attribution": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "exclusions": {
+          "items": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "maxItems": 100000,
+          "minItems": 3,
+          "type": "array"
+        },
+        "features": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "frame_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "logical_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "representation": {
+                "enum": [
+                  "mlp-v1",
+                  "graph-v1"
+                ]
+              }
+            },
+            "required": [
+              "frame_id",
+              "logical_sha256",
+              "representation"
+            ],
+            "type": "object"
+          },
+          "maxItems": 29960,
+          "minItems": 1,
+          "type": "array"
+        },
+        "fit_source_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2880,
+          "minItems": 1,
+          "type": "array"
+        },
+        "frames": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "kind": {
+                "const": "learning-stream-frame"
+              },
+              "path": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "artifact_id",
+              "kind",
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 15456,
+          "minItems": 1,
+          "type": "array"
+        },
+        "labels": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "frame_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "ref": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "const": "learning-stream-labels"
+                      },
+                      "path": {
+                        "maxLength": 256,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[0-9a-f]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "artifact_id",
+                      "kind",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "state": {
+                "enum": [
+                  "available",
+                  "provider",
+                  "oracle-failed",
+                  "missing"
+                ]
+              }
+            },
+            "required": [
+              "frame_id",
+              "reason",
+              "ref",
+              "state"
+            ],
+            "type": "object"
+          },
+          "maxItems": 14504,
+          "minItems": 0,
+          "type": "array"
+        },
+        "license": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "normalizers": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "coordinate_order": {
+                "items": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "fit_source_ids": {
+                "items": {
+                  "maxLength": 256,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "fit_split": {
+                "enum": [
+                  "train"
+                ]
+              },
+              "head_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "mean": {
+                "items": {
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "minimum": -1e+308,
+                  "type": "number"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "normalizer_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "scale": {
+                "items": {
+                  "exclusiveMinimum": 0,
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "type": "number"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              },
+              "sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "source_weights": {
+                "items": {
+                  "exclusiveMinimum": 0,
+                  "format": "lossless-float64",
+                  "maximum": 1e+308,
+                  "type": "number"
+                },
+                "maxItems": 2000000,
+                "type": "array"
+              }
+            },
+            "required": [
+              "normalizer_id",
+              "head_id",
+              "fit_source_ids",
+              "fit_split",
+              "coordinate_order",
+              "mean",
+              "scale",
+              "source_weights",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 14,
+          "minItems": 1,
+          "type": "array"
+        },
+        "population_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "artifact_id": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "kind": {
+                "const": "learning-stream-source"
+              },
+              "path": {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "artifact_id",
+              "kind",
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 5040,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "attribution",
+        "exclusions",
+        "features",
+        "fit_source_ids",
+        "frames",
+        "labels",
+        "license",
+        "normalizers",
+        "population_sha256",
+        "sources"
+      ],
+      "type": "object"
+    },
+    "protocol_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+    },
+    "protocol_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "learning-protocol"
+        },
+        "path": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_ids": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2000000,
+          "type": "array"
+        },
+        "producer_source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "registration_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "producer_source_sha256",
+        "registration_sha256",
+        "parent_ids"
+      ],
+      "type": "object"
+    },
+    "purpose": {
+      "enum": [
+        "scientific",
+        "contract-fixture"
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_id": {
+      "const": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-feature-stream/2.0.0"
+    },
+    "source_lock_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "available",
+        "provider"
+      ]
+    },
+    "version": {
+      "const": "2.0.0"
+    }
+  },
+  "required": [
+    "artifact_id",
+    "content_sha256",
+    "kind",
+    "payload",
+    "protocol_id",
+    "protocol_ref",
+    "protocol_sha256",
+    "provenance",
+    "purpose",
+    "reason",
+    "schema_id",
+    "source_lock_sha256",
+    "state",
+    "version"
+  ],
+  "title": "Logical learning feature stream v2.0.0",
+  "type": "object"
+}
