@@ -34,8 +34,8 @@ def test_real_excluded_candidate_projection_preserves_trial_ancestry_and_legacy_
     old = deepcopy(receipt)
     old["schema"] = "softqp.r4.heldout-trial-receipt/1"
     del old["numeric"], old["frame_id"]
-    original_schema = json.loads((ROOT / "schemas/softqp-learning-heldout-trial-receipt.schema.json").read_bytes())
-    jsonschema.Draft202012Validator(original_schema).validate(old)
+    original_schema = (ROOT / "schemas/softqp-learning-heldout-trial-receipt.schema.json").read_bytes()
+    c._validator(original_schema).validate(old)
     with pytest.raises(jsonschema.ValidationError):
         validator.validate(old)
 
