@@ -87,7 +87,7 @@ describe('the gate script', () => {
   it('puts mandatory Focus and Showcase checks before pass-through arguments', () => {
     expect(gate.indexOf("'--require-focus'")).toBeLessThan(gate.indexOf('...extra'));
     expect(gate.indexOf("'--require-showcase'")).toBeLessThan(gate.indexOf('...extra'));
-    expect(pkg.scripts.gate).toBe('node scripts/check_story_mode.mjs && node scripts/gate.mjs');
+    expect(pkg.scripts.gate).toBe('node scripts/check_story_mode.mjs && node --test scripts/check_focus_mode.test.mjs && node scripts/gate.mjs');
   });
 });
 

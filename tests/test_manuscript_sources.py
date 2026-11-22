@@ -66,7 +66,11 @@ def test_adversarial_manuscript_requires_author_and_running_identity(manuscript)
     assert r"\usepackage{orcidlink}" in text
     assert r"\orcidlink{0000-0002-0150-3246}" in text
     assert "CAOS Research program" in text and "CAOS Research programme" in text
-    assert r"\usepackage{fancyhdr}" in text and r"\fancyhead[L]" in text
+    # LaTeX permits several packages in one usepackage declaration. The
+    # manuscripts use `fancyhdr,etoolbox`, so require the package token rather
+    # than one exact brace payload.
+    assert re.search(r"\\usepackage(?:\[[^]]*\])?\{[^}]*\bfancyhdr\b[^}]*\}", text)
+    assert r"\fancyhead[L]" in text
     assert r"\fancyhead[R]" in text and r"\pagestyle{fancy}" in text
     assert "linknavy" in text and "colorlinks=true" in text
 
