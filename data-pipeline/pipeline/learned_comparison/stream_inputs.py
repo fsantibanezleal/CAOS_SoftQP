@@ -1070,7 +1070,7 @@ class StreamingPhaseReader:
     def logical_keys(self):
         return tuple(self._logical)
 
-    def _stored(self, artifact_id, expected_kind):
+    def _stored_record(self, artifact_id, expected_kind):
         row = self._records.get(artifact_id)
         c.ensure(
             row is not None and row["ref"]["kind"] == expected_kind, "stored input absent from stream role"
@@ -1089,7 +1089,41 @@ class StreamingPhaseReader:
             document["purpose"] != "contract-fixture" or self.fixture_only,
             "hidden stream fixture substitution",
         )
-        return document
+        return raw, document
+
+    def _stored(self, artifact_id, expected_kind):
+        return self._stored_record(artifact_id, expected_kind)[1]
+
+    def read_sealed_frame_pair(self, frame_id):
+        """Fresh local raw inputs, without numerical reconstruction or test admission.
+
+        Scientific supervisors must start full-cost timing and the whole-trial
+        deadline before this broker read and stop after observing checked output.
+        """
+        frame_raw, frame_document = self._stored_record(frame_id, FRAME)
+        frame = frame_document["payload"]
+        source_ref = frame["source_ref"]
+        source_row = self._records.get(source_ref["artifact_id"])
+        c.ensure(
+            source_row is not None and source_row["ref"] == source_ref,
+            "stream phase alternate source binding",
+        )
+        source_raw, source_document = self._stored_record(source_ref["artifact_id"], SOURCE)
+        c.ensure(
+            source_document["payload"]["slot"]["split"] == frame["source"]["split"] == self.role,
+            "stream phase source role relabel",
+        )
+        c.ensure(
+            frame_raw == c.canonical_bytes(frame_document)
+            and source_raw == c.canonical_bytes(source_document),
+            "stream phase raw projection must be canonical",
+        )
+        return {
+            "source_raw": source_raw,
+            "frame_raw": frame_raw,
+            "source_ref": dict(source_ref),
+            "frame_ref": dict(self._records[frame_id]["ref"]),
+        }
 
     def _problem(self, frame_id):
         frame = self._stored(frame_id, FRAME)["payload"]

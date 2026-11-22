@@ -16,7 +16,7 @@ from weakref import WeakKeyDictionary
 from . import contracts as c
 
 
-_OPERATIONS = frozenset({"generate-source", "native-label", "train-model", "calibrate-model"})
+_OPERATIONS = frozenset({"generate-source", "native-label", "train-model", "calibrate-model", "evaluate-heldout"})
 _EVIDENCE = frozenset({"runtime", "seed_inventory", "semantic_matrix", "compatibility", "math_gates"})
 _REQUIRED_FILES = frozenset(
     "data-pipeline/pipeline/learned_comparison/" + name
