@@ -15,3 +15,15 @@
 5. Freeze source/schema/example/test raw hashes and historical preservation evidence, run focused tests/report checker, then request independent U1 review.
 
 Pending after U1 acceptance: isolated environment/ABI admission, actual comparator implementations, differentiable/GNN parity/gradient/runtime tests, generator implementation and independent registration, data/split/oracle labels, trained models/calibration/resume, complete held-out campaign/evaluation, replay/UI integration, EN/ES lessons, native LaTeX report and independent release/deployment review. No later task is claimed complete by these contracts.
+
+## Isolated phase input source unit (LC-020 through LC-022)
+
+1. Apply the trusted complete preflight and exact semantic inventory in [phase-inputs.md](phase-inputs.md).
+2. Verify actual train, validation and calibration fixture IO and adversarial custody controls before independent source admission.
+3. Admit production input scale, registration and each ordinary learning phase independently before scientific generation or training.
+
+## Normalizer and label boundary follow-up (LC-023 and LC-024)
+
+1. Verify call-local normalizer cache identity, accounting, byte freshness and transitive cycle refusal with actual readers.
+2. Refuse a tightly stationary cold candidate whose original objective differs from the independent three-oracle reference.
+3. Admit the exact source independently. Measure complete-population wall time and memory before production qualification.

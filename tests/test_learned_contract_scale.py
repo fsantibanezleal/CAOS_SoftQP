@@ -595,3 +595,245 @@ def test_split_digest_preserves_interleaved_dataset_entry_order(scale_bundle):
     with pytest.raises(c.ContractError, match="split differs from source-bound dataset"):
         put("learning-split", "reversed-frame-split", changed, context)
     assert not (context.root / "reversed-frame-split.json").exists()
+
+
+def add_normalizer_fixture(context, kind, name, payload):
+    doc = PROVIDER["envelope"](kind, name, payload, context)
+    artifact = c.write_artifact(doc, name + ".json", context)
+    ref = dict(kind=kind, artifact_id=name, path=name + ".json", sha256=artifact.raw_sha256)
+    return replace(context, catalog={**context.catalog, name: ref}), ref
+
+
+def observe_normalizer_compute(monkeypatch):
+    calls = []
+    original = c._compute_fitted_normalizer
+
+    def observed(head, dataset, context, stack):
+        calls.append((head, dataset["attribution"], context))
+        return original(head, dataset, context, stack)
+
+    monkeypatch.setattr(c, "_compute_fitted_normalizer", observed)
+    return calls
+
+
+def test_adversarial_normalizer_batch_cache_matches_uncached_and_reopens(scale_bundle, monkeypatch, tmp_path):
+    ctx, docs, refs = scale_bundle
+    root = tmp_path / "provider"
+    shutil.copytree(ctx.root, root)
+    ctx = replace(ctx, root=root)
+    copied_schema = tmp_path / "schemas"
+    shutil.copytree(c.SCHEMAS, copied_schema)
+    monkeypatch.setattr(c, "SCHEMAS", copied_schema)
+    ctx, other = add_normalizer_fixture(
+        ctx, "learning-features", "paired-feature", docs["features"]["payload"]
+    )
+    first = c.ReadRequest(root / refs["features"]["path"], refs["features"]["sha256"])
+    second = c.ReadRequest(root / other["path"], other["sha256"])
+
+    split = docs["split"]["payload"]
+    head = docs["features"]["payload"]["head_id"]
+    independent = c.fitted_normalizer(head, split, ctx, ())
+    assert independent[2] == [1] * len(independent[2])
+    assert all(
+        value == docs["features"]["payload"]["normalizer"][key]
+        for value, key in zip(
+            independent, ("coordinate_order", "mean", "scale", "fit_source_ids", "source_weights")
+        )
+    )
+    calls = observe_normalizer_compute(monkeypatch)
+    reads = observe_reads(monkeypatch)
+    first_result, second_result = c.read_artifacts((first, second), ctx)
+    assert first_result.raw == c.json_bytes(docs["features"])
+    assert first_result.payload == second_result.payload
+    assert len(calls) == 1
+    assert reads[(root / refs["problem-train"]["path"]).resolve()] == 1
+    assert reads[(root / refs["dataset"]["path"]).resolve()] == 1
+    assert reads[(root / refs["split"]["path"]).resolve()] == 1
+    assert all(count == 1 for count in reads.values())
+
+    with c._admission(ctx, fresh=True):
+        cached_result = c.fitted_normalizer(head, split, ctx, (), split_ref=refs["split"])
+        assert c.canonical_bytes(cached_result) == c.canonical_bytes(independent)
+        for value in cached_result:
+            value.clear()
+        assert c.canonical_bytes(
+            c.fitted_normalizer(head, split, ctx, (), split_ref=refs["split"])
+        ) == c.canonical_bytes(independent)
+    assert len(calls) == 2
+
+    reads.clear()
+    assert c.read_artifact(first.path, ctx, expected_sha256=first.expected_sha256).raw == first_result.raw
+    assert len(calls) == 3
+    assert reads[(root / refs["problem-train"]["path"]).resolve()] == 1
+    detached_context = replace(ctx)
+    with c._admission(ctx, fresh=True):
+        c.read_artifact(first.path, ctx, expected_sha256=first.expected_sha256)
+        c.read_artifact(second.path, detached_context, expected_sha256=second.expected_sha256)
+        c.read_artifact(second.path, ctx, expected_sha256=second.expected_sha256)
+    assert len(calls) == 5 and calls[-1][2] is detached_context
+
+    for path, marker in (
+        (root / refs["problem-train"]["path"], b'"version": "1.0.0"'),
+        (copied_schema / "softqp-learning-features.schema.json", b'"additionalProperties": false'),
+    ):
+        raw = path.read_bytes()
+        new = raw.replace(marker, b"!" + marker[1:], 1)
+        assert new != raw and len(new) == len(raw)
+        path.write_bytes(new)
+        try:
+            with pytest.raises(c.ContractError):
+                c.read_artifact(first.path, ctx, expected_sha256=first.expected_sha256)
+        finally:
+            path.write_bytes(raw)
+    assert len(calls) == 5
+
+
+def test_adversarial_normalizer_scope_identity_ancestry_and_budget(scale_bundle, monkeypatch, tmp_path):
+    ctx, docs, refs = scale_bundle
+    root = tmp_path / "provider"
+    shutil.copytree(ctx.root, root)
+    ctx = replace(ctx, root=root)
+    base_split = docs["split"]["payload"]
+    base_head = docs["features"]["payload"]["head_id"]
+    ctx, other_split = add_normalizer_fixture(ctx, "learning-split", "same-dataset-new-split", base_split)
+    alt_dataset = copy.deepcopy(docs["dataset"]["payload"])
+    alt_dataset["attribution"] = "Alternate independently sealed provider dataset"
+    ctx, other_dataset = add_normalizer_fixture(ctx, "learning-dataset", "new-dataset", alt_dataset)
+    alt_split = {**base_split, "dataset": other_dataset}
+    ctx, changed_dataset_split = add_normalizer_fixture(ctx, "learning-split", "new-dataset-split", alt_split)
+
+    calls = observe_normalizer_compute(monkeypatch)
+    with c._admission(ctx, fresh=True) as session:
+        external = set()
+        session.frames.append(external)
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=refs["split"])
+        session.frames.pop()
+        assert set(refs) & external == {
+            "split",
+            "dataset",
+            "protocol",
+            "problem-train",
+            "problem-validation",
+            "problem-calibration",
+            "problem-test",
+        }
+        ((key, (stored, charge)),) = session.normalizers.entries.items()
+        statistics, ancestry = stored
+        assert key == (refs["split"]["sha256"], refs["dataset"]["sha256"], base_head)
+        assert charge == c._normalizer_cache_size(key, stored) == session.normalizers.byte_count
+        assert charge > len(c.canonical_bytes(statistics))
+        assert ancestry == external
+
+        # A previously verified split is now requested below one of its actual
+        # ancestors. This exercises the existing semantic cache and the fitter.
+        with pytest.raises(c.ContractError, match="cycle through cached node"):
+            c.fitted_normalizer(base_head, base_split, ctx, ("problem-train",), split_ref=refs["split"])
+        with pytest.raises(c.ContractError, match="normalizer split identity"):
+            c.fitted_normalizer(base_head, alt_split, ctx, (), split_ref=refs["split"])
+        forged = {**refs["split"], "sha256": "0" * 64}
+        with pytest.raises(c.ContractError, match="sealed catalog"):
+            c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=forged)
+
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=other_split)
+        c.fitted_normalizer(base_head, alt_split, ctx, (), split_ref=changed_dataset_split)
+        with pytest.raises(c.ContractError, match="required head has no training source"):
+            c.fitted_normalizer("H-3-4", base_split, ctx, (), split_ref=refs["split"])
+        assert len(calls) == 4 and calls[-1][0] == "H-3-4"
+        assert len(session.normalizers.entries) == 3
+
+    monkeypatch.setattr(c, "_NORMALIZER_CACHE_ENTRIES", 1)
+    with c._admission(ctx, fresh=True) as session:
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=refs["split"])
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=other_split)
+        assert len(session.normalizers.entries) == 1 and key not in session.normalizers.entries
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=refs["split"])
+    assert len(calls) == 7
+
+    monkeypatch.setattr(c, "_NORMALIZER_CACHE_BYTES", charge - 1)
+    with c._admission(ctx, fresh=True) as session:
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=refs["split"])
+        c.fitted_normalizer(base_head, base_split, ctx, (), split_ref=refs["split"])
+        assert not session.normalizers.entries and session.normalizers.byte_count == 0
+        c.fitted_normalizer(base_head, base_split, ctx, ())
+        assert not session.normalizers.entries
+    assert len(calls) == 10
+
+
+def test_adversarial_normalizer_distinct_heads_keep_weighted_and_zero_variance_values(scale_bundle, tmp_path):
+    ctx, docs, _ = scale_bundle
+    root = tmp_path / "provider"
+    shutil.copytree(ctx.root, root)
+    ctx = replace(ctx, root=root)
+    extra_shape = copy.deepcopy(docs["problem-train"]["payload"]["original"])
+    extra_shape.update(
+        n=2,
+        m=2,
+        P=c.csc([[1, 0], [0, 1]]),
+        A=c.csc([[1, 0], [0, 1]]),
+        q=[0, 1],
+        lower=[0, 0],
+        upper=[1, 1],
+        lower_finite=[True, True],
+        upper_finite=[True, True],
+    )
+    extra_shape["penalty"] = {
+        key: [*values, False if key == "soft" else 0] for key, values in extra_shape["penalty"].items()
+    }
+    extra_shape["units"].update(
+        variable=["dimensionless"] * 2, row=["dimensionless"] * 2, D_x=[1, 1], D_r=[1, 1]
+    )
+    dataset = copy.deepcopy(docs["dataset"]["payload"])
+    split = copy.deepcopy(docs["split"]["payload"])
+    for name, kwargs in (
+        ("another-base-head", {"q": 3, "regime": 4}),
+        ("additional-head", {"family": "N02", "original": extra_shape}),
+    ):
+        problem = PROVIDER["problem_payload"](control="contract-fixture:normalizer-head", **kwargs)
+        source = problem["source"]
+        source.update(source_id="fixture-source-" + name, parent_id="fixture-parent-" + name)
+        ctx = replace(
+            ctx,
+            source_records={**ctx.source_records, name: c.digest(c.canonical_bytes(source))},
+            problem_hashes={**ctx.problem_hashes, name: problem["original_sha256"]},
+            fit_source_ids=(*ctx.fit_source_ids, source["source_id"]),
+        )
+        ctx, ref = add_normalizer_fixture(ctx, "learning-problem", name, problem)
+        dataset["problems"].append({"problem": ref, "source": source})
+        dataset["source_ids"].append(source["source_id"])
+        for field in ("problems", "sources", "train"):
+            dataset["counts"][field] += 1
+        split["assignments"].append(
+            {
+                "source_id": source["source_id"],
+                "parent_id": source["parent_id"],
+                "split": "train",
+                "input_sha256": c.digest(c.canonical_bytes([source["input_sha256"]])),
+                "problem_ids": [name],
+            }
+        )
+    dataset["problems"].sort(key=lambda entry: entry["problem"]["artifact_id"])
+    dataset["source_ids"].sort()
+    ctx, dataset_ref = add_normalizer_fixture(ctx, "learning-dataset", "weighted-head-dataset", dataset)
+    split["assignments"].sort(key=lambda entry: entry["source_id"])
+    split.update(
+        dataset=dataset_ref,
+        fit_source_ids=sorted(ctx.fit_source_ids),
+        disjointness_sha256=c.digest(c.canonical_bytes(split["assignments"])),
+    )
+    ctx, split_ref = add_normalizer_fixture(ctx, "learning-split", "weighted-head-split", split)
+
+    heads = ("H-2-3", "H-3-4")
+    expected = [c.fitted_normalizer(head, split, ctx, ()) for head in heads]
+    assert expected[0][4] == [0.5, 0.5]
+    assert 1.5 in expected[0][2] and 1 in expected[0][2]
+    assert all(value == 1 for value in expected[1][2])
+    with c._admission(ctx, fresh=True) as session:
+        for head, stats in zip(heads, expected):
+            assert c.canonical_bytes(
+                c.fitted_normalizer(head, split, ctx, (), split_ref=split_ref)
+            ) == c.canonical_bytes(stats)
+        assert {key[-1] for key in session.normalizers.entries} == set(heads)
+        for head, stats in zip(reversed(heads), reversed(expected)):
+            assert c.canonical_bytes(
+                c.fitted_normalizer(head, split, ctx, (), split_ref=split_ref)
+            ) == c.canonical_bytes(stats)

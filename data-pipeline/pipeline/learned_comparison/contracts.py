@@ -20,6 +20,7 @@ import math
 import os
 from pathlib import Path, PurePosixPath
 import struct
+import sys
 import tempfile
 from types import MappingProxyType
 from typing import Any, Literal, Mapping, TypedDict
@@ -313,12 +314,16 @@ class ReadRequest:
 MAX_BATCH_REQUESTS = 256
 _CACHE_ENTRIES = 2048
 _CACHE_BYTES = 64 * 1024 * 1024
+_NORMALIZER_CACHE_ENTRIES = 32
+_NORMALIZER_CACHE_BYTES = 32 * 1024 * 1024
 
 
 class _BoundedCache:
-    def __init__(self):
+    def __init__(self, *, max_entries=None, max_bytes=None):
         self.entries = OrderedDict()
         self.byte_count = 0
+        self.max_entries = _CACHE_ENTRIES if max_entries is None else max_entries
+        self.max_bytes = _CACHE_BYTES if max_bytes is None else max_bytes
 
     def get(self, key):
         entry = self.entries.get(key)
@@ -331,10 +336,10 @@ class _BoundedCache:
         previous = self.entries.pop(key, None)
         if previous is not None:
             self.byte_count -= previous[1]
-        if byte_count > _CACHE_BYTES:
+        if byte_count > self.max_bytes:
             return
         while self.entries and (
-            len(self.entries) >= _CACHE_ENTRIES or self.byte_count + byte_count > _CACHE_BYTES
+            len(self.entries) >= self.max_entries or self.byte_count + byte_count > self.max_bytes
         ):
             _, (_, removed_bytes) = self.entries.popitem(last=False)
             self.byte_count -= removed_bytes
@@ -349,6 +354,9 @@ class _AdmissionSession:
         self.context = context
         self.raw = _BoundedCache()
         self.validated = _BoundedCache()
+        self.normalizers = _BoundedCache(
+            max_entries=_NORMALIZER_CACHE_ENTRIES, max_bytes=_NORMALIZER_CACHE_BYTES
+        )
         self.schemas = {}
         self.root_identities = {}
         self.frames = []
@@ -1389,8 +1397,61 @@ def graph_coordinates(transform):
     )
 
 
-def fitted_normalizer(head_id, split, context, stack):
-    dataset = dependency(split["dataset"], context, stack)
+def fitted_normalizer(head_id, split, context, stack, *, split_ref=None):
+    if split_ref is None:
+        return _compute_fitted_normalizer(
+            head_id, dependency(split["dataset"], context, stack), context, stack
+        )
+
+    with _admission(context) as session:
+        identities = set()
+        session.frames.append(identities)
+        try:
+            verified_split = _read_reference(split_ref, context, stack)
+            ensure(verified_split.kind == "learning-split", "normalizer split identity")
+            split_snapshot = verified_split.payload
+            ensure(split_snapshot is not None and split == split_snapshot, "normalizer split identity")
+            dataset_ref = split_snapshot["dataset"]
+            verified_dataset = _read_reference(dataset_ref, context, stack)
+            ensure(verified_dataset.kind == "learning-dataset", "normalizer dataset identity")
+            key = (verified_split.raw_sha256, verified_dataset.raw_sha256, head_id)
+            cached = session.normalizers.get(key)
+            if cached is None:
+                statistics = tuple(
+                    tuple(values)
+                    for values in _compute_fitted_normalizer(
+                        head_id, verified_dataset.payload, context, stack
+                    )
+                )
+                ancestry = frozenset(identities)
+                cached = (statistics, ancestry)
+                session.normalizers.put(key, cached, _normalizer_cache_size(key, cached))
+            statistics, ancestry = cached
+            ensure(not ancestry.intersection(stack), "artifact dependency cycle through cached normalizer")
+            identities.update(ancestry)
+        finally:
+            session.frames.pop()
+        if session.frames:
+            session.frames[-1].update(identities)
+        return tuple(list(values) for values in statistics)
+
+
+def _normalizer_cache_size(key, cached):
+    statistics, ancestry = cached
+    return (
+        # Account for per-entry cache/index storage as well as retained values.
+        256
+        + sys.getsizeof(key)
+        + sum(map(sys.getsizeof, key))
+        + sys.getsizeof(cached)
+        + sys.getsizeof(statistics)
+        + sum(sys.getsizeof(values) + sum(map(sys.getsizeof, values)) for values in statistics)
+        + sys.getsizeof(ancestry)
+        + sum(map(sys.getsizeof, ancestry))
+    )
+
+
+def _compute_fitted_normalizer(head_id, dataset, context, stack):
     problems = []
     for entry in dataset["problems"]:
         if entry["source"]["split"] == "train":
@@ -1448,7 +1509,9 @@ def _features(payload, context, document, stack):
         )
         normalizer = payload["normalizer"]
         ensure(normalizer is not None, "missing train normalizer")
-        fitted_names, mean, scale, ids, weights = fitted_normalizer(head_id, split, context, stack)
+        fitted_names, mean, scale, ids, weights = fitted_normalizer(
+            head_id, split, context, stack, split_ref=payload["split"]
+        )
         ensure(
             normalizer["head_id"] == head_id and normalizer["coordinate_order"] == fitted_names,
             "normalizer coordinate identity",
@@ -1836,6 +1899,7 @@ def _labels(payload, context, document, stack):
     )
     _recovery(problem, candidate, hard_limit=1e-8, limit=1e-8)
     metric = original_metrics(problem["original"], candidate, f_ref)
+    ensure(metric["G"] <= 1e-8, "cold label objective disagreement")
     ensure(
         all(
             metric[k] <= lim
