@@ -48,6 +48,7 @@ KINDS = tuple(
 )
 LEARNED = {"learned_osqp", "learned_daqp"}
 SEEDS = (41001, 41002, 41003)
+_GENERATOR_FIXTURE_ENTROPY_PREFIX = (20261122, 800003)
 Q = Fraction
 
 
@@ -716,9 +717,54 @@ class AdmissionContext:
     expected_diagnostic_keys: tuple[tuple[Any, ...], ...] = ()
     diagnostic_evidence: Mapping[tuple[Any, ...], str] = field(default_factory=dict)
     forbidden_roots: tuple[Path, ...] = (ROOT,)
+    native_run: object | None = field(default=None, compare=False, repr=False)
+    expected_native_manifest_sha256: str | None = None
+    native_input_preflight: object | None = field(default=None, compare=False, repr=False)
     _input_aliases: frozenset[str] = field(default_factory=frozenset, init=False, compare=False, repr=False)
 
     def __post_init__(self):
+        if any(value is not None for value in (
+            self.native_run, self.expected_native_manifest_sha256, self.native_input_preflight
+        )):
+            from .native_labels import NativeRun
+            from .phase_inputs import PhasePreflight
+
+            ensure(
+                type(self.native_run) is NativeRun
+                and self.expected_native_manifest_sha256 == self.native_run.sha256
+                and digest(self.native_run.raw) == self.expected_native_manifest_sha256,
+                "native run requires independently expected manifest identity",
+            )
+            ensure(
+                type(self.native_input_preflight) is PhasePreflight,
+                "native run requires its input preflight",
+            )
+            manifest = self.native_run.document
+            preflight = strict_loads(self.native_input_preflight.receipt_bytes)
+            ensure(
+                manifest["fixture_only"] == preflight["fixture_only"] == self.allow_fixture
+                and manifest["preflight_sha256"] == self.native_input_preflight.sha256
+                and manifest["population_sha256"] == preflight["population_sha256"]
+                and preflight["source_root"] == str(self.root.resolve())
+                and preflight["forbidden_roots"] == [str(path.resolve()) for path in self.forbidden_roots]
+                and all(row["ref"] is None and row["state"] == "missing" for row in preflight["labels"])
+                and set(preflight["identities"]) == {
+                    "protocol_id", "protocol_sha256", "source_lock_sha256",
+                    "registration_sha256", "producer_source_sha256", "generator_sha256",
+                    "dependency_lock_sha256", "learning_policy_sha256", "design_manifest_sha256",
+                }
+                and preflight["identities"]["learning_policy_sha256"]
+                == self.authority.manifest["normative_sha256"]["learning-spec.md"]
+                and preflight["identities"]["design_manifest_sha256"] == DESIGN_MANIFEST_SHA256
+                and preflight["protocol_ref"]
+                == self.catalog.get(preflight["protocol_ref"]["artifact_id"])
+                and all(preflight["identities"][key] == getattr(self, key) for key in (
+                    "protocol_id", "protocol_sha256", "source_lock_sha256",
+                    "registration_sha256", "producer_source_sha256", "generator_sha256",
+                    "dependency_lock_sha256",
+                )),
+                "native run input preflight, source or fixture ancestry differs",
+            )
         ensure(self.root.is_absolute() and self.root.exists(), "external context root missing")
         resolved_root = self.root.resolve()
         ensure(
@@ -985,7 +1031,10 @@ def canonical_transform(original: dict[str, Any]) -> dict[str, Any]:
                     scale = g[side + "_scale"][pos]
                     row = {j: sign * scale * v for j, v in coeff(i).items()}
                     row[live[g["group_id"]]] = -1
-                    emit(row, None, sign * scale * bounds[i], f"{side}:{i}", i, sign * scale)
+                    bound = sign * scale * bounds[i]
+                    # A valid positive-zero physical lower bound is negated
+                    # here. Keep the canonical artifact free of signed zero.
+                    emit(row, None, abs(bound) if bound == 0 else bound, f"{side}:{i}", i, sign * scale)
         for group_id, index in live.items():
             emit({index: 1}, 0, None, f"nonnegative-t:{group_id}")
     nl = len(variables)
@@ -1011,7 +1060,7 @@ def canonical_transform(original: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def _problem(payload, context, document):
+def _problem(payload, context, document, *, v2_fixture=False):
     o, source = payload["original"], payload["source"]
     n, m = o["n"], o["m"]
     ensure(n > 0 and n <= 66 and m <= 98, "original dimensions outside reviewed bound")
@@ -1179,11 +1228,20 @@ def _problem(payload, context, document):
     )
     split_code = ["train", "validation", "calibration", "test"].index(source["split"])
     ensure(source["unit_index"] < (32 if split_code == 0 else 8), "source split count")
-    ensure(
-        source["entropy"]
-        == [20261105, 903, int(source["family"][1:]), source["regime"], split_code, source["unit_index"], 0],
-        "source seed entropy",
-    )
+    suffix = [int(source["family"][1:]), source["regime"], split_code, source["unit_index"], 0]
+    if source["entropy"] == [*_GENERATOR_FIXTURE_ENTROPY_PREFIX, *suffix]:
+        ensure(
+            v2_fixture and context.allow_fixture and source["state_origin"] == "contract-fixture",
+            "excluded generator fixture entropy outside v2 fixture lane",
+        )
+        from numpy.random import PCG64, SeedSequence
+
+        ensure(
+            source["rng_state"] == PCG64(SeedSequence(source["entropy"])).state,
+            "excluded generator fixture initial RNG state differs from its entropy",
+        )
+    else:
+        ensure(source["entropy"] == [20261105, 903, *suffix], "source seed entropy")
     ensure(
         source["rng_state_sha256"] == digest(canonical_bytes(source["rng_state"]))
         and source["rng_state"]["state"]["inc"] % 2 == 1,
@@ -2089,8 +2147,22 @@ def _checkpoint(payload, context, document, stack):
         _checkpoint_class_values(stats, label_data)
 
 
-def _checkpoint_class_values(stats, label_data):
-    weighted = _source_frame_weights([s for l, s in label_data])
+def _checkpoint_class_values(stats, label_data, *, sdk_order=False):
+    if sdk_order:
+        label_data = sorted(label_data, key=lambda row: (row[1]["source_id"], row[1]["frame"]))
+        sources = [source for _, source in label_data]
+        cells = {}
+        for source in sources:
+            cells.setdefault((source["family"], source["regime"]), set()).add(source["source_id"])
+        families = {family for family, _ in cells}
+        weighted = [
+            (1 / (len(families)
+                  * sum(family == source["family"] for family, _ in cells)
+                  * len(cells[(source["family"], source["regime"])]))) / source["frame_count"]
+            for source in sources
+        ]
+    else:
+        weighted = _source_frame_weights([s for l, s in label_data])
     mass = [0.0, 0.0]
     for (label, source), weight in zip(label_data, weighted):
         active = [v for v, mask in zip(label["labels"], label["mask"]) if mask]

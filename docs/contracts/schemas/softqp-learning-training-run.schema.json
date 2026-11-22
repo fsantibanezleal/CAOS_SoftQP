@@ -1,0 +1,630 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-training-run/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "not": {
+          "required": [
+            "resources"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "fixture_only": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "resources"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fixture_only": {
+            "const": false
+          },
+          "state": {
+            "enum": [
+              "completed"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "resources": {
+            "properties": {
+              "peak_disk_bytes": {
+                "maximum": 8589934592
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "checkpoints": {
+      "additionalProperties": false,
+      "properties": {
+        "final": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        "latest": {
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "elapsed_seconds": {
+      "format": "lossless-float64",
+      "type": "number"
+    },
+    "fixture_only": {
+      "type": "boolean"
+    },
+    "format": {
+      "const": "learning-training-run/1.0.0"
+    },
+    "heads": {
+      "items": {
+        "maxLength": 4096,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 14,
+      "type": "array"
+    },
+    "journal": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "maxItems": 20000,
+      "type": "array"
+    },
+    "method": {
+      "enum": [
+        "learned_osqp",
+        "learned_daqp"
+      ]
+    },
+    "phases": {
+      "additionalProperties": false,
+      "properties": {
+        "train": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "validation": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "train",
+        "validation"
+      ],
+      "type": "object"
+    },
+    "population_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "preflight_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "prior_run_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "protocol": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "learning-protocol"
+        },
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resources": {
+      "additionalProperties": false,
+      "properties": {
+        "peak_disk_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "policy_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "peak_disk_bytes",
+        "policy_sha256"
+      ],
+      "type": "object"
+    },
+    "runtime_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "seed": {
+      "enum": [
+        41001,
+        41002,
+        41003
+      ]
+    },
+    "selected_initial_heads": {
+      "items": {
+        "maxLength": 4096,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 14,
+      "type": "array"
+    },
+    "snapshots": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "class_statistics": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "N0": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  },
+                  "N1": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  },
+                  "positive_prior": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  },
+                  "weight0": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  },
+                  "weight1": {
+                    "format": "lossless-float64",
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "N0",
+                  "N1",
+                  "positive_prior",
+                  "weight0",
+                  "weight1"
+                ],
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "commit": {
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "maxLength": 4096,
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "epoch": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "files": {
+            "additionalProperties": false,
+            "properties": {
+              "best": {
+                "additionalProperties": false,
+                "properties": {
+                  "bytes": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "bytes",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "current": {
+                "additionalProperties": false,
+                "properties": {
+                  "bytes": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "bytes",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "initial": {
+                "additionalProperties": false,
+                "properties": {
+                  "bytes": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "bytes",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "metadata": {
+                "additionalProperties": false,
+                "properties": {
+                  "bytes": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "bytes",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "moments": {
+                "additionalProperties": false,
+                "properties": {
+                  "bytes": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "bytes",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "rng": {
+                "additionalProperties": false,
+                "properties": {
+                  "bytes": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "path": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "bytes",
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "best",
+              "current",
+              "initial",
+              "metadata",
+              "moments",
+              "rng"
+            ],
+            "type": "object"
+          },
+          "head": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "type": "string"
+          },
+          "initial_train_objective": {
+            "format": "lossless-float64",
+            "type": "number"
+          },
+          "initialization": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "initialization_rule": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "initialization_seed": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "name": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "type": "string"
+                },
+                "shape": {
+                  "items": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "maxItems": 4,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "initialization_rule",
+                "initialization_seed",
+                "name",
+                "sha256",
+                "shape"
+              ],
+              "type": "object"
+            },
+            "maxItems": 200,
+            "type": "array"
+          },
+          "snapshot_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "stopped": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "class_statistics",
+          "commit",
+          "epoch",
+          "files",
+          "head",
+          "initial_train_objective",
+          "initialization",
+          "snapshot_sha256",
+          "stopped"
+        ],
+        "type": "object"
+      },
+      "maxItems": 14,
+      "type": "array"
+    },
+    "source_sha256": {
+      "additionalProperties": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "state": {
+      "enum": [
+        "fixture-exercise",
+        "failed",
+        "completed",
+        "selection-unqualified"
+      ]
+    },
+    "worker": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "installed": {
+              "type": "object"
+            },
+            "peak_rss_bytes": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "ready": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "installed",
+            "peak_rss_bytes",
+            "ready"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "checkpoints",
+    "elapsed_seconds",
+    "fixture_only",
+    "format",
+    "heads",
+    "journal",
+    "method",
+    "phases",
+    "population_sha256",
+    "preflight_sha256",
+    "prior_run_sha256",
+    "protocol",
+    "reason",
+    "runtime_sha256",
+    "seed",
+    "selected_initial_heads",
+    "snapshots",
+    "source_sha256",
+    "state",
+    "worker"
+  ],
+  "type": "object"
+}

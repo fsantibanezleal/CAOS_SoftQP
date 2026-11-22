@@ -1,0 +1,1042 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-native-run/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "authority_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "fixture_only": {
+          "type": "boolean"
+        },
+        "format": {
+          "const": "softqp.native-run/v1"
+        },
+        "inventory_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "population_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "preflight_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "enum": [
+              "train",
+              "validation",
+              "calibration"
+            ]
+          },
+          "maxItems": 3,
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "attempt": {
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "pattern": "^[.a-z0-9-]+[.]json$",
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "input": {
+                "additionalProperties": false,
+                "properties": {
+                  "cold_eligible": {
+                    "type": "boolean"
+                  },
+                  "family": {
+                    "pattern": "^N(0[1-9]|1[0-5])$",
+                    "type": "string"
+                  },
+                  "frame": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "const": "learning-stream-frame"
+                      },
+                      "path": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "artifact_id",
+                      "kind",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  "frame_count": {
+                    "enum": [
+                      1,
+                      32
+                    ]
+                  },
+                  "frame_index": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "original_sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "regime": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "role": {
+                    "enum": [
+                      "train",
+                      "validation",
+                      "calibration"
+                    ]
+                  },
+                  "source": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "const": "learning-stream-source"
+                      },
+                      "path": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "artifact_id",
+                      "kind",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  "source_id": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "transform_sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  "unit_index": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "units_sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "cold_eligible",
+                  "family",
+                  "frame",
+                  "frame_count",
+                  "frame_index",
+                  "original_sha256",
+                  "parent_id",
+                  "regime",
+                  "role",
+                  "source",
+                  "source_id",
+                  "transform_sha256",
+                  "unit_index",
+                  "units_sha256"
+                ],
+                "type": "object"
+              },
+              "label": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "path": {
+                        "pattern": "^[.a-z0-9-]+[.]json$",
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "result_sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "state": {
+                "enum": [
+                  "accepted",
+                  "reference-only",
+                  "reference-product-rejected",
+                  "oracle-native-failure",
+                  "oracle-timeout",
+                  "oracle-failed",
+                  "oracle-disagreement",
+                  "cold-native-failure",
+                  "cold-timeout",
+                  "cold-product-rejected",
+                  "oracle-worker-exit",
+                  "cold-worker-exit"
+                ]
+              }
+            },
+            "required": [
+              "attempt",
+              "input",
+              "label",
+              "reason",
+              "result_sha256",
+              "state"
+            ],
+            "type": "object"
+          },
+          "maxItems": 15456,
+          "type": "array"
+        },
+        "scope_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0.0"
+        },
+        "workers": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "pattern": "^[.a-z0-9-]+[.]json$",
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 15456,
+          "type": "array"
+        }
+      },
+      "required": [
+        "authority_sha256",
+        "fixture_only",
+        "format",
+        "inventory_sha256",
+        "population_sha256",
+        "preflight_sha256",
+        "roles",
+        "rows",
+        "scope_sha256",
+        "version",
+        "workers"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "authority_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "cold": {
+          "anyOf": [
+            {
+              "oneOf": [
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "observed": {
+                      "type": "null"
+                    },
+                    "reason": {
+                      "maxLength": 4096,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "stage": {
+                      "enum": [
+                        "reference",
+                        "cold"
+                      ]
+                    },
+                    "status": {
+                      "enum": [
+                        "timeout",
+                        "worker-exit"
+                      ]
+                    },
+                    "telemetry": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "diagnostic": {
+                          "maxLength": 4096,
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "observed",
+                    "reason",
+                    "stage",
+                    "status",
+                    "telemetry"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "frame_id": {
+                      "maxLength": 4096,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "index": {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "nonce": {
+                      "pattern": "^[a-f0-9]{32}$",
+                      "type": "string"
+                    },
+                    "observed": {
+                      "anyOf": [
+                        {
+                          "type": "object"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "reason": {
+                      "anyOf": [
+                        {
+                          "maxLength": 4096,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "request_sha256": {
+                      "pattern": "^[a-f0-9]{64}$",
+                      "type": "string"
+                    },
+                    "stage": {
+                      "enum": [
+                        "reference",
+                        "cold"
+                      ]
+                    },
+                    "status": {
+                      "enum": [
+                        "observed",
+                        "native-failure"
+                      ]
+                    },
+                    "telemetry": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "frame_id",
+                    "index",
+                    "nonce",
+                    "observed",
+                    "reason",
+                    "request_sha256",
+                    "stage",
+                    "status",
+                    "telemetry"
+                  ],
+                  "type": "object"
+                }
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "format": {
+          "const": "softqp.native-attempt/v1"
+        },
+        "input": {
+          "additionalProperties": false,
+          "properties": {
+            "cold_eligible": {
+              "type": "boolean"
+            },
+            "family": {
+              "pattern": "^N(0[1-9]|1[0-5])$",
+              "type": "string"
+            },
+            "frame": {
+              "additionalProperties": false,
+              "properties": {
+                "artifact_id": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "kind": {
+                  "const": "learning-stream-frame"
+                },
+                "path": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "artifact_id",
+                "kind",
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "frame_count": {
+              "enum": [
+                1,
+                32
+              ]
+            },
+            "frame_index": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "original_sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "parent_id": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            "regime": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "role": {
+              "enum": [
+                "train",
+                "validation",
+                "calibration"
+              ]
+            },
+            "source": {
+              "additionalProperties": false,
+              "properties": {
+                "artifact_id": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "kind": {
+                  "const": "learning-stream-source"
+                },
+                "path": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "sha256": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "artifact_id",
+                "kind",
+                "path",
+                "sha256"
+              ],
+              "type": "object"
+            },
+            "source_id": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            "transform_sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            "unit_index": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "units_sha256": {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "cold_eligible",
+            "family",
+            "frame",
+            "frame_count",
+            "frame_index",
+            "original_sha256",
+            "parent_id",
+            "regime",
+            "role",
+            "source",
+            "source_id",
+            "transform_sha256",
+            "unit_index",
+            "units_sha256"
+          ],
+          "type": "object"
+        },
+        "peak_rss_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "preflight_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reference": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "observed": {
+                  "type": "null"
+                },
+                "reason": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "stage": {
+                  "enum": [
+                    "reference",
+                    "cold"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "timeout",
+                    "worker-exit"
+                  ]
+                },
+                "telemetry": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "diagnostic": {
+                      "maxLength": 4096,
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "required": [
+                "observed",
+                "reason",
+                "stage",
+                "status",
+                "telemetry"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "frame_id": {
+                  "maxLength": 4096,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "index": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "nonce": {
+                  "pattern": "^[a-f0-9]{32}$",
+                  "type": "string"
+                },
+                "observed": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "reason": {
+                  "anyOf": [
+                    {
+                      "maxLength": 4096,
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "request_sha256": {
+                  "pattern": "^[a-f0-9]{64}$",
+                  "type": "string"
+                },
+                "stage": {
+                  "enum": [
+                    "reference",
+                    "cold"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "observed",
+                    "native-failure"
+                  ]
+                },
+                "telemetry": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "frame_id",
+                "index",
+                "nonce",
+                "observed",
+                "reason",
+                "request_sha256",
+                "stage",
+                "status",
+                "telemetry"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "result_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "accepted",
+            "reference-only",
+            "reference-product-rejected",
+            "oracle-native-failure",
+            "oracle-timeout",
+            "oracle-failed",
+            "oracle-disagreement",
+            "cold-native-failure",
+            "cold-timeout",
+            "cold-product-rejected",
+            "oracle-worker-exit",
+            "cold-worker-exit"
+          ]
+        },
+        "version": {
+          "const": "1.0.0"
+        },
+        "worker": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "authority_sha256",
+        "cold",
+        "format",
+        "input",
+        "peak_rss_bytes",
+        "preflight_sha256",
+        "reason",
+        "reference",
+        "result_sha256",
+        "state",
+        "version",
+        "worker"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "fixture_only": {
+          "type": "boolean"
+        },
+        "format": {
+          "const": "softqp.native-role/v1"
+        },
+        "manifest_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "population_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "preflight_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "train",
+            "validation",
+            "calibration"
+          ]
+        },
+        "rows": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "attempt": {
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "pattern": "^[.a-z0-9-]+[.]json$",
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              "input": {
+                "additionalProperties": false,
+                "properties": {
+                  "cold_eligible": {
+                    "type": "boolean"
+                  },
+                  "family": {
+                    "pattern": "^N(0[1-9]|1[0-5])$",
+                    "type": "string"
+                  },
+                  "frame": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "const": "learning-stream-frame"
+                      },
+                      "path": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "artifact_id",
+                      "kind",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  "frame_count": {
+                    "enum": [
+                      1,
+                      32
+                    ]
+                  },
+                  "frame_index": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "original_sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  "parent_id": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "regime": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "role": {
+                    "enum": [
+                      "train",
+                      "validation",
+                      "calibration"
+                    ]
+                  },
+                  "source": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "artifact_id": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "const": "learning-stream-source"
+                      },
+                      "path": {
+                        "maxLength": 4096,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "artifact_id",
+                      "kind",
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  "source_id": {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "transform_sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  },
+                  "unit_index": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "units_sha256": {
+                    "pattern": "^[a-f0-9]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "cold_eligible",
+                  "family",
+                  "frame",
+                  "frame_count",
+                  "frame_index",
+                  "original_sha256",
+                  "parent_id",
+                  "regime",
+                  "role",
+                  "source",
+                  "source_id",
+                  "transform_sha256",
+                  "unit_index",
+                  "units_sha256"
+                ],
+                "type": "object"
+              },
+              "label": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "path": {
+                        "pattern": "^[.a-z0-9-]+[.]json$",
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "pattern": "^[a-f0-9]{64}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "path",
+                      "sha256"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "reason": {
+                "anyOf": [
+                  {
+                    "maxLength": 4096,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "result_sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              },
+              "state": {
+                "enum": [
+                  "accepted",
+                  "reference-only",
+                  "reference-product-rejected",
+                  "oracle-native-failure",
+                  "oracle-timeout",
+                  "oracle-failed",
+                  "oracle-disagreement",
+                  "cold-native-failure",
+                  "cold-timeout",
+                  "cold-product-rejected",
+                  "oracle-worker-exit",
+                  "cold-worker-exit"
+                ]
+              }
+            },
+            "required": [
+              "attempt",
+              "input",
+              "label",
+              "reason",
+              "result_sha256",
+              "state"
+            ],
+            "type": "object"
+          },
+          "maxItems": 15456,
+          "type": "array"
+        },
+        "scope_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        "version": {
+          "const": "1.0.0"
+        }
+      },
+      "required": [
+        "fixture_only",
+        "format",
+        "manifest_sha256",
+        "population_sha256",
+        "preflight_sha256",
+        "role",
+        "rows",
+        "scope_sha256",
+        "version"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "Supervised native label attempt, run and role custody v1.0.0"
+}

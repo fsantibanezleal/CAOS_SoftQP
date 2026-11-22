@@ -363,7 +363,8 @@ def _problem(context, frame_document, source_document):
         "unresolved stream frame license/attribution",
     )
     doc_id = frame_document["artifact_id"]
-    c._problem(problem, context, {"artifact_id": doc_id})
+    c._problem(problem, context, {"artifact_id": doc_id},
+               v2_fixture=frame_document["purpose"] == source_document["purpose"] == "contract-fixture")
     return problem
 
 
@@ -389,14 +390,26 @@ def _label(context, doc, frame_ref, problem, scope):
         payload["frame"] == frame_ref and payload["population_sha256"] == scope,
         "stream label frame/population binding",
     )
+    if not context.allow_fixture or context.native_run is not None:
+        from .native_labels import NativeRun
+
+        c.ensure(
+            type(context.native_run) is NativeRun
+            and context.expected_native_manifest_sha256 is not None,
+            "stream label source-run attestation unavailable",
+        )
+        context.native_run.require_label(
+            doc,
+            frame_ref,
+            problem,
+            scope,
+            expected_manifest_sha256=context.expected_native_manifest_sha256,
+        )
     evidence = payload["native_evidence"]
     if payload["status"] == "oracle-failed":
         c.ensure(evidence is None, "fabricated raw DAQP output after oracle failure")
         c._label_values(payload, problem, context.fit_source_ids, context)
         return
-    # No production source-run attestation contract is admitted yet. The
-    # fixture lane exercises raw side semantics without qualifying a run.
-    c.ensure(context.allow_fixture, "stream label source-run attestation unavailable")
     c.ensure(evidence is not None, "missing raw label evidence")
     c.ensure(
         evidence["sha256"] == _digest({k: v for k, v in evidence.items() if k != "sha256"}),
@@ -1191,4 +1204,4 @@ def _checkpoint(context, document, train, validation):
             (train.read_label(frame_id)["payload"], train.read_problem(frame_id)["source"])
             for frame_id in train._labels
         ]
-        c._checkpoint_class_values(stats, values)
+        c._checkpoint_class_values(stats, values, sdk_order=not train.fixture_only)

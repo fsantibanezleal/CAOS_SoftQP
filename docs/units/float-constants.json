@@ -29,9 +29,14 @@
     "data-pipeline/pipeline/io/contract.py",
     "data-pipeline/pipeline/io/formats.py",
     "data-pipeline/pipeline/learned_comparison/__init__.py",
+    "data-pipeline/pipeline/learned_comparison/authority.py",
     "data-pipeline/pipeline/learned_comparison/contracts.py",
+    "data-pipeline/pipeline/learned_comparison/generator.py",
+    "data-pipeline/pipeline/learned_comparison/native_labels.py",
     "data-pipeline/pipeline/learned_comparison/phase_inputs.py",
     "data-pipeline/pipeline/learned_comparison/stream_inputs.py",
+    "data-pipeline/pipeline/learned_comparison/training.py",
+    "data-pipeline/pipeline/learned_comparison/training_worker.py",
     "data-pipeline/pipeline/lesson_process.py",
     "data-pipeline/pipeline/optimality.py",
     "data-pipeline/pipeline/oracles.py",
@@ -1203,7 +1208,7 @@
       "unit": "dimensionless",
       "rationale": "This literal defines relative backend residual stopping ratio in dimensionless; its dimensional role is specific to this source expression."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1707:48": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1765:48": {
       "value": "1e-06",
       "context_sha256": "4f7c3b6a9e0214648438aeee554c9f9d31602bfc2095a51bccfbe5499ac27749",
       "expression": "def _recovery(problem, candidate, *, hard_limit=1e-6, limit=1e-5):",
@@ -1211,7 +1216,7 @@
       "unit": "canonical row-coordinate unit for absolute bound departures; dimensionless for relative objective discrepancy",
       "rationale": "The recovery reader uses this default both for each lifted row bound margin and for the relative mismatch between canonical auxiliary cost and the recomputed original objective. The two checks use their stated canonical reference magnitudes."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1707:60": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1765:60": {
       "value": "1e-05",
       "context_sha256": "4f7c3b6a9e0214648438aeee554c9f9d31602bfc2095a51bccfbe5499ac27749",
       "expression": "def _recovery(problem, candidate, *, hard_limit=1e-6, limit=1e-5):",
@@ -1219,7 +1224,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The recovery reader bounds the lifted gradient after scaling by the largest canonical gradient term and bounds each dual times bound departure after scaling by canonical cost magnitudes."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2094:12": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2166:12": {
       "value": "0.0",
       "context_sha256": "f602326b9a51904300cb7c5b6221128e322a430154a4e251eac84fdfe6f93db0",
       "expression": "mass = [0.0, 0.0]",
@@ -1227,7 +1232,7 @@
       "unit": "dimensionless weighted class fraction",
       "rationale": "This zero initializes N0 before adding each training frame's source-balanced weight times its fraction of unmasked negative labels. An absent class fails the registered fit check."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2094:17": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2166:17": {
       "value": "0.0",
       "context_sha256": "f602326b9a51904300cb7c5b6221128e322a430154a4e251eac84fdfe6f93db0",
       "expression": "mass = [0.0, 0.0]",
@@ -1235,7 +1240,7 @@
       "unit": "dimensionless weighted class fraction",
       "rationale": "This zero initializes N1 before adding each training frame's source-balanced weight times its fraction of unmasked positive labels. The admitted positive prior uses N1 divided by total class mass."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1845:79": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1903:79": {
       "value": "1e-08",
       "context_sha256": "8644357558e63f6d1d1bc7a2f1759192668e56f05d945f844c8737af8252171a",
       "expression": "(max(objectives) - min(objectives)) / max(1, *map(abs, objectives)) <= 1e-8,",
@@ -1243,7 +1248,7 @@
       "unit": "dimensionless relative objective discrepancy",
       "rationale": "R4 numerical-spec.md bounds the spread of independently recomputed reference objectives divided by the largest absolute objective or the fixed objective reference unit before using their median."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1931:45": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1989:45": {
       "value": "1e-08",
       "context_sha256": "c8a2c8fa4d504efd83164e9a8e42e34bf998dcab7b1a0f34758b231b8cf3576f",
       "expression": "_recovery(problem, candidate, hard_limit=1e-8, limit=1e-8)",
@@ -1251,7 +1256,7 @@
       "unit": "canonical row-coordinate unit for absolute bound departures; dimensionless for relative objective discrepancy",
       "rationale": "The cold DAQP label candidate admission passes this tighter value to the recovery reader for both lifted row bound departures and the normalized auxiliary objective mismatch. The two uses retain their own canonical reference magnitudes."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1931:57": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1989:57": {
       "value": "1e-08",
       "context_sha256": "c8a2c8fa4d504efd83164e9a8e42e34bf998dcab7b1a0f34758b231b8cf3576f",
       "expression": "_recovery(problem, candidate, hard_limit=1e-8, limit=1e-8)",
@@ -1259,7 +1264,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The cold DAQP label candidate admission tightens the recovery reader's normalized lifted-gradient and dual-product checks. Both ratios use the fixed canonical reference magnitudes."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1933:26": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1991:26": {
       "value": "1e-08",
       "context_sha256": "05950518f130c29331f68b557e3e5464e2a097d98c1136f118787b49396c9a41",
       "expression": "ensure(metric[\"G\"] <= 1e-8, \"cold label objective disagreement\")",
@@ -1267,7 +1272,7 @@
       "unit": "dimensionless",
       "rationale": "The original objective difference is divided by max(1, abs(f_ref)) under the registered unit objective reference; the 1e-8 acceptance threshold is dimensionless."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1962:14": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2020:14": {
       "value": "1e-07",
       "context_sha256": "76f9b7344106f1548e505c017913ec78961f8545b525c1b6fe7619a36506469d",
       "expression": "tau = 1e-7 * max(1, abs(bound))",
@@ -1275,7 +1280,7 @@
       "unit": "dimensionless relative scale",
       "rationale": "R4 learning-spec.md multiplies this factor by the maximum of one and the absolute signed canonical bound to obtain the slack ambiguity threshold. The resulting threshold has the bound's coordinate unit before nondimensionalization."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:3020:21": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:3092:21": {
       "value": "0.0125",
       "context_sha256": "9f939c07e8937e0568b6e26ccf28cdf2afc8497d009551437a07c03c8b6469d2",
       "expression": "return [quantile(0.0125), quantile(0.9875)]",
@@ -1283,7 +1288,7 @@
       "unit": "dimensionless probability",
       "rationale": "R4 timing-spec.md selects the lower tail at probability 0.0125 from the ordered bootstrap estimates using type 7 interpolation. This is one endpoint of the 97.5 percent marginal interval."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:3020:39": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:3092:39": {
       "value": "0.9875",
       "context_sha256": "9f939c07e8937e0568b6e26ccf28cdf2afc8497d009551437a07c03c8b6469d2",
       "expression": "return [quantile(0.0125), quantile(0.9875)]",
@@ -1291,7 +1296,7 @@
       "unit": "dimensionless probability",
       "rationale": "R4 timing-spec.md selects the upper tail at probability 0.9875 from the ordered bootstrap estimates using type 7 interpolation. This is the other endpoint of the 97.5 percent marginal interval."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1865:54": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1923:54": {
       "value": "1e-08",
       "context_sha256": "f69ca4304c1a8cd19ca2e6baff81294e6137d0c8d3fdc7319135a52237ea56d5",
       "expression": "_recovery(problem, o[\"candidate\"], hard_limit=1e-8, limit=1e-8)",
@@ -1299,7 +1304,7 @@
       "unit": "canonical row-coordinate unit for absolute bound departures; dimensionless for relative objective discrepancy",
       "rationale": "The reference admission passes this tighter value to the recovery reader for both lifted row bound departures and the normalized auxiliary objective mismatch. The two uses retain their own canonical reference magnitudes."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1865:66": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1923:66": {
       "value": "1e-08",
       "context_sha256": "f69ca4304c1a8cd19ca2e6baff81294e6137d0c8d3fdc7319135a52237ea56d5",
       "expression": "_recovery(problem, o[\"candidate\"], hard_limit=1e-8, limit=1e-8)",
@@ -1307,7 +1312,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The reference admission tightens the recovery reader's normalized lifted-gradient and dual-product checks. Both ratios use the fixed canonical reference magnitudes."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2216:29": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2288:29": {
       "value": "0.001",
       "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
       "expression": "\"learning_rate\": 0.001,",
@@ -1315,7 +1320,7 @@
       "unit": "dimensionless training-step multiplier",
       "rationale": "R4 learning-spec.md sets the same scalar step size for the normalized L2WS and GNN optimization coordinates. The checkpoint reader compares the recorded setting exactly."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2218:21": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2290:21": {
       "value": "0.9",
       "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
       "expression": "\"beta1\": 0.9,",
@@ -1323,7 +1328,7 @@
       "unit": "dimensionless",
       "rationale": "R4 learning-spec.md pins beta1 as the exponential averaging coefficient for the optimizer's first gradient moment. The checkpoint reader compares that value exactly."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2219:21": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2291:21": {
       "value": "0.999",
       "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
       "expression": "\"beta2\": 0.999,",
@@ -1331,7 +1336,7 @@
       "unit": "dimensionless",
       "rationale": "R4 learning-spec.md pins beta2 as the exponential averaging coefficient for the optimizer's second gradient moment. The checkpoint reader compares that value exactly."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2220:19": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2292:19": {
       "value": "1e-08",
       "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
       "expression": "\"eps\": 1e-8,",
@@ -1339,7 +1344,7 @@
       "unit": "gradient RMS coordinate in dimensionless training coordinates",
       "rationale": "R4 learning-spec.md pins epsilon for the optimizer's square-root second-moment denominator. The checkpoint reader checks the exact parameter in the normalized learning coordinate system."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1964:48": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2022:48": {
       "value": "1e-07",
       "context_sha256": "9b2a24923fb2505648aa073a57448ed1a41c6ee4f145fa8c84dd3a1192ae50c5",
       "expression": "1 if abs(d) <= tau and multiplier > 1e-7 else (0 if d > tau and abs(multiplier) <= 1e-7 else None)",
@@ -1347,7 +1352,7 @@
       "unit": "dimensionless canonical graph dual coordinate, with physical scale objective-unit per canonical row unit",
       "rationale": "A close-to-tight inequality is labeled positive only when its signed one-sided cold DAQP multiplier is strictly greater than this threshold. R4 learning-spec.md assigns ambiguous rows no label."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2217:28": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2289:28": {
       "value": "0.0001",
       "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
       "expression": "\"weight_decay\": 0.0001 if method == \"learned_osqp\" else 0.01,",
@@ -1355,7 +1360,7 @@
       "unit": "dimensionless optimizer coefficient",
       "rationale": "R4 learning-spec.md fixes this decay setting for learned_osqp. The checkpoint reader checks the L2WS branch of the optimizer definition."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2217:68": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2289:68": {
       "value": "0.01",
       "context_sha256": "232d2ac2386a492bf670b72730a37dc96fc587e9ad324cfc975148b4f93b8aab",
       "expression": "\"weight_decay\": 0.0001 if method == \"learned_osqp\" else 0.01,",
@@ -1363,7 +1368,7 @@
       "unit": "dimensionless optimizer coefficient",
       "rationale": "R4 learning-spec.md fixes this decay setting for learned_daqp. The checkpoint reader checks the GNN branch of the optimizer definition."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1736:21": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1794:21": {
       "value": "1e-07",
       "context_sha256": "314379b338b6bb866d14f6589622e940a631fb1673a69d79f8ec8fab709c14b0",
       "expression": "(dual <= 1e-7 or up is not None) and (dual >= -1e-7 or lo is not None),",
@@ -1371,7 +1376,7 @@
       "unit": "objective-unit per canonical row unit",
       "rationale": "With no finite upper bound the positive canonical dual must stay below this absolute allowance in that row's dual coordinate. The recovery map defines positive dual as upper-side orientation."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1771:70": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1829:70": {
       "value": "1e-07",
       "context_sha256": "25d58e5d3dcfedcee712ad7f623c98c8849ab960fdb88b578f02e378d9acb82f",
       "expression": "e[\"t\"][gid] == value and e[\"mu\"][gid] == mu and value >= -1e-7 and mu >= -1e-7,",
@@ -1379,7 +1384,7 @@
       "unit": "declared peak-coordinate unit",
       "rationale": "The reader checks the returned epigraph peak against the recorded lifted variable and admits a negative roundoff allowance in its canonical peak coordinate. The peak reference magnitude is one."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1771:86": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1829:86": {
       "value": "1e-07",
       "context_sha256": "25d58e5d3dcfedcee712ad7f623c98c8849ab960fdb88b578f02e378d9acb82f",
       "expression": "e[\"t\"][gid] == value and e[\"mu\"][gid] == mu and value >= -1e-7 and mu >= -1e-7,",
@@ -1387,7 +1392,7 @@
       "unit": "objective-unit per declared peak-coordinate unit",
       "rationale": "The reader recovers mu by reversing the signed multiplier on the nonnegative peak row and applies this negative-roundoff allowance in the corresponding peak dual coordinate."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1791:93": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1849:93": {
       "value": "1e-05",
       "context_sha256": "29f968da1d79a541afeefc93d688659cdbadf966e310c11177184223029d302b",
       "expression": "abs(g[\"linear\"] + g[\"quadratic\"] * value - sum(multipliers) - mu) / denom <= 1e-5",
@@ -1395,7 +1400,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The peak price derivative minus recovered side and nonnegativity multipliers has objective units per peak unit. The reader divides by the largest magnitude of those terms and the one-unit reference before applying this R4 limit."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1792:69": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1850:69": {
       "value": "1e-05",
       "context_sha256": "29f968da1d79a541afeefc93d688659cdbadf966e310c11177184223029d302b",
       "expression": "and abs(mu * value) / max(1, abs(mu), abs(value)) <= 1e-5,",
@@ -1403,7 +1408,7 @@
       "unit": "dimensionless numeric scalar in fixed canonical reference coordinates",
       "rationale": "The reader compares the absolute product of mu and the peak with this limit after dividing by the maximum of one and the two separate canonical numeric magnitudes. R4 numerical-spec.md describes cost-unit normalization, so dimensional equivalence of this denominator requires separate review."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1964:95": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2022:95": {
       "value": "1e-07",
       "context_sha256": "9b2a24923fb2505648aa073a57448ed1a41c6ee4f145fa8c84dd3a1192ae50c5",
       "expression": "1 if abs(d) <= tau and multiplier > 1e-7 else (0 if d > tau and abs(multiplier) <= 1e-7 else None)",
@@ -1411,7 +1416,7 @@
       "unit": "dimensionless canonical graph dual coordinate, with physical scale objective-unit per canonical row unit",
       "rationale": "A sufficiently slack inequality is labeled negative only when the absolute one-sided cold DAQP multiplier is at most this threshold. R4 learning-spec.md assigns ambiguous rows no label."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1736:59": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1794:59": {
       "value": "1e-07",
       "context_sha256": "314379b338b6bb866d14f6589622e940a631fb1673a69d79f8ec8fab709c14b0",
       "expression": "(dual <= 1e-7 or up is not None) and (dual >= -1e-7 or lo is not None),",
@@ -1419,7 +1424,7 @@
       "unit": "objective-unit per canonical row unit",
       "rationale": "With no finite lower bound the canonical dual may be negative only down to the negative of this allowance in that row's dual coordinate. The recovery map defines negative dual as lower-side orientation."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1785:27": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1843:27": {
       "value": "1e-05",
       "context_sha256": "873b9547a0f05cb90ebd1db43d53474ede7643d6b814030f9c36377240fad3ae",
       "expression": "<= 1e-5,",
@@ -1427,7 +1432,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The recovery reader multiplies a side multiplier by the matching peak-unit slack and divides the resulting objective-scale product by the largest corresponding cost magnitude. R4 numerical-spec.md sets the supplemental side complementarity limit."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1937:33": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1995:33": {
       "value": "1e-08",
       "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
       "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1435,7 +1440,7 @@
       "unit": "dimensionless original-row departure divided by its fixed canonical reference magnitude",
       "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This is the maximum hard-row departure relative to its declared original-row reference magnitude. The stored reference magnitudes are exactly one in canonical coordinates."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1937:46": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1995:46": {
       "value": "1e-08",
       "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
       "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1443,7 +1448,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This is the worse original-space gradient ratio from the raw and repaired duals, each scaled by its own canonical gradient-term magnitude."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1937:59": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1995:59": {
       "value": "1e-08",
       "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
       "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1451,7 +1456,7 @@
       "unit": "dimensionless relative objective defect",
       "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This bounds the largest individual row or peak-group Fenchel defect after dividing by its own objective-scale denominator."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1937:76": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1995:76": {
       "value": "1e-08",
       "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
       "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1459,7 +1464,7 @@
       "unit": "dimensionless relative objective defect",
       "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This bounds the aggregate Fenchel discrepancy using its objective-scale denominator while the individual row and group checks remain separate."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1937:89": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1995:89": {
       "value": "1e-09",
       "context_sha256": "5496851108a6297af4af33ec6f92f0d748ecc27df5c050588f9b13419c5f85a9",
       "expression": "for k, lim in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1467,7 +1472,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The cold DAQP label candidate must pass the tighter R4 original-space acceptance limit. This bounds the largest recovered-to-repaired original dual difference relative to the canonical raw dual magnitude and its one-unit reference floor."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1778:79": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1836:79": {
       "value": "1e-07",
       "context_sha256": "0af12366e85b8bbea70389661c99211335462eb096a27553c6ae9b4b6cfabcdf",
       "expression": "ensure(e[\"lambda_\" + side][i] == multiplier and multiplier >= -1e-7, \"peak side multiplier\")",
@@ -1475,7 +1480,7 @@
       "unit": "objective-unit per declared peak-coordinate unit",
       "rationale": "Each directional epigraph side is expressed in the group peak coordinate. Its recorded multiplier must equal the recovered value and satisfy the stated nonnegativity allowance in objective units per peak unit."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1871:39": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1929:39": {
       "value": "1e-08",
       "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
       "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1483,7 +1488,7 @@
       "unit": "dimensionless original-row departure divided by its fixed canonical reference magnitude",
       "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This is the maximum hard-row departure relative to its declared original-row reference magnitude. The stored reference magnitudes are exactly one in canonical coordinates."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1871:52": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1929:52": {
       "value": "1e-08",
       "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
       "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1491,7 +1496,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This is the worse original-space gradient ratio from the raw and repaired duals, each scaled by its own canonical gradient-term magnitude."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1871:65": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1929:65": {
       "value": "1e-08",
       "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
       "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1499,7 +1504,7 @@
       "unit": "dimensionless relative objective defect",
       "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This bounds the largest individual row or peak-group Fenchel defect after dividing by its own objective-scale denominator."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1871:82": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1929:82": {
       "value": "1e-08",
       "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
       "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1507,7 +1512,7 @@
       "unit": "dimensionless relative objective defect",
       "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This bounds the aggregate Fenchel discrepancy using its objective-scale denominator while the individual row and group checks remain separate."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:1871:95": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:1929:95": {
       "value": "1e-09",
       "context_sha256": "200afdb322503ff6fb6e44197b0e2d370714b5c0750db9e5eb1e8f8d0ec8497f",
       "expression": "for k, limit in [(\"H\", 1e-8), (\"K\", 1e-8), (\"F\", 1e-8), (\"F_all\", 1e-8), (\"D\", 1e-9)]",
@@ -1515,7 +1520,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "The reference must pass the tighter R4 original-space acceptance limit. This bounds the largest recovered-to-repaired original dual difference relative to the canonical raw dual magnitude and its one-unit reference floor."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2940:66": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:3012:66": {
       "value": "0.1",
       "context_sha256": "68dae15c831f6bb3dcdbb8b33ab237578becf20eeb804ea3c067a5aaf39b5f85",
       "expression": "and hypothesis[\"qualified\"] == (interval[0] > 0.10)",
@@ -1523,7 +1528,7 @@
       "unit": "dimensionless relative wall-time reduction fraction",
       "rationale": "R4 timing-spec.md requires the lower crossed-bootstrap interval endpoint to be strictly above ten percent for an otherwise admitted hypothesis. The statistic uses complete trajectory cost ratios."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2666:30": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2738:30": {
       "value": "1e-06",
       "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
       "expression": "(\"H\", 1e-6),",
@@ -1531,7 +1536,7 @@
       "unit": "dimensionless original-row departure divided by its fixed canonical reference magnitude",
       "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This is the maximum hard-row departure relative to its declared original-row reference magnitude. The stored reference magnitudes are exactly one in canonical coordinates."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2667:30": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2739:30": {
       "value": "1e-06",
       "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
       "expression": "(\"G\", 1e-6),",
@@ -1539,7 +1544,7 @@
       "unit": "dimensionless relative objective discrepancy",
       "rationale": "R4 numerical-spec.md bounds the absolute gap to the admitted median reference objective divided by the larger of its absolute magnitude and the fixed objective reference unit."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2668:30": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2740:30": {
       "value": "1e-05",
       "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
       "expression": "(\"K\", 1e-5),",
@@ -1547,7 +1552,7 @@
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This is the worse original-space gradient ratio from the raw and repaired duals, each scaled by its own canonical gradient-term magnitude."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2669:30": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2741:30": {
       "value": "1e-05",
       "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
       "expression": "(\"F\", 1e-5),",
@@ -1555,7 +1560,7 @@
       "unit": "dimensionless relative objective defect",
       "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This bounds the largest individual row or peak-group Fenchel defect after dividing by its own objective-scale denominator."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2670:34": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2742:34": {
       "value": "1e-05",
       "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
       "expression": "(\"F_all\", 1e-5),",
@@ -1563,13 +1568,1501 @@
       "unit": "dimensionless relative objective defect",
       "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This bounds the aggregate Fenchel discrepancy using its objective-scale denominator while the individual row and group checks remain separate."
     },
-    "data-pipeline/pipeline/learned_comparison/contracts.py:2671:30": {
+    "data-pipeline/pipeline/learned_comparison/contracts.py:2743:30": {
       "value": "1e-07",
       "context_sha256": "63273c1ca4dc026a13575aeb65ffbc3c038a2fba73b2fbe7343d1ba0b8a689d3",
       "expression": "(\"D\", 1e-7),",
       "quantity": "candidate original-space dual repair magnitude limit (D)",
       "unit": "dimensionless in the fixed canonical reference coordinates",
       "rationale": "R4 numerical-spec.md requires this limit for an accepted method trial. This bounds the largest recovered-to-repaired original dual difference relative to the canonical raw dual magnitude and its one-unit reference floor."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:56:6": {
+      "value": "0.2",
+      "context_sha256": "f217efd68f299e68693d910d57aa5c2c549eeb808da038b126ecd4de1f855c4c",
+      "expression": "_DT = .2",
+      "quantity": "double-integrator sample duration",
+      "unit": "s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:143:26": {
+      "value": "0.0",
+      "context_sha256": "b7c97ac94791a182b8b4c8a1b627fe959494a71ac32aba195b3ff1f323f05862",
+      "expression": "values[values == 0] = 0.0",
+      "quantity": "canonical positive-zero coefficient",
+      "unit": "same declared unit as the normalized coefficient",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:239:29": {
+      "value": "0.3",
+      "context_sha256": "0d1a7609392e7c27cee09242a3bc1018f167e4faf082cdf267fcb3dccd2346e6",
+      "expression": "def _penalty(soft, *, linear=.3, quadratic=2., ratio=1., grouped=False):",
+      "quantity": "default linear side price",
+      "unit": "synthetic objective unit per declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:239:43": {
+      "value": "2.0",
+      "context_sha256": "0d1a7609392e7c27cee09242a3bc1018f167e4faf082cdf267fcb3dccd2346e6",
+      "expression": "def _penalty(soft, *, linear=.3, quadratic=2., ratio=1., grouped=False):",
+      "quantity": "default quadratic side price",
+      "unit": "synthetic objective unit per squared declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:239:53": {
+      "value": "1.0",
+      "context_sha256": "0d1a7609392e7c27cee09242a3bc1018f167e4faf082cdf267fcb3dccd2346e6",
+      "expression": "def _penalty(soft, *, linear=.3, quadratic=2., ratio=1., grouped=False):",
+      "quantity": "default upper to lower side price ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:256:34": {
+      "value": "0.3",
+      "context_sha256": "0de9e8172f4a6b714ab0b474d2d0082894e6501d3cad55ba2ff6f0d08f59e70f",
+      "expression": "def _static(P, A, soft, *, linear=.3, quadratic=2., ratio=1., groups=(),",
+      "quantity": "default linear side price",
+      "unit": "synthetic objective unit per declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:256:48": {
+      "value": "2.0",
+      "context_sha256": "0de9e8172f4a6b714ab0b474d2d0082894e6501d3cad55ba2ff6f0d08f59e70f",
+      "expression": "def _static(P, A, soft, *, linear=.3, quadratic=2., ratio=1., groups=(),",
+      "quantity": "default quadratic side price",
+      "unit": "synthetic objective unit per squared declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:256:58": {
+      "value": "1.0",
+      "context_sha256": "0de9e8172f4a6b714ab0b474d2d0082894e6501d3cad55ba2ff6f0d08f59e70f",
+      "expression": "def _static(P, A, soft, *, linear=.3, quadratic=2., ratio=1., groups=(),",
+      "quantity": "default upper to lower side price ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:168:40": {
+      "value": "1.0",
+      "context_sha256": "6cd38b3464e66e5553f3be9f01701dfb16007ad519125ae896e64433a40a7929",
+      "expression": "Q *= np.where(np.diag(R) < 0, -1.0, 1.0)",
+      "quantity": "orthogonal basis sign normalization",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:169:24": {
+      "value": "0.8",
+      "context_sha256": "2c3375b372391ef1c3e3b7087e5ea0751561ce7112f7512b0b088c8fe4d992f8",
+      "expression": "scale = rng.uniform(.8, 1.2)",
+      "quantity": "dense positive curvature common scale bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:169:28": {
+      "value": "1.2",
+      "context_sha256": "2c3375b372391ef1c3e3b7087e5ea0751561ce7112f7512b0b088c8fe4d992f8",
+      "expression": "scale = rng.uniform(.8, 1.2)",
+      "quantity": "dense positive curvature common scale bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:181:24": {
+      "value": "0.8",
+      "context_sha256": "2c3375b372391ef1c3e3b7087e5ea0751561ce7112f7512b0b088c8fe4d992f8",
+      "expression": "scale = rng.uniform(.8, 1.2)",
+      "quantity": "exact diagonal curvature common scale bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:181:28": {
+      "value": "1.2",
+      "context_sha256": "2c3375b372391ef1c3e3b7087e5ea0751561ce7112f7512b0b088c8fe4d992f8",
+      "expression": "scale = rng.uniform(.8, 1.2)",
+      "quantity": "exact diagonal curvature common scale bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:218:65": {
+      "value": "0.0",
+      "context_sha256": "8c749e5c9db3b65557f1720cc2c8a2241a9799a97d45d2fc7e695740653bdb57",
+      "expression": "rows = np.where(mask, normal / np.sqrt(max(1, density * n)), 0.0)",
+      "quantity": "masked coefficient structural zero",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:231:30": {
+      "value": "0.1",
+      "context_sha256": "a327b36c9353ff17c33940a36bad179de807e94f6ca892d86f7b31d90f676d91",
+      "expression": "center = rng.uniform(-.1, .1, size=count)",
+      "quantity": "generic soft interval center distribution bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:232:29": {
+      "value": "0.3",
+      "context_sha256": "e63506c1ba9c7c20804a99077106fc9dbc7807a121a3aee35d9b06f228e4e644",
+      "expression": "half_width = rng.uniform(.3, .6, size=count)",
+      "quantity": "generic soft interval half-width distribution bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:232:33": {
+      "value": "0.6",
+      "context_sha256": "e63506c1ba9c7c20804a99077106fc9dbc7807a121a3aee35d9b06f228e4e644",
+      "expression": "half_width = rng.uniform(.3, .6, size=count)",
+      "quantity": "generic soft interval half-width distribution bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:241:29": {
+      "value": "0.0",
+      "context_sha256": "83c9d1dd0f69531fff78e3ddea5a0986d27714e8c0aa8b8c74d55e48b57d8237",
+      "expression": "linear = quadratic = 0.0",
+      "quantity": "absence of separable price on peak rows",
+      "unit": "structural zero in each declared side-price unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:294:36": {
+      "value": "0.8",
+      "context_sha256": "5f30e55376634e4e5edb73ccf242f4ffb4edc73b82446e87d3426be9496adda1",
+      "expression": "curvature = coefficient.uniform(.8, 1.2)",
+      "quantity": "scalar curvature uniform distribution bound",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:294:40": {
+      "value": "1.2",
+      "context_sha256": "5f30e55376634e4e5edb73ccf242f4ffb4edc73b82446e87d3426be9496adda1",
+      "expression": "curvature = coefficient.uniform(.8, 1.2)",
+      "quantity": "scalar curvature uniform distribution bound",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:297:31": {
+      "value": "0.95",
+      "context_sha256": "e88beddfcc872d52b9d7c44c9670b994e6fb94b6c6ded8a26469b62eba97ebbb",
+      "expression": "jitter = operating.uniform(.95, 1.05)",
+      "quantity": "scalar target-distance jitter distribution bound",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:297:36": {
+      "value": "1.05",
+      "context_sha256": "e88beddfcc872d52b9d7c44c9670b994e6fb94b6c6ded8a26469b62eba97ebbb",
+      "expression": "jitter = operating.uniform(.95, 1.05)",
+      "quantity": "scalar target-distance jitter distribution bound",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:338:63": {
+      "value": "1.0",
+      "context_sha256": "efaf878c5c35e58134509d50a398720ee36de517ce1404dfaac4b03539964abe",
+      "expression": "density = {\"N06\": value, \"N08\": .2, \"N15\": .2}.get(family, 1.)",
+      "quantity": "requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:412:38": {
+      "value": "0.1",
+      "context_sha256": "b172b00b1bceb10243cfcfaac801c57043114dbbaa39899b5f3490c31252f815",
+      "expression": "velocity = operating.uniform(-.1, .1)",
+      "quantity": "MPC initial velocity sampling endpoints",
+      "unit": "m/s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:460:30": {
+      "value": "0.0",
+      "context_sha256": "1afcb73390f265bd79616420d15f22bcc82e1c03eedcfc79333228f491a40ab1",
+      "expression": "phase = operating.uniform(0., 2 * np.pi, size=2)",
+      "quantity": "minimum sampled thermal phase angle",
+      "unit": "radian",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:461:31": {
+      "value": "0.0",
+      "context_sha256": "6651293c6726697cf928b4d1e82d99694aaec6563aa212e395cc2ad2765e75e1",
+      "expression": "offset = operating.uniform(0., 24.)",
+      "quantity": "thermal daylight offset distribution endpoints",
+      "unit": "hour",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:461:35": {
+      "value": "24.0",
+      "context_sha256": "6651293c6726697cf928b4d1e82d99694aaec6563aa212e395cc2ad2765e75e1",
+      "expression": "offset = operating.uniform(0., 24.)",
+      "quantity": "thermal daylight offset distribution endpoints",
+      "unit": "hour",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:462:14": {
+      "value": "21.5",
+      "context_sha256": "bfb475b2ab912897b5c6fa7eef5981745889cdc6b4d757886f818e6cbaec608b",
+      "expression": "initial = 21.5 + .5 * np.sin(phase)",
+      "quantity": "thermal initial temperature baseline or amplitude",
+      "unit": "degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:465:14": {
+      "value": "8.0",
+      "context_sha256": "6a140e8d71312c4898700bd4e7930dd8ef00353dfaf8ef5d7e8da1c568479dfe",
+      "expression": "outside = 8. + 3. * daylight",
+      "quantity": "outside-temperature baseline or amplitude",
+      "unit": "degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:466:12": {
+      "value": "0.2",
+      "context_sha256": "3fa061d8267091018032b6b19f3deeb2d51564cd435bbab5f35f81c645fe0703",
+      "expression": "price = .2 + .08 * daylight",
+      "quantity": "baseline heating price or oscillation amplitude",
+      "unit": "synthetic-currency/kWh",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:38:15": {
+      "value": "0.25",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N01\": (0, .25, .5, 1, 2, 4),",
+      "quantity": "N01 target distance below lower interval",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:38:20": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N01\": (0, .25, .5, 1, 2, 4),",
+      "quantity": "N01 target distance below lower interval",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:39:15": {
+      "value": "0.25",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N02\": (0, .25, .5, 1, 2, 4),",
+      "quantity": "N02 target distance above upper interval",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:39:20": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N02\": (0, .25, .5, 1, 2, 4),",
+      "quantity": "N02 target distance above upper interval",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:40:15": {
+      "value": "0.1",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N03\": (0, .1, .2, .4, .8, 1.6),",
+      "quantity": "N03 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:40:19": {
+      "value": "0.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N03\": (0, .1, .2, .4, .8, 1.6),",
+      "quantity": "N03 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:40:23": {
+      "value": "0.4",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N03\": (0, .1, .2, .4, .8, 1.6),",
+      "quantity": "N03 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:40:27": {
+      "value": "0.8",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N03\": (0, .1, .2, .4, .8, 1.6),",
+      "quantity": "N03 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:40:31": {
+      "value": "1.6",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N03\": (0, .1, .2, .4, .8, 1.6),",
+      "quantity": "N03 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:41:12": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N04\": (.5, .75, 1, 1.25, 1.5, 2),",
+      "quantity": "N04 demand multiplier on its base linear term",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:41:16": {
+      "value": "0.75",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N04\": (.5, .75, 1, 1.25, 1.5, 2),",
+      "quantity": "N04 demand multiplier on its base linear term",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:41:24": {
+      "value": "1.25",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N04\": (.5, .75, 1, 1.25, 1.5, 2),",
+      "quantity": "N04 demand multiplier on its base linear term",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:41:30": {
+      "value": "1.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N04\": (.5, .75, 1, 1.25, 1.5, 2),",
+      "quantity": "N04 demand multiplier on its base linear term",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:42:12": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N05\": (.5, .75, 1, 1.5, 2, 4),",
+      "quantity": "N05 upper to lower group side scale ratio",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:42:16": {
+      "value": "0.75",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N05\": (.5, .75, 1, 1.5, 2, 4),",
+      "quantity": "N05 upper to lower group side scale ratio",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:42:24": {
+      "value": "1.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N05\": (.5, .75, 1, 1.5, 2, 4),",
+      "quantity": "N05 upper to lower group side scale ratio",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:43:12": {
+      "value": "0.05",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N06\": (.05, .1, .2, .3, .5, .8),",
+      "quantity": "N06 requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:43:17": {
+      "value": "0.1",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N06\": (.05, .1, .2, .3, .5, .8),",
+      "quantity": "N06 requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:43:21": {
+      "value": "0.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N06\": (.05, .1, .2, .3, .5, .8),",
+      "quantity": "N06 requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:43:25": {
+      "value": "0.3",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N06\": (.05, .1, .2, .3, .5, .8),",
+      "quantity": "N06 requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:43:29": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N06\": (.05, .1, .2, .3, .5, .8),",
+      "quantity": "N06 requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:43:33": {
+      "value": "0.8",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N06\": (.05, .1, .2, .3, .5, .8),",
+      "quantity": "N06 requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:46:12": {
+      "value": "0.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N09\": (.2, .4, .8, 1.2, 1.6, 2),",
+      "quantity": "N09 target initial position",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:46:16": {
+      "value": "0.4",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N09\": (.2, .4, .8, 1.2, 1.6, 2),",
+      "quantity": "N09 target initial position",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:46:20": {
+      "value": "0.8",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N09\": (.2, .4, .8, 1.2, 1.6, 2),",
+      "quantity": "N09 target initial position",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:46:24": {
+      "value": "1.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N09\": (.2, .4, .8, 1.2, 1.6, 2),",
+      "quantity": "N09 target initial position",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:46:29": {
+      "value": "1.6",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N09\": (.2, .4, .8, 1.2, 1.6, 2),",
+      "quantity": "N09 target initial position",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:47:12": {
+      "value": "0.1",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N10\": (.1, .2, .3, .4, .6, .8),",
+      "quantity": "N10 comfort position half width",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:47:16": {
+      "value": "0.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N10\": (.1, .2, .3, .4, .6, .8),",
+      "quantity": "N10 comfort position half width",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:47:20": {
+      "value": "0.3",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N10\": (.1, .2, .3, .4, .6, .8),",
+      "quantity": "N10 comfort position half width",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:47:24": {
+      "value": "0.4",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N10\": (.1, .2, .3, .4, .6, .8),",
+      "quantity": "N10 comfort position half width",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:47:28": {
+      "value": "0.6",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N10\": (.1, .2, .3, .4, .6, .8),",
+      "quantity": "N10 comfort position half width",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:47:32": {
+      "value": "0.8",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N10\": (.1, .2, .3, .4, .6, .8),",
+      "quantity": "N10 comfort position half width",
+      "unit": "m",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:48:12": {
+      "value": "0.05",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N11\": (.05, .1, .2, .4, .8, 1.6),",
+      "quantity": "N11 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:48:17": {
+      "value": "0.1",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N11\": (.05, .1, .2, .4, .8, 1.6),",
+      "quantity": "N11 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:48:21": {
+      "value": "0.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N11\": (.05, .1, .2, .4, .8, 1.6),",
+      "quantity": "N11 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:48:25": {
+      "value": "0.4",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N11\": (.05, .1, .2, .4, .8, 1.6),",
+      "quantity": "N11 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:48:29": {
+      "value": "0.8",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N11\": (.05, .1, .2, .4, .8, 1.6),",
+      "quantity": "N11 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:48:33": {
+      "value": "1.6",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N11\": (.05, .1, .2, .4, .8, 1.6),",
+      "quantity": "N11 opposing desired interval gap",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:49:15": {
+      "value": "0.2",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N12\": (0, .2, .4, .6, .8, 1),",
+      "quantity": "N12 scheduled velocity impulse amplitude",
+      "unit": "m/s",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:49:19": {
+      "value": "0.4",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N12\": (0, .2, .4, .6, .8, 1),",
+      "quantity": "N12 scheduled velocity impulse amplitude",
+      "unit": "m/s",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:49:23": {
+      "value": "0.6",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N12\": (0, .2, .4, .6, .8, 1),",
+      "quantity": "N12 scheduled velocity impulse amplitude",
+      "unit": "m/s",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:49:27": {
+      "value": "0.8",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N12\": (0, .2, .4, .6, .8, 1),",
+      "quantity": "N12 scheduled velocity impulse amplitude",
+      "unit": "m/s",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:50:12": {
+      "value": "0.25",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N13\": (.25, .5, 1, 2, 4, 8),",
+      "quantity": "N13 base thermal peak price multiplier",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:50:17": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N13\": (.25, .5, 1, 2, 4, 8),",
+      "quantity": "N13 base thermal peak price multiplier",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:51:12": {
+      "value": "0.25",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N14\": (.25, .5, 1, 2, 4, 8),",
+      "quantity": "N14 upper to lower comfort price ratio",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:51:17": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N14\": (.25, .5, 1, 2, 4, 8),",
+      "quantity": "N14 upper to lower comfort price ratio",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:52:12": {
+      "value": "0.1",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N15\": (.1, .25, .5, 1, 2, 4),",
+      "quantity": "N15 quadratic to linear cost ratio in canonical coordinates",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:52:16": {
+      "value": "0.25",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N15\": (.1, .25, .5, 1, 2, 4),",
+      "quantity": "N15 quadratic to linear cost ratio in canonical coordinates",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:52:21": {
+      "value": "0.5",
+      "context_sha256": "819276bcc3d29a448f818f8cd8fb5c02e6b145003f9e546e80ffd2b4762af9b0",
+      "expression": "\"N15\": (.1, .25, .5, 1, 2, 4),",
+      "quantity": "N15 quadratic to linear cost ratio in canonical coordinates",
+      "unit": "dimensionless",
+      "rationale": "This fixed R4 regime value selects the declared operating case before draws."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:168:35": {
+      "value": "1.0",
+      "context_sha256": "6cd38b3464e66e5553f3be9f01701dfb16007ad519125ae896e64433a40a7929",
+      "expression": "Q *= np.where(np.diag(R) < 0, -1.0, 1.0)",
+      "quantity": "orthogonal basis sign normalization",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:231:26": {
+      "value": "0.1",
+      "context_sha256": "a327b36c9353ff17c33940a36bad179de807e94f6ca892d86f7b31d90f676d91",
+      "expression": "center = rng.uniform(-.1, .1, size=count)",
+      "quantity": "generic soft interval center distribution bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:275:19": {
+      "value": "1.0",
+      "context_sha256": "852b6d20bcb1f9142521de2791ba7e15c814d36c57a715580beb696b82c35ae4",
+      "expression": "\"S_f\": 1.,",
+      "quantity": "canonical objective reference magnitude",
+      "unit": "one declared synthetic objective unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:295:31": {
+      "value": "1.1",
+      "context_sha256": "6d8d0a7988f1fd24e50313ec00231408164349e1af67ae92bdf98dae2b8fc2a3",
+      "expression": "lower = operating.uniform(-1.1, -.9)",
+      "quantity": "scalar case lower-bound distribution bound",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:295:37": {
+      "value": "0.9",
+      "context_sha256": "6d8d0a7988f1fd24e50313ec00231408164349e1af67ae92bdf98dae2b8fc2a3",
+      "expression": "lower = operating.uniform(-1.1, -.9)",
+      "quantity": "scalar case lower-bound distribution bound",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:321:66": {
+      "value": "0.0",
+      "context_sha256": "04319513838f0397a9dc495d407ddeebba1076b37c29c014a4b67d35014b18a8",
+      "expression": "static = _static(P, A, np.ones(len(A), dtype=bool), quadratic=0.)",
+      "quantity": "pure-L1 quadratic price structural zero",
+      "unit": "synthetic operating-cost per squared dimensionless row",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:380:75": {
+      "value": "0.0",
+      "context_sha256": "dea804ce6c8b273181b1db0f0e233ee5c119dc5c512db56144ff1789f3293172",
+      "expression": "position = np.where(causal, self.B[0] + (k - j) * _DT * self.B[1], 0.)",
+      "quantity": "causal position response structural zero",
+      "unit": "m/N",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:381:47": {
+      "value": "0.0",
+      "context_sha256": "a2b2d6eb38e795114611bffb8e5441f7fc900bcdae3d70b5f0df55bc06a2cc92",
+      "expression": "velocity = np.where(causal, self.B[1], 0.)",
+      "quantity": "causal velocity response structural zero",
+      "unit": "(m/s)/N",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:385:26": {
+      "value": "1.0",
+      "context_sha256": "6503c993cacb36da83393fa5acc51e416191512172bd5c3b62a342ca75ce87fb",
+      "expression": "steps = np.arange(1., _MPC_HORIZON + 1)",
+      "quantity": "first future step number",
+      "unit": "count",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:394:41": {
+      "value": "0.8",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "model = MPCModel(coefficient.uniform(.8, 1.2), coefficient.uniform(2.7, 3.3),",
+      "quantity": "MPC minimum sampled mass",
+      "unit": "kg",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:394:45": {
+      "value": "1.2",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "model = MPCModel(coefficient.uniform(.8, 1.2), coefficient.uniform(2.7, 3.3),",
+      "quantity": "MPC maximum sampled mass",
+      "unit": "kg",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:394:71": {
+      "value": "2.7",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "model = MPCModel(coefficient.uniform(.8, 1.2), coefficient.uniform(2.7, 3.3),",
+      "quantity": "MPC minimum position cost weight",
+      "unit": "synthetic operating-cost/m^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:394:76": {
+      "value": "3.3",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "model = MPCModel(coefficient.uniform(.8, 1.2), coefficient.uniform(2.7, 3.3),",
+      "quantity": "MPC maximum position cost weight",
+      "unit": "synthetic operating-cost/m^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:395:41": {
+      "value": "0.27",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "coefficient.uniform(.27, .33), coefficient.uniform(.09, .11))",
+      "quantity": "MPC minimum velocity cost weight",
+      "unit": "synthetic operating-cost/(m/s)^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:395:46": {
+      "value": "0.33",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "coefficient.uniform(.27, .33), coefficient.uniform(.09, .11))",
+      "quantity": "MPC maximum velocity cost weight",
+      "unit": "synthetic operating-cost/(m/s)^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:395:72": {
+      "value": "0.09",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "coefficient.uniform(.27, .33), coefficient.uniform(.09, .11))",
+      "quantity": "MPC minimum force cost weight",
+      "unit": "synthetic operating-cost/N^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:395:77": {
+      "value": "0.11",
+      "context_sha256": "bd9f18390e945e8b3bab3a310cf255a15d6acc045d1807f14ce7db0fd9e0fa82",
+      "expression": "coefficient.uniform(.27, .33), coefficient.uniform(.09, .11))",
+      "quantity": "MPC maximum force cost weight",
+      "unit": "synthetic operating-cost/N^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:405:35": {
+      "value": "0.95",
+      "context_sha256": "e88beddfcc872d52b9d7c44c9670b994e6fb94b6c6ded8a26469b62eba97ebbb",
+      "expression": "jitter = operating.uniform(.95, 1.05)",
+      "quantity": "N09 initial position jitter bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:405:40": {
+      "value": "1.05",
+      "context_sha256": "e88beddfcc872d52b9d7c44c9670b994e6fb94b6c6ded8a26469b62eba97ebbb",
+      "expression": "jitter = operating.uniform(.95, 1.05)",
+      "quantity": "N09 initial position jitter bounds",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:406:42": {
+      "value": "2.0",
+      "context_sha256": "0e9ea590845160790d60d39d4e32740fc6fa6ccea898df58b95f5126b4361114",
+      "expression": "position, limit = value * jitter, 2.",
+      "quantity": "N09 fixed comfort position half width",
+      "unit": "m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:412:34": {
+      "value": "0.1",
+      "context_sha256": "b172b00b1bceb10243cfcfaac801c57043114dbbaa39899b5f3490c31252f815",
+      "expression": "velocity = operating.uniform(-.1, .1)",
+      "quantity": "MPC initial velocity sampling endpoints",
+      "unit": "m/s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:462:21": {
+      "value": "0.5",
+      "context_sha256": "bfb475b2ab912897b5c6fa7eef5981745889cdc6b4d757886f818e6cbaec608b",
+      "expression": "initial = 21.5 + .5 * np.sin(phase)",
+      "quantity": "thermal initial temperature baseline or amplitude",
+      "unit": "degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:464:53": {
+      "value": "24.0",
+      "context_sha256": "d7004612917b570e462982e918b7e167f28c79cbfb90b49bfbba6081e9c79d70",
+      "expression": "daylight = np.sin(2 * np.pi * (hours + offset) / 24.)",
+      "quantity": "thermal daylight cycle duration",
+      "unit": "hour",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:465:19": {
+      "value": "3.0",
+      "context_sha256": "6a140e8d71312c4898700bd4e7930dd8ef00353dfaf8ef5d7e8da1c568479dfe",
+      "expression": "outside = 8. + 3. * daylight",
+      "quantity": "outside-temperature baseline or amplitude",
+      "unit": "degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:466:17": {
+      "value": "0.08",
+      "context_sha256": "3fa061d8267091018032b6b19f3deeb2d51564cd435bbab5f35f81c645fe0703",
+      "expression": "price = .2 + .08 * daylight",
+      "quantity": "baseline heating price or oscillation amplitude",
+      "unit": "synthetic-currency/kWh",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:490:28": {
+      "value": "6.0",
+      "context_sha256": "f98e217a37a5ec8decd215b633ffaa342254f84efa6fe69e32ddbd1755922bf3",
+      "expression": "upper[j_heat] = 6.",
+      "quantity": "hard upper hourly heat input bound",
+      "unit": "kWh",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:496:56": {
+      "value": "0.4",
+      "context_sha256": "6acb91069888faea5b63b7b5be949382efbc54b1a97266a6df1f71803d2bf0c6",
+      "expression": "static = _static(P, A, np.arange(m) >= n, quadratic=.4, ratio=value, groups=groups,",
+      "quantity": "N14 base quadratic comfort price",
+      "unit": "synthetic-currency/degreeC^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:252:64": {
+      "value": "1.0",
+      "context_sha256": "d6979a72f5da53ed456015a9f7aaaf2855ef53f599668d0e699e508ad5e61e92",
+      "expression": "return {\"group_id\": group_id, \"rows\": rows, \"lower_scale\": [1.] * len(rows),",
+      "quantity": "common lower group side scale",
+      "unit": "declared peak unit per corresponding row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:338:36": {
+      "value": "0.2",
+      "context_sha256": "efaf878c5c35e58134509d50a398720ee36de517ce1404dfaac4b03539964abe",
+      "expression": "density = {\"N06\": value, \"N08\": .2, \"N15\": .2}.get(family, 1.)",
+      "quantity": "requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:338:47": {
+      "value": "0.2",
+      "context_sha256": "efaf878c5c35e58134509d50a398720ee36de517ce1404dfaac4b03539964abe",
+      "expression": "density = {\"N06\": value, \"N08\": .2, \"N15\": .2}.get(family, 1.)",
+      "quantity": "requested random coefficient mask density",
+      "unit": "fraction",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:354:66": {
+      "value": "2.0",
+      "context_sha256": "504d5826bf18bbf94410a0b97800fbed3d6d39b9e1273032c6b67bf7f2be9d41",
+      "expression": "quadratic=.3 * value if family == \"N15\" else 2., groups=groups)",
+      "quantity": "generic elastic quadratic side price",
+      "unit": "synthetic operating-cost per squared dimensionless row",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:411:54": {
+      "value": "0.4",
+      "context_sha256": "6e9369a9e48b4df936b662a86efe90f51d1369ff9944c41d7d6298df0b9607a7",
+      "expression": "position, limit = operating.uniform(.8, 1.6), .4",
+      "quantity": "N12 sampled initial position endpoints or comfort half width",
+      "unit": "m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:417:37": {
+      "value": "1.5",
+      "context_sha256": "16b696336214274302dadcf898065be68975e7ad2ca17ccebe4979fe591814ba",
+      "expression": "_parameter(\"velocity_limit\", 1.5, \"m/s\", 1),",
+      "quantity": "MPC velocity bound magnitude",
+      "unit": "m/s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:418:34": {
+      "value": "1.0",
+      "context_sha256": "16b696336214274302dadcf898065be68975e7ad2ca17ccebe4979fe591814ba",
+      "expression": "_parameter(\"force_limit\", 1., \"N\", 1),",
+      "quantity": "MPC force bound magnitude",
+      "unit": "N",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:430:65": {
+      "value": "1.5",
+      "context_sha256": "c033aec67b305efa69afb708329baf515a77c0f62e995e72fafe1b64a01c2531",
+      "expression": "base_upper = np.r_[np.ones(h), np.full(h, limit), np.full(h, 1.5)]",
+      "quantity": "upper velocity bound magnitude",
+      "unit": "m/s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:435:76": {
+      "value": "0.0",
+      "context_sha256": "bd1e980965593ea3cacf48ada85ede54e6b56585ed3844fc477dd3ede632eba8",
+      "expression": "impulse = value if frame == 8 else -.75 * value if frame == 20 else 0.",
+      "quantity": "no scheduled velocity impulse",
+      "unit": "m/s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:443:65": {
+      "value": "1.0",
+      "context_sha256": "1fc6dab080ca31f7b3878ec8f0fa410408b8d27fe322b876ae0016104ce5058c",
+      "expression": "force = np.clip(-.5 * state[0] - .2 * state[1], -1., 1.)",
+      "quantity": "upper held reference force magnitude",
+      "unit": "N",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:492:59": {
+      "value": "21.0",
+      "context_sha256": "db554d436246ce60b1e52c6fc581cf4e99e7a614759fb9ecbd656c5a92a182bb",
+      "expression": "lower[j_heat + heats], upper[j_heat + heats] = 21., 23.",
+      "quantity": "lower or upper soft thermal comfort endpoint",
+      "unit": "degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:492:64": {
+      "value": "23.0",
+      "context_sha256": "db554d436246ce60b1e52c6fc581cf4e99e7a614759fb9ecbd656c5a92a182bb",
+      "expression": "lower[j_heat + heats], upper[j_heat + heats] = 21., 23.",
+      "quantity": "lower or upper soft thermal comfort endpoint",
+      "unit": "degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:244:47": {
+      "value": "0.0",
+      "context_sha256": "68fae258695f93487de28af169d45885a732b80bbc85c257e45d2ef46c5ca0b2",
+      "expression": "\"lower_linear\": np.where(soft, linear, 0.0).tolist(),",
+      "quantity": "hard-row lower linear price structural zero",
+      "unit": "synthetic objective unit per declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:245:55": {
+      "value": "0.0",
+      "context_sha256": "68fae258695f93487de28af169d45885a732b80bbc85c257e45d2ef46c5ca0b2",
+      "expression": "\"upper_linear\": np.where(soft, linear * ratio, 0.0).tolist(),",
+      "quantity": "hard-row upper linear price structural zero",
+      "unit": "synthetic objective unit per declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:246:53": {
+      "value": "0.0",
+      "context_sha256": "68fae258695f93487de28af169d45885a732b80bbc85c257e45d2ef46c5ca0b2",
+      "expression": "\"lower_quadratic\": np.where(soft, quadratic, 0.0).tolist(),",
+      "quantity": "hard-row lower quadratic price structural zero",
+      "unit": "synthetic objective unit per squared declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:247:61": {
+      "value": "0.0",
+      "context_sha256": "68fae258695f93487de28af169d45885a732b80bbc85c257e45d2ef46c5ca0b2",
+      "expression": "\"upper_quadratic\": np.where(soft, quadratic * ratio, 0.0).tolist(),",
+      "quantity": "hard-row upper quadratic price structural zero",
+      "unit": "synthetic objective unit per squared declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:272:20": {
+      "value": "1.0",
+      "context_sha256": "852b6d20bcb1f9142521de2791ba7e15c814d36c57a715580beb696b82c35ae4",
+      "expression": "\"D_x\": [1.] * n,",
+      "quantity": "canonical variable reference magnitude",
+      "unit": "one declared variable unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:273:20": {
+      "value": "1.0",
+      "context_sha256": "852b6d20bcb1f9142521de2791ba7e15c814d36c57a715580beb696b82c35ae4",
+      "expression": "\"D_r\": [1.] * m,",
+      "quantity": "canonical row reference magnitude",
+      "unit": "one declared row unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:274:20": {
+      "value": "1.0",
+      "context_sha256": "852b6d20bcb1f9142521de2791ba7e15c814d36c57a715580beb696b82c35ae4",
+      "expression": "\"D_t\": [1.] * len(groups),",
+      "quantity": "canonical peak reference magnitude",
+      "unit": "one declared peak unit",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:288:46": {
+      "value": "0.0",
+      "context_sha256": "ed3b9a5a208f7286d54e561728089165813023f32fff697a6e8973eded7230ab",
+      "expression": "\"lower\": [None if np.isneginf(x) else 0.0 if x == 0 else float(x) for x in lower],",
+      "quantity": "canonical finite zero lower bound",
+      "unit": "same declared unit as the original row",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:289:46": {
+      "value": "0.0",
+      "context_sha256": "ed3b9a5a208f7286d54e561728089165813023f32fff697a6e8973eded7230ab",
+      "expression": "\"upper\": [None if np.isposinf(x) else 0.0 if x == 0 else float(x) for x in upper],",
+      "quantity": "canonical finite zero upper bound",
+      "unit": "same declared unit as the original row",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:352:77": {
+      "value": "0.5",
+      "context_sha256": "08ef3b6ec3d5c3db927b67adf880a0689bb709bf8768d62053801513f9bed751",
+      "expression": "groups = tuple(_group(g, list(range(n + 4*g, n + 4*(g + 1))), value, .5, 1.) for g in range(4))",
+      "quantity": "N05 linear peak price",
+      "unit": "synthetic operating-cost per dimensionless peak",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:352:81": {
+      "value": "1.0",
+      "context_sha256": "08ef3b6ec3d5c3db927b67adf880a0689bb709bf8768d62053801513f9bed751",
+      "expression": "groups = tuple(_group(g, list(range(n + 4*g, n + 4*(g + 1))), value, .5, 1.) for g in range(4))",
+      "quantity": "N05 quadratic peak price",
+      "unit": "synthetic operating-cost per squared dimensionless peak",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:354:31": {
+      "value": "0.3",
+      "context_sha256": "504d5826bf18bbf94410a0b97800fbed3d6d39b9e1273032c6b67bf7f2be9d41",
+      "expression": "quadratic=.3 * value if family == \"N15\" else 2., groups=groups)",
+      "quantity": "N15 base nominal elastic price",
+      "unit": "synthetic operating-cost per squared normalized row",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:370:26": {
+      "value": "1.0",
+      "context_sha256": "c87dcee4e07b9e3203472c48806cfb5c553bbc114386221c13a436b8e44be259",
+      "expression": "return np.array([[1., _DT], [0., 1.]])",
+      "quantity": "position identity transition",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:370:37": {
+      "value": "0.0",
+      "context_sha256": "c87dcee4e07b9e3203472c48806cfb5c553bbc114386221c13a436b8e44be259",
+      "expression": "return np.array([[1., _DT], [0., 1.]])",
+      "quantity": "zero position to velocity transition",
+      "unit": "1/s structural zero",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:370:41": {
+      "value": "1.0",
+      "context_sha256": "c87dcee4e07b9e3203472c48806cfb5c553bbc114386221c13a436b8e44be259",
+      "expression": "return np.array([[1., _DT], [0., 1.]])",
+      "quantity": "velocity identity transition",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:409:44": {
+      "value": "1.14",
+      "context_sha256": "9b154f19b9d5de669a8414988627adadca291cd7269e3d7b5e1c57ddcffa6356",
+      "expression": "position, limit = operating.uniform(1.14, 1.26), value",
+      "quantity": "N10 initial position sampling endpoints",
+      "unit": "m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:409:50": {
+      "value": "1.26",
+      "context_sha256": "9b154f19b9d5de669a8414988627adadca291cd7269e3d7b5e1c57ddcffa6356",
+      "expression": "position, limit = operating.uniform(1.14, 1.26), value",
+      "quantity": "N10 initial position sampling endpoints",
+      "unit": "m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:411:44": {
+      "value": "0.8",
+      "context_sha256": "6e9369a9e48b4df936b662a86efe90f51d1369ff9944c41d7d6298df0b9607a7",
+      "expression": "position, limit = operating.uniform(.8, 1.6), .4",
+      "quantity": "N12 sampled initial position endpoints or comfort half width",
+      "unit": "m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:411:48": {
+      "value": "1.6",
+      "context_sha256": "6e9369a9e48b4df936b662a86efe90f51d1369ff9944c41d7d6298df0b9607a7",
+      "expression": "position, limit = operating.uniform(.8, 1.6), .4",
+      "quantity": "N12 sampled initial position endpoints or comfort half width",
+      "unit": "m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:429:35": {
+      "value": "1.0",
+      "context_sha256": "e4f3a2b1488de9cd9ff23421d0a1b32b3c987f93f2a4812e127e76973f4be3d6",
+      "expression": "base_lower = np.r_[np.full(h, -1.), np.full(h, -limit), np.full(h, -1.5)]",
+      "quantity": "lower force bound magnitude",
+      "unit": "N",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:429:72": {
+      "value": "1.5",
+      "context_sha256": "e4f3a2b1488de9cd9ff23421d0a1b32b3c987f93f2a4812e127e76973f4be3d6",
+      "expression": "base_lower = np.r_[np.full(h, -1.), np.full(h, -limit), np.full(h, -1.5)]",
+      "quantity": "lower velocity bound magnitude",
+      "unit": "m/s",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:443:61": {
+      "value": "1.0",
+      "context_sha256": "1fc6dab080ca31f7b3878ec8f0fa410408b8d27fe322b876ae0016104ce5058c",
+      "expression": "force = np.clip(-.5 * state[0] - .2 * state[1], -1., 1.)",
+      "quantity": "lower held reference force magnitude",
+      "unit": "N",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:471:44": {
+      "value": "0.002",
+      "context_sha256": "c6bbc58f1e31430dc76da1fa215ecf026674c9fea2e8ac7a7f677ea962807a70",
+      "expression": "P = np.diag(np.r_[np.full(temperatures, .002), np.full(heats, .04)])",
+      "quantity": "quadratic temperature objective coefficient",
+      "unit": "synthetic-currency/degreeC^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:471:66": {
+      "value": "0.04",
+      "context_sha256": "c6bbc58f1e31430dc76da1fa215ecf026674c9fea2e8ac7a7f677ea962807a70",
+      "expression": "P = np.diag(np.r_[np.full(temperatures, .002), np.full(heats, .04)])",
+      "quantity": "quadratic heating objective coefficient",
+      "unit": "synthetic-currency/kWh^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:472:42": {
+      "value": "0.002",
+      "context_sha256": "5859262df8bb44a3b55578c11f7326a1d06e0effaf4fe01714cb92f0f00241aa",
+      "expression": "q = np.r_[np.full(temperatures, -22 * .002), np.tile(price, 2)]",
+      "quantity": "quadratic coefficient used to center thermal temperature cost",
+      "unit": "synthetic-currency/degreeC^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:486:23": {
+      "value": "1.0",
+      "context_sha256": "923dbc14c8a4fb11ef9ab9641d2fcefdedcfb46834414e75ce623eb041b134d2",
+      "expression": "forcing = (1. - a[zone]) * outside[hour]",
+      "quantity": "unit term of complement to thermal retention",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:495:64": {
+      "value": "1.5",
+      "context_sha256": "d09c3d0077960ef1c988f2a5072db07675c50fd8d294b0803d423ebbf025975a",
+      "expression": "groups = tuple(_group(g, list(range(n+g*h, n+(g+1)*h)), 1.5, 5.*value, 1.) for g in range(2))",
+      "quantity": "N13 upper comfort peak side scale",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:495:79": {
+      "value": "1.0",
+      "context_sha256": "d09c3d0077960ef1c988f2a5072db07675c50fd8d294b0803d423ebbf025975a",
+      "expression": "groups = tuple(_group(g, list(range(n+g*h, n+(g+1)*h)), 1.5, 5.*value, 1.) for g in range(2))",
+      "quantity": "N13 quadratic comfort peak price",
+      "unit": "synthetic-currency/degreeC^2",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:435:44": {
+      "value": "0.75",
+      "context_sha256": "bd1e980965593ea3cacf48ada85ede54e6b56585ed3844fc477dd3ede632eba8",
+      "expression": "impulse = value if frame == 8 else -.75 * value if frame == 20 else 0.",
+      "quantity": "reverse velocity impulse ratio",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:443:45": {
+      "value": "0.2",
+      "context_sha256": "1fc6dab080ca31f7b3878ec8f0fa410408b8d27fe322b876ae0016104ce5058c",
+      "expression": "force = np.clip(-.5 * state[0] - .2 * state[1], -1., 1.)",
+      "quantity": "velocity force feedback gain magnitude",
+      "unit": "N/(m/s)",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:459:38": {
+      "value": "0.88",
+      "context_sha256": "1c172404d96a2a31eacaeb836fa52c2bc6d4aec355397ba03cc3521abad65e42",
+      "expression": "a, b = zip(*[(coefficient.uniform(.88, .94), coefficient.uniform(.22, .30)) for _ in range(2)])",
+      "quantity": "minimum sampled thermal retention",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:459:43": {
+      "value": "0.94",
+      "context_sha256": "1c172404d96a2a31eacaeb836fa52c2bc6d4aec355397ba03cc3521abad65e42",
+      "expression": "a, b = zip(*[(coefficient.uniform(.88, .94), coefficient.uniform(.22, .30)) for _ in range(2)])",
+      "quantity": "maximum sampled thermal retention",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:459:69": {
+      "value": "0.22",
+      "context_sha256": "1c172404d96a2a31eacaeb836fa52c2bc6d4aec355397ba03cc3521abad65e42",
+      "expression": "a, b = zip(*[(coefficient.uniform(.88, .94), coefficient.uniform(.22, .30)) for _ in range(2)])",
+      "quantity": "minimum sampled thermal heater gain",
+      "unit": "degreeC/kWh",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:459:74": {
+      "value": "0.3",
+      "context_sha256": "1c172404d96a2a31eacaeb836fa52c2bc6d4aec355397ba03cc3521abad65e42",
+      "expression": "a, b = zip(*[(coefficient.uniform(.88, .94), coefficient.uniform(.22, .30)) for _ in range(2)])",
+      "quantity": "maximum sampled thermal heater gain",
+      "unit": "degreeC/kWh",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:495:69": {
+      "value": "5.0",
+      "context_sha256": "d09c3d0077960ef1c988f2a5072db07675c50fd8d294b0803d423ebbf025975a",
+      "expression": "groups = tuple(_group(g, list(range(n+g*h, n+(g+1)*h)), 1.5, 5.*value, 1.) for g in range(2))",
+      "quantity": "N13 base linear comfort peak price",
+      "unit": "synthetic-currency/degreeC",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:317:48": {
+      "value": "1.0",
+      "context_sha256": "220f463d09962637f5c3e0c4e7b98c6ccae066c27def6f8c85d75b6ddca3fae2",
+      "expression": "lower, upper = np.r_[lower, np.full(n, -1.)], np.r_[upper, np.ones(n)]",
+      "quantity": "N11 third policy lower-box magnitude",
+      "unit": "dimensionless",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/generator.py:443:29": {
+      "value": "0.5",
+      "context_sha256": "1fc6dab080ca31f7b3878ec8f0fa410408b8d27fe322b876ae0016104ce5058c",
+      "expression": "force = np.clip(-.5 * state[0] - .2 * state[1], -1., 1.)",
+      "quantity": "position force feedback gain magnitude",
+      "unit": "N/m",
+      "rationale": "This literal sets the specified R4 source quantity in its declared coordinate system."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:123:11": {
+      "value": "0.0",
+      "context_sha256": "e2fd336a1507c78d50340da410da0e0cfcc9793d634bcd0b19445f7961feedc3",
+      "expression": "return 0.0 if type(value) is float and value == 0 else value",
+      "quantity": "Canonical signed-zero serialization value",
+      "unit": "same as corresponding input coordinate",
+      "rationale": "Replacing signed zero preserves each coefficient bound objective-vector or nested output coordinate and its existing physical unit."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:1108:20": {
+      "value": "1e-07",
+      "context_sha256": "23785b9c90a1447346f697300742533576b85974660142efc16feb17d63bff00",
+      "expression": "\"tau_dual\": 1e-7,",
+      "quantity": "Scaled canonical side-dual label cutoff",
+      "unit": "dimensionless",
+      "rationale": "Labels threshold the actual signed multiplier in the registered dimensionless canonical objective and constraint coordinates."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:1109:21": {
+      "value": "1e-07",
+      "context_sha256": "23785b9c90a1447346f697300742533576b85974660142efc16feb17d63bff00",
+      "expression": "\"tau_tight\": 1e-7,",
+      "quantity": "Relative one-sided tightness tolerance",
+      "unit": "dimensionless",
+      "rationale": "The dimensionless tolerance multiplies max one or the absolute scaled canonical bound before testing slack."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:284:19": {
+      "value": "0.005",
+      "context_sha256": "153ff1e5ada9079b84099fca8286ecac8734913c52b553b6e347a733baad9f2f",
+      "expression": "time.sleep(0.005)",
+      "quantity": "Owned worker polling interval",
+      "unit": "second",
+      "rationale": "This wall-clock delay bounds polling overhead without changing numerical tolerances or deadlines."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:305:19": {
+      "value": "0.005",
+      "context_sha256": "153ff1e5ada9079b84099fca8286ecac8734913c52b553b6e347a733baad9f2f",
+      "expression": "time.sleep(0.005)",
+      "quantity": "Owned worker polling interval",
+      "unit": "second",
+      "rationale": "This wall-clock delay bounds polling overhead without changing numerical tolerances or deadlines."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:1034:14": {
+      "value": "1e-07",
+      "context_sha256": "a9b8461dbebf6e90ec78451c1f9e2ae870a0e73a2a06a822b1782b9efdbfe56f",
+      "expression": "tau = 1e-7 * max(1, abs(b))",
+      "quantity": "Relative one-sided tightness tolerance",
+      "unit": "dimensionless",
+      "rationale": "The dimensionless tolerance multiplies max one or the absolute scaled canonical bound before testing slack."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:354:23": {
+      "value": "0.005",
+      "context_sha256": "153ff1e5ada9079b84099fca8286ecac8734913c52b553b6e347a733baad9f2f",
+      "expression": "time.sleep(0.005)",
+      "quantity": "Owned worker polling interval",
+      "unit": "second",
+      "rationale": "This wall-clock delay bounds polling overhead without changing numerical tolerances or deadlines."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:773:23": {
+      "value": "0.01",
+      "context_sha256": "154b3aa0effebcce42a0edb843a1d00ef80d4fc92f15ffda7b20955801db2c30",
+      "expression": "time.sleep(0.01)",
+      "quantity": "Owned worker polling interval",
+      "unit": "second",
+      "rationale": "This wall-clock delay bounds polling overhead without changing numerical tolerances or deadlines."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:243:44": {
+      "value": "0.0",
+      "context_sha256": "c38eecb5a828a59323f25a4a674f95577b2c26859f14a03f1bd816632f51fdcb",
+      "expression": "matrix = lambda rows: [[float(value) or 0.0 for value in row] for row in rows]  # noqa: E731",
+      "quantity": "Canonical signed-zero serialization value",
+      "unit": "same as corresponding input coordinate",
+      "rationale": "Replacing signed zero preserves each coefficient bound objective-vector or nested output coordinate and its existing physical unit."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:244:41": {
+      "value": "0.0",
+      "context_sha256": "7547b1adc6223666e1331ffcf06d2f1729e08337a02bd4f4d06a4920315bfe9f",
+      "expression": "bounds = lambda values: [float(v) or 0.0 if v is not None and math.isfinite(v) else None for v in values]  # noqa: E731",
+      "quantity": "Canonical signed-zero serialization value",
+      "unit": "same as corresponding input coordinate",
+      "rationale": "Replacing signed zero preserves each coefficient bound objective-vector or nested output coordinate and its existing physical unit."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:249:30": {
+      "value": "0.0",
+      "context_sha256": "3f4709dc32795d807c54ff1336ae9a686232a9706f6514a9b5221a0a71877259",
+      "expression": "\"q\": [float(v) or 0.0 for v in q],",
+      "quantity": "Canonical signed-zero serialization value",
+      "unit": "same as corresponding input coordinate",
+      "rationale": "Replacing signed zero preserves each coefficient bound objective-vector or nested output coordinate and its existing physical unit."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:1037:53": {
+      "value": "1e-07",
+      "context_sha256": "30a2fc8fb808bc248b97ab9d63b222c6ad468d4f14ac11070a0a88679917d021",
+      "expression": "if abs(distance) <= tau and multiplier > 1e-7",
+      "quantity": "Scaled canonical side-dual label cutoff",
+      "unit": "dimensionless",
+      "rationale": "Labels threshold the actual signed multiplier in the registered dimensionless canonical objective and constraint coordinates."
+    },
+    "data-pipeline/pipeline/learned_comparison/native_labels.py:1038:61": {
+      "value": "1e-07",
+      "context_sha256": "30a2fc8fb808bc248b97ab9d63b222c6ad468d4f14ac11070a0a88679917d021",
+      "expression": "else (0 if distance > tau and abs(multiplier) <= 1e-7 else None)",
+      "quantity": "Scaled canonical side-dual label cutoff",
+      "unit": "dimensionless",
+      "rationale": "Labels threshold the actual signed multiplier in the registered dimensionless canonical objective and constraint coordinates."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:952:20": {
+      "value": "0.0",
+      "context_sha256": "48322ef5c16dbd2f685ce2aaa5b8b7445ebfc51e9d64c762dc2c3255bd9129ff",
+      "expression": "prior_seconds = 0.0",
+      "quantity": "Prior cumulative training wall time",
+      "unit": "second",
+      "rationale": "Zero initializes elapsed wall time before any completed resume interval is added."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:89:52": {
+      "value": "0.0",
+      "context_sha256": "4699b39e93e55af116a08ad02ca79e0cfd7fc7b3ae1c9b2d7414bb7606761e58",
+      "expression": "def __init__(self, roots, job, *, prior_seconds=0.0, committed_bytes=0, started=None):",
+      "quantity": "Prior cumulative training wall time",
+      "unit": "second",
+      "rationale": "Zero initializes elapsed wall time before any completed resume interval is added."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:1711:27": {
+      "value": "0.0",
+      "context_sha256": "7218ba9264c7a3f6706ea0777fdf714a65840048312fda73c102a888203eaff0",
+      "expression": "tp = fp = fn = 0.0",
+      "quantity": "Weighted classification score zero",
+      "unit": "dimensionless",
+      "rationale": "The zero represents normalized classification mass or the registered zero F1 for an empty score denominator."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:817:33": {
+      "value": "0.001",
+      "context_sha256": "e5fa7e73103b8a1f0355c3fea49bceced88629008989a078f1a6219109912822",
+      "expression": "\"learning_rate\": 0.001,",
+      "quantity": "Adam learning rate",
+      "unit": "dimensionless",
+      "rationale": "The frozen optimizer scales normalized parameter gradients by this fixed dimensionless step multiplier."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:819:25": {
+      "value": "0.9",
+      "context_sha256": "e5fa7e73103b8a1f0355c3fea49bceced88629008989a078f1a6219109912822",
+      "expression": "\"beta1\": 0.9,",
+      "quantity": "Adam exponential moment coefficient",
+      "unit": "dimensionless",
+      "rationale": "This registered dimensionless averaging weight preserves the exact first or second moment update."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:820:25": {
+      "value": "0.999",
+      "context_sha256": "e5fa7e73103b8a1f0355c3fea49bceced88629008989a078f1a6219109912822",
+      "expression": "\"beta2\": 0.999,",
+      "quantity": "Adam exponential moment coefficient",
+      "unit": "dimensionless",
+      "rationale": "This registered dimensionless averaging weight preserves the exact first or second moment update."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:821:23": {
+      "value": "1e-08",
+      "context_sha256": "e5fa7e73103b8a1f0355c3fea49bceced88629008989a078f1a6219109912822",
+      "expression": "\"eps\": 1e-8,",
+      "quantity": "Adam normalized denominator stabilizer",
+      "unit": "dimensionless",
+      "rationale": "The normalized loss and parameter coordinates give dimensionless gradient moments and denominator offset."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:449:32": {
+      "value": "0.0",
+      "context_sha256": "8249f962bc0b18c1c1ed39e307698f43bc183fa2989de45c97ccb6a3b6ac8cfa",
+      "expression": "\"raw\": [float(v) or 0.0 for v in feature[\"raw_values\"]],",
+      "quantity": "Dimensionless canonical MLP feature signed zero before fitted normalization",
+      "unit": "dimensionless",
+      "rationale": "These raw canonical lifted features are already dimensionless; only fitted per-head centering and scaling remain unapplied."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:450:39": {
+      "value": "0.0",
+      "context_sha256": "8249f962bc0b18c1c1ed39e307698f43bc183fa2989de45c97ccb6a3b6ac8cfa",
+      "expression": "\"normalized\": [float(v) or 0.0 for v in feature[\"values\"]],",
+      "quantity": "Normalized feature signed zero",
+      "unit": "dimensionless",
+      "rationale": "These normalized MLP or graph feature coordinates preserve zero while removing a serialization-only sign bit."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:460:40": {
+      "value": "0.0",
+      "context_sha256": "8ba0614bae8923f1a4ca79afc2a6cdddae3e5bc28c5a07bf3e8290b25f029623",
+      "expression": "\"edge_weight\": [float(v) or 0.0 for v in graph[\"edge_weight\"]],",
+      "quantity": "Signed canonical graph edge coefficient zero",
+      "unit": "dimensionless",
+      "rationale": "Graph edges carry dimensionless canonical Hessian or side-matrix coefficients; fitted node-feature normalization does not transform edge weights."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:818:32": {
+      "value": "0.0001",
+      "context_sha256": "e5fa7e73103b8a1f0355c3fea49bceced88629008989a078f1a6219109912822",
+      "expression": "\"weight_decay\": 0.0001 if method == \"learned_osqp\" else 0.01,",
+      "quantity": "Method-specific Adam weight decay",
+      "unit": "dimensionless",
+      "rationale": "The registered loss and model parameters use normalized coordinates; each method retains its fixed decay coefficient."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:818:72": {
+      "value": "0.01",
+      "context_sha256": "e5fa7e73103b8a1f0355c3fea49bceced88629008989a078f1a6219109912822",
+      "expression": "\"weight_decay\": 0.0001 if method == \"learned_osqp\" else 0.01,",
+      "quantity": "Method-specific Adam weight decay",
+      "unit": "dimensionless",
+      "rationale": "The registered loss and model parameters use normalized coordinates; each method retains its fixed decay coefficient."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:459:43": {
+      "value": "0.0",
+      "context_sha256": "8ba0614bae8923f1a4ca79afc2a6cdddae3e5bc28c5a07bf3e8290b25f029623",
+      "expression": "\"node_features\": [[float(v) or 0.0 for v in row] for row in graph[\"node_features\"]],",
+      "quantity": "Normalized feature signed zero",
+      "unit": "dimensionless",
+      "rationale": "These normalized MLP or graph feature coordinates preserve zero while removing a serialization-only sign bit."
+    },
+    "data-pipeline/pipeline/learned_comparison/training.py:1717:77": {
+      "value": "0.0",
+      "context_sha256": "4cc2605cd82eb1a8f3c3bfdd3b4055d6812fdcb5bf1f67ae482ec3ce38ca8fa4",
+      "expression": "scores.append(weight * (2 * tp / denominator if denominator else 0.0))",
+      "quantity": "Weighted classification score zero",
+      "unit": "dimensionless",
+      "rationale": "The zero represents normalized classification mass or the registered zero F1 for an empty score denominator."
+    },
+    "data-pipeline/pipeline/learned_comparison/training_worker.py:194:13": {
+      "value": "0.0",
+      "context_sha256": "74e5521dcd11651d4defd78d387d4a0b211406b12a765089dcab60d3accf54ad",
+      "expression": "result = 0.0",
+      "quantity": "Source-weighted initial train objective accumulator",
+      "unit": "dimensionless",
+      "rationale": "Zero initializes the no-update normalized training objective before source-weighted frame losses are added."
+    },
+    "data-pipeline/pipeline/learned_comparison/training_worker.py:49:19": {
+      "value": "0.005",
+      "context_sha256": "153ff1e5ada9079b84099fca8286ecac8734913c52b553b6e347a733baad9f2f",
+      "expression": "time.sleep(0.005)",
+      "quantity": "Owned worker polling interval",
+      "unit": "second",
+      "rationale": "This wall-clock delay bounds polling overhead without changing numerical tolerances or deadlines."
+    },
+    "data-pipeline/pipeline/learned_comparison/training_worker.py:100:21": {
+      "value": "0.0",
+      "context_sha256": "7c9bff95a4eeea7a5bbd5c57bdf2390e45aeeede26612508ae8ff8d6be24ddb1",
+      "expression": "return values or 0.0 if type(values) is float else values",
+      "quantity": "Numeric tensor signed-zero serialization value",
+      "unit": "same as corresponding numeric tensor coordinate",
+      "rationale": "This zero retains the weight optimizer loss or input tensor coordinate and removes only a serialization sign bit."
     },
     "data-pipeline/pipeline/lesson_process.py:175:27": {
       "value": "0.01",

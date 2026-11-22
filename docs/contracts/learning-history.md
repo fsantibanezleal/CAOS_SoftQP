@@ -31,3 +31,14 @@ The replacement also preserves generic JSON integer min/max validation, translat
 | learning-stream-checkpoint | 2.0.0 | New descriptor and independent role phase binding for the existing strict numeric model format. |
 
 Legacy v1 schemas and historical examples keep their exact versions and bytes. The versioned streamed phase receipt is independent of the legacy v1 phase manifest. Full-volume scientific, runtime resumption and held-out gates remain pending.
+
+## Supervised native and learning receipts, 2026-11-22
+
+| Contract | Version | Change |
+|---|---|---|
+| native-run | 1.0.0 | New independently pinned observed native run, raw attempts and role inclusion, with strict M/P0 context ancestry before every production label status. |
+| training-run | 1.0.0 | New observed numeric SDK optimizer, epoch history, exact resume and complete checkpoint selection custody. |
+| frozen-inference | 1.0.0 | New immutable selected numeric checkpoint projection for subsequent role-local inference. |
+| stream-calibration | 1.0.0 | New actual calibration observations and threshold/metrics replay bound to the frozen model and only calibration-role inputs. |
+
+The original schemas and historical scientific artifacts remain unchanged. Actual excluded controls establish software behavior only; genuine registered training and held-out results remain unavailable.

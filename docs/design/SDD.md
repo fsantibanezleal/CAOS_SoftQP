@@ -2,6 +2,8 @@
 
 Design version 0.01.000. The solver contribution is a hypothesis subject to proof and comparative evaluation.
 
+Current implementation boundary, 2026-11-22. The prospective R4 extension specifies twelve methods, including two genuinely trained learned methods; there is no learned-method waiver. The separate public SDK0.3.0 supplies the native implementations. The source generator, strict native-run and role bridge, numeric training/resume and calibration orchestration have independently reviewed excluded software controls. Genuine independent I1 registration, full generation, training, held-out evaluation and complete scientific/product qualification remain required. The existing seven-method research preview and both negative studies remain separate immutable evidence. The [method-extension requirements](features/method-extension/requirements.md), [source generator](features/method-extension/generator.md), [native-label boundary](features/method-extension/native-labels.md) and [training boundary](features/method-extension/training.md) define the implemented source interfaces and open production gates.
+
 ## Problem and non-goals
 
 Control, robotics, building-energy, and optimization engineers encounter quadratic programs whose selected operational constraints may yield. Solver APIs often make the mathematical meaning of “soft” difficult to inspect: a quadratic violation cost, an exact linear penalty, a weighted two-sided penalty, a group penalty, and an infeasibility-repair objective can return different decisions even when attached to the same interval. Practitioners need to see what is softened, what remains hard, how lower and upper violations are priced, whether the returned point solves that declared objective, and how numerical behavior changes across methods.
@@ -306,7 +308,7 @@ Primary sources: https://arxiv.org/abs/2610.35631 ; https://osqp.org/docs/solver
 
 UNVERIFIED: global novelty, timing superiority, scientific product qualification and operational value; each requires its own evidence. The research preview is deployed with exact-source, route, byte-stream and browser verification. The complete catalog and registered experimental grid are executed and retained.
 
-The Methodology page uses the documented `method-learned` floor waiver: the implemented method set is deterministic convex optimization and has no trained parameter policy. This does not waive any method implementation, comparison, mathematical-depth or executive-brief requirement. Deep FlexQP remains an availability-gated related method with distinct restoration semantics.
+The historical preview implements deterministic convex optimization. The current product requirement additionally demands twelve methods including two genuinely trained learned models; this requirement has no waiver. Initialized fixture weights and accepted software controls cannot establish trained-model availability. Deep FlexQP remains an availability-gated related method with distinct restoration semantics.
 
 ## Preregistered outcome and release stop
 
@@ -328,4 +330,4 @@ The registered revision is complete: 48 development, 144 heldout and 18 robustne
 
 The registered primary has144heldoutinstances, sixseedclusters and ninefailedpairs. Its score−212.449874656751%,95%interval[−225.33661821558257%,−192.87375906532098%] fails the10%acceptance criterion. Both BS-1 and BS-2 remain unaccepted improvement hypotheses. The published negative manuscript covers BS-2 without declaring successful novelty, general superiority or a qualified product release. The additional EN/ES worked lesson executes the real public SDK2 through an explicit external process boundary, separated from the SDK1 kernel and frozen campaign. See coupled-lessons requirements and the coupled-study manuscript for derivations and honest evidence.
 
-All 33 CAOS product requirements are traced to implemented specifications, real controls and explicit residuals in [the normative crosswalk](caos-requirements.md). This coverage map does not override either negative scientific outcome.
+The [normative crosswalk](caos-requirements.md) preserves the historical requirement trace. Current admission must satisfy the complete governing product bar, including its additional requirements, rather than treating the older row count as complete. Neither this coverage map nor source-level acceptance overrides either negative scientific outcome.

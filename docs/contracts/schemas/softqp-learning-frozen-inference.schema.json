@@ -1,0 +1,140 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-frozen-inference/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checkpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "fixture_only": {
+      "type": "boolean"
+    },
+    "format": {
+      "const": "learning-frozen-inference/1.0.0"
+    },
+    "method": {
+      "enum": [
+        "learned_osqp",
+        "learned_daqp"
+      ]
+    },
+    "population_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "preflight_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "protocol": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "kind": {
+          "const": "learning-protocol"
+        },
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_id",
+        "kind",
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "run_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "seed": {
+      "enum": [
+        41001,
+        41002,
+        41003
+      ]
+    },
+    "selected_initial_heads": {
+      "items": {
+        "maxLength": 4096,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 14,
+      "type": "array"
+    },
+    "weights": {
+      "additionalProperties": false,
+      "properties": {
+        "byte_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "format": {
+          "enum": [
+            "raw-float64-le",
+            "raw-uint8"
+          ]
+        },
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "byte_count",
+        "format",
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "checkpoint",
+    "fixture_only",
+    "format",
+    "method",
+    "population_sha256",
+    "preflight_sha256",
+    "protocol",
+    "run_sha256",
+    "seed",
+    "selected_initial_heads",
+    "weights"
+  ],
+  "type": "object"
+}

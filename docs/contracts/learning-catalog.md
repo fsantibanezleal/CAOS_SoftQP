@@ -1,6 +1,6 @@
 # Prospective learning contract catalog
 
-This separate eleven-boundary catalog does not alter the historical18contracts or their consumers. Initial version1.0.0 is authored for independent U1 review, not a public release. The real implemented unit is strict serialization/admission in data-pipeline/pipeline/learned_comparison/contracts.py. Actual generator/solver/training/calibration/campaign/replay producers remain pending U2-U6. A schema-valid provider record never counts as a trained model, registered dataset or measured result.
+This separate prospective catalog does not alter the historical18contracts or their consumers. The initial eleven version1.0.0 boundaries implement strict serialization/admission in data-pipeline/pipeline/learned_comparison/contracts.py. Versioned streamed inputs and native/training custody extend that boundary below. Generator, native supervision, numeric training/resume and role-local calibration have actual excluded software controls; genuine scientific registration, full-scale execution and complete evaluated replay remain pending. A schema-valid provider record never counts as a trained scientific model, registered dataset or measured scientific result.
 
 All examples carry purpose contract-fixture and state provider, or explicit missing state with null payload/reason. Production rejects fixture purpose. tests/fixtures/learned-contracts/provider.py authors only external tiny analytic serialization fixtures through the real writer/consumer. Numeric checkpoint zeros and opaque state blobs are untrained contract fixtures, not initialized/trained runtime states. The committed provider tree is copied to an external root before consumer checks. No executable model serializer is admitted.
 
@@ -54,4 +54,17 @@ The prospective v2 storage kinds use explicit producer and reader entry points i
 | learning-stream-labels | 2.0.0 | [schema](schemas/softqp-learning-stream-labels.schema.json) | [fixture](examples/softqp-learning-stream-labels.json) | `write_stream_artifact`, `read_stream_artifact`, `StreamingPhaseReader.read_label` |
 | learning-stream-checkpoint | 2.0.0 | [schema](schemas/softqp-learning-stream-checkpoint.schema.json) | [fixture](examples/softqp-learning-stream-checkpoint.json) | `write_stream_artifact`, `read_stream_artifact` with independently opened train and validation phases |
 
-See [stream inputs](../design/features/method-extension/stream-inputs.md) and `tests/test_stream_inputs.py`. Frame references always bind real files. Logical feature keys have their own versioned digest and no filesystem path. Compatible missing and oracle-failed labels remain explicit. Scientific successful label admission awaits independent native source-run evidence. The stream checkpoint example is an untrained contract fixture.
+See [stream inputs](../design/features/method-extension/stream-inputs.md) and `tests/test_stream_inputs.py`. Frame references always bind real files. Logical feature keys have their own versioned digest and no filesystem path. Compatible missing and oracle-failed labels remain explicit. Every production label, including oracle-failed, requires independently pinned supervised native source-run evidence and initial P0 ancestry; role projection into P1 retains every observed disposition. The stream checkpoint example is an untrained contract fixture.
+
+## Supervised native and learning custody
+
+These new version1.0.0 typed receipts are emitted by actual supervised native or training workers. The examples preserve bytes from excluded software controls. Their referenced ancestry and numeric sidecars are independently exercised by the executable tests; an isolated example alone does not establish execution or scientific availability.
+
+| Kind | Version | Schema | Typed example | Producer and independent consumer |
+|---|---|---|---|---|
+| native-run | 1.0.0 | [schema](schemas/softqp-learning-native-run.schema.json) | [fixture](examples/softqp-learning-native-run.json) | `supervise_native_run`, `read_native_run`, strict stream inclusion and `bind_labeled_preflight` |
+| training-run | 1.0.0 | [schema](schemas/softqp-learning-training-run.schema.json) | [fixture](examples/softqp-learning-training-run.json) | `supervise_training`, `read_training_run` |
+| frozen-inference | 1.0.0 | [schema](schemas/softqp-learning-frozen-inference.schema.json) | [fixture](examples/softqp-learning-frozen-inference.json) | `publish_frozen_inference`, `read_frozen_inference` |
+| stream-calibration | 1.0.0 | [schema](schemas/softqp-learning-stream-calibration.schema.json) | [fixture](examples/softqp-learning-stream-calibration.json) | `supervise_calibration`, `read_calibration` |
+
+`tests/test_native_labels.py`, `tests/test_stream_native_bridge.py` and `tests/test_learned_training.py` prove actual native status/side data, q=2 objective mediation, M/P0/P1 ancestry, numeric optimizer/resume identity and calibration with fitting payloads unavailable. No recipe trusts a caller's assertion that optimization or native work occurred. Runtime/profile/authority acceptance is separate. Production must additionally use the live governed scientific runtime and genuine independent registration; software fixtures cannot grant that authority.

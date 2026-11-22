@@ -1,0 +1,327 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-stream-calibration/2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "else": {
+        "not": {
+          "required": [
+            "resources"
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "fixture_only": {
+            "const": false
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "resources"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fixture_only": {
+            "const": false
+          },
+          "state": {
+            "enum": [
+              "calibrated",
+              "not-applicable"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "resources": {
+            "properties": {
+              "peak_disk_bytes": {
+                "maximum": 8589934592
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "checkpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "fixture_only": {
+      "type": "boolean"
+    },
+    "format": {
+      "const": "learning-stream-calibration/2.0.0"
+    },
+    "frozen_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "method": {
+      "enum": [
+        "learned_osqp",
+        "learned_daqp"
+      ]
+    },
+    "observations": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "frame_id": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "type": "string"
+          },
+          "mask_sha256": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "probabilities": {
+            "additionalProperties": false,
+            "properties": {
+              "byte_count": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "format": {
+                "enum": [
+                  "raw-float64-le",
+                  "raw-uint8"
+                ]
+              },
+              "path": {
+                "maxLength": 4096,
+                "minLength": 1,
+                "type": "string"
+              },
+              "sha256": {
+                "pattern": "^[a-f0-9]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "byte_count",
+              "format",
+              "path",
+              "sha256"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "frame_id",
+          "mask_sha256",
+          "probabilities"
+        ],
+        "type": "object"
+      },
+      "maxItems": 20000,
+      "type": "array"
+    },
+    "phase_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "population_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "preflight_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "resources": {
+      "additionalProperties": false,
+      "properties": {
+        "elapsed_seconds": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "peak_disk_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "policy_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "peak_disk_bytes",
+        "policy_sha256",
+        "elapsed_seconds"
+      ],
+      "type": "object"
+    },
+    "runtime_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "seed": {
+      "enum": [
+        41001,
+        41002,
+        41003
+      ]
+    },
+    "state": {
+      "enum": [
+        "calibrated",
+        "not-applicable",
+        "failed"
+      ]
+    },
+    "values": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "brier": {
+              "anyOf": [
+                {
+                  "format": "lossless-float64",
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "class_counts": {
+              "items": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "maxItems": 2,
+              "type": "array"
+            },
+            "ece": {
+              "anyOf": [
+                {
+                  "format": "lossless-float64",
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "f1": {
+              "format": "lossless-float64",
+              "type": "number"
+            },
+            "mask_count": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "scores": {
+              "items": {
+                "format": "lossless-float64",
+                "type": "number"
+              },
+              "maxItems": 9,
+              "type": "array"
+            },
+            "threshold": {
+              "format": "lossless-float64",
+              "type": "number"
+            },
+            "zero_mask_frames": {
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "brier",
+            "class_counts",
+            "ece",
+            "f1",
+            "mask_count",
+            "scores",
+            "threshold",
+            "zero_mask_frames"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "worker": {
+      "additionalProperties": false,
+      "properties": {
+        "installed": {
+          "type": "object"
+        },
+        "peak_rss_bytes": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "ready": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "installed",
+        "peak_rss_bytes",
+        "ready"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "checkpoint",
+    "fixture_only",
+    "format",
+    "frozen_sha256",
+    "method",
+    "observations",
+    "phase_sha256",
+    "population_sha256",
+    "preflight_sha256",
+    "reason",
+    "runtime_sha256",
+    "seed",
+    "state",
+    "values",
+    "worker"
+  ],
+  "type": "object"
+}
