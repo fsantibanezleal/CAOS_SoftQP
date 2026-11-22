@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-heldout-trial-receipt/1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "key", "ordinal", "request_sha256", "policy_sha256", "profile_sha256", "nonce", "owned_pid", "released_ns", "observed_ns", "numeric_sha256", "full_cost_ns"],
+  "properties": {
+    "schema": {"const": "softqp.r4.heldout-trial-receipt/1"},
+    "key": {
+      "type": "array",
+      "prefixItems": [
+        {"enum": ["lifted", "generalized", "asymmetric", "directional", "daqp", "flex", "elastiqp", "clarabel", "proxqp", "piqp", "learned_osqp", "learned_daqp", "cold_osqp", "cold_daqp", "previous_osqp", "previous_daqp"]},
+        {"enum": [0, 41001, 41002, 41003]},
+        {"type": "string", "pattern": "^N(0[1-9]|1[0-5])$"},
+        {"type": "integer", "minimum": 0, "maximum": 5},
+        {"type": "integer", "minimum": 0, "maximum": 7},
+        {"type": "integer", "minimum": 0, "maximum": 31},
+        {"enum": ["warmup", "measured"]},
+        {"type": "integer", "minimum": 0, "maximum": 4}
+      ],
+      "minItems": 8,
+      "items": false
+    },
+    "ordinal": {"type": "integer", "minimum": 0},
+    "request_sha256": {"$ref": "#/$defs/sha256"},
+    "policy_sha256": {"$ref": "#/$defs/sha256"},
+    "profile_sha256": {"$ref": "#/$defs/sha256"},
+    "nonce": {"type": "string", "pattern": "^[a-f0-9]{32}$"},
+    "owned_pid": {"type": "integer", "minimum": 1},
+    "released_ns": {"type": "integer", "minimum": 0},
+    "observed_ns": {"type": "integer", "minimum": 0},
+    "numeric_sha256": {"$ref": "#/$defs/sha256"},
+    "full_cost_ns": {"type": "integer", "minimum": 1, "exclusiveMaximum": 10000000000}
+  },
+  "$defs": {"sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+}

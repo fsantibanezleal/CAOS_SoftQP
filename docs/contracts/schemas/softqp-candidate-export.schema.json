@@ -1,0 +1,671 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-candidate-export/1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "scope_sha256",
+    "request_sha256",
+    "policy_sha256",
+    "profile_sha256",
+    "roster_sha256",
+    "test_sha256",
+    "native_sha256",
+    "proof_sha256",
+    "schedule_sha256",
+    "frontier_sha256",
+    "fixture_only",
+    "statuses",
+    "diagnostics",
+    "counts",
+    "matrix_complete",
+    "diagnostics_complete",
+    "scientifically_qualified",
+    "hypotheses"
+  ],
+  "properties": {
+    "schema": {
+      "const": "softqp.r4.candidate-export/1"
+    },
+    "scope_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "policy_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "profile_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "roster_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "test_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "native_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "proof_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "schedule_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "frontier_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "fixture_only": {
+      "type": "boolean"
+    },
+    "statuses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "byte_count",
+        "rows"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!\\.{1,2}$)[A-Za-z0-9_.-]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byte_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967296
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "byte_count",
+        "rows"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!\\.{1,2}$)[A-Za-z0-9_.-]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byte_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967296
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accepted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        },
+        "accuracy-rejected": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        },
+        "oracle-failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        },
+        "timeout": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        },
+        "incompatible": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 42816
+        }
+      }
+    },
+    "matrix_complete": {
+      "type": "boolean"
+    },
+    "diagnostics_complete": {
+      "type": "boolean"
+    },
+    "scientifically_qualified": {
+      "type": "boolean"
+    },
+    "cohort_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "timing_complete": {
+      "type": "boolean"
+    },
+    "startups": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "byte_count",
+        "rows"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!\\.{1,2}$)[A-Za-z0-9_.-]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byte_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967296
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "amortization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "byte_count",
+        "rows"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!\\.{1,2}$)[A-Za-z0-9_.-]+$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byte_count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967296
+        },
+        "rows": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "hypotheses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "learned_osqp",
+        "learned_daqp"
+      ],
+      "properties": {
+        "learned_osqp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "estimate",
+            "interval",
+            "qualified",
+            "failed_statuses",
+            "bootstrap"
+          ],
+          "properties": {
+            "estimate": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number",
+                  "format": "lossless-float64"
+                }
+              ]
+            },
+            "interval": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number",
+                    "format": "lossless-float64"
+                  }
+                }
+              ]
+            },
+            "qualified": {
+              "type": "boolean"
+            },
+            "failed_statuses": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "bootstrap": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "method",
+                    "file"
+                  ],
+                  "properties": {
+                    "method": {
+                      "const": "learned_osqp"
+                    },
+                    "file": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "path",
+                        "format",
+                        "sha256",
+                        "byte_count"
+                      ],
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "pattern": "^(?!\\.{1,2}$)[A-Za-z0-9_.-]+$"
+                        },
+                        "format": {
+                          "const": "raw-uint8"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "pattern": "^[a-f0-9]{64}$"
+                        },
+                        "byte_count": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 4294967296
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "estimate": {
+                    "type": "null"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "interval": {
+                    "type": "null"
+                  },
+                  "qualified": {
+                    "const": false
+                  },
+                  "bootstrap": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "interval": {
+                    "type": "array"
+                  },
+                  "bootstrap": {
+                    "type": "object"
+                  },
+                  "failed_statuses": {
+                    "const": 0
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "qualified": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "estimate": {
+                    "type": "number",
+                    "format": "lossless-float64"
+                  },
+                  "interval": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "number",
+                        "exclusiveMinimum": 0.1
+                      },
+                      {}
+                    ]
+                  },
+                  "failed_statuses": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "learned_daqp": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "estimate",
+            "interval",
+            "qualified",
+            "failed_statuses",
+            "bootstrap"
+          ],
+          "properties": {
+            "estimate": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "number",
+                  "format": "lossless-float64"
+                }
+              ]
+            },
+            "interval": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                    "type": "number",
+                    "format": "lossless-float64"
+                  }
+                }
+              ]
+            },
+            "qualified": {
+              "type": "boolean"
+            },
+            "failed_statuses": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "bootstrap": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "method",
+                    "file"
+                  ],
+                  "properties": {
+                    "method": {
+                      "const": "learned_daqp"
+                    },
+                    "file": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "path",
+                        "format",
+                        "sha256",
+                        "byte_count"
+                      ],
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "pattern": "^(?!\\.{1,2}$)[A-Za-z0-9_.-]+$"
+                        },
+                        "format": {
+                          "const": "raw-uint8"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "pattern": "^[a-f0-9]{64}$"
+                        },
+                        "byte_count": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 4294967296
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "estimate": {
+                    "type": "null"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "interval": {
+                    "type": "null"
+                  },
+                  "qualified": {
+                    "const": false
+                  },
+                  "bootstrap": {
+                    "type": "null"
+                  }
+                }
+              },
+              "else": {
+                "properties": {
+                  "interval": {
+                    "type": "array"
+                  },
+                  "bootstrap": {
+                    "type": "object"
+                  },
+                  "failed_statuses": {
+                    "const": 0
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "qualified": {
+                    "const": true
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "estimate": {
+                    "type": "number",
+                    "format": "lossless-float64"
+                  },
+                  "interval": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "number",
+                        "exclusiveMinimum": 0.1
+                      },
+                      {}
+                    ]
+                  },
+                  "failed_statuses": {
+                    "const": 0
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "dependentRequired": {
+    "cohort_sha256": [
+      "timing_complete",
+      "startups",
+      "amortization"
+    ],
+    "timing_complete": [
+      "cohort_sha256",
+      "startups",
+      "amortization"
+    ],
+    "startups": [
+      "cohort_sha256",
+      "timing_complete",
+      "amortization"
+    ],
+    "amortization": [
+      "cohort_sha256",
+      "timing_complete",
+      "startups"
+    ]
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "fixture_only": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "scientifically_qualified": {
+            "const": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "scientifically_qualified": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "cohort_sha256",
+          "timing_complete",
+          "startups",
+          "amortization"
+        ],
+        "properties": {
+          "fixture_only": {
+            "const": false
+          },
+          "matrix_complete": {
+            "const": true
+          },
+          "diagnostics_complete": {
+            "const": true
+          },
+          "timing_complete": {
+            "const": true
+          },
+          "hypotheses": {
+            "properties": {
+              "learned_osqp": {
+                "properties": {
+                  "qualified": {
+                    "const": true
+                  }
+                }
+              },
+              "learned_daqp": {
+                "properties": {
+                  "qualified": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
