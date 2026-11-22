@@ -51,3 +51,7 @@ Independent adversaries cover late validator/source/metadata/receipt changes, ma
 read-window receipt mutation, namespace/runtime junction redirection, unsafe names, incomplete matrix cells, false backend
 states, owned-process cleanup and shell exit forwarding. Actual build, full browser matrix, publication, deployment and
 scientific qualification retain their own observed acceptance records.
+
+## Versioned authored inputs and readiness delegation
+
+The shared local workflow refuses version-stamped JSON inputs below a promoted payload directory before creating a generation stage. Stamped engine reference fixtures outside promoted directories are copied without changing their bytes. The configured readiness provider receives the actual judged root and runs in the primary generation runtime for both shipped and external payloads. Provider declarations delegate the readiness shape without removing the independent strict-path planted-fault tests. RP-033 and RP-034 bind these adopted base behaviors to the product.
