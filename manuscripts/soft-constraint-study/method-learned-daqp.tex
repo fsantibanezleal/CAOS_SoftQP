@@ -1,0 +1,96 @@
+\subsection{Graph-predicted working sets for DAQP}\label{sec:method-learned-daqp}
+Schmidtobreick, Arnstr\"om, H\"ausner and Sj\"olund use a graph model
+to initialize a dual active-set solver
+(\href{https://arxiv.org/abs/2511.13174v2}{primary source}).
+The SoftQP adapter uses this approach with DAQP \cite{daqp} on a
+supported positive-definite convex lift. A backend curvature or
+numerical refusal is retained. The graph does not change the quadratic
+objective or the feasible set.
+
+Let \(P,q,G,b\) denote the admitted dimensionless lifted Hessian,
+linear cost, one-sided matrix and right-hand side. The row map
+contains each equality once and otherwise lists finite upper and
+lower sides in that order, with signs \(+1\) and \(-1\). There is
+one variable node per lifted coordinate and one constraint node per
+retained side or equality. The four feature coordinates are
+\((q_j,0,0,0)\) for variable \(j\) and
+\((0,b_i,\mathbf1_{\mathrm{eq},i},1)\) for row \(i\).
+Each graph standardizes each coordinate across its own nodes with
+population variance and unit scale at zero variance. Nonzero
+\(P_{jk}\) entries supply signed variable-to-variable edges, and
+each nonzero \(G_{ij}\) supplies a signed edge in both directions
+between variable \(j\) and constraint \(i\). The constraint-variable
+incidence is bipartite; the additional Hessian edges convey
+interactions among variables.
+
+Three weighted local extrema convolution layers have widths
+\(4\to128\to128\to1\). The first two are followed by layer normalization
+and leaky rectification with slope \(0.1\). There are
+\begin{equation}\label{eq:learn-daqp-parameters}
+ \sum_{(a,b)\in\{(4,128),(128,128),(128,1)\}}(3ab+2b)+4(128)
+ =52\,098
+\end{equation}
+trainable scalars. Each convolution has three matrices and two
+biases. The two normalization layers each contribute 128 weights
+and 128 biases. The final scalar logit \(g_i\) gives
+\(p_i=(1+\exp(-g_i))^{-1}\).
+
+Three independently evaluated reference solves must agree before a
+fresh cold DAQP solve is eligible to supply labels. Its initial flags
+contain only the immutable equalities. After an acceptable DAQP
+status and the tight lifted and original-space checks, take both
+the primal vector \(z\) and the unmodified raw one-sided dual
+\(\lambda_i\) from that same cold solve. Put \(s_i=b_i-G_i z\) and
+\(\tau_i=10^{-7}\max(1,|b_i|)\). A positive target has
+\(|s_i|\le\tau_i\) and \(\lambda_i>10^{-7}\); a negative target
+has \(s_i>\tau_i\) and \(|\lambda_i|\le10^{-7}\). Ambiguous rows,
+equality rows and variable nodes carry no supervised target.
+Let \(M\) be the retained labels and \(m_c\) the train-only,
+source-weighted mass of class \(c\). The loss per nonempty frame is
+\begin{equation}\label{eq:learn-daqp-bce}
+ \mathcal L=\frac{1}{|M|}\sum_{i\in M}\frac{m_0+m_1}{2m_{t_i}}
+       \log(1+\exp((1-2t_i)g_i)).
+\end{equation}
+Here \(t_i\in\{0,1\}\) is the admitted binary label. An empty mask
+contributes zero gradient, while missing class mass prevents model
+qualification. The fit uses three seeds 41001--41003 and AdamW with
+eight sources per batch, rate \(10^{-3}\), decay \(10^{-2}\),
+at most 100 epochs, patience five and minimum improvement \(10^{-3}\).
+A separate calibration role selects from thresholds 0.1 through 0.9
+by source-level macro F1, preferring the larger threshold on exact
+ties. Calibration is undefined when every eligible calibration mask
+is empty. Individual empty-mask frames are retained. An unavailable
+calibration prevents a qualified learned solve.
+
+\begin{algorithm}[ht]
+\caption{Predict, repair and verify a DAQP working set}\label{alg:learn-daqp}
+\begin{algorithmic}[1]
+\State Verify the model, lift and frozen threshold and compute node probabilities.
+\State Mark inequalities active for \(p_i>\theta\) and keep equalities immutable.
+\State Attempt DAQP with the proposed flags.
+\While{the native status is \(-6\) and a predicted inequality remains}
+ \State Remove the lowest-confidence active prediction and retry.
+\EndWhile
+\State Retain each attempt and check the recovered candidate independently.
+\end{algorithmic}
+\end{algorithm}
+
+Removal breaks confidence ties by original interval row and then
+one-sided position. The last permitted retry may have no
+predicted inequalities. Other failure codes do not trigger arbitrary
+repair. The matched DAQP 0.10.3 routes pass primal and dual tolerances
+\(10^{-7}\), zero threshold \(10^{-12}\), limit \(200\,000\),
+zero proximal correction and \texttt{eq\_reduction=-1}.
+The cold control starts with equalities alone; previous initialization
+uses only an accepted compatible preceding state with admitted
+multiplier and tightness evidence. For this trio of one-shot routes,
+the reported argument values are those passed to the native call.
+The thin legacy elastic route separately supports native-instance
+settings observations before and after its solve. The primary
+measurement includes graph feature construction, inference, setup,
+all repair attempts and the final checks. Inference cost depends on
+the number of graph nodes and signed edges, and solver cost on the
+working-set linear algebra and the number of retries. Status 1 or 2
+is required but still subject to independent acceptance. Signed
+one-sided multipliers accumulate with their side signs to recover
+the interval dual before original-space evaluation.

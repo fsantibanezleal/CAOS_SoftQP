@@ -10,7 +10,7 @@ from test_learned_contracts import make_problem
 
 
 @pytest.mark.parametrize("scale", [1, 1.5])
-def test_peak_lower_positive_zero_survives_canonical_artifact_checks(scale):
+def test_adversarial_peak_lower_positive_zero_survives_canonical_artifact_checks(scale):
     original = deepcopy(make_problem()["original"])
     original.update(
         formulation="peak", lower=[0.0], upper=[2],

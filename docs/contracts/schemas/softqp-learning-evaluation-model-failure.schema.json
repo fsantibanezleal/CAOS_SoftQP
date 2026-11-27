@@ -1,0 +1,73 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-evaluation-model-failure/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "softqp.r4.evaluation-model-failure/1"
+    },
+    "method": {
+      "enum": [
+        "learned_osqp",
+        "learned_daqp"
+      ]
+    },
+    "seed": {
+      "enum": [
+        41001,
+        41002,
+        41003
+      ]
+    },
+    "fixture_only": {
+      "type": "boolean"
+    },
+    "protocol_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "population_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "preflight_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "state": {
+      "enum": [
+        "failed",
+        "missing"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "enum": [
+        "training",
+        "calibration",
+        "preprocessing"
+      ]
+    },
+    "evidence_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "schema",
+    "method",
+    "seed",
+    "fixture_only",
+    "protocol_sha256",
+    "population_sha256",
+    "preflight_sha256",
+    "state",
+    "reason",
+    "stage",
+    "evidence_sha256"
+  ]
+}

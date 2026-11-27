@@ -1,0 +1,246 @@
+{
+  "$id": "urn:softqp:softqp.test-native-attempt/2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cold": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "encoding": {
+              "const": "softqp-native-json/1"
+            },
+            "json": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "encoding",
+            "json",
+            "sha256"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "generation": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "identity": {
+      "additionalProperties": false,
+      "properties": {
+        "cold_eligible": {
+          "type": "boolean"
+        },
+        "family": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "frame": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "artifact_id",
+            "kind"
+          ],
+          "type": "object"
+        },
+        "frame_count": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "frame_index": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "original_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "parent_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "regime": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "role": {
+          "const": "test"
+        },
+        "source": {
+          "additionalProperties": false,
+          "properties": {
+            "artifact_id": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "kind": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "path": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "sha256": {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "artifact_id",
+            "kind"
+          ],
+          "type": "object"
+        },
+        "source_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "transform_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "unit_index": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "units_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "family",
+        "regime",
+        "unit_index",
+        "frame_index",
+        "frame_count",
+        "source_id",
+        "parent_id",
+        "source",
+        "frame",
+        "original_sha256",
+        "transform_sha256",
+        "units_sha256",
+        "cold_eligible"
+      ],
+      "type": "object"
+    },
+    "index": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "label": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "oracle_rows": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "object"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reference": {
+      "additionalProperties": false,
+      "properties": {
+        "encoding": {
+          "const": "softqp-native-json/1"
+        },
+        "json": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "encoding",
+        "json",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "const": "softqp.test-native-attempt/2"
+    },
+    "state": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema",
+    "index",
+    "generation",
+    "identity",
+    "reference",
+    "cold",
+    "state",
+    "reason",
+    "oracle_rows",
+    "label"
+  ],
+  "type": "object"
+}

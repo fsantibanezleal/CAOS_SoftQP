@@ -1,0 +1,200 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-inference-preprocessing/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "softqp.r4.inference-preprocessing/1"
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "enum": [
+            "learned_osqp",
+            "learned_daqp"
+          ]
+        },
+        "seed": {
+          "enum": [
+            41001,
+            41002,
+            41003
+          ]
+        },
+        "fixture_only": {
+          "type": "boolean"
+        },
+        "run_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "frozen_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "checkpoint_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "weights_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "population_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "preflight_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "protocol_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "producer_source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dependency_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "phases": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "train": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "validation": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "train",
+            "validation"
+          ]
+        }
+      },
+      "required": [
+        "method",
+        "seed",
+        "fixture_only",
+        "run_sha256",
+        "frozen_sha256",
+        "checkpoint_sha256",
+        "weights_sha256",
+        "population_sha256",
+        "preflight_sha256",
+        "protocol_sha256",
+        "source_lock_sha256",
+        "producer_source_sha256",
+        "dependency_lock_sha256",
+        "phases"
+      ]
+    },
+    "heads": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(graph|H-[1-9][0-9]*-[1-9][0-9]*)$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "normalizers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "normalizer_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "head_id": {
+            "type": "string",
+            "pattern": "^(graph|H-[1-9][0-9]*-[1-9][0-9]*)$"
+          },
+          "fit_source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "fit_split": {
+            "const": "train"
+          },
+          "coordinate_order": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "mean": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "scale": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "source_weights": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "normalizer_id",
+          "head_id",
+          "fit_source_ids",
+          "fit_split",
+          "coordinate_order",
+          "mean",
+          "scale",
+          "source_weights",
+          "sha256"
+        ]
+      }
+    },
+    "class_statistics": {
+      "type": [
+        "object",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "identities",
+    "heads",
+    "normalizers",
+    "class_statistics"
+  ]
+}

@@ -4,6 +4,8 @@ Design version 0.01.000. The solver contribution is a hypothesis subject to proo
 
 Current implementation boundary, 2026-11-22. The prospective R4 extension specifies twelve methods, including two genuinely trained learned methods; there is no learned-method waiver. The separate public SDK0.3.0 supplies the native implementations. The source generator, strict native-run and role bridge, numeric training/resume and calibration orchestration have independently reviewed excluded software controls. Genuine independent I1 registration, full generation, training, held-out evaluation and complete scientific/product qualification remain required. The existing seven-method research preview and both negative studies remain separate immutable evidence. The [method-extension requirements](features/method-extension/requirements.md), [source generator](features/method-extension/generator.md), [native-label boundary](features/method-extension/native-labels.md) and [training boundary](features/method-extension/training.md) define the implemented source interfaces and open production gates.
 
+The current shell adoption pins published version0.26.3 exactly. Context Focus composes the selected scientific stage without changing its group, and its stable Method and costs rail retains native editing/request/import. Other groups retain their own Focus content. Address changes use the live URL and router state so case, scene, method, native evidence, hash and unrelated fields survive direct entry and Back/Forward. Native controls have distinct Focus identifiers and remain reachable in a scrolling phone rail. These behavior requirements are traced by EX-013 to EX-015; full installed-gate and deployment acceptance remain separate.
+
 ## Problem and non-goals
 
 Control, robotics, building-energy, and optimization engineers encounter quadratic programs whose selected operational constraints may yield. Solver APIs often make the mathematical meaning of “soft” difficult to inspect: a quadratic violation cost, an exact linear penalty, a weighted two-sided penalty, a group penalty, and an infeasibility-repair objective can return different decisions even when attached to the same interval. Practitioners need to see what is softened, what remains hard, how lower and upper violations are priced, whether the returned point solves that declared objective, and how numerical behavior changes across methods.
@@ -52,6 +54,8 @@ Worked lessons trace contract/code definitions to https://github.com/fsantibanez
 
 Worked lessons trace contract/code definitions to https://doi.org/10.5281/zenodo.23851659 .
 
+The additional method lessons follow Clarabel's quadratic conic formulation at https://doi.org/10.1007/s12532-026-00320-7 , the ProxQP proximal QP method at https://doi.org/10.1109/TRO.2025.3577107 , and the authors' PIQP paper at https://arxiv.org/abs/2304.00290 . The initializer lessons use the fixed-point warm-start method at https://www.jmlr.org/papers/v25/23-1174.html and the graph active-set warm-start method at https://proceedings.mlr.press/v331/schmidtobreick26a.html . Their small worked examples compare original-space outcomes and report native iteration counts under matched settings.
+
 ## Sizing and contracts
 
 The current size estimate is a research-grade software package, not a small front-end. The product template provides the app, contract system, pipeline structure, guards, notebook and deployment scaffolding; it does not provide the scientific methods, adapters, fixtures, proofs, data, result matrix, bilingual lessons, manuscript, or UI interaction. Expected workload is XL across method engines and matrix, L across product/app/docs, and L for release evidence. A release is gated by the exact acceptance matrix, not an elapsed-time estimate.
@@ -67,7 +71,7 @@ Proposed units with disjoint write ownership after contract freeze:
 
 The units define module ownership and stable contract seams.
 
-Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distribution/import `softqp`. It vendors the reviewed C core and Python binding with Apache-2.0, MIT and BSD notices, pinned QDLDL and marked source changes. Linux and Windows tests and wheel builds passed on promoted source. The app consumes published distribution `softqp==0.1.0`; a fresh public-index Windows install passes all 94 native tests and license checks. The historical experiment remains tied to its exact source revision. CPU builtin backend is supported. The approved ownership decision is implemented.
+Engine decision: The separate public repository `CAOS_SoftQP_Engine` owns distribution/import `softqp`. It vendors the reviewed C core and Python binding with Apache-2.0, MIT and BSD notices, pinned QDLDL and marked source changes. Linux and Windows tests and wheel builds passed on promoted source. The current default client pins the public `softqp==0.3.0` distribution. The historical 0.1.0 public-index install passed its 94 native tests and license checks. Current client and notebook reruns establish their own compatibility evidence. The historical experiment remains tied to its exact source revision. CPU builtin backend is supported. The approved ownership decision is implemented.
 
 
 ## Technology and versions
@@ -78,7 +82,7 @@ The 2026-11-05 candidate pinned published shell 0.20.0. Its v0.20.0 tag peels to
 
 | component | package | version | use | alternative considered |
 |---|---|---|---|---|
-| shell | @fasl-work/caos-app-shell | 0.26.2 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
+| shell | @fasl-work/caos-app-shell | 0.26.3 | Shared workbench, linked scenes, story and measured gate | Custom shell duplication |
 | tooling | @types/node | 24.19.1 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | @types/react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -107,8 +111,11 @@ The 2026-11-05 candidate pinned published shell 0.20.0. Its v0.20.0 tag peels to
 | tooling | react-dom | 19.3.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | react-router | 8.4.0 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | lint | ruff | 0.15.18 | Static Python source validation | Unpinned formatting |
+| sparse conic comparison | clarabel | 0.11.1 | Official native cone solver for lifted convex QPs | Reimplemented conic solver |
+| sparse proximal comparison | proxsuite | 0.7.2 | Official sparse ProxQP for the same lifted intervals | Reimplemented proximal solver |
+| sparse interior-point comparison | piqp | 0.6.4 | Official PIQP for the same lifted intervals | Reimplemented interior-point solver |
 | sparse matrices | scipy | 1.18.1 | CSC assembly and convexity checks | Dense-only storage |
-| native engine | softqp | 0.1.0 | Pinned native generalized and asymmetric solver | Separate package over internal distribution |
+| native engine | softqp | 0.3.0 | Pinned public SDK for current native and teaching clients | Separate package over internal distribution |
 | tooling | typescript | 5.9.3 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | uplot | 1.6.32 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
 | tooling | vite | 8.3.5 | Locked direct dependency declared in frontend/package-lock.json | Separate custom implementation |
@@ -117,12 +124,13 @@ The 2026-11-05 candidate pinned published shell 0.20.0. Its v0.20.0 tag peels to
 
 ## Resources
 
-Design budgets, to be measured and enforced before release; no stage has yet been shown to meet the full-product budget. CPU-only.
+The historical preview used a two-hour, 2 GiB bake estimate. The accepted R4 extension supersedes that estimate for its separate source, native, learning and evaluation operations. These are pre-data limits, not observations of a completed scientific campaign. Numerical workers use one CPU and one BLAS/Torch thread; 20 GiB of free external storage is required at admission. Excluded software controls establish bounded code paths and do not establish full-population completion.
 
 | stage | memory | disk | time | where it runs |
 |---|---|---|---|---|
-| bake | 4 GiB | 2 GiB raw samples | 2 hours | bounded workstation job; reduce batches without discarding required cells |
-| training | not applicable until a learned comparator is reproducibly available | no model currently produced | no training currently scheduled | baseline and candidate are deterministic solvers |
+| source and native admission | 8 GiB owned tree | 8 GiB aggregate input, label and model artifact accounting | 600 seconds for installed-file admission, 180 seconds for cold imports; 30 seconds per source draw or reference/cold native permit | Fixed supervised source/native routes, exact roles and independently pinned source/runtime authority |
+| learning and calibration | 8 GiB owned tree | 8 GiB aggregate data, checkpoint and model artifacts | 48 hours per method and seed, including the charged prior training time on resume | Actual SDK fitting, selected numeric checkpoints and role-local calibration; no fitting payload access during held-out inference |
+| bake, held-out candidates | 4 GiB combined supervisor, parent, leaf and descendants | 4 GiB output with separately accounted admitted inputs | Original 24-hour campaign deadline across resume, 10 seconds per entire trial before getter through independent checked observation | Complete fixed trial schedule and failure denominators; immutable head preloading and separately observed startup amortization |
 | tests | 4 GiB | 2 GiB temporary build | 15 minutes | build system time limit; analytic/lifted suite is a separate narrow measurement |
 | build | 2 GiB | 1 GiB dependencies and outputs | 5 minutes | static-site build budget |
 | deploy | browser budget 256 MiB | 20 MiB compressed artifacts | initial route 3 seconds under declared QA network | replay-first design acceptance budget |
@@ -142,10 +150,17 @@ Each promised method is a real executable vertical, not a citation. The final se
 | M-3 | sota | DAQP side-specific weights | Lower/upper linear/quadratic semantics map exactly; only compatible convex cases are compared, and unsupported cases are marked incompatible with reason. | Adapter parity and case compatibility gate |
 | M-4 | sota | FlexQP exact L1 feasibility restoration | Reconstruct from the paper only if its algorithm, assumptions and test oracle are independently reviewed; report as restoration, not a substitute for arbitrary fixed penalty objectives. | Mathematical implementation review and oracle gate |
 | M-6 | sota | ElastiQP 0.2.0 dual active set | Pure L1 positive-definite side costs and hard equalities match independent lifting; hard inequalities and quadratic costs are refused. | Published adapter parity and original dual recovery tests |
+| M-7 | sota | Clarabel sparse quadratic-cone solver | The official backend consumes the same convex lift, retains exact native status and recovers signed interval and equality duals for independent original-space acceptance. | Actual installed route and settings controls; complete registered matrix remains pending |
+| M-8 | sota | ProxQP sparse proximal primal-dual solver | The official sparse backend consumes matched equality and interval blocks without changing the declared penalty or introducing an inferred active-set state. | Actual installed route and settings controls; complete registered matrix remains pending |
+| M-9 | sota | PIQP sparse proximal interior-point solver | The official backend consumes the same lifted inputs and returns a checked native result with unchanged signed recovery and full cost. | Actual installed route and settings controls; complete registered matrix remains pending |
+| L-1 | sota | Learned primal-dual initialization for stock OSQP | Fourteen dimension heads per seed use train-only fitted preprocessing, genuine selected numeric weights and the fixed differentiated residual loss; matched learned, cold and previous solves preserve the same native settings. Missing models retain eligible failures. | Actual SDK fit/resume/inference and frozen-input controls; full three-seed fitting and held-out qualification remain pending |
+| L-2 | sota | Graph-predicted DAQP working-set initialization | The admitted graph, source-weighted labels, actual selected numeric model and independent calibration threshold initialize the native active set with fixed equality flags and bounded repair. Missing models or calibration retain eligible failures. | Actual SDK graph fit/calibration/inference and native label controls; full three-seed fitting and held-out qualification remain pending |
 | BS-1 | beyond | AAGSP side-specific generalized projection | Mathematical review passes; independent lifted oracle agrees on all supported cases; preregistered practitioner outcome improves on compatible matched cases without hard-constraint or accuracy regression. | Proof, novelty, adversarial tests, and held-out benchmark gates |
 | BS-2 | beyond | Directional disjoint group-peak update preserving original interval rows | Fixed positive diagonal metric, alpha in(0,2), convex closed monotone scalar price, positive directional scales, nonempty soft box and an attained saddle point; original-space checks pass. Registered144-instance paired10% criterion is false; no novelty or timing superiority established. | `tests/coupled/test_coupled_correctness.py`, `tests/coupled/test_coupled_export.py`, `tests/test_coupled_lessons.py` |
 
 Deep FlexQP remains a conditional unavailable comparator because trained code/weights/data were unavailable. Its former M-5 row is excluded from the executable ladder, rather than fabricating a learned-policy result. The fixed FlexQP reconstruction does not claim trained-policy reproduction.
+
+The five added rows replicate published methods through the public SDK; they add no novelty claim. Runtime keys are `clarabel`, `proxqp`, `piqp`, `learned_osqp` and `learned_daqp`. The four matched cold and previous-state routes are evaluation controls, not extra promised methods. Current-source lesson coverage must add all five rows before content acceptance; initialized memory fixtures do not count as trained models.
 
 Internal tier words and IDs remain in design/control records only. Product pages, README, notebooks, posts, and manuscripts use method names and the shared terminology rules.
 
@@ -244,13 +259,13 @@ Offline stages: ingest source/registry -> validate -> generate/pin seeds and spl
 
 Current visualization design reconciliation, 2026-11-05. This section specifies the replacement of the historical violation-chart entry view. It records a present design rather than claiming that these requirements preceded the original implementation. The published base is CAOS_PRODUCT_TEMPLATE 0.15.006 (4b6a1e4058a1b39fb32b0ad52f1c222bffb68165) with CAOS App Shell 0.25.0 (8e8398d55cd9ee40f0d79b3c3f506fb0f2e24c65). The declared story runs Formulate, Price, Compute and Compare. Its callouts reserve the measured shell header band. The remaining height is the drawing surface, and the phone stage floor includes both regions. All views share the selected case, method, interval row and recorded stream frame. Inputs are verified replay or a verified local-native import; a selection never becomes a new browser solve. Shared stage, story, callout and transition behavior belongs to the shell.
 
-### Current base adoption, 2026-11-11
+### Earlier base adoption, 2026-11-11
 
-The current candidate adopts CAOS_PRODUCT_TEMPLATE 0.15.010 and CAOS App Shell 0.26.0. The shell fixes natural PlotCard header sizing, redraws moving chart marks, publishes settled callout-band measurements, gives callout values a dedicated row, and exposes carousel semantics only when cards are hidden. It also adds explicit UTC/local time-axis handling and formatter caching. The product's elapsed-day charts use `formatNumber`; it does not use calendar-time axes. The template workflow includes an opt-in guarded readiness-provider path, but SoftQP keeps the strict catalog and readiness-inventory lane because its artifact adapter does not independently validate the readiness document. Full product requalification against these exact installed bases is required before promotion.
+The earlier candidate adopted CAOS_PRODUCT_TEMPLATE 0.15.010 and CAOS App Shell 0.26.0. That shell fixed natural PlotCard header sizing, moving chart redraw, settled callout-band measurements and dedicated readout rows. The product's elapsed-day charts use `formatNumber`. The template introduced an opt-in guarded readiness-provider path; SoftQP retains the strict catalog and readiness-inventory lane because its artifact adapter does not independently validate the readiness document.
 
 ### Current base adoption, 2026-11-22
 
-The candidate updates to CAOS_PRODUCT_TEMPLATE 0.15.014 (release commit `c9ec0e94908ce084b6a62a6a529535c90e44ab57`) and CAOS App Shell 0.26.2 (release commit `e5f6df0e4e0bcbf657480b3d890d95408dc6537d`). The shared chart readout wraps as it grows and restores the keyboard crosshair after the chart rebuilds. The loopback story check launches Chromium without proxy discovery. The product retains its strict catalog and readiness-inventory lane. The installed browser gate and capture review remain required before promotion.
+The candidate adopts released CAOS_PRODUCT_TEMPLATE 0.15.015 (tag commit `b30a5708a78ef13096956141e9cd057ebc3499b5`) and published CAOS App Shell 0.26.3 (release commit `333facf9244fc6135789e63f6aa3c90dfcf73700`). The template's deployed main `9084d19ca88c4242e58d923b0946b3a9f687d854` has the same source tree as that tag. The shell supports a product-controlled Focus stage, disclosure controls, URL-restored history and stable stage, callout and chart readout sizing. SoftQP's installed public-package gate passed 1,350 states, with 245 captures and independent native, history, phone and painted-geometry checks. Six inherited content waivers remain recorded; the learned-method and comparison gaps must close after genuine model and benchmark availability. This bounded UI acceptance does not establish the scientific method floor or final deployment readiness. The product retains its strict catalog and readiness-inventory lane.
 
 ### Focus content and allocation, 2026-11-22
 

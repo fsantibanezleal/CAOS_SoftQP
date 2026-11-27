@@ -60,3 +60,20 @@ def test_adversarial_inner_flag_cannot_select_an_unrelated_interpreter(runtime, 
     runner, _, _, _ = runtime
     monkeypatch.setattr(sys, "argv", ["run_notebooks", "--inner"])
     assert runner.main() == 2
+
+def test_product_notebook_environment_ignores_managed_coupled_auxiliary(runtime, monkeypatch):
+    runner, root, directory, python = runtime
+    config = json.loads((ROOT / "scripts/local/workflow.json").read_text(encoding="utf-8"))
+    ordinary = [entry for entry in config["environments"] if entry.get("when") == "notebooks"]
+    assert [entry["path"] for entry in ordinary] == [".venv-lessons"]
+    auxiliary = next(entry for entry in config["environments"] if entry["path"] == ".venv-coupled-lessons")
+    assert "when" not in auxiliary
+    assert auxiliary["requirements"] == ["docs/teaching/coupled/requirements.txt"]
+    config["environment_namespace"] = "product"
+    (root / "scripts/local/workflow.json").write_text(json.dumps(config), encoding="utf-8")
+    auxiliary_python = directory.with_name(auxiliary["path"]) / python.relative_to(directory)
+    auxiliary_python.parent.mkdir(parents=True)
+    auxiliary_python.write_bytes(b"auxiliary interpreter; never executed")
+    monkeypatch.setenv("SOFTQP_COUPLED_PYTHON", str(auxiliary_python))
+    assert runner.notebook_environment() == directory
+    assert runner.venv_python() == python

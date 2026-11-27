@@ -62,7 +62,7 @@ def test_sealed_pair_reads_two_local_files_without_numerical_work(local_reader, 
         unavailable.rename(context.root)
 
 
-def test_sealed_pair_refuses_same_size_same_time_mutation_and_hardlink(local_reader, tmp_path):
+def test_adversarial_sealed_pair_refuses_same_size_same_time_mutation_and_hardlink(local_reader, tmp_path):
     _, reader, root = local_reader
     pair = reader.read_sealed_frame_pair("trajectory-00")
     path = root / reader._records["trajectory-00"]["path"]

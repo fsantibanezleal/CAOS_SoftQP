@@ -82,7 +82,7 @@ finally:
         outer.close()
 
 
-def test_learning_leaf_holds_exact_boot_before_worker_dispatch(tmp_path):
+def test_adversarial_learning_leaf_holds_exact_boot_before_worker_dispatch(tmp_path):
     from types import SimpleNamespace
 
     spec = dict(nonce="1" * 32, operation="train-model", method="learned_osqp", seed=41001,

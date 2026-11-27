@@ -14,3 +14,6 @@ EARS (Mavin et al., RE'09, doi:10.1109/RE.2009.9). Every requirement names the g
 | EX-010 | WHILE the App route is open at a desktop viewport, THE primary stage SHALL occupy at least 60% of the viewport and at least 80% in Focus. | `frontend/scripts/gate.mjs` (G6) |
 | EX-011 | WHEN any registered control changes, THE workbench SHALL change the selection key, and no view SHALL keep an earlier key. | `frontend/scripts/gate.mjs` (G9) |
 | EX-012 | THE repository SHALL state its version in VERSION only. | `scripts/check_version_coherence.py` |
+| EX-013 | WHEN Context enters Focus, THE workbench SHALL show the selected scientific scene while preserving the Context group; every other Focus group SHALL retain its own selected content. | `frontend/scripts/check-softqp-ui.mjs` |
+| EX-014 | WHEN case, scene, method, native result or Focus changes through the workbench or browser history, THE workbench SHALL preserve unrelated live query fields, hash and router state and SHALL restore the corresponding recorded or verified native selection. | `frontend/scripts/check-softqp-ui.mjs` |
+| EX-015 | WHILE Context Focus is open, THE Method and costs rail SHALL expose the same native editing, request and verified import workflow using unique control identifiers and an accessible scrolling rail on a short phone viewport. | `frontend/scripts/check-softqp-ui.mjs` |

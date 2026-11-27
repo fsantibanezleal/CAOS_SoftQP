@@ -133,7 +133,7 @@ def test_resigned_inconsistent_fixture_records_still_refuse(tmp_path, mutation, 
         a.load_i1_authority(trust=trust, context=context, protocol_ref=protocol)
 
 
-def test_independent_index_identity_and_actual_review_bytes(tmp_path):
+def test_adversarial_independent_index_identity_and_actual_review_bytes(tmp_path):
     trust, context, protocol = _approval(tmp_path)
     with pytest.raises(c.ContractError, match="I1 evidence byte identity mismatch"):
         a.load_i1_authority(trust=replace(trust, expected_index_sha256="0"*64), context=context,
@@ -185,7 +185,7 @@ def test_registered_dispatch_refuses_standalone_before_reading_governance_or_dra
         g.dispatch_registered_request(c.canonical_bytes(_source_request()), object())
 
 
-def test_dispatch_does_not_take_a_policy_or_different_slot_from_the_request(monkeypatch):
+def test_dispatch_does_not_take_a_policy_or_different_slot_from_the_request(monkeypatch, tmp_path):
     request = _source_request()
     policy = {key: None for key in ("approval", "product_root", "engine_root", "design_root",
                                   "output_root", "locks", "protocol")}
@@ -199,7 +199,7 @@ def test_dispatch_does_not_take_a_policy_or_different_slot_from_the_request(monk
     monkeypatch.setattr(g, "_rng", forbidden)
     with pytest.raises(c.ContractError, match="request slot was not independently approved"):
         g.dispatch_registered_request(c.canonical_bytes(request), object())
-    injected = {**request, "output_root": "D:/forged"}
+    injected = {**request, "output_root": str(tmp_path / "forged")}
     with pytest.raises(c.ContractError, match="invalid registered generator request"):
         g.dispatch_registered_request(c.canonical_bytes(injected), object())
 

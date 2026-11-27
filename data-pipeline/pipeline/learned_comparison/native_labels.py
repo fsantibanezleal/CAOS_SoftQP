@@ -285,10 +285,14 @@ def _worker(root, expected_authority, nonce):
     raw = _bounded(path)
     _require(_sha(raw) == expected_authority, "owned worker authority differs")
     authority = _decode(raw)
+    _require(authority.get("mode") == "fixture", "standalone native worker is excluded-fixture only")
     _require(_file_sha(__file__) == authority["sources"][_WORKER_SOURCE[0]], "running worker code differs")
     _check_independent_review(authority)
     verification_started = time.monotonic()
     audit = _profile_checks(authority)
+    _require(
+        audit["distributions"] == 45, "standalone native fixture requires the historical 45-package profile"
+    )
     staged_digest = _publish(
         root / "installed-files.json",
         {
@@ -307,6 +311,21 @@ def _worker(root, expected_authority, nonce):
         _decode(_bounded(ack)) == {"nonce": nonce, "verified_sha256": staged_digest},
         "native import lacks verified supervisor ACK",
     )
+    _native_loop(root, expected_authority, nonce, audit, staged_digest)
+
+
+def _native_loop(
+    root,
+    expected_authority,
+    nonce,
+    audit,
+    staged_digest,
+    *,
+    spec=None,
+    live=None,
+    hold_stage=None,
+    import_seconds=None,
+):
     startup = time.monotonic()
 
     from importlib.metadata import version
@@ -318,8 +337,14 @@ def _worker(root, expected_authority, nonce):
     from softqp.learning import graph  # noqa: F401 - admit the full numerical import path
     from softqp.learning.solvers import backend_settings
 
-    torch.set_num_threads(1)
-    torch.set_num_interop_threads(1)
+    if spec is None:
+        torch.set_num_threads(1)
+        torch.set_num_interop_threads(1)
+    else:
+        _require(
+            torch.get_num_threads() == torch.get_num_interop_threads() == 1, "native thread policy differs"
+        )
+        live()
     _require(version("softqp") == "0.3.0", "actual SDK version differs")
     import_origins = {
         name: _file_sha(module.__file__)
@@ -343,7 +368,8 @@ def _worker(root, expected_authority, nonce):
             "versions": import_versions,
             "import_origins": import_origins,
             "cold_settings": _plain(backend_settings()["daqp-label"]),
-            "import_seconds": time.monotonic() - startup,
+            "import_seconds": time.monotonic() - startup + (import_seconds or 0),
+            **({"guardian": spec} if spec is not None else {}),
         },
     )
     index = 0
@@ -359,27 +385,39 @@ def _worker(root, expected_authority, nonce):
         stage = request["stage"]
         if stage == "stop":
             return
-        started = time.monotonic()
-        timing = {}
-        try:
-            if stage == "reference":
-                problem = _prepare(request["original"])
-                lift_digest = _observed_lift(problem)
-                evidence = problem.reference()
-                state = (index, request["frame_id"], problem, evidence)
-                observed = {"lift_sha256": lift_digest, "reference": _plain(evidence.as_dict())}
-            else:
-                _require(
-                    stage == "cold" and state is not None and state[:2] == (index - 1, request["frame_id"]),
-                    "cold request lost its opaque reference custody",
-                )
-                observed, timing = _actual_cold(state[2], state[3])
+        from contextlib import nullcontext
+
+        lease = (
+            _leaf_permit(root, spec, request, raw, state, live, hold_stage)
+            if spec is not None
+            else nullcontext()
+        )
+        with lease:
+            started = time.monotonic()
+            timing = {}
+            try:
+                if stage == "reference":
+                    problem = _prepare(request["original"])
+                    lift_digest = _observed_lift(problem)
+                    evidence = problem.reference()
+                    state = (index, request["frame_id"], problem, evidence, None)
+                    observed = {"lift_sha256": lift_digest, "reference": _plain(evidence.as_dict())}
+                else:
+                    _require(
+                        stage == "cold"
+                        and state is not None
+                        and state[:2] == (index - 1, request["frame_id"]),
+                        "cold request lost its opaque reference custody",
+                    )
+                    observed, timing = _actual_cold(state[2], state[3])
+                    state = None
+                status, reason = "observed", None
+            except (ArithmeticError, ImportError, RuntimeError, ValueError) as error:
+                observed, status, reason = None, "native-failure", f"{type(error).__name__}: {error}"
                 state = None
-            status, reason = "observed", None
-        except (ArithmeticError, ImportError, RuntimeError, ValueError) as error:
-            observed, status, reason = None, "native-failure", f"{type(error).__name__}: {error}"
-            state = None
-        _publish(
+        if spec is not None:
+            live()
+        response_sha = _publish(
             root / f"response-{index:06d}.json",
             {
                 "index": index,
@@ -393,7 +431,90 @@ def _worker(root, expected_authority, nonce):
                 "telemetry": {"elapsed_seconds": time.monotonic() - started, **timing},
             },
         )
+        if state is not None:
+            state = (*state[:4], response_sha)
         index += 1
+
+
+def _stage_permit(spec, request):
+    return {
+        "schema": "softqp.r4.native-permit/1",
+        "generation": spec["generation"],
+        "scope_sha256": spec["scope_sha256"],
+        "nonce": spec["nonce"],
+        "index": request["index"],
+        "role": request["role"],
+        "frame_id": request["frame_id"],
+        "stage": request["stage"],
+        "request_sha256": _hash(request),
+        "reference_sha256": request["reference_sha256"],
+    }
+
+
+def _leaf_permit(root, spec, request, raw, state, live, hold_stage=None):
+    _require(
+        request["role"] in spec["roles"] and request["generation"] == spec["generation"],
+        "native stage outside approved role or generation",
+    )
+    if request["stage"] == "cold":
+        _require(
+            state is not None
+            and state[:2] == (request["index"] - 1, request["frame_id"])
+            and request["reference_sha256"] == state[4],
+            "native cold permit lost prior reference",
+        )
+    else:
+        _require(
+            request["stage"] == "reference" and request["reference_sha256"] is None,
+            "invalid native reference permit request",
+        )
+    proposal = _stage_permit(spec, request)
+    _require(proposal["request_sha256"] == _sha(raw), "native request must be canonical")
+    index = request["index"]
+    live()
+    _publish(root / f"permit-request-{index:06d}.json", proposal)
+    permit = root / f"permit-{index:06d}.json"
+    deadline = time.monotonic() + _TRIAL_SECONDS
+    while not permit.is_file() and time.monotonic() < deadline:
+        time.sleep(0.005)
+    _require(
+        time.monotonic() < deadline and _decode(_bounded(permit)) == proposal,
+        "native stage permit unavailable",
+    )
+    live()
+    if hold_stage is not None:
+        return hold_stage(
+            {
+                f"request-{index:06d}.json": [len(raw), _sha(raw)],
+                permit.name: [len(_encode(proposal)), _hash(proposal)],
+            }
+        )
+    from contextlib import nullcontext
+
+    return nullcontext()
+
+
+def main_verified(root, spec, *, require_live, hold_stage, audit, installed, import_seconds):
+    """Fixed leaf inside exact scientific runtime and inherited kernel Job."""
+    require_live()
+    _require(
+        installed["pid"] == os.getpid()
+        and installed["nonce"] == spec["nonce"]
+        and audit["distributions"] == 49
+        and audit["profile_sha256"] == spec["profile_sha256"],
+        "native leaf installed/interpreter receipt differs",
+    )
+    _native_loop(
+        root,
+        spec["authority_sha256"],
+        spec["nonce"],
+        audit,
+        _hash(installed),
+        spec=spec,
+        live=require_live,
+        hold_stage=hold_stage,
+        import_seconds=import_seconds,
+    )
 
 
 def _check_independent_review(document):
@@ -699,6 +820,9 @@ class _OwnedWorker:
         self.nonce = nonce
         self.index = 0
         self.peak_rss = 0
+        self.governed = None
+        self.identity = None
+        self.reference_sha256 = None
         self.job = None
         self.process = None
         root.mkdir()
@@ -766,7 +890,10 @@ class _OwnedWorker:
             if time.monotonic() >= deadline:
                 raise TimeoutError(f"native worker deadline for {path.name}")
             if path.is_file():
-                return _decode(_bounded(path))
+                result = _decode(_bounded(path))
+                if time.monotonic() >= deadline:
+                    raise TimeoutError(f"native worker deadline reading {path.name}")
+                return result
             code = self.process.poll()
             if code is not None:
                 raise _WorkerExited(f"native worker exited before {path.name}: {code}")
@@ -781,13 +908,36 @@ class _OwnedWorker:
             "stage": stage,
             "original": original,
         }
+        deadline = time.monotonic() + _TRIAL_SECONDS
+        if self.governed is not None:
+            spec, check = self.governed
+            check()
+            request.update(
+                generation=spec["generation"],
+                role=self.identity["role"],
+                reference_sha256=self.reference_sha256 if stage == "cold" else None,
+            )
         request_sha = _publish(self.root / f"request-{index:06d}.json", request)
-        record = self.wait_file(self.root / f"response-{index:06d}.json", _TRIAL_SECONDS)
+        if self.governed is not None:
+            proposal = self.wait_file(
+                self.root / f"permit-request-{index:06d}.json", deadline - time.monotonic()
+            )
+            _require(proposal == _stage_permit(spec, request), "observed native permit request differs")
+            check()
+            _publish(self.root / f"permit-{index:06d}.json", proposal)
+        record = self.wait_file(self.root / f"response-{index:06d}.json", deadline - time.monotonic())
+        if self.governed is not None:
+            check()
+            self.reference_sha256 = _hash(record) if stage == "reference" else None
+            for kind in ("permit-request", "permit"):
+                (self.root / f"{kind}-{index:06d}.json").unlink()
         _require(
             all(record[key] == request[key] for key in ("index", "nonce", "frame_id", "stage"))
             and record["request_sha256"] == request_sha,
             "native observed output custody mismatch",
         )
+        if time.monotonic() >= deadline:
+            raise TimeoutError(f"native worker deadline authenticating {stage} observation")
         self.index += 1
         (self.root / f"request-{index:06d}.json").unlink()
         (self.root / f"response-{index:06d}.json").unlink()
@@ -799,7 +949,8 @@ class _OwnedWorker:
             {"index": self.index, "nonce": self.nonce, "frame_id": None, "stage": "stop", "original": None},
         )
         try:
-            _require(self.process.wait(timeout=3) == 0, "native observed child exited unsuccessfully")
+            limit = _TRIAL_SECONDS if self.governed is not None else 3
+            _require(self.process.wait(timeout=limit) == 0, "native observed child exited unsuccessfully")
         finally:
             self.close()
 
@@ -1208,8 +1359,11 @@ def _restore_custody(root, ref, *, limit=_FILE_LIMIT):
     return raw
 
 
-def _start_worker(run_root, authority, index):
+def _start_worker(run_root, authority, index, runtime=None):
+    if runtime is not None:
+        return _start_governed_worker(run_root, authority, index, runtime)
     doc = authority.document
+    _require(doc["mode"] == "fixture", "standalone native supervisor is excluded-fixture only")
     nonce = secrets.token_hex(16)
     executable = Path(doc["runtime"]["python"])
     owned_root = run_root / f"worker-{index:04d}"
@@ -1295,11 +1449,16 @@ def _run_input(worker, problem, identity, context):
     return reference, cold, timeout_stage
 
 
-def supervise_native_run(plan, authority, destination):
+def supervise_native_run(plan, authority, destination, *, runtime=None):
     """Produce immutable attempts/labels only from an exact owned SDK child."""
     from . import phase_inputs as p
 
     _recheck_plan(plan, authority)
+    if not plan.context.allow_fixture:
+        _require(type(runtime) is _NativeRuntime, "scientific live 49-package guardian required")
+    if runtime is not None:
+        _require(type(runtime) is _NativeRuntime, "invalid native runtime guardian")
+        runtime.verify(plan, authority)
     receipt = _decode(plan.preflight.receipt_bytes)
     records = {row["ref"]["artifact_id"]: row for row in receipt["records"]}
     target = p._external_destination(
@@ -1314,16 +1473,31 @@ def supervise_native_run(plan, authority, destination):
     target.mkdir()
     rows, workers = [], []
     worker = None
+    frontier = None
     stored_bytes = 0
     completed_work_bytes = 0
     try:
         for index, slot in enumerate(plan.slots):
-            problem, identity = _problem_input(plan, slot, receipt, records)
             if worker is None:
                 worker_index = len(workers)
-                worker, hello = _start_worker(target, authority, worker_index)
+                worker, hello = _start_worker(target, authority, worker_index, runtime)
                 workers.append(hello)
                 stored_bytes += (target / hello["path"]).stat().st_size
+            if runtime is not None:
+                runtime.check()
+            problem, identity = _problem_input(plan, slot, receipt, records)
+            if runtime is not None:
+                worker.identity = identity
+                intent = _persist(
+                    target / f"intent-{index:06d}.json",
+                    {
+                        "previous": frontier,
+                        "input": identity,
+                        "generation": worker_index,
+                        "request_index": worker.index,
+                        "nonce": worker.nonce,
+                    },
+                )
             reference, cold, timed_out = _run_input(worker, problem, identity, plan.context)
             attempt = {
                 "format": ATTEMPT,
@@ -1336,7 +1510,11 @@ def supervise_native_run(plan, authority, destination):
                 "cold": cold,
                 "peak_rss_bytes": worker.peak_rss,
             }
-            current_work_bytes = sum(path.stat().st_size for path in worker.root.iterdir() if path.is_file())
+            current_work_bytes = (
+                _native_base_bytes((worker.root,))
+                if runtime is not None
+                else sum(path.stat().st_size for path in worker.root.iterdir() if path.is_file())
+            )
             if timed_out is not None:
                 completed_work_bytes += current_work_bytes
                 current_work_bytes = 0
@@ -1363,6 +1541,21 @@ def supervise_native_run(plan, authority, destination):
                 <= _DISK_LIMIT - _MANIFEST_LIMIT - _DIAGNOSTIC_LIMIT * 2,
                 "native stored run exceeds its disk budget",
             )
+            if runtime is not None:
+                runtime.check()
+                frontier = _persist(
+                    target / f"ordinal-{index:06d}.json",
+                    {
+                        "intent": intent,
+                        "attempt": attempt_ref,
+                        "label": label_ref,
+                        "result_sha256": attempt["result_sha256"],
+                    },
+                )
+                stored_bytes += (target / intent["path"]).stat().st_size + (
+                    target / frontier["path"]
+                ).stat().st_size
+                runtime.budget(stored_bytes + completed_work_bytes + current_work_bytes)
             rows.append(
                 {
                     "input": identity,
@@ -1374,8 +1567,12 @@ def supervise_native_run(plan, authority, destination):
                 }
             )
         if worker is not None:
+            if runtime is not None:
+                runtime.check()
             worker.finish()
             worker = None
+        if runtime is not None:
+            runtime.check()
         manifest = {
             "format": MANIFEST,
             "version": VERSION,
@@ -1548,7 +1745,28 @@ def _read_run(root, filename, expected_manifest_sha256, authority, plan):
             hello["authority_sha256"] == authority.sha256 and hello["audit"]["full_files"] is True,
             "native worker fresh admission differs",
         )
+        guardian = hello.get("guardian")
+        if not plan.context.allow_fixture or guardian is not None:
+            _require(
+                guardian is not None
+                and guardian["generation"] == index
+                and guardian["operation"]
+                == ("native-label-fixture" if plan.context.allow_fixture else "native-label")
+                and guardian["fixture_only"] is plan.context.allow_fixture
+                and guardian["roles"] == list(plan.roles)
+                and guardian["authority_sha256"] == authority.sha256
+                and hello["nonce"] == guardian["nonce"]
+                and hello["audit"]["distributions"] == 49
+                and hello["audit"]["profile_sha256"] == guardian["profile_sha256"]
+                and hello["pid"] == hello["verified_files"]["pid"] != guardian["owner"],
+                "native governed interpreter or generation receipt differs",
+            )
+            _require(
+                guardian["profile_sha256"] == expected["runtime"]["profile_sha256"],
+                "native persisted governed profile differs",
+            )
         worker_records.append(hello)
+    frontier = None
     for index, (row, slot) in enumerate(zip(manifest["rows"], plan.slots, strict=True)):
         problem, identity = _problem_input(plan, slot, receipt, records)
         _require(
@@ -1567,6 +1785,40 @@ def _read_run(root, filename, expected_manifest_sha256, authority, plan):
             "native observed attempt binding differs",
         )
         hello = worker_records[attempt["worker"]]
+        if "guardian" in hello:
+            intent_path, ordinal_path = f"intent-{index:06d}.json", f"ordinal-{index:06d}.json"
+            ordinal_local = root / ordinal_path
+            facts = p._path_stat(ordinal_local)
+            _require(
+                stat.S_ISREG(facts.st_mode)
+                and facts.st_nlink == 1
+                and ordinal_local.resolve(strict=True).parts == ordinal_local.parts,
+                "native durable ordinal path alias",
+            )
+            ordinal_raw = _bounded(ordinal_local)
+            ordinal = _decode(ordinal_raw)
+            intent_ref = ordinal["intent"]
+            intent = _decode(_restore_custody(root, intent_ref))
+            _require(
+                intent_ref["path"] == intent_path
+                and ordinal
+                == {
+                    "intent": intent_ref,
+                    "attempt": row["attempt"],
+                    "label": row["label"],
+                    "result_sha256": row["result_sha256"],
+                }
+                and intent["previous"] == frontier
+                and intent["input"] == identity
+                and intent["generation"] == attempt["worker"]
+                and intent["nonce"] == hello["nonce"]
+                and (
+                    attempt["reference"]["status"] in _TRANSPORT_FAILURES
+                    or intent["request_index"] == attempt["reference"]["index"]
+                ),
+                "native durable ordinal frontier differs",
+            )
+            frontier = {"path": ordinal_path, "sha256": _sha(ordinal_raw)}
         for name in ("reference", "cold"):
             stage = attempt[name]
             if stage is not None and stage["status"] not in _TRANSPORT_FAILURES:
@@ -1577,6 +1829,12 @@ def _read_run(root, filename, expected_manifest_sha256, authority, plan):
                     "stage": name,
                     "original": problem["original"] if name == "reference" else None,
                 }
+                if "guardian" in hello:
+                    expected_request.update(
+                        generation=attempt["worker"],
+                        role=slot.role,
+                        reference_sha256=_hash(attempt["reference"]) if name == "cold" else None,
+                    )
                 _require(
                     stage["nonce"] == hello["nonce"]
                     and stage["frame_id"] == slot.frame_id
@@ -1798,6 +2056,267 @@ class NativeRoleProof:
         _compare_label_slot(row, label_slot, fixture=self.trust.fixture_only)
         label = reader.read_label(frame_id) if label_slot is not None else None
         return {"state": row["state"], "reason": row["reason"], "label": label}
+
+
+@dataclass(frozen=True)
+class _NativeRuntime:
+    custody: object
+    operation: str
+    request_sha256: str
+    profile_sha256: str
+    policy_sha256: str
+    scope_sha256: str
+    quota_base_bytes: int
+    fixture_only: bool
+
+    def binding(self):
+        return {
+            "operation": self.operation,
+            "request_sha256": self.request_sha256,
+            "profile_sha256": self.profile_sha256,
+            "source_file": Path(__file__).resolve(),
+        }
+
+    def check(self):
+        from softqp_native_runtime_custody import read_policy
+
+        raw = read_policy(self.custody, **self.binding())
+        _require(_sha(raw) == self.policy_sha256, "native independently expected launch policy differs")
+        return _decode(raw)
+
+    def verify(self, plan, authority):
+        policy = self.check()
+        _require(plan.context.allow_fixture == self.fixture_only, "native runtime fixture scope differs")
+        _require(
+            (
+                plan.preflight.sha256,
+                list(plan.roles),
+                authority.sha256,
+                authority.document["inventory_sha256"],
+            )
+            == (
+                policy["scope"]["preflight"]["sha256"],
+                policy["scope"]["roles"],
+                policy["scope"]["authority"]["sha256"],
+                policy["scope"]["inventory_sha256"],
+            ),
+            "native plan is outside active governed scope",
+        )
+        _require(
+            self.profile_sha256 == authority.document["runtime"]["profile_sha256"],
+            "native authority and live runtime profile disagreement",
+        )
+        if not self.fixture_only:
+            _require(
+                authority.i1_authority.runtime_profile_sha256 == self.profile_sha256,
+                "native I1 and live runtime profile disagreement",
+            )
+
+    def budget(self, increment):
+        _require(
+            self.quota_base_bytes + increment
+            <= _DISK_LIMIT - _MANIFEST_LIMIT - 4 * _FILE_LIMIT - 2 * _DIAGNOSTIC_LIMIT,
+            "aggregate native data budget exceeded",
+        )
+
+    def launch(self, root, nonce, generation, authority_sha256):
+        from softqp_native_runtime_custody import open_worker
+
+        self.check()
+        return open_worker(
+            self.custody,
+            root=root,
+            nonce=nonce,
+            generation=generation,
+            authority_sha256=authority_sha256,
+            scope_sha256=self.scope_sha256,
+            **self.binding(),
+        )
+
+
+def _start_governed_worker(run_root, authority, index, runtime):
+    nonce = secrets.token_hex(16)
+    worker = runtime.launch(run_root / f"worker-{index:04d}", nonce, index, authority.sha256)
+    try:
+        verified = worker.wait_file(worker.root / "installed.json", _VERIFY_SECONDS)
+        audit = verified["audit"]
+        _require(
+            verified["nonce"] == nonce
+            and verified["pid"] in worker._pids()
+            and audit["distributions"] == 49
+            and audit["full_files"] is True
+            and audit["profile_sha256"] == runtime.profile_sha256
+            and audit["full_source_files_checked"] > 0,
+            "native owned scientific installed custody differs",
+        )
+        verified_sha256 = _hash(verified)
+        runtime.check()
+        _persist(worker.root / "import-ack.json", {"installed_sha256": verified_sha256})
+        hello = worker.wait_file(worker.root / "hello.json", _IMPORT_SECONDS)
+        guardian = hello["guardian"]
+        _require(
+            hello["nonce"] == nonce
+            and hello["pid"] == verified["pid"]
+            and hello["pid"] in worker._pids()
+            and hello["verified_sha256"] == verified_sha256
+            and hello["authority_sha256"] == authority.sha256
+            and hello["audit"] == audit
+            and guardian["policy_sha256"] == runtime.policy_sha256
+            and guardian["scope_sha256"] == runtime.scope_sha256
+            and guardian["generation"] == index
+            and guardian["profile_sha256"] == runtime.profile_sha256
+            and guardian["fixture_only"] is runtime.fixture_only
+            and guardian["roles"] == authority.document["roles"],
+            "native observed 49-package interpreter hello differs",
+        )
+        hello["verified_files"] = verified
+        worker.governed = (guardian, runtime.check)
+        telemetry = _persist(run_root / f"worker-{index:04d}-hello.json", hello)
+        return worker, telemetry
+    except BaseException:
+        worker.close()
+        raise
+
+
+def _native_scope_file(root, ref, *, limit=_MANIFEST_LIMIT):
+    _require(
+        type(ref) is dict and set(ref) == {"path", "sha256"} and _hex(ref["sha256"]),
+        "native independently expected file reference required",
+    )
+    return _restore_custody(root, ref, limit=limit)
+
+
+def _native_base_bytes(roots):
+    from . import phase_inputs as p
+    import stat
+
+    seen, count = set(), 0
+    for path in roots:
+        for nested in path.rglob("*"):
+            info = p._path_stat(nested)
+            if stat.S_ISREG(info.st_mode) and (info.st_dev, info.st_ino) not in seen:
+                seen.add((info.st_dev, info.st_ino))
+                count += info.st_size
+    return count
+
+
+def _dispatch_native_scientific(policy):
+    from dataclasses import replace
+    from .authority import load_i1_authority
+    from .generator import _dispatch_context
+
+    config = dict(policy["admission"])
+    catalog_ref = config.pop("catalog")
+    trust, context, protocol_ref = _dispatch_context(config)
+    catalog = _decode(_native_scope_file(trust.governance_root, catalog_ref))
+    _require(
+        set(catalog) == {"catalog", "problem_hashes", "source_records", "fit_source_ids"},
+        "native independently nominated product context differs",
+    )
+    _require(
+        catalog["catalog"].get(protocol_ref["artifact_id"]) == protocol_ref, "native catalog protocol differs"
+    )
+    authority = load_i1_authority(trust=trust, context=context, protocol_ref=protocol_ref)
+    return replace(
+        context,
+        catalog=catalog["catalog"],
+        problem_hashes=catalog["problem_hashes"],
+        source_records=catalog["source_records"],
+        fit_source_ids=tuple(catalog["fit_source_ids"]),
+    ), (
+        trust.governance_root,
+        authority,
+    )
+
+
+def dispatch_registered_native(raw, custody, *, fixture_only=False):
+    """Fixed native parent. Only the actual runtime guardian issues the transient capability."""
+    from softqp_native_runtime_custody import read_policy
+
+    from . import phase_inputs as p
+    from dataclasses import replace
+
+    request = _decode(raw)
+    operation = "native-label-fixture" if fixture_only else "native-label"
+    _require(request["operation"] == operation, "native fixed operation differs")
+    from softqp_native_runtime_custody import active_profile_sha256
+
+    profile = active_profile_sha256(custody)
+    binding = dict(
+        operation=operation,
+        request_sha256=_sha(raw),
+        profile_sha256=profile,
+        source_file=Path(__file__).resolve(),
+    )
+    raw_policy = read_policy(custody, **binding)
+    policy = _decode(raw_policy)
+    scope = policy["scope"]
+    if fixture_only:
+        from test_native_runtime import load_fixture_context
+
+        context, meta = load_fixture_context(policy["admission"])
+        i1 = None
+    else:
+        context, (meta, i1) = _dispatch_native_scientific(policy)
+        _require(i1.runtime_profile_sha256 == profile, "independent I1 native profile differs")
+    preflight_raw = _native_scope_file(meta, scope["preflight"])
+    preflight_doc = _decode(preflight_raw)
+    preflight = p.PhasePreflight(
+        Path(preflight_doc["source_root"]),
+        tuple(Path(root) for root in preflight_doc["forbidden_roots"]),
+        preflight_raw,
+    )
+    authority_raw = _native_scope_file(meta, scope["authority"])
+    authority = NativeAuthority(authority_raw, scope["authority"]["sha256"], i1)
+    context = replace(context, settings_hashes=authority.document["settings_hashes"])
+    plan = NativePlan.from_preflight(
+        context,
+        preflight,
+        expected_preflight_sha256=request["preflight_sha256"],
+        roles=request["roles"],
+        authority=authority,
+    )
+    _require(
+        _hash(_slots_data(plan.slots)) == request["inventory_sha256"], "native exact frame inventory differs"
+    )
+    work = p._exact_directory(Path(policy["output_root"]))
+    roots = tuple(p._exact_directory(Path(root)) for root in policy["artifact_roots"])
+    _require(
+        all(any(path.is_relative_to(root) for root in roots) for path in (work, preflight.source_root)),
+        "native aggregate quota omits an approved artifact root",
+    )
+    _require(
+        not any(base.is_relative_to(root) for root in roots for base in preflight.forbidden_roots),
+        "native quota overlaps protected code or authority",
+    )
+    bound = _hash(
+        {
+            "preflight": preflight.sha256,
+            "inventory": request["inventory_sha256"],
+            "policy": _sha(raw_policy),
+            "authority": authority.sha256,
+            "profile": profile,
+        }
+    )
+    runtime = _NativeRuntime(
+        custody,
+        operation,
+        _sha(raw),
+        profile,
+        _sha(raw_policy),
+        bound,
+        _native_base_bytes(roots),
+        fixture_only,
+    )
+    runtime.budget(0)
+    result = supervise_native_run(plan, authority, work / "native-run", runtime=runtime)
+    return {
+        "schema": "softqp.r4.native-result/1",
+        "request_sha256": _sha(raw),
+        "policy_sha256": _sha(raw_policy),
+        "manifest_sha256": result.sha256,
+        "fixture_only": fixture_only,
+    }
 
 
 if __name__ == "__main__":

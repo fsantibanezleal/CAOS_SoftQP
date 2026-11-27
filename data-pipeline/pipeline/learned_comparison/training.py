@@ -26,7 +26,7 @@ _LIMIT = 8 * 2**30
 
 
 LEARNING_REQUEST = "softqp.r4.learning-request/1"
-LEARNING_POLICY = "softqp.r4.learning-policy/1"
+LEARNING_POLICY = "softqp.r4.learning-policy/2"
 _JOB_SECONDS = 48 * 3600
 _MIN_FREE = 20 * 2**30
 
@@ -1795,8 +1795,7 @@ def dispatch_registered_learning(raw, custody):
     """Registered scientific parent entrypoint. Only the verified platform can invoke it."""
     from softqp_runtime_custody import read_active_learning_policy
 
-    from .authority import load_i1_authority
-    from .generator import _dispatch_context
+    from .learning_exports import export_lease
 
     request = _shape(
         c.strict_loads(raw),
@@ -1838,6 +1837,17 @@ def dispatch_registered_learning(raw, custody):
         custody, op, request_sha, policy["profile_sha256"], c.digest(raw_policy), output_root
     )
     runtime.verify()
+    with export_lease(output_root):
+        return _run_registered_learning(request, policy, runtime, started=time.monotonic())
+
+
+def _run_registered_learning(request, policy, runtime, *, started):
+    from . import learning_exports as exports
+    from .authority import load_i1_authority
+    from .generator import _dispatch_context
+
+    op, method, seed, resume = (request[k] for k in ("operation", "method", "seed", "resume"))
+    output_root = runtime.output_root
 
     admission = _shape(
         policy["admission"],
@@ -1854,7 +1864,7 @@ def dispatch_registered_learning(raw, custody):
     role_names = ("train", "validation") if op == "train-model" else ("calibration",)
     keyset = {"roles", "preflight", "resume"}
     if op == "calibrate-model":
-        keyset.update(("frozen", "committed_artifact_receipt"))
+        keyset.update(("frozen", "committed_artifact_receipt", "preprocessing"))
     scope = _shape(policy["scope"], keyset, "invalid registered learning phase scope")
     _equal(scope["resume"], resume, "independently approved resume differs")
     preflight_raw = _checked_scope_file(trust.governance_root, scope["preflight"])
@@ -1866,27 +1876,36 @@ def dispatch_registered_learning(raw, custody):
         preflight_raw,
     )
     _equal(p1_doc["protocol_ref"], protocol, "governed phase protocol differs")
-    roles = _shape(scope["roles"], set(role_names), "registered learning roles differ")
-    admitted = {role: _registered_role(role, roles[role], trust.governance_root, p1) for role in role_names}
-    for reader, _ in admitted.values():
-        _expected_phase(p1_doc, reader)
-    policy_sha = context.authority.manifest["normative_sha256"]["learning-spec.md"]
-    _equal(
-        p1_doc["identities"]["learning_policy_sha256"], policy_sha, "learning specification identity differs"
-    )
-    roots = tuple(phase._exact_directory(Path(path)) for path in policy["artifact_roots"])
-    necessary_roots = [output_root, *(r._root for r, _ in admitted.values())]
-    if op == "train-model":
-        necessary_roots.append(p1.source_root)
-    if resume is not None:
-        necessary_roots.append(phase._exact_directory(Path(resume["root"])))
     if op == "calibrate-model":
         frozen_policy = _shape(
             scope["frozen"],
             {"root", "receipt_sha256", "run_sha256", "checkpoint_sha256"},
             "invalid frozen-calibration authority",
         )
-        necessary_roots.append(phase._exact_directory(Path(frozen_policy["root"])))
+        prep = _shape(scope["preprocessing"], {"root", "sha256"}, "invalid preprocessing authority")
+        phase._hash(prep["sha256"])
+        prep_root = phase._exact_directory(Path(prep["root"]))
+        frozen_root = phase._exact_directory(Path(frozen_policy["root"]))
+        c.ensure(
+            not prep_root.is_relative_to(frozen_root) and not frozen_root.is_relative_to(prep_root),
+            "preprocessing and frozen model roots overlap",
+        )
+    roles = _shape(scope["roles"], set(role_names), "registered learning roles differ")
+    policy_sha = context.authority.manifest["normative_sha256"]["learning-spec.md"]
+    _equal(
+        p1_doc["identities"]["learning_policy_sha256"], policy_sha, "learning specification identity differs"
+    )
+    roots = tuple(phase._exact_directory(Path(path)) for path in policy["artifact_roots"])
+    necessary_roots = [
+        output_root,
+        *(phase._exact_directory(Path(roles[role]["root"])) for role in role_names),
+    ]
+    if op == "train-model":
+        necessary_roots.append(p1.source_root)
+    if resume is not None:
+        necessary_roots.append(phase._exact_directory(Path(resume["root"])))
+    if op == "calibrate-model":
+        necessary_roots.extend((frozen_root, prep_root))
         raw_accounting = _checked_scope_file(trust.governance_root, scope["committed_artifact_receipt"])
         account = _shape(
             c.strict_loads(raw_accounting),
@@ -1912,7 +1931,7 @@ def dispatch_registered_learning(raw, custody):
                 c.canonical_bytes(account),
                 "softqp.r4.committed-artifacts/1",
                 p1.sha256,
-                admitted["calibration"][0].manifest_sha256,
+                roles["calibration"]["manifest_sha256"],
                 frozen_policy["receipt_sha256"],
             ),
             "independent calibration accounting identity differs",
@@ -1948,6 +1967,23 @@ def dispatch_registered_learning(raw, custody):
         ),
         "quota roots include protected project or governance data",
     )
+    if op == "calibrate-model":
+        frozen = read_frozen_inference(
+            frozen_root,
+            expected_receipt_sha256=frozen_policy["receipt_sha256"],
+            expected_run_sha256=frozen_policy["run_sha256"],
+            expected_checkpoint_sha256=frozen_policy["checkpoint_sha256"],
+            allow_fixture=False,
+        )
+        _equal(
+            (frozen.document["method"], frozen.document["seed"]),
+            (method, seed),
+            "calibration request differs from chosen model",
+        )
+        exports.validate_preprocessing(prep_root, prep["sha256"], frozen, context=context)
+    admitted = {role: _registered_role(role, roles[role], trust.governance_root, p1) for role in role_names}
+    for reader, _ in admitted.values():
+        _expected_phase(p1_doc, reader)
     if op == "train-model":
         plan = TrainingPlan.admit(
             authority,
@@ -1963,6 +1999,21 @@ def dispatch_registered_learning(raw, custody):
         key = f"{method}-{seed}"
         if resume is not None:
             key += "-resume-" + resume["sha256"][:16]
+        prior_seconds = (
+            0
+            if resume is None
+            else read_training_run(
+                Path(resume["root"]), expected_manifest_sha256=resume["sha256"], plan=plan, runtime=runtime
+            ).document["elapsed_seconds"]
+        )
+        budget = LearningBudget(roots, output_root / key, started=started, prior_seconds=prior_seconds)
+
+        def live():
+            runtime.verify()
+            _exact_plan(plan, op)
+            for role in (plan.train, plan.validation):
+                _verify_role_manifest(role)
+
         result = supervise_training(
             plan,
             runtime,
@@ -1973,19 +2024,10 @@ def dispatch_registered_learning(raw, custody):
             budget_roots=roots,
         )
         manifest, sha, state = "training-run.json", result.sha256, result.document["state"]
+        projections = exports.export_training(
+            output_root, key, result, plan=plan, runtime=runtime, budget=budget, require_live=live
+        )
     else:
-        frozen = read_frozen_inference(
-            frozen_policy["root"],
-            expected_receipt_sha256=frozen_policy["receipt_sha256"],
-            expected_run_sha256=frozen_policy["run_sha256"],
-            expected_checkpoint_sha256=frozen_policy["checkpoint_sha256"],
-            allow_fixture=False,
-        )
-        _equal(
-            (frozen.document["method"], frozen.document["seed"]),
-            (method, seed),
-            "calibration request differs from chosen model",
-        )
         reader, proof = admitted["calibration"]
         plan = CalibrationPlan.admit(
             authority,
@@ -2000,6 +2042,15 @@ def dispatch_registered_learning(raw, custody):
             expected_checkpoint_sha256=frozen_policy["checkpoint_sha256"],
         )
         key = f"calibration-{method}-{seed}"
+        budget = LearningBudget(
+            roots, output_root / key, started=started, committed_bytes=account["committed_bytes"]
+        )
+
+        def live():
+            runtime.verify()
+            _require_calibration_authority(plan)
+            _verify_role_manifest(reader)
+
         result = supervise_calibration(
             plan,
             runtime,
@@ -2008,14 +2059,31 @@ def dispatch_registered_learning(raw, custody):
             committed_bytes=account["committed_bytes"],
         )
         manifest, sha, state = "calibration.json", c.digest(c.canonical_bytes(result)), result["state"]
-    runtime.verify()
-    return {
-        "schema": "softqp.r4.learning-result/1",
-        "request_sha256": request_sha,
-        "policy_sha256": runtime.policy_sha256,
-        "operation": op,
-        "method": method,
-        "seed": seed,
-        "manifest": {"path": f"{key}/{manifest}", "sha256": sha},
-        "state": state,
-    }
+        projections = exports.export_calibration(
+            output_root,
+            key,
+            result,
+            plan=plan,
+            runtime=runtime,
+            budget=budget,
+            require_live=live,
+            preprocessing_root=prep_root,
+            preprocessing_sha256=prep["sha256"],
+        )
+    _read_ref(output_root / key, {"path": manifest, "sha256": sha})
+    return exports.seal_result(
+        output_root / key,
+        {
+            "schema": exports.RESULT,
+            "request_sha256": runtime.request_sha256,
+            "policy_sha256": runtime.policy_sha256,
+            "operation": op,
+            "method": method,
+            "seed": seed,
+            "manifest": {"path": f"{key}/{manifest}", "sha256": sha},
+            "state": state,
+            "exports": projections,
+        },
+        require_live=live,
+        budget=budget,
+    )

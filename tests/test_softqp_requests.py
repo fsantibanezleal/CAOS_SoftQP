@@ -83,7 +83,7 @@ def test_cost_edits_leave_hard_row_coefficients_and_policy_unchanged():
 def test_export_provenance_identifies_native_binary_without_local_paths():
     result = execute_request(request())
     environment = result["environment"]
-    assert environment["packages"]["softqp"] == "0.1.0"
+    assert environment["packages"]["softqp"] == "0.3.0"
     assert len(environment["native_binary_sha256"]) == 64
     assert str(ROOT) not in json.dumps(environment)
     assert "file://" not in json.dumps(environment)

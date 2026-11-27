@@ -1,0 +1,157 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-evaluation-model-bundle/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "softqp.r4.evaluation-model-bundle/1"
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "enum": [
+            "learned_osqp",
+            "learned_daqp"
+          ]
+        },
+        "seed": {
+          "enum": [
+            41001,
+            41002,
+            41003
+          ]
+        },
+        "fixture_only": {
+          "type": "boolean"
+        },
+        "run_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "frozen_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "checkpoint_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "weights_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "population_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "preflight_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "protocol_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "producer_source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dependency_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "phases": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "train": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "validation": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "required": [
+            "train",
+            "validation"
+          ]
+        }
+      },
+      "required": [
+        "method",
+        "seed",
+        "fixture_only",
+        "run_sha256",
+        "frozen_sha256",
+        "checkpoint_sha256",
+        "weights_sha256",
+        "population_sha256",
+        "preflight_sha256",
+        "protocol_sha256",
+        "source_lock_sha256",
+        "producer_source_sha256",
+        "dependency_lock_sha256",
+        "phases"
+      ]
+    },
+    "preprocessing_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "calibration_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "calibration_phase_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "enum": [
+            "calibrated",
+            "not-applicable"
+          ]
+        },
+        "threshold": {
+          "enum": [
+            null,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+            0.9
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "threshold"
+      ]
+    }
+  },
+  "required": [
+    "schema",
+    "identities",
+    "preprocessing_sha256",
+    "calibration_sha256",
+    "calibration_phase_sha256",
+    "disposition"
+  ]
+}

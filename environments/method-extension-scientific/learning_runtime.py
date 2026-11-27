@@ -55,14 +55,20 @@ def learning_scope(launch, expected_profile):
          and set(resume) == {"root", "sha256"} and type(resume["root"]) is str
          and Path(resume["root"]).is_absolute() and hex_digest(resume["sha256"])),
          "invalid learning resume")
-    need(set(policy) == POLICY_KEYS and policy["schema"] == "softqp.r4.learning-policy/1"
+    need(set(policy) == POLICY_KEYS and policy["schema"] in {"softqp.r4.learning-policy/1", "softqp.r4.learning-policy/2"}
          and policy["operation"] == operation and policy["profile_sha256"] == expected_profile
          and policy["request_sha256"] == digest(raw), "learning policy identity differs")
     scope = policy["scope"]
     roles = {"train", "validation"} if operation == "train-model" else {"calibration"}
     expected = {"preflight", "roles", "resume"} | ({"frozen", "committed_artifact_receipt"} if operation == "calibrate-model" else set())
+    if operation == "calibrate-model" and policy["schema"].endswith("/2"):
+        expected.add("preprocessing")
     need(type(scope) is dict and set(scope) == expected and type(scope["roles"]) is dict
          and set(scope["roles"]) == roles and scope["resume"] == resume, "learning role or resume scope differs")
+    if "preprocessing" in expected:
+        prep = scope["preprocessing"]
+        need(type(prep) is dict and set(prep) == {"root", "sha256"} and type(prep["root"]) is str
+             and Path(prep["root"]).is_absolute() and hex_digest(prep["sha256"]), "invalid preprocessing reference")
     workspace = Path(policy["output_root"])
     need(workspace.is_absolute() and workspace.resolve(strict=True).parts == workspace.parts and workspace.is_dir(),
          "learning workspace must be an existing exact external directory")
@@ -77,6 +83,7 @@ def dispatch_learning(args, held, launch, *, verify_live, create_child):
     from pipeline.learned_comparison import training
 
     request, policy, leaf = learning_scope(launch, args.expected_profile_sha256)
+    need(policy["schema"] == "softqp.r4.learning-policy/2", "registered learning requires policy/2")
     operation = request["operation"]
     for protected in (args.source, args.profile, args.python.parents[1], args.base_python.parent, args.run):
         need(not leaf.is_relative_to(protected) and not protected.is_relative_to(leaf.parent),
@@ -130,10 +137,10 @@ def dispatch_learning(args, held, launch, *, verify_live, create_child):
         result = training.dispatch_registered_learning(launch[0], scope)
         verify_live()
         expected = {key: request[key] for key in ("operation", "method", "seed")}
-        expected.update(schema="softqp.r4.learning-result/1", request_sha256=digest(launch[0]),
+        expected.update(schema="softqp.r4.learning-result/2", request_sha256=digest(launch[0]),
                         policy_sha256=digest(launch[1]))
         need(started and child is not None and child.process is None and type(result) is dict
-             and len(encode(result)) <= 8192 and set(result) == set(expected) | {"manifest", "state"}
+             and len(encode(result)) <= 8192 and set(result) == set(expected) | {"manifest", "state", "exports"}
              and all(result[key] == value for key, value in expected.items()),
              "learning operation lacks a closed worker or scoped completion")
         ref = result["manifest"]
@@ -141,9 +148,37 @@ def dispatch_learning(args, held, launch, *, verify_live, create_child):
         need(type(ref) is dict and set(ref) == {"path", "sha256"} and hex_digest(ref["sha256"])
              and ref["path"] == f"{leaf.parent.name}/{name}", "learning completion manifest differs")
         manifest = leaf.parent / name
-        need(manifest.resolve(strict=True).parts == manifest.parts and manifest.stat().st_size <= 2**24
-             and digest(manifest.read_bytes()) == ref["sha256"],
-             "learning completion bytes differ from observed manifest")
+        need(manifest.resolve(strict=True).parts == manifest.parts and manifest.stat().st_size <= 2**24,
+             "learning completion manifest path or size differs")
+        manifest_raw = manifest.read_bytes()
+        need(digest(manifest_raw) == ref["sha256"] and canonical(manifest_raw)["state"] == result["state"],
+             "learning completion bytes or state differ from observed manifest")
+        exported = ({"bundle": "bundle.json"} if operation == "calibrate-model" else
+                    {"frozen": "frozen-inference.json", "preprocessing": "preprocessing.json"})
+        need(type(result["exports"]) is dict and set(result["exports"]) == set(exported), "learning export roster differs")
+        for suffix, filename in exported.items():
+            disposition = result["exports"][suffix]
+            need(type(disposition) is dict and set(disposition) == {"state", "reason", "ref"}, "invalid export disposition")
+            if disposition["state"] == "unavailable":
+                need(disposition["ref"] is None and type(disposition["reason"]) is str and bool(disposition["reason"]),
+                     "missing export failure reason")
+                continue
+            ref = disposition["ref"]
+            subdirectory = leaf.parent.name + "-" + suffix
+            need(disposition["state"] == "available" and disposition["reason"] is None and type(ref) is dict
+                 and set(ref) == {"path", "sha256"} and ref["path"] == f"{subdirectory}/{filename}"
+                 and hex_digest(ref["sha256"]), "learning export reference differs")
+            path = leaf.parent.parent / subdirectory / filename
+            need(path.resolve(strict=True).parts == path.parts and path.stat().st_size <= 64 * 2**20
+                 and digest(path.read_bytes()) == ref["sha256"], "observed export differs from completion")
+        states = {item["state"] for item in result["exports"].values()}
+        eligible = {"completed"} if operation == "train-model" else {"calibrated", "not-applicable"}
+        need(len(states) == 1 and ("available" not in states or result["state"] in eligible),
+             "available projection disagrees with primary result")
+        sealed = leaf.parent / "learning-result.json"
+        need(sealed.resolve(strict=True).parts == sealed.parts and sealed.stat().st_size <= 8192
+             and sealed.read_bytes() == encode(result), "learning result seal differs")
+        verify_live()
         return result
     finally:
         live = False

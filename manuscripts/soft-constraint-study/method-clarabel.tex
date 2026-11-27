@@ -1,0 +1,64 @@
+\subsection{Clarabel for lifted convex quadratic programs}\label{sec:method-clarabel}
+Clarabel uses a homogeneous primal-dual embedding for conic programs with
+a quadratic objective. The SoftQP adapter invokes the published algorithm
+of Goulart and Chen (\href{https://doi.org/10.1007/s12532-026-00320-7}{primary source})
+on a sparse lift. Let \(z\) contain the original decision and nonnegative
+penalty auxiliaries, \(P_L\succeq0\) be its Hessian, and \(q_L\) its linear
+cost. Independent lower and upper slacks represent separable penalties.
+For a group-peak penalty the lift instead constrains each weighted
+violation by the group epigraph variable on the appropriate side. The
+penalty remains in the objective. The lifted program is
+\begin{equation}\label{eq:clarabel-cone-form}
+ \min_z \ \tfrac12 z^\top P_L z+q_L^\top z,\qquad
+ Cz+s=b,\quad s\in\mathcal K=\{0\}^{m_e}\times\mathbb R_+^{m_i}.
+\end{equation}
+An equality contributes its row once to the zero-cone block. An upper
+side contributes \((A_i,u_i)\); a lower side contributes
+\((-A_i,-l_i)\); infinite sides contribute no rows. Here \(A_i\) is the
+corresponding lifted row, and \(m_e,m_i\) count equalities and finite
+inequality sides. Thus complementarity applies to inequality blocks,
+while equality dual variables are free.
+
+Write \(v\) for the cone dual and \(\tau,\kappa\) for the homogeneous
+scalars. At an exact embedded solution with \(\tau>0\), the primal
+and dual vectors are recovered by division by \(\tau\). Before that
+recovery their stationarity and feasibility equations take the form
+\begin{equation}\label{eq:clarabel-embedded-residual}
+ P_Lz+C^\top v+q_L\tau=0,\qquad Cz+s-b\tau=0.
+\end{equation}
+The embedded Newton system also couples the homogeneous scalars to the
+quadratic gap and complementarity. For the nonnegative block its
+centering targets include \(s_i v_i=\mu\) and \(\tau\kappa=\mu\) for
+positive barrier parameter \(\mu\). The solver computes affine and
+centering directions and selects steps in the cone interiors. The
+equalities are enforced in the Newton system. This describes the
+embedding's role without assuming strict convexity of \(P_L\);
+nonconvex curvature is outside the admitted model, and practical
+termination remains a numerical observation.
+
+\begin{algorithm}[ht]
+\caption{Lift, solve and check the Clarabel candidate}\label{alg:clarabel-route}
+\begin{algorithmic}[1]
+\State Assemble the admitted convex lift, cone blocks and finite-side map.
+\State Solve the cone form with the pinned sparse Clarabel backend.
+\If{the native status is exactly \texttt{Solved}}
+ \State Recover the signed interval dual and map the lifted solution to physical coordinates.
+ \State Check the lifted and original-space residuals and the objective.
+\Else
+ \State Keep the native termination and any diagnostic direction as separate evidence.
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+For the cone-side duals, accumulate \(y_i=v_{i,+}-v_{i,-}\), taking an
+omitted side as zero, and copy each equality dual directly. This sign
+rule gives the same \(A^\top y\) as \(C^\top v\). A direction reported
+during an infeasibility termination is only a candidate for independent
+certificate checks. The SDK uses Clarabel 0.11.1, upper-triangular sparse
+\(P_L\), one backend thread, \(10^{-7}\) gap, feasibility and
+infeasibility tolerances, and an iteration limit of \(200\,000\).
+The separate tight reference route uses \(10^{-10}\) and \(10^6\)
+iterations. Cost depends on finite-side assembly, sparse factor fill,
+factorizations and the number of Newton steps. An exact successful
+status is a prerequisite for accepting the recovered solution; lifted
+auxiliary or original-space checks can still reject it.

@@ -30,4 +30,12 @@ The reviewed host profile pins the exact observed Microsoft-signed Defender imag
 
 PyG renders a fresh LEConv implementation during its normal operation. The worker permits the approved named render in fresh owned scratch after checking the pinned recipe source files and exact rendered bytes and establishing a write/delete-denying handle. Any other explicit source-loader attempt invalidates the worker even if the library handles the loader error.
 
-The qualification source snapshot cannot dispatch registered generation. A future verified committed snapshot and independent policy are required for the fixed generator bridge. The [batch design](batch-dispatch.md) describes the shared boundary.
+The qualification source snapshot cannot dispatch registered generation. A verified committed checkout profile and independent policy are required for the fixed generator bridge. The [batch design](batch-dispatch.md) describes the shared boundary.
+
+## Building a profile from committed source
+
+The six-path factory keeps qualification mode as its default. Add `--source-commit <full-40-character-SHA>` to select committed mode. Use exact absolute paths for the product checkout, owned scratch, installed runtime, baseline profile, excluded tools and a new destination. Scratch and destination must be external, distinct and separate from every input. Scratch holds the previously verified `requirements.lock`, `additions.json` and four public dependency wheels. No dependency installation occurs in the factory.
+
+Committed mode reconstructs the complete fixed numerical and guard scope from actual Git blobs with replacement-object resolution disabled. It rejects changed, omitted, aliased or non-blob inputs and compares checkout bytes directly, including newline bytes. Unrelated work outside that fixed scope remains untouched. It retains a verified external snapshot and exact Git inventory, then publishes the profile directory only after the final HEAD and scope check. An interrupted pending directory remains diagnostic evidence and has no final-profile name.
+
+For committed profiles, pass the original admitted checkout as `--source` when running the verifier. The live verifier independently reconstructs the Git scope before imports; it does not accept a caller-supplied subset. Qualification and committed profiles can run the fixed excluded controls, which never issue I1. A committed profile alone grants no permission to draw sources, fit models or evaluate held-out data: genuine independently pinned operation-specific authority remains required.

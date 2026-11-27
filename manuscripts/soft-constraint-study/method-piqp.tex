@@ -1,0 +1,57 @@
+\subsection{PIQP for lifted interval constraints}\label{sec:method-piqp}
+PIQP combines an infeasible-start interior-point method with the proximal
+method of multipliers \cite{piqp}. The SDK sends its sparse interface
+the convex lifted Hessian \(P_L\), affine equality block \(Ez=e\), and
+remaining bounds \(\ell\le Cz\le u\). The lifted \(z\) comprises the
+original decision and the costed side-specific or group-peak
+auxiliaries. For the following derivation express the finite interval
+sides as \(Gz\le h\), introducing a slack \(s\ge0\). A finite upper
+side contributes \((C_i,u_i)\), a finite lower side
+\((-C_i,-\ell_i)\). This conversion describes the mathematics; the SDK
+passes the equality/interval representation rather than rebuilding
+the solver's internal side coordinates.
+
+Let \(y\) be the free equality multiplier, \(v\ge0\) the inequality
+multiplier and \((\bar z,\bar y,\bar v)\) the proximal centers. In the
+generic proximal system with positive parameters \(\rho,\delta\),
+the stationary residuals and central target have the form
+\begin{align}
+ P_Lz+q_L+E^\top y+G^\top v+\rho(z-\bar z)&=0,\label{eq:piqp-rd}\\
+ Ez-e-\delta(y-\bar y)&=0,\label{eq:piqp-re}\\
+ Gz-h+s-\delta(v-\bar v)&=0,\qquad s_i v_i=\mu>0.\label{eq:piqp-ri}
+\end{align}
+Differentiating the last equality gives
+\(v_i\Delta s_i+s_i\Delta v_i\) in the Newton system.
+For \(\mu\) tending to zero and proximal centers agreeing with their
+iterates, the shifted residuals reduce to the ordinary KKT conditions.
+Positive proximal regularization changes the systems solved along the
+path, which is useful for rank-deficient equality blocks. It does not
+justify accepting a nonconvex input or treating a finite-iteration
+termination as a proof. PIQP uses a predictor step, a centrality
+correction, and a sparse \(LDL^\top\) solve of the regularized KKT
+system. Sparsity and fill, the number of factorizations and iterations,
+and finite-side count govern cost.
+
+\begin{algorithm}[ht]
+\caption{PIQP on the sparse lifted interval representation}\label{alg:piqp-route}
+\begin{algorithmic}[1]
+\State Assemble the exact lift and partition equality and interval rows.
+\State Invoke the pinned sparse PIQP solver on a fresh instance.
+\State Check the native termination and the dimensions of primal and dual output.
+\If{status is \texttt{PIQP\_SOLVED}}
+ \State Restore interval and equality multipliers in lifted row order.
+ \State Recover the original decision and apply original-space and lifted checks.
+\Else
+ \State Record the native failure without an accepted primal or multiplier.
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+The candidate route pins PIQP 0.6.4, absolute and relative tolerances
+\(10^{-7}\), and at most \(200\,000\) iterations. Its tight reference
+configuration uses \(10^{-10}\) and \(10^6\) iterations.
+The interval dual is upper minus lower. Equality multipliers are
+copied without imposing a sign. The lift and the physical-coordinate
+evaluation are shared with the other routes, and numerical
+acceptance still requires their independent residual and objective
+checks after the native solved status.

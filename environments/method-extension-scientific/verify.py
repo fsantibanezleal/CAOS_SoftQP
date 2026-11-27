@@ -10,6 +10,7 @@ from importlib.machinery import PathFinder, SourceFileLoader
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -20,6 +21,15 @@ LIMITS = {"scan": 600, "imports": 180, "reference": 30, "cold": 30, "gradient": 
           "final": 30, "generate": 30}
 RSS = 8 * 2**30
 LEARNING_LIMIT = 48 * 3600
+COMMITTED_PREFIXES = ("data-pipeline", "docs/contracts/schemas", "docs/contracts/examples",
+                      "tests/fixtures/learned-contracts")
+COMMITTED_SUPPORT = tuple("tests/" + name for name in (
+    "test_learned_contracts.py", "test_stream_inputs.py", "test_phase_inputs.py",
+    "test_native_labels.py", "test_native_runtime.py", "test_heldout_inputs.py", "runtime_config.py",
+    "test_candidate_runtime.py"))
+COMMITTED_GUARDS = tuple("environments/method-extension-scientific/" + name for name in (
+    "build_profile.py", "verify.py", "custody.py", "controls.py", "learning_runtime.py",
+    "native_runtime.py", "heldout_runtime.py", "committed_source.py", "evaluation_runtime.py"))
 
 
 def require(predicate, reason):
@@ -48,17 +58,111 @@ def configuration(args):
     load(Path(__file__), stamp["verifier_sha256"])
     require(set(manifest) == {"runtime", "base", "source", "tools", "module_owners"},
             "incomplete runtime custody inventory")
+    require(stamp["source_kind"] in ("qualification-snapshot-of-product-worktree", "committed-product-checkout"),
+            "unknown product source provenance")
+    if stamp["source_kind"] == "committed-product-checkout":
+        verify_committed_source(args, stamp, manifest)
     return profile, stamp, manifest
+
+
+def verify_committed_source(args, stamp, manifest):
+    """Reconstruct the complete Git scope independently of attempted metadata."""
+    from hashlib import sha1, sha256
+
+    commit = stamp["source_head"]
+    require(args.source.is_absolute() and args.source.resolve(strict=True).parts == args.source.parts,
+            "committed verifier requires the exact absolute source checkout")
+    require(type(commit) is str and re.fullmatch("[0-9a-f]{40}", commit), "explicit committed source SHA required")
+    require({"committed_source_sha256", "committed_git_manifest_sha256"} <= stamp.keys(),
+            "committed source proof is absent")
+    scopes = COMMITTED_PREFIXES + COMMITTED_SUPPORT + COMMITTED_GUARDS
+    def git(*arguments, input_bytes=None):
+        result = subprocess.run(["git", "--no-replace-objects", "-C", str(args.source), *arguments], input=input_bytes,
+                                capture_output=True, check=False, timeout=30)
+        require(result.returncode == 0, "committed verifier Git operation failed")
+        return result.stdout
+    def unchanged():
+        require(git("rev-parse", "HEAD^{commit}").decode().strip() == commit,
+                "active committed source HEAD differs")
+        require(not git("status", "--porcelain=v1", "-z", "--untracked-files=all", "--", *scopes),
+                "active committed source scope is dirty")
+    unchanged()
+    rows, folded = {}, set()
+    for entry in git("ls-tree", "-rz", "--full-tree", commit, "--", *scopes).split(b"\0"):
+        if not entry:
+            continue
+        header, raw_name = entry.split(b"\t", 1)
+        mode, kind, blob = header.decode("ascii").split()
+        name = raw_name.decode("utf8")
+        require(mode in ("100644", "100755") and kind == "blob"
+                and re.fullmatch("[0-9a-f]{40}", blob), "unapproved committed Git mode")
+        require(name.casefold() not in folded and "__pycache__" not in Path(name).parts
+                and not name.endswith(".pyc"), "duplicate or bytecode committed source")
+        require(not Path(name).is_absolute() and ".." not in Path(name).parts
+                and "\\" not in name and ":" not in name, "unsafe committed Git path")
+        folded.add(name.casefold())
+        rows[name] = dict(mode=mode, blob=blob)
+    require(all(any(name.startswith(prefix + "/") for name in rows) for prefix in COMMITTED_PREFIXES)
+            and set(COMMITTED_SUPPORT + COMMITTED_GUARDS) <= rows.keys(), "committed Git source scope incomplete")
+    identifiers = [row["blob"] for row in rows.values()]
+    data = git("cat-file", "--batch", input_bytes=("\n".join(identifiers) + "\n").encode())
+    offset = 0
+    expected_source = {}
+    for name, row in rows.items():
+        end = data.index(b"\n", offset)
+        blob, kind, raw_size = data[offset:end].decode("ascii").split()
+        require(blob == row["blob"] and kind == "blob" and raw_size.isdecimal(), "committed blob header differs")
+        offset, size = end + 1, int(raw_size)
+        raw = data[offset:offset + size]
+        require(len(raw) == size and data[offset + size:offset + size + 1] == b"\n"
+                and sha1(b"blob " + str(size).encode() + b"\0" + raw).hexdigest() == blob,
+                "committed blob content differs")
+        offset += size + 1
+        path = args.source / name
+        for part in (*reversed(path.parents), path):
+            facts = part.lstat()
+            require(not part.is_symlink() and not getattr(facts, "st_file_attributes", 0) & 0x400,
+                    "committed source reparse path")
+        require(path.is_file() and path.stat().st_nlink == 1
+                and path.resolve(strict=True).parts == path.parts and path.read_bytes() == raw,
+                "active source is not the committed Git blob")
+        row.update(bytes=size, sha256=sha256(raw).hexdigest())
+        if name in COMMITTED_GUARDS:
+            if path.name != "build_profile.py":
+                load(args.profile / path.name, row["sha256"])
+        else:
+            expected_source[name] = [size, row["sha256"]]
+    require(offset == len(data) and manifest["source"] == expected_source,
+            "attempted source manifest omits or changes the normative Git scope")
+    attempted = json.loads(load(args.profile / "committed-source.json", stamp["committed_git_manifest_sha256"]))
+    require(attempted == rows, "attempted committed Git inventory differs")
+    helper = rows["environments/method-extension-scientific/committed_source.py"]["sha256"]
+    require(stamp["committed_source_sha256"] == helper, "committed source helper identity differs")
+    unchanged()
+
+
+def source_kind_allowed(stamp, fixture):
+    return stamp["source_kind"] == "committed-product-checkout" or (
+        fixture and stamp["source_kind"] == "qualification-snapshot-of-product-worktree")
 
 
 def launch_inputs(args, stamp):
     fields = (args.request, args.expected_request_sha256, args.policy, args.expected_policy_sha256)
     if not any(fields):
-        require(not (getattr(args, "campaign", False) or getattr(args, "learning", False)),
+        require(not (getattr(args, "campaign", False) or getattr(args, "learning", False)
+                     or getattr(args, "native", False) or getattr(args, "heldout", False)
+                     or getattr(args, "candidate", False)
+                     or getattr(args, "candidate_recover", False)
+                     or (getattr(args, "heldout_fixture", False) and not (
+                         getattr(args, "heldout_child", False) or getattr(args, "candidate_child", False)))
+                     or (getattr(args, "native_fixture", False) and not getattr(args, "native_child", False))),
                 "registered dispatch requires governed launch inputs")
         return None
     require(all(fields), "request and policy require independently expected digests")
-    require(stamp["source_kind"] == "committed-product-checkout",
+    qualification = ((getattr(args, "native_fixture", False) and not getattr(args, "native_child", False))
+                     or (getattr(args, "heldout_fixture", False) and not (
+                         getattr(args, "heldout_child", False) or getattr(args, "candidate_child", False))))
+    require(source_kind_allowed(stamp, qualification),
             "qualification snapshot cannot dispatch registered generation")
     require(args.request != args.policy and max(args.request.stat().st_size, args.policy.stat().st_size) <= 65536,
             "registered dispatch input outside bounded size")
@@ -109,7 +213,7 @@ def read_marker(path):
 
 def dispatch_registered(args, stamp, held, raw, policy, violations):
     from hashlib import sha256
-    head = subprocess.check_output(["git", "-C", str(args.source), "rev-parse", "HEAD^{commit}"], timeout=10)
+    head = subprocess.check_output(["git", "--no-replace-objects", "-C", str(args.source), "rev-parse", "HEAD^{commit}"], timeout=10)
     require(head.decode().strip() == stamp["source_head"], "active committed product source differs")
     from pipeline.learned_comparison import generator
     custody = object()
@@ -545,18 +649,195 @@ def require_learning_leaf(args, held, roots, spec, violations):
     loaded_native(held, roots)
 
 
+def native_component(args, stamp):
+    return source_code(args.profile / "native_runtime.py", stamp["native_runtime_sha256"])
+
+
+def native_leaf_launch(args, stamp):
+    require(args.native_child and args.worker and not (args.native or args.learning or args.learning_child
+            or args.campaign) and args.owning_job and args.tools is None and
+            source_kind_allowed(stamp, args.native_fixture),
+            "native leaf outside fixed operation")
+    helper = native_component(args, stamp)
+    path = wait_marker(args.run / "native-launch.json")
+    require(path.stat().st_size <= 8192, "native launch descriptor exceeds size")
+    spec = helper["canonical"](load(path, args.expected_native_launch_sha256))
+    helper["check_leaf"](spec, args.expected_profile_sha256, fixture_only=args.native_fixture)
+    require(args.run.name == f"worker-{spec['generation']:04d}" and args.run.parent.name == "native-run",
+            "native leaf namespace differs")
+    check_learning_parent(spec["owner"])
+    return helper, spec
+
+
+def create_native_child(args, helper, root, payload, *, heldout=False):
+    from pipeline.learned_comparison.native_labels import _OwnedWorker
+
+    data = helper["encode"](payload)
+    command = [
+        str(args.python), "-I", "-S", "-B", "-u", "-X", "pycache_prefix=" + str(root / "empty-bytecode-prefix"),
+        str(Path(__file__).resolve()), "--worker", "--heldout-child" if heldout else "--native-child",
+        "--owning-job", os.environ["SOFTQP_SCIENTIFIC_JOB"],
+        "--python", str(args.python), "--base-python", str(args.base_python), "--profile", str(args.profile),
+        "--source", str(args.source), "--run", str(root), "--expected-profile-sha256", args.expected_profile_sha256,
+        "--expected-native-launch-sha256", helper["digest"](data),
+    ]
+    if heldout and args.heldout_fixture:
+        command.append("--heldout-fixture")
+    elif not heldout and args.native_fixture:
+        command.append("--native-fixture")
+    child = _OwnedWorker(root, command, args.python, nonce=payload["nonce"])
+    try:
+        with (root / "native-launch.pending").open("xb") as handle:
+            handle.write(data)
+        (root / "native-launch.pending").rename(root / "native-launch.json")
+    except BaseException:
+        child.close()
+        raise
+    return child
+
+
+def heldout_component(args, stamp):
+    return source_code(args.profile / "heldout_runtime.py", stamp["heldout_runtime_sha256"])
+
+
+def candidate_component(args, stamp):
+    return source_code(args.profile / "evaluation_runtime.py", stamp["evaluation_runtime_sha256"])
+
+
+def candidate_bake(args, stamp, launch):
+    require(bool(args.bake) == bool(args.expected_bake_sha256) == (args.candidate or args.candidate_recover),
+            "candidate bake requires its independent digest and fixed route")
+    if not (args.candidate or args.candidate_recover):
+        return None
+    require(launch is not None and args.bake not in (args.request, args.policy)
+            and args.bake.stat().st_size <= 2**22, "candidate bake descriptor exceeds bounded scope")
+    helper = candidate_component(args, stamp)
+    raw = load(args.bake, args.expected_bake_sha256)
+    return helper, raw, helper["scoped_bake"](raw, args.expected_bake_sha256, *launch,
+                                              args.expected_profile_sha256)
+
+
+def recovery_policy(args, bake):
+    require(bool(args.recovery) == bool(args.expected_recovery_sha256) == args.candidate_recover,
+            "candidate recovery requires its fixed policy and independent digest")
+    if not args.candidate_recover:
+        return None
+    require(args.recovery.stat().st_size <= 8192, "candidate recovery policy exceeds bound")
+    helper, _, descriptor = bake
+    policy = helper["recovery_scope"](load(args.recovery, args.expected_recovery_sha256),
+                                      args.expected_recovery_sha256, descriptor, args.expected_bake_sha256)
+    output = Path(policy["output_root"])
+    original = json.loads(load(args.policy, args.expected_policy_sha256))
+    inputs = original["inputs"]
+    metadata = tuple(Path(inputs[name]) for name in ("metadata", "roster_root"))
+    inference = tuple(Path(row["trust"][name]) for row in inputs["roster"]
+                      for name in ("root", "bundle_root", "preprocessing_root", "frozen_root")
+                      if name in row["trust"])
+    admission = tuple(Path(inputs["admission"][name]) for name in
+                      ("root", "output_root", "product_root", "engine_root", "design_root")
+                      if name in inputs["admission"])
+    protected = (args.run, args.source, args.profile, args.python.parents[1], args.base_python.parent,
+                 *metadata, *inference, *admission, *(Path(original["scope"][name])
+                 for name in ("test_root", "native_root", "proof_root", "frontier_root")))
+    require(all(not (output.is_relative_to(path) or path.is_relative_to(output)) for path in protected),
+            "candidate recovery output overlaps protected scope")
+    require(output.parent.resolve(strict=True).parts == output.parent.parts
+            and shutil.disk_usage(output.parent).free >= 20 * 2**30,
+            "candidate recovery output volume differs or has less than 20 GiB free")
+    return policy
+
+
+def candidate_leaf_launch(args, stamp):
+    require(args.candidate_child and args.worker and args.owning_job and args.tools is None
+            and not (args.native or args.native_child or args.native_fixture or args.learning
+                     or args.learning_child or args.campaign or args.heldout or args.heldout_child
+                     or args.candidate or args.candidate_recover)
+            and source_kind_allowed(stamp, args.heldout_fixture),
+            "candidate leaf outside fixed evaluated scope")
+    helper = candidate_component(args, stamp)
+    path = wait_marker(args.run / "candidate-launch.json")
+    require(path.stat().st_size <= 2**20, "candidate leaf descriptor exceeds bound")
+    spec = helper["canonical"](load(path, args.expected_candidate_launch_sha256))
+    helper["check_leaf"](spec, profile=args.expected_profile_sha256, fixture=args.heldout_fixture)
+    require(args.run.name == f"worker-{spec['slot_floor']:06d}", "candidate leaf namespace differs")
+    check_learning_parent(spec["owner"])
+    return helper, spec
+
+
+def create_candidate_child(args, helper, root, payload):
+    from pipeline.learned_comparison.native_labels import _OwnedWorker
+
+    data = helper["encode"](payload)
+    command = [
+        str(args.python), "-I", "-S", "-B", "-u", "-X", "pycache_prefix=" + str(root / "empty-bytecode-prefix"),
+        str(Path(__file__).resolve()), "--worker", "--candidate-child",
+        "--owning-job", os.environ["SOFTQP_SCIENTIFIC_JOB"],
+        "--python", str(args.python), "--base-python", str(args.base_python), "--profile", str(args.profile),
+        "--source", str(args.source), "--run", str(root), "--expected-profile-sha256", args.expected_profile_sha256,
+        "--expected-candidate-launch-sha256", helper["digest"](data),
+    ]
+    if args.heldout_fixture:
+        command.append("--heldout-fixture")
+    child = _OwnedWorker(root, command, args.python, nonce=payload["nonce"])
+    try:
+        helper["write_marker"](root / "candidate-launch.json", payload)
+    except BaseException:
+        child.close()
+        raise
+    return child
+
+
+def heldout_leaf_launch(args, stamp):
+    fixture = args.heldout_fixture
+    require(args.heldout_child and args.worker and args.owning_job and args.tools is None
+            and not (args.native or args.native_child or args.native_fixture or args.learning
+                     or args.learning_child or args.campaign or args.heldout)
+            and source_kind_allowed(stamp, fixture),
+            "held-out leaf outside fixed evaluated native scope")
+    helper = heldout_component(args, stamp)
+    path = wait_marker(args.run / "native-launch.json")
+    require(path.stat().st_size <= 8192, "held-out leaf descriptor exceeds size")
+    spec = helper["canonical"](load(path, args.expected_native_launch_sha256))
+    helper["check_leaf"](spec, args.expected_profile_sha256, fixture)
+    require(args.run.name == f"worker-{spec['generation']:04d}", "held-out leaf namespace differs")
+    check_learning_parent(spec["owner"])
+    return helper, spec
+
+
+def require_native_leaf(args, held, roots, spec, violations):
+    require_owned_job(args.owning_job)
+    require(not violations and time.monotonic_ns() < spec["deadline_monotonic_ns"],
+            "native leaf source/deadline custody invalidated")
+    module = sys.modules.get("pipeline.learned_comparison.native_labels")
+    require(module is not None, "fixed native module is absent")
+    kind, relative, _ = held.identify(module.__spec__.origin)
+    require((kind, relative) == ("source", "data-pipeline/pipeline/learned_comparison/native_labels.py"),
+            "fixed native leaf source differs")
+    loaded_native(held, roots)
+
+
 def worker(args):
     started = time.monotonic()
     require(sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode and
             sys.flags.optimize == 0 and sys.pycache_prefix == str(args.run / "empty-bytecode-prefix") and
             not Path(sys.pycache_prefix).exists(), "isolated no-site and unused bytecode prefix required")
-    require_owned_job(args.owning_job if args.learning_child else None)
+    native_child = args.native_child or args.heldout_child
+    nested = args.learning_child or native_child or args.candidate_child
+    require_owned_job(args.owning_job if nested else None)
     extension_points_disabled()
     profile, stamp, manifest = configuration(args)
     launch = launch_inputs(args, stamp)
-    require(not args.learning_child or launch is None, "learning leaf accepts only its owned launch descriptor")
-    leaf = leaf_launch(args, stamp) if args.learning_child else None
-    fixtures = launch is None and leaf is None
+    require(not nested or launch is None,
+            "leaf accepts only its owned launch descriptor")
+    require(bool(args.expected_candidate_launch_sha256) == args.candidate_child,
+            "candidate descriptor digest outside leaf route")
+    bake = candidate_bake(args, stamp, launch)
+    recovery = recovery_policy(args, bake)
+    leaf = (leaf_launch(args, stamp) if args.learning_child else
+            native_leaf_launch(args, stamp) if args.native_child else
+            heldout_leaf_launch(args, stamp) if args.heldout_child else
+            candidate_leaf_launch(args, stamp) if args.candidate_child else None)
+    fixtures = (launch is None and leaf is None) or ((args.native_fixture or args.heldout_fixture) and not nested)
     roots = dict(runtime=Path(sys.executable).parents[1].resolve(strict=True),
                  base=Path(sys.base_prefix).resolve(strict=True), source=args.source)
     if fixtures:
@@ -567,7 +848,8 @@ def worker(args):
     host_root, host_manifest = host_scope(args, stamp)
     with custody["HeldInventory"]() as held:
         for kind, root in roots.items():
-            held.check(root, kind, manifest[kind], selected=(kind == "source" and not fixtures))
+            held.check(root, kind, manifest[kind], selected=(kind == "source" and (
+                not fixtures or stamp["source_kind"] == "committed-product-checkout")))
         held.check(host_root, "host-native", host_manifest, selected=True)
         sys.prefix = sys.exec_prefix = str(roots["runtime"])
         sys.path.append(str(roots["runtime"] / "Lib" / "site-packages"))
@@ -595,8 +877,23 @@ def worker(args):
         if leaf is None:
             stage_file(args.run, "scan", scan, started)
         else:
+            if native_child:
+                descriptor = args.run / "native-launch.json"
+                held.check(args.run, "native-boot",
+                           {descriptor.name: [descriptor.stat().st_size, args.expected_native_launch_sha256]},
+                           selected=True, hold_directories=False)
+            elif args.candidate_child:
+                descriptor = args.run / "candidate-launch.json"
+                held.check(args.run, "candidate-boot",
+                           {descriptor.name: [descriptor.stat().st_size, args.expected_candidate_launch_sha256]},
+                           selected=True, hold_directories=False)
             audit, installed = learning_installed(args, *leaf, scan, started)
         started = time.monotonic()
+        imports_start_ns = time.perf_counter_ns()
+        if native_child:
+            require_owned_job(args.owning_job)
+            require(time.monotonic_ns() < leaf[1]["deadline_monotonic_ns"], "native import lease expired")
+            held.recheck_names()
         if stamp.get("derived_python"):
             independent = json.loads(load(args.profile / "derived-recipe-receipt.json",
                                           stamp["derived_receipt_sha256"]))
@@ -612,18 +909,126 @@ def worker(args):
         # The test-only fixture tooling stays outside registered execution.
         if fixtures:
             controls["warm_imports"]()
-        defaults = controls["live_defaults"](args.profile, stamp)
+        defaults = None if recovery else controls["live_defaults"](args.profile, stamp)
         if leaf is not None:
             helper, spec = leaf
-            hold_learning_boot(args, held, helper, spec)
-            from pipeline.learned_comparison import training_worker
+            if native_child:
+                from pipeline.learned_comparison import native_labels
+            elif args.candidate_child:
+                from pipeline.learned_comparison import evaluation_worker
+            else:
+                hold_learning_boot(args, held, helper, spec)
+                from pipeline.learned_comparison import training_worker
         stage_file(args.run, "imports", dict(modules=imported, defaults_sha256=defaults,
                     native=loaded_native(held, roots), isolated=True, site_hooks_run=False,
                     legacy_extension_points_disabled=True), started)
         imports_seconds = time.monotonic() - started
         started = time.monotonic()
-        if leaf is not None:
-            live = lambda: require_learning_leaf(args, held, roots, spec, violations)
+        if native_child:
+            def live():
+                require_native_leaf(args, held, roots, spec, violations)
+            live()
+            from contextlib import contextmanager
+            @contextmanager
+            def hold_stage(expected):
+                with custody["HeldInventory"]() as commands:
+                    commands.check(args.run, "native-stage", expected, selected=True, hold_directories=False)
+                    live()
+                    yield
+                    commands.recheck_names()
+                    live()
+            native_labels.main_verified(args.run, spec, require_live=live, hold_stage=hold_stage,
+                                        audit=audit, installed=installed, import_seconds=imports_seconds)
+        elif args.candidate_child:
+            def live():
+                require_owned_job(args.owning_job)
+                require(not violations and time.perf_counter_ns() < spec["deadline_ns"],
+                        "candidate leaf source/deadline custody invalidated")
+                require(held.identify(evaluation_worker.__spec__.origin)[:2] ==
+                        ("source", "data-pipeline/pipeline/learned_comparison/evaluation_worker.py"),
+                        "fixed candidate leaf source differs")
+                loaded_native(held, roots)
+            live()
+            helper["write_marker"](args.run / "candidate-imported.json", dict(
+                nonce=spec["nonce"], pid=os.getpid(), start_ns=imports_start_ns, end_ns=time.perf_counter_ns()))
+            model_binding, heads = helper["leaf_models"](spec)
+            live()
+            helper["write_marker"](args.run / "ready.json", dict(nonce=spec["nonce"], pid=os.getpid(), heads=heads))
+            ack = helper["canonical"](wait_marker(args.run / "startup-ack.json").read_bytes())
+            require(set(ack) == {"startup_sha256"} and helper["sha"](ack["startup_sha256"]),
+                    "candidate startup receipt acknowledgement differs")
+            evaluation_worker.main_verified(args.run, slot_floor=spec["slot_floor"],
+                                            settings_hashes=spec["settings_hashes"], model_binding=model_binding,
+                                            startup_sha256=ack["startup_sha256"],
+                                            require_live=live, deadline_ns=spec["deadline_ns"])
+        elif args.heldout or args.heldout_fixture or args.candidate or recovery:
+            helper = heldout_component(args, stamp)
+            def live():
+                require_owned_job()
+                require(not violations, "source loader invalidated held-out custody")
+            dispatch_candidate = None
+            live_callback = live
+            def spawn(root, payload):
+                return create_native_child(args, helper, root, payload, heldout=True)
+            if recovery:
+                component, _, descriptor = bake
+                write_marker(args.run, "recovery-start.json", {"pid": os.getpid()})
+                lease = read_marker(wait_marker(args.run / "recovery-clock.json"))
+                deadline = lease["deadline_ns"]
+                require(lease["pid"] == os.getpid() and type(deadline) is int
+                        and time.perf_counter_ns() < deadline, "recovery administrative lease differs")
+                def readonly_live():
+                    live()
+                    require(time.perf_counter_ns() < deadline, "candidate recovery deadline")
+                readonly_live()
+                timer = component["timer_receipt"](descriptor)
+                terminal = Path(recovery["terminal_root"]) / "receipt.json"
+                require(terminal.stat().st_size <= 2**24, "candidate terminal receipt exceeds bound")
+                reason = component["terminal_recovery_scope"](
+                    json.loads(load(terminal, recovery["terminal_sha256"])), bake=descriptor,
+                    policy=recovery, source_manifest=stamp["source_manifest_sha256"], timer=timer,
+                )
+                from pipeline.learned_comparison import candidate_recovery
+                def dispatch_candidate(token):
+                    observed = candidate_recovery.project(
+                        launch[0], token, bake=descriptor, original_policy=launch[1], policy=recovery,
+                        expected_recovery=args.expected_recovery_sha256, termination=reason,
+                        require_live=readonly_live,
+                    )
+                    readonly_live()
+                    load(terminal, recovery["terminal_sha256"])
+                    return observed
+                live_callback, spawn = readonly_live, None
+            elif bake is not None:
+                component, raw, _ = bake
+                deadline_ns = int(os.environ["SOFTQP_CANDIDATE_DEADLINE_NS"])
+                def dispatch_candidate(token):
+                    return component["dispatch"](
+                        args, held, launch, raw, args.expected_bake_sha256, heldout_token=token, verify_live=live,
+                        create_child=lambda root, payload: create_candidate_child(args, component, root, payload),
+                        deadline_ns=deadline_ns,
+                    )
+            result = helper["dispatch"](
+                args, held, launch, verify_live=live_callback, create_child=spawn,
+                fixture=args.heldout_fixture,
+                dispatch_candidate=dispatch_candidate,
+                read_only=recovery is not None,
+            )
+            stage_file(args.run, "candidate-recovery" if recovery else "heldout-inputs", result, started, limit=86400)
+        elif args.native or args.native_fixture:
+            helper = native_component(args, stamp)
+            def live():
+                require_owned_job()
+                require(not violations, "source loader contract invalidated native custody")
+            result = helper["dispatch_native"](
+                args, held, launch, verify_live=live,
+                create_child=lambda root, payload: create_native_child(args, helper, root, payload),
+                fixture_only=args.native_fixture,
+            )
+            stage_file(args.run, "native", result, started, limit=helper["canonical"](launch[1])["scope"]["max_wall_seconds"])
+        elif leaf is not None:
+            def live():
+                require_learning_leaf(args, held, roots, spec, violations)
             live()
             training_worker.main_verified(args.run, spec["nonce"], require_live=live, audit=audit,
                                           installed=installed, import_seconds=imports_seconds)
@@ -666,12 +1071,39 @@ def supervise(args):
             and not sys.flags.optimize, "isolated no-site supervisor required")
     _, stamp, manifest = configuration(args)
     launch = launch_inputs(args, stamp)
-    require(not (args.learning and args.campaign) and not args.learning_child and not args.owning_job,
+    require(sum((args.learning, args.campaign, args.native, args.native_fixture,
+                 args.heldout, args.heldout_fixture or args.candidate or args.candidate_recover)) <= 1
+            and not (args.candidate and args.candidate_recover)
+            and not (args.learning_child or args.native_child or args.heldout_child
+                     or args.candidate_child or args.owning_job or args.expected_candidate_launch_sha256),
             "mutually exclusive fixed launch modes")
+    bake = candidate_bake(args, stamp, launch)
+    recovery = recovery_policy(args, bake)
     if args.learning:
         request, policy, _ = learning_component(args, stamp)["learning_scope"](launch, args.expected_profile_sha256)
         require(Path(policy["admission"]["product_root"]).resolve(strict=True).parts == args.source.parts,
                 "learning authority product root differs from committed worker source")
+    native_limit = None
+    if args.native or args.native_fixture:
+        _, native_policy, _ = native_component(args, stamp)["native_scope"](
+            launch, args.expected_profile_sha256, fixture_only=args.native_fixture)
+        if args.native:
+            require(Path(native_policy["admission"]["product_root"]).resolve(strict=True).parts == args.source.parts,
+                    "native authority product root differs from committed worker source")
+        else:
+            require(args.tools is not None, "native software control requires admitted test tools")
+        native_limit = native_policy["scope"]["max_wall_seconds"]
+    heldout_limit = None
+    if args.heldout or args.heldout_fixture or args.candidate or recovery:
+        _, policy = heldout_component(args, stamp)["scope"](
+            launch, args.expected_profile_sha256, args.heldout_fixture,
+            candidate=args.candidate or bool(recovery))
+        if not args.heldout_fixture:
+            require(Path(policy["inputs"]["admission"]["product_root"]).resolve(strict=True).parts == args.source.parts,
+                    "held-out authority source root differs")
+        else:
+            require(args.tools is not None, "held-out software control requires admitted test tools")
+        heldout_limit = 86400
     campaign = campaign_bounds(args, launch) if args.campaign else None
     protected = (args.source, args.profile, args.python.parents[1], args.base_python.parent, args.tools)
     require(not any(args.run.is_relative_to(root) for root in protected if root is not None),
@@ -694,7 +1126,16 @@ def supervise(args):
               "profile_sha256": args.expected_profile_sha256, "source_head": stamp["source_head"],
               "source_manifest_sha256": stamp["source_manifest_sha256"], "stages": {}, "owned_pids": []}
     start = time.monotonic()
+    watchdog = None
+    recovery_deadline = None
     try:
+        if bake is not None and not recovery:
+            component, _, descriptor = bake
+            first, finish, schedule = component["watchdog_inputs"](descriptor, fixture=args.heldout_fixture)
+            watchdog = component["TrialWatchdog"](
+                args.run, first=first, finish=finish, schedule=schedule,
+                deadline_ns=component["timer_scope"](descriptor),
+            )
         bootstrap.check(args.base_python.parent, "base", manifest["base"])
         host_root, host_manifest = host_scope(args, stamp)
         bootstrap.check(host_root, "host-native", host_manifest, selected=True)
@@ -706,6 +1147,8 @@ def supervise(args):
                    SOFTQP_SCIENTIFIC_JOB=job.name)
         env.update({key: "1" for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
                                          "NUMEXPR_NUM_THREADS", "RAYON_NUM_THREADS")})
+        if watchdog is not None:
+            env["SOFTQP_CANDIDATE_DEADLINE_NS"] = str(watchdog.deadline)
         command = [str(args.python), "-I", "-S", "-B", "-u", "-X",
                    "pycache_prefix=" + str(args.run / "empty-bytecode-prefix"), str(Path(__file__).resolve()),
                    "--worker", *sys.argv[1:]]
@@ -715,9 +1158,13 @@ def supervise(args):
                                        stdout=stdout, stderr=stderr, creationflags=4)
             job.attach_and_resume(process)
             phases = ("scan", "imports", "reference", "cold", "gradient", "reader", "final") if launch is None else (
-                "scan", "imports", "learn" if args.learning else "generate", "final")
+                "scan", "imports", "candidate-recovery" if recovery else "heldout-inputs" if heldout_limit else "native" if native_limit is not None
+                else "learn" if args.learning else "generate", "final")
             for stage in phases:
-                limit = LEARNING_LIMIT if stage == "learn" else (campaign[2] if stage == "generate" and campaign else LIMITS[stage])
+                limit = (recovery["max_wall_seconds"] + 10 if stage == "candidate-recovery"
+                         else heldout_limit if stage == "heldout-inputs" else native_limit if stage == "native"
+                         else LEARNING_LIMIT if stage == "learn"
+                         else campaign[2] if stage == "generate" and campaign else LIMITS[stage])
                 slot, finish, _, entries = campaign if stage == "generate" and campaign else (0, 0, 0, ())
                 slot_started = None
                 phase_start = time.monotonic()
@@ -732,7 +1179,7 @@ def supervise(args):
                             ctypes.sizeof(members), None), "cannot query owned process tree")
                     require(members.assigned == members.count <= 16, "incomplete owned process inventory")
                     result["owned_pids"] = sorted(set(result["owned_pids"]) | set(members.ids[:members.count]))
-                    total = 0
+                    total = sample(os.getpid())[1] if watchdog is not None or recovery else 0
                     for pid in members.ids[:members.count]:
                         try:
                             total += sample(pid)[1]
@@ -742,6 +1189,19 @@ def supervise(args):
                     peak = max(peak, total)
                     elapsed = time.monotonic() - phase_start
                     require(elapsed < limit and peak < RSS, f"{stage} deadline or RSS bound exceeded")
+                    if watchdog is not None:
+                        watchdog.step(owned_pids=tuple(members.ids[:members.count]), combined_peak_rss=peak)
+                    if recovery:
+                        require(peak < 4 * 2**30, "candidate recovery combined RSS cap exceeded")
+                        marker = args.run / "recovery-start.json"
+                        if stage == "candidate-recovery" and marker.is_file() and recovery_deadline is None:
+                            ready = read_marker(marker)
+                            require(ready["pid"] in tuple(members.ids[:members.count]), "recovery owner is outside Job")
+                            recovery_deadline = time.perf_counter_ns() + recovery["max_wall_seconds"] * 10**9
+                            write_marker(args.run, "recovery-clock.json",
+                                         {"pid": ready["pid"], "deadline_ns": recovery_deadline})
+                        require(recovery_deadline is None or time.perf_counter_ns() < recovery_deadline,
+                                "candidate recovery administrative lease expired")
                     require((args.run / "stderr.log").stat().st_size < 2**22, "diagnostic limit exceeded")
                     if slot < finish:
                         name = f"slot-{slot:05d}"
@@ -766,18 +1226,61 @@ def supervise(args):
                                 slot += 1
                                 slot_started = None
                     if path.is_file() and slot == finish:
+                        if watchdog is not None and stage == "heldout-inputs":
+                            watchdog.require_complete()
                         entry = json.loads(path.read_bytes())
                         require(entry["stage"] == stage and entry["pid"] in result["owned_pids"],
                                 "worker observation path does not bind the owned phase")
+                        if watchdog is not None and stage == "scan":
+                            require(entry["pid"] in tuple(members.ids[:members.count]),
+                                    "candidate getter owner is outside the current Job")
+                            watchdog.getter_pid = entry["pid"]
                         result["stages"][stage] = dict(seconds=elapsed, peak_tree_working_set_bytes=peak,
                             deadline_seconds=limit, **entry)
                         break
                     require(process.poll() is None, f"owned process exited before {stage}")
-                    time.sleep(.05)
+                    time.sleep(.01 if watchdog is not None else .05)
             require(process.wait(timeout=3) == 0, "worker shutdown failed")
-        result["status"] = "software-qualification-pass" if launch is None else "registered-dispatch-observed"
+        if recovery:
+            require(recovery_deadline is not None and time.perf_counter_ns() < recovery_deadline,
+                    "candidate recovery expired before publication")
+            export = result["stages"]["candidate-recovery"]["observed"]
+            require(re.fullmatch(r"\.recovery-stage-[a-f0-9]{24}", export["stage"]), "invalid recovery staging path")
+            output = Path(recovery["output_root"])
+            stage = output / export["stage"]
+            load(stage / "recovery.json", export["sha256"])
+            require(sum(file.stat().st_size for file in output.rglob("*") if file.is_file()) <= 2**30,
+                    "candidate recovery staged and final quota exceeded")
+            require(time.perf_counter_ns() < recovery_deadline, "candidate recovery expired before publication")
+            owned = stage.stat()
+            final = output / "recovery"
+            stage.rename(final)
+            if time.perf_counter_ns() >= recovery_deadline:
+                observed = final.stat()
+                if (observed.st_dev, observed.st_ino) == (owned.st_dev, owned.st_ino) and not stage.exists():
+                    final.rename(stage)
+                raise TimeoutError("candidate recovery expired during publication")
+        if args.heldout_fixture:
+            result["status"] = "heldout-fixture-observed"
+            result["fixture_only"] = True
+        elif args.native_fixture:
+            result["status"] = "native-fixture-observed"
+            result["fixture_only"] = True
+        else:
+            result["status"] = "software-qualification-pass" if launch is None else "registered-dispatch-observed"
     except BaseException as error:
         result.update(status="refused", error=f"{type(error).__name__}: {error}")
+        if args.candidate and watchdog is not None:
+            observed_ns = time.perf_counter_ns()
+            timer = component["timer_receipt"](descriptor)
+            message = str(error)
+            reason = ("bake-deadline" if observed_ns >= timer["deadline_ns"] else
+                      "evaluation-rss-cap" if "working-set exceeded 4 GiB" in message else
+                      "trial-deadline" if "whole-trial deadline" in message else "candidate-failed")
+            result["candidate_terminal"] = {
+                "timer_sha256": descriptor["timer_sha256"], "boot_id": timer["boot_id"],
+                "reason": reason, "observed_ns": observed_ns,
+            }
         raise
     finally:
         try:
@@ -801,6 +1304,21 @@ if __name__ == "__main__":
     parser.add_argument("--campaign", action="store_true")
     parser.add_argument("--learning", action="store_true")
     parser.add_argument("--learning-child", action="store_true")
+    parser.add_argument("--heldout", action="store_true")
+    parser.add_argument("--heldout-fixture", action="store_true")
+    parser.add_argument("--heldout-child", action="store_true")
+    parser.add_argument("--candidate", action="store_true")
+    parser.add_argument("--candidate-recover", action="store_true")
+    parser.add_argument("--recovery", type=lambda value: Path(value).resolve())
+    parser.add_argument("--expected-recovery-sha256")
+    parser.add_argument("--candidate-child", action="store_true")
+    parser.add_argument("--expected-candidate-launch-sha256")
+    parser.add_argument("--bake", type=lambda value: Path(value).resolve())
+    parser.add_argument("--expected-bake-sha256")
+    parser.add_argument("--native", action="store_true")
+    parser.add_argument("--native-fixture", action="store_true")
+    parser.add_argument("--native-child", action="store_true")
+    parser.add_argument("--expected-native-launch-sha256")
     parser.add_argument("--owning-job")
     parser.add_argument("--expected-learning-launch-sha256")
     parser.add_argument("--tools", type=lambda value: Path(value).resolve())

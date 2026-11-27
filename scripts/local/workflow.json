@@ -46,7 +46,6 @@
     },
     {
       "path": ".venv-coupled-lessons",
-      "when": "notebooks",
       "requirements": [
         "docs/teaching/coupled/requirements.txt"
       ]

@@ -1,0 +1,61 @@
+\subsection{Sparse ProxQP for lifted interval constraints}\label{sec:method-proxqp}
+ProxQP solves a convex quadratic program using a primal-dual proximal
+augmented Lagrangian (Bambade et al., \href{https://simple-robotics.github.io/publications/proxqp/}{primary source}).
+The adapter forms the same separable slack or group-peak epigraph lift
+used for the other sparse comparators. It partitions a lifted row into
+an equality row only when its finite lower and upper bounds coincide.
+The canonical backend problem is
+\begin{equation}\label{eq:proxqp-interval-form}
+ \min_z \ \tfrac12z^\top P_Lz+q_L^\top z,\qquad
+ Ez=e,\quad Cz\in B=\prod_i[l_i,u_i],
+ \qquad P_L\succeq0.
+\end{equation}
+The lifted variables include the costed auxiliaries, so splitting the
+hard interval rows does not alter which soft violations incur cost.
+A missing interval side is represented by an infinite endpoint.
+
+One way to understand the inequality update is to introduce \(w=Cz\)
+with \(w\in B\). Let \(v_k\) be the current signed inequality multiplier
+and \(\mu>0\) its proximal multiplier parameter. For a fixed \(z\), the
+augmented quadratic in \(w\) is minimized by the interval projection,
+giving the equivalent signed multiplier update
+\begin{equation}\label{eq:proxqp-dual-update}
+ \widehat w=\Pi_B(Cz+\mu v_k),\qquad
+ v^+=v_k+\mu^{-1}(Cz-\widehat w).
+\end{equation}
+For the free equality multiplier \(y_k\), the analogous update is
+\(y^+=y_k+\mu_e^{-1}(Ez-e)\) with \(\mu_e>0\).
+Together with a positive primal proximal term
+\(\rho\lVert z-z_k\rVert_2^2/2\), these updates yield a regularized,
+piecewise quadratic primal subproblem. The projection changes its
+local derivative when a bound becomes active. ProxQP uses the
+primal-dual merit system and an active-region Newton step with a line
+search to solve the proximal subproblems inexactly. The published
+convergence discussion depends on a primal-dual solution with zero
+duality gap and controlled inner errors. The adapter does not extend
+those conditions to indefinite or otherwise unsupported inputs.
+
+\begin{algorithm}[ht]
+\caption{Sparse ProxQP and signed recovery}\label{alg:proxqp-route}
+\begin{algorithmic}[1]
+\State Assemble the lifted Hessian, equality block and remaining interval block.
+\State Initialize the sparse solver without an initial guess.
+\State Solve the proximal primal-dual subproblems until the native termination test.
+\If{status is \texttt{PROXQP\_SOLVED}}
+ \State Reorder equality and signed interval multipliers to their original lifted rows.
+ \State Check lifted feasibility, stationarity and penalty recovery in physical coordinates.
+\Else
+ \State Retain the native termination without an accepted candidate.
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+ProxSuite 0.7.2 receives sparse matrices, no initial guess, absolute
+and relative residual and gap tolerances of \(10^{-7}\), an iteration
+limit of \(200\,000\), and gap checking. Its interval multiplier has
+upper-positive and lower-negative sign. Bound activity alone is not a
+basis for supplying a missing multiplier. Sparse matrix assembly is
+linear in stored entries, while numerical cost is governed by the
+factorizations, their fill, and the inner and outer steps. Fresh
+instances avoid sharing an inferred active set or numerical
+factorization across samples.

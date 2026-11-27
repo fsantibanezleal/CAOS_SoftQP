@@ -94,7 +94,7 @@ def test_missing_attestation_refuses_success_and_oracle_failure_before_metrics(s
                           run.document["population_sha256"])
 
 
-def test_native_pin_fixture_and_p0_ancestry_cannot_be_self_replaced(supervised):
+def test_adversarial_native_pin_fixture_and_p0_ancestry_cannot_be_self_replaced(supervised):
     _, plan, _, run, _, _ = supervised
     context = bound_context(plan, run)
     with pytest.raises(c.ContractError, match="independently expected manifest"):

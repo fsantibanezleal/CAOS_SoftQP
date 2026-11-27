@@ -13,41 +13,74 @@ import pytest
 from pipeline.learned_comparison import contracts as c
 from pipeline.learned_comparison import native_labels as n
 from pipeline.learned_comparison import stream_inputs as stream
+from runtime_config import native49, sdk45
 from test_learned_contracts import PROVIDER
 from test_stream_inputs import build_factored, put
 
 
-SDK = Path("D:/_Temp/softqp-20261122-sdk-release/candidate/Scripts/python.exe")
-PROFILE = Path("D:/_Archives/CAOS_SoftQP/2026-11-22/sdk-release/sdk-profile")
-PUBLISHED_WHEEL = PROFILE.parent / "public-files/softqp-0.3.0-cp312-cp312-win_amd64.whl"
 PROFILE_SHA = "a4bfa531f8af72412cc6bfbaacf57e0cd3d9545a481a780a5caba96448629f3d"
 WHEEL_SHA = "6b930ca688e629ee11b7e816c2b160135c817de382082e3876c8504d40da1c89"
+CHECKER_SHA = "72d8e12a3a568b120186b3c8ae44895b33435fea32022da40d9b9537291db535"
+DEFAULTS_SHA = "a11af752c5ab8f01352d0b44b341d5d431dd451ec704b9e65774e839dd5ad952"
 
 
 def runtime_identity():
+    config = sdk45()
+    profile = config.profile
+    assert n._file_sha(profile / "provenance.json") == PROFILE_SHA
+    assert n._file_sha(config.wheel) == WHEEL_SHA
+    assert n._file_sha(profile / "check_lock.py") == CHECKER_SHA
+    assert n._file_sha(profile / "defaults.json") == DEFAULTS_SHA
     base = Path(
         subprocess.check_output(
-            [str(SDK), "-I", "-B", "-c", "import sys; print(sys._base_executable)"], text=True
+            [str(config.python), "-I", "-S", "-B", "-c", "import sys; print(sys._base_executable)"], text=True,
+            timeout=15,
         ).strip()
     )
     dll = base.with_name("python312.dll")
-    assert n._file_sha(PROFILE / "provenance.json") == PROFILE_SHA
-    assert n._file_sha(PUBLISHED_WHEEL) == WHEEL_SHA
     return {
-        "python": str(SDK),
-        "python_sha256": n._file_sha(SDK),
+        "python": str(config.python),
+        "python_sha256": n._file_sha(config.python),
         "base_python": str(base),
         "base_python_sha256": n._file_sha(base),
         "python_dll": str(dll),
         "python_dll_sha256": n._file_sha(dll),
-        "profile": str(PROFILE),
+        "profile": str(profile),
         "profile_sha256": PROFILE_SHA,
-        "checker_sha256": n._file_sha(PROFILE / "check_lock.py"),
-        "defaults_sha256": n._file_sha(PROFILE / "defaults.json"),
-        "wheel": str(PUBLISHED_WHEEL),
+        "checker_sha256": CHECKER_SHA,
+        "defaults_sha256": DEFAULTS_SHA,
+        "wheel": str(config.wheel),
         "wheel_sha256": WHEEL_SHA,
         "engine_source": "febdc8ebaf424b7256a4a939055851ab331ff23a",
     }
+
+
+def test_runtime_configuration_distinguishes_absent_and_invalid(monkeypatch, tmp_path):
+    for prefix, names in (
+        ("SDK45_FIXTURE", ("PYTHON", "PROFILE", "WHEEL")),
+        ("NATIVE49_FIXTURE", ("SNAPSHOT", "PYTHON", "TOOLS", "PROFILE_SHA256", "BASE_PYTHON")),
+    ):
+        for name in names:
+            monkeypatch.delenv(f"SOFTQP_{prefix}_{name}", raising=False)
+    for read in (sdk45, native49):
+        with pytest.raises(pytest.skip.Exception, match="not nominated"):
+            read()
+    monkeypatch.setenv("SOFTQP_SDK45_FIXTURE_PYTHON", sys.executable)
+    with pytest.raises(pytest.fail.Exception, match="incomplete"):
+        sdk45()
+    monkeypatch.setenv("SOFTQP_SDK45_FIXTURE_PROFILE", str(tmp_path))
+    monkeypatch.setenv("SOFTQP_SDK45_FIXTURE_WHEEL", str(tmp_path / "missing.whl"))
+    with pytest.raises(pytest.fail.Exception, match="invalid nominated file"):
+        sdk45()
+    for key in ("SNAPSHOT", "PYTHON", "TOOLS", "PROFILE_SHA256"):
+        monkeypatch.setenv(f"SOFTQP_NATIVE49_FIXTURE_{key}", str(tmp_path))
+    with pytest.raises(pytest.fail.Exception, match="independently pinned"):
+        native49()
+
+
+def test_configured_sdk45_matches_independent_release_pins():
+    config = runtime_identity()
+    assert config["profile_sha256"] == PROFILE_SHA and config["wheel_sha256"] == WHEEL_SHA
 
 
 def native_problem(role, q, name, *, family="N01", original=None):

@@ -178,10 +178,15 @@ def _reference(root, reference):
 
 
 def _head(root):
-    result = subprocess.run(["git", "-C", str(root), "rev-parse", "HEAD^{commit}"],
+    result = subprocess.run(["git", "--no-replace-objects", "-C", str(root), "rev-parse", "HEAD^{commit}"],
                             capture_output=True, check=False, text=True, timeout=10)
     c.ensure(result.returncode == 0 and _hex(result.stdout.strip(), 40), "unavailable I1 source commit")
     return result.stdout.strip()
+
+
+def _literal_git_file(root, revision, path):
+    return subprocess.run(["git", "--no-replace-objects", "-C", str(root), "show", f"{revision}:{path}"],
+                          capture_output=True, check=False, timeout=10)
 
 
 def _sources(lock, trust, *, verify_committed=False):
@@ -192,10 +197,7 @@ def _sources(lock, trust, *, verify_committed=False):
     for path, expected in files.items():
         _read(trust.product_root, path, expected)
         if verify_committed and not trust.fixture_only:
-            frozen = subprocess.run(
-                ["git", "-C", str(trust.product_root), "show", f"{lock['product_commit']}:{path}"],
-                capture_output=True, check=False, timeout=10,
-            )
+            frozen = _literal_git_file(trust.product_root, lock["product_commit"], path)
             c.ensure(frozen.returncode == 0 and c.digest(frozen.stdout) == expected,
                      "I1 source map does not match the reviewed Git object")
     module = Path(__file__).resolve()
@@ -245,8 +247,7 @@ def _runtime(runtime, trust, dependency_lock_sha256, *, full=False):
     checker = c.safe_path(trust.engine_root, _ENGINE_CHECKER, must_exist=True)
     checker_raw = _read(trust.engine_root, _ENGINE_CHECKER, runtime["verifier_sha256"])
     if full:
-        frozen = subprocess.run(["git", "-C", str(trust.engine_root), "show", f"HEAD:{_ENGINE_CHECKER}"],
-                                capture_output=True, check=False, timeout=10)
+        frozen = _literal_git_file(trust.engine_root, "HEAD", _ENGINE_CHECKER)
         c.ensure(frozen.returncode == 0 and c.digest(frozen.stdout) == runtime["verifier_sha256"],
                  "I1 runtime verifier differs from reviewed engine Git object")
         observed = subprocess.run([
@@ -286,7 +287,7 @@ def _runtime(runtime, trust, dependency_lock_sha256, *, full=False):
                 raise c.ContractError("I1 active NumPy source bytes differ") from error
 
 
-def _verify(trust, context, protocol_ref, generator_scope=None):
+def _verify(trust, context, protocol_ref, generator_scope=None, *, held_recovery_profile=None):
     c.ensure(type(trust) is ApprovalTrust and type(context) is c.AdmissionContext
              and trust.fixture_only == context.allow_fixture, "I1 trust lane mismatch")
     governance = trust.governance_root.resolve(strict=True)
@@ -366,7 +367,13 @@ def _verify(trust, context, protocol_ref, generator_scope=None):
     if generator_scope is not None:
         c.ensure(_hex(runtime.get("profile_sha256")), "I1 runtime requires an exact live worker profile")
         _require_generator_scope(generator_scope, generator_scope.slot, profile_sha256=runtime["profile_sha256"])
-    _runtime(runtime, trust, context.dependency_lock_sha256, full=generator_scope is None)
+    if held_recovery_profile is None:
+        _runtime(runtime, trust, context.dependency_lock_sha256, full=generator_scope is None)
+    else:
+        c.ensure(runtime.get("profile_sha256") == held_recovery_profile and runtime.get("decision") == "accepted"
+                 and runtime.get("dependency_lock_sha256") == context.dependency_lock_sha256
+                 and "evaluate-heldout" in operations, "historical I1 runtime or operation differs")
+        _runtime(runtime, trust, context.dependency_lock_sha256, full=False)
     c.ensure(context.catalog.get(protocol_ref["artifact_id"]) == protocol_ref
              and protocol_ref["kind"] == "learning-protocol", "I1 protocol reference is not sealed")
     path = c.safe_path(context.root, protocol_ref["path"], must_exist=True)
@@ -380,6 +387,16 @@ def _verify(trust, context, protocol_ref, generator_scope=None):
              and _digest({k: v for k, v in payload.items() if k != "registration_sha256"})
              == subject["protocol_core_sha256"], "I1 registered protocol or registration back-reference differs")
     return frozenset(operations), lock, runtime, (index["registration"], index["review"], *refs.values())
+
+
+def _verify_historical_recovery(trust, context, protocol_ref, custody, *, request_sha256):
+    from softqp_heldout_runtime_custody import historical_profile
+
+    profile = historical_profile(custody, request_sha256=request_sha256, source_file=Path(__file__).resolve())
+    _verify(trust, context, protocol_ref, held_recovery_profile=profile)
+    c.ensure(historical_profile(custody, request_sha256=request_sha256,
+                               source_file=Path(__file__).resolve()) == profile,
+             "historical recovery capability expired")
 
 
 @dataclass(frozen=True)

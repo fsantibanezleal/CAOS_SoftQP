@@ -4,7 +4,7 @@ The [English](en/README.md) and [Spanish](es/README.md) trees contain five mirro
 
 ## Environment and execution
 
-Use Python 3.12 and the exact requirements in `requirements.txt`. The separate native distribution [softqp 0.1.0 is published on PyPI](https://pypi.org/project/softqp/0.1.0/). The ordinary lessons use its public Windows wheel; the directional lesson invokes the separate pinned 0.2.0 runtime through the guarded teaching bridge. The recorded experiment uses the exact historical source revision in its protocol, independently of later packaging metadata.
+Use Python 3.12 and the exact requirements in `requirements.txt`. The separate native distribution [softqp 0.3.0 is published on PyPI](https://pypi.org/project/softqp/0.3.0/). The ordinary lessons use its public Windows wheel; the directional lesson invokes the separate pinned 0.2.0 runtime through the guarded teaching bridge. The recorded experiment uses the exact historical source revision in its protocol, independently of later packaging metadata.
 
 ```bash
 python -m pip install -r notebooks/requirements.txt
@@ -13,7 +13,7 @@ python scripts/check_notebooks.py
 python scripts/run_notebooks.py --check
 ```
 
-The runner uses `.venv-notebooks`. Set `CAOS_TEMP_ROOT` to the device's external temporary directory before the fresh-kernel check; no repository-local temporary tree or ambient system temp fallback is allowed. The runner alone writes outputs and strips volatile metadata. All figures need labeled axes, units and a prose interpretation in the notebook's language.
+The runner selects the ordinary external `.venv-lessons` runtime. Setup also manages `.venv-coupled-lessons` unconditionally as an auxiliary runtime so the directional bridge can keep its exact SDK 0.2.0 pin. Only the ordinary runtime is assigned the notebook kernel role. Set `CAOS_TEMP_ROOT` to the device's external temporary directory before the fresh-kernel check; no repository-local temporary tree or ambient system temp fallback is allowed. The runner alone writes outputs and strips volatile metadata. All figures need labeled axes, units and a prose interpretation in the notebook's language.
 
 The side-specific lesson includes one deterministic reproduction of the original frozen endpoint from the complete canonical export. The directional lesson reads its separately accepted summary without repeating the raw-trial inference. Both compute fresh educational parameter sweeps through the real numerical methods, explicitly outside either registered timing campaign. Neither selects a favorable evaluation subset or changes the unsuccessful 10% criterion.
 
@@ -23,7 +23,7 @@ The [notebook guide](../docs/guides/08_notebooks.md) sets the worked-lesson bar 
 
 All eight lessons passed [independent curriculum review](../docs/notebook-review.md) after correcting control-interval timing in two figures and Spanish method display names. That review does not establish the rejected timing hypothesis or qualified product-release acceptance.
 
-The fifth lesson teaches directional shared peaks and reciprocal physical row scaling through actual public SDK0.2 methods. Keep the notebook kernel pins unchanged. Install docs/teaching/coupled/requirements.txt into a separate external CPython3.12 environment created from a direct native executable; set SOFTQP_COUPLED_PYTHON to its absolute interpreter and CAOS_TEMP_ROOT to an existing external scratch directory. Windows Store broker bases are refused before execution. The lesson bridge uses isolated startup without site hooks, verifies installed SDK/source identities and retains unsupported quadratic row-split states. It inspects the exact accepted summary while explicitly distinguishing this from raw-trial bootstrap reanalysis. Independent acceptance of these two new lessons is recorded separately from the historical eight.
+The fifth lesson teaches directional shared peaks and reciprocal physical row scaling through actual public SDK0.2 methods. Keep the directional teaching runtime separate from the ordinary notebook kernel. Install docs/teaching/coupled/requirements.txt into a separate external CPython3.12 environment created from a direct native executable; set SOFTQP_COUPLED_PYTHON to its absolute interpreter and CAOS_TEMP_ROOT to an existing external scratch directory. Windows Store broker bases are refused before execution. The lesson bridge uses isolated startup without site hooks, verifies installed SDK/source identities and retains unsupported quadratic row-split states. It inspects the exact accepted summary while explicitly distinguishing this from raw-trial bootstrap reanalysis. Independent acceptance of these two new lessons is recorded separately from the historical eight.
 
 ## Coverage and lesson depth
 

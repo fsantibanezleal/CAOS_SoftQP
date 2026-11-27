@@ -1,0 +1,71 @@
+{
+  "$id": "https://fsantibanezleal.github.io/CAOS_SoftQP/contracts/softqp-learning-evaluation-model-roster/1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "softqp.r4.evaluation-model-roster/1"
+    },
+    "protocol_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "population_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "preflight_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "method": {
+            "enum": [
+              "learned_osqp",
+              "learned_daqp"
+            ]
+          },
+          "seed": {
+            "enum": [
+              41001,
+              41002,
+              41003
+            ]
+          },
+          "state": {
+            "enum": [
+              "available",
+              "failed",
+              "missing"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "method",
+          "seed",
+          "state",
+          "sha256"
+        ]
+      },
+      "minItems": 6,
+      "maxItems": 6
+    }
+  },
+  "required": [
+    "schema",
+    "protocol_sha256",
+    "population_sha256",
+    "preflight_sha256",
+    "entries"
+  ]
+}

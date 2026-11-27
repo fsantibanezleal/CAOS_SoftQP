@@ -1,5 +1,5 @@
 # Development scientific environment; exact published engine distribution.
-softqp==0.1.0
+softqp==0.3.0
 numpy==2.5.4
 scipy==1.18.1
 osqp==1.1.3

@@ -442,7 +442,7 @@ def test_real_campaign_lease_frontier_rollback_and_output_owner(excluded_campaig
     assert f.draws == [0]
 
 
-def test_campaign_timeout_and_ambiguous_attempt_never_redraw(excluded_campaign, monkeypatch):
+def test_adversarial_campaign_timeout_and_ambiguous_attempt_never_redraw(excluded_campaign, monkeypatch):
     f = excluded_campaign
     ticks = iter((0, 2))
     with monkeypatch.context() as mutation:

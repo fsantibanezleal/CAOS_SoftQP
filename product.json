@@ -20,6 +20,9 @@
   "year": 2026,
   "method_entrypoints": [
     "softqp.solvers.solve",
+    "softqp.peak.solve_peak",
+    "softqp.comparators.vertical.ComparatorSession",
+    "pipeline.notebook_initializer_lessons.run_initializer_lesson",
     "softqp.flex.solve_flex",
     "softqp.elasti.solve_elastiqp",
     "softqp.sessions.PreparedSolver",

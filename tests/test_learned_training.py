@@ -208,7 +208,7 @@ def test_adversarial_changed_snapshot_file_refuses_fresh_run(admitted, l2_bounda
         t.read_training_run(target, expected_manifest_sha256=l2_boundary.sha256, plan=plan, runtime=runtime)
 
 
-def test_actual_leconv_training_and_frozen_calibration_role_io(admitted, monkeypatch):
+def test_adversarial_actual_leconv_training_and_frozen_calibration_role_io(admitted, monkeypatch):
     root, runtime, plan, readers, proofs = admitted
     result = t.supervise_training(
         plan, runtime, method="learned_daqp", seed=41002, destination=root / "graph", fixture_stop_after=3
@@ -345,7 +345,7 @@ while not (p / 'exit').exists():
     assert float.fromhex(report["class_order"][0]) != reversed_mass0
 
 
-def test_registered_request_exact_six_and_no_fixture_epoch_narrowing():
+def test_registered_request_exact_six_and_no_fixture_epoch_narrowing(tmp_path):
     jobs = t.registered_jobs()
     assert jobs == tuple(
         (method, seed) for method in ("learned_osqp", "learned_daqp") for seed in (41001, 41002, 41003)
@@ -361,7 +361,7 @@ def test_registered_request_exact_six_and_no_fixture_epoch_narrowing():
             "calibrate-model",
             "learned_daqp",
             41001,
-            resume={"root": "D:/excluded-controls", "sha256": "1" * 64},
+            resume={"root": str(tmp_path / "excluded-controls"), "sha256": "1" * 64},
         )
 
 
